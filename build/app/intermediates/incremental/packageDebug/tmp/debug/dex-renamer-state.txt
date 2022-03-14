@@ -1,0 +1,4 @@
+#Mon Mar 14 19:47:05 PKT 2022
+base.0=/Users/discover/Documents/GitHub/paynest_flutter_app/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

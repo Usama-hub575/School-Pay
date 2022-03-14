@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="arrow_next" transform="translate(-298 -30)">
+    <path id="Subtraction_1" data-name="Subtraction 1" d="M10,0A10,10,0,1,1,0,10,10,10,0,0,1,10,0Z" transform="translate(318 50) rotate(180)" fill="#04acdd"/>
+    <path id="Arrow" d="M7.806,2.786l.013,0H2.285l1.74-1.744a.457.457,0,0,0,0-.642L3.754.132a.453.453,0,0,0-.639,0L.132,3.114a.456.456,0,0,0,0,.641L3.114,6.738a.453.453,0,0,0,.639,0l.271-.271a.448.448,0,0,0,.132-.32.435.435,0,0,0-.132-.314L2.265,4.081H7.813a.469.469,0,0,0,.459-.464V3.234A.46.46,0,0,0,7.806,2.786Z" transform="translate(312.271 43.87) rotate(180)" fill="#fff"/>
+  </g>
+</svg>

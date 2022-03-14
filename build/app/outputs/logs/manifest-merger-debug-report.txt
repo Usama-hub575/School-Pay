@@ -1,0 +1,115 @@
+-- Merging decision tree log ---
+application
+INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml:3:4-33:19
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/2df3e800105c65bcd517f820668a5ebe/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/2df3e800105c65bcd517f820668a5ebe/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.core:core:1.6.0] /Users/discover/.gradle/caches/transforms-3/d262b2397ef0c53fe7baf1e91c4860cb/transformed/core-1.6.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.6.0] /Users/discover/.gradle/caches/transforms-3/d262b2397ef0c53fe7baf1e91c4860cb/transformed/core-1.6.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/discover/.gradle/caches/transforms-3/fa4f8f313201b075cd01abebfd09d7f4/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/discover/.gradle/caches/transforms-3/fa4f8f313201b075cd01abebfd09d7f4/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.6.0] /Users/discover/.gradle/caches/transforms-3/d262b2397ef0c53fe7baf1e91c4860cb/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
+	android:name
+		INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml
+manifest
+ADDED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml:1:1-34:12
+INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml:1:1-34:12
+INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml:1:1-34:12
+INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml:1:1-34:12
+MERGED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml:1:1-34:12
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/discover/.gradle/caches/transforms-3/606ef1c545f38b93a95d0e9089043217/transformed/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/f275e626ae031e210610785060520ef3/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/discover/.gradle/caches/transforms-3/a23fc33aa5b3b698366222b55515bd3e/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/discover/.gradle/caches/transforms-3/73cf6bf601d05be971a7dc6a3137548e/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] /Users/discover/.gradle/caches/transforms-3/95973fed74b9e445a8a695ae66247ed9/transformed/jetified-activity-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/2df3e800105c65bcd517f820668a5ebe/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/discover/.gradle/caches/transforms-3/92806111721da5a890434210e6a3c70d/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.6.0] /Users/discover/.gradle/caches/transforms-3/d262b2397ef0c53fe7baf1e91c4860cb/transformed/core-1.6.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/discover/.gradle/caches/transforms-3/c1c9cd42115fa7bf9cb7b8f07787349f/transformed/lifecycle-runtime-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/discover/.gradle/caches/transforms-3/21d2d1e123ba1557bb90b900fcdc900d/transformed/jetified-savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/discover/.gradle/caches/transforms-3/5f3f17e5c1b77ebf4f8f4b276e1706ff/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/discover/.gradle/caches/transforms-3/6c1f05c1bbb69e35c79d330b9dedeb13/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/discover/.gradle/caches/transforms-3/ddee3acb59e3274a59e313226bfd54a9/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/discover/.gradle/caches/transforms-3/36b280465aeb40ef6d9fb1ca69cffb8c/transformed/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/discover/.gradle/caches/transforms-3/fa4f8f313201b075cd01abebfd09d7f4/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/discover/.gradle/caches/transforms-3/452de5dd23d594debe1ee06fc3621832/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/discover/.gradle/caches/transforms-3/49d93028f622a46581d2f792e41929a7/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
+INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+	package
+		ADDED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml:2:5-46
+		INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/debug/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml:1:1-34:12
+		INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/debug/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml:1:1-34:12
+		INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/debug/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml:1:11-69
+uses-sdk
+INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/discover/.gradle/caches/transforms-3/606ef1c545f38b93a95d0e9089043217/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/discover/.gradle/caches/transforms-3/606ef1c545f38b93a95d0e9089043217/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/f275e626ae031e210610785060520ef3/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/f275e626ae031e210610785060520ef3/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/discover/.gradle/caches/transforms-3/a23fc33aa5b3b698366222b55515bd3e/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/discover/.gradle/caches/transforms-3/a23fc33aa5b3b698366222b55515bd3e/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/discover/.gradle/caches/transforms-3/73cf6bf601d05be971a7dc6a3137548e/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/discover/.gradle/caches/transforms-3/73cf6bf601d05be971a7dc6a3137548e/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] /Users/discover/.gradle/caches/transforms-3/95973fed74b9e445a8a695ae66247ed9/transformed/jetified-activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] /Users/discover/.gradle/caches/transforms-3/95973fed74b9e445a8a695ae66247ed9/transformed/jetified-activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/2df3e800105c65bcd517f820668a5ebe/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/2df3e800105c65bcd517f820668a5ebe/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] /Users/discover/.gradle/caches/transforms-3/92806111721da5a890434210e6a3c70d/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/discover/.gradle/caches/transforms-3/92806111721da5a890434210e6a3c70d/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.6.0] /Users/discover/.gradle/caches/transforms-3/d262b2397ef0c53fe7baf1e91c4860cb/transformed/core-1.6.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.6.0] /Users/discover/.gradle/caches/transforms-3/d262b2397ef0c53fe7baf1e91c4860cb/transformed/core-1.6.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/discover/.gradle/caches/transforms-3/c1c9cd42115fa7bf9cb7b8f07787349f/transformed/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/discover/.gradle/caches/transforms-3/c1c9cd42115fa7bf9cb7b8f07787349f/transformed/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/discover/.gradle/caches/transforms-3/21d2d1e123ba1557bb90b900fcdc900d/transformed/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/discover/.gradle/caches/transforms-3/21d2d1e123ba1557bb90b900fcdc900d/transformed/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/discover/.gradle/caches/transforms-3/5f3f17e5c1b77ebf4f8f4b276e1706ff/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/discover/.gradle/caches/transforms-3/5f3f17e5c1b77ebf4f8f4b276e1706ff/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/discover/.gradle/caches/transforms-3/6c1f05c1bbb69e35c79d330b9dedeb13/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/discover/.gradle/caches/transforms-3/6c1f05c1bbb69e35c79d330b9dedeb13/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/discover/.gradle/caches/transforms-3/ddee3acb59e3274a59e313226bfd54a9/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/discover/.gradle/caches/transforms-3/ddee3acb59e3274a59e313226bfd54a9/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/discover/.gradle/caches/transforms-3/36b280465aeb40ef6d9fb1ca69cffb8c/transformed/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/discover/.gradle/caches/transforms-3/36b280465aeb40ef6d9fb1ca69cffb8c/transformed/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/discover/.gradle/caches/transforms-3/fa4f8f313201b075cd01abebfd09d7f4/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/discover/.gradle/caches/transforms-3/fa4f8f313201b075cd01abebfd09d7f4/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/discover/.gradle/caches/transforms-3/452de5dd23d594debe1ee06fc3621832/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/discover/.gradle/caches/transforms-3/452de5dd23d594debe1ee06fc3621832/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/discover/.gradle/caches/transforms-3/49d93028f622a46581d2f792e41929a7/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/discover/.gradle/caches/transforms-3/49d93028f622a46581d2f792e41929a7/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/debug/AndroidManifest.xml
+INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/debug/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/debug/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/debug/AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/debug/AndroidManifest.xml:6:5-66
+	android:name
+		ADDED from /Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/debug/AndroidManifest.xml:6:22-64
+uses-library#androidx.window.extensions
+ADDED from [androidx.window:window:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/2df3e800105c65bcd517f820668a5ebe/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/2df3e800105c65bcd517f820668a5ebe/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/2df3e800105c65bcd517f820668a5ebe/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+uses-library#androidx.window.sidecar
+ADDED from [androidx.window:window:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/2df3e800105c65bcd517f820668a5ebe/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/2df3e800105c65bcd517f820668a5ebe/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/discover/.gradle/caches/transforms-3/2df3e800105c65bcd517f820668a5ebe/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51

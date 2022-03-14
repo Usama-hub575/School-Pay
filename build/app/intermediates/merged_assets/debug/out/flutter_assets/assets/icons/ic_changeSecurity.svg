@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ic_security_pin" transform="translate(-22 -450)">
+    <g id="Rectangle_1090" data-name="Rectangle 1090" transform="translate(22 450)" fill="#fff" stroke="#006e7d" stroke-width="2">
+      <rect width="24" height="24" rx="4" stroke="none"/>
+      <rect x="1" y="1" width="22" height="22" rx="3" fill="none"/>
+    </g>
+    <text id="_569" data-name="569" transform="translate(34 465)" fill="#006e7d" font-size="9"  font-weight="800"><tspan x="-8.914" y="0">569</tspan></text>
+  </g>
+</svg>

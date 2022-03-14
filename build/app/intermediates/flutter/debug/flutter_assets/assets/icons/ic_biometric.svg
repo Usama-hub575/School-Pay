@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25.994" height="26" viewBox="0 0 25.994 26">
+  <g id="ic_biometric" transform="translate(-1261.074 -390.391)">
+    <g id="Group_38805" data-name="Group 38805" transform="translate(1262.074 391.391)">
+      <g id="Group_38803" data-name="Group 38803" transform="translate(0 0)">
+        <path id="Path_41466" data-name="Path 41466" d="M1262.074,396.578v-3.221a1.966,1.966,0,0,1,1.966-1.966h2.552" transform="translate(-1262.074 -391.391)" fill="none" stroke="#006e7d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Path_41467" data-name="Path 41467" d="M1504.316,396.578v-3.221a1.966,1.966,0,0,0-1.966-1.966H1499.8" transform="translate(-1480.323 -391.391)" fill="none" stroke="#006e7d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Group_38804" data-name="Group 38804" transform="translate(0 18.813)">
+        <path id="Path_41468" data-name="Path 41468" d="M1262.074,621.021v3.221a1.966,1.966,0,0,0,1.966,1.966h2.552" transform="translate(-1262.074 -621.021)" fill="none" stroke="#006e7d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Path_41469" data-name="Path 41469" d="M1504.316,621.021v3.221a1.966,1.966,0,0,1-1.966,1.966H1499.8" transform="translate(-1480.323 -621.021)" fill="none" stroke="#006e7d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+    <g id="Group_38806" data-name="Group 38806" transform="translate(1266.206 394.825)">
+      <path id="Path_41470" data-name="Path 41470" d="M1312.511,447.407v-6.23a7.865,7.865,0,0,1,7.865-7.865h0a7.865,7.865,0,0,1,7.865,7.865v6.23" transform="translate(-1312.511 -433.312)" fill="none" stroke="#006e7d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <path id="Path_41471" data-name="Path 41471" d="M1373.405,506.075v-9.291a2.876,2.876,0,0,1,2.876-2.876h0a2.876,2.876,0,0,1,2.876,2.876v9.291" transform="translate(-1368.416 -488.944)" fill="#fff" stroke="#006e7d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>
