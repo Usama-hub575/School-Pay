@@ -4,7 +4,26 @@
             "outputFile": "/Users/discover/Documents/GitHub/paynest_flutter_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/discover/.gradle/caches/transforms-3/d262b2397ef0c53fe7baf1e91c4860cb/transformed/core-1.6.0/res/values-v16/values-v16.xml",
+                    "source": "/Users/discover/.gradle/caches/transforms-3/b46d3be24827fa5b65cd63f12f07b986/transformed/appcompat-1.2.0/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
+                },
+                {
+                    "source": "/Users/discover/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

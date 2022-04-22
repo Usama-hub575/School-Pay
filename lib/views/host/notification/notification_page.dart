@@ -44,7 +44,7 @@ class _NotificationPageState extends State<NotificationPage> {
                               onPressed: (){
                                 Navigator.pop(context);
                               },
-                              icon: Icon(Icons.clear,size: 20.sp,color: PayNestTheme.blueAccent),
+                              icon: Icon(Icons.arrow_back,size: 20.sp,color: PayNestTheme.blueAccent),
                               // child: Text(""),
                             ),
                           ),

@@ -8,8 +8,8 @@
         "source": "/Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/discover/Documents/GitHub/paynest_flutter_app/build/app/intermediates/merged_res/debug/drawable_launch_background.xml.flat",
-        "source": "/Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/res/drawable/launch_background.xml"
+        "merged": "/Users/discover/Documents/GitHub/paynest_flutter_app/build/app/intermediates/merged_res/debug/xml_network_security_config.xml.flat",
+        "source": "/Users/discover/Documents/GitHub/paynest_flutter_app/android/app/src/main/res/xml/network_security_config.xml"
     },
     {
         "merged": "/Users/discover/Documents/GitHub/paynest_flutter_app/build/app/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher.png.flat",

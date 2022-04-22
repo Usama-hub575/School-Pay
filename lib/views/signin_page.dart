@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
+import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/widgets/blue_back_button.dart';
 
 class SignInPage extends StatefulWidget {
@@ -12,6 +16,13 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  // LoginController userController = Get.put(LoginController());
+  UserController userController = Get.put(UserController());
+  final accessToken = GetStorage();
+
+  bool isObscure = true;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,44 +36,90 @@ class _SignInPageState extends State<SignInPage> {
                 children: [
                   BlueBackButton(context: context,),
                   SizedBox(width: 20.w,),
-                  Text(signIn),
+                  Text(signIn,style: PayNestTheme.title20primaryColor,),
                 ],
               ),
-              SizedBox(height: 58.h,),
-              TextFormField(
-                decoration: InputDecoration(
-                  // contentPadding: EdgeInsets.only(left: 24.44.w,right: 34.47.w, bottom: 12.3.h,top: 15.03.h),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                      borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
-                  labelText: email,
-                  // labelStyle: CustomizedTheme.b_W400_12,
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
+              Form(
+                key: Utils.loginFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 58.h,),
+                    TextFormField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                            borderSide: BorderSide(color: PayNestTheme.blueAccent,width: 1.0.w)),
+                        labelText: email,
+                        // labelStyle: CustomizedTheme.b_W400_12,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                          borderSide: BorderSide(color: PayNestTheme.blueAccent),
+                        ),
+                      ),
+                      autovalidateMode:AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value!.trim().isEmpty) {
+                          return 'Please enter email';
+                        }
+                        // Check if the entered email has the right format
+                        if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                          return 'Invalid email';
+                        }
+                        // Return null if the entered email is valid
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 13.h,),
+                    TextFormField(
+                      controller: passwordController,
+                      obscureText: isObscure,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                            borderSide: BorderSide(color: PayNestTheme.blueAccent,width: 1.0.w)),
+                        labelText: password,
+                        // labelStyle: CustomizedTheme.b_W400_12,
+                        suffixIcon: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    isObscure = !isObscure;
+                                  });
+                                },
+                                child: Text(isObscure ? show : hide,style: PayNestTheme.h2_14blueAccent)
+                            ),
+                          ],
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                          borderSide: BorderSide(color: PayNestTheme.blueAccent),
+                        ),
+                      ),
+                      autovalidateMode:AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value!.trim().isEmpty) {
+                          return 'Please enter password';
+                        }
+                        // Check if the entered email has the right format
+                        if (value.trim().length < 5) {
+                          return 'Password must not be less than 5';
+                        }
+                        // Return null if the entered email is valid
+                        return null;
+                      },
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 13.h,),
-              TextFormField(
-                decoration: InputDecoration(
-                  // contentPadding: EdgeInsets.only(left: 24.44.w,right: 34.47.w, bottom: 12.3.h,top: 15.03.h),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                      borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
-                  labelText: password,
-                  // labelStyle: CustomizedTheme.b_W400_12,
-                  suffixText: show,
-                  // suffixStyle: ,
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                ),
-              ),
+
               Padding(
                 padding: EdgeInsets.only(top: 16.h,bottom: 72.h),
-                child: Text(forgotpassword),
+                child: Text(forgotpassword,style: PayNestTheme.h2_14blueAccent,),
               ),
               InkWell(
                 child: Center(
@@ -70,22 +127,30 @@ class _SignInPageState extends State<SignInPage> {
                 )),
               SizedBox(height: 47.h,),
 
-              SizedBox(
+              Obx(() => SizedBox(
                 height: 60.h,
                 width: 326.w,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      // primary: MyTheme.sharpGreen,
+                      primary: PayNestTheme.blueAccent,
                       elevation: 0,
                       // side: BorderSide(width:1, color:Colors.white),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    onPressed: (){
-                      Navigator.pushNamed(context, '/DashboardPage');
+                    onPressed: () async {
+                      if(Utils.loginFormKey.currentState!.validate()){
+                        await userController.hitLogin(emailController.text.trim(),passwordController.text.trim(),accessToken.read('fcmToken'));
+                        if(userController.userResData.value.status == true){
+                          accessToken.write('accessToken', userController.userResData.value.token);
+                          Navigator.pushNamedAndRemoveUntil(context, '/DashboardPage',(Route<dynamic> route) => false);
+                        }else{
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Entered email or password does not match"),backgroundColor: Colors.red,));
+                        }
+                      }
                     },
-                    child: Text(signIn,style: PayNestTheme.subtitle16white)
+                    child: !userController.isLoading.value ? Text(signIn,style: PayNestTheme.subtitle16white): Center(child: CircularProgressIndicator(backgroundColor: PayNestTheme.colorWhite,color: PayNestTheme.blueAccent,))
                 ),
-              ),
+              )),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 child: Row(

@@ -1,0 +1,289 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
+
+class APIService{
+  GetStorage accessToken = GetStorage();
+  static var client =http.Client();
+  static var baseurl =Uri.parse("https://payschool.azurewebsites.net");
+  static var baseurl1 = "discoveritech.com";
+
+  static var login = "/api/parent/auth/login";
+  static var sendOTP = "/api/parent/sendOtp";
+  static var verifyOTP = "/api/parent/verifyotp";
+  static var register = "/api/parent/auth/signup";
+  static var myStudents = "/api/parent/students";
+  static var allSchools = "/api/school/allSchools";
+  static var allStudents = "/api/student/all";
+  static var addStudents = "/api/parent/addStudent";
+  static var pinUpdate = "/api/parent/update";
+  static var resetPassword = "/api/parent/resetpassword";
+  static var updateProfile = "/api/parent/updateProfile";
+  ///Fetch Transaction
+  static var transaction = "/api/transaction/all";
+  static var verifyPin = "/api/parent/verifyPin";
+  static var partialPay = "/api/parent/updateFeeBalance";
+  static var payNow = "/schoolpay-transactions/PaymentInitiator.php";
+  /// To set payment data to server
+  static var createTransaction= "/api/transaction";
+  static var updateBankResponse= "/api/transaction/setBankResponse";
+
+  // Map<String, String> headers = {
+  //   "Authorization": tokenType.read('tokenType')+" "+token.read('token'),
+  //   "Content-Type": "application/json",
+  // };
+  Map<String, String> headers = {
+    "Content-Type": "application/json",
+  };
+
+
+  /// * Login * ///
+  Future apiLogin(data) async {
+    var endPoint = Uri.parse("$baseurl$login");
+    var response = await client.post(endPoint,headers: headers,body: data);
+    print("Login Data");
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+  /// * Send OTP * ///
+  Future apiSendOTP(data) async {
+    var endPoint = Uri.parse("$baseurl$sendOTP");
+    var response = await client.post(endPoint,headers: headers,body: data);
+    // print("Login Data");
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+
+  /// * Verify OTP * ///
+  Future apiVerifyOTP(data) async {
+    var endPoint = Uri.parse("$baseurl$verifyOTP");
+    var response = await client.post(endPoint,headers: headers,body: data);
+    // print("Login Data");
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+  /// * Register * ///
+  Future apiResister(data) async {
+    var endPoint = Uri.parse("$baseurl$register");
+    var response = await client.post(endPoint,headers: headers,body: data);
+    // print("Login Data");
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+
+  /// * Fetch MyStudents already added students * ///
+  Future apiMyStudents(data) async {
+    var endPoint = Uri.parse("$baseurl$myStudents");
+    var response = await client.post(endPoint,headers: headers,body: data);
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+  /// * Student List * ///
+  Future apiStudentList() async {
+    Map<String, String> headersAccess = {
+      "Authorization": "Bearer "+ accessToken.read('accessToken'),
+      "Content-Type": "application/json",
+    };
+    var endPoint = Uri.parse("$baseurl$allStudents");
+    var response = await client.get(endPoint,headers: headersAccess);
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+  /// * Schools List * ///
+  Future apiSchoolList() async {
+    var endPoint = Uri.parse("$baseurl$allSchools");
+    var response = await client.get(endPoint);
+    print('this is school');
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+
+  /// * Parent Add Student * ///
+  Future apiAddStudent(data) async {
+    print("Student data");
+    print(data);
+    var endPoint = Uri.parse("$baseurl$addStudents");
+    var response = await client.post(endPoint,headers: headers,body: data);
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+  /// * Update or add Pin * ///
+  Future apiPinUpdate(data) async {
+    print("Student data");
+    print(data);
+    var endPoint = Uri.parse("$baseurl$pinUpdate");
+    var response = await client.put(endPoint,headers: headers,body: data);
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+  /// * ResetPassword * ///
+  Future apiResetPassword(data) async {
+    var endPoint = Uri.parse("$baseurl$resetPassword");
+    var response = await client.post(endPoint,headers: headers,body: data);
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+  /// * UpdateProfile * ///
+  Future apiUpdateProfile(data) async {
+    var endPoint = Uri.parse("$baseurl$updateProfile");
+    var response = await client.put(endPoint,headers: headers,body: data);
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+
+  /// * Fetch all previous Transactions * ///
+  Future apiTransactionList(data) async {
+    var endPoint = Uri.parse("$baseurl$transaction");
+    var response = await client.post(endPoint,headers: headers,body: data);
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+
+  /// * Verify Pin * ///
+  Future apiVerifyPin(data) async {
+    var endPoint = Uri.parse("$baseurl$verifyPin");
+    var response = await client.post(endPoint,headers: headers,body: data);
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+  /// * Half Fee payment * ///
+  Future apiPartialPay(data) async {
+    var endPoint = Uri.parse("$baseurl$partialPay");
+    var response = await client.put(endPoint,headers: headers,body: data);
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+  /// *  payment * ///
+  // Future web(data) async {
+  //   final queryParameters = {
+  //     'c': data,
+  //   };
+  //   var endPoidsfnt = Uri.https("$baseurl1", '',queryParameters);
+  //   var endPoint = Uri.parse("$endPoidsfnt$partialPay");
+  //   var response = await client.post(endPoint,body: data);
+  //   print(response.body);
+  //   if(response.statusCode == 200){
+  //     return response.body;
+  //   }else{
+  //     return response.body;
+  //   }
+  // }
+
+  Future apiPayNow(queryParams) async {
+    var endPoint = Uri.https('discoveritech.com',payNow,queryParams);
+    print("PARAMAMAMMAMAM");
+    print(endPoint);
+    var response = await client.get(endPoint);
+    print(response.body);
+    if(response.statusCode == 200){
+      print("Pay Response ***");
+      // print(response.body);
+      log(response.body);
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+  /// Sending Data of student to server for which payment is made
+  Future apiCreateTransaction(queryParams) async {
+    var endPoint = Uri.https('payschool.azurewebsites.net',createTransaction,queryParams);
+    print("PARAMAMAMMAMAM");
+    print(endPoint);
+    var response = await client.post(endPoint,body: queryParams);
+    print(response.body);
+    if(response.statusCode == 200){
+      print("CreateTrans Response ***");
+      // print(response.body);
+      log(response.body);
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+
+  /// * Update Bank Response * ///
+  Future apiUpdateBankResponse(data) async {
+    var endPoint = Uri.parse("$baseurl$updateBankResponse");
+    var response = await client.post(endPoint,headers: headers,body: data);
+    print("Bank Response");
+    print(response.body);
+    if(response.statusCode == 200){
+      return response.body;
+    }else{
+      return response.body;
+    }
+  }
+}

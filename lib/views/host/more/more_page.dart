@@ -2,11 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
+import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
 import 'package:paynest_flutter_app/views/host/transaction/recent_transaction_page.dart';
 import 'package:paynest_flutter_app/views/host/viewprofile/view_profile.dart';
+import 'package:paynest_flutter_app/views/welcome_page.dart';
 
 class MorePage extends StatefulWidget {
   const MorePage({Key? key}) : super(key: key);
@@ -16,6 +19,8 @@ class MorePage extends StatefulWidget {
 }
 
 class _MorePageState extends State<MorePage> {
+  final UserController userController = Get.find<UserController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,10 +61,10 @@ class _MorePageState extends State<MorePage> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                            color: PayNestTheme.dropShadow,
+                            color: PayNestTheme.dropShadow.withOpacity(.3),
                             spreadRadius: 0,
-                            blurRadius: 1,
-                            offset: Offset(0, 1), // changes position of shadow
+                            blurRadius: 10,
+                            offset: Offset(0, 5), // changes position of shadow
                           ),
                         ],
                         color: PayNestTheme.colorWhite,
@@ -68,15 +73,18 @@ class _MorePageState extends State<MorePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
+                          Obx(()=>Row(
                             children: [
                               CircleAvatar(
-                                backgroundImage: AssetImage(dp),
+                                backgroundImage: userController.userResData.value.parent!.profileImage == null ?
+                                NetworkImage('https://cdn.pixabay.com/photo/2022/02/19/15/05/dark-7022879_960_720.jpg'):
+                                NetworkImage(userController.userResData.value.parent!.profileImage),
+
                               ),
                               SizedBox(width: 5.w,),
-                              Text("Belal",style: PayNestTheme.title18black,),
+                              Text(userController.userResData.value.parent!.firstName.toString(),style: PayNestTheme.title18black,),
                             ],
-                          ),
+                          )),
                           GestureDetector(
                             onTap: (){
                               Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewProfile()));
@@ -111,7 +119,7 @@ class _MorePageState extends State<MorePage> {
                     ),
                     ListTile(
                       onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => RecentTrasactionPage()));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => RecentTransactionPage(whichStack: "other",)));
                       },
                       leading:SvgPicture.asset(ic_paymentHistory),
                       title: Text(paymentHistory,style: PayNestTheme.title_3_16black,),
@@ -209,7 +217,20 @@ class _MorePageState extends State<MorePage> {
                             width: 1.w,
                           ),
                         ),
-                        onPressed: (){},
+                        onPressed: (){
+                          // Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                          Navigator.of(context).pushAndRemoveUntil(
+                            // the new route
+                            MaterialPageRoute(
+                              builder: (BuildContext context) => WelcomePage(),
+                            ),
+
+                            // this function should return true when we're done removing routes
+                            // but because we want to remove all other screens, we make it
+                            // always return false
+                                (Route route) => false,
+                          );
+                        },
                         child: Text(signOut,style: PayNestTheme.title_3_16red,),
                       ),
                     ),

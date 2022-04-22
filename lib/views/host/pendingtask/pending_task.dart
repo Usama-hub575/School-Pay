@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
+import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
 
 class PendingTask extends StatefulWidget {
   const PendingTask({Key? key}) : super(key: key);
@@ -12,6 +15,8 @@ class PendingTask extends StatefulWidget {
 }
 
 class _PendingTaskState extends State<PendingTask> {
+  final UserController userController = Get.find<UserController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +49,7 @@ class _PendingTaskState extends State<PendingTask> {
                               onPressed: (){
                                 Navigator.pop(context);
                               },
-                              icon: Icon(Icons.clear,size: 20.sp,color: PayNestTheme.blueAccent),
+                              icon: Icon(Icons.arrow_back,size: 20.sp,color: PayNestTheme.blueAccent),
                               // child: Text(""),
                             ),
                           ),
@@ -58,7 +63,7 @@ class _PendingTaskState extends State<PendingTask> {
             ),
           ),
 
-          Padding(
+          Obx(()=>userController.userResData.value.parent!.pin == null ? Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               children: [
@@ -72,6 +77,7 @@ class _PendingTaskState extends State<PendingTask> {
                       )
                   ),
                   onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePIN()));
                     // Navigator.of(context).push(MaterialPageRoute(builder: (context) => RecentTrasactionPage()));
                   },
 
@@ -83,7 +89,7 @@ class _PendingTaskState extends State<PendingTask> {
 
               ],
             ),
-          )
+          ):SizedBox()),
 
         ],
       ),

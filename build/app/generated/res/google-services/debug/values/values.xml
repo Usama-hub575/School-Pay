@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">516143072835-i8ap64vpbba25mdfk88dm1sr8g9hoscq.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">516143072835</string>
+    <string name="google_api_key" translatable="false">AIzaSyC0mTcMzzA14izbweGNk68OQtnuPl8tn2s</string>
+    <string name="google_app_id" translatable="false">1:516143072835:android:cb0fb840681525ef3676f6</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyC0mTcMzzA14izbweGNk68OQtnuPl8tn2s</string>
+    <string name="google_storage_bucket" translatable="false">paynest-school.appspot.com</string>
+    <string name="project_id" translatable="false">paynest-school</string>
+</resources>

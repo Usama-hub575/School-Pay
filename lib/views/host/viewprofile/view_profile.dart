@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/changepassword/change_password.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
@@ -15,6 +17,8 @@ class ViewProfile extends StatefulWidget {
 }
 
 class _ViewProfileState extends State<ViewProfile> {
+  final UserController userController = Get.find<UserController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +95,7 @@ class _ViewProfileState extends State<ViewProfile> {
                 ),
                 Positioned.fill(
                     top: 90,
-                    child: SizedBox(
+                    child: Obx(()=>SizedBox(
                       width: 1.sw,
                       child: Stack(
                         alignment: Alignment.center,
@@ -105,10 +109,10 @@ class _ViewProfileState extends State<ViewProfile> {
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: PayNestTheme.dropShadow,
+                                    color: PayNestTheme.dropShadow.withOpacity(.3),
                                     spreadRadius: 0,
-                                    blurRadius: 1,
-                                    offset: Offset(0, 1), // changes position of shadow
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5), // changes position of shadow
                                   ),
                                 ],
                                 color: PayNestTheme.colorWhite,
@@ -118,7 +122,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text("Belal Syed",style: PayNestTheme.title18black,),
+                                  Text(userController.userResData.value.parent!.firstName + " "+ userController.userResData.value.parent!.lastName,style: PayNestTheme.title18black,),
                                   SizedBox(height: 16.h,)
                                 ],
                               ),
@@ -130,14 +134,16 @@ class _ViewProfileState extends State<ViewProfile> {
                               radius: 46.r,
                               backgroundColor: PayNestTheme.blueAccent,
                               child: CircleAvatar(
-                                backgroundImage: NetworkImage('https://cdn.pixabay.com/photo/2022/02/19/15/05/dark-7022879_960_720.jpg'),
+                                backgroundImage: userController.userResData.value.parent!.profileImage == null ?
+                                  NetworkImage('https://cdn.pixabay.com/photo/2022/02/19/15/05/dark-7022879_960_720.jpg'):
+                                  NetworkImage(userController.userResData.value.parent!.profileImage),
                                 radius: 45.r,
                               ),
                             ),
                           )
                         ],
                       ),
-                    )
+                    ))
                 )
               ],
             ),
@@ -156,7 +162,7 @@ class _ViewProfileState extends State<ViewProfile> {
                     Text(name,style: PayNestTheme.h2_14textGrey,),
                     SizedBox(height: 5.h,),
 
-                    Text("Belal Syed",style: PayNestTheme.title_3_16black),
+                    Obx(()=>Text(userController.userResData.value.parent!.firstName + " "+ userController.userResData.value.parent!.lastName,style: PayNestTheme.title_3_16black)),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -169,7 +175,7 @@ class _ViewProfileState extends State<ViewProfile> {
                     Text(email,style: PayNestTheme.h2_14textGrey,),
                     SizedBox(height: 5.h,),
 
-                    Text("abc@xyzmail.com",style: PayNestTheme.title_3_16black),
+                    Obx(()=>Text(userController.userResData.value.parent!.email,style: PayNestTheme.title_3_16black)),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -181,7 +187,7 @@ class _ViewProfileState extends State<ViewProfile> {
 
                     Text(contactNumber,style: PayNestTheme.h2_14textGrey,),
                     SizedBox(height: 5.h,),
-                    Text("+971-5452135",style: PayNestTheme.title_3_16black,),
+                    Obx(()=>Text(userController.userResData.value.parent!.phone,style: PayNestTheme.title_3_16black,)),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -194,25 +200,25 @@ class _ViewProfileState extends State<ViewProfile> {
                       dense: true,
                       contentPadding: EdgeInsets.all(0),
                       title: Text(pin,style: PayNestTheme.h2_14textGrey,),
-                      subtitle: RoundedDots(),
-                      trailing: Container(
-                          height: 26.h,
-                          width: 110.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4.r),
-                              color: PayNestTheme.blueAccent
-                          ),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: PayNestTheme.blueAccent,
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePIN()));
-                            },
-                            child: Center(child: FittedBox(child: Text(chgpin))),
-                          )
-
-                      ),
+                      subtitle: userController.userResData.value.parent!.pin == null ? Text("Add 4 digit Pin",style: PayNestTheme.title_3_16black,) : RoundedDot(),
+                      // trailing: Container(
+                      //     height: 26.h,
+                      //     width: 110.w,
+                      //     decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(4.r),
+                      //         color: PayNestTheme.blueAccent
+                      //     ),
+                      //     child: ElevatedButton(
+                      //       style: ElevatedButton.styleFrom(
+                      //         primary: PayNestTheme.blueAccent,
+                      //       ),
+                      //       onPressed: () {
+                      //         Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePIN()));
+                      //       },
+                      //       child: Center(child: FittedBox(child: Text(chgpin))),
+                      //     )
+                      //
+                      // ),
                     ),
 
                     Padding(
@@ -260,11 +266,11 @@ class _ViewProfileState extends State<ViewProfile> {
                       child: OutlinedButton.icon(
                         onPressed: (){},
                         icon: Icon(Icons.restore_from_trash),
-                        label: Text(deleteAcc),
+                        label: Text(deleteAcc,style: PayNestTheme.floating_14primaryColor,),
                         style: OutlinedButton.styleFrom(
                           // primary: MyTheme.sharpGreen,
                           elevation: 0,
-                          // side: BorderSide(width:1, color:Colors.white),
+                          side: BorderSide(width:1, color:PayNestTheme.blueAccent),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         ),
                       ),
@@ -347,3 +353,53 @@ class RoundedDots extends StatelessWidget {
     );
   }
 }
+class RoundedDot extends StatelessWidget {
+  const RoundedDot({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          width: 10.h,
+          height: 10.h,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: PayNestTheme.black
+          ),
+        ),
+        SizedBox(width: 4.w,),
+        Container(
+          width: 10.h,
+          height: 10.h,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: PayNestTheme.black
+          ),
+        ),
+        SizedBox(width: 4.w,),
+        Container(
+          width: 10.h,
+          height: 10.h,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: PayNestTheme.black
+          ),
+        ),
+        SizedBox(width: 4.w,),
+        Container(
+          width: 10.h,
+          height: 10.h,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: PayNestTheme.black
+          ),
+        ),
+
+      ],
+    );
+  }
+}
+

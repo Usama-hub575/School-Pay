@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
+import 'package:paynest_flutter_app/controller/updateprofile_controller.dart';
+import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/utils/utils.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -11,6 +15,23 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+  final UserController userController = Get.find<UserController>();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  UpdateProfileController updateProfileController = Get.put(UpdateProfileController());
+
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    emailController = TextEditingController(text: userController.userResData.value.parent!.email);
+    firstNameController = TextEditingController(text: userController.userResData.value.parent!.firstName);
+    lastNameController = TextEditingController(text: userController.userResData.value.parent!.lastName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +82,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(right: 25.h),
-                                child: SizedBox(
+                                child: Obx(()=>SizedBox(
                                   height : 44.h,
                                   width : 80.w,
                                   child: ElevatedButton(
@@ -71,10 +92,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         borderRadius: BorderRadius.circular(12.r)
                                       )
                                     ),
-                                    onPressed: (){},
-                                    child: Text(save,style: PayNestTheme.h2_14blueAccent,),
+                                    onPressed: () async {
+                                      if(Utils.editProfileFormKey.currentState!.validate()){
+                                        await updateProfileController.hitUpdateProfile(
+                                            userController.userResData.value.parent!.id.toString(),
+                                            firstNameController.text,
+                                            lastNameController.text
+                                        );
+                                        if(updateProfileController.updateProfileData.value.status == true){
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
+                                              // updateProfileController.updateProfileData.value.message.toString(),
+                                            "Profile Updated"
+                                          ),backgroundColor: Colors.green,));
+                                          userController.userResData.update((val) {
+                                            val!.parent!.firstName = firstNameController.text;
+                                            val.parent!.lastName = lastNameController.text;
+                                          });
+                                          Navigator.pop(context);
+                                        }else{
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to Update'),backgroundColor: Colors.red,));
+                                        }
+                                      }
+                                    },
+                                    child: !updateProfileController.isLoading.value ? Text(save,style: PayNestTheme.h2_14blueAccent,) :Center(child: SizedBox(height: 10.h,width: 10.w,child: CircularProgressIndicator(backgroundColor: PayNestTheme.colorWhite,color: PayNestTheme.blueAccent,))),
                                   ),
-                                ),
+                                )),
                               ),
                             ],
                           ),
@@ -99,10 +141,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: PayNestTheme.dropShadow,
+                                    color: PayNestTheme.dropShadow.withOpacity(.3),
                                     spreadRadius: 0,
-                                    blurRadius: 1,
-                                    offset: Offset(0, 1), // changes position of shadow
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5), // changes position of shadow
                                   ),
                                 ],
                                 color: PayNestTheme.colorWhite,
@@ -112,7 +154,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text("Belal Syed",style: PayNestTheme.title18black,),
+                                  Obx(()=>Text(userController.userResData.value.parent!.firstName + " "+ userController.userResData.value.parent!.lastName,style: PayNestTheme.title18black,)),
                                   SizedBox(height: 16.h,)
                                 ],
                               ),
@@ -123,10 +165,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             child: CircleAvatar(
                               radius: 46.r,
                               backgroundColor: PayNestTheme.blueAccent,
-                              child: CircleAvatar(
-                                backgroundImage: NetworkImage('https://cdn.pixabay.com/photo/2022/02/19/15/05/dark-7022879_960_720.jpg'),
+                              child: Obx(()=>CircleAvatar(
+                                backgroundImage: userController.userResData.value.parent!.profileImage == null ?
+                                NetworkImage('https://cdn.pixabay.com/photo/2022/02/19/15/05/dark-7022879_960_720.jpg'):
+                                NetworkImage(userController.userResData.value.parent!.profileImage),
                                 radius: 45.r,
-                              ),
+                              )),
                             ),
                           )
                         ],
@@ -140,68 +184,89 @@ class _EditProfilePageState extends State<EditProfilePage> {
           Expanded(
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 30.h,bottom: 16.h),
-                      child: Text(personalDetails,style: PayNestTheme.title_2_16primaryColor,),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 17.h),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          // contentPadding: EdgeInsets.only(left: 24.44.w,right: 34.47.w, bottom: 12.3.h,top: 15.03.h),
-                          border: OutlineInputBorder(
+              child: Form(
+                key: Utils.editProfileFormKey,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 30.h,bottom: 16.h),
+                        child: Text(personalDetails,style: PayNestTheme.title_2_16primaryColor,),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 17.h),
+                        child: TextFormField(
+                          controller: firstNameController,
+                          keyboardType: TextInputType.name,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                                borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
+                            labelText: firstName,
+                            // labelStyle: CustomizedTheme.b_W400_12,
+                            focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                              borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
-                          labelText: oldPassword,
-                          // labelStyle: CustomizedTheme.b_W400_12,
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                            borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: PayNestTheme.primaryColor),
+                            ),
+                          ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value){
+                            if(value!.isEmpty){
+                              return "Required";
+                            }else{
+                              return null;
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 17.h),
+                        child: TextFormField(
+                          controller: lastNameController,
+                          keyboardType: TextInputType.name,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                                borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
+                            labelText: lastName,
+                            // labelStyle: CustomizedTheme.b_W400_12,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                              borderSide: BorderSide(color: PayNestTheme.primaryColor),
+                            ),
+                          ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value){
+                            if(value!.isEmpty){
+                              return "Required";
+                            }else{
+                              return null;
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 17.h),
+                        child: TextFormField(
+                          controller: emailController,
+                          enabled: false,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                                borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
+                            labelText: email,
+                            // labelStyle: CustomizedTheme.b_W400_12,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                              borderSide: BorderSide(color: PayNestTheme.primaryColor),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 17.h),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          // contentPadding: EdgeInsets.only(left: 24.44.w,right: 34.47.w, bottom: 12.3.h,top: 15.03.h),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                              borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
-                          labelText: newPassword,
-                          // labelStyle: CustomizedTheme.b_W400_12,
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 17.h),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          // contentPadding: EdgeInsets.only(left: 24.44.w,right: 34.47.w, bottom: 12.3.h,top: 15.03.h),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                              borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
-                          labelText: confirmpassword,
-                          // labelStyle: CustomizedTheme.b_W400_12,
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                  ],
+                    ],
+                  ),
                 ),
               ),
             )

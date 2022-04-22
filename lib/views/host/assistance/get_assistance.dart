@@ -36,23 +36,26 @@ class _GetAssistanceState extends State<GetAssistance> {
                         height : 44.h,
                         width : 44.w,
                         decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: PayNestTheme.colorWhite,
                             borderRadius: BorderRadius.circular(12.r)
                         ),
                         child: IconButton(
                           onPressed: (){
                             Navigator.pop(context);
                           },
-                          icon: Icon(Icons.clear,size: 20.sp,color: PayNestTheme.blueAccent),
+                          icon: Icon(Icons.arrow_back,size: 20.sp,color: PayNestTheme.blueAccent),
                           // child: Text(""),
                         ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 34.h,bottom: 11.h),
+                      padding: EdgeInsets.only(top: 34.h,bottom: 11.h,left: 7.w,right:7.w),
                       child: Text(assistance,style: PayNestTheme.title20white,),
                     ),
-                    Text(assistanceMSG,style: PayNestTheme.small_2_14colorWhite,),
+                    Padding(
+                      padding: EdgeInsets.only(left: 7.w,right:7.w),
+                      child: Text(assistanceMSG,style: PayNestTheme.small_2_14colorWhite,),
+                    ),
                   ],
                 ),
               ),
@@ -67,18 +70,25 @@ class _GetAssistanceState extends State<GetAssistance> {
                   width: 167.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(width: 1.w,color: Colors.grey)
+                      border: Border.all(width: 1.w,color: PayNestTheme.lineColor)
                   ),
                   child: Column(
                     children: [
                       Container(
                         height: 55.h,
                         width: 1.sw,
+                        padding: EdgeInsets.symmetric(horizontal: 14.w),
                         decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: PayNestTheme.blueAccent,
                           borderRadius: BorderRadius.vertical(top: Radius.circular(12.r))
                         ),
-                        child: Center(child: Text(appTutorial,style: PayNestTheme.title_3_18colorWhite,)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(appTutorial,style: PayNestTheme.title_3_18colorWhite,),
+                          ],
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 8.h),
@@ -104,18 +114,25 @@ class _GetAssistanceState extends State<GetAssistance> {
                   width: 167.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.r),
-                    border: Border.all(width: 1.w,color: Colors.grey)
+                    border: Border.all(width: 1.w,color: PayNestTheme.lineColor)
                   ),
                   child: Column(
                     children: [
                       Container(
                         height: 55.h,
                         width: 1.sw,
+                        padding: EdgeInsets.symmetric(horizontal: 14.w),
                         decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: PayNestTheme.blueAccent,
                           borderRadius: BorderRadius.vertical(top: Radius.circular(12.r))
                         ),
-                        child: Center(child: Text(contactCC,style: PayNestTheme.title_3_18colorWhite)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(contactCC,style: PayNestTheme.title_3_18colorWhite),
+                          ],
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 8.h),
@@ -149,18 +166,25 @@ class _GetAssistanceState extends State<GetAssistance> {
                   width: 167.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(width: 1.w,color: Colors.grey)
+                      border: Border.all(width: 1.w,color: PayNestTheme.lineColor)
                   ),
                   child: Column(
                     children: [
                       Container(
                         height: 55.h,
                         width: 1.sw,
+                        padding: EdgeInsets.symmetric(horizontal: 14.w),
                         decoration: BoxDecoration(
-                            color: Colors.blue,
+                            color: PayNestTheme.blueAccent,
                             borderRadius: BorderRadius.vertical(top: Radius.circular(12.r))
                         ),
-                        child: Center(child: Text(FAQs,style: PayNestTheme.title_3_18colorWhite)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(FAQs,style: PayNestTheme.title_3_18colorWhite),
+                          ],
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 8.h),
@@ -186,18 +210,25 @@ class _GetAssistanceState extends State<GetAssistance> {
                   width: 167.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(width: 1.w,color: Colors.grey)
+                      border: Border.all(width: 1.w,color: PayNestTheme.lineColor)
                   ),
                   child: Column(
                     children: [
                       Container(
                         height: 55.h,
                         width: 1.sw,
+                        padding: EdgeInsets.symmetric(horizontal: 14.w),
                         decoration: BoxDecoration(
-                            color: Colors.blue,
+                            color: PayNestTheme.blueAccent,
                             borderRadius: BorderRadius.vertical(top: Radius.circular(12.r))
                         ),
-                        child: Center(child: Text(liveChat,style: PayNestTheme.title_3_18colorWhite)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(liveChat,style: PayNestTheme.title_3_18colorWhite),
+                          ],
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 8.h),

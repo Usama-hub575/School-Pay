@@ -1,6 +1,8 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 
@@ -12,8 +14,24 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  final fcmToken = GetStorage();
+  late FirebaseMessaging messaging;
+  @override
+  void initState() {
+    super.initState();
+    getFCMToken();
+  }
+
+  getFCMToken() async {
+    messaging = FirebaseMessaging.instance;
+    messaging.getToken().then((value) {
+      fcmToken.write('fcmToken', value);
+      print(value);
+    });
+  }
   @override
   Widget build(BuildContext context) {
+    print(fcmToken.read('fcmToken'));
     return Scaffold(
       body: SizedBox(
         height: 1.sh,
@@ -65,7 +83,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         width: 326.w,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            // primary: MyTheme.sharpGreen,
+                            primary: PayNestTheme.blueAccent,
                             elevation: 0,
                             // side: BorderSide(width:1, color:Colors.white),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

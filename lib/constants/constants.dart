@@ -19,6 +19,7 @@ const ic_privacyPolicy = "assets/icons/ic_privacyPolicy.svg";
 const ic_terms = "assets/icons/ic_terms.svg";
 const ic_studentAvatar = "assets/icons/ic_studentAvatar.svg";
 const ic_schoolWhite = "assets/icons/ic_schoolIconWhite.png";
+const ic_schooldark = "assets/icons/ic_schoolIcondark.png";
 
 
 const ic_dashboard = "assets/dashboard/ic_dashboard.png";
@@ -38,8 +39,9 @@ const paynest = "Paynest";
 const signIn = "Sign in";
 const signOut = "Sign out";
 const register = "Register";
+const registration = "Registration";
 const email = "Email address";
-const dob = "mm/dd/yyyy";
+const dob = "yyyy/mm/dd";
 const password = "Password";
 const phone = "Phone number";
 const fname = "First name";
@@ -53,9 +55,11 @@ const area = "Area";
 const country = "Country";
 const forgotpassword = "Forgot Password?";
 const show = "Show";
+const hide = "Hide";
 const or = "OR";
 const next = "Next";
 const create = "Create";
+const submit = "Submit";
 const skip = "Skip";
 const resend = "Resend code again";
 const slogan = "Payments Anywhere, Anytime";
@@ -63,12 +67,16 @@ const payments = "Payments";
 const setting = "Settings";
 const about = "About";
 const paid = "Paid";
+const paidon = "Paid On";
+const dues = "Dues";
 const view = "View";
-const searchSchool = "Search school";
+const searchSchool = "Search School";
+const searchStudent = "Search Student";
 
 
 const accountDetails = "Account details";
 const name = "Name";
+const referenceNumber = "Reference number";
 const emailID = "Email ID";
 const contactNumber = "Contact Number";
 const pin = "PIN";
@@ -86,6 +94,10 @@ const oldPassword = "Old password";
 const newPassword = "New password";
 const confirmpassword = "Confirm password";
 
+const confirm = "Confirm";
+const congratulations = "Congratulations!";
+const youHaveSuccessfully = "You have successfully transferred the amount.";
+
 
 
 
@@ -97,7 +109,18 @@ const makeFirstPayment = "Make first payment";
 const setPIN = "Setup PIN";
 const student = "Students";
 const studentID = "Student ID";
+const studentName = "Student Name";
+const studentclass = "Class";
+const dueDate = "Due date";
+const dueAmount = "Due Amount";
+const payableAmount = "Payable amount";
+const amountPaid = "Amount Paid";
+const continueToPayment = "Continue to payment";
+const enterYourPin = "Enter your 4 digit Pin to continue";
+const currentPayableMmount = "Current Payable amount";
+const downloadInvoice = 'Download Invoice';
 const verifyStudent = "Verify students";
+const enterAmount = "Enter Amount";
 const addStudent = "Add Students";
 const paynow = "Pay Now";
 const viewprofile = "View Profile";
@@ -109,6 +132,7 @@ const save = "Save";
 
 const pleaseconfirmDetailsbelow = "Please confirm below details before we proceed.";
 const pleaseenterdetailbelow = "Please enter the details below";
+const pleaseenteramount = "Please enter the amount that you want to pay.";
 const youneedtosetuppin = "You need to setup PIN before making any transaction";
 const weuseyourphone = "We'll use your mobile phone and e-mail to send you the activation code.";
 const confirmCode = "Confirmation code has been sent to your mobile and e-mail";
@@ -128,8 +152,15 @@ const addressDetails = "Address Details";
 const google = "Continue with Google";
 const facebook = "Continue with Facebook";
 
+const payment = "Payment";
+const paymentfor = "Payment For";
+const currentPayableamount = "Current Payable amount";
+const feepayment = "Fee Payment";
 const paymentHistory = "Payment history";
-const chgPIN = "Change security PIN";
+const invoiceDetails = "Invoice details";
+const paymentCategory = "Payment Category";
+const paymentCategories = "Payment Categories";
+const chgPIN = "Change PIN";
 const biometricAuth = "Biometric authentication";
 const Location = "Location access";
 const FAQ = "FAQ";

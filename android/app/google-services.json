@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "516143072835",
+    "project_id": "paynest-school",
+    "storage_bucket": "paynest-school.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516143072835:android:cb0fb840681525ef3676f6",
+        "android_client_info": {
+          "package_name": "com.paynest.paynest_flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516143072835-i8ap64vpbba25mdfk88dm1sr8g9hoscq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0mTcMzzA14izbweGNk68OQtnuPl8tn2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516143072835-i8ap64vpbba25mdfk88dm1sr8g9hoscq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
