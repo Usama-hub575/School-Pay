@@ -10,6 +10,8 @@ import 'package:paynest_flutter_app/service/api_service.dart';
 class UserController extends GetxController{
   var isLoading = false.obs;
   final isFailed = "".obs;
+  var retriesTime= ''.obs;
+  var attemptsRemain= ''.obs;
   final userResData = RegisterRespModel(
       status: false,
       message: null,
@@ -84,6 +86,18 @@ class UserController extends GetxController{
         userResData.refresh();
         print(lrm.message);
       }else if(decoded['status'] == false){
+        if(decoded['retryInMins'] != null){
+          retriesTime.value = decoded['retryInMins'].toString();
+          retriesTime.refresh();
+        }else if(decoded['remainingAttempts'] != null){
+          attemptsRemain.value = decoded['remainingAttempts'].toString();
+          attemptsRemain.refresh();
+        }else{
+          retriesTime.value = '';
+          retriesTime.refresh();
+          attemptsRemain.value = '';
+          attemptsRemain.refresh();
+        }
         isLoading(false);
       }
     }

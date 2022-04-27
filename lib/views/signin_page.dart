@@ -143,7 +143,16 @@ class _SignInPageState extends State<SignInPage> {
                         if(userController.userResData.value.status == true){
                           accessToken.write('accessToken', userController.userResData.value.token);
                           Navigator.pushNamedAndRemoveUntil(context, '/DashboardPage',(Route<dynamic> route) => false);
-                        }else{
+                        }else if(userController.userResData.value.status == false){
+                          passwordController.clear();
+                          if(userController.retriesTime.value != ''){
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please retry after "+ userController.retriesTime.value.toString()+" min"),backgroundColor: Colors.red,));
+                          }else if(userController.attemptsRemain.value != ''){
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(userController.attemptsRemain.value.toString() +" attempts remaining"),backgroundColor: Colors.red,));
+
+                          }else{
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Entered email or password does not match"),backgroundColor: Colors.red,));
+                          }
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Entered email or password does not match"),backgroundColor: Colors.red,));
                         }
                       }
@@ -151,6 +160,8 @@ class _SignInPageState extends State<SignInPage> {
                     child: !userController.isLoading.value ? Text(signIn,style: PayNestTheme.subtitle16white): Center(child: CircularProgressIndicator(backgroundColor: PayNestTheme.colorWhite,color: PayNestTheme.blueAccent,))
                 ),
               )),
+
+
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 child: Row(
