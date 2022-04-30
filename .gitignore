@@ -26,6 +26,9 @@ dist/
 # JetBrains IDE
 .idea/
 
+#fvm
+.fvm/
+
 # Unit test reports
 TEST*.xml
 
