@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
-import 'package:paynest_flutter_app/service/api_service.dart';
 
 class TransactionController extends GetxController{
   var isLoading = false.obs;

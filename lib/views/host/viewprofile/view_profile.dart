@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/changepassword/change_password.dart';
-import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
 import 'package:paynest_flutter_app/views/host/editprofile/edit_profile.dart';
 
 import '../../../constants/constants.dart';

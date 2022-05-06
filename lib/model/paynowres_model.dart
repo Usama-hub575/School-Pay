@@ -2,7 +2,6 @@
 //
 //     final payNowResModel = payNowResModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 PayNowResModel payNowResModelFromJson(String str) => PayNowResModel.fromJson(json.decode(str));

@@ -21,7 +21,7 @@ class CreateTransactionRespController extends GetxController{
         "parentId": parentId,
         "invoiceId": "0",
         "studentId": studentId,
-        "payedOn": DateFormat("yyyy-MM-dd").format(DateTime.now()),
+        "payedOn": DateFormat("yyyy-MM-dd").format(DateTime.now()).toString(),
         "amount": amount,
       };
       print(data);

@@ -2,7 +2,6 @@
 //
 //     final partialPayModel = partialPayModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 PartialPayModel partialPayModelFromJson(String str) => PartialPayModel.fromJson(json.decode(str));
