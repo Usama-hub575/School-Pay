@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:get_storage/get_storage.dart';
@@ -408,7 +409,44 @@ class APIService {
     print(response.body);
     if (response.statusCode == 200) {
       print("CreateTrans Response ***");
-      // print(response.body);
+      print(response.body);
+      log(response.body);
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  Future multipart(String url,
+      {Map? headers, formData, encoding, bool withToken = true}) async {
+    print('----Multipart REQUEST----\nURL --> $url\nBody --> $formData');
+    final header = await appendHeader(headers: headers, withToken: withToken);
+    final request = http.MultipartRequest('POST', Uri.parse(url));
+    request.fields.addAll(formData);
+    request.headers.addAll(header);
+    final response = await request.send();
+    final streamString = await response.stream.bytesToString();
+    var encoded = json.decode(streamString);
+  }
+
+  Future apiTransactionEnquery(queryParams) async {
+    var endPoint = Uri.https(
+      'payschool.azurewebsites.net',
+      'https://test.cbdonline.ae/CyberSourceMerchantAPI/MerchantSettlementService.svc/restService/',
+    );
+    print(endPoint);
+    var response = await client.post(
+      endPoint,
+      body: queryParams,
+      headers: {
+        'Content-type': 'text/xml',
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      print("CreateTrans Response ***");
+      print(response.body);
       log(response.body);
       return response.body;
     } else {
@@ -434,5 +472,17 @@ class APIService {
     } else {
       return response.body;
     }
+  }
+
+  Future<Map<String, String>> appendHeader(
+      {Map? headers, bool refresh = false, withToken = true}) async {
+    try {
+      headers ??= <String, String>{};
+      headers["Authorization"] = 'Bearer ' + storage.read('accessToken');
+    } catch (e) {
+      print(e.toString());
+    }
+
+    return headers as Map<String, String>;
   }
 }

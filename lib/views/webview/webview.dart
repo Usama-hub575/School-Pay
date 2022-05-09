@@ -102,11 +102,11 @@ class _MyWebViewState extends State<MyWebView> {
                   });
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(behavior: SnackBarBehavior.floating,content: Text('Amount Updated'),backgroundColor: Colors.green,));
                   // studentController.myStudentData.value.students![index].student!.totalBalanceAmount
-                  !sbrController.isLoading.value ? Navigator.pop(context,true): null;
+                  !sbrController.isLoading.value ? Navigator.pop(context,decoded["Response"]["Body"]["PaymentInformation"]): null;
                 }else{
                   await sbrController.hitSetBankResponse(widget.resID, CBDReferenceNo);
                   // studentController.myStudentData.value.students![index].student!.totalBalanceAmount
-                  !sbrController.isLoading.value ? Navigator.pop(context,false): null;
+                  !sbrController.isLoading.value ? Navigator.pop(context): null;
 
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(behavior: SnackBarBehavior.floating,content: Text(decoded['Response']['Header']['ResponseMsg']),backgroundColor: Colors.red,));
                 }

@@ -353,6 +353,7 @@ class _AddStudentState extends State<AddStudent> {
                                       ShowMyModal(
                                         context,
                                         _searchResult[index].id,
+                                        _searchResult[index].studentRegNo,
                                       );
                                       setState(() {});
                                     },
@@ -419,7 +420,8 @@ class _AddStudentState extends State<AddStudent> {
     );
   }
 
-  Future<dynamic> ShowMyModal(BuildContext cont, selectedStudentID) {
+  Future<dynamic> ShowMyModal(
+      BuildContext cont, selectedStudentID, selectedStudentRegNo) {
     DateTime tempPickedDate;
     return showModalBottomSheet(
       isScrollControlled: true,
@@ -607,7 +609,7 @@ class _AddStudentState extends State<AddStudent> {
                                   .toString(),
                               dob: dateController.text,
                               studentId: selectedStudentID.toString(),
-                              studentRegNo: studentRegController.text,
+                              studentRegNo: selectedStudentRegNo.toString(),
                             );
                             await addStudentController
                                 .hitAddStudent(addStudentModelToJson(model));

@@ -63,18 +63,22 @@ class _PayNowPageState extends State<PayNowPage> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
           backgroundColor: PayNestTheme.blueAccent,
           onPressed: () async {
-            if (studentController.myStudentData.value.status &&
-                int.parse(amountController.text) > 0) {
+            if (studentController.myStudentData.value.status
+                // &&
+                // int.parse(amountController.text) > 0
+                ) {
               print("Student data for Payment to CBD");
               print(studentIDController.text +
                   parentIDController.text +
                   schoolIDController.text);
               // schoolId=56&parentId=225&studentId=638
-              await ctrcController.hitCreateTransaction(
-                  schoolIDController.text,
-                  parentIDController.text,
-                  studentIDController.text,
-                  amountController.text);
+
+              // await ctrcController.hitCreateTransaction(
+              //     schoolIDController.text,
+              //     parentIDController.text,
+              //     studentIDController.text,
+              //     amountController.text);
+
               // ctrcController.createTransData.value.status == true ?
               // Navigator.of(context).push(MaterialPageRoute(
               //   builder: (BuildContext context) => MyWebView(
@@ -85,7 +89,7 @@ class _PayNowPageState extends State<PayNowPage> {
               //   )
               // )):ScaffoldMessenger.of(context).showSnackBar(SnackBar(behavior: SnackBarBehavior.floating,content: Text("Some error occurred"),backgroundColor: Colors.red,));
 
-              if (ctrcController.createTransData.value.status == true) {
+              if (ctrcController.createTransData.value.status) {
                 final result =
                     await Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) => MyWebView(
@@ -97,8 +101,15 @@ class _PayNowPageState extends State<PayNowPage> {
                             )));
                 print("Response from my data" + result.toString());
 
-                if (result == true) {
-                  var amountt = amountController.text;
+                if (result != null) {
+                  var amount = amountController.text;
+
+                  await ctrcController.hitCreateTransaction(
+                      schoolIDController.text,
+                      parentIDController.text,
+                      studentIDController.text,
+                      amountController.text);
+
                   studentController.myStudentData.update((val) {
                     setState(() {
                       val!.students![idx].student!.totalBalanceAmount = "0";
@@ -157,7 +168,7 @@ class _PayNowPageState extends State<PayNowPage> {
                       referenceNo:
                           sbrController.bankResponseData.value.referenceNo,
                       paidOn: sbrController.bankResponseData.value.paidOn,
-                      amountPaid: amountt,
+                      amountPaid: amount,
                     );
                     !sbrController.isLoading.value
                         ? Navigator.of(context).push(MaterialPageRoute(
