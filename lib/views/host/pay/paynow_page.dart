@@ -1,3 +1,4 @@
+import 'package:encrypt/encrypt.dart' as encryption;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ import 'package:paynest_flutter_app/views/webview/webview.dart';
 class PayNowPage extends StatefulWidget {
   final String whichStack;
 
-  const PayNowPage({required this.whichStack, Key? key}) : super(key: key);
+  const PayNowPage({required this.whichStack});
 
   @override
   State<PayNowPage> createState() => _PayNowPageState();
@@ -63,10 +64,8 @@ class _PayNowPageState extends State<PayNowPage> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
           backgroundColor: PayNestTheme.blueAccent,
           onPressed: () async {
-            if (studentController.myStudentData.value.status
-                // &&
-                // int.parse(amountController.text) > 0
-                ) {
+            if (studentController.myStudentData.value.status &&
+                int.parse(amountController.text) > 0) {
               print("Student data for Payment to CBD");
               print(studentIDController.text +
                   parentIDController.text +
@@ -90,15 +89,20 @@ class _PayNowPageState extends State<PayNowPage> {
               // )):ScaffoldMessenger.of(context).showSnackBar(SnackBar(behavior: SnackBarBehavior.floating,content: Text("Some error occurred"),backgroundColor: Colors.red,));
 
               if (ctrcController.createTransData.value.status) {
-                final result =
-                    await Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => MyWebView(
-                              title: "CBD",
-                              resID: ctrcController
-                                  .createTransData.value.transaction!.id,
-                              amount: amountController.text,
-                              indx: idx,
-                            )));
+                String encryptedAmount = await encrypt(amountController.text);
+                final result = await Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => MyWebView(
+                      title: "CBD",
+                      resID:
+                          ctrcController.createTransData.value.transaction!.id,
+                      amount: encryptedAmount,
+                      indx: idx,
+                      schoolId: ctrcController
+                          .createTransData.value.transaction!.schoolId,
+                    ),
+                  ),
+                );
                 print("Response from my data" + result.toString());
 
                 if (result != null) {
@@ -490,5 +494,15 @@ class _PayNowPageState extends State<PayNowPage> {
         ),
       ),
     );
+  }
+
+  Future<String> encrypt(amount) async {
+    final key = encryption.Key.fromUtf8("90UJEG5OQZYD1OAB");
+    final iv = encryption.IV.fromUtf8("90UJEG5OQZYD1OAB");
+    final encrypter =
+        encryption.Encrypter(encryption.AES(key, mode: encryption.AESMode.cbc));
+    final encrypted = encrypter.encrypt(amount, iv: iv);
+    print(encrypted.base64);
+    return encrypted.base64;
   }
 }

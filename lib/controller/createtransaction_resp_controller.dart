@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cryptography/cryptography.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/model/createtransaction_resp_model.dart';
@@ -38,53 +37,5 @@ class CreateTransactionRespController extends GetxController {
     } finally {
       isLoading(false);
     }
-  }
-
-  hitTransactionEnquery(orderId, cbdRef, amount) async {
-    try {
-      isLoading(true);
-      final data = encrypt(orderId, amount, cbdRef);
-
-      print(data);
-      var res = await APIService().multipart(
-        'https://test.cbdonline.ae/CyberSourceMerchantAPI/MerchantSettlementService.svc/restService/',
-        formData: data,
-      );
-      var decoded = jsonDecode(res);
-      if (decoded['status'] == true) {
-        CreateTransactionResModel transactionResModel =
-            createTransactionResModelFromJson(res);
-        createTransData.value = transactionResModel;
-        createTransData.refresh();
-      } else if (decoded['status'] == false) {
-        isLoading(false);
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
-
-  Future<String> encrypt(orderId, amount, cbdRef) async {
-    final cbdXML = '''<BankInformation>
-    <ClientID>CBDINSTA</ClientID>
-    <PayType>sale</PayType>
-    <PaymentInformation>
-      <OrderID>$orderId</OrderID>
-      <TotalAmount>$amount</TotalAmount>
-      <CBDReferenceNo>$cbdRef</CBDReferenceNo>
-    </PaymentInformation>
-    </BankInformation>''';
-
-    final algorithm = AesCbc.with128bits(macAlgorithm: MacAlgorithm.empty);
-    final secretKey = await algorithm.newSecretKeyFromBytes(
-      utf8.encode("90UJEG5OQZYD1OAB"),
-    );
-
-    final secretBox = await algorithm.encrypt(
-      utf8.encode(cbdXML),
-      secretKey: secretKey,
-    );
-
-    return base64Encode(secretBox.cipherText);
   }
 }

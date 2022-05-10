@@ -50,8 +50,7 @@ dependencies:
   flutter_inappwebview:
   url_launcher:
   xml2json:
-  cryptography: ^2.0.5
-
+  encrypt: ^5.0.1
 
 
 dev_dependencies:
