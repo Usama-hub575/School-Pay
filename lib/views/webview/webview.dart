@@ -10,16 +10,18 @@ import 'package:xml2json/xml2json.dart';
 
 class MyWebView extends StatefulWidget {
   final String title;
-  final int resID;
+  // final int resID;
   final String amount;
   final int indx;
+  final int orderId;
   final int schoolId;
 
   MyWebView({
     required this.title,
-    required this.resID,
+    // required this.resID,
     required this.amount,
     required this.indx,
+    required this.orderId,
     required this.schoolId,
   });
 
@@ -48,7 +50,7 @@ class _MyWebViewState extends State<MyWebView> {
     super.initState();
     // if (Platform.isAndroid) WebView.platform = AndroidWebView();
     paymentGateWay =
-        "https://discoveritech.com/BorderPay_Payment_Api/border_request_copy.php?schoolId=${widget.schoolId}&amount=${widget.amount}";
+        "https://discoveritech.com/BorderPay_Payment_Api/border_request_copy.php?schoolId=${widget.schoolId}&amount=${widget.amount}&orderid=${widget.orderId}";
   }
 
   @override
@@ -103,8 +105,8 @@ class _MyWebViewState extends State<MyWebView> {
               print("This is response");
               print(CBDReferenceNo);
               if (decoded["Response"]["Header"]["ResponseCode"] == "00") {
-                await sbrController.hitSetBankResponse(
-                    widget.resID, CBDReferenceNo);
+                // await sbrController.hitSetBankResponse(
+                //     widget.resID, CBDReferenceNo);
                 studentController.myStudentData.update((val) {
                   val!.students![widget.indx].student!.totalBalanceAmount = "0";
                 });
@@ -119,8 +121,8 @@ class _MyWebViewState extends State<MyWebView> {
                         decoded["Response"]["Body"]["PaymentInformation"])
                     : null;
               } else {
-                await sbrController.hitSetBankResponse(
-                    widget.resID, CBDReferenceNo);
+                // await sbrController.hitSetBankResponse(
+                //     widget.resID, CBDReferenceNo);
                 // studentController.myStudentData.value.students![index].student!.totalBalanceAmount
                 !sbrController.isLoading.value ? Navigator.pop(context) : null;
 

@@ -603,16 +603,22 @@ class _AddStudentState extends State<AddStudent> {
                         onPressed: () async {
                           if (dateController.text.isNotEmpty &&
                               studentRegController.text.isNotEmpty) {
-                            AddStudentModel model = AddStudentModel(
-                              parentId: userController
-                                  .userResData.value.parent!.id
-                                  .toString(),
-                              dob: dateController.text,
-                              studentId: selectedStudentID.toString(),
-                              studentRegNo: selectedStudentRegNo.toString(),
-                            );
-                            await addStudentController
-                                .hitAddStudent(addStudentModelToJson(model));
+                            // AddStudentModel model = AddStudentModel(
+                            //   parentId: userController
+                            //       .userResData.value.parent!.id
+                            //       .toString(),
+                            //   dob: dateController.text,
+                            //   studentId: selectedStudentID.toString(),
+                            //   studentRegNo: selectedStudentRegNo.toString(),
+                            // );
+                            final model = {
+                              "parentId": userController
+                                  .userResData.value.parent!.id.toString(),
+                              "dob": dateController.text,
+                              "studentId": selectedStudentID.toString(),
+                              "studentRegNo": selectedStudentRegNo.toString(),
+                            };
+                            await addStudentController.hitAddStudent(model);
                             if (addStudentController
                                 .addStudentData.value.status) {
                               dateController.clear();
