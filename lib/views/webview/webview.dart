@@ -10,6 +10,7 @@ import 'package:xml2json/xml2json.dart';
 
 class MyWebView extends StatefulWidget {
   final String title;
+
   // final int resID;
   final String amount;
   final int indx;
@@ -69,14 +70,14 @@ class _MyWebViewState extends State<MyWebView> {
         onWebViewCreated: (WebViewController webViewController) =>
             _controller = webViewController,
         onProgress: (value) {
-          setState(() {
-            isLoading = false;
-          });
+          // setState(() {
+          //   isLoading = false;
+          // });
         },
         onPageStarted: (url) {
-          setState(() {
-            isLoading = true;
-          });
+          // setState(() {
+          //   isLoading = true;
+          // });
           print('on page start allowing navigation to $url');
           if (url ==
               "https://discoveritech.com/BorderPay_Payment_Api/ReceiveResult.php") {
@@ -86,14 +87,13 @@ class _MyWebViewState extends State<MyWebView> {
           // I/chromium(26486): [INFO:CONSOLE(2)] "JQMIGRATE: Migrate is installed, version 3.3.2", source: https://discoveritech.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2 (2)
         },
         onPageFinished: (url) async {
-          setState(() {
-            isLoading = false;
-          });
+          // setState(() {
+          //   isLoading = false;
+          // });
           print('on page finish allowing navigation to $url');
           // 'https://discoveritech.com/schoolpay-transactions/PaymentInitiator.php'
-          if (!isCodeReceived &&
-              url.contains(
-                  'https://discoveritech.com/schoolpay-transactions/cdb_recieve.php?')) {
+          if (url.contains(
+              'https://discoveritech.com/schoolpay-transactions/cdb_recieve.php?')) {
             print('got it');
             isCodeReceived = true;
             var CBDReferenceNo =
@@ -117,8 +117,7 @@ class _MyWebViewState extends State<MyWebView> {
                 ));
                 // studentController.myStudentData.value.students![index].student!.totalBalanceAmount
                 !sbrController.isLoading.value
-                    ? Navigator.pop(context,
-                        decoded["Response"]["Body"]["PaymentInformation"])
+                    ? Navigator.pop(context, CBDReferenceNo)
                     : null;
               } else {
                 // await sbrController.hitSetBankResponse(
