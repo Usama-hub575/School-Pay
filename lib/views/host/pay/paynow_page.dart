@@ -66,10 +66,8 @@ class _PayNowPageState extends State<PayNowPage> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
           backgroundColor: PayNestTheme.blueAccent,
           onPressed: () async {
-            if (studentController.myStudentData.value.status
-                // &&
-                // int.parse(amountController.text) > 0
-                ) {
+            if (studentController.myStudentData.value.status &&
+                int.parse(amountController.text) > 0) {
               print("Student data for Payment to CBD");
               print(studentIDController.text +
                   parentIDController.text +
@@ -100,7 +98,7 @@ class _PayNowPageState extends State<PayNowPage> {
                     title: "CBD",
                     // resID:
                     //     ctrcController.createTransData.value.transaction!.id,
-                    amount: encryptedAmount,
+                    amount: amountController.text,
                     indx: idx,
                     orderId: Random().nextInt(1000000000),
                     schoolId: int.parse(schoolIDController.text),
@@ -265,13 +263,21 @@ class _PayNowPageState extends State<PayNowPage> {
               //   });
               // }
 
-            } else {
+            }
+            else
+              if(int.parse(amountController.text) < 0){
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 behavior: SnackBarBehavior.floating,
-                content: Text("Fees already paid"),
-                backgroundColor: Colors.green,
+                content: Text("Amount is not correct"),
+                backgroundColor: Colors.redAccent,
               ));
-            }
+            } else if(int.parse(amountController.text) == 0){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  content: Text("Fees already paid"),
+                  backgroundColor: Colors.green,
+                ));
+              }
           },
           label: SizedBox(
             width: .8.sw,
@@ -356,8 +362,6 @@ class _PayNowPageState extends State<PayNowPage> {
             ),
             Expanded(
               child: Container(
-                // height: MediaQuery.of(context).size.height,
-                // width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                     color: PayNestTheme.colorWhite,
                     borderRadius:

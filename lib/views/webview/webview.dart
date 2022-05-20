@@ -47,11 +47,10 @@ class _MyWebViewState extends State<MyWebView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    // if (Platform.isAndroid) WebView.platform = AndroidWebView();
     paymentGateWay =
-        "https://discoveritech.com/BorderPay_Payment_Api/border_request_copy.php?schoolId=${widget.schoolId}&amount=${widget.amount}&orderid=${widget.orderId}";
+        "https://discoveritech.com/schoolpay-transactions/school_pay_init_new.php?schoolId=${widget.schoolId}&amount=${widget.amount}&orderid=${widget.orderId}";
+    print(paymentGateWay);
   }
 
   @override
@@ -70,30 +69,22 @@ class _MyWebViewState extends State<MyWebView> {
         onWebViewCreated: (WebViewController webViewController) =>
             _controller = webViewController,
         onProgress: (value) {
-          // setState(() {
-          //   isLoading = false;
-          // });
+
         },
         onPageStarted: (url) {
-          // setState(() {
-          //   isLoading = true;
-          // });
+
           print('on page start allowing navigation to $url');
           if (url ==
               "https://discoveritech.com/BorderPay_Payment_Api/ReceiveResult.php") {
             Navigator.pop(context);
           }
-          // I/flutter (26486): on page start allowing navigation to https://discoveritech.com/BorderPay_Payment_Api/ReceiveResult.php
-          // I/chromium(26486): [INFO:CONSOLE(2)] "JQMIGRATE: Migrate is installed, version 3.3.2", source: https://discoveritech.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2 (2)
-        },
+            },
         onPageFinished: (url) async {
-          // setState(() {
-          //   isLoading = false;
-          // });
+
           print('on page finish allowing navigation to $url');
           // 'https://discoveritech.com/schoolpay-transactions/PaymentInitiator.php'
           if (url.contains(
-              'https://discoveritech.com/schoolpay-transactions/cdb_recieve.php?')) {
+              'https://discoveritech.com/BorderPay_Payment_Api/cdb_recieve.php?')) {
             print('got it');
             isCodeReceived = true;
             var CBDReferenceNo =
@@ -120,10 +111,7 @@ class _MyWebViewState extends State<MyWebView> {
                     ? Navigator.pop(context, CBDReferenceNo)
                     : null;
               } else {
-                // await sbrController.hitSetBankResponse(
-                //     widget.resID, CBDReferenceNo);
-                // studentController.myStudentData.value.students![index].student!.totalBalanceAmount
-                !sbrController.isLoading.value ? Navigator.pop(context) : null;
+               !sbrController.isLoading.value ? Navigator.pop(context) : null;
 
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   behavior: SnackBarBehavior.floating,
@@ -140,41 +128,6 @@ class _MyWebViewState extends State<MyWebView> {
         },
       ),
 
-      // {
-      //   "Response":{
-      //     "Header":{
-      //       "ResponseCode":"00",
-      //       "ResponseMsg":"success"
-      //     },
-      //     "Body":{
-      //       "PaymentInformation":{
-      //         "CBDReferenceNo":245863,
-      //         "CCReferenceNo":6498840915556097804006,
-      //         "AuthCode":831000,
-      //         "OrderID":18952477,
-      //         "AuthorizationDateTime":"4/14/2022 1 : 08 :12 AM",
-      //         "CardType":"001",
-      //         "MaskedCardNumber":"xxxxxxxxxxxx1111",
-      //         "TokenizedValue":null
-      //       }
-      //     }
-      //   }
-      // }
-      // WebView(
-      //   initialUrl: widget.selectedUrl,
-      //   javascriptMode: JavascriptMode.unrestricted,
-      //   onWebViewCreated: (WebViewController webViewController) {
-      //     _controller.complete(webViewController);
-      //   },
-      //   navigationDelegate: (request){
-      //     print(request);
-      //     return NavigationDecision.navigate;
-      //   },
-      //   onPageFinished: (value){
-      //     print("Finished");
-      //     print(value);
-      //   },
-      // )
     );
   }
 

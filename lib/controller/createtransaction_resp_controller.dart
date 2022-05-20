@@ -12,7 +12,8 @@ class CreateTransactionRespController extends GetxController {
 
   // schoolId=56&parentId=225&InvoiceId=452&studentId=638
 
-  hitCreateTransaction(schoolId, parentId, studentId, amount) async {
+  hitCreateTransaction(
+      schoolId, parentId, studentId, amount, bankResponse) async {
     try {
       isLoading(true);
       final data = {
@@ -22,6 +23,7 @@ class CreateTransactionRespController extends GetxController {
         "studentId": studentId,
         "payedOn": DateFormat("yyyy-MM-dd").format(DateTime.now()).toString(),
         "amount": amount,
+        "bankResponse": bankResponse,
       };
       print(data);
       var res = await APIService().apiCreateTransaction(data);
