@@ -2,7 +2,6 @@
 //
 //     final passwordResetRespModel = passwordResetRespModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 PasswordResetRespModel passwordResetRespModelFromJson(String str) => PasswordResetRespModel.fromJson(json.decode(str));

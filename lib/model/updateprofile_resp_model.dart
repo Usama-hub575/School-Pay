@@ -2,7 +2,6 @@
 //
 //     final updateProfileRespModel = updateProfileRespModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 UpdateProfileRespModel updateProfileRespModelFromJson(String str) => UpdateProfileRespModel.fromJson(json.decode(str));

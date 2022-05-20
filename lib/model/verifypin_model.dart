@@ -2,7 +2,6 @@
 //
 //     final verifyPinModel = verifyPinModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 VerifyPinModel verifyPinModelFromJson(String str) => VerifyPinModel.fromJson(json.decode(str));

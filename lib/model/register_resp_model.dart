@@ -2,7 +2,6 @@
 //
 //     final registerRespModel = registerRespModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 RegisterRespModel registerRespModelFromJson(String str) => RegisterRespModel.fromJson(json.decode(str));

@@ -2,7 +2,6 @@
 //
 //     final transactionListModel = transactionListModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 TransactionListModel transactionListModelFromJson(String str) => TransactionListModel.fromJson(json.decode(str));

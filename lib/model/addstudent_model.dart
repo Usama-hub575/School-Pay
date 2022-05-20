@@ -2,7 +2,6 @@
 //
 //     final addStudentModel = addStudentModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 AddStudentModel addStudentModelFromJson(String str) => AddStudentModel.fromJson(json.decode(str));

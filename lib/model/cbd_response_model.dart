@@ -2,7 +2,6 @@
 //
 //     final cbdResponseModel = cbdResponseModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 CbdResponseModel cbdResponseModelFromJson(String str) => CbdResponseModel.fromJson(json.decode(str));

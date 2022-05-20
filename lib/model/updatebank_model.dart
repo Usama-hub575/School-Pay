@@ -2,7 +2,6 @@
 //
 //     final updateBankModel = updateBankModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 UpdateBankModel updateBankModelFromJson(String str) => UpdateBankModel.fromJson(json.decode(str));

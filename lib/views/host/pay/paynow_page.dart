@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:encrypt/encrypt.dart' as encryption;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,7 +16,8 @@ import 'package:paynest_flutter_app/views/webview/webview.dart';
 
 class PayNowPage extends StatefulWidget {
   final String whichStack;
-  const PayNowPage({required this.whichStack,Key? key}) : super(key: key);
+
+  const PayNowPage({required this.whichStack});
 
   @override
   State<PayNowPage> createState() => _PayNowPageState();
@@ -22,8 +26,10 @@ class PayNowPage extends StatefulWidget {
 class _PayNowPageState extends State<PayNowPage> {
   final MyStudentController studentController = Get.find<MyStudentController>();
   final PayNowController payNowController = Get.put(PayNowController());
-  final CreateTransactionRespController ctrcController = Get.put(CreateTransactionRespController());
-  final SetBankResponseController sbrController = Get.put(SetBankResponseController());
+  final CreateTransactionRespController ctrcController =
+      Get.put(CreateTransactionRespController());
+  final SetBankResponseController sbrController =
+      Get.put(SetBankResponseController());
 
   int idx = 0;
   TextEditingController amountController = TextEditingController();
@@ -33,77 +39,125 @@ class _PayNowPageState extends State<PayNowPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    if(studentController.myStudentData.value.status){
-      amountController.text = studentController.myStudentData.value.students![0].student!.totalBalanceAmount.toString();
-      studentIDController.text = studentController.myStudentData.value.students![0].studentId.toString();
-      parentIDController.text = studentController.myStudentData.value.students![0].parentId.toString();
-      schoolIDController.text = studentController.myStudentData.value.students![0].student!.schoolId.toString();
+    if (studentController.myStudentData.value.status) {
+      amountController.text = studentController
+          .myStudentData.value.students![0].student!.totalBalanceAmount
+          .toString();
+      studentIDController.text = studentController
+          .myStudentData.value.students![0].studentId
+          .toString();
+      parentIDController.text = studentController
+          .myStudentData.value.students![0].parentId
+          .toString();
+      schoolIDController.text = studentController
+          .myStudentData.value.students![0].student!.schoolId
+          .toString();
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    return Obx(()=>Scaffold(
-      backgroundColor: PayNestTheme.primaryColor,
-      floatingActionButton: FloatingActionButton.extended(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.r)
-        ),
-        backgroundColor:PayNestTheme.blueAccent,
-        onPressed: () async {
-          if(studentController.myStudentData.value.status && int.parse(amountController.text) > 0){
-            print("Student data for Payment to CBD");
-            print(studentIDController.text+parentIDController.text+schoolIDController.text);
-            // schoolId=56&parentId=225&studentId=638
-            await ctrcController.hitCreateTransaction(schoolIDController.text,parentIDController.text,studentIDController.text,amountController.text);
-            // ctrcController.createTransData.value.status == true ?
-            // Navigator.of(context).push(MaterialPageRoute(
-            //   builder: (BuildContext context) => MyWebView(
-            //     title: "CBD",
-            //     resID: ctrcController.createTransData.value.transaction!.id,
-            //     amount: amountController.text,
-            //     indx: idx,
-            //   )
-            // )):ScaffoldMessenger.of(context).showSnackBar(SnackBar(behavior: SnackBarBehavior.floating,content: Text("Some error occurred"),backgroundColor: Colors.red,));
+    return Obx(
+      () => Scaffold(
+        backgroundColor: PayNestTheme.primaryColor,
+        floatingActionButton: FloatingActionButton.extended(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+          backgroundColor: PayNestTheme.blueAccent,
+          onPressed: () async {
+            if (studentController.myStudentData.value.status &&
+                int.parse(amountController.text) > 0) {
+              print("Student data for Payment to CBD");
+              print(studentIDController.text +
+                  parentIDController.text +
+                  schoolIDController.text);
+              // schoolId=56&parentId=225&studentId=638
 
-            if(ctrcController.createTransData.value.status == true){
-              final result = await Navigator.of(context).push(MaterialPageRoute(
+              // await ctrcController.hitCreateTransaction(
+              //     schoolIDController.text,
+              //     parentIDController.text,
+              //     studentIDController.text,
+              //     amountController.text);
+
+              // ctrcController.createTransData.value.status == true ?
+              // Navigator.of(context).push(MaterialPageRoute(
+              //   builder: (BuildContext context) => MyWebView(
+              //     title: "CBD",
+              //     resID: ctrcController.createTransData.value.transaction!.id,
+              //     amount: amountController.text,
+              //     indx: idx,
+              //   )
+              // )):ScaffoldMessenger.of(context).showSnackBar(SnackBar(behavior: SnackBarBehavior.floating,content: Text("Some error occurred"),backgroundColor: Colors.red,));
+
+              // if (!ctrcController.createTransData.value.status) {
+              String encryptedAmount = await encrypt(amountController.text);
+              final result = await Navigator.of(context).push(
+                MaterialPageRoute(
                   builder: (BuildContext context) => MyWebView(
                     title: "CBD",
-                    resID: ctrcController.createTransData.value.transaction!.id,
+                    // resID:
+                    //     ctrcController.createTransData.value.transaction!.id,
                     amount: amountController.text,
                     indx: idx,
-                  )
-              ));
-              print("Response from my data"+ result.toString());
+                    orderId: Random().nextInt(1000000000),
+                    schoolId: int.parse(schoolIDController.text),
+                  ),
+                ),
+              );
+              print("Response from my data" + result.toString());
 
-              if(result == true){
-                var amountt = amountController.text;
+              if (result != null) {
+                var amount = amountController.text;
+
+                await ctrcController.hitCreateTransaction(
+                  schoolIDController.text,
+                  parentIDController.text,
+                  studentIDController.text,
+                  amountController.text,
+                  result,
+                );
+
                 studentController.myStudentData.update((val) {
                   setState(() {
                     val!.students![idx].student!.totalBalanceAmount = "0";
                     amountController.text = "0";
                   });
-                  PayNowTransactionDetailModel model = PayNowTransactionDetailModel(
+                  PayNowTransactionDetailModel model =
+                      PayNowTransactionDetailModel(
                     student: PayNowTransactionDetailStudent(
                         id: sbrController.bankResponseData.value.student!.id,
-                        studentRegNo: sbrController.bankResponseData.value.student!.studentRegNo,
-                        firstName: sbrController.bankResponseData.value.student!.firstName,
-                        lastName: sbrController.bankResponseData.value.student!.lastName,
-                        grade: sbrController.bankResponseData.value.student!.grade,
-                        parentEmiratesId: sbrController.bankResponseData.value.student!.parentEmiratesId,
-                        parentPhoneNumber: sbrController.bankResponseData.value.student!.parentPhoneNumber,
+                        studentRegNo: sbrController
+                            .bankResponseData.value.student!.studentRegNo,
+                        firstName: sbrController
+                            .bankResponseData.value.student!.firstName,
+                        lastName: sbrController
+                            .bankResponseData.value.student!.lastName,
+                        grade:
+                            sbrController.bankResponseData.value.student!.grade,
+                        parentEmiratesId: sbrController
+                            .bankResponseData.value.student!.parentEmiratesId,
+                        parentPhoneNumber: sbrController
+                            .bankResponseData.value.student!.parentPhoneNumber,
                         dob: sbrController.bankResponseData.value.student!.dob,
-                        admissionDate: sbrController.bankResponseData.value.student!.admissionDate,
-                        deletedAt: sbrController.bankResponseData.value.student!.deletedAt,
-                        schoolId: sbrController.bankResponseData.value.student!.schoolId,
-                        totalBalanceAmount: sbrController.bankResponseData.value.student!.totalBalanceAmount,
-                        guardianFirstName: sbrController.bankResponseData.value.student!.guardianFirstName,
-                        guardianLastName: sbrController.bankResponseData.value.student!.guardianLastName,
-                        guardianGender: sbrController.bankResponseData.value.student!.guardianGender,
-                        guardianEmiratesId: sbrController.bankResponseData.value.student!.guardianEmiratesId,
-                        guardianNationality: sbrController.bankResponseData.value.student!.guardianNationality,
+                        admissionDate: sbrController
+                            .bankResponseData.value.student!.admissionDate,
+                        deletedAt: sbrController
+                            .bankResponseData.value.student!.deletedAt,
+                        schoolId: sbrController
+                            .bankResponseData.value.student!.schoolId,
+                        totalBalanceAmount: sbrController
+                            .bankResponseData.value.student!.totalBalanceAmount,
+                        guardianFirstName: sbrController
+                            .bankResponseData.value.student!.guardianFirstName,
+                        guardianLastName: sbrController
+                            .bankResponseData.value.student!.guardianLastName,
+                        guardianGender: sbrController
+                            .bankResponseData.value.student!.guardianGender,
+                        guardianEmiratesId: sbrController
+                            .bankResponseData.value.student!.guardianEmiratesId,
+                        guardianNationality:
+                            sbrController.bankResponseData.value.student!.guardianNationality,
                         guardianReligion: sbrController.bankResponseData.value.student!.guardianReligion,
                         area: sbrController.bankResponseData.value.student!.area,
                         region: sbrController.bankResponseData.value.student!.region,
@@ -119,15 +173,18 @@ class _PayNowPageState extends State<PayNowPage> {
                         file: sbrController.bankResponseData.value.student!.file,
                         privacy: sbrController.bankResponseData.value.student!.privacy,
                         createdAt: sbrController.bankResponseData.value.student!.createdAt,
-                        updatedAt: sbrController.bankResponseData.value.student!.updatedAt
-                    ),
-                    referenceNo: sbrController.bankResponseData.value.referenceNo,
+                        updatedAt: sbrController.bankResponseData.value.student!.updatedAt),
+                    referenceNo:
+                        sbrController.bankResponseData.value.referenceNo,
                     paidOn: sbrController.bankResponseData.value.paidOn,
-                    amountPaid: amountt,
+                    amountPaid: amount,
                   );
-                  !sbrController.isLoading.value ? Navigator.of(context).push(MaterialPageRoute(builder: (context) => PayNowTransactionDetailsPage(
-                    pntdm: model,
-                  ))):CircularProgressIndicator();
+                  !sbrController.isLoading.value
+                      ? Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => PayNowTransactionDetailsPage(
+                                pntdm: model,
+                              )))
+                      : CircularProgressIndicator();
                 });
               }
               // result == true ? studentController.myStudentData.update((val) {
@@ -180,173 +237,283 @@ class _PayNowPageState extends State<PayNowPage> {
               //     pntdm: model,
               //   ))):CircularProgressIndicator();
               // }):null;
-            }else{
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(behavior: SnackBarBehavior.floating,content: Text("Some error occurred"),backgroundColor: Colors.red,));
+              // } else {
+              //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              //     behavior: SnackBarBehavior.floating,
+              //     content: Text("Some error occurred"),
+              //     backgroundColor: Colors.red,
+              //   ));
+              // }
+
+              // payNowController.hitPayNow(amountController.text, parentIDController.text, studentIDController.text);
+              // print("${amountController.text+parentIDController.text+ studentIDController.text}");
+              // String pattern = r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?';
+              // RegExp regExp = RegExp(pattern);
+              // if((payNowController.payNowData.value.url.isEmpty)){
+              //
+              // }else {
+              //   setState(() {
+              //     Navigator.of(context).push(MaterialPageRoute(
+              //         builder: (BuildContext context) => MyWebView(
+              //             title: "CBD",
+              //             selectedUrl: payNowController.payNowData.value.url,
+              //             hiddenData : payNowController.payNowData.value.hiddendata
+              //         )
+              //     ));
+              //   });
+              // }
+
             }
-
-            // payNowController.hitPayNow(amountController.text, parentIDController.text, studentIDController.text);
-            // print("${amountController.text+parentIDController.text+ studentIDController.text}");
-            // String pattern = r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?';
-            // RegExp regExp = RegExp(pattern);
-            // if((payNowController.payNowData.value.url.isEmpty)){
-            //
-            // }else {
-            //   setState(() {
-            //     Navigator.of(context).push(MaterialPageRoute(
-            //         builder: (BuildContext context) => MyWebView(
-            //             title: "CBD",
-            //             selectedUrl: payNowController.payNowData.value.url,
-            //             hiddenData : payNowController.payNowData.value.hiddendata
-            //         )
-            //     ));
-            //   });
-            // }
-
-          }else{
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(behavior: SnackBarBehavior.floating,content: Text("Fees already paid"),backgroundColor: Colors.green,));
-          }
-        },
-
-        label: SizedBox(
-          width: .8.sw,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("AED " + amountController.text, style: PayNestTheme.subtitle16white),
-              !payNowController.isLoading.value ? Text(paynow,style: PayNestTheme.small_2_14colorWhite,):CircularProgressIndicator(color: PayNestTheme.colorWhite,backgroundColor: PayNestTheme.blueAccent,),
-               // Icon(Icons.play_circle_fill,color: Colors.white,),
-                   // : CircularProgressIndicator(backgroundColor: PayNestTheme.colorWhite,color: PayNestTheme.blueAccent,),
-            ],
+            else
+              if(int.parse(amountController.text) < 0){
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                behavior: SnackBarBehavior.floating,
+                content: Text("Amount is not correct"),
+                backgroundColor: Colors.redAccent,
+              ));
+            } else if(int.parse(amountController.text) == 0){
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  content: Text("Fees already paid"),
+                  backgroundColor: Colors.green,
+                ));
+              }
+          },
+          label: SizedBox(
+            width: .8.sw,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "AED " + amountController.text,
+                  style: PayNestTheme.subtitle16white,
+                ),
+                !payNowController.isLoading.value
+                    ? Text(
+                        paynow,
+                        style: PayNestTheme.small_2_14colorWhite,
+                      )
+                    : CircularProgressIndicator(
+                        color: PayNestTheme.colorWhite,
+                        backgroundColor: PayNestTheme.blueAccent,
+                      ),
+                // Icon(Icons.play_circle_fill,color: Colors.white,),
+                // : CircularProgressIndicator(backgroundColor: PayNestTheme.colorWhite,color: PayNestTheme.blueAccent,),
+              ],
+            ),
           ),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
-      body: Column(
-        children: [
-          Container(
-            height: 129.h,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                color: PayNestTheme.primaryColor,
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(24.r))
-            ),
-            child: SafeArea(
-              child: Padding(
-                padding: EdgeInsets.only(left: 25.h),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        widget.whichStack == "other" ? Padding(
-                          padding: EdgeInsets.only(right: 25.h),
-                          child: Container(
-                            height : 44.h,
-                            width : 44.w,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.r)
-                            ),
-                            child: IconButton(
-                              onPressed: (){
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(Icons.arrow_back,size: 20.sp,color: PayNestTheme.blueAccent),
-                              // child: Text(""),
-                            ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: Column(
+          children: [
+            Container(
+              height: 129.h,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  color: PayNestTheme.primaryColor,
+                  borderRadius:
+                      BorderRadius.vertical(bottom: Radius.circular(24.r))),
+              child: SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 25.h),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          widget.whichStack == "other"
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                    right: 25.h,
+                                  ),
+                                  child: Container(
+                                    height: 44.h,
+                                    width: 44.w,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(
+                                        12.r,
+                                      ),
+                                    ),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      icon: Icon(
+                                        Icons.arrow_back,
+                                        size: 20.sp,
+                                        color: PayNestTheme.blueAccent,
+                                      ),
+                                      // child: Text(""),
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(),
+                          Text(
+                            paynow,
+                            style: PayNestTheme.title20white,
                           ),
-                        ):SizedBox(),
-                        Text(paynow,style: PayNestTheme.title20white,),
-
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              // height: MediaQuery.of(context).size.height,
-              // width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: PayNestTheme.colorWhite,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(15.r))
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10.h),
-                child: studentController.myStudentData.value.status ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(paymentfor,style: PayNestTheme.title_2_16primaryColor,),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 25.h),
-                      child: SizedBox(
-                        height: 90.h,
-                        width: 1.sw,
-                        child: ListView.builder(
-                          itemCount: studentController.myStudentData.value.students!.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context,index){
-                            return Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8.w),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                    color: PayNestTheme.colorWhite,
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(15.r))),
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                  child: studentController.myStudentData.value.status
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              paymentfor,
+                              style: PayNestTheme.title_2_16primaryColor,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 25.h),
                               child: SizedBox(
-                                // height: 84.h,
-                                width: 100.w,
-                                child: OutlinedButton(
-                                  style: OutlinedButton.styleFrom(
-                                    // backgroundColor:idx == index ? Colors.blue:Colors.black,
-                                    elevation: 0,
-                                    side: BorderSide(width:1, color: idx == index ? PayNestTheme.blueAccent : PayNestTheme.borderGrey),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                  ),
-                                  onPressed: (){
-                                    setState(() {
-                                      idx = index;
-                                      amountController.text = studentController.myStudentData.value.students![index].student!.totalBalanceAmount;
-                                      studentIDController.text = studentController.myStudentData.value.students![index].studentId.toString();
-                                      parentIDController.text = studentController.myStudentData.value.students![index].parentId.toString();
-                                      schoolIDController.text = studentController.myStudentData.value.students![index].student!.schoolId.toString();
-                                      print(idx);
-                                    });
-                                    // Navigator.of(context).push(MaterialPageRoute(builder: (context) => SelectSchool()));
-
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 18.r,
-                                      ),
-                                      SizedBox(height: 15.h,),
-                                      Text(studentController.myStudentData.value.students![index].student!.firstName+" "+studentController.myStudentData.value.students![index].student!.lastName,style: PayNestTheme.h2_12blueAccentLight,),
-                                    ],
-                                  ),
-                                ),
+                                height: 90.h,
+                                width: 1.sw,
+                                child: ListView.builder(
+                                    itemCount: studentController
+                                        .myStudentData.value.students!.length,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 8.w),
+                                        child: SizedBox(
+                                          // height: 84.h,
+                                          width: 100.w,
+                                          child: OutlinedButton(
+                                            style: OutlinedButton.styleFrom(
+                                              // backgroundColor:idx == index ? Colors.blue:Colors.black,
+                                              elevation: 0,
+                                              side: BorderSide(
+                                                  width: 1,
+                                                  color: idx == index
+                                                      ? PayNestTheme.blueAccent
+                                                      : PayNestTheme
+                                                          .borderGrey),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12)),
+                                            ),
+                                            onPressed: () {
+                                              setState(
+                                                () {
+                                                  idx = index;
+                                                  amountController.text =
+                                                      studentController
+                                                          .myStudentData
+                                                          .value
+                                                          .students![index]
+                                                          .student!
+                                                          .totalBalanceAmount;
+                                                  studentIDController.text =
+                                                      studentController
+                                                          .myStudentData
+                                                          .value
+                                                          .students![index]
+                                                          .studentId
+                                                          .toString();
+                                                  parentIDController.text =
+                                                      studentController
+                                                          .myStudentData
+                                                          .value
+                                                          .students![index]
+                                                          .parentId
+                                                          .toString();
+                                                  schoolIDController.text =
+                                                      studentController
+                                                          .myStudentData
+                                                          .value
+                                                          .students![index]
+                                                          .student!
+                                                          .schoolId
+                                                          .toString();
+                                                  print(idx);
+                                                },
+                                              );
+                                              // Navigator.of(context).push(MaterialPageRoute(builder: (context) => SelectSchool()));
+                                            },
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 18.r,
+                                                ),
+                                                SizedBox(
+                                                  height: 15.h,
+                                                ),
+                                                Text(
+                                                  studentController
+                                                          .myStudentData
+                                                          .value
+                                                          .students![index]
+                                                          .student!
+                                                          .firstName +
+                                                      " " +
+                                                      studentController
+                                                          .myStudentData
+                                                          .value
+                                                          .students![index]
+                                                          .student!
+                                                          .lastName,
+                                                  style: PayNestTheme
+                                                      .h2_12blueAccentLight,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }),
                               ),
-                            );
-                          }
-                        ),
-                      ),
-                    ),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(currentPayableamount,style: PayNestTheme.title_3_16black,),
-                        Text("AED " + amountController.text,style: PayNestTheme.title_2_16primaryColor,),
-
-                      ],
-                    ),
-                  ],
-                ):SizedBox(),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  currentPayableamount,
+                                  style: PayNestTheme.title_3_16black,
+                                ),
+                                Text(
+                                  "AED " + amountController.text,
+                                  style: PayNestTheme.title_2_16primaryColor,
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
-    ));
+    );
+  }
+
+  Future<String> encrypt(amount) async {
+    final key = encryption.Key.fromUtf8("90UJEG5OQZYD1OAB");
+    final iv = encryption.IV.fromUtf8("90UJEG5OQZYD1OAB");
+    final encrypter =
+        encryption.Encrypter(encryption.AES(key, mode: encryption.AESMode.cbc));
+    final encrypted = encrypter.encrypt(amount, iv: iv);
+    print(encrypted.base64);
+    return encrypted.base64;
   }
 }

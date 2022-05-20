@@ -2,7 +2,6 @@
 //
 //     final pinUpdateResModel = pinUpdateResModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 PinUpdateResModel pinUpdateResModelFromJson(String str) => PinUpdateResModel.fromJson(json.decode(str));

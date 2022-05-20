@@ -2,7 +2,6 @@
 //
 //     final createTransactionResModel = createTransactionResModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 CreateTransactionResModel createTransactionResModelFromJson(String str) => CreateTransactionResModel.fromJson(json.decode(str));

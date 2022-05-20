@@ -2,7 +2,6 @@
 //
 //     final studentListRespModel = studentListRespModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 StudentListRespModel studentListRespModelFromJson(String str) => StudentListRespModel.fromJson(json.decode(str));

@@ -16,6 +16,8 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   final fcmToken = GetStorage();
   late FirebaseMessaging messaging;
+
+
   @override
   void initState() {
     super.initState();

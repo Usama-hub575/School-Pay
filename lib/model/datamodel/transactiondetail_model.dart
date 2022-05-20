@@ -2,8 +2,7 @@
 //
 //     final transactionDetailModel = transactionDetailModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
-import 'dart:convert';
+
 
 class TransactionDetailModel {
 
