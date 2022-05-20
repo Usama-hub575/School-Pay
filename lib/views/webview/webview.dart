@@ -68,19 +68,15 @@ class _MyWebViewState extends State<MyWebView> {
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController) =>
             _controller = webViewController,
-        onProgress: (value) {
-
-        },
+        onProgress: (value) {},
         onPageStarted: (url) {
-
           print('on page start allowing navigation to $url');
           if (url ==
               "https://discoveritech.com/BorderPay_Payment_Api/ReceiveResult.php") {
             Navigator.pop(context);
           }
-            },
+        },
         onPageFinished: (url) async {
-
           print('on page finish allowing navigation to $url');
           // 'https://discoveritech.com/schoolpay-transactions/PaymentInitiator.php'
           if (url.contains(
@@ -92,33 +88,16 @@ class _MyWebViewState extends State<MyWebView> {
             print("This is Parsed");
             print(Uri.parse(url).queryParameters['string']);
             if (CBDReferenceNo != null) {
-              var decoded = jsonDecode(CBDReferenceNo);
-              print("This is response");
               print(CBDReferenceNo);
-              if (decoded["Response"]["Header"]["ResponseCode"] == "00") {
-                // await sbrController.hitSetBankResponse(
-                //     widget.resID, CBDReferenceNo);
-                studentController.myStudentData.update((val) {
-                  val!.students![widget.indx].student!.totalBalanceAmount = "0";
-                });
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  behavior: SnackBarBehavior.floating,
-                  content: Text('Amount Updated'),
-                  backgroundColor: Colors.green,
-                ));
-                // studentController.myStudentData.value.students![index].student!.totalBalanceAmount
-                !sbrController.isLoading.value
-                    ? Navigator.pop(context, CBDReferenceNo)
-                    : null;
-              } else {
-               !sbrController.isLoading.value ? Navigator.pop(context) : null;
-
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  behavior: SnackBarBehavior.floating,
-                  content: Text(decoded['Response']['Header']['ResponseMsg']),
-                  backgroundColor: Colors.red,
-                ));
-              }
+              Navigator.pop(context, CBDReferenceNo);
+            } else {
+              var decoded = jsonDecode(CBDReferenceNo);
+              !sbrController.isLoading.value ? Navigator.pop(context) : null;
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                behavior: SnackBarBehavior.floating,
+                content: Text(decoded['Response']['Header']['ResponseMsg']),
+                backgroundColor: Colors.red,
+              ));
             }
           }
         },
@@ -127,7 +106,6 @@ class _MyWebViewState extends State<MyWebView> {
           return NavigationDecision.navigate;
         },
       ),
-
     );
   }
 
@@ -140,6 +118,6 @@ class _MyWebViewState extends State<MyWebView> {
     print(jsonString);
     // var data = jsonDecode(jsonString);
     // return data['Response']['Header']['ResponseCode'];
-    return jsonString;
+    return response;
   }
 }

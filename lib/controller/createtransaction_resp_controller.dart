@@ -12,7 +12,7 @@ class CreateTransactionRespController extends GetxController {
 
   // schoolId=56&parentId=225&InvoiceId=452&studentId=638
 
-  hitCreateTransaction(
+ Future<bool> hitCreateTransaction(
       schoolId, parentId, studentId, amount, bankResponse) async {
     try {
       isLoading(true);
@@ -36,8 +36,11 @@ class CreateTransactionRespController extends GetxController {
       } else if (decoded['status'] == false) {
         isLoading(false);
       }
-    } finally {
+      return decoded['status'];
+    } catch(e) {
+      print(e);
       isLoading(false);
+      return false;
     }
   }
 }
