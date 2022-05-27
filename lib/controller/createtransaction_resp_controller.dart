@@ -7,12 +7,14 @@ import 'package:paynest_flutter_app/service/api_service.dart';
 
 class CreateTransactionRespController extends GetxController {
   var isLoading = false.obs;
-  final createTransData =
-      CreateTransactionResModel(status: false, transaction: null).obs;
+  final createTransData = CreateTransactionResModel(
+    status: false,
+    message: '',
+  ).obs;
 
   // schoolId=56&parentId=225&InvoiceId=452&studentId=638
 
- Future<bool> hitCreateTransaction(
+  Future<bool> hitCreateTransaction(
       schoolId, parentId, studentId, amount, bankResponse) async {
     try {
       isLoading(true);
@@ -37,7 +39,7 @@ class CreateTransactionRespController extends GetxController {
         isLoading(false);
       }
       return decoded['status'];
-    } catch(e) {
+    } catch (e) {
       print(e);
       isLoading(false);
       return false;

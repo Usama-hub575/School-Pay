@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ukmobile/AndroidStudioProjects/pn-flutter-app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "/Users/muhammadbhatti/AndroidStudioProjects/pn_school/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/ukmobile/AndroidStudioProjects/pn-flutter-app/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/Users/muhammadbhatti/AndroidStudioProjects/pn_school/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/ukmobile/.gradle/caches/transforms-3/b46d3be24827fa5b65cd63f12f07b986/transformed/appcompat-1.2.0/res/values-night-v8/values-night-v8.xml",
+                    "source": "/Users/muhammadbhatti/.gradle/caches/transforms-3/b46d3be24827fa5b65cd63f12f07b986/transformed/appcompat-1.2.0/res/values-night-v8/values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
