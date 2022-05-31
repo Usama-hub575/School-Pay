@@ -51,6 +51,7 @@ dependencies:
   url_launcher:
   xml2json:
   encrypt: ^5.0.1
+  country_picker: ^2.0.12
 
 
 dev_dependencies:
