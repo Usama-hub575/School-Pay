@@ -15,16 +15,16 @@ class CreateTransactionResModel {
   });
 
   bool status;
-  Transaction? transaction;
+  String? transaction;
 
   factory CreateTransactionResModel.fromJson(Map<String, dynamic> json) => CreateTransactionResModel(
     status: json["status"],
-    transaction: Transaction.fromJson(json["transaction"]),
+    transaction: json['message'],
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
-    "transaction": transaction!.toJson(),
+    "transaction": transaction,
   };
 }
 
