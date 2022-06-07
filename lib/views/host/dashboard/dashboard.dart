@@ -245,417 +245,385 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                   ),
                   Obx(
-                    () => myStudentController.myStudentData.value.students !=
-                            null
-                        ? Container(
-                            height: 200.h,
-                            child: ListView.separated(
-                                physics: BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) => index !=
-                                        myStudentController.myStudentData.value
-                                            .students!.length
-                                    ? myStudentController
-                                            .myStudentData.value.status
-                                        ? InkWell(
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                SingleStudentModel model = SingleStudentModel(
-                                                    id: myStudentController
+                    () =>
+                        myStudentController.myStudentData.value.students != null
+                            ? Container(
+                                height: 200.h,
+                                child: ListView.separated(
+                                    physics: BouncingScrollPhysics(),
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder:
+                                        (context, index) =>
+                                            index !=
+                                                    myStudentController
                                                         .myStudentData
                                                         .value
-                                                        .students![index]
-                                                        .id,
-                                                    parentId: myStudentController
+                                                        .students!
+                                                        .length
+                                                ? myStudentController
                                                         .myStudentData
                                                         .value
-                                                        .students![index]
-                                                        .parentId,
-                                                    studentId: myStudentController
-                                                        .myStudentData
-                                                        .value
-                                                        .students![index]
-                                                        .studentId,
-                                                    deletedAt: myStudentController
-                                                        .myStudentData
-                                                        .value
-                                                        .students![index]
-                                                        .deletedAt,
-                                                    createdAt: myStudentController
-                                                        .myStudentData
-                                                        .value
-                                                        .students![index]
-                                                        .createdAt,
-                                                    updatedAt: myStudentController
-                                                        .myStudentData
-                                                        .value
-                                                        .students![index]
-                                                        .updatedAt,
-                                                    student: Student(
-                                                        dob: myStudentController
-                                                            .myStudentData
-                                                            .value
-                                                            .students![index]
-                                                            .student!
-                                                            .dob,
-                                                        admissionDate: myStudentController
-                                                            .myStudentData
-                                                            .value
-                                                            .students![index]
-                                                            .student!
-                                                            .admissionDate,
-                                                        id: myStudentController
-                                                            .myStudentData
-                                                            .value
-                                                            .students![index]
-                                                            .student!
-                                                            .id,
-                                                        studentRegNo: myStudentController
-                                                            .myStudentData
-                                                            .value
-                                                            .students![index]
-                                                            .student!
-                                                            .studentRegNo,
-                                                        firstName:
-                                                            myStudentController
+                                                        .status
+                                                    ? myStudentController
                                                                 .myStudentData
                                                                 .value
-                                                                .students![index]
-                                                                .student!
-                                                                .firstName,
-                                                        lastName: myStudentController.myStudentData.value.students![index].student!.lastName,
-                                                        grade: myStudentController.myStudentData.value.students![index].student!.grade,
-                                                        parentEmiratesId: myStudentController.myStudentData.value.students![index].student!.parentEmiratesId,
-                                                        parentPhoneNumber: myStudentController.myStudentData.value.students![index].student!.parentPhoneNumber,
-                                                        deletedAt: myStudentController.myStudentData.value.students![index].student!.deletedAt,
-                                                        schoolId: myStudentController.myStudentData.value.students![index].student!.schoolId,
-                                                        totalBalanceAmount: myStudentController.myStudentData.value.students![index].student!.totalBalanceAmount,
-                                                        guardianFirstName: myStudentController.myStudentData.value.students![index].student!.guardianFirstName,
-                                                        guardianLastName: myStudentController.myStudentData.value.students![index].student!.guardianLastName,
-                                                        guardianGender: myStudentController.myStudentData.value.students![index].student!.guardianGender,
-                                                        guardianEmiratesId: myStudentController.myStudentData.value.students![index].student!.guardianEmiratesId,
-                                                        guardianNationality: myStudentController.myStudentData.value.students![index].student!.guardianNationality,
-                                                        guardianReligion: myStudentController.myStudentData.value.students![index].student!.guardianReligion,
-                                                        area: myStudentController.myStudentData.value.students![index].student!.area,
-                                                        region: myStudentController.myStudentData.value.students![index].student!.region,
-                                                        streetAddress: myStudentController.myStudentData.value.students![index].student!.streetAddress,
-                                                        email: myStudentController.myStudentData.value.students![index].student!.email,
-                                                        phoneNumber: myStudentController.myStudentData.value.students![index].student!.phoneNumber,
-                                                        otherNumber: myStudentController.myStudentData.value.students![index].student!.otherNumber,
-                                                        profile: myStudentController.myStudentData.value.students![index].student!.profile,
-                                                        religion: myStudentController.myStudentData.value.students![index].student!.religion,
-                                                        nationality: myStudentController.myStudentData.value.students![index].student!.nationality,
-                                                        gender: myStudentController.myStudentData.value.students![index].student!.gender,
-                                                        dueDate: myStudentController.myStudentData.value.students![index].student!.dueDate,
-                                                        file: myStudentController.myStudentData.value.students![index].student!.file,
-                                                        privacy: myStudentController.myStudentData.value.students![index].student!.privacy,
-                                                        createdAt: myStudentController.myStudentData.value.students![index].student!.createdAt,
-                                                        updatedAt: myStudentController.myStudentData.value.students![index].student!.updatedAt,
-                                                        school: School(id: myStudentController.myStudentData.value.students![index].student!.school!.id, name: myStudentController.myStudentData.value.students![index].student!.school!.name, deletedAt: myStudentController.myStudentData.value.students![index].student!.school!.deletedAt, addedBy: myStudentController.myStudentData.value.students![index].student!.school!.addedBy, address: myStudentController.myStudentData.value.students![index].student!.school!.address, description: myStudentController.myStudentData.value.students![index].student!.school!.description, vat: myStudentController.myStudentData.value.students![index].student!.school!.vat, paynestFee: myStudentController.myStudentData.value.students![index].student!.school!.paynestFee, apiKey: myStudentController.myStudentData.value.students![index].student!.school!.apiKey, merchantId: myStudentController.myStudentData.value.students![index].student!.school!.merchantId, file: myStudentController.myStudentData.value.students![index].student!.school!.file, privacy: myStudentController.myStudentData.value.students![index].student!.school!.privacy, createdAt: myStudentController.myStudentData.value.students![index].student!.school!.createdAt, updatedAt: myStudentController.myStudentData.value.students![index].student!.school!.updatedAt)));
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            SingleStudentPage(
-                                                                singleStudentModel:
-                                                                    model)));
-                                              },
-                                              child: Container(
-                                                height: 230.h,
-                                                width: 156.w,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
-                                                    border: Border.all(
-                                                        color: PayNestTheme
-                                                            .borderGrey,
-                                                        width: 1)),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 11.h,
-                                                              horizontal: 10.w),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          SvgPicture.asset(
-                                                              ic_studentAvatar,
-                                                              height: 50.sp),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 8.21.h,
-                                                                    bottom:
-                                                                        8.h),
-                                                            child: Text(
-                                                              myStudentController
-                                                                      .myStudentData
-                                                                      .value
-                                                                      .students![
-                                                                          index]
-                                                                      .student!
-                                                                      .firstName +
-                                                                  " " +
-                                                                  myStudentController
-                                                                      .myStudentData
-                                                                      .value
-                                                                      .students![
-                                                                          index]
-                                                                      .student!
-                                                                      .lastName,
-                                                              style: PayNestTheme
-                                                                  .small_14black,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            myStudentController
-                                                                .myStudentData
-                                                                .value
-                                                                .students![index]
-                                                                .student!
-                                                                .school!
-                                                                .name,
-                                                            style: PayNestTheme
-                                                                .small_2_12textGrey,
-                                                          ),
-                                                          SizedBox(
-                                                            height: 15.h,
-                                                          ),
+                                                                .students![
+                                                                    index]
+                                                                .student ==
+                                                            null
+                                                        ? SizedBox.shrink()
+                                                        : InkWell(
+                                                            child:
+                                                                GestureDetector(
+                                                              onTap: () {
+                                                                SingleStudentModel model = SingleStudentModel(
+                                                                    id: myStudentController
+                                                                        .myStudentData
+                                                                        .value
+                                                                        .students![
+                                                                            index]
+                                                                        .id,
+                                                                    parentId: myStudentController
+                                                                        .myStudentData
+                                                                        .value
+                                                                        .students![
+                                                                            index]
+                                                                        .parentId,
+                                                                    studentId: myStudentController
+                                                                        .myStudentData
+                                                                        .value
+                                                                        .students![
+                                                                            index]
+                                                                        .studentId,
+                                                                    deletedAt: myStudentController
+                                                                        .myStudentData
+                                                                        .value
+                                                                        .students![
+                                                                            index]
+                                                                        .deletedAt,
+                                                                    createdAt: myStudentController
+                                                                        .myStudentData
+                                                                        .value
+                                                                        .students![
+                                                                            index]
+                                                                        .createdAt,
+                                                                    updatedAt: myStudentController
+                                                                        .myStudentData
+                                                                        .value
+                                                                        .students![
+                                                                            index]
+                                                                        .updatedAt,
+                                                                    student: Student(
+                                                                        dob: myStudentController
+                                                                            .myStudentData
+                                                                            .value
+                                                                            .students![
+                                                                                index]
+                                                                            .student!
+                                                                            .dob,
+                                                                        admissionDate: myStudentController
+                                                                            .myStudentData
+                                                                            .value
+                                                                            .students![index]
+                                                                            .student!
+                                                                            .admissionDate,
+                                                                        id: myStudentController.myStudentData.value.students![index].student!.id,
+                                                                        studentRegNo: myStudentController.myStudentData.value.students![index].student!.studentRegNo,
+                                                                        firstName: myStudentController.myStudentData.value.students![index].student!.firstName,
+                                                                        lastName: myStudentController.myStudentData.value.students![index].student!.lastName,
+                                                                        grade: myStudentController.myStudentData.value.students![index].student!.grade,
+                                                                        parentEmiratesId: myStudentController.myStudentData.value.students![index].student!.parentEmiratesId,
+                                                                        parentPhoneNumber: myStudentController.myStudentData.value.students![index].student!.parentPhoneNumber,
+                                                                        deletedAt: myStudentController.myStudentData.value.students![index].student!.deletedAt,
+                                                                        schoolId: myStudentController.myStudentData.value.students![index].student!.schoolId,
+                                                                        totalBalanceAmount: myStudentController.myStudentData.value.students![index].student!.totalBalanceAmount,
+                                                                        guardianFirstName: myStudentController.myStudentData.value.students![index].student!.guardianFirstName,
+                                                                        guardianLastName: myStudentController.myStudentData.value.students![index].student!.guardianLastName,
+                                                                        guardianGender: myStudentController.myStudentData.value.students![index].student!.guardianGender,
+                                                                        guardianEmiratesId: myStudentController.myStudentData.value.students![index].student!.guardianEmiratesId,
+                                                                        guardianNationality: myStudentController.myStudentData.value.students![index].student!.guardianNationality,
+                                                                        guardianReligion: myStudentController.myStudentData.value.students![index].student!.guardianReligion,
+                                                                        area: myStudentController.myStudentData.value.students![index].student!.area,
+                                                                        region: myStudentController.myStudentData.value.students![index].student!.region,
+                                                                        streetAddress: myStudentController.myStudentData.value.students![index].student!.streetAddress,
+                                                                        email: myStudentController.myStudentData.value.students![index].student!.email,
+                                                                        phoneNumber: myStudentController.myStudentData.value.students![index].student!.phoneNumber,
+                                                                        otherNumber: myStudentController.myStudentData.value.students![index].student!.otherNumber,
+                                                                        profile: myStudentController.myStudentData.value.students![index].student!.profile,
+                                                                        religion: myStudentController.myStudentData.value.students![index].student!.religion,
+                                                                        nationality: myStudentController.myStudentData.value.students![index].student!.nationality,
+                                                                        gender: myStudentController.myStudentData.value.students![index].student!.gender,
+                                                                        dueDate: myStudentController.myStudentData.value.students![index].student!.dueDate,
+                                                                        file: myStudentController.myStudentData.value.students![index].student!.file,
+                                                                        privacy: myStudentController.myStudentData.value.students![index].student!.privacy,
+                                                                        createdAt: myStudentController.myStudentData.value.students![index].student!.createdAt,
+                                                                        updatedAt: myStudentController.myStudentData.value.students![index].student!.updatedAt,
+                                                                        school: School(id: myStudentController.myStudentData.value.students![index].student!.school!.id, name: myStudentController.myStudentData.value.students![index].student!.school!.name, deletedAt: myStudentController.myStudentData.value.students![index].student!.school!.deletedAt, addedBy: myStudentController.myStudentData.value.students![index].student!.school!.addedBy, address: myStudentController.myStudentData.value.students![index].student!.school!.address, description: myStudentController.myStudentData.value.students![index].student!.school!.description, vat: myStudentController.myStudentData.value.students![index].student!.school!.vat, paynestFee: myStudentController.myStudentData.value.students![index].student!.school!.paynestFee, apiKey: myStudentController.myStudentData.value.students![index].student!.school!.apiKey, merchantId: myStudentController.myStudentData.value.students![index].student!.school!.merchantId, file: myStudentController.myStudentData.value.students![index].student!.school!.file, privacy: myStudentController.myStudentData.value.students![index].student!.school!.privacy, createdAt: myStudentController.myStudentData.value.students![index].student!.school!.createdAt, updatedAt: myStudentController.myStudentData.value.students![index].student!.school!.updatedAt)));
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .push(MaterialPageRoute(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                SingleStudentPage(singleStudentModel: model)));
+                                                              },
+                                                              child: Container(
+                                                                height: 230.h,
+                                                                width: 156.w,
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            12),
+                                                                    border: Border.all(
+                                                                        color: PayNestTheme
+                                                                            .borderGrey,
+                                                                        width:
+                                                                            1)),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: EdgeInsets.symmetric(
+                                                                          vertical: 11
+                                                                              .h,
+                                                                          horizontal:
+                                                                              10.w),
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.start,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          SvgPicture.asset(
+                                                                              ic_studentAvatar,
+                                                                              height: 50.sp),
+                                                                          Padding(
+                                                                            padding:
+                                                                                EdgeInsets.only(top: 8.21.h, bottom: 8.h),
+                                                                            child:
+                                                                                Text(
+                                                                              myStudentController.myStudentData.value.students![index].student!.firstName + " " + myStudentController.myStudentData.value.students![index].student!.lastName,
+                                                                              style: PayNestTheme.small_14black,
+                                                                            ),
+                                                                          ),
+                                                                          Text(
+                                                                            myStudentController.myStudentData.value.students![index].student!.school!.name,
+                                                                            style:
+                                                                                PayNestTheme.small_2_12textGrey,
+                                                                          ),
+                                                                          SizedBox(
+                                                                            height:
+                                                                                15.h,
+                                                                          ),
 
-                                                          /// Check Paid or Unpaid ///
-                                                          myStudentController
-                                                                          .myStudentData
-                                                                          .value
-                                                                          .students![
-                                                                              index]
-                                                                          .student!
-                                                                          .totalBalanceAmount !=
-                                                                      "0" ||
-                                                                  myStudentController
-                                                                      .myStudentData
-                                                                      .value
-                                                                      .students![
-                                                                          index]
-                                                                      .student!
-                                                                      .totalBalanceAmount
-                                                                      .isNotEmpty
-                                                              ? Container(
-                                                                  height: 18.h,
-                                                                  width:
-                                                                      50.79.w,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: PayNestTheme
-                                                                        .paidGreen,
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                  ),
-                                                                  child: Center(
+                                                                          /// Check Paid or Unpaid ///
+                                                                          myStudentController.myStudentData.value.students![index].student!.totalBalanceAmount != "0" || myStudentController.myStudentData.value.students![index].student!.totalBalanceAmount.isNotEmpty
+                                                                              ? Container(
+                                                                                  height: 18.h,
+                                                                                  width: 50.79.w,
+                                                                                  decoration: BoxDecoration(
+                                                                                    color: PayNestTheme.paidGreen,
+                                                                                    borderRadius: BorderRadius.circular(5),
+                                                                                  ),
+                                                                                  child: Center(
+                                                                                      child: Text(
+                                                                                    paid,
+                                                                                    style: PayNestTheme.small_2_12white,
+                                                                                  )),
+                                                                                )
+                                                                              : Container(
+                                                                                  height: 18.h,
+                                                                                  width: 50.79.w,
+                                                                                  decoration: BoxDecoration(
+                                                                                    color: PayNestTheme.red,
+                                                                                    borderRadius: BorderRadius.circular(5),
+                                                                                  ),
+                                                                                  child: Center(
+                                                                                      child: Text(
+                                                                                    dues,
+                                                                                    style: PayNestTheme.small_2_12white,
+                                                                                  )),
+                                                                                ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      width:
+                                                                          1.sw,
+                                                                      height:
+                                                                          1.h,
+                                                                      color: PayNestTheme
+                                                                          .borderGrey,
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsets.symmetric(
+                                                                          vertical:
+                                                                              8.0.h),
                                                                       child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.center,
+                                                                        children: [
                                                                           Text(
-                                                                    paid,
-                                                                    style: PayNestTheme
-                                                                        .small_2_12white,
-                                                                  )),
-                                                                )
-                                                              : Container(
-                                                                  height: 18.h,
-                                                                  width:
-                                                                      50.79.w,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color:
-                                                                        PayNestTheme
-                                                                            .red,
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                  ),
-                                                                  child: Center(
-                                                                      child:
-                                                                          Text(
-                                                                    dues,
-                                                                    style: PayNestTheme
-                                                                        .small_2_12white,
-                                                                  )),
+                                                                            view,
+                                                                            style:
+                                                                                PayNestTheme.h2_14blueAccent,
+                                                                          ),
+                                                                          SizedBox(
+                                                                            width:
+                                                                                5.w,
+                                                                          ),
+                                                                          SvgPicture.asset(
+                                                                              arrowNext),
+                                                                        ],
+                                                                      ),
+                                                                    )
+                                                                  ],
                                                                 ),
-                                                        ],
+                                                              ),
+                                                            ),
+                                                          )
+                                                    : SizedBox.shrink()
+                                                : Center(
+                                                  child: SizedBox(
+                                                      height: 230.h,
+                                                      width: 156.w,
+                                                      child: OutlinedButton(
+                                                        style: OutlinedButton
+                                                            .styleFrom(
+                                                          // backgroundColor:Colors.blue,
+                                                          elevation: 0,
+                                                          side: BorderSide(
+                                                              width: 1,
+                                                              color: PayNestTheme
+                                                                  .borderGrey),
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12)),
+                                                        ),
+                                                        onPressed: () {
+                                                          Navigator.of(context).push(
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          SelectSchool()));
+                                                        },
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Container(
+                                                              height: 32.h,
+                                                              width: 32.w,
+                                                              decoration: BoxDecoration(
+                                                                  color: PayNestTheme
+                                                                      .blueAccent,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.r)),
+                                                              child: IconButton(
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .push(MaterialPageRoute(
+                                                                          builder:
+                                                                              (context) =>
+                                                                                  SelectSchool()));
+                                                                },
+                                                                icon: Icon(
+                                                                  Icons.add,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  size: 14.sp,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 15.h,
+                                                            ),
+                                                            Text(
+                                                              addStudent,
+                                                              style: PayNestTheme
+                                                                  .h2_14blueAccent,
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
-                                                    Container(
-                                                      width: 1.sw,
-                                                      height: 1.h,
-                                                      color: PayNestTheme
-                                                          .borderGrey,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 8.0.h),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            view,
-                                                            style: PayNestTheme
-                                                                .h2_14blueAccent,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5.w,
-                                                          ),
-                                                          SvgPicture.asset(
-                                                              arrowNext),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
                                                 ),
-                                              ),
-                                            ),
-                                          )
-                                        : SizedBox.shrink()
-                                    : SizedBox(
-                                        height: 230.h,
-                                        width: 156.w,
-                                        child: OutlinedButton(
-                                          style: OutlinedButton.styleFrom(
-                                            // backgroundColor:Colors.blue,
-                                            elevation: 0,
-                                            side: BorderSide(
-                                                width: 1,
-                                                color: PayNestTheme.borderGrey),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(12)),
-                                          ),
+                                    separatorBuilder: (_, index) => SizedBox(
+                                          width: 14.w,
+                                        ),
+                                    itemCount: myStudentController.myStudentData
+                                            .value.students!.length +
+                                        1),
+                              )
+                            : SizedBox(
+                                height: 230.h,
+                                width: 156.w,
+                                child: OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                    // backgroundColor:Colors.blue,
+                                    elevation: 0,
+                                    side: BorderSide(
+                                        width: 1,
+                                        color: PayNestTheme.borderGrey),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(12)),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SelectSchool()));
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        height: 32.h,
+                                        width: 32.w,
+                                        decoration: BoxDecoration(
+                                            color: PayNestTheme.blueAccent,
+                                            borderRadius:
+                                                BorderRadius.circular(8.r)),
+                                        child: IconButton(
                                           onPressed: () {
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         SelectSchool()));
                                           },
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                height: 32.h,
-                                                width: 32.w,
-                                                decoration: BoxDecoration(
-                                                    color:
-                                                        PayNestTheme.blueAccent,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.r)),
-                                                child: IconButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).push(
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                SelectSchool()));
-                                                  },
-                                                  icon: Icon(
-                                                    Icons.add,
-                                                    color: Colors.white,
-                                                    size: 14.sp,
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 15.h,
-                                              ),
-                                              Text(
-                                                addStudent,
-                                                style: PayNestTheme
-                                                    .h2_14blueAccent,
-                                              ),
-                                            ],
+                                          icon: Icon(
+                                            Icons.add,
+                                            color: Colors.white,
+                                            size: 14.sp,
                                           ),
                                         ),
                                       ),
-                                separatorBuilder: (_, index) => SizedBox(
-                                      width: 14.w,
-                                    ),
-                                itemCount: myStudentController
-                                        .myStudentData.value.students!.length +
-                                    1),
-                          )
-                        : SizedBox(
-                      height: 230.h,
-                      width: 156.w,
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          // backgroundColor:Colors.blue,
-                          elevation: 0,
-                          side: BorderSide(
-                              width: 1,
-                              color: PayNestTheme.borderGrey),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(12)),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      SelectSchool()));
-                        },
-                        child: Column(
-                          mainAxisAlignment:
-                          MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 32.h,
-                              width: 32.w,
-                              decoration: BoxDecoration(
-                                  color:
-                                  PayNestTheme.blueAccent,
-                                  borderRadius:
-                                  BorderRadius.circular(
-                                      8.r)),
-                              child: IconButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SelectSchool()));
-                                },
-                                icon: Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                  size: 14.sp,
+                                      SizedBox(
+                                        height: 15.h,
+                                      ),
+                                      Text(
+                                        addStudent,
+                                        style: PayNestTheme.h2_14blueAccent,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 15.h,
-                            ),
-                            Text(
-                              addStudent,
-                              style: PayNestTheme
-                                  .h2_14blueAccent,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                   ),
                   // Obx(() =>
                   //     Row(

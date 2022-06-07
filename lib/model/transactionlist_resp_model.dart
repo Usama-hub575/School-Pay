@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:paynest_flutter_app/constants/constants.dart';
+
 TransactionListRespModel transactionListRespModelFromJson(String str) => TransactionListRespModel.fromJson(json.decode(str));
 
 String transactionListRespModelToJson(TransactionListRespModel data) => json.encode(data.toJson());
@@ -38,12 +40,12 @@ class Transactions {
   List<TransactionsRow>? rows;
 
   factory Transactions.fromJson(Map<String, dynamic> json) => Transactions(
-    count: json["count"] == null ? null : json["count"],
+    count: json["count"] == null ? -1 : json["count"],
     rows: json["rows"] == null ? null : List<TransactionsRow>.from(json["rows"].map((x) => TransactionsRow.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
-    "count": count == null ? null : count,
+    "count": count == null ? -1 : count,
     "rows": rows == null ? null : List<dynamic>.from(rows!.map((x) => x.toJson())),
   };
 }
@@ -95,28 +97,29 @@ class TransactionsRow {
   Student? student;
   School? school;
 
+
   factory TransactionsRow.fromJson(Map<String, dynamic> json) => TransactionsRow(
-    id: json["id"] == null ? null : json["id"],
-    schoolId: json["schoolId"] == null ? null : json["schoolId"],
-    parentId: json["parentId"] == null ? null : json["parentId"],
-    invoiceId: json["invoiceId"] == null ? null : json["invoiceId"],
-    studentId: json["studentId"] == null ? null : json["studentId"],
-    payedOn: DateTime.parse(json["payedOn"]),
-    amount: json["amount"] == null ? null : json["amount"],
-    deletedAt: json["deletedAt"],
-    refNo: json["refNo"] == null ? null : json["refNo"],
-    type: json["type"] == null ? null : json["type"],
-    vat: json["vat"],
-    paynestFee: json["paynestFee"],
-    country: json["country"],
-    bankResponse: json["bankResponse"],
-    amountToPay: json["amountToPay"] == null ? null : json["amountToPay"],
-    stringToBank: json["stringToBank"],
-    stringFromBank: json["stringFromBank"],
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    student: json["student"] == null ? null : Student.fromJson(json["student"]),
-    school: json["school"] == null ? null : School.fromJson(json["school"]),
+    id: json["id"] == null ? -1 : json["id"],
+    schoolId: json["schoolId"] == null ? -1 : json["schoolId"],
+    parentId: json["parentId"] == null ? -1 : json["parentId"],
+    invoiceId: json["invoiceId"] == null ? -1 : json["invoiceId"],
+    studentId: json["studentId"] == null ? -1 : json["studentId"],
+    payedOn: json["payedOn"] == null ? DateTime.now() : DateTime.parse(json["payedOn"]),
+    amount: json["amount"] == null ? -1 : json["amount"],
+    deletedAt:json["deletedAt"] == null?"" : json["deletedAt"],
+    refNo: json["refNo"] == null ? "" : json["refNo"],
+    type: json["type"] == null ? "" : json["type"],
+    vat: json["vat"] == null ?"" :json["vat"],
+    paynestFee:json["paynestFee"] == null? "" : json["paynestFee"],
+    country: json["country"]!=null?json["country"]:"",
+    bankResponse: json["bankResponse"] != null? json["bankResponse"] : "",
+    amountToPay: json["amountToPay"] == null ? -1 : json["amountToPay"],
+    stringToBank: json["stringToBank"]!= null? json["stringToBank"] : "",
+    stringFromBank: json["stringFromBank"] != null ? json["stringFromBank"] : "",
+    createdAt: json["createdAt"] == null ? DateTime.now() : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ?  DateTime.now()  : DateTime.parse(json["updatedAt"]),
+    student: json["student"] == null ? Student.empty() : Student.fromJson(json["student"]),
+    school: json["school"] == null ? School.empty() : School.fromJson(json["school"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -177,21 +180,25 @@ class School {
   DateTime? createdAt;
   DateTime? updatedAt;
 
+  static School empty(){
+    return School(id: -1, name: "", deletedAt: DateTime.now(), addedBy: "", address: "", description: "", vat: -1.0, paynestFee: -1, apiKey: "", merchantId: -1, file: "", privacy: "", createdAt: DateTime.now(), updatedAt: DateTime.now());
+  }
+
   factory School.fromJson(Map<String, dynamic> json) => School(
-    id: json["id"] == null ? null : json["id"],
-    name: json["name"] == null ? null : json["name"],
-    deletedAt: json["deletedAt"],
-    addedBy: json["addedBy"],
-    address: json["address"] == null ? null : json["address"],
-    description: json["description"] == null ? null : json["description"],
-    vat: json["vat"] == null ? null : json["vat"].toDouble(),
-    paynestFee: json["paynestFee"] == null ? null : json["paynestFee"],
-    apiKey: json["APIKey"],
-    merchantId: json["merchantId"] == null ? null : json["merchantId"],
-    file: json["file"] == null ? null : json["file"],
-    privacy: json["privacy"] == null ? null : json["privacy"],
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    id: json["id"] == null ? -1 : json["id"],
+    name: json["name"] == null ? "" : json["name"],
+    deletedAt: json["deletedAt"] != null? DateTime.now() : json["deletedAt"],
+    addedBy: json["addedBy"] !=null ?json["addedBy"] : "",
+    address: json["address"] == null ? "" : json["address"],
+    description: json["description"] == null ? "" : json["description"],
+    vat: json["vat"] == null ? -1.0 : json["vat"].toDouble(),
+    paynestFee: json["paynestFee"] == null ? -1 : json["paynestFee"],
+    apiKey: json["APIKey"] !=null? "" : json["APIKey"],
+    merchantId: json["merchantId"] == null ? -1 : json["merchantId"],
+    file: json["file"] == null ? "" : json["file"],
+    privacy: json["privacy"] == null ? "" : json["privacy"],
+    createdAt: json["createdAt"] == null ? DateTime.now() : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? DateTime.now()  : DateTime.parse(json["updatedAt"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -283,40 +290,44 @@ class Student {
   DateTime? createdAt;
   DateTime? updatedAt;
 
+  static Student empty(){
+    return Student(dob: DateTime.now(), admissionDate: DateTime.now(), id: -1, studentRegNo: "", firstName: "", lastName: "", grade: "", parentEmiratesId: "", parentPhoneNumber: "", deletedAt: "", schoolId: -1, totalBalanceAmount: "", guardianFirstName: "", guardianLastName: "", guardianGender: "", guardianEmiratesId: "", guardianNationality: "", guardianReligion: "", area: "", region: "", streetAddress: "", email: "", phoneNumber: "", otherNumber: "", profile: "", religion: "", nationality: "", gender: "", dueDate: DateTime.now(), file: "", privacy: "", createdAt: DateTime.now(), updatedAt: DateTime.now());
+  }
+
   factory Student.fromJson(Map<String, dynamic> json) => Student(
-    dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
-    admissionDate: json["admissionDate"] == null ? null : DateTime.parse(json["admissionDate"]),
-    id: json["id"] == null ? null : json["id"],
-    studentRegNo: json["studentRegNo"] == null ? null : json["studentRegNo"],
-    firstName: json["firstName"] == null ? null : json["firstName"],
-    lastName: json["lastName"] == null ? null : json["lastName"],
-    grade: json["grade"] == null ? null : json["grade"],
-    parentEmiratesId: json["parentEmiratesId"] == null ? null : json["parentEmiratesId"],
-    parentPhoneNumber: json["parentPhoneNumber"] == null ? null : json["parentPhoneNumber"],
-    deletedAt: json["deletedAt"],
-    schoolId: json["schoolId"] == null ? null : json["schoolId"],
-    totalBalanceAmount: json["total_balance_amount"] == null ? null : json["total_balance_amount"],
-    guardianFirstName: json["guardianFirstName"] == null ? null : json["guardianFirstName"],
-    guardianLastName: json["guardianLastName"] == null ? null : json["guardianLastName"],
-    guardianGender: json["guardianGender"] == null ? null : json["guardianGender"],
-    guardianEmiratesId: json["guardianEmiratesId"] == null ? null : json["guardianEmiratesId"],
-    guardianNationality: json["guardianNationality"] == null ? null : json["guardianNationality"],
-    guardianReligion: json["guardianReligion"] == null ? null : json["guardianReligion"],
-    area: json["area"] == null ? null : json["area"],
-    region: json["region"] == null ? null : json["region"],
-    streetAddress: json["streetAddress"] == null ? null : json["streetAddress"],
-    email: json["email"] == null ? null : json["email"],
-    phoneNumber: json["phoneNumber"] == null ? null : json["phoneNumber"],
-    otherNumber: json["otherNumber"] == null ? null : json["otherNumber"],
-    profile: json["profile"],
-    religion: json["religion"] == null ? null : json["religion"],
-    nationality: json["nationality"] == null ? null : json["nationality"],
-    gender: json["gender"] == null ? null : json["gender"],
-    dueDate: json["dueDate"] == null ? null : DateTime.parse(json["dueDate"]),
-    file: json["file"] == null ? null : json["file"],
-    privacy: json["privacy"] == null ? null : json["privacy"],
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    dob: json["dob"] == null ? DateTime.now() : DateTime.parse(json["dob"]),
+    admissionDate: json["admissionDate"] == null ? DateTime.now() : DateTime.parse(json["admissionDate"]),
+    id: json["id"] == null ? -1 : json["id"],
+    studentRegNo: json["studentRegNo"] == null ? "" : json["studentRegNo"],
+    firstName: json["firstName"] == null ? "" : json["firstName"],
+    lastName: json["lastName"] == null ? "" : json["lastName"],
+    grade: json["grade"] == null ? "" : json["grade"],
+    parentEmiratesId: json["parentEmiratesId"] == null ? "" : json["parentEmiratesId"],
+    parentPhoneNumber: json["parentPhoneNumber"] == null ? "" : json["parentPhoneNumber"],
+    deletedAt: json["deletedAt"] !=null ?json["deletedAt"] : "",
+    schoolId: json["schoolId"] == null ? -1 : json["schoolId"],
+    totalBalanceAmount: json["total_balance_amount"] == null ? "" : json["total_balance_amount"],
+    guardianFirstName: json["guardianFirstName"] == null ? "" : json["guardianFirstName"],
+    guardianLastName: json["guardianLastName"] == null ? "" : json["guardianLastName"],
+    guardianGender: json["guardianGender"] == null ? "" : json["guardianGender"],
+    guardianEmiratesId: json["guardianEmiratesId"] == null ? "" : json["guardianEmiratesId"],
+    guardianNationality: json["guardianNationality"] == null ? "" : json["guardianNationality"],
+    guardianReligion: json["guardianReligion"] == null ? "" : json["guardianReligion"],
+    area: json["area"] == null ? "" : json["area"],
+    region: json["region"] == null ? "" : json["region"],
+    streetAddress: json["streetAddress"] == null ? "" : json["streetAddress"],
+    email: json["email"] == null ? "" : json["email"],
+    phoneNumber: json["phoneNumber"] == null ? "" : json["phoneNumber"],
+    otherNumber: json["otherNumber"] == null ? "" : json["otherNumber"],
+    profile: json["profile"] !=null ? json["profile"] : "",
+    religion: json["religion"] == null ? "" : json["religion"],
+    nationality: json["nationality"] == null ? "" : json["nationality"],
+    gender: json["gender"] == null ? "" : json["gender"],
+    dueDate: json["dueDate"] == null ? DateTime.now() : DateTime.parse(json["dueDate"]),
+    file: json["file"] == null ? "" : json["file"],
+    privacy: json["privacy"] == null ? "" : json["privacy"],
+    createdAt: json["createdAt"] == null ? DateTime.now() : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? DateTime.now() : DateTime.parse(json["updatedAt"]),
   );
 
   Map<String, dynamic> toJson() => {
