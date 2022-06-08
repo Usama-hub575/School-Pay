@@ -112,7 +112,7 @@ class School {
   dynamic vat;
   int paynestFee;
   String? apiKey;
-  int? merchantId;
+  String? merchantId;
   dynamic file;
   String? privacy;
   DateTime createdAt;
