@@ -9,7 +9,7 @@ class CreateTransactionRespController extends GetxController {
   var isLoading = false.obs;
   final createTransData = CreateTransactionResModel(
     status: false,
-    message: '',
+    transaction: '',
   ).obs;
 
   // schoolId=56&parentId=225&InvoiceId=452&studentId=638

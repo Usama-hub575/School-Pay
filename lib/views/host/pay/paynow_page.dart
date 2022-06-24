@@ -125,7 +125,9 @@ class _PayNowPageState extends State<PayNowPage> {
                     });
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       behavior: SnackBarBehavior.floating,
-                      content: Text('Amount Updated'),
+                      content: Text(
+                          ctrcController.createTransData.value.transaction ??
+                              'Amount Updated'),
                       backgroundColor: Colors.green,
                     ));
                     PayNowTransactionDetailModel model =
@@ -275,7 +277,7 @@ class _PayNowPageState extends State<PayNowPage> {
               //   });
               // }
 
-            } else if (int.parse(amountController.text) < 0) {
+            } else if ( int.parse(amountController.text) < 0) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 behavior: SnackBarBehavior.floating,
                 content: Text("Amount is not correct"),

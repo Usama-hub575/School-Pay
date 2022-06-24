@@ -7,7 +7,8 @@ import 'package:http/http.dart' as http;
 class APIService {
   GetStorage storage = GetStorage();
   static var client = http.Client();
-  static var baseurl = Uri.parse("https://payschool.azurewebsites.net");
+  static var baseurl = Uri.parse("https://api.paynestschools.ae");
+ // static var baseurl = Uri.parse("https://payschool.azurewebsites.net");
   static var baseurl1 = "discoveritech.com";
 
   static var login = "/api/parent/auth/login";

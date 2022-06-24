@@ -81,7 +81,7 @@ class TransactionDetailSchool {
   double vat;
   int paynestFee;
   dynamic apiKey;
-  int merchantId;
+  String merchantId;
   String file;
   String privacy;
   DateTime? createdAt;

@@ -55,27 +55,27 @@ class Log {
   double vat;
   int paynestFee;
   dynamic apiKey;
-  int? merchantId;
+  String merchantId;
   String? file;
   String privacy;
   DateTime createdAt;
   DateTime updatedAt;
 
   factory Log.fromJson(Map<String, dynamic> json) => Log(
-    id: json["id"],
-    name: json["name"],
-    deletedAt: json["deletedAt"],
-    addedBy: json["addedBy"],
-    address: json["address"],
-    description: json["description"],
-    vat: json["vat"].toDouble(),
-    paynestFee: json["paynestFee"],
-    apiKey: json["APIKey"],
-    merchantId: json["merchantId"],
-    file: json["file"] == null ? null : json["file"],
-    privacy: json["privacy"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
+    id: json["id"] !=null ? json["id"] : -1,
+    name: json["name"] !=null ? json["name"] : "",
+    deletedAt: json["deletedAt"] !=null ?json["deletedAt"] : "",
+    addedBy: json["addedBy"] !=null ? json["addedBy"] : "",
+    address: json["address"] !=null ? json["address"] : "",
+    description: json["description"] !=null ? json["description"] : "",
+    vat: json["vat"].toDouble() !=null ? json["vat"].toDouble() : -0.0,
+    paynestFee: json["paynestFee"] != null ? json["paynestFee"]: 0,
+    apiKey: json["APIKey"] !=null ? json["APIKey"] : "",
+    merchantId: json["merchantId"] !=null ?json["merchantId"]: "",
+    file: json["file"] == null ? "" : json["file"],
+    privacy: json["privacy"] !=null ? json["privacy"] : "",
+    createdAt:json["createdAt"] !=null? DateTime.parse(json["createdAt"]) :DateTime.now(),
+    updatedAt:json["updatedAt"] !=null? DateTime.parse(json["updatedAt"]) : DateTime.now(),
   );
 
   Map<String, dynamic> toJson() => {
