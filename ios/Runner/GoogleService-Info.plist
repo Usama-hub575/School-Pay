@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>516143072835-4eofpc10trdpegghftatqhidimj2lanp.apps.googleusercontent.com</string>
+	<string>447855064635-ql7alr2slia5596bc53r0l84iagvdlnp.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.516143072835-4eofpc10trdpegghftatqhidimj2lanp</string>
+	<string>com.googleusercontent.apps.447855064635-ql7alr2slia5596bc53r0l84iagvdlnp</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBMILJ8Ot5TqFrjhURgbvVRsBN-w6Xl5ak</string>
+	<string>AIzaSyANXDMzJfY9Kp4gD3RI9jprANdDBu05wlI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>516143072835</string>
+	<string>447855064635</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.paynest.paynestapp</string>
+	<string>com.paynest.schoolpay</string>
 	<key>PROJECT_ID</key>
-	<string>paynest-school</string>
+	<string>paynest-f14d4</string>
 	<key>STORAGE_BUCKET</key>
-	<string>paynest-school.appspot.com</string>
+	<string>paynest-f14d4.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:516143072835:ios:1db24e7c506fefa13676f6</string>
+	<string>1:447855064635:ios:0aa26111e03baf4500ce1e</string>
 </dict>
 </plist>
