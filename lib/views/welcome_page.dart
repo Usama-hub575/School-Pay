@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,11 +17,14 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   final fcmToken = GetStorage();
   late FirebaseMessaging messaging;
+  late FirebaseRemoteConfig remoteConfig;
 
 
   @override
   void initState() {
     super.initState();
+    remoteConfig = FirebaseRemoteConfig.instance;
+    setUpRemoteConfig();
     getFCMToken();
   }
 
@@ -123,4 +127,20 @@ class _WelcomePageState extends State<WelcomePage> {
       ),
     );
   }
+
+  Future<void> setUpRemoteConfig() async {
+    await remoteConfig.fetchAndActivate();
+    await remoteConfig.setConfigSettings(
+      RemoteConfigSettings(
+        fetchTimeout: const Duration(
+          minutes: 1,
+        ),
+        minimumFetchInterval: const Duration(
+          minutes: 30,
+        ),
+      ),
+    );
+  }
 }
+
+

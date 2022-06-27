@@ -22,8 +22,6 @@ dependencies:
   get:
   get_storage:
   intl:
-  firebase_core:
-  firebase_messaging:
   flutter_local_notifications:
   webview_flutter:
   flutter_inappwebview:
@@ -31,6 +29,12 @@ dependencies:
   xml2json:
   encrypt: ^5.0.1
   country_picker: ^2.0.12
+
+
+  #Firebase Packages
+  firebase_remote_config:
+  firebase_core:
+  firebase_messaging:
 
 
 dev_dependencies:
