@@ -17,6 +17,7 @@ class HostPage extends StatefulWidget {
 
 class _HostPageState extends State<HostPage> {
   int pageIndex = 0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final pages = [
     const DashboardPage(),
@@ -46,6 +47,7 @@ class _HostPageState extends State<HostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: WillPopScope(
         onWillPop: () async => false,
         child: pages[pageIndex]

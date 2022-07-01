@@ -30,7 +30,8 @@ class APIService {
   static var payNow = "/schoolpay-transactions/PaymentInitiator.php";
 
   /// To set payment data to server
-  static var createTransaction = "/api/transaction";
+  // static var createTransaction = "/api/transaction";
+  static var createTransaction = "/api/transaction/mobile";
   static var updateBankResponse = "/api/transaction/setBankResponse";
   static var searchByLastName =
       "/api/student/getByLName?LName={last_name}&schoolId={school_id}";
@@ -380,6 +381,7 @@ class APIService {
     var response = await client.get(
       endPoint,
       headers: {
+        "Content-Type": "application/json",
         "Authorization": "Bearer " + storage.read('accessToken'),
       },
     );
@@ -396,7 +398,7 @@ class APIService {
   /// Sending Data of student to server for which payment is made
   Future apiCreateTransaction(queryParams) async {
     var endPoint = Uri.https(
-      'payschool.azurewebsites.net',
+      "api.paynestschools.ae",
       createTransaction,
     );
     print(endPoint);
@@ -404,6 +406,7 @@ class APIService {
       endPoint,
       body: queryParams,
       headers: {
+        "Content-Type" : "application/x-www-form-urlencoded",
         "Authorization": "Bearer " + storage.read('accessToken'),
       },
     );

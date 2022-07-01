@@ -68,7 +68,7 @@ class Log {
     addedBy: json["addedBy"] !=null ? json["addedBy"] : "",
     address: json["address"] !=null ? json["address"] : "",
     description: json["description"] !=null ? json["description"] : "",
-    vat: json["vat"].toDouble() !=null ? json["vat"].toDouble() : -0.0,
+    vat: json["vat"] !=null ? double.parse(json["vat"]) : -0.0,
     paynestFee: json["paynestFee"] != null ? json["paynestFee"]: 0,
     apiKey: json["APIKey"] !=null ? json["APIKey"] : "",
     merchantId: json["merchantId"] !=null ?json["merchantId"]: "",

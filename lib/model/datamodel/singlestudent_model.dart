@@ -40,7 +40,7 @@ class Student {
   dynamic parentPhoneNumber;
   dynamic deletedAt;
   int schoolId;
-  String totalBalanceAmount;
+  double totalBalanceAmount;
   dynamic guardianFirstName;
   dynamic guardianLastName;
   dynamic guardianGender;

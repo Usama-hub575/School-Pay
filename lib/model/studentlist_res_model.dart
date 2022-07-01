@@ -96,7 +96,7 @@ class StudentListRowData {
   dynamic parentPhoneNumber;
   dynamic deletedAt;
   int schoolId;
-  String totalBalanceAmount;
+  dynamic totalBalanceAmount;
   dynamic guardianFirstName;
   dynamic guardianLastName;
   dynamic guardianGender;
