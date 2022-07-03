@@ -83,6 +83,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
           ),
 
           Obx(()=> !transactionListController.isLoading.value ?
+          transactionListController.transactionListData.value.transactions != null?
           Expanded(
             child: ListView.builder(
               shrinkWrap: true,
@@ -219,7 +220,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                 );
               }
             ),
-          ):SizedBox()),
+          ): SizedBox.shrink() :SizedBox()),
 
         ],
       ),

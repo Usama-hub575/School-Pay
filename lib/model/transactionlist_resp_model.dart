@@ -196,7 +196,7 @@ class School {
     addedBy: json["addedBy"] !=null ?json["addedBy"] : "",
     address: json["address"] == null ? "-" : json["address"],
     description: json["description"] == null ? "-" : json["description"],
-    vat: json["vat"] == null ? -1.0 : json["vat"].toDouble(),
+    vat: json["vat"] == null ? -1.0 : double.parse(json["vat"]),
     paynestFee: json["paynestFee"] == null ? -1 : json["paynestFee"],
     apiKey: json["APIKey"] !=null? "-" : json["APIKey"],
     merchantId: json["merchantId"] == null ? "-" : json["merchantId"],
@@ -272,7 +272,7 @@ class Student {
   String parentPhoneNumber;
   dynamic deletedAt;
   int schoolId;
-  String totalBalanceAmount;
+  double totalBalanceAmount;
   String guardianFirstName;
   String guardianLastName;
   String guardianGender;
@@ -296,7 +296,7 @@ class Student {
   DateTime? updatedAt;
 
   static Student empty(){
-    return Student(dob: DateTime.now(), admissionDate: DateTime.now(), id: -1, studentRegNo: "-", firstName: "-", lastName: "-", grade: "-", parentEmiratesId: "-", parentPhoneNumber: "-", deletedAt: "-", schoolId: -1, totalBalanceAmount: "-", guardianFirstName: "-", guardianLastName: "-", guardianGender: "-", guardianEmiratesId: "-", guardianNationality: "-", guardianReligion: "-", area: "-", region: "-", streetAddress: "-", email: "-", phoneNumber: "-", otherNumber: "-", profile: "-", religion: "-", nationality: "-", gender: "-", dueDate: DateTime.now(), file: "-", privacy: "-", createdAt: DateTime.now(), updatedAt: DateTime.now());
+    return Student(dob: DateTime.now(), admissionDate: DateTime.now(), id: -1, studentRegNo: "-", firstName: "-", lastName: "-", grade: "-", parentEmiratesId: "-", parentPhoneNumber: "-", deletedAt: "-", schoolId: -1, totalBalanceAmount: 0.0, guardianFirstName: "-", guardianLastName: "-", guardianGender: "-", guardianEmiratesId: "-", guardianNationality: "-", guardianReligion: "-", area: "-", region: "-", streetAddress: "-", email: "-", phoneNumber: "-", otherNumber: "-", profile: "-", religion: "-", nationality: "-", gender: "-", dueDate: DateTime.now(), file: "-", privacy: "-", createdAt: DateTime.now(), updatedAt: DateTime.now());
   }
 
   factory Student.fromJson(Map<String, dynamic> json) => Student(
@@ -311,7 +311,7 @@ class Student {
     parentPhoneNumber: json["parentPhoneNumber"] == null ? "-" : json["parentPhoneNumber"],
     deletedAt: json["deletedAt"] !=null ?json["deletedAt"] : "-",
     schoolId: json["schoolId"] == null ? -1 : json["schoolId"],
-    totalBalanceAmount: json["total_balance_amount"] == null ? "-" : json["total_balance_amount"],
+    totalBalanceAmount: json["total_balance_amount"] == null ? 0.0 : double.parse(json["total_balance_amount"].toString()),
     guardianFirstName: json["guardianFirstName"] == null ? "-" : json["guardianFirstName"],
     guardianLastName: json["guardianLastName"] == null ? "-" : json["guardianLastName"],
     guardianGender: json["guardianGender"] == null ? "-" : json["guardianGender"],

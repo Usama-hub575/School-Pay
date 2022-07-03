@@ -119,7 +119,7 @@ class StudentStudent {
   dynamic parentPhoneNumber;
   dynamic deletedAt;
   int schoolId;
-  String totalBalanceAmount;
+  dynamic totalBalanceAmount;
   String? guardianFirstName;
   String? guardianLastName;
   String? guardianGender;
@@ -267,7 +267,7 @@ class School {
     addedBy: json["addedBy"] ?? "-",
     address: json["address"] ?? "-",
     description: json["description"] ?? "-",
-    vat: json["vat"].toDouble() ?? 0.0,
+    vat: double.parse(json["vat"]),
     paynestFee: json["paynestFee"] ?? 0,
     apiKey: json["APIKey"] == null ? "" : json["APIKey"],
     merchantId: json["merchantId"] ?? "-",

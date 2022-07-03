@@ -137,7 +137,7 @@ class TransactionDetailStudent {
   String parentPhoneNumber;
   dynamic deletedAt;
   int schoolId;
-  String totalBalanceAmount;
+  double totalBalanceAmount;
   String guardianFirstName;
   String guardianLastName;
   String guardianGender;

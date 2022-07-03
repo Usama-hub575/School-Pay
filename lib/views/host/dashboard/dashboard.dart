@@ -336,7 +336,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                                                         parentPhoneNumber: myStudentController.myStudentData.value.students![index].student!.parentPhoneNumber,
                                                                         deletedAt: myStudentController.myStudentData.value.students![index].student!.deletedAt,
                                                                         schoolId: myStudentController.myStudentData.value.students![index].student!.schoolId,
-                                                                        totalBalanceAmount: myStudentController.myStudentData.value.students![index].student!.totalBalanceAmount,
+                                                                        totalBalanceAmount: double.parse(myStudentController.myStudentData.value.students![index].student!.totalBalanceAmount.toString()),
                                                                         guardianFirstName: myStudentController.myStudentData.value.students![index].student!.guardianFirstName,
                                                                         guardianLastName: myStudentController.myStudentData.value.students![index].student!.guardianLastName,
                                                                         guardianGender: myStudentController.myStudentData.value.students![index].student!.guardianGender,

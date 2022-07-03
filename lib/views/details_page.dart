@@ -401,7 +401,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                   emirateIDController.text,
                                   areaController.text,
                                   countryController.text,
-                                  addressController.text);
+                                  addressController.text,
+                              "E23123");
                               if (registerController.userResData.value.status ==
                                   true) {
                                 Navigator.pushNamed(context, '/CreatePin');

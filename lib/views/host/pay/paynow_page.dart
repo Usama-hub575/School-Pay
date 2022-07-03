@@ -62,6 +62,7 @@ class _PayNowPageState extends State<PayNowPage> {
       () => Scaffold(
         backgroundColor: PayNestTheme.primaryColor,
         floatingActionButton: FloatingActionButton.extended(
+          heroTag: 'paynest-hero-tag',
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
           backgroundColor: PayNestTheme.blueAccent,
@@ -98,7 +99,7 @@ class _PayNowPageState extends State<PayNowPage> {
                     title: "CBD",
                     // resID:
                     //     ctrcController.createTransData.value.transaction!.id,
-                    amount: amountController.text,
+                    amount: '600',
                     indx: idx,
                     orderId: Random().nextInt(1000000000),
                     schoolId: int.parse(schoolIDController.text),
@@ -114,7 +115,7 @@ class _PayNowPageState extends State<PayNowPage> {
                   schoolIDController.text,
                   parentIDController.text,
                   studentIDController.text,
-                  amountController.text,
+                  '600',
                   result,
                 );
                 if (status) {
@@ -123,74 +124,76 @@ class _PayNowPageState extends State<PayNowPage> {
                       val!.students![idx].student!.totalBalanceAmount = "0";
                       amountController.text = "0";
                     });
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      behavior: SnackBarBehavior.floating,
-                      content: Text(
-                          ctrcController.createTransData.value.transaction ??
-                              'Amount Updated'),
-                      backgroundColor: Colors.green,
-                    ));
-                    PayNowTransactionDetailModel model =
-                        PayNowTransactionDetailModel(
-                      student: PayNowTransactionDetailStudent(
-                          id: sbrController.bankResponseData.value.student!.id,
-                          studentRegNo: sbrController
-                              .bankResponseData.value.student!.studentRegNo,
-                          firstName: sbrController
-                              .bankResponseData.value.student!.firstName,
-                          lastName: sbrController
-                              .bankResponseData.value.student!.lastName,
-                          grade: sbrController
-                              .bankResponseData.value.student!.grade,
-                          parentEmiratesId: sbrController
-                              .bankResponseData.value.student!.parentEmiratesId,
-                          parentPhoneNumber: sbrController.bankResponseData
-                              .value.student!.parentPhoneNumber,
-                          dob:
-                              sbrController.bankResponseData.value.student!.dob,
-                          admissionDate: sbrController
-                              .bankResponseData.value.student!.admissionDate,
-                          deletedAt: sbrController
-                              .bankResponseData.value.student!.deletedAt,
-                          schoolId: sbrController
-                              .bankResponseData.value.student!.schoolId,
-                          totalBalanceAmount: sbrController.bankResponseData
-                              .value.student!.totalBalanceAmount,
-                          guardianFirstName: sbrController.bankResponseData
-                              .value.student!.guardianFirstName,
-                          guardianLastName: sbrController
-                              .bankResponseData.value.student!.guardianLastName,
-                          guardianGender:
-                              sbrController.bankResponseData.value.student!.guardianGender,
-                          guardianEmiratesId: sbrController.bankResponseData.value.student!.guardianEmiratesId,
-                          guardianNationality: sbrController.bankResponseData.value.student!.guardianNationality,
-                          guardianReligion: sbrController.bankResponseData.value.student!.guardianReligion,
-                          area: sbrController.bankResponseData.value.student!.area,
-                          region: sbrController.bankResponseData.value.student!.region,
-                          streetAddress: sbrController.bankResponseData.value.student!.streetAddress,
-                          email: sbrController.bankResponseData.value.student!.email,
-                          phoneNumber: sbrController.bankResponseData.value.student!.phoneNumber,
-                          otherNumber: sbrController.bankResponseData.value.student!.otherNumber,
-                          profile: sbrController.bankResponseData.value.student!.profile,
-                          religion: sbrController.bankResponseData.value.student!.religion,
-                          nationality: sbrController.bankResponseData.value.student!.nationality,
-                          gender: sbrController.bankResponseData.value.student!.gender,
-                          dueDate: sbrController.bankResponseData.value.student!.dueDate,
-                          file: sbrController.bankResponseData.value.student!.file,
-                          privacy: sbrController.bankResponseData.value.student!.privacy,
-                          createdAt: sbrController.bankResponseData.value.student!.createdAt,
-                          updatedAt: sbrController.bankResponseData.value.student!.updatedAt),
-                      referenceNo:
-                          sbrController.bankResponseData.value.referenceNo,
-                      paidOn: sbrController.bankResponseData.value.paidOn,
-                      amountPaid: amount,
-                    );
-                    !sbrController.isLoading.value
-                        ? Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PayNowTransactionDetailsPage(
-                                  pntdm: model,
-                                )))
-                        : CircularProgressIndicator();
+                    PayNowTransactionDetailModel model;
+                    Future.delayed(Duration(seconds: 3)).then((value) => {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            content: Text(ctrcController
+                                    .createTransData.value.transaction ??
+                                'Amount Updated'),
+                            backgroundColor: Colors.green,
+                          )),
+                          model = PayNowTransactionDetailModel(
+                            student: PayNowTransactionDetailStudent(
+                                id: sbrController
+                                    .bankResponseData.value.student!.id,
+                                studentRegNo: sbrController.bankResponseData
+                                    .value.student!.studentRegNo,
+                                firstName: sbrController
+                                    .bankResponseData.value.student!.firstName,
+                                lastName: sbrController
+                                    .bankResponseData.value.student!.lastName,
+                                grade: sbrController
+                                    .bankResponseData.value.student!.grade,
+                                parentEmiratesId: sbrController.bankResponseData
+                                    .value.student!.parentEmiratesId,
+                                parentPhoneNumber: sbrController
+                                    .bankResponseData
+                                    .value
+                                    .student!
+                                    .parentPhoneNumber,
+                                dob: sbrController
+                                    .bankResponseData.value.student!.dob,
+                                admissionDate: sbrController.bankResponseData
+                                    .value.student!.admissionDate,
+                                deletedAt: sbrController
+                                    .bankResponseData.value.student!.deletedAt,
+                                schoolId: sbrController.bankResponseData.value.student!.schoolId,
+                                totalBalanceAmount: sbrController.bankResponseData.value.student!.totalBalanceAmount,
+                                guardianFirstName: sbrController.bankResponseData.value.student!.guardianFirstName,
+                                guardianLastName: sbrController.bankResponseData.value.student!.guardianLastName,
+                                guardianGender: sbrController.bankResponseData.value.student!.guardianGender,
+                                guardianEmiratesId: sbrController.bankResponseData.value.student!.guardianEmiratesId,
+                                guardianNationality: sbrController.bankResponseData.value.student!.guardianNationality,
+                                guardianReligion: sbrController.bankResponseData.value.student!.guardianReligion,
+                                area: sbrController.bankResponseData.value.student!.area,
+                                region: sbrController.bankResponseData.value.student!.region,
+                                streetAddress: sbrController.bankResponseData.value.student!.streetAddress,
+                                email: sbrController.bankResponseData.value.student!.email,
+                                phoneNumber: sbrController.bankResponseData.value.student!.phoneNumber,
+                                otherNumber: sbrController.bankResponseData.value.student!.otherNumber,
+                                profile: sbrController.bankResponseData.value.student!.profile,
+                                religion: sbrController.bankResponseData.value.student!.religion,
+                                nationality: sbrController.bankResponseData.value.student!.nationality,
+                                gender: sbrController.bankResponseData.value.student!.gender,
+                                dueDate: sbrController.bankResponseData.value.student!.dueDate,
+                                file: sbrController.bankResponseData.value.student!.file,
+                                privacy: sbrController.bankResponseData.value.student!.privacy,
+                                createdAt: sbrController.bankResponseData.value.student!.createdAt,
+                                updatedAt: sbrController.bankResponseData.value.student!.updatedAt),
+                            referenceNo: sbrController
+                                .bankResponseData.value.referenceNo,
+                            paidOn: sbrController.bankResponseData.value.paidOn,
+                            amountPaid: amount,
+                          ),
+                          !sbrController.isLoading.value
+                              ? Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      PayNowTransactionDetailsPage(
+                                        pntdm: model,
+                                      )))
+                              : CircularProgressIndicator()
+                        });
                   });
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -277,7 +280,7 @@ class _PayNowPageState extends State<PayNowPage> {
               //   });
               // }
 
-            } else if ( int.parse(amountController.text) < 0) {
+            } else if (int.parse(amountController.text) < 0) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 behavior: SnackBarBehavior.floating,
                 content: Text("Amount is not correct"),
@@ -431,7 +434,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                           .value
                                                           .students![index]
                                                           .student!
-                                                          .totalBalanceAmount;
+                                                          .totalBalanceAmount
+                                                          .toString();
                                                   studentIDController.text =
                                                       studentController
                                                           .myStudentData
