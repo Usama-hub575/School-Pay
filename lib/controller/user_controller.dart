@@ -19,7 +19,7 @@ class UserController extends GetxController{
       parent: null
   ).obs;
 
-  hitRegister(email,phone,password,firstName,lastName ,dialCode,countryCode,emiratesId,area,country,address,) async {
+  hitRegister(email,phone,password,firstName,lastName ,dialCode,countryCode,emiratesId,area,country,address,passport) async {
     try{
       isLoading(true);
       RegisterModel registerModel = RegisterModel(
@@ -33,7 +33,8 @@ class UserController extends GetxController{
           emiratesId: emiratesId,
           area: area,
           country: country,
-          address: address
+          address: address,
+          passport :passport
       );
       var res = await APIService().apiResister(registerModelToJson(registerModel));
       var decoded = jsonDecode(res);

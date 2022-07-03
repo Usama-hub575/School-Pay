@@ -21,6 +21,7 @@ class RegisterModel {
     required this.area,
     required this.country,
     required this.address,
+    required this.passport
   });
 
   String email;
@@ -34,6 +35,7 @@ class RegisterModel {
   String area;
   String country;
   String address;
+  String passport;
 
   factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
     email: json["email"],
@@ -47,6 +49,7 @@ class RegisterModel {
     area: json["area"],
     country: json["country"],
     address: json["address"],
+    passport: json["passport"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -61,5 +64,6 @@ class RegisterModel {
     "area": area,
     "country": country,
     "address": address,
+    "passport" : passport
   };
 }

@@ -31,184 +31,189 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       body: SingleChildScrollView(
-         child: SizedBox(
-           height: 1.sh,
-           child: Column(
-             children: [
-               Container(
-                 height: 129.h,
-                 decoration: BoxDecoration(
-                     color: PayNestTheme.primaryColor,
-                     borderRadius: BorderRadius.vertical(bottom: Radius.circular(24.r))
-                 ),
-                 child: SafeArea(
-                   child: Padding(
-                     padding: EdgeInsets.only(left: 25.h),
-                     child: Column(
-                       mainAxisAlignment: MainAxisAlignment.center,
-                       children: [
-                         Row(
-                           children: [
-                             Padding(
-                               padding: EdgeInsets.only(right: 25.h),
-                               child: Container(
-                                 height : 44.h,
-                                 width : 44.w,
-                                 decoration: BoxDecoration(
-                                     color: Colors.white,
-                                     borderRadius: BorderRadius.circular(12.r)
-                                 ),
-                                 child: IconButton(
-                                   onPressed: (){
-                                     Navigator.pop(context);
-                                   },
-                                   icon: Icon(Icons.arrow_back,size: 20.sp,color: PayNestTheme.blueAccent,),
-                                   // child: Text(""),
-                                 ),
+       body: SizedBox(
+         height: 1.sh,
+         child: Column(
+           children: [
+             Container(
+               height: 129.h,
+               decoration: BoxDecoration(
+                   color: PayNestTheme.primaryColor,
+                   borderRadius: BorderRadius.vertical(bottom: Radius.circular(24.r))
+               ),
+               child: SafeArea(
+                 child: Padding(
+                   padding: EdgeInsets.only(left: 25.h),
+                   child: Column(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       Row(
+                         children: [
+                           Padding(
+                             padding: EdgeInsets.only(right: 25.h),
+                             child: Container(
+                               height : 44.h,
+                               width : 44.w,
+                               decoration: BoxDecoration(
+                                   color: Colors.white,
+                                   borderRadius: BorderRadius.circular(12.r)
+                               ),
+                               child: IconButton(
+                                 onPressed: (){
+                                   Navigator.pop(context);
+                                 },
+                                 icon: Icon(Icons.arrow_back,size: 20.sp,color: PayNestTheme.blueAccent,),
+                                 // child: Text(""),
                                ),
                              ),
-                             Text(chgPassword,style: PayNestTheme.title20white,),
-                           ],
+                           ),
+                           Text(chgPassword,style: PayNestTheme.title20white,),
+                         ],
+                       ),
+                     ],
+                   ),
+                 ),
+               ),
+             ),
+
+             Expanded(
+               child: SingleChildScrollView(
+                 child: Padding(
+                   padding: EdgeInsets.symmetric(horizontal: 25.w,vertical: 25.h),
+                   child: Form(
+                     key: Utils.changePasswordFormKey,
+                     child: Column(
+                       children: [
+                         Padding(
+                           padding: EdgeInsets.only(bottom: 17.h),
+                           child: TextFormField(
+                             controller: oldPassController,
+                             obscureText: isObscure,
+                             autovalidateMode: AutovalidateMode.onUserInteraction,
+                             validator: (value){
+                               if(value!.isEmpty){
+                                 return "Required";
+                               }else{
+                                 return null;
+                               }
+                             },
+                             decoration: InputDecoration(
+                               border: OutlineInputBorder(
+                                   borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                                   borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
+                               labelText: oldPassword,
+                               // labelStyle: CustomizedTheme.b_W400_12,
+                               focusedBorder: OutlineInputBorder(
+                                 borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                                 borderSide: BorderSide(color: Colors.black),
+                               ),
+                               suffixIcon: Column(
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 children: [
+                                   GestureDetector(
+                                       onTap: (){
+                                         setState(() {
+                                           isObscure = !isObscure;
+                                         });
+                                       },
+                                       child: Text(isObscure ? show : hide,style: PayNestTheme.h2_14blueAccent)
+                                   ),
+                                 ],
+                               ),
+                             ),
+                           ),
+                         ),
+                         Padding(
+                           padding: EdgeInsets.only(bottom: 17.h),
+                           child: TextFormField(
+                             obscureText: isObscurenew,
+                             controller: newPassController,
+                             autovalidateMode: AutovalidateMode.onUserInteraction,
+                             validator: (value){
+                               if(value!.length < 6 ){
+                                 return "6 Characters";
+                               }else if(value.isEmpty){
+                                 return "Required";
+                               }else{
+                                 return null;
+                               }
+                             },
+                             decoration: InputDecoration(
+                               border: OutlineInputBorder(
+                                   borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                                   borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
+                               labelText: newPassword,
+                               // labelStyle: CustomizedTheme.b_W400_12,
+                               focusedBorder: OutlineInputBorder(
+                                 borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                                 borderSide: BorderSide(color: Colors.black),
+                               ),
+                               suffixIcon: Column(
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 children: [
+                                   GestureDetector(
+                                       onTap: (){
+                                         setState(() {
+                                           isObscurenew = !isObscurenew;
+                                         });
+                                       },
+                                       child: Text(isObscurenew ? show : hide,style: PayNestTheme.h2_14blueAccent)
+                                   ),
+                                 ],
+                               ),
+                             ),
+                           ),
+                         ),
+                         Padding(
+                           padding: EdgeInsets.only(bottom: 17.h),
+                           child: TextFormField(
+                             controller: rePassController,
+                             autovalidateMode: AutovalidateMode.onUserInteraction,
+                             validator: (value){
+                               if(value!.isNotEmpty && value != newPassController.text){
+                                 return "Password does not match";
+                               }else if(value.isEmpty){
+                                 return "Required";
+                               }
+                               return null;
+                             },
+                             obscureText: isObscurere,
+                             decoration: InputDecoration(
+                               border: OutlineInputBorder(
+                                   borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                                   borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
+                               labelText: confirmpassword,
+                               // labelStyle: CustomizedTheme.b_W400_12,
+                               focusedBorder: OutlineInputBorder(
+                                 borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
+                                 borderSide: BorderSide(color: Colors.black),
+                               ),
+                               suffixIcon: Column(
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 children: [
+                                   GestureDetector(
+                                       onTap: (){
+                                         setState(() {
+                                           isObscurere = !isObscurere;
+                                         });
+                                       },
+                                       child: Text(isObscurere ? show : hide,style: PayNestTheme.h2_14blueAccent)
+                                   ),
+                                 ],
+                               ),
+                             ),
+                           ),
                          ),
                        ],
                      ),
                    ),
                  ),
                ),
+             ),
 
-               Padding(
-                 padding: EdgeInsets.symmetric(horizontal: 25.w,vertical: 25.h),
-                 child: Form(
-                   key: Utils.changePasswordFormKey,
-                   child: Column(
-                     children: [
-                       Padding(
-                         padding: EdgeInsets.only(bottom: 17.h),
-                         child: TextFormField(
-                           controller: oldPassController,
-                           obscureText: isObscure,
-                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                           validator: (value){
-                             if(value!.isEmpty){
-                               return "Required";
-                             }else{
-                               return null;
-                             }
-                           },
-                           decoration: InputDecoration(
-                             border: OutlineInputBorder(
-                                 borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                                 borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
-                             labelText: oldPassword,
-                             // labelStyle: CustomizedTheme.b_W400_12,
-                             focusedBorder: OutlineInputBorder(
-                               borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                               borderSide: BorderSide(color: Colors.black),
-                             ),
-                             suffixIcon: Column(
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               children: [
-                                 GestureDetector(
-                                     onTap: (){
-                                       setState(() {
-                                         isObscure = !isObscure;
-                                       });
-                                     },
-                                     child: Text(isObscure ? show : hide,style: PayNestTheme.h2_14blueAccent)
-                                 ),
-                               ],
-                             ),
-                           ),
-                         ),
-                       ),
-                       Padding(
-                         padding: EdgeInsets.only(bottom: 17.h),
-                         child: TextFormField(
-                           obscureText: isObscurenew,
-                           controller: newPassController,
-                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                           validator: (value){
-                             if(value!.length < 6 ){
-                               return "6 Characters";
-                             }else if(value.isEmpty){
-                               return "Required";
-                             }else{
-                               return null;
-                             }
-                           },
-                           decoration: InputDecoration(
-                             border: OutlineInputBorder(
-                                 borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                                 borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
-                             labelText: newPassword,
-                             // labelStyle: CustomizedTheme.b_W400_12,
-                             focusedBorder: OutlineInputBorder(
-                               borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                               borderSide: BorderSide(color: Colors.black),
-                             ),
-                             suffixIcon: Column(
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               children: [
-                                 GestureDetector(
-                                     onTap: (){
-                                       setState(() {
-                                         isObscurenew = !isObscurenew;
-                                       });
-                                     },
-                                     child: Text(isObscurenew ? show : hide,style: PayNestTheme.h2_14blueAccent)
-                                 ),
-                               ],
-                             ),
-                           ),
-                         ),
-                       ),
-                       Padding(
-                         padding: EdgeInsets.only(bottom: 17.h),
-                         child: TextFormField(
-                           controller: rePassController,
-                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                           validator: (value){
-                             if(value!.isNotEmpty && value != newPassController.text){
-                               return "Password does not match";
-                             }else if(value.isEmpty){
-                               return "Required";
-                             }
-                             return null;
-                           },
-                           obscureText: isObscurere,
-                           decoration: InputDecoration(
-                             border: OutlineInputBorder(
-                                 borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                                 borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
-                             labelText: confirmpassword,
-                             // labelStyle: CustomizedTheme.b_W400_12,
-                             focusedBorder: OutlineInputBorder(
-                               borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                               borderSide: BorderSide(color: Colors.black),
-                             ),
-                             suffixIcon: Column(
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               children: [
-                                 GestureDetector(
-                                     onTap: (){
-                                       setState(() {
-                                         isObscurere = !isObscurere;
-                                       });
-                                     },
-                                     child: Text(isObscurere ? show : hide,style: PayNestTheme.h2_14blueAccent)
-                                 ),
-                               ],
-                             ),
-                           ),
-                         ),
-                       ),
-                     ],
-                   ),
-                 ),
-               ),
-               Spacer(),
-               Obx(()=>SizedBox(
+             Padding(
+               padding: EdgeInsets.symmetric(vertical: 20),
+               child: Obx(()=>SizedBox(
                  height: 60.h,
                  width: 326.w,
                  child: TextButton(
@@ -226,8 +231,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                          newPassController.clear();
                          rePassController.clear();
                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
-                             // resetController.resetPassData.value.message.toString()
-                           "Password Reset Successfully"
+                           // resetController.resetPassData.value.message.toString()
+                             "Password Reset Successfully"
                          ),
                            backgroundColor: Colors.green,));
                          Navigator.pop(context);
@@ -241,9 +246,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                    // label:
                  ),
                )),
-               SizedBox(height: 50.h,),
-             ],
-           ),
+             )
+           ],
          ),
        ),
     );

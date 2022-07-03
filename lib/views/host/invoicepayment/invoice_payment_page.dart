@@ -23,9 +23,9 @@ class InvoicePaymentPage extends StatefulWidget {
 
 class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
   final VerifyPinController verifyPinController =
-  Get.put(VerifyPinController());
+      Get.put(VerifyPinController());
   final PartialPayController partialPayController =
-  Get.put(PartialPayController());
+      Get.put(PartialPayController());
   final UserController userController = Get.find<UserController>();
 
   TextEditingController feeController = TextEditingController();
@@ -37,43 +37,42 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton:
-      (widget.singleStudentModel.student!.totalBalanceAmount).abs() > 0
-          ? FloatingActionButton.extended(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.r)),
-        backgroundColor: PayNestTheme.blueAccent,
-        onPressed: () {
-          showMyModal(context);
-          setState(() {
-            // index = 1;
-          });
-        },
-        // extendedPadding: EdgeInsets.symmetric(horizontal: 50.w),
-        // icon:
-        label: Obx(() =>
-            SizedBox(
-              width: 214.w,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(continueToPayment,
-                      style: TextStyle(
-                          color: PayNestTheme.colorWhite,
-                          fontSize: 12.sp)),
-                  !partialPayController.isLoading.value
-                      ? Icon(
-                    Icons.play_circle_fill,
-                    color: Colors.white,
-                  )
-                      : CircularProgressIndicator(
-                    backgroundColor: PayNestTheme.colorWhite,
-                    color: PayNestTheme.blueAccent,
-                  ),
-                ],
-              ),
-            )),
-      )
-          : SizedBox(),
+          (widget.singleStudentModel.student!.totalBalanceAmount).abs() > 0
+              ? FloatingActionButton.extended(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r)),
+                  backgroundColor: PayNestTheme.blueAccent,
+                  onPressed: () {
+                    showMyModal(context);
+                    setState(() {
+                      // index = 1;
+                    });
+                  },
+                  // extendedPadding: EdgeInsets.symmetric(horizontal: 50.w),
+                  // icon:
+                  label: Obx(() => SizedBox(
+                        width: 214.w,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(continueToPayment,
+                                style: TextStyle(
+                                    color: PayNestTheme.colorWhite,
+                                    fontSize: 12.sp)),
+                            !partialPayController.isLoading.value
+                                ? Icon(
+                                    Icons.play_circle_fill,
+                                    color: Colors.white,
+                                  )
+                                : CircularProgressIndicator(
+                                    backgroundColor: PayNestTheme.colorWhite,
+                                    color: PayNestTheme.blueAccent,
+                                  ),
+                          ],
+                        ),
+                      )),
+                )
+              : SizedBox(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: PayNestTheme.primaryColor,
       body: Column(
@@ -83,7 +82,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
             decoration: BoxDecoration(
                 color: PayNestTheme.primaryColor,
                 borderRadius:
-                BorderRadius.vertical(bottom: Radius.circular(24.r))),
+                    BorderRadius.vertical(bottom: Radius.circular(24.r))),
             child: SafeArea(
               child: Padding(
                 padding: EdgeInsets.only(left: 25.h),
@@ -125,7 +124,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
               decoration: BoxDecoration(
                   color: PayNestTheme.colorWhite,
                   borderRadius:
-                  BorderRadius.vertical(top: Radius.circular(15.r))),
+                      BorderRadius.vertical(top: Radius.circular(15.r))),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Column(
@@ -269,10 +268,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
             padding: EdgeInsets.only(
                 left: 28.w,
                 right: 28.w,
-                bottom: MediaQuery
-                    .of(context)
-                    .viewInsets
-                    .bottom),
+                bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Wrap(
               children: [
                 Padding(
@@ -324,12 +320,12 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       ],
                       controller: feeController,
                       keyboardType:
-                      TextInputType.numberWithOptions(decimal: false),
+                          TextInputType.numberWithOptions(decimal: false),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Required';
-                        } else if (int.parse(feeController.text.toString()) >
+                        } else if (double.parse(feeController.text.toString()) >
                             widget.singleStudentModel.student!
                                 .totalBalanceAmount) {
                           return "";
@@ -339,14 +335,14 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                         // contentPadding: EdgeInsets.only(left: 24.44.w,right: 34.47.w, bottom: 12.3.h,top: 15.03.h),
                         border: OutlineInputBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(10.0.r)),
+                                BorderRadius.all(Radius.circular(10.0.r)),
                             borderSide:
-                            BorderSide(color: Colors.black, width: 1.0.w)),
+                                BorderSide(color: Colors.black, width: 1.0.w)),
                         labelText: enterAmount,
                         // labelStyle: CustomizedTheme.b_W400_12,
                         focusedBorder: OutlineInputBorder(
                           borderRadius:
-                          BorderRadius.all(Radius.circular(10.0.r)),
+                              BorderRadius.all(Radius.circular(10.0.r)),
                           borderSide: BorderSide(color: Colors.black),
                         ),
                       ),
@@ -370,7 +366,8 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       Text(
                         "AED " +
                             widget
-                                .singleStudentModel.student!.totalBalanceAmount.toString(),
+                                .singleStudentModel.student!.totalBalanceAmount
+                                .toString(),
                         style: PayNestTheme.title_2_16primaryColor,
                       )
                     ],
@@ -394,7 +391,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                         }
                       },
                       child:
-                      Text(confirm, style: PayNestTheme.subtitle16white)),
+                          Text(confirm, style: PayNestTheme.subtitle16white)),
                 ),
               ],
             ),
@@ -422,10 +419,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
             padding: EdgeInsets.only(
                 left: 28.w,
                 right: 28.w,
-                bottom: MediaQuery
-                    .of(context)
-                    .viewInsets
-                    .bottom),
+                bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Wrap(
               children: [
                 Padding(
@@ -435,9 +429,9 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                     children: [
                       Expanded(
                           child: Text(
-                            enterYourPin,
-                            style: PayNestTheme.title22blackbold,
-                          )),
+                        enterYourPin,
+                        style: PayNestTheme.title22blackbold,
+                      )),
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(ctx);
@@ -470,8 +464,8 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                           return s!.isEmpty
                               ? 'Enter Pin'
                               : s.length < 4
-                              ? '4 Digit Pin '
-                              : null;
+                                  ? '4 Digit Pin '
+                                  : null;
                         },
                         pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                         showCursor: true,
@@ -480,8 +474,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                     ),
                   ),
                 ),
-                Obx(() =>
-                    SizedBox(
+                Obx(() => SizedBox(
                       height: 60.h,
                       width: 326.w,
                       child: ElevatedButton(
@@ -498,7 +491,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                                   userController.userResData.value.parent!.id,
                                   pinController.text);
                               if (verifyPinController
-                                  .verifyPinData.value.status ==
+                                      .verifyPinData.value.status ==
                                   true) {
                                 Navigator.pop(context);
 
@@ -514,18 +507,18 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content:
-                                        Text('Pin Verification failed')));
+                                            Text('Pin Verification failed')));
                                 Navigator.pop(context);
                               }
                             } else {}
                           },
                           child: !verifyPinController.isLoading.value
                               ? Text(confirm,
-                              style: PayNestTheme.subtitle16white)
+                                  style: PayNestTheme.subtitle16white)
                               : CircularProgressIndicator(
-                            backgroundColor: PayNestTheme.colorWhite,
-                            color: PayNestTheme.blueAccent,
-                          )),
+                                  backgroundColor: PayNestTheme.colorWhite,
+                                  color: PayNestTheme.blueAccent,
+                                )),
                     )),
               ],
             ),
@@ -553,7 +546,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
         widget.singleStudentModel.student!.id.toString(), feeController.text);
     if (partialPayController.partialPayData.value.status == true) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
-        // partialPayController.partialPayData.value.message.toString(),
+          // partialPayController.partialPayData.value.message.toString(),
           "Payment Successful")));
     } else {
       ScaffoldMessenger.of(context)

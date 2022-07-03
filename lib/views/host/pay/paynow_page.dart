@@ -67,7 +67,8 @@ class _PayNowPageState extends State<PayNowPage> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
           backgroundColor: PayNestTheme.blueAccent,
           onPressed: () async {
-            if (studentController.myStudentData.value.status) {
+            if (studentController.myStudentData.value.status &&
+                int.parse(amountController.text) > 0) {
               print("Student data for Payment to CBD");
               print(studentIDController.text +
                   parentIDController.text +
