@@ -6,9 +6,14 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../../model/mystudents_resp_model.dart';
 
 class StudentCard extends StatefulWidget {
-  const StudentCard({Key? key, required this.students}) : super(key: key);
+  const StudentCard({
+    Key? key,
+    required this.students,
+    required this.onTap,
+  }) : super(key: key);
 
   final List<StudentElement> students;
+  final Function(StudentElement studentElement) onTap;
 
   @override
   _StudentCardState createState() => _StudentCardState();
@@ -18,25 +23,29 @@ class _StudentCardState extends State<StudentCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: horizontalValue(12),
-      ),
-      height: sizes.heightRatio * 155,
+      height: sizes.heightRatio * 180,
       child: ListView.separated(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return _singleCard();
+          return GestureDetector(
+            onTap: () => widget.onTap(
+              widget.students[index],
+            ),
+            child: _singleCard(
+              widget.students[index],
+            ),
+          );
         },
         separatorBuilder: (context, index) {
           return horizontalSpacer(12);
         },
-        itemCount: 3,
+        itemCount: widget.students.length > 3 ? 3 : widget.students.length,
       ),
     );
   }
 
-  Widget _singleCard() {
+  Widget _singleCard(StudentElement studentElement) {
     return Container(
       child: Stack(
         children: [
@@ -44,6 +53,7 @@ class _StudentCardState extends State<StudentCard> {
             margin: EdgeInsets.symmetric(
               vertical: verticalValue(10),
             ),
+            height: sizes.heightRatio * 155,
             padding: EdgeInsets.symmetric(
               horizontal: horizontalValue(12),
               vertical: verticalValue(16),
@@ -58,23 +68,23 @@ class _StudentCardState extends State<StudentCard> {
                   backgroundImage: NetworkImage(
                     'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
                   ),
-                  minRadius: 12,
-                  maxRadius: 16,
+                  minRadius: 16,
+                  maxRadius: 24,
                 ),
                 verticalSpacer(12),
                 Text(
-                  'John \n Allan',
+                  '${studentElement.student?.firstName} \n ${studentElement.student?.lastName} ',
                   textAlign: TextAlign.center,
                   style: PayNestTheme.title_2_16primaryColor.copyWith(
                     fontSize: sizes.fontRatio * 12,
                     color: PayNestTheme.colorWhite,
                   ),
                 ),
-                verticalSpacer(8),
+                Spacer(),
                 Container(
                   width: sizes.widthRatio * 80,
                   child: Text(
-                    'Gems Winchester School',
+                    '${studentElement.student?.school!.name}',
                     maxLines: 2,
                     textAlign: TextAlign.center,
                     style: PayNestTheme.title_2_16primaryColor.copyWith(
@@ -84,6 +94,7 @@ class _StudentCardState extends State<StudentCard> {
                     ),
                   ),
                 ),
+                Spacer()
               ],
             ),
           ),

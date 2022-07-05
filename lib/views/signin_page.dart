@@ -84,7 +84,13 @@ class _SignInPageState extends State<SignInPage> {
                         TextFormField(
                           controller: emailController,
                           decoration: InputDecoration(
-                            border: InputBorder.none,
+                            border:UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(
+                                  0.5,
+                                ),
+                              ),
+                            ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: PayNestTheme.textGrey.withOpacity(0.5),
@@ -360,11 +366,13 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   verticalSpacer(20),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        height: 1.5,
-                        width: sizes.width / 2.5,
-                        color: PayNestTheme.primaryColor,
+                      Expanded(
+                        child: Container(
+                          height: 1.5,
+                          color: PayNestTheme.primaryColor,
+                        ),
                       ),
                       horizontalSpacer(10),
                       Text(
@@ -375,10 +383,11 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ),
                       horizontalSpacer(10),
-                      Container(
-                        height: 1.5,
-                        width: sizes.width / 2.5,
-                        color: PayNestTheme.primaryColor,
+                      Expanded(
+                        child: Container(
+                          height: 1.5,
+                          color: PayNestTheme.primaryColor,
+                        ),
                       ),
                     ],
                   ),

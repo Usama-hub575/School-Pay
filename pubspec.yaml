@@ -32,6 +32,7 @@ dependencies:
   encrypt: ^5.0.1
   country_picker: ^2.0.12
   lottie:
+  animated_bottom_navigation_bar:
 
 
 dev_dependencies:

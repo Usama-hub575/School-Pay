@@ -82,6 +82,8 @@ const contactNumber = "Contact Number";
 const pin = "PIN";
 const chgpin = "Change PIN";
 const enterPin = "Please enter PIN";
+const enterThePayNestStudentCode = "Enter The PayNest Student Code";
+const addStudentManually = "Add Student Manually";
 const passwordDetails = "Password details";
 const chgPassword = "Change Password";
 const deleteAcc = "Delete Account";
@@ -103,9 +105,9 @@ const youHaveSuccessfully = "You have successfully transferred the amount.";
 
 
 const pendingTask = "Pending tasks";
-const showAll = "Show all";
+const showAll = "Show All";
 const cfgPayment = "Configure payment methods";
-const makeFirstPayment = "Make first payment";
+const makeFirstPayment = "Make First Payment";
 const setPIN = "Setup PIN";
 const student = "Students";
 const studentID = "Student ID";
@@ -151,6 +153,8 @@ const addressDetails = "Address Details";
 
 const google = "Continue with Google";
 const facebook = "Continue with Facebook";
+
+
 
 const payment = "Payment";
 const paymentfor = "Payment For";
