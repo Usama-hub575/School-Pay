@@ -6,9 +6,11 @@ import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
+import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/assistance/get_assistance.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
+import 'package:paynest_flutter_app/views/host/dashboard/widgets/student_card.dart';
 import 'package:paynest_flutter_app/views/host/notification/notification_page.dart';
 import 'package:paynest_flutter_app/views/host/pay/paynow_page.dart';
 import 'package:paynest_flutter_app/views/host/pendingtask/pending_task.dart';
@@ -16,6 +18,7 @@ import 'package:paynest_flutter_app/views/host/school/select_school.dart';
 import 'package:paynest_flutter_app/views/host/singlestudent/singlestudent_page.dart';
 import 'package:paynest_flutter_app/views/host/student/student_page.dart';
 import 'package:paynest_flutter_app/widgets/mycarousel_slider.dart';
+import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -136,9 +139,37 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
           ),
         ),
-        //header end
-
-        CarouselSliderPage(),
+        verticalSpacer(12),
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: horizontalValue(16),
+          ),
+          child: Row(
+            children: [
+              Text(
+                'Students',
+                style: PayNestTheme.h2_12blueAccent.copyWith(
+                  fontSize: sizes.fontRatio * 16,
+                  color: PayNestTheme.black,
+                ),
+              ),
+              Spacer(),
+              Text(
+                'Show All',
+                style: PayNestTheme.h2_12blueAccent.copyWith(
+                  fontSize: sizes.fontRatio * 12,
+                  color: PayNestTheme.textGrey,
+                ),
+              ),
+            ],
+          ),
+        ),
+        verticalSpacer(8),
+        myStudentController.myStudentData.value.students != null
+            ? StudentCard(
+                students: myStudentController.myStudentData.value.students!,
+              )
+            : const SizedBox.shrink(),
         Expanded(
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -492,7 +523,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                                           )
                                                     : SizedBox.shrink()
                                                 : Center(
-                                                  child: SizedBox(
+                                                    child: SizedBox(
                                                       height: 230.h,
                                                       width: 156.w,
                                                       child: OutlinedButton(
@@ -537,9 +568,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                                                   Navigator.of(
                                                                           context)
                                                                       .push(MaterialPageRoute(
-                                                                          builder:
-                                                                              (context) =>
-                                                                                  SelectSchool()));
+                                                                          builder: (context) =>
+                                                                              SelectSchool()));
                                                                 },
                                                                 icon: Icon(
                                                                   Icons.add,
@@ -561,7 +591,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                                         ),
                                                       ),
                                                     ),
-                                                ),
+                                                  ),
                                     separatorBuilder: (_, index) => SizedBox(
                                           width: 14.w,
                                         ),

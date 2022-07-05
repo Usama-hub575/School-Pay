@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
+import 'package:paynest_flutter_app/res/assets.dart';
+import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/widgets/blue_back_button.dart';
+import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -16,198 +21,322 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  // LoginController userController = Get.put(LoginController());
   UserController userController = Get.put(UserController());
   final storage = GetStorage();
 
   bool isObscure = true;
+  bool isBioMatric = true;
+  bool isLoading = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 44.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+      body: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: horizontalValue(16),
+        ),
+        child: Column(
+          children: [
+            verticalSpacer(60),
+            Row(
+              children: [
+                BlueBackButton(
+                  context: context,
+                ),
+                Spacer(),
+                Text(
+                  signIn,
+                  style: PayNestTheme.title20primaryColor,
+                ),
+                Spacer(),
+              ],
+            ),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                physics: const BouncingScrollPhysics(),
                 children: [
-                  BlueBackButton(
-                    context: context,
-                  ),
-                  SizedBox(
-                    width: 20.w,
-                  ),
-                  Text(
-                    signIn,
-                    style: PayNestTheme.title20primaryColor,
-                  ),
-                ],
-              ),
-              Form(
-                key: Utils.loginFormKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 58.h,
-                    ),
-                    TextFormField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0.r)),
-                            borderSide: BorderSide(
-                                color: PayNestTheme.blueAccent, width: 1.0.w)),
-                        labelText: email,
-                        // labelStyle: CustomizedTheme.b_W400_12,
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0.r)),
-                          borderSide:
-                              BorderSide(color: PayNestTheme.blueAccent),
+                  Form(
+                    key: Utils.loginFormKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        verticalSpacer(16),
+                        Text(
+                          'Sign In',
+                          style: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 20,
+                            color: PayNestTheme.black,
+                          ),
                         ),
+                        verticalSpacer(16),
+                        Text(
+                          'Please Enter Your Registered Email ID and Password',
+                          style: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 14,
+                            color: PayNestTheme.black,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        verticalSpacer(16),
+                        TextFormField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                            labelText: email,
+                            labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                              fontSize: sizes.fontRatio * 12,
+                              color: PayNestTheme.primaryColor,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                            errorBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                            disabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'Please enter email';
+                            }
+                            // Check if the entered email has the right format
+                            if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                              return 'Invalid email';
+                            }
+                            // Return null if the entered email is valid
+                            return null;
+                          },
+                        ),
+                        verticalSpacer(16),
+                        TextFormField(
+                          controller: passwordController,
+                          obscureText: isObscure,
+                          style: PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontSize: sizes.fontRatio * 14,
+                            color: PayNestTheme.textGrey,
+                          ),
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(
+                                  0.5,
+                                ),
+                              ),
+                            ),
+                            labelText: password,
+                            labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                              fontSize: sizes.fontRatio * 12,
+                              color: PayNestTheme.primaryColor,
+                            ),
+                            suffixIcon: IconButton(
+                              icon: SvgPicture.asset(
+                                AppAssets.passwordEye,
+                                color: PayNestTheme.primaryColor,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  isObscure = !isObscure;
+                                });
+                              },
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(
+                                  0.5,
+                                ),
+                              ),
+                            ),
+                            errorBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(
+                                  0.5,
+                                ),
+                              ),
+                            ),
+                            disabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(
+                                  0.5,
+                                ),
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'Please enter password';
+                            }
+                            // Check if the entered email has the right format
+                            if (value.trim().length < 5) {
+                              return 'Password must not be less than 5';
+                            }
+                            // Return null if the entered email is valid
+                            return null;
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  verticalSpacer(16),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      forgotpassword,
+                      style: PayNestTheme.title_2_16primaryColor.copyWith(
+                        fontSize: sizes.fontRatio * 14,
+                        color: PayNestTheme.primaryColor,
                       ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.trim().isEmpty) {
-                          return 'Please enter email';
-                        }
-                        // Check if the entered email has the right format
-                        if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                          return 'Invalid email';
-                        }
-                        // Return null if the entered email is valid
-                        return null;
-                      },
                     ),
-                    SizedBox(
-                      height: 13.h,
-                    ),
-                    TextFormField(
-                      controller: passwordController,
-                      obscureText: isObscure,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0.r)),
-                            borderSide: BorderSide(
-                                color: PayNestTheme.blueAccent, width: 1.0.w)),
-                        labelText: password,
-                        // labelStyle: CustomizedTheme.b_W400_12,
-                        suffixIcon: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isObscure = !isObscure;
-                                  });
-                                },
-                                child: Text(isObscure ? show : hide,
-                                    style: PayNestTheme.h2_14blueAccent)),
-                          ],
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0.r)),
-                          borderSide:
-                              BorderSide(color: PayNestTheme.blueAccent),
-                        ),
-                      ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.trim().isEmpty) {
-                          return 'Please enter password';
-                        }
-                        // Check if the entered email has the right format
-                        if (value.trim().length < 5) {
-                          return 'Password must not be less than 5';
-                        }
-                        // Return null if the entered email is valid
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 16.h, bottom: 72.h),
-                child: Text(
-                  forgotpassword,
-                  style: PayNestTheme.h2_14blueAccent,
-                ),
-              ),
-              InkWell(child: Center(child: Image.asset(touchid))),
-              SizedBox(
-                height: 47.h,
-              ),
-              Obx(() => SizedBox(
-                    height: 60.h,
-                    width: 326.w,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.blueAccent,
-                          elevation: 0,
-                          // side: BorderSide(width:1, color:Colors.white),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                        ),
-                        onPressed: () async {
-                          if (Utils.loginFormKey.currentState!.validate()) {
-                            await userController.hitLogin(
-                              emailController.text.trim(),
-                              passwordController.text.trim(),
-                              storage.read('fcmToken'),
-                            );
-                            if (userController.userResData.value.status ==
-                                true) {
-                              storage.write(
-                                'accessToken',
-                                userController.userResData.value.token,
+                  ),
+                  isBioMatric
+                      ? Center(
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 28.52.h),
+                            child: GestureDetector(
+                              onTap: () async {
+                                if (!isLoading) {
+                                  // bool isAuthenticated = await LocalAuthApi
+                                  //     .authenticateWithBiometrics();
+                                  // if (isAuthenticated) {
+                                  //   setState(() {
+                                  //     isLoading = true;
+                                  //   });
+                                  //   // String phone = storage
+                                  //   //     .getStringValue(SharedPrefKeys.userPhone);
+                                  //   // String password = storage.getStringValue(
+                                  //   //     SharedPrefKeys.userPassword);
+                                  //   // await userLogin(
+                                  //   //   phone,
+                                  //   //   password,
+                                  //   // );
+                                  // }
+                                }
+                              },
+                              child: Column(
+                                children: [
+                                  Lottie.asset(
+                                    AppAssets.faceId,
+                                    height: 109,
+                                    width: 81,
+                                    repeat: true,
+                                  ),
+                                  SizedBox(
+                                    child: Text(
+                                      'Login with Touch ID',
+                                      style:
+                                          PayNestTheme.h2_12blueAccent.copyWith(
+                                        fontSize: sizes.fontRatio * 18,
+                                        color: PayNestTheme.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                  verticalSpacer(60),
+                  Obx(
+                    () => Container(
+                      width: double.infinity,
+                      height: sizes.heightRatio * 46,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: PayNestTheme.primaryColor,
+                            elevation: 0,
+                            // side: BorderSide(width:1, color:Colors.white),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                12,
+                              ),
+                            ),
+                          ),
+                          onPressed: () async {
+                            if (Utils.loginFormKey.currentState!.validate()) {
+                              await userController.hitLogin(
+                                emailController.text.trim(),
+                                passwordController.text.trim(),
+                                storage.read('fcmToken'),
                               );
-                              storage.write('email', userController.userResData.value.parent!.email);
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                '/DashboardPage',
-                                (Route<dynamic> route) => false,
-                              );
-                            } else if (userController
-                                    .userResData.value.status ==
-                                false) {
-                              passwordController.clear();
-                              userController.isLoading.value = false;
+                              if (userController.userResData.value.status ==
+                                  true) {
+                                storage.write(
+                                  'accessToken',
+                                  userController.userResData.value.token,
+                                );
+                                storage.write(
+                                    'email',
+                                    userController
+                                        .userResData.value.parent!.email);
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  '/DashboardPage',
+                                  (Route<dynamic> route) => false,
+                                );
+                              } else if (userController
+                                      .userResData.value.status ==
+                                  false) {
+                                passwordController.clear();
+                                userController.isLoading.value = false;
 
-                              if (userController.retriesTime.value != '') {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      "Please retry after " +
-                                          userController.retriesTime.value
-                                              .toString() +
-                                          " min",
+                                if (userController.retriesTime.value != '') {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        "Please retry after " +
+                                            userController.retriesTime.value
+                                                .toString() +
+                                            " min",
+                                      ),
+                                      backgroundColor: Colors.red,
                                     ),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
-                              } else if (userController.attemptsRemain.value !=
-                                  '') {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      userController.attemptsRemain.value
-                                              .toString() +
-                                          " attempts remaining",
+                                  );
+                                } else if (userController
+                                        .attemptsRemain.value !=
+                                    '') {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        userController.attemptsRemain.value
+                                                .toString() +
+                                            " attempts remaining",
+                                      ),
+                                      backgroundColor: Colors.red,
                                     ),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
-                              } else {
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        "Entered email or password does not match",
+                                      ),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
@@ -217,87 +346,102 @@ class _SignInPageState extends State<SignInPage> {
                                   ),
                                 );
                               }
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    "Entered email or password does not match",
-                                  ),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
                             }
-                          }
-                        },
-                        child: !userController.isLoading.value
-                            ? Text(signIn, style: PayNestTheme.subtitle16white)
-                            : Center(
-                                child: CircularProgressIndicator(
-                                backgroundColor: PayNestTheme.colorWhite,
-                                color: PayNestTheme.blueAccent,
-                              ))),
-                  )),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 12.h),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 1.h,
-                      width: 129.w,
-                      decoration: BoxDecoration(
-                        color: Color(0xffE4E6EC),
-                      ),
+                          },
+                          child: !userController.isLoading.value
+                              ? Text(signIn,
+                                  style: PayNestTheme.subtitle16white)
+                              : Center(
+                                  child: CircularProgressIndicator(
+                                  backgroundColor: PayNestTheme.colorWhite,
+                                  color: PayNestTheme.blueAccent,
+                                ))),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: Text(or),
-                    ),
-                    Container(
-                      height: 1.h,
-                      width: 129.w,
-                      decoration: BoxDecoration(
-                        color: Color(0xffE4E6EC),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 60.h,
-                width: 326.w,
-                child: OutlinedButton.icon(
-                  onPressed: () {},
-                  icon: Image.asset(googleicon),
-                  label: Text(google),
-                  style: OutlinedButton.styleFrom(
-                    // primary: MyTheme.sharpGreen,
-                    elevation: 0,
-                    // side: BorderSide(width:1, color:Colors.white),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 16.h,
-              ),
-              SizedBox(
-                height: 60.h,
-                width: 326.w,
-                child: OutlinedButton.icon(
-                  onPressed: () {},
-                  icon: Image.asset(facebookicon),
-                  label: Text(facebook),
-                  style: OutlinedButton.styleFrom(
-                    // primary: MyTheme.sharpGreen,
-                    elevation: 0,
-                    // side: BorderSide(width:1, color:Colors.white),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                  verticalSpacer(20),
+                  Row(
+                    children: [
+                      Container(
+                        height: 1.5,
+                        width: sizes.width / 2.5,
+                        color: PayNestTheme.primaryColor,
+                      ),
+                      horizontalSpacer(10),
+                      Text(
+                        or,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.black,
+                        ),
+                      ),
+                      horizontalSpacer(10),
+                      Container(
+                        height: 1.5,
+                        width: sizes.width / 2.5,
+                        color: PayNestTheme.primaryColor,
+                      ),
+                    ],
                   ),
-                ),
+                  verticalSpacer(20),
+                  Container(
+                    width: double.infinity,
+                    height: sizes.heightRatio * 46,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: PayNestTheme.primaryColor,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          googleicon,
+                        ),
+                        horizontalSpacer(8),
+                        Text(
+                          google,
+                          style: PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: PayNestTheme.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  verticalSpacer(16),
+                  Container(
+                    width: double.infinity,
+                    height: sizes.heightRatio * 46,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: PayNestTheme.primaryColor,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          facebookicon,
+                        ),
+                        horizontalSpacer(8),
+                        Text(
+                          facebook,
+                          style: PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: PayNestTheme.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
