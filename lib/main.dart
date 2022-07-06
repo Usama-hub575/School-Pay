@@ -10,7 +10,7 @@ import 'package:paynest_flutter_app/views/details_page.dart';
 import 'package:paynest_flutter_app/views/host/host_page.dart';
 import 'package:paynest_flutter_app/views/otp_page.dart';
 import 'package:paynest_flutter_app/views/reg_pin_page.dart';
-import 'package:paynest_flutter_app/views/register_page.dart';
+import 'package:paynest_flutter_app/views/registration_screen/register_page.dart';
 import 'package:paynest_flutter_app/views/signin_page.dart';
 import 'package:paynest_flutter_app/views/welcome_page.dart';
 

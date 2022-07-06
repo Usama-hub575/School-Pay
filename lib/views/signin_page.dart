@@ -39,17 +39,27 @@ class _SignInPageState extends State<SignInPage> {
         ),
         child: Column(
           children: [
-            verticalSpacer(60),
+            verticalSpacer(20),
             Row(
               children: [
-                BlueBackButton(
-                  context: context,
+                Container(
+                  height: 54.h,
+                  width: 44.w,
+                  decoration: BoxDecoration(
+                      color: PayNestTheme.primaryColor,
+                      borderRadius: BorderRadius.circular(15.r)),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.arrow_back,
+                        size: 20.sp, color: PayNestTheme.colorWhite),
+                    // child: Text(""),
+                  ),
                 ),
                 Spacer(),
-                Text(
-                  signIn,
-                  style: PayNestTheme.title20primaryColor,
-                ),
+                Image.asset(welcomeRegisterLogo,
+                width: sizes.widthRatio* 120,),
                 Spacer(),
               ],
             ),

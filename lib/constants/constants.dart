@@ -1,6 +1,8 @@
 // Assets Contants
 const splash = "assets/splash.png";
 const paynestLogo = "assets/logo.svg";
+const paynestLogoNew = "assets/logo_new.png";
+const welcomeRegisterLogo = "assets/welcome_register_logo.png";
 const touchid = "assets/ic_touchid.png";
 const googleicon = "assets/icons/ic_google.png";
 const facebookicon = "assets/icons/ic_facebook.png";
@@ -51,6 +53,7 @@ const expiry = "Expiry date";
 const address = "Address";
 const notifications = "Notifications";
 const selectSchool = "Select your school";
+const selectStudent = "Select Student";
 const area = "Area";
 const country = "Country";
 const forgotpassword = "Forgot Password?";
@@ -124,7 +127,7 @@ const downloadInvoice = 'Download Invoice';
 const verifyStudent = "Verify students";
 const enterAmount = "Enter Amount";
 const addStudent = "Add Students";
-const paynow = "Pay Now";
+const paynow = "Pay\nNow";
 const viewprofile = "View Profile";
 const myProfile = "My Profile";
 const editProfile = "Edit Profile";

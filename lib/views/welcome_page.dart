@@ -52,15 +52,9 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            SvgPicture.asset(
-              paynestLogo,
-            ),
-            Text(
-              slogan,
-              style: PayNestTheme.title24white.copyWith(
-                fontSize: sizes.fontRatio * 16,
-                color: PayNestTheme.colorWhite,
-              ),
+            Image.asset(
+              paynestLogoNew,
+              width: sizes.widthRatio* 230,
             ),
             verticalSpacer(220),
             Row(

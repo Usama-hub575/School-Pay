@@ -80,74 +80,17 @@ class _HostPageState extends State<HostPage> {
             bottomTabIsActive = false;
             setState(() {});
           },
-          label: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalValue(4),
-            ),
-            child: Text(
-              paynow,
-              maxLines: 2,
-              style: PayNestTheme.floating_12primaryColor.copyWith(
-                color: PayNestTheme.colorWhite,
-                fontSize: sizes.fontRatio * 12,
-              ),
+          label: Text(
+            paynow,
+            textAlign: TextAlign.center,
+            style: PayNestTheme.floating_12primaryColor.copyWith(
+              color: PayNestTheme.colorWhite,
+              fontSize: sizes.fontRatio * 12,
             ),
           ), //icon inside button
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // bottomNavigationBar: SafeArea(
-      //   bottom: true,
-      //   child: Container(
-      //     height: 70.h,
-      //     decoration: BoxDecoration(
-      //       color: Theme.of(context).primaryColor,
-      //       borderRadius: BorderRadius.only(
-      //         topLeft: Radius.circular(20.r),
-      //         topRight: Radius.circular(20.r),
-      //       ),
-      //     ),
-      //     child: ClipRRect(
-      //       borderRadius: BorderRadius.only(
-      //         topLeft: Radius.circular(20.r),
-      //         topRight: Radius.circular(20.r),
-      //       ),
-      //       child: BottomNavigationBar(
-      //         backgroundColor: PayNestTheme.primaryColor,
-      //         currentIndex: pageIndex,
-      //         selectedLabelStyle: PayNestTheme.navbar12,
-      //         unselectedLabelStyle:PayNestTheme.navbar12,
-      //         // fixedColor: PayNestTheme.colorWhite,
-      //         selectedItemColor: PayNestTheme.colorWhite,
-      //         unselectedItemColor:PayNestTheme.colorWhite,
-      //         type: BottomNavigationBarType.fixed,
-      //         onTap: (index)=>selectedNavItem(index),
-      //         items: [
-      //           BottomNavigationBarItem(
-      //               icon: Image.asset(pageIndex == 0 ? ic_dashboard_non : ic_dashboard,height: 15.sp),
-      //               label: 'Dashboard'
-      //           ),
-      //           BottomNavigationBarItem(
-      //               icon: Image.asset(pageIndex == 1 ? ic_student_non:ic_student,height: 15.sp),
-      //               label: 'Student',
-      //           ),
-      //           BottomNavigationBarItem(
-      //               icon: Text(''),
-      //               label: ''
-      //           ),
-      //            BottomNavigationBarItem(
-      //               icon: Image.asset(pageIndex == 3 ? ic_transaction_non:ic_transaction ,height: 15.sp),
-      //               label: 'Transactions'
-      //           ),
-      //            BottomNavigationBarItem(
-      //               icon: Image.asset(pageIndex == 4 ? ic_menu_non:ic_menu ,height: 15.sp),
-      //               label: 'More'
-      //           ),
-      //         ],
-      //       ),
-      //     )
-      //   ),
-      // ),
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
         itemCount: selectedIcons.length,
         tabBuilder: (int index, bool isActive) {
@@ -181,10 +124,10 @@ class _HostPageState extends State<HostPage> {
         splashColor: PayNestTheme.blueAccent,
         // notchAndCornersAnimation: borderRadiusAnimation,
         splashSpeedInMilliseconds: 300,
-        notchSmoothness: NotchSmoothness.sharpEdge,
+        notchSmoothness: NotchSmoothness.softEdge,
         gapLocation: GapLocation.center,
-        leftCornerRadius: 32,
-        rightCornerRadius: 32,
+        leftCornerRadius: 10,
+        rightCornerRadius: 10,
         onTap: (index) {
           payNow = 0;
           selectedNavItem(index);
