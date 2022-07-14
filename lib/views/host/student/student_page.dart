@@ -7,8 +7,12 @@ import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/school/select_school.dart';
+import 'package:paynest_flutter_app/widgets/spacer.dart';
+import '../../../model/datamodel/singlestudent_model.dart';
+import '../dashboard/widgets/add_student_bottom_sheet.dart';
 import '../singlestudent/singlestudent_page.dart';
 import 'widget/single_student_card.dart';
+import '../../../model/mystudents_resp_model.dart' as studentElement;
 
 class StudentPage extends StatefulWidget {
   final String whichStack;
@@ -39,9 +43,11 @@ class _StudentPageState extends State<StudentPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontalValue(16),
+                vertical: verticalValue(40),
+              ),
               child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   widget.whichStack == "other"
                       ? Container(
@@ -60,6 +66,7 @@ class _StudentPageState extends State<StudentPage> {
                           ),
                         )
                       : SizedBox(),
+                  Spacer(),
                   Text(
                     student,
                     style: PayNestTheme.title_2_16primaryColor.copyWith(
@@ -69,17 +76,16 @@ class _StudentPageState extends State<StudentPage> {
                   ),
                   Spacer(),
                   Container(
-                    height: 52.h,
-                    width: 40.w,
+                    height: sizes.heightRatio * 40,
+                    width: sizes.widthRatio * 40,
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16.r)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
                     child: IconButton(
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => SelectSchool(),
-                          ),
+                        AddStudentBottomSheet.show(
+                          context: context,
                         );
                       },
                       icon: Icon(
@@ -87,7 +93,6 @@ class _StudentPageState extends State<StudentPage> {
                         size: 20.sp,
                         color: PayNestTheme.blueAccent,
                       ),
-                      // child: Text(""),
                     ),
                   ),
                 ],
@@ -96,758 +101,114 @@ class _StudentPageState extends State<StudentPage> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20)),
-                    color: PayNestTheme.colorWhite),
-                child: Obx(() => controller.isLoading.value == false
-                    ? controller.myStudentData.value.status == true
-                        ? controller.myStudentData.value.students == null
-                            ? SizedBox()
-                            // : ListView.builder(
-                            //     shrinkWrap: true,
-                            //     itemCount: controller
-                            //         .myStudentData.value.students!.length,
-                            //     itemBuilder: (context, index) {
-                            //       if (controller.myStudentData.value
-                            //               .students![index].student ==
-                            //           null) {
-                            //         return SizedBox.shrink();
-                            //       } else {
-                            //         if (index == 0) {
-                            //           var isSchoolNull = controller
-                            //               .myStudentData
-                            //               .value
-                            //               .students![index]
-                            //               .student!
-                            //               .school;
-                            //           return Padding(
-                            //             padding: EdgeInsets.symmetric(
-                            //                 horizontal: 20.w),
-                            //             child: Column(
-                            //               crossAxisAlignment:
-                            //                   CrossAxisAlignment.start,
-                            //               children: [
-                            //                 SizedBox(
-                            //                   height: 16.h,
-                            //                 ),
-                            //                 Text(
-                            //                   selectStudent,
-                            //                   style: PayNestTheme
-                            //                       .title_2_16primaryColor
-                            //                       .copyWith(
-                            //                     fontWeight: FontWeight.bold,
-                            //                     color:
-                            //                         PayNestTheme.primaryColor,
-                            //                   ),
-                            //                 ),
-                            //                 // ListTile(
-                            //                 //   shape: RoundedRectangleBorder(
-                            //                 //     borderRadius:
-                            //                 //         BorderRadius.circular(12),
-                            //                 //     side: BorderSide(
-                            //                 //         width: 3.w,
-                            //                 //         color: PayNestTheme
-                            //                 //             .primaryColor),
-                            //                 //   ),
-                            //                 //   onTap: () {
-                            //                 //     SingleStudentModel model = SingleStudentModel(
-                            //                 //         id: controller
-                            //                 //             .myStudentData
-                            //                 //             .value
-                            //                 //             .students![index]
-                            //                 //             .id,
-                            //                 //         parentId: controller
-                            //                 //             .myStudentData
-                            //                 //             .value
-                            //                 //             .students![index]
-                            //                 //             .parentId,
-                            //                 //         studentId: controller
-                            //                 //             .myStudentData
-                            //                 //             .value
-                            //                 //             .students![index]
-                            //                 //             .studentId,
-                            //                 //         deletedAt: controller
-                            //                 //             .myStudentData
-                            //                 //             .value
-                            //                 //             .students![index]
-                            //                 //             .deletedAt,
-                            //                 //         createdAt: controller
-                            //                 //             .myStudentData
-                            //                 //             .value
-                            //                 //             .students![index]
-                            //                 //             .createdAt,
-                            //                 //         updatedAt: controller
-                            //                 //             .myStudentData
-                            //                 //             .value
-                            //                 //             .students![index]
-                            //                 //             .updatedAt,
-                            //                 //         student: Student(
-                            //                 //             dob: controller
-                            //                 //                 .myStudentData
-                            //                 //                 .value
-                            //                 //                 .students![index]
-                            //                 //                 .student!
-                            //                 //                 .dob,
-                            //                 //             admissionDate: controller
-                            //                 //                 .myStudentData
-                            //                 //                 .value
-                            //                 //                 .students![index]
-                            //                 //                 .student!
-                            //                 //                 .admissionDate,
-                            //                 //             id: controller
-                            //                 //                 .myStudentData
-                            //                 //                 .value
-                            //                 //                 .students![index]
-                            //                 //                 .student!
-                            //                 //                 .id,
-                            //                 //             studentRegNo: controller
-                            //                 //                 .myStudentData
-                            //                 //                 .value
-                            //                 //                 .students![index]
-                            //                 //                 .student!
-                            //                 //                 .studentRegNo,
-                            //                 //             firstName: controller
-                            //                 //                 .myStudentData
-                            //                 //                 .value
-                            //                 //                 .students![index]
-                            //                 //                 .student!
-                            //                 //                 .firstName,
-                            //                 //             lastName: controller
-                            //                 //                 .myStudentData
-                            //                 //                 .value
-                            //                 //                 .students![index]
-                            //                 //                 .student!
-                            //                 //                 .lastName,
-                            //                 //             grade: controller
-                            //                 //                 .myStudentData
-                            //                 //                 .value
-                            //                 //                 .students![index]
-                            //                 //                 .student!
-                            //                 //                 .grade,
-                            //                 //             parentEmiratesId: controller
-                            //                 //                 .myStudentData
-                            //                 //                 .value
-                            //                 //                 .students![index]
-                            //                 //                 .student!
-                            //                 //                 .parentEmiratesId,
-                            //                 //             parentPhoneNumber: controller
-                            //                 //                 .myStudentData
-                            //                 //                 .value
-                            //                 //                 .students![index]
-                            //                 //                 .student!
-                            //                 //                 .parentPhoneNumber,
-                            //                 //             deletedAt:
-                            //                 //                 controller.myStudentData.value.students![index].student!.deletedAt,
-                            //                 //             schoolId: controller.myStudentData.value.students![index].student!.schoolId,
-                            //                 //             totalBalanceAmount: controller.myStudentData.value.students![index].student!.totalBalanceAmount,
-                            //                 //             guardianFirstName: controller.myStudentData.value.students![index].student!.guardianFirstName,
-                            //                 //             guardianLastName: controller.myStudentData.value.students![index].student!.guardianLastName,
-                            //                 //             guardianGender: controller.myStudentData.value.students![index].student!.guardianGender,
-                            //                 //             guardianEmiratesId: controller.myStudentData.value.students![index].student!.guardianEmiratesId,
-                            //                 //             guardianNationality: controller.myStudentData.value.students![index].student!.guardianNationality,
-                            //                 //             guardianReligion: controller.myStudentData.value.students![index].student!.guardianReligion,
-                            //                 //             area: controller.myStudentData.value.students![index].student!.area,
-                            //                 //             region: controller.myStudentData.value.students![index].student!.region,
-                            //                 //             streetAddress: controller.myStudentData.value.students![index].student!.streetAddress,
-                            //                 //             email: controller.myStudentData.value.students![index].student!.email,
-                            //                 //             phoneNumber: controller.myStudentData.value.students![index].student!.phoneNumber,
-                            //                 //             otherNumber: controller.myStudentData.value.students![index].student!.otherNumber,
-                            //                 //             profile: controller.myStudentData.value.students![index].student!.profile,
-                            //                 //             religion: controller.myStudentData.value.students![index].student!.religion,
-                            //                 //             nationality: controller.myStudentData.value.students![index].student!.nationality,
-                            //                 //             gender: controller.myStudentData.value.students![index].student!.gender,
-                            //                 //             dueDate: controller.myStudentData.value.students![index].student!.dueDate,
-                            //                 //             file: controller.myStudentData.value.students![index].student!.file,
-                            //                 //             privacy: controller.myStudentData.value.students![index].student!.privacy,
-                            //                 //             createdAt: controller.myStudentData.value.students![index].student!.createdAt,
-                            //                 //             updatedAt: controller.myStudentData.value.students![index].student!.updatedAt,
-                            //                 //             school: School(id: controller.myStudentData.value.students![index].student!.school!.id, name: controller.myStudentData.value.students![index].student!.school!.name, deletedAt: controller.myStudentData.value.students![index].student!.school!.deletedAt, addedBy: controller.myStudentData.value.students![index].student!.school!.addedBy, address: controller.myStudentData.value.students![index].student!.school!.address, description: controller.myStudentData.value.students![index].student!.school!.description, vat: controller.myStudentData.value.students![index].student!.school!.vat, paynestFee: controller.myStudentData.value.students![index].student!.school!.paynestFee, apiKey: controller.myStudentData.value.students![index].student!.school!.apiKey, merchantId: controller.myStudentData.value.students![index].student!.school!.merchantId, file: controller.myStudentData.value.students![index].student!.school!.file, privacy: controller.myStudentData.value.students![index].student!.school!.privacy, createdAt: controller.myStudentData.value.students![index].student!.school!.createdAt, updatedAt: controller.myStudentData.value.students![index].student!.school!.updatedAt)));
-                            //                 //
-                            //                 //     Navigator.of(context).push(
-                            //                 //         MaterialPageRoute(
-                            //                 //             builder: (context) =>
-                            //                 //                 SingleStudentPage(
-                            //                 //                     singleStudentModel:
-                            //                 //                         model)));
-                            //                 //   },
-                            //                 //   leading: CircleAvatar(
-                            //                 //     radius: 25.r,
-                            //                 //     backgroundColor:
-                            //                 //         PayNestTheme.primaryColor,
-                            //                 //     child: Text(
-                            //                 //         controller
-                            //                 //                 .myStudentData
-                            //                 //                 .value
-                            //                 //                 .students![index]
-                            //                 //                 .student!
-                            //                 //                 .firstName
-                            //                 //                 .capitalize
-                            //                 //                 .toString() +
-                            //                 //             " " +
-                            //                 //             controller
-                            //                 //                 .myStudentData
-                            //                 //                 .value
-                            //                 //                 .students![index]
-                            //                 //                 .student!
-                            //                 //                 .lastName
-                            //                 //                 .capitalize
-                            //                 //                 .toString(),
-                            //                 //         style: PayNestTheme
-                            //                 //             .title_3_16white),
-                            //                 //   ),
-                            //                 //   title: Text(
-                            //                 //     controller
-                            //                 //             .myStudentData
-                            //                 //             .value
-                            //                 //             .students![index]
-                            //                 //             .student!
-                            //                 //             .firstName
-                            //                 //             .toString() +
-                            //                 //         " " +
-                            //                 //         controller
-                            //                 //             .myStudentData
-                            //                 //             .value
-                            //                 //             .students![index]
-                            //                 //             .student!
-                            //                 //             .lastName
-                            //                 //             .toString(),
-                            //                 //     style: PayNestTheme
-                            //                 //         .title_3_16black,
-                            //                 //   ),
-                            //                 //   trailing:
-                            //                 //       SvgPicture.asset(arrowNext),
-                            //                 //   subtitle: Text(
-                            //                 //     controller
-                            //                 //             .myStudentData
-                            //                 //             .value
-                            //                 //             .students![index]
-                            //                 //             .student!
-                            //                 //             .school!
-                            //                 //             .name
-                            //                 //             .isNotEmpty
-                            //                 //         ? controller
-                            //                 //             .myStudentData
-                            //                 //             .value
-                            //                 //             .students![index]
-                            //                 //             .student!
-                            //                 //             .school!
-                            //                 //             .name
-                            //                 //             .toString()
-                            //                 //         : "",
-                            //                 //     style:
-                            //                 //         PayNestTheme.h2_14textGrey,
-                            //                 //   ),
-                            //                 // ),
-                            //                 SizedBox(
-                            //                   height: 16.h,
-                            //                 ),
-                            //               ],
-                            //             ),
-                            //           );
-                            //         } else if (index != 0 &&
-                            //             controller
-                            //                     .myStudentData
-                            //                     .value
-                            //                     .students![index - 1]
-                            //                     .student!
-                            //                     .school!
-                            //                     .id ==
-                            //                 controller
-                            //                     .myStudentData
-                            //                     .value
-                            //                     .students![index]
-                            //                     .student!
-                            //                     .school!
-                            //                     .id) {
-                            //           return Padding(
-                            //             padding: EdgeInsets.symmetric(
-                            //                 horizontal: 20.w),
-                            //             child: Column(
-                            //               children: [
-                            //                 SizedBox(
-                            //                   height: 16.h,
-                            //                 ),
-                            //                 ListTile(
-                            //                   shape: RoundedRectangleBorder(
-                            //                       borderRadius:
-                            //                           BorderRadius.circular(12),
-                            //                       side: BorderSide(
-                            //                           width: 1.w,
-                            //                           color: PayNestTheme
-                            //                               .lineColor)),
-                            //                   onTap: () {
-                            //                     /// Passing Data ///
-                            //                     SingleStudentModel model = SingleStudentModel(
-                            //                         id: controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .id,
-                            //                         parentId: controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .parentId,
-                            //                         studentId: controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .studentId,
-                            //                         deletedAt: controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .deletedAt,
-                            //                         createdAt: controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .createdAt,
-                            //                         updatedAt: controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .updatedAt,
-                            //                         student: Student(
-                            //                             dob: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .dob,
-                            //                             admissionDate: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .admissionDate,
-                            //                             id: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .id,
-                            //                             studentRegNo: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .studentRegNo,
-                            //                             firstName: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .firstName,
-                            //                             lastName: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .lastName,
-                            //                             grade: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .grade,
-                            //                             parentEmiratesId: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .parentEmiratesId,
-                            //                             parentPhoneNumber: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .parentPhoneNumber,
-                            //                             deletedAt:
-                            //                                 controller.myStudentData.value.students![index].student!.deletedAt,
-                            //                             schoolId: controller.myStudentData.value.students![index].student!.schoolId,
-                            //                             totalBalanceAmount: controller.myStudentData.value.students![index].student!.totalBalanceAmount,
-                            //                             guardianFirstName: controller.myStudentData.value.students![index].student!.guardianFirstName,
-                            //                             guardianLastName: controller.myStudentData.value.students![index].student!.guardianLastName,
-                            //                             guardianGender: controller.myStudentData.value.students![index].student!.guardianGender,
-                            //                             guardianEmiratesId: controller.myStudentData.value.students![index].student!.guardianEmiratesId,
-                            //                             guardianNationality: controller.myStudentData.value.students![index].student!.guardianNationality,
-                            //                             guardianReligion: controller.myStudentData.value.students![index].student!.guardianReligion,
-                            //                             area: controller.myStudentData.value.students![index].student!.area,
-                            //                             region: controller.myStudentData.value.students![index].student!.region,
-                            //                             streetAddress: controller.myStudentData.value.students![index].student!.streetAddress,
-                            //                             email: controller.myStudentData.value.students![index].student!.email,
-                            //                             phoneNumber: controller.myStudentData.value.students![index].student!.phoneNumber,
-                            //                             otherNumber: controller.myStudentData.value.students![index].student!.otherNumber,
-                            //                             profile: controller.myStudentData.value.students![index].student!.profile,
-                            //                             religion: controller.myStudentData.value.students![index].student!.religion,
-                            //                             nationality: controller.myStudentData.value.students![index].student!.nationality,
-                            //                             gender: controller.myStudentData.value.students![index].student!.gender,
-                            //                             dueDate: controller.myStudentData.value.students![index].student!.dueDate,
-                            //                             file: controller.myStudentData.value.students![index].student!.file,
-                            //                             privacy: controller.myStudentData.value.students![index].student!.privacy,
-                            //                             createdAt: controller.myStudentData.value.students![index].student!.createdAt,
-                            //                             updatedAt: controller.myStudentData.value.students![index].student!.updatedAt,
-                            //                             school: School(id: controller.myStudentData.value.students![index].student!.school!.id, name: controller.myStudentData.value.students![index].student!.school!.name, deletedAt: controller.myStudentData.value.students![index].student!.school!.deletedAt, addedBy: controller.myStudentData.value.students![index].student!.school!.addedBy, address: controller.myStudentData.value.students![index].student!.school!.address, description: controller.myStudentData.value.students![index].student!.school!.description, vat: controller.myStudentData.value.students![index].student!.school!.vat, paynestFee: controller.myStudentData.value.students![index].student!.school!.paynestFee, apiKey: controller.myStudentData.value.students![index].student!.school!.apiKey, merchantId: controller.myStudentData.value.students![index].student!.school!.merchantId, file: controller.myStudentData.value.students![index].student!.school!.file, privacy: controller.myStudentData.value.students![index].student!.school!.privacy, createdAt: controller.myStudentData.value.students![index].student!.school!.createdAt, updatedAt: controller.myStudentData.value.students![index].student!.school!.updatedAt)));
-                            //
-                            //                     Navigator.of(context).push(
-                            //                         MaterialPageRoute(
-                            //                             builder: (context) =>
-                            //                                 SingleStudentPage(
-                            //                                     singleStudentModel:
-                            //                                         model)));
-                            //                   },
-                            //                   leading: CircleAvatar(
-                            //                     radius: 25.r,
-                            //                     backgroundColor:
-                            //                         PayNestTheme.primaryColor,
-                            //                     child: Text(
-                            //                         controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .firstName
-                            //                                 .capitalize
-                            //                                 .toString() +
-                            //                             " " +
-                            //                             controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .lastName
-                            //                                 .capitalize
-                            //                                 .toString(),
-                            //                         style: PayNestTheme
-                            //                             .title_3_16white),
-                            //                   ),
-                            //                   title: Text(
-                            //                     controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .student!
-                            //                             .firstName
-                            //                             .toString() +
-                            //                         " " +
-                            //                         controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .student!
-                            //                             .lastName
-                            //                             .toString(),
-                            //                     style: PayNestTheme
-                            //                         .title_3_16black,
-                            //                   ),
-                            //                   trailing:
-                            //                       SvgPicture.asset(arrowNext),
-                            //                   subtitle: Text(
-                            //                     controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .student!
-                            //                             .school!
-                            //                             .name
-                            //                             .isNotEmpty
-                            //                         ? controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .student!
-                            //                             .school!
-                            //                             .name
-                            //                             .toString()
-                            //                         : "",
-                            //                     style:
-                            //                         PayNestTheme.h2_14textGrey,
-                            //                   ),
-                            //                 ),
-                            //                 SizedBox(
-                            //                   height: 16.h,
-                            //                 ),
-                            //               ],
-                            //             ),
-                            //           );
-                            //         } else {
-                            //           return Padding(
-                            //             padding: EdgeInsets.symmetric(
-                            //                 horizontal: 20.w),
-                            //             child: Column(
-                            //               children: [
-                            //                 SizedBox(
-                            //                   height: 16.h,
-                            //                 ),
-                            //                 Container(
-                            //                   height: 28.w,
-                            //                   width: 1.sw,
-                            //                   decoration: BoxDecoration(
-                            //                       color:
-                            //                           PayNestTheme.lineColor),
-                            //                   child: Padding(
-                            //                     padding: EdgeInsets.symmetric(
-                            //                         horizontal: 20.w),
-                            //                     child: Column(
-                            //                       crossAxisAlignment:
-                            //                           CrossAxisAlignment.start,
-                            //                       mainAxisAlignment:
-                            //                           MainAxisAlignment.center,
-                            //                       children: [
-                            //                         Text(
-                            //                           controller
-                            //                               .myStudentData
-                            //                               .value
-                            //                               .students![index]
-                            //                               .student!
-                            //                               .school!
-                            //                               .name
-                            //                               .toString(),
-                            //                           style: PayNestTheme
-                            //                               .small_2_12textGrey,
-                            //                         ),
-                            //                       ],
-                            //                     ),
-                            //                   ),
-                            //                 ),
-                            //                 SizedBox(
-                            //                   height: 16.h,
-                            //                 ),
-                            //                 ListTile(
-                            //                   shape: RoundedRectangleBorder(
-                            //                       borderRadius:
-                            //                           BorderRadius.circular(12),
-                            //                       side: BorderSide(
-                            //                           width: 1.w,
-                            //                           color: PayNestTheme
-                            //                               .lineColor)),
-                            //                   onTap: () {
-                            //                     /// Passing Data ///
-                            //                     SingleStudentModel model = SingleStudentModel(
-                            //                         id: controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .id,
-                            //                         parentId: controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .parentId,
-                            //                         studentId: controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .studentId,
-                            //                         deletedAt: controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .deletedAt,
-                            //                         createdAt: controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .createdAt,
-                            //                         updatedAt: controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .updatedAt,
-                            //                         student: Student(
-                            //                             dob: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .dob,
-                            //                             admissionDate: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .admissionDate,
-                            //                             id: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .id,
-                            //                             studentRegNo: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .studentRegNo,
-                            //                             firstName: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .firstName,
-                            //                             lastName: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .lastName,
-                            //                             grade: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .grade,
-                            //                             parentEmiratesId: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .parentEmiratesId,
-                            //                             parentPhoneNumber: controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .parentPhoneNumber,
-                            //                             deletedAt:
-                            //                                 controller.myStudentData.value.students![index].student!.deletedAt,
-                            //                             schoolId: controller.myStudentData.value.students![index].student!.schoolId,
-                            //                             totalBalanceAmount: controller.myStudentData.value.students![index].student!.totalBalanceAmount,
-                            //                             guardianFirstName: controller.myStudentData.value.students![index].student!.guardianFirstName,
-                            //                             guardianLastName: controller.myStudentData.value.students![index].student!.guardianLastName,
-                            //                             guardianGender: controller.myStudentData.value.students![index].student!.guardianGender,
-                            //                             guardianEmiratesId: controller.myStudentData.value.students![index].student!.guardianEmiratesId,
-                            //                             guardianNationality: controller.myStudentData.value.students![index].student!.guardianNationality,
-                            //                             guardianReligion: controller.myStudentData.value.students![index].student!.guardianReligion,
-                            //                             area: controller.myStudentData.value.students![index].student!.area,
-                            //                             region: controller.myStudentData.value.students![index].student!.region,
-                            //                             streetAddress: controller.myStudentData.value.students![index].student!.streetAddress,
-                            //                             email: controller.myStudentData.value.students![index].student!.email,
-                            //                             phoneNumber: controller.myStudentData.value.students![index].student!.phoneNumber,
-                            //                             otherNumber: controller.myStudentData.value.students![index].student!.otherNumber,
-                            //                             profile: controller.myStudentData.value.students![index].student!.profile,
-                            //                             religion: controller.myStudentData.value.students![index].student!.religion,
-                            //                             nationality: controller.myStudentData.value.students![index].student!.nationality,
-                            //                             gender: controller.myStudentData.value.students![index].student!.gender,
-                            //                             dueDate: controller.myStudentData.value.students![index].student!.dueDate,
-                            //                             file: controller.myStudentData.value.students![index].student!.file,
-                            //                             privacy: controller.myStudentData.value.students![index].student!.privacy,
-                            //                             createdAt: controller.myStudentData.value.students![index].student!.createdAt,
-                            //                             updatedAt: controller.myStudentData.value.students![index].student!.updatedAt,
-                            //                             school: School(id: controller.myStudentData.value.students![index].student!.school!.id, name: controller.myStudentData.value.students![index].student!.school!.name, deletedAt: controller.myStudentData.value.students![index].student!.school!.deletedAt, addedBy: controller.myStudentData.value.students![index].student!.school!.addedBy, address: controller.myStudentData.value.students![index].student!.school!.address, description: controller.myStudentData.value.students![index].student!.school!.description, vat: controller.myStudentData.value.students![index].student!.school!.vat, paynestFee: controller.myStudentData.value.students![index].student!.school!.paynestFee, apiKey: controller.myStudentData.value.students![index].student!.school!.apiKey, merchantId: controller.myStudentData.value.students![index].student!.school!.merchantId, file: controller.myStudentData.value.students![index].student!.school!.file, privacy: controller.myStudentData.value.students![index].student!.school!.privacy, createdAt: controller.myStudentData.value.students![index].student!.school!.createdAt, updatedAt: controller.myStudentData.value.students![index].student!.school!.updatedAt)));
-                            //
-                            //                     Navigator.of(context).push(
-                            //                         MaterialPageRoute(
-                            //                             builder: (context) =>
-                            //                                 SingleStudentPage(
-                            //                                     singleStudentModel:
-                            //                                         model)));
-                            //                   },
-                            //                   leading: CircleAvatar(
-                            //                     radius: 25.r,
-                            //                     backgroundColor:
-                            //                         PayNestTheme.primaryColor,
-                            //                     child: Text(
-                            //                         controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .firstName[0]
-                            //                                 .capitalize
-                            //                                 .toString() +
-                            //                             " " +
-                            //                             controller
-                            //                                 .myStudentData
-                            //                                 .value
-                            //                                 .students![index]
-                            //                                 .student!
-                            //                                 .lastName[0]
-                            //                                 .capitalize
-                            //                                 .toString(),
-                            //                         style: PayNestTheme
-                            //                             .title_3_16white),
-                            //                   ),
-                            //                   title: Text(
-                            //                     controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .student!
-                            //                             .firstName
-                            //                             .toString() +
-                            //                         " " +
-                            //                         controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .student!
-                            //                             .lastName
-                            //                             .toString(),
-                            //                     style: PayNestTheme
-                            //                         .title_3_16black,
-                            //                   ),
-                            //                   trailing:
-                            //                       SvgPicture.asset(arrowNext),
-                            //                   subtitle: Text(
-                            //                     controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .student!
-                            //                             .school!
-                            //                             .name
-                            //                             .isNotEmpty
-                            //                         ? controller
-                            //                             .myStudentData
-                            //                             .value
-                            //                             .students![index]
-                            //                             .student!
-                            //                             .school!
-                            //                             .name
-                            //                             .toString()
-                            //                         : "",
-                            //                     style:
-                            //                         PayNestTheme.h2_14textGrey,
-                            //                   ),
-                            //                 ),
-                            //                 SizedBox(
-                            //                   height: 16.h,
-                            //                 ),
-                            //               ],
-                            //             ),
-                            //           );
-                            //         }
-                            //       }
-                            //     })
-                            : SingleStudentCard(
-                                onTap: (student) {
-                                  // MaterialPageRoute(
-                                  //   builder: (context) => SingleStudentPage(
-                                  //       singleStudentModel: student),
-                                  // );
-                                },
-                                students:
-                                    controller.myStudentData.value.students!,
-                              )
-                        : SizedBox()
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 15.h,
-                          ),
-                          CircularProgressIndicator(
-                            backgroundColor: PayNestTheme.colorWhite,
-                            color: PayNestTheme.blueAccent,
-                          ),
-                        ],
-                      )),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  color: PayNestTheme.colorWhite,
+                ),
+                child: Obx(
+                  () => controller.isLoading.value == false
+                      ? controller.myStudentData.value.status == true
+                          ? controller.myStudentData.value.students == null
+                              ? SizedBox()
+                              : SingleStudentCard(
+                                  onTap: (student) {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => SingleStudentPage(
+                                          singleStudentModel: getStudentModel(
+                                            studentElement: student,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  students:
+                                      controller.myStudentData.value.students!,
+                                )
+                          : SizedBox()
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            CircularProgressIndicator(
+                              backgroundColor: PayNestTheme.colorWhite,
+                              color: PayNestTheme.blueAccent,
+                            ),
+                          ],
+                        ),
+                ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  SingleStudentModel getStudentModel({
+    required studentElement.StudentElement studentElement,
+  }) {
+    return SingleStudentModel(
+      id: studentElement.id,
+      parentId: studentElement.parentId,
+      studentId: studentElement.studentId,
+      deletedAt: studentElement.deletedAt,
+      createdAt: studentElement.createdAt,
+      updatedAt: studentElement.updatedAt,
+      student: Student(
+        dob: studentElement.student!.dob,
+        admissionDate: studentElement.student!.admissionDate,
+        id: studentElement.student!.id,
+        studentRegNo: studentElement.student!.studentRegNo,
+        firstName: studentElement.student!.firstName,
+        lastName: studentElement.student!.lastName,
+        grade: studentElement.student!.grade,
+        parentEmiratesId: studentElement.student!.parentEmiratesId,
+        parentPhoneNumber: studentElement.student!.parentPhoneNumber,
+        deletedAt: studentElement.student!.deletedAt,
+        schoolId: studentElement.student!.schoolId,
+        totalBalanceAmount:
+            double.parse(studentElement.student!.totalBalanceAmount.toString()),
+        guardianFirstName: studentElement.student!.guardianFirstName,
+        guardianLastName: studentElement.student!.guardianLastName,
+        guardianGender: studentElement.student!.guardianGender,
+        guardianEmiratesId: studentElement.student!.guardianEmiratesId,
+        guardianNationality: studentElement.student!.guardianNationality,
+        guardianReligion: studentElement.student!.guardianReligion,
+        area: studentElement.student!.area,
+        region: studentElement.student!.region,
+        streetAddress: studentElement.student!.streetAddress,
+        email: studentElement.student!.email,
+        phoneNumber: studentElement.student!.phoneNumber,
+        otherNumber: studentElement.student!.otherNumber,
+        profile: studentElement.student!.profile,
+        religion: studentElement.student!.religion,
+        nationality: studentElement.student!.nationality,
+        gender: studentElement.student!.gender,
+        dueDate: studentElement.student!.dueDate,
+        file: studentElement.student!.file,
+        privacy: studentElement.student!.privacy,
+        createdAt: studentElement.student!.createdAt,
+        updatedAt: studentElement.student!.updatedAt,
+        school: School(
+          id: studentElement.student!.school!.id,
+          name: studentElement.student!.school!.name,
+          deletedAt: studentElement.student!.school!.deletedAt,
+          addedBy: studentElement.student!.school!.addedBy,
+          address: studentElement.student!.school!.address,
+          description: studentElement.student!.school!.description,
+          vat: studentElement.student!.school!.vat,
+          paynestFee: studentElement.student!.school!.paynestFee,
+          apiKey: studentElement.student!.school!.apiKey,
+          merchantId: studentElement.student!.school!.merchantId,
+          file: studentElement.student!.school!.file,
+          privacy: studentElement.student!.school!.privacy,
+          createdAt: studentElement.student!.school!.createdAt,
+          updatedAt: studentElement.student!.school!.updatedAt,
         ),
       ),
     );

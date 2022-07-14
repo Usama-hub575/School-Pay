@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
+import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
+import '../../../res/res.dart';
 
 class SingleStudentPage extends StatefulWidget {
   SingleStudentModel singleStudentModel;
@@ -25,238 +28,233 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 350.h,
-            child: Stack(
+      body: Container(
+        height: sizes.height,
+        decoration: BoxDecoration(
+          color: PayNestTheme.primaryColor,
+        ),
+        child: Stack(
+          children: [
+            Column(
               children: [
+                verticalSpacer(32),
                 Container(
-                  height: 210.h,
-                  width: 1.sw,
-                  decoration: BoxDecoration(
-                      color: PayNestTheme.primaryColor,
-                      borderRadius:
-                          BorderRadius.vertical(bottom: Radius.circular(24.r))),
-                  child: SafeArea(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 25.h, top: 25.h),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: horizontalValue(16),
+                    vertical: verticalValue(16),
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 25.w),
+                        child: Container(
+                          height: 44.h,
+                          width: 44.w,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12.r)),
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(Icons.arrow_back,
+                                size: 20.sp, color: PayNestTheme.blueAccent),
+                            // child: Text(""),
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        'Student Details',
+                        style: PayNestTheme.h2_12blueAccent.copyWith(
+                          fontSize: sizes.fontRatio * 16,
+                          color: PayNestTheme.colorWhite,
+                        ),
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                ),
+                verticalSpacer(100),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                      color: PayNestTheme.colorWhite,
+                    ),
+                    child: Column(
+                      children: [
+                        verticalSpacer(120),
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: horizontalValue(16),
+                          ),
+                          child: Row(
                             children: [
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 25.w),
-                                    child: Container(
-                                      height: 44.h,
-                                      width: 44.w,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(12.r)),
-                                      child: IconButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        icon: Icon(Icons.arrow_back,
-                                            size: 20.sp,
-                                            color: PayNestTheme.blueAccent),
-                                        // child: Text(""),
-                                      ),
-                                    ),
-                                  ),
-                                  // Text(myProfile,style: PayNestTheme.title20white,),
-                                ],
+                              Text(
+                                'Current Payable Amount',
+                                style:
+                                    PayNestTheme.h2_12blueAccentLight.copyWith(
+                                  fontSize: sizes.fontRatio * 14,
+                                  color: PayNestTheme.primaryColor,
+                                ),
                               ),
-                              // Padding(
-                              //   padding: EdgeInsets.only(right: 25.h),
-                              //   child: Container(
-                              //     height : 44.h,
-                              //     width : 44.w,
-                              //     decoration: BoxDecoration(
-                              //         color: Colors.white,
-                              //         borderRadius: BorderRadius.circular(12.r)
-                              //     ),
-                              //     child: IconButton(
-                              //       onPressed: (){
-                              //         Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditProfilePage()));
-                              //       },
-                              //       icon: Image.asset(ic_edit,width: 20.w,height: 20.h,),
-                              //       // child: Text(""),
-                              //     ),
-                              //   ),
-                              // ),
+                              Spacer(),
+                              Text(
+                                '${widget.singleStudentModel.student!.totalBalanceAmount}',
+                                style: PayNestTheme.h2_12blueAccent.copyWith(
+                                  fontSize: sizes.fontRatio * 14,
+                                ),
+                              ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                        verticalSpacer(8),
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: horizontalValue(16),
+                          ),
+                          width: double.infinity,
+                          height: 1,
+                          color: PayNestTheme.textGrey.withOpacity(0.5),
+                        ),
+                        Spacer(),
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: horizontalValue(16),
+                          ),
+                          child: Lottie.asset(
+                            singleStudentJson,
+                            repeat: true,
+                            height: sizes.heightRatio * 250,
+                          ),
+                        ),
+                        verticalSpacer(16),
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: horizontalValue(16),
+                          ),
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: PayNestTheme.colorWhite,
+                              elevation: 0,
+                              side: BorderSide(
+                                width: 1,
+                                color: PayNestTheme.primaryColor,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  14,
+                                ),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                vertical: verticalValue(14),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => InvoicePaymentPage(
+                                    singleStudentModel:
+                                        widget.singleStudentModel,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Center(
+                              child: Text(
+                                continueToPayment,
+                                style: PayNestTheme.title_2_16primaryColor
+                                    .copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                  color: PayNestTheme.primaryColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        verticalSpacer(24),
+                      ],
                     ),
                   ),
                 ),
-                Positioned.fill(
-                    top: 90,
-                    child: Obx(() => SizedBox(
-                          width: 1.sw,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: 25.w, right: 25.w, top: 30.h),
-                                child: Container(
-                                  // padding: EdgeInsets.symmetric(horizontal: 20.w),
-                                  width: 1.sw,
-                                  height: 223.h,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: PayNestTheme.dropShadow
-                                            .withOpacity(.3),
-                                        spreadRadius: 0,
-                                        blurRadius: 10,
-                                        offset: Offset(
-                                            0, 5), // changes position of shadow
-                                      ),
-                                    ],
-                                    color: PayNestTheme.colorWhite,
-                                    borderRadius: BorderRadius.circular(24.r),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        widget.singleStudentModel.student!
-                                                .firstName +
-                                            " " +
-                                            widget.singleStudentModel.student!
-                                                .lastName,
-                                        style: PayNestTheme.title18black,
-                                      ),
-                                      Text(
-                                        'Grade ' +
-                                            widget.singleStudentModel.student!
-                                                .grade,
-                                        style: PayNestTheme.h2_16textGrey,
-                                      ),
-                                      SizedBox(
-                                        height: 16.h,
-                                      ),
-                                      Image.asset(
-                                        ic_schooldark,
-                                        height: 30.h,
-                                        width: 30.w,
-                                      ),
-                                      Text(
-                                        widget.singleStudentModel.student!
-                                            .school!.name,
-                                        style: PayNestTheme.title_3_16black,
-                                      ),
-                                      Text(
-                                        widget.singleStudentModel.student!
-                                            .school!.address,
-                                        style: PayNestTheme.h2_16textGrey,
-                                      ),
-                                      SizedBox(
-                                        height: 13.h,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                top: 0,
-                                child: CircleAvatar(
-                                  radius: 46.r,
-                                  backgroundColor: userController.userResData
-                                              .value.parent!.profileImage ==
-                                          null
-                                      ? PayNestTheme.blueAccent
-                                      : PayNestTheme.blueAccent,
-                                  child: userController.userResData.value
-                                              .parent!.profileImage ==
-                                          null
-                                      ? CircleAvatar(
-                                          backgroundColor:
-                                              PayNestTheme.blueAccent,
-                                          // backgroundImage: NetworkImage('https://cdn.pixabay.com/photo/2022/02/19/15/05/dark-7022879_960_720.jpg'),
-                                          // NetworkImage(userController.userResData.value.parent!.profileImage),
-                                          radius: 45.r,
-                                          child: Text(
-                                              widget.singleStudentModel.student!
-                                                      .firstName[0].capitalize
-                                                      .toString() +
-                                                  " " +
-                                                  widget
-                                                      .singleStudentModel
-                                                      .student!
-                                                      .lastName[0]
-                                                      .capitalize
-                                                      .toString(),
-                                              style: PayNestTheme.title20white),
-                                        )
-                                      : CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              userController.userResData.value
-                                                  .parent!.profileImage),
-                                          radius: 45.r,
-                                          // child: Text(widget.singleStudentModel.student!.firstName[0].capitalize.toString()+" "+ widget.singleStudentModel.student!.lastName[0].capitalize.toString()
-                                          //     ,style: PayNestTheme.title20white ),
-                                        ),
-                                ),
-                              )
-                            ],
-                          ),
-                        )))
               ],
             ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 34.h),
+            Positioned(
+              top: sizes.heightRatio * 100,
+              left: 0,
+              right: 0,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: PayNestTheme.colorWhite,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                margin: EdgeInsets.symmetric(
+                  horizontal: horizontalValue(16),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: horizontalValue(16),
+                  vertical: verticalValue(16),
+                ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
+                      ),
+                      minRadius: 20,
+                      maxRadius: 32,
+                    ),
+                    verticalSpacer(8),
                     Text(
-                      paymentCategories,
-                      style: PayNestTheme.title_2_16primaryColor,
+                      '${widget.singleStudentModel.student!.firstName + widget.singleStudentModel.student!.lastName}',
+                      style: PayNestTheme.h2_12blueAccent.copyWith(
+                        fontSize: sizes.fontRatio * 16,
+                        color: PayNestTheme.primaryColor,
+                      ),
                     ),
-                    SizedBox(
-                      height: 15.h,
+                    verticalSpacer(8),
+                    Text(
+                      'Grade ${widget.singleStudentModel.student!.grade}',
+                      style: PayNestTheme.h2_12blueAccent.copyWith(
+                        fontSize: sizes.fontRatio * 16,
+                        color: PayNestTheme.black,
+                      ),
                     ),
-                    ListTile(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => InvoicePaymentPage(
-                                singleStudentModel:
-                                    widget.singleStudentModel)));
-                      },
-                      title:
-                          Text(feepayment, style: PayNestTheme.title_3_16black),
-                      subtitle: Text(payment,
-                          style: PayNestTheme.floating_12primaryColor),
-                      trailing: SvgPicture.asset(arrowNext),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                          side: BorderSide(
-                            width: 1.w,
-                            color: PayNestTheme.borderGrey,
-                          )),
+                    verticalSpacer(16),
+                    Text(
+                      'Grade ${widget.singleStudentModel.student!.school!.name}',
+                      style: PayNestTheme.h2_12blueAccent.copyWith(
+                        fontSize: sizes.fontRatio * 16,
+                        color: PayNestTheme.black,
+                      ),
+                    ),
+                    verticalSpacer(8),
+                    Text(
+                      'Grade ${widget.singleStudentModel.student!.school!.address}',
+                      style: PayNestTheme.small_2_10textGrey.copyWith(
+                        fontSize: sizes.fontRatio * 16,
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -31,7 +31,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
     return isListEmpty ? Container(
       padding: EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
-        color: PayNestTheme.primaryColor.withOpacity(0.3),
+        color: PayNestTheme.colorDimPrimary,
         borderRadius: BorderRadius.circular(16),
       ),
       child: ListView.separated(
@@ -56,10 +56,11 @@ class _RecentTransactionsState extends State<RecentTransactions> {
         horizontal: horizontalValue(16),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: sizes.heightRatio * 30,
-            width: sizes.heightRatio * 30,
+            height: sizes.heightRatio * 16,
+            width: sizes.heightRatio * 16,
             decoration: BoxDecoration(
               color: Colors.green,
               borderRadius: BorderRadius.circular(20),
@@ -68,7 +69,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
               child: Icon(
                 Icons.check,
                 color: PayNestTheme.colorWhite,
-                size: 20,
+                size: 14,
               ),
             ),
           ),

@@ -39,7 +39,7 @@ class _SignInPageState extends State<SignInPage> {
         ),
         child: Column(
           children: [
-            verticalSpacer(20),
+            verticalSpacer(40),
             Row(
               children: [
                 Container(

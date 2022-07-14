@@ -10,7 +10,11 @@ import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/model/addstudent_model.dart';
 import 'package:paynest_flutter_app/model/datamodel/selectedschool_to_addstudent.dart';
 import 'package:paynest_flutter_app/model/studentlist_res_model.dart';
+import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/views/host/addstudent/widget/student_bottom_sheet.dart';
+import 'package:paynest_flutter_app/views/host/dashboard/widgets/succes_bottom_sheet.dart';
+import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 class AddStudent extends StatefulWidget {
   SelectedSchoolData schoolData;
@@ -38,7 +42,6 @@ class _AddStudentState extends State<AddStudent> {
     super.initState();
   }
 
-  /// ** Search ** ///
   onSearchTextChanged(String text) async {
     _searchResult.clear();
     if (text.isEmpty) {
@@ -189,7 +192,6 @@ class _AddStudentState extends State<AddStudent> {
                                             SizedBox(
                                               height: 19.h,
                                             ),
-                                            // Text('Beaconhouse Al Khaleej International Pvt school',style: PayNestTheme.title18black,),
                                             Text(
                                               widget.schoolData.name,
                                               style: PayNestTheme.title18black,
@@ -198,7 +200,6 @@ class _AddStudentState extends State<AddStudent> {
                                               widget.schoolData.address,
                                               style: PayNestTheme.h2_14textGrey,
                                             ),
-                                            // Text('Al Riqa, Suburbal Azra, Sharjah',style: PayNestTheme.h2_14textGrey,),
                                           ],
                                         ),
                                       ),
@@ -211,24 +212,21 @@ class _AddStudentState extends State<AddStudent> {
                                           Expanded(
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.white,
-                                                      width: 1.w),
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10))),
+                                                border: Border.all(
+                                                    color: Colors.white,
+                                                    width: 1.w),
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(
+                                                    10,
+                                                  ),
+                                                ),
+                                              ),
                                               child:
                                                   DropdownButtonHideUnderline(
                                                 child: ButtonTheme(
                                                   alignedDropdown: true,
                                                   child: DropdownButton(
-                                                    // borderRadius: BorderRadius.circular(10),
-                                                    // dropdownColor:MyTheme.lightGreen,
-                                                    // iconDisabledColor: MyTheme.sharpGreen,
-                                                    // iconEnabledColor: MyTheme.sharpGreen,
-                                                    // underline: SizedBox(),
-                                                    // style: MyTheme.whiteText,
                                                     elevation: 0,
                                                     isExpanded: true,
                                                     items: filters
@@ -236,11 +234,27 @@ class _AddStudentState extends State<AddStudent> {
                                                       return DropdownMenuItem<
                                                           String>(
                                                         value: value,
-                                                        child: Text(value),
+                                                        child: Text(
+                                                          value,
+                                                          style: PayNestTheme
+                                                              .h2_12blueAccent
+                                                              .copyWith(
+                                                                  fontSize:
+                                                                      sizes.fontRatio *
+                                                                          14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color:
+                                                                      PayNestTheme
+                                                                          .black),
+                                                        ),
                                                       );
                                                     }).toList(),
                                                     value: _selectedFilter,
-                                                    hint: Text("Search by"),
+                                                    hint: Text(
+                                                      "Search by",
+                                                    ),
                                                     // value: selection,
                                                     onChanged: (newValue) {
                                                       setState(
@@ -249,7 +263,8 @@ class _AddStudentState extends State<AddStudent> {
                                                               newValue
                                                                   .toString();
                                                           print(
-                                                              _selectedFilter);
+                                                            _selectedFilter,
+                                                          );
                                                         },
                                                       );
                                                     },
@@ -283,16 +298,19 @@ class _AddStudentState extends State<AddStudent> {
                                             contentPadding: EdgeInsets.all(13),
                                             filled: true,
                                             fillColor: Colors.white,
-                                            // enabledBorder: ,
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: PayNestTheme.primaryColor
+                                                    .withOpacity(0.5),
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
                                             prefixIcon: Icon(
                                               Icons.search,
                                               color: PayNestTheme.primaryColor,
                                             ),
                                             hintText: searchStudent,
-                                            // hintStyle: TextStyle(
-                                            //   color: Colors.black,
-                                            //   fontSize: 18.sp,
-                                            // ),
                                             border: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(12.r),
@@ -340,61 +358,147 @@ class _AddStudentState extends State<AddStudent> {
                             shrinkWrap: true,
                             physics: BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20.w, vertical: 5.h),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12.r),
-                                      border: Border.all(
-                                          color: Colors.grey, width: 1.w)),
-                                  child: ListTile(
-                                    onTap: () {
-                                      ShowMyModal(
-                                        context,
-                                        _searchResult[index].id,
-                                        _searchResult[index].studentRegNo,
-                                      );
-                                      setState(() {});
-                                    },
-                                    leading: const CircleAvatar(),
-                                    title: Wrap(
-                                      children: [
-                                        Text(
-                                          _searchResult[index]
-                                                  .firstName
-                                                  .toString() +
-                                              ' ' +
-                                              _searchResult[index]
-                                                  .lastName
-                                                  .toString(),
-                                          style: PayNestTheme.title_3_16black,
-                                        ),
-                                      ],
-                                    ),
-                                    subtitle: Text(
-                                      "Grade " +
-                                          _searchResult[index].grade.toString(),
-                                      style: PayNestTheme.small_2_12textGrey,
-                                    ),
-                                    trailing: Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 5.w),
-                                      height: 26.h,
-                                      width: 79.h,
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  verticalSpacer(16),
+                                  _getText(),
+                                  verticalSpacer(16),
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Container(
+                                      margin: EdgeInsets.symmetric(
+                                        horizontal: horizontalValue(16),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: horizontalValue(12),
+                                        vertical: verticalValue(8),
+                                      ),
                                       decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4.r),
-                                          color: PayNestTheme.blueAccent),
-                                      child: FittedBox(
-                                        child: Text(
-                                          "Verify & add",
-                                          style: PayNestTheme.small_2_12white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          color: PayNestTheme.primaryColor,
                                         ),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: sizes.heightRatio * 60,
+                                            width: sizes.heightRatio * 60,
+                                            child: CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
+                                              ),
+                                            ),
+                                          ),
+                                          horizontalSpacer(12),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                '${_searchResult[index].firstName} \t ${_searchResult[index].lastName}',
+                                                style: PayNestTheme
+                                                    .h2_12blueAccent
+                                                    .copyWith(
+                                                  fontSize:
+                                                      sizes.fontRatio * 14,
+                                                  color: PayNestTheme.black,
+                                                ),
+                                              ),
+                                              Text(
+                                                'Grade ${_searchResult[index].grade}',
+                                                style: PayNestTheme
+                                                    .h2_12blueAccentLight
+                                                    .copyWith(
+                                                  fontSize:
+                                                      sizes.fontRatio * 12,
+                                                  color: PayNestTheme.textGrey,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Spacer(),
+                                          _getActionButton(
+                                            onTap: () {
+                                              StudentBottomSheet.show(
+                                                context: context,
+                                                selectedStudentID:
+                                                    _searchResult[index]
+                                                        .id
+                                                        .toString(),
+                                                selectedStudentRegNo:
+                                                    _searchResult[index]
+                                                        .studentRegNo
+                                                        .toString(),
+                                                onTap: (studentId, dob) async {
+                                                  if(studentId.isNotEmpty && dob.isNotEmpty){
+                                                    final model = {
+                                                      "parentId": userController
+                                                          .userResData
+                                                          .value
+                                                          .parent!
+                                                          .id
+                                                          .toString(),
+                                                      "dob": dob,
+                                                      "studentId": studentId,
+                                                      "studentRegNo":
+                                                      _searchResult[index]
+                                                          .studentRegNo
+                                                          .toString(),
+                                                    };
+                                                    Navigator.of(context).pop();
+                                                    await addStudentController
+                                                        .hitAddStudent(model);
+                                                    if (addStudentController
+                                                        .isStudentAdded) {
+                                                      SuccessBottomSheet.show(context: context);
+                                                    } else {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      ScaffoldMessenger.of(
+                                                          context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          behavior:
+                                                          SnackBarBehavior
+                                                              .floating,
+                                                          content: Text(
+                                                            'Verification failed',
+                                                          ),
+                                                          backgroundColor:
+                                                          Colors.red,
+                                                        ),
+                                                      );
+                                                    }
+                                                  }else{
+                                                    Navigator.of(context)
+                                                        .pop();
+                                                    ScaffoldMessenger.of(
+                                                        context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        behavior:
+                                                        SnackBarBehavior
+                                                            .floating,
+                                                        content: Text(
+                                                          'Fields can not be empty',
+                                                        ),
+                                                        backgroundColor:
+                                                        Colors.red,
+                                                      ),
+                                                    );
+                                                  }
+                                                },
+                                              );
+                                            },
+                                          ),
+                                          horizontalSpacer(12),
+                                        ],
                                       ),
                                     ),
                                   ),
-                                ),
+                                ],
                               );
                             },
                           )
@@ -420,274 +524,42 @@ class _AddStudentState extends State<AddStudent> {
     );
   }
 
-  Future<dynamic> ShowMyModal(
-      BuildContext cont, selectedStudentID, selectedStudentRegNo) {
-    DateTime tempPickedDate;
-    return showModalBottomSheet(
-      isScrollControlled: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.r),
-          topRight: Radius.circular(20.r),
+  Widget _getActionButton({required Function onTap}) {
+    return GestureDetector(
+      onTap: () => onTap(),
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalValue(12),
+          vertical: verticalValue(2),
+        ),
+        decoration: BoxDecoration(
+          color: PayNestTheme.primaryColor,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(
+          'Verify & add',
+          style: PayNestTheme.h2_12blueAccent.copyWith(
+            fontSize: sizes.fontRatio * 12,
+            color: PayNestTheme.colorWhite,
+          ),
         ),
       ),
-      //Idhr singlechild and bottom padding add kari hay
-      context: cont,
-      builder: (ctx) {
-        return SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(
-                left: 28.w,
-                right: 28.w,
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: Wrap(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 28.h, bottom: 28.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        verifyStudent,
-                        style: PayNestTheme.title18black,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(ctx);
-                        },
-                        child: Container(
-                          height: 30.h,
-                          width: 30.w,
-                          decoration: BoxDecoration(
-                            color: PayNestTheme.blueAccent,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: Icon(Icons.clear,
-                              color: PayNestTheme.colorWhite, size: 12.sp),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  width: 1.sw,
-                  height: 1.h,
-                  color: PayNestTheme.lineColor,
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                Text(
-                  pleaseconfirmDetailsbelow,
-                  style: PayNestTheme.title_3_16black,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 22.h, bottom: 16.h),
-                  child: TextFormField(
-                    controller: dateController,
-                    decoration: InputDecoration(
-                      // contentPadding: EdgeInsets.only(left: 24.44.w,right: 34.47.w, bottom: 12.3.h,top: 15.03.h),
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0.r)),
-                          borderSide:
-                              BorderSide(color: Colors.black, width: 1.0.w)),
-                      labelText: dob,
-                      // labelStyle: CustomizedTheme.b_W400_12,
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                        borderSide: BorderSide(color: Colors.black),
-                      ),
-                    ),
-                    onTap: () {
-                      showDialog(
-                          builder: (sdCTX) {
-                            return AlertDialog(
-                              title: Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.pop(sdCTX);
-                                    },
-                                    child: Container(
-                                      height: 25.h,
-                                      width: 70.w,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(12.r),
-                                        color: PayNestTheme.blueAccent,
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "Done",
-                                          style: PayNestTheme.small_2_12white,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              content: SizedBox(
-                                width: .9.sw,
-                                height: .5.sh,
-                                child: CupertinoDatePicker(
-                                  mode: CupertinoDatePickerMode.date,
-                                  onDateTimeChanged: (DateTime dateTime) {
-                                    tempPickedDate = dateTime;
-                                    dateController.text =
-                                        DateFormat("yyyy-MM-dd")
-                                            .format(dateTime)
-                                            .toString();
-                                    print("THIS date is picked");
-                                    print(tempPickedDate);
-                                  },
-                                  initialDateTime: DateTime.now(),
-                                ),
-                              ),
-                            );
-                          },
-                          context: ctx);
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 16.h),
-                  child: TextFormField(
-                    controller: studentRegController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            10.0.r,
-                          ),
-                        ),
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                          width: 1.0.w,
-                        ),
-                      ),
-                      labelText: studentID,
-                      // labelStyle: CustomizedTheme.b_W400_12,
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            10.0.r,
-                          ),
-                        ),
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    // onTap: (){
-                    // },
-                  ),
-                ),
-                Obx(
-                  () => Padding(
-                    padding: EdgeInsets.only(top: 63.h, bottom: 15.h),
-                    child: SizedBox(
-                      height: 60.h,
-                      width: 326.w,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: PayNestTheme.blueAccent,
-                          elevation: 0,
-                          // side: BorderSide(width:1, color:Colors.white),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              12,
-                            ),
-                          ),
-                        ),
-                        onPressed: () async {
-                          if (dateController.text.isNotEmpty &&
-                              studentRegController.text.isNotEmpty) {
-                            // AddStudentModel model = AddStudentModel(
-                            //   parentId: userController
-                            //       .userResData.value.parent!.id
-                            //       .toString(),
-                            //   dob: dateController.text,
-                            //   studentId: selectedStudentID.toString(),
-                            //   studentRegNo: selectedStudentRegNo.toString(),
-                            // );
-                            final model = {
-                              "parentId": userController
-                                  .userResData.value.parent!.id.toString(),
-                              "dob": dateController.text,
-                              "studentId": selectedStudentID.toString(),
-                              "studentRegNo": selectedStudentRegNo.toString(),
-                            };
-                            await addStudentController.hitAddStudent(model);
-                            if (addStudentController
-                                .addStudentData.value.status) {
-                              dateController.clear();
-                              studentRegController.clear();
-                              Navigator.pop(ctx);
-                              ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
-                                behavior: SnackBarBehavior.floating,
-                                content: Text('Student Added'),
-                                backgroundColor: Colors.green,
-                              ));
-                            } else {
-                              Navigator.pop(ctx);
-                              dateController.clear();
-                              studentRegController.clear();
-                              ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
-                                behavior: SnackBarBehavior.floating,
-                                content: Text('Verification failed'),
-                                backgroundColor: Colors.red,
-                              ));
-                            }
-                          } else {
-                            print('Empty');
-                          }
-                          //   Navigator.pushNamed(context, '/OTPPage');
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                next,
-                                style: PayNestTheme.subtitle16white,
-                              ),
-                              !addStudentController.isLoading.value
-                                  ? ClipOval(
-                                      child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                          color: PayNestTheme.colorWhite,
-                                          borderRadius:
-                                              BorderRadius.circular(50.r),
-                                        ),
-                                        child: Icon(
-                                          Icons.arrow_forward,
-                                          color: PayNestTheme.blueAccent,
-                                          size: 12.sp,
-                                        ),
-                                      ),
-                                    )
-                                  : Center(
-                                      child: CircularProgressIndicator(
-                                        backgroundColor:
-                                            PayNestTheme.colorWhite,
-                                        color: PayNestTheme.blueAccent,
-                                      ),
-                                    )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+    );
+  }
+
+  Widget _getText() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalValue(36),
+      ),
+      child: Text(
+        'Search Result',
+        style: PayNestTheme.h2_12blueAccent.copyWith(
+          fontWeight: FontWeight.bold,
+          fontSize: sizes.fontRatio * 14,
+          color: PayNestTheme.black,
+        ),
+      ),
     );
   }
 }

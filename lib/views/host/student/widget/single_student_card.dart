@@ -38,6 +38,7 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
   Widget build(BuildContext context) {
     if(isListEmpty){
       return ListView.separated(
+        physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return _singleCard(
             student: widget.students![index],
@@ -54,69 +55,72 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
   }
 
   Widget _singleCard({required StudentElement student}) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: horizontalValue(16),
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: horizontalValue(16),
-        vertical: verticalValue(12),
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: PayNestTheme.primaryColor,
+    return GestureDetector(
+      onTap: ()=> widget.onTap(student),
+      child: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: horizontalValue(16),
         ),
-      ),
-      child: Row(
-        children: [
-          Container(
-            height: sizes.heightRatio * 60,
-            width: sizes.heightRatio * 60,
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(
-                'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
-              ),
-            ),
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalValue(16),
+          vertical: verticalValue(12),
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: PayNestTheme.primaryColor,
           ),
-          horizontalSpacer(12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${student.student!.firstName} \t ${student.student!.lastName}',
-                style: PayNestTheme.h2_12blueAccent.copyWith(
-                  fontSize: sizes.fontRatio * 14,
-                  color: PayNestTheme.black,
+        ),
+        child: Row(
+          children: [
+            Container(
+              height: sizes.heightRatio * 60,
+              width: sizes.heightRatio * 60,
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(
+                  'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
                 ),
               ),
-              Text(
-                '${student.student!.school!.name}',
-                style: PayNestTheme.h2_12blueAccentLight.copyWith(
-                  fontSize: sizes.fontRatio * 12,
-                  color: PayNestTheme.textGrey,
+            ),
+            horizontalSpacer(12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${student.student!.firstName} \t ${student.student!.lastName}',
+                  style: PayNestTheme.h2_12blueAccent.copyWith(
+                    fontSize: sizes.fontRatio * 14,
+                    color: PayNestTheme.black,
+                  ),
+                ),
+                Text(
+                  '${student.student!.school!.name}',
+                  style: PayNestTheme.h2_12blueAccentLight.copyWith(
+                    fontSize: sizes.fontRatio * 12,
+                    color: PayNestTheme.textGrey,
+                  ),
+                ),
+              ],
+            ),
+            Spacer(),
+            Container(
+              height: sizes.heightRatio * 35,
+              width: sizes.heightRatio * 35,
+              decoration: BoxDecoration(
+                color: Colors.blueAccent,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Icon(
+                  Icons.arrow_forward,
+                  color: PayNestTheme.colorWhite,
+                  size: 20,
                 ),
               ),
-            ],
-          ),
-          Spacer(),
-          Container(
-            height: sizes.heightRatio * 35,
-            width: sizes.heightRatio * 35,
-            decoration: BoxDecoration(
-              color: Colors.blueAccent,
-              borderRadius: BorderRadius.circular(20),
             ),
-            child: Center(
-              child: Icon(
-                Icons.arrow_forward,
-                color: PayNestTheme.colorWhite,
-                size: 20,
-              ),
-            ),
-          ),
-          horizontalSpacer(12),
-        ],
+            horizontalSpacer(12),
+          ],
+        ),
       ),
     );
   }

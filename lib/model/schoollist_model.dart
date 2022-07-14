@@ -44,6 +44,7 @@ class Log {
     required this.privacy,
     required this.createdAt,
     required this.updatedAt,
+    required this.isSelected,
   });
 
   int id;
@@ -60,6 +61,7 @@ class Log {
   String privacy;
   DateTime createdAt;
   DateTime updatedAt;
+  bool isSelected;
 
   factory Log.fromJson(Map<String, dynamic> json) => Log(
     id: json["id"] !=null ? json["id"] : -1,
@@ -76,6 +78,7 @@ class Log {
     privacy: json["privacy"] !=null ? json["privacy"] : "",
     createdAt:json["createdAt"] !=null? DateTime.parse(json["createdAt"]) :DateTime.now(),
     updatedAt:json["updatedAt"] !=null? DateTime.parse(json["updatedAt"]) : DateTime.now(),
+    isSelected : false,
   );
 
   Map<String, dynamic> toJson() => {
@@ -93,5 +96,6 @@ class Log {
     "privacy": privacy,
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
+    "isSelected" : false,
   };
 }

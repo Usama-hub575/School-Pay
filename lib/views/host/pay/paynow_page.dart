@@ -4,6 +4,7 @@ import 'package:encrypt/encrypt.dart' as encryption;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/createtransaction_resp_controller.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
@@ -13,6 +14,10 @@ import 'package:paynest_flutter_app/model/datamodel/paynowtransaction_detail_mod
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/transactiondetails/paynowltransactiondetails_page.dart';
 import 'package:paynest_flutter_app/views/webview/webview.dart';
+import 'package:paynest_flutter_app/widgets/spacer.dart';
+
+import '../../../model/mystudents_resp_model.dart';
+import '../../../res/res.dart';
 
 class PayNowPage extends StatefulWidget {
   final String whichStack;
@@ -36,6 +41,7 @@ class _PayNowPageState extends State<PayNowPage> {
   TextEditingController parentIDController = TextEditingController();
   TextEditingController studentIDController = TextEditingController();
   TextEditingController schoolIDController = TextEditingController();
+  String payAbleAmount = '0';
 
   @override
   void initState() {
@@ -61,273 +67,19 @@ class _PayNowPageState extends State<PayNowPage> {
     return Obx(
       () => Scaffold(
         backgroundColor: PayNestTheme.primaryColor,
-        floatingActionButton: FloatingActionButton.extended(
-          heroTag: 'paynest-hero-tag',
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
-          backgroundColor: PayNestTheme.blueAccent,
-          onPressed: () async {
-            if (studentController.myStudentData.value.status &&
-                int.parse(amountController.text) > 0) {
-              print("Student data for Payment to CBD");
-              print(studentIDController.text +
-                  parentIDController.text +
-                  schoolIDController.text);
-              // schoolId=56&parentId=225&studentId=638
-
-              // await ctrcController.hitCreateTransaction(
-              //     schoolIDController.text,
-              //     parentIDController.text,
-              //     studentIDController.text,
-              //     amountController.text);
-
-              // ctrcController.createTransData.value.status == true ?
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (BuildContext context) => MyWebView(
-              //     title: "CBD",
-              //     resID: ctrcController.createTransData.value.transaction!.id,
-              //     amount: amountController.text,
-              //     indx: idx,
-              //   )
-              // )):ScaffoldMessenger.of(context).showSnackBar(SnackBar(behavior: SnackBarBehavior.floating,content: Text("Some error occurred"),backgroundColor: Colors.red,));
-
-              // if (!ctrcController.createTransData.value.status) {
-              String encryptedAmount = await encrypt(amountController.text);
-              final result = await Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) => MyWebView(
-                    title: "CBD",
-                    // resID:
-                    //     ctrcController.createTransData.value.transaction!.id,
-                    amount: '600',
-                    indx: idx,
-                    orderId: Random().nextInt(1000000000),
-                    schoolId: int.parse(schoolIDController.text),
-                  ),
-                ),
-              );
-              print("Response from my data" + result.toString());
-
-              if (result != null) {
-                var amount = amountController.text;
-
-                bool status = await ctrcController.hitCreateTransaction(
-                  schoolIDController.text,
-                  parentIDController.text,
-                  studentIDController.text,
-                  '600',
-                  result,
-                );
-                if (status) {
-                  studentController.myStudentData.update((val) {
-                    setState(() {
-                      val!.students![idx].student!.totalBalanceAmount = "0";
-                      amountController.text = "0";
-                    });
-                    PayNowTransactionDetailModel model;
-                    Future.delayed(Duration(seconds: 3)).then((value) => {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            behavior: SnackBarBehavior.floating,
-                            content: Text(ctrcController
-                                    .createTransData.value.transaction ??
-                                'Amount Updated'),
-                            backgroundColor: Colors.green,
-                          )),
-                          model = PayNowTransactionDetailModel(
-                            student: PayNowTransactionDetailStudent(
-                                id: sbrController
-                                    .bankResponseData.value.student!.id,
-                                studentRegNo: sbrController.bankResponseData
-                                    .value.student!.studentRegNo,
-                                firstName: sbrController
-                                    .bankResponseData.value.student!.firstName,
-                                lastName: sbrController
-                                    .bankResponseData.value.student!.lastName,
-                                grade: sbrController
-                                    .bankResponseData.value.student!.grade,
-                                parentEmiratesId: sbrController.bankResponseData
-                                    .value.student!.parentEmiratesId,
-                                parentPhoneNumber: sbrController
-                                    .bankResponseData
-                                    .value
-                                    .student!
-                                    .parentPhoneNumber,
-                                dob: sbrController
-                                    .bankResponseData.value.student!.dob,
-                                admissionDate: sbrController.bankResponseData
-                                    .value.student!.admissionDate,
-                                deletedAt: sbrController
-                                    .bankResponseData.value.student!.deletedAt,
-                                schoolId: sbrController.bankResponseData.value.student!.schoolId,
-                                totalBalanceAmount: sbrController.bankResponseData.value.student!.totalBalanceAmount,
-                                guardianFirstName: sbrController.bankResponseData.value.student!.guardianFirstName,
-                                guardianLastName: sbrController.bankResponseData.value.student!.guardianLastName,
-                                guardianGender: sbrController.bankResponseData.value.student!.guardianGender,
-                                guardianEmiratesId: sbrController.bankResponseData.value.student!.guardianEmiratesId,
-                                guardianNationality: sbrController.bankResponseData.value.student!.guardianNationality,
-                                guardianReligion: sbrController.bankResponseData.value.student!.guardianReligion,
-                                area: sbrController.bankResponseData.value.student!.area,
-                                region: sbrController.bankResponseData.value.student!.region,
-                                streetAddress: sbrController.bankResponseData.value.student!.streetAddress,
-                                email: sbrController.bankResponseData.value.student!.email,
-                                phoneNumber: sbrController.bankResponseData.value.student!.phoneNumber,
-                                otherNumber: sbrController.bankResponseData.value.student!.otherNumber,
-                                profile: sbrController.bankResponseData.value.student!.profile,
-                                religion: sbrController.bankResponseData.value.student!.religion,
-                                nationality: sbrController.bankResponseData.value.student!.nationality,
-                                gender: sbrController.bankResponseData.value.student!.gender,
-                                dueDate: sbrController.bankResponseData.value.student!.dueDate,
-                                file: sbrController.bankResponseData.value.student!.file,
-                                privacy: sbrController.bankResponseData.value.student!.privacy,
-                                createdAt: sbrController.bankResponseData.value.student!.createdAt,
-                                updatedAt: sbrController.bankResponseData.value.student!.updatedAt),
-                            referenceNo: sbrController
-                                .bankResponseData.value.referenceNo,
-                            paidOn: sbrController.bankResponseData.value.paidOn,
-                            amountPaid: amount,
-                          ),
-                          !sbrController.isLoading.value
-                              ? Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      PayNowTransactionDetailsPage(
-                                        pntdm: model,
-                                      )))
-                              : CircularProgressIndicator()
-                        });
-                  });
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    content: Text('Something went wrong with the transaction'),
-                    backgroundColor: Colors.red,
-                  ));
-                }
-              }
-
-              // result == true ? studentController.myStudentData.update((val) {
-              //   var amountt = amountController.text;
-              //   setState(() {
-              //     val!.students![idx].student!.totalBalanceAmount = "0";
-              //     amountController.text = "0";
-              //   });
-              //   PayNowTransactionDetailModel model = PayNowTransactionDetailModel(
-              //     student: PayNowTransactionDetailStudent(
-              //         id: sbrController.bankResponseData.value.student!.id,
-              //         studentRegNo: sbrController.bankResponseData.value.student!.studentRegNo,
-              //         firstName: sbrController.bankResponseData.value.student!.firstName,
-              //         lastName: sbrController.bankResponseData.value.student!.lastName,
-              //         grade: sbrController.bankResponseData.value.student!.grade,
-              //         parentEmiratesId: sbrController.bankResponseData.value.student!.parentEmiratesId,
-              //         parentPhoneNumber: sbrController.bankResponseData.value.student!.parentPhoneNumber,
-              //         dob: sbrController.bankResponseData.value.student!.dob,
-              //         admissionDate: sbrController.bankResponseData.value.student!.admissionDate,
-              //         deletedAt: sbrController.bankResponseData.value.student!.deletedAt,
-              //         schoolId: sbrController.bankResponseData.value.student!.schoolId,
-              //         totalBalanceAmount: sbrController.bankResponseData.value.student!.totalBalanceAmount,
-              //         guardianFirstName: sbrController.bankResponseData.value.student!.guardianFirstName,
-              //         guardianLastName: sbrController.bankResponseData.value.student!.guardianLastName,
-              //         guardianGender: sbrController.bankResponseData.value.student!.guardianGender,
-              //         guardianEmiratesId: sbrController.bankResponseData.value.student!.guardianEmiratesId,
-              //         guardianNationality: sbrController.bankResponseData.value.student!.guardianNationality,
-              //         guardianReligion: sbrController.bankResponseData.value.student!.guardianReligion,
-              //         area: sbrController.bankResponseData.value.student!.area,
-              //         region: sbrController.bankResponseData.value.student!.region,
-              //         streetAddress: sbrController.bankResponseData.value.student!.streetAddress,
-              //         email: sbrController.bankResponseData.value.student!.email,
-              //         phoneNumber: sbrController.bankResponseData.value.student!.phoneNumber,
-              //         otherNumber: sbrController.bankResponseData.value.student!.otherNumber,
-              //         profile: sbrController.bankResponseData.value.student!.profile,
-              //         religion: sbrController.bankResponseData.value.student!.religion,
-              //         nationality: sbrController.bankResponseData.value.student!.nationality,
-              //         gender: sbrController.bankResponseData.value.student!.gender,
-              //         dueDate: sbrController.bankResponseData.value.student!.dueDate,
-              //         file: sbrController.bankResponseData.value.student!.file,
-              //         privacy: sbrController.bankResponseData.value.student!.privacy,
-              //         createdAt: sbrController.bankResponseData.value.student!.createdAt,
-              //         updatedAt: sbrController.bankResponseData.value.student!.updatedAt
-              //     ),
-              //     referenceNo: sbrController.bankResponseData.value.referenceNo,
-              //     paidOn: sbrController.bankResponseData.value.paidOn,
-              //     amountPaid: amountt,
-              //   );
-              //   !sbrController.isLoading.value ? Navigator.of(context).push(MaterialPageRoute(builder: (context) => PayNowTransactionDetailsPage(
-              //     pntdm: model,
-              //   ))):CircularProgressIndicator();
-              // }):null;
-              // } else {
-              //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              //     behavior: SnackBarBehavior.floating,
-              //     content: Text("Some error occurred"),
-              //     backgroundColor: Colors.red,
-              //   ));
-              // }
-
-              // payNowController.hitPayNow(amountController.text, parentIDController.text, studentIDController.text);
-              // print("${amountController.text+parentIDController.text+ studentIDController.text}");
-              // String pattern = r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?';
-              // RegExp regExp = RegExp(pattern);
-              // if((payNowController.payNowData.value.url.isEmpty)){
-              //
-              // }else {
-              //   setState(() {
-              //     Navigator.of(context).push(MaterialPageRoute(
-              //         builder: (BuildContext context) => MyWebView(
-              //             title: "CBD",
-              //             selectedUrl: payNowController.payNowData.value.url,
-              //             hiddenData : payNowController.payNowData.value.hiddendata
-              //         )
-              //     ));
-              //   });
-              // }
-
-            } else if (int.parse(amountController.text) < 0) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                behavior: SnackBarBehavior.floating,
-                content: Text("Amount is not correct"),
-                backgroundColor: Colors.redAccent,
-              ));
-            } else if (int.parse(amountController.text) == 0) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                behavior: SnackBarBehavior.floating,
-                content: Text("Fees already paid"),
-                backgroundColor: Colors.green,
-              ));
-            }
-          },
-          label: SizedBox(
-            width: .8.sw,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "AED " + amountController.text,
-                  style: PayNestTheme.subtitle16white,
-                ),
-                !payNowController.isLoading.value
-                    ? Text(
-                        paynow,
-                        style: PayNestTheme.small_2_14colorWhite,
-                      )
-                    : CircularProgressIndicator(
-                        color: PayNestTheme.colorWhite,
-                        backgroundColor: PayNestTheme.blueAccent,
-                      ),
-                // Icon(Icons.play_circle_fill,color: Colors.white,),
-                // : CircularProgressIndicator(backgroundColor: PayNestTheme.colorWhite,color: PayNestTheme.blueAccent,),
-              ],
-            ),
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Column(
           children: [
             Container(
               height: 129.h,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                  color: PayNestTheme.primaryColor,
-                  borderRadius:
-                      BorderRadius.vertical(bottom: Radius.circular(24.r))),
+                color: PayNestTheme.primaryColor,
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(
+                    24.r,
+                  ),
+                ),
+              ),
               child: SafeArea(
                 child: Padding(
                   padding: EdgeInsets.only(left: 25.h),
@@ -364,10 +116,12 @@ class _PayNowPageState extends State<PayNowPage> {
                                   ),
                                 )
                               : SizedBox(),
+                          Spacer(),
                           Text(
-                            paynow,
+                            pay,
                             style: PayNestTheme.title20white,
                           ),
+                          Spacer(),
                         ],
                       ),
                     ],
@@ -378,145 +132,187 @@ class _PayNowPageState extends State<PayNowPage> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                    color: PayNestTheme.colorWhite,
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(15.r))),
+                  color: PayNestTheme.colorWhite,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(
+                      26.r,
+                    ),
+                  ),
+                ),
                 child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 10.h,
+                  ),
                   child: studentController.myStudentData.value.status
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            verticalSpacer(16),
                             Text(
-                              paymentfor,
+                              selectStudent,
                               style: PayNestTheme.title_2_16primaryColor,
                             ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 25.h),
-                              child: SizedBox(
-                                height: 90.h,
-                                width: 1.sw,
-                                child: ListView.builder(
-                                    itemCount: studentController
-                                        .myStudentData.value.students!.length,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 8.w),
-                                        child: SizedBox(
-                                          // height: 84.h,
-                                          width: 100.w,
-                                          child: OutlinedButton(
-                                            style: OutlinedButton.styleFrom(
-                                              // backgroundColor:idx == index ? Colors.blue:Colors.black,
-                                              elevation: 0,
-                                              side: BorderSide(
-                                                  width: 1,
-                                                  color: idx == index
-                                                      ? PayNestTheme.blueAccent
-                                                      : PayNestTheme
-                                                          .borderGrey),
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12)),
-                                            ),
-                                            onPressed: () {
-                                              setState(
-                                                () {
-                                                  idx = index;
-                                                  amountController.text =
-                                                      studentController
-                                                          .myStudentData
-                                                          .value
-                                                          .students![index]
-                                                          .student!
-                                                          .totalBalanceAmount
-                                                          .toString();
-                                                  studentIDController.text =
-                                                      studentController
-                                                          .myStudentData
-                                                          .value
-                                                          .students![index]
-                                                          .studentId
-                                                          .toString();
-                                                  parentIDController.text =
-                                                      studentController
-                                                          .myStudentData
-                                                          .value
-                                                          .students![index]
-                                                          .parentId
-                                                          .toString();
-                                                  schoolIDController.text =
-                                                      studentController
-                                                          .myStudentData
-                                                          .value
-                                                          .students![index]
-                                                          .student!
-                                                          .schoolId
-                                                          .toString();
-                                                  print(idx);
-                                                },
-                                              );
-                                              // Navigator.of(context).push(MaterialPageRoute(builder: (context) => SelectSchool()));
-                                            },
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 18.r,
-                                                ),
-                                                SizedBox(
-                                                  height: 15.h,
-                                                ),
-                                                Text(
-                                                  studentController
-                                                          .myStudentData
-                                                          .value
-                                                          .students![index]
-                                                          .student!
-                                                          .firstName +
-                                                      " " +
-                                                      studentController
-                                                          .myStudentData
-                                                          .value
-                                                          .students![index]
-                                                          .student!
-                                                          .lastName,
-                                                  style: PayNestTheme
-                                                      .h2_12blueAccentLight,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    }),
+                            Container(
+                              height: sizes.heightRatio * 156,
+                              child: ListView.separated(
+                                itemCount: studentController
+                                    .myStudentData.value.students!.length,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  // return Padding(
+                                  //   padding:
+                                  //       EdgeInsets.symmetric(horizontal: 8.w),
+                                  //   child: SizedBox(
+                                  //     // height: 84.h,
+                                  //     width: 100.w,
+                                  //     child: OutlinedButton(
+                                  //       style: OutlinedButton.styleFrom(
+                                  //         elevation: 0,
+                                  //         side: BorderSide(
+                                  //           width: 1,
+                                  //           color: idx == index
+                                  //               ? PayNestTheme.blueAccent
+                                  //               : PayNestTheme.borderGrey,
+                                  //         ),
+                                  //         shape: RoundedRectangleBorder(
+                                  //           borderRadius:
+                                  //               BorderRadius.circular(12),
+                                  //         ),
+                                  //       ),
+                                  //       onPressed: () {
+                                  //         setState(
+                                  //           () {
+                                  //             idx = index;
+                                  //             amountController.text =
+                                  //                 studentController
+                                  //                     .myStudentData
+                                  //                     .value
+                                  //                     .students![index]
+                                  //                     .student!
+                                  //                     .totalBalanceAmount
+                                  //                     .toString();
+                                  //             studentIDController.text =
+                                  //                 studentController
+                                  //                     .myStudentData
+                                  //                     .value
+                                  //                     .students![index]
+                                  //                     .studentId
+                                  //                     .toString();
+                                  //             parentIDController.text =
+                                  //                 studentController
+                                  //                     .myStudentData
+                                  //                     .value
+                                  //                     .students![index]
+                                  //                     .parentId
+                                  //                     .toString();
+                                  //             schoolIDController.text =
+                                  //                 studentController
+                                  //                     .myStudentData
+                                  //                     .value
+                                  //                     .students![index]
+                                  //                     .student!
+                                  //                     .schoolId
+                                  //                     .toString();
+                                  //           },
+                                  //         );
+                                  //       },
+                                  //       child: Column(
+                                  //         mainAxisAlignment:
+                                  //             MainAxisAlignment.center,
+                                  //         children: [
+                                  //           CircleAvatar(
+                                  //             radius: 18.r,
+                                  //           ),
+                                  //           SizedBox(
+                                  //             height: 15.h,
+                                  //           ),
+                                  //           Text(
+                                  //             studentController
+                                  //                     .myStudentData
+                                  //                     .value
+                                  //                     .students![index]
+                                  //                     .student!
+                                  //                     .firstName +
+                                  //                 " " +
+                                  //                 studentController
+                                  //                     .myStudentData
+                                  //                     .value
+                                  //                     .students![index]
+                                  //                     .student!
+                                  //                     .lastName,
+                                  //             style: PayNestTheme
+                                  //                 .h2_12blueAccentLight,
+                                  //           ),
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // );
+                                  return _singleCard(
+                                    studentController
+                                        .myStudentData.value.students![index],
+                                    (StudentElement student) {
+                                      payAbleAmount = "AED " + student.student!.totalBalanceAmount.toString();
+                                      studentController.updateSelectedCard(student.id);
+                                    },
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return horizontalSpacer(16);
+                                },
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  currentPayableamount,
-                                  style: PayNestTheme.title_3_16black,
-                                ),
-                                Text(
-                                  "AED " + amountController.text,
-                                  style: PayNestTheme.title_2_16primaryColor,
-                                ),
-                              ],
+                            verticalSpacer(16),
+                            Container(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Current Payable Amount',
+                                    style: PayNestTheme.h2_12blueAccentLight
+                                        .copyWith(
+                                      fontSize: sizes.fontRatio * 12,
+                                      color: PayNestTheme.primaryColor,
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    '${payAbleAmount!= 0 ? payAbleAmount : ''}',
+                                    style: PayNestTheme.h2_12blueAccent
+                                        .copyWith(
+                                      fontSize: sizes.fontRatio * 12,
+                                      color: PayNestTheme.primaryColor,
+                                    ),
+                                  ),
+                                  horizontalSpacer(16),
+                                ],
+                              ),
                             ),
+                            verticalSpacer(8),
+                            Container(
+                              width: double.infinity,
+                              height: 1,
+                              color: PayNestTheme.textGrey.withOpacity(0.5),
+                            ),
+                            Spacer(),
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: horizontalValue(16),
+                              ),
+                              child: Lottie.asset(
+                                singleStudentJson,
+                                repeat: true,
+                                height: sizes.heightRatio * 250,
+                              ),
+                            ),
+                            verticalSpacer(16),
                           ],
                         )
                       : SizedBox(),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -531,5 +327,83 @@ class _PayNowPageState extends State<PayNowPage> {
     final encrypted = encrypter.encrypt(amount, iv: iv);
     print(encrypted.base64);
     return encrypted.base64;
+  }
+
+  Widget _singleCard(StudentElement studentElement, Function onTap) {
+    return GestureDetector(
+      onTap: () => onTap(studentElement),
+      child: Opacity(
+        opacity: studentElement.isSelected ? 1 : 0.5,
+        child: Container(
+          child: Stack(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(
+                  vertical: verticalValue(10),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: horizontalValue(12),
+                  vertical: verticalValue(16),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                  color: PayNestTheme.primaryColor.withOpacity(0.5),
+                ),
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
+                      ),
+                      minRadius: 16,
+                      maxRadius: 24,
+                    ),
+                    verticalSpacer(12),
+                    Text(
+                      '${studentElement.student?.firstName} \n ${studentElement.student?.lastName} ',
+                      textAlign: TextAlign.center,
+                      style: PayNestTheme.title_2_16primaryColor.copyWith(
+                        fontSize: sizes.fontRatio * 12,
+                        color: PayNestTheme.colorWhite,
+                      ),
+                    ),
+                    Spacer(),
+                    Container(
+                      width: sizes.widthRatio * 80,
+                      child: Text(
+                        '${studentElement.student?.school!.name}',
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 11,
+                          color: PayNestTheme.colorWhite,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    ),
+                    Spacer()
+                  ],
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: CircleAvatar(
+                  backgroundColor: PayNestTheme.primaryColor,
+                  radius: 16,
+                  child: Center(
+                    child: Icon(
+                      Icons.add,
+                      color: PayNestTheme.colorWhite,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

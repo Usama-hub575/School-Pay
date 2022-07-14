@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/views/host/dashboard/widgets/student_detail_bottom_sheet.dart';
+import 'package:paynest_flutter_app/views/host/dashboard/widgets/succes_bottom_sheet.dart';
 import '../../../../constants/constants.dart';
 import '../../../../res/res.dart';
 import '../../../../widgets/spacer.dart';
 import '../../school/select_school.dart';
 
-class AddStudentBottomSheet {
+class StudentDetailBottomSheet {
   static void show({
     required BuildContext context,
   }) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) {
@@ -20,8 +21,21 @@ class AddStudentBottomSheet {
   }
 }
 
-class StudentWidget extends StatelessWidget {
+class StudentWidget extends StatefulWidget {
   StudentWidget();
+
+  @override
+  State<StudentWidget> createState() => _StudentWidgetState();
+}
+
+class _StudentWidgetState extends State<StudentWidget> {
+  final TextEditingController _studentCode = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _studentCode.text = '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +44,7 @@ class StudentWidget extends StatelessWidget {
       color: PayNestTheme.black.withOpacity(0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
         children: [
           IntrinsicHeight(
             child: Container(
@@ -45,52 +60,63 @@ class StudentWidget extends StatelessWidget {
                 color: PayNestTheme.colorWhite,
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: horizontalValue(30)),
+                padding:
+                    EdgeInsets.symmetric(horizontal: horizontalValue(30)),
                 child: Column(
                   children: [
-                    verticalSpacer(22.0),
+                    verticalSpacer(48),
                     Text(
-                      addStudent,
+                      enterStudentDetail,
                       style: PayNestTheme.title_2_16primaryColor.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: PayNestTheme.black,
+                        color: PayNestTheme.primaryColor,
                       ),
                     ),
                     verticalSpacer(22.0),
                     Container(
                       height: sizes.heightRatio * 40,
                     ),
-                    verticalSpacer(22.0),
-                    Container(
-                      width: double.infinity,
-                      height: sizes.heightRatio * 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
-                          elevation: 0,
-                          // side: BorderSide(width:1, color:Colors.white),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              14,
+                    Padding(
+                      padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom,
+                      ),
+                      child: TextFormField(
+                        controller: _studentCode,
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(0.5),
+                            ),
+                          ),
+                          labelText: enterPaynestStudentCode,
+                          labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(0.5),
+                            ),
+                          ),
+                          errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(0.5),
+                            ),
+                          ),
+                          disabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(0.5),
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          StudentDetailBottomSheet.show(
-                            context: context,
-                          );
-                        },
-                        child: Center(
-                          child: Text(
-                            enterThePayNestStudentCode,
-                            style: PayNestTheme.title_2_16primaryColor.copyWith(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              color: PayNestTheme.colorWhite,
-                            ),
-                          ),
-                        ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                     ),
                     verticalSpacer(22.0),
@@ -110,16 +136,15 @@ class StudentWidget extends StatelessWidget {
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => SelectSchool(),
-                            ),
+                          SuccessBottomSheet.show(
+                            context: context,
                           );
                         },
                         child: Center(
                           child: Text(
-                            addStudentManually,
-                            style: PayNestTheme.title_2_16primaryColor.copyWith(
+                            next,
+                            style:
+                                PayNestTheme.title_2_16primaryColor.copyWith(
                               fontWeight: FontWeight.w500,
                               fontSize: 14,
                               color: PayNestTheme.colorWhite,

@@ -39,6 +39,7 @@ class StudentElement {
     required this.createdAt,
     required this.updatedAt,
     required this.student,
+    required this.isSelected,
   });
 
   int id;
@@ -48,6 +49,7 @@ class StudentElement {
   DateTime createdAt;
   DateTime updatedAt;
   StudentStudent? student;
+  bool isSelected;
 
   factory StudentElement.fromJson(Map<String, dynamic> json) => StudentElement(
     id: json["id"] != null? json["id"] : -1,
@@ -57,6 +59,7 @@ class StudentElement {
     createdAt: json["createdAt"] != null ? DateTime.parse(json["createdAt"]): DateTime.now(),
     updatedAt: json["updatedAt"] != null ? DateTime.parse(json["updatedAt"]) : DateTime.now(),
     student: json["student"] == null ? StudentStudent.empty() : StudentStudent.fromJson(json["student"]),
+    isSelected: false,
   );
 
   Map<String, dynamic> toJson() => {
@@ -67,6 +70,7 @@ class StudentElement {
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
     "student": student == null ? null : student!.toJson(),
+    'isSelected' : isSelected,
   };
 }
 
