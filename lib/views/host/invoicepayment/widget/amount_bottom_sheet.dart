@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import '../../../../constants/constants.dart';
 import '../../../../res/res.dart';
@@ -8,6 +9,8 @@ import '../../../../widgets/spacer.dart';
 class AmountBottomSheet {
   static void show({
     required BuildContext context,
+    required Function onTap,
+    required SingleStudentModel singleStudentModel,
   }) {
     showModalBottomSheet(
       context: context,
@@ -15,13 +18,24 @@ class AmountBottomSheet {
       isDismissible: true,
       backgroundColor: Colors.transparent,
       builder: (context) {
-        return AmountWidget();
+        return AmountWidget(
+          onTap: () => onTap(),
+          singleStudentModel: singleStudentModel,
+        );
       },
     );
   }
 }
 
 class AmountWidget extends StatefulWidget {
+  AmountWidget({
+    required this.onTap,
+    required this.singleStudentModel,
+  });
+
+  final Function onTap;
+  final SingleStudentModel singleStudentModel;
+
   @override
   State<AmountWidget> createState() => _AmountWidgetState();
 }
@@ -84,7 +98,7 @@ class _AmountWidgetState extends State<AmountWidget> {
                             ),
                             Spacer(),
                             Text(
-                              '600',
+                              '${widget.singleStudentModel.student?.totalBalanceAmount}',
                               style: PayNestTheme.h2_12blueAccent.copyWith(
                                 fontSize: sizes.fontRatio * 14,
                               ),
@@ -183,7 +197,7 @@ class _AmountWidgetState extends State<AmountWidget> {
                               vertical: verticalValue(14),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () => widget.onTap(),
                           child: Center(
                             child: Text(
                               continueTo,
