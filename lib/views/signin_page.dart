@@ -24,11 +24,11 @@ class _SignInPageState extends State<SignInPage> {
   UserController userController = Get.put(UserController());
   final storage = GetStorage();
 
-  bool isObscure = true;
   bool isBioMatric = true;
   bool isLoading = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {

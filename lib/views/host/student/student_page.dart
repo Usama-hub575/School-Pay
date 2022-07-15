@@ -42,6 +42,7 @@ class _StudentPageState extends State<StudentPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            verticalSpacer(16),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: horizontalValue(16),
@@ -69,12 +70,14 @@ class _StudentPageState extends State<StudentPage> {
                   Spacer(),
                   Text(
                     student,
+                    textAlign: TextAlign.center,
                     style: PayNestTheme.title_2_16primaryColor.copyWith(
-                      fontWeight: FontWeight.bold,
                       color: PayNestTheme.colorWhite,
+                      fontSize: sizes.fontRatio * 18,
+                      fontFamily: 'montserratBold',
                     ),
                   ),
-                  Spacer(),
+                  horizontalSpacer(82),
                   Container(
                     height: sizes.heightRatio * 40,
                     width: sizes.widthRatio * 40,
@@ -112,20 +115,44 @@ class _StudentPageState extends State<StudentPage> {
                       ? controller.myStudentData.value.status == true
                           ? controller.myStudentData.value.students == null
                               ? SizedBox()
-                              : SingleStudentCard(
-                                  onTap: (student) {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => SingleStudentPage(
-                                          singleStudentModel: getStudentModel(
-                                            studentElement: student,
-                                          ),
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    verticalSpacer(16),
+                                    Container(
+                                      margin: EdgeInsets.symmetric(
+                                        horizontal: horizontalValue(24),
+                                      ),
+                                      child: Text(
+                                        selectStudent,
+                                        style:
+                                            PayNestTheme.h2_12blueAccent.copyWith(
+                                          fontSize: sizes.fontRatio * 16,
+                                          color: PayNestTheme.primaryColor,
+                                          fontFamily: 'montserratBold',
                                         ),
                                       ),
-                                    );
-                                  },
-                                  students:
-                                      controller.myStudentData.value.students!,
+                                    ),
+                                    Expanded(
+                                      child: SingleStudentCard(
+                                        onTap: (student) {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SingleStudentPage(
+                                                singleStudentModel:
+                                                    getStudentModel(
+                                                  studentElement: student,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        students: controller
+                                            .myStudentData.value.students!,
+                                      ),
+                                    ),
+                                  ],
                                 )
                           : SizedBox()
                       : Column(

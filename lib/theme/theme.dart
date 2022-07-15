@@ -13,6 +13,8 @@ class PayNestTheme {
   static Color paidGreen = const Color(0xffBBD84C);
   static Color red = const Color(0xffFF423B);
   static Color aqua = const Color(0xffCCECF7);
+  static Color lightBlack = const Color(0xff707070);
+  static Color colorRedShade = const Color(0xffDD5656);
 
   static Color blueAccent = const Color(0xff04ACDD);
 
@@ -40,7 +42,10 @@ class PayNestTheme {
   );
 
   static TextStyle title20white = TextStyle(
-      color: colorWhite, fontSize: 20.sp, fontFamily: 'montserratBold');
+    color: colorWhite,
+    fontSize: 20.sp,
+    fontFamily: 'montserratBold',
+  );
   static TextStyle title20primaryColor = TextStyle(
     color: primaryColor,
     fontSize: 20.sp,
@@ -83,15 +88,22 @@ class PayNestTheme {
     fontWeight: FontWeight.w700,
     fontFamily: 'montserratBold',
   );
-  static TextStyle title_3_16black =
-      TextStyle(color: black, fontSize: 16.sp, fontFamily: 'montserratBold');
+  static TextStyle title_3_16black = TextStyle(
+    color: black,
+    fontSize: 16.sp,
+    fontFamily: 'montserratBold',
+  );
   static TextStyle title_3_16white = TextStyle(
-      color: colorWhite, fontSize: 16.sp, fontFamily: 'montserratBold');
+    color: colorWhite,
+    fontSize: 16.sp,
+    fontFamily: 'montserratBold',
+  );
   static TextStyle title_3_16blackbold = TextStyle(
-      color: black,
-      fontSize: 16.sp,
-      fontWeight: FontWeight.w600,
-      fontFamily: 'montserratBold');
+    color: black,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'montserratBold',
+  );
   static TextStyle title_3_16red =
       TextStyle(color: red, fontSize: 16.sp, fontFamily: 'montserratMedium');
   static TextStyle title_3_18colorWhite = TextStyle(
@@ -100,12 +112,15 @@ class PayNestTheme {
       color: colorWhite, fontSize: 14.sp, fontFamily: 'montserratMedium');
 
   static TextStyle h2_12blueAccent = TextStyle(
-      color: blueAccent,
-      fontSize: 12.sp,
-      fontWeight: FontWeight.w800,
-      fontFamily: 'montserratBold');
-  static TextStyle h2_12blueAccentLight =
-      TextStyle(color: blueAccent, fontSize: 12.sp);
+    color: blueAccent,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w800,
+    fontFamily: 'montserratBold',
+  );
+  static TextStyle h2_12blueAccentLight = TextStyle(
+    color: blueAccent,
+    fontSize: 12.sp,
+  );
   static TextStyle h2_14blueAccent = TextStyle(
     color: blueAccent,
     fontSize: 14.sp,

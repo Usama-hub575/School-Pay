@@ -17,10 +17,7 @@ import 'package:paynest_flutter_app/views/host/dashboard/widgets/student_card.da
 import 'package:paynest_flutter_app/views/host/notification/notification_page.dart';
 import 'package:paynest_flutter_app/views/host/pay/paynow_page.dart';
 import 'package:paynest_flutter_app/views/host/pendingtask/pending_task.dart';
-import 'package:paynest_flutter_app/views/host/school/select_school.dart';
 import 'package:paynest_flutter_app/views/host/singlestudent/singlestudent_page.dart';
-import 'package:paynest_flutter_app/views/host/student/student_page.dart';
-import 'package:paynest_flutter_app/views/host/transaction/recent_transaction_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../controller/transactionlist_controller.dart';
 import '../../../model/mystudents_resp_model.dart' as studentElement;
@@ -72,352 +69,241 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       );
     } else {
+      String fullName = lc.userResData.value.parent!.firstName.toString() +
+          ' ' +
+          lc.userResData.value.parent!.lastName.toString();
       return Scaffold(
-          body: Column(
-        children: [
-          Container(
-            height: 129.h,
-            decoration: BoxDecoration(
-              color: PayNestTheme.primaryColor,
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(
-                  24.r,
-                ),
-              ),
-            ),
-            child: SafeArea(
-              child: Padding(
-                padding: EdgeInsets.only(left: 25.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          welcome,
-                          style: PayNestTheme.title20white,
-                        ),
-                        Obx(
-                          () => Text(
-                            lc.userResData.value.parent!.firstName.toString(),
-                            style: PayNestTheme.subtitle16white,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          height: 44.h,
-                          width: 44.w,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12)),
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => NotificationPage(),
-                                ),
-                              );
-                            },
-                            icon: Image.asset(
-                              ic_bell,
-                              height: 20.sp,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 12.w,
-                        ),
-                        Container(
-                          height: 44.h,
-                          width: 44.w,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.horizontal(
-                                  left: Radius.circular(12.r))),
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => GetAssistance(),
-                                ),
-                              );
-                            },
-                            icon: Lottie.asset(
-                              "assets/json/support.json",
-                              repeat: true,
-                              width: 40.w,
-                              height: 40.h,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          verticalSpacer(12),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalValue(16),
-            ),
-            child: Row(
-              children: [
-                Text(
-                  'Students',
-                  style: PayNestTheme.h2_12blueAccent.copyWith(
-                    fontSize: sizes.fontRatio * 16,
-                    color: PayNestTheme.black,
+        body: Column(
+          children: [
+            Container(
+              height: sizes.heightRatio * 150,
+              decoration: BoxDecoration(
+                color: PayNestTheme.primaryColor,
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(
+                    24.r,
                   ),
                 ),
-                Spacer(),
-                Text(
-                  'Show All',
-                  style: PayNestTheme.h2_12blueAccent.copyWith(
-                    fontSize: sizes.fontRatio * 12,
-                    color: PayNestTheme.textGrey,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          verticalSpacer(8),
-          Expanded(
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 20.w,
-                  right: 20.w,
-                  bottom: 10.h,
-                ),
-                child: Column(
-                  children: [
-                    Obx(
-                      () => myStudentController.myStudentData.value.students !=
-                              null
-                          ? StudentCard(
-                              students: myStudentController
-                                  .myStudentData.value.students!,
-                              onTap: (student) {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => SingleStudentPage(
-                                      singleStudentModel: getStudentModel(
-                                        studentElement: student,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            )
-                          : const SizedBox.shrink(),
-                    ),
-                    verticalSpacer(16),
-                    Container(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
-                          elevation: 0,
-                          // side: BorderSide(width:1, color:Colors.white),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              20,
-                            ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            vertical: verticalValue(12),
-                          ),
-                        ),
-                        onPressed: () {
-                          AddStudentBottomSheet.show(
-                            context: context,
-                          );
-                        },
-                        child: Center(
-                          child: Row(
+              ),
+              child: SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 25.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      verticalSpacer(24),
+                      Image.asset(
+                        welcomeRegisterLogo,
+                        width: sizes.widthRatio * 70,
+                        color: PayNestTheme.colorWhite,
+                      ),
+                      verticalSpacer(8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                height: sizes.heightRatio * 30,
-                                width: sizes.heightRatio * 30,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: PayNestTheme.colorWhite,
-                                      width: 2.5),
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Center(
-                                  child: Icon(
-                                    Icons.add,
-                                    color: PayNestTheme.colorWhite,
-                                    size: 20,
-                                  ),
+                              Text(
+                                "Welcome Back",
+                                style: PayNestTheme.small_2_12black.copyWith(
+                                  fontSize: sizes.fontRatio * 14,
+                                  fontFamily: 'montserratRegular',
+                                  color: PayNestTheme.colorWhite,
                                 ),
                               ),
-                              horizontalSpacer(10),
                               Text(
-                                addStudent,
-                                style: PayNestTheme.title_2_16primaryColor
-                                    .copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  color: PayNestTheme.colorWhite,
+                                fullName,
+                                style: PayNestTheme.subtitle16white.copyWith(
+                                  fontSize: sizes.fontRatio * 22,
+                                  fontFamily: 'montserratSemiBold',
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                    ),
-                    verticalSpacer(16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          pendingTask,
-                          style: PayNestTheme.h2_12blueAccent.copyWith(
-                            fontSize: sizes.fontRatio * 16,
-                            color: PayNestTheme.black,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => PendingTask(),
+                          Row(
+                            children: [
+                              Container(
+                                height: 44.h,
+                                width: 44.w,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(
+                                    12,
+                                  ),
+                                ),
+                                child: IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            NotificationPage(),
+                                      ),
+                                    );
+                                  },
+                                  icon: Lottie.asset(
+                                    notificationAnimation,
+                                    repeat: true,
+                                  ),
+                                ),
                               ),
-                            );
-                          },
-                          child: Text(
-                            showAll,
-                            style: PayNestTheme.h2_12blueAccent.copyWith(
-                              fontSize: sizes.fontRatio * 12,
-                              color: PayNestTheme.textGrey,
-                            ),
-                          ),
-                        ),
-                      ],
+                              SizedBox(
+                                width: 12.w,
+                              ),
+                              Container(
+                                height: 44.h,
+                                width: 44.w,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.horizontal(
+                                    left: Radius.circular(12.r),
+                                  ),
+                                ),
+                                child: IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => GetAssistance(),
+                                      ),
+                                    );
+                                  },
+                                  icon: Lottie.asset(
+                                    supportAnimation,
+                                    repeat: true,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            verticalSpacer(12),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontalValue(16),
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    'Students',
+                    style: PayNestTheme.title20white.copyWith(
+                      fontSize: sizes.fontRatio * 16,
+                      color: PayNestTheme.black,
                     ),
-                    SizedBox(height: 10.5.h),
-                    Obx(
-                      () => lc.userResData.value.parent!.pin == null
-                          ? SizedBox(
-                              height: 48.h,
-                              width: 326.w,
-                              child: OutlinedButton(
-                                onPressed: () {
+                  ),
+                  Spacer(),
+                  Text(
+                    'Show All',
+                    style: PayNestTheme.h2_12blueAccent.copyWith(
+                      fontSize: sizes.fontRatio * 12,
+                      color: PayNestTheme.textGrey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            verticalSpacer(8),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 20.w,
+                    right: 20.w,
+                    bottom: 10.h,
+                  ),
+                  child: Column(
+                    children: [
+                      Obx(
+                        () => myStudentController
+                                    .myStudentData.value.students !=
+                                null
+                            ? StudentCard(
+                                students: myStudentController
+                                    .myStudentData.value.students!,
+                                onTap: (student) {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => ChangePIN(),
+                                      builder: (context) => SingleStudentPage(
+                                        singleStudentModel: getStudentModel(
+                                          studentElement: student,
+                                        ),
+                                      ),
                                     ),
                                   );
                                 },
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      setPIN,
-                                      style: PayNestTheme.title_3_16black,
-                                    ),
-                                    SvgPicture.asset(
-                                      arrowNext,
-                                      height: 20.sp,
-                                    )
-                                  ],
-                                ),
+                              )
+                            : const SizedBox.shrink(),
+                      ),
+                      verticalSpacer(16),
+                      Container(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: PayNestTheme.primaryColor,
+                            elevation: 0,
+                            // side: BorderSide(width:1, color:Colors.white),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                20,
                               ),
-                            )
-                          : SizedBox.shrink(),
-                    ),
-                    SizedBox(height: 10.5.h),
-                    Obx(
-                      () => lc.userResData.value.parent!.paymentConfigured ==
-                                  null ||
-                              lc.userResData.value.parent!.paymentConfigured
-                                  .toString()
-                                  .isEmpty
-                          ? GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        PayNowPage(whichStack: "other"),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              vertical: verticalValue(12),
+                            ),
+                          ),
+                          onPressed: () {
+                            AddStudentBottomSheet.show(
+                              context: context,
+                            );
+                          },
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: sizes.heightRatio * 30,
+                                  width: sizes.heightRatio * 30,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: PayNestTheme.colorWhite,
+                                        width: 2.5),
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
-                                );
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: horizontalValue(10),
-                                  vertical: verticalValue(10),
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    18,
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.add,
+                                      color: PayNestTheme.colorWhite,
+                                      size: 20,
+                                    ),
                                   ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
-                                      spreadRadius: 1,
-                                      blurRadius: 2,
-                                      offset: Offset(
-                                        0,
-                                        1,
-                                      ), // changes position of shadow
-                                    ),
-                                  ],
-                                  color: PayNestTheme.colorDimPrimary,
                                 ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      makeFirstPayment,
-                                      style:
-                                          PayNestTheme.small_2_12black.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: sizes.fontRatio * 13,
-                                        color: PayNestTheme.black,
-                                      ),
-                                    ),
-                                    Container(
-                                      height: sizes.heightRatio * 30,
-                                      width: sizes.heightRatio * 30,
-                                      decoration: BoxDecoration(
-                                        color: Colors.blueAccent,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Center(
-                                        child: Icon(
-                                          Icons.arrow_forward,
-                                          color: PayNestTheme.colorWhite,
-                                          size: 20,
-                                        ),
-                                      ),
-                                    )
-                                  ],
+                                horizontalSpacer(10),
+                                Text(
+                                  addStudent,
+                                  style: PayNestTheme.title_2_16primaryColor
+                                      .copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: PayNestTheme.colorWhite,
+                                  ),
                                 ),
-                              ),
-                            )
-                          : SizedBox.shrink(),
-                    ),
-                    SizedBox(height: 10.5.h),
-                    Padding(
-                      padding: EdgeInsets.only(top: 18.5.h, bottom: 11.h),
-                      child: Row(
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      verticalSpacer(10),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            recentTransactions,
+                            pendingTask,
                             style: PayNestTheme.h2_12blueAccent.copyWith(
                               fontSize: sizes.fontRatio * 16,
                               color: PayNestTheme.black,
@@ -425,13 +311,11 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // Navigator.of(context).push(
-                              //   MaterialPageRoute(
-                              //     builder: (context) => StudentPage(
-                              //       whichStack: "other",
-                              //     ),
-                              //   ),
-                              // );
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => PendingTask(),
+                                ),
+                              );
                             },
                             child: Text(
                               showAll,
@@ -443,23 +327,154 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                         ],
                       ),
-                    ),
-                    verticalSpacer(8),
-                    transactionListController
-                                .transactionListData.value.transactions !=
-                            null
-                        ? RecentTransactions(
-                            transactions: transactionListController
-                                .transactionListData.value.transactions!,
-                          )
-                        : const SizedBox.shrink(),
-                  ],
+                      verticalSpacer(10),
+                      Obx(
+                        () => lc.userResData.value.parent!.pin == null
+                            ? SizedBox(
+                                height: 48.h,
+                                width: 326.w,
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => ChangePIN(),
+                                      ),
+                                    );
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        setPIN,
+                                        style: PayNestTheme.title_3_16black,
+                                      ),
+                                      SvgPicture.asset(
+                                        arrowNext,
+                                        height: 20.sp,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : SizedBox.shrink(),
+                      ),
+                      verticalSpacer(10),
+                      Obx(
+                        () => lc.userResData.value.parent!.paymentConfigured ==
+                                    null ||
+                                lc.userResData.value.parent!.paymentConfigured
+                                    .toString()
+                                    .isEmpty
+                            ? GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => PayNowPage(
+                                        whichStack: "other",
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: horizontalValue(12),
+                                    vertical: verticalValue(12),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      18,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.3),
+                                        spreadRadius: 1,
+                                        blurRadius: 2,
+                                        offset: Offset(
+                                          0,
+                                          1,
+                                        ),
+                                      ),
+                                    ],
+                                    color: PayNestTheme.colorDimPrimary,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        makeFirstPayment,
+                                        style: PayNestTheme.small_2_12black
+                                            .copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: sizes.fontRatio * 13,
+                                          color: PayNestTheme.black,
+                                        ),
+                                      ),
+                                      Lottie.asset(
+                                        arrowForwardAnimation,
+                                        repeat: true,
+                                        width: sizes.widthRatio * 22,
+                                        height: sizes.heightRatio * 22,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : SizedBox.shrink(),
+                      ),
+                      SizedBox(height: 10.5.h),
+                      Padding(
+                        padding: EdgeInsets.only(top: 18.5.h, bottom: 11.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              recentTransactions,
+                              style: PayNestTheme.h2_12blueAccent.copyWith(
+                                fontSize: sizes.fontRatio * 16,
+                                color: PayNestTheme.black,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                // Navigator.of(context).push(
+                                //   MaterialPageRoute(
+                                //     builder: (context) => StudentPage(
+                                //       whichStack: "other",
+                                //     ),
+                                //   ),
+                                // );
+                              },
+                              child: Text(
+                                showAll,
+                                style: PayNestTheme.h2_12blueAccent.copyWith(
+                                  fontSize: sizes.fontRatio * 12,
+                                  color: PayNestTheme.textGrey,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      verticalSpacer(8),
+                      transactionListController
+                                  .transactionListData.value.transactions !=
+                              null
+                          ? RecentTransactions(
+                              transactions: transactionListController
+                                  .transactionListData.value.transactions!,
+                            )
+                          : const SizedBox.shrink(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
-      ));
+            )
+          ],
+        ),
+      );
     }
   }
 

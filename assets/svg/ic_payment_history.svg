@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+  <g id="Layer_2" data-name="Layer 2" transform="translate(-0.166 -0.166)">
+    <g id="invisible_box" data-name="invisible box" transform="translate(0.167 0.167)">
+      <rect id="Rectangle_531" data-name="Rectangle 531" width="25" height="25" transform="translate(-0.001 0)" fill="none"/>
+    </g>
+    <g id="icons_Q2" data-name="icons Q2" transform="translate(3.14 1.042)">
+      <path id="Path_43" data-name="Path 43" d="M23.831,22.978H22.782V19.044a4.143,4.143,0,0,0-1.206-2.989l-2.57-2.517,2.57-2.517a4.143,4.143,0,0,0,1.206-2.989V4.1h1.049a1.049,1.049,0,0,0,0-2.1H7.049a1.049,1.049,0,1,0,0,2.1H8.1V8.031A4.143,4.143,0,0,0,9.3,11.02l2.57,2.517L9.3,16.055A4.143,4.143,0,0,0,8.1,19.044v3.933H7.049a1.049,1.049,0,0,0,0,2.1H23.831a1.049,1.049,0,0,0,0-2.1Zm-5.454,0H12.5l2.937-2.989Z" transform="translate(-6 -2)" fill="#006e7d"/>
+    </g>
+  </g>
+</svg>

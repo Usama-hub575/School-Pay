@@ -47,12 +47,13 @@ class _SingleCardWithRadioButtonState extends State<SingleCardWithRadioButton> {
               '${widget.value}',
               style: PayNestTheme.h2_12blueAccent.copyWith(
                 fontSize: sizes.fontRatio * 14,
-                color: PayNestTheme.textGrey,
+                color: PayNestTheme.lightBlack,
+                fontFamily: 'montserratBold',
               ),
             ),
             Spacer(),
             Container(
-              height: sizes.heightRatio * 16,
+              height: sizes.heightRatio * 22,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
               ),

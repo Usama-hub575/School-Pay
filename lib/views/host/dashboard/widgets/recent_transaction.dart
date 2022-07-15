@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+import '../../../../main.dart';
 import '../../../../model/transactionlist_resp_model.dart';
 import '../../../../res/res.dart';
 
@@ -18,36 +20,52 @@ class RecentTransactions extends StatefulWidget {
 
 class _RecentTransactionsState extends State<RecentTransactions> {
   bool isListEmpty = true;
+
   @override
   void initState() {
     super.initState();
-    if(widget.transactions!=null && widget.transactions!.rows!=null && widget.transactions!.rows!.isNotEmpty){
-    }else{
+    initializeDateFormatting();
+    if (widget.transactions != null &&
+        widget.transactions!.rows != null &&
+        widget.transactions!.rows!.isNotEmpty) {
+    } else {
       isListEmpty = false;
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    return isListEmpty ? Container(
-      padding: EdgeInsets.only(bottom: 20),
-      decoration: BoxDecoration(
-        color: PayNestTheme.colorDimPrimary,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: ListView.separated(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          return _singleCard(
-            transactionsRow: widget.transactions!.rows![index]
-          );
-        },
-        separatorBuilder: (context, index) {
-          return verticalSpacer(8);
-        },
-        itemCount: widget.transactions!.rows!.length > 3 ? 3 : widget.transactions!.rows!.length,
-      ),
-    ) : const SizedBox.shrink();
+    return isListEmpty
+        ? Container(
+            padding: EdgeInsets.only(bottom: 20),
+            decoration: BoxDecoration(
+              color: PayNestTheme.colorDimPrimary,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 7,
+                  offset: Offset(0, 1),
+                ),
+              ],
+            ),
+            child: ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return _singleCard(
+                    transactionsRow: widget.transactions!.rows![index]);
+              },
+              separatorBuilder: (context, index) {
+                return verticalSpacer(16);
+              },
+              itemCount: widget.transactions!.rows!.length > 3
+                  ? 3
+                  : widget.transactions!.rows!.length,
+            ),
+          )
+        : const SizedBox.shrink();
   }
 
   Widget _singleCard({required TransactionsRow transactionsRow}) {
@@ -59,8 +77,8 @@ class _RecentTransactionsState extends State<RecentTransactions> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: sizes.heightRatio * 16,
-            width: sizes.heightRatio * 16,
+            height: sizes.heightRatio * 23,
+            width: sizes.heightRatio * 23,
             decoration: BoxDecoration(
               color: Colors.green,
               borderRadius: BorderRadius.circular(20),
@@ -80,15 +98,17 @@ class _RecentTransactionsState extends State<RecentTransactions> {
               Text(
                 '${transactionsRow.school!.name}',
                 style: PayNestTheme.h2_12blueAccent.copyWith(
-                  fontSize: sizes.fontRatio * 14,
+                  fontSize: sizes.fontRatio * 13,
                   color: PayNestTheme.black,
+                  fontFamily: 'montserratBold',
                 ),
               ),
               Text(
-                '${DateFormat("yyyy-MM-dd").format(transactionsRow.payedOn)}',
+                '${dateFormat.format(DateTime.parse(transactionsRow.payedOn.toString().substring(0, 10)))}',
                 style: PayNestTheme.h2_12blueAccentLight.copyWith(
-                  fontSize: sizes.fontRatio * 12,
+                  fontSize: sizes.fontRatio * 10,
                   color: PayNestTheme.textGrey,
+                  fontFamily: 'montserratRegular',
                 ),
               ),
             ],

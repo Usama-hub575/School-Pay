@@ -44,7 +44,7 @@ class _WelcomePageState extends State<WelcomePage> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-              splash,
+              icBackground,
             ),
             fit: BoxFit.cover,
           ),

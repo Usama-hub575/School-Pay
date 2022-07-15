@@ -59,6 +59,7 @@ flutter:
     - assets/dashboard/
     - assets/svg/
     - assets/json/
+    - assets/png/
 
   fonts:
     - family: montserratBlack

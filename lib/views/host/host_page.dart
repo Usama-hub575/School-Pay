@@ -51,9 +51,9 @@ class _HostPageState extends State<HostPage> {
 
   final names = <String>[
     'Dashboard',
-    'Student',
+    'Students',
     'Transactions',
-    'More',
+    'Setting',
   ];
 
   selectedNavItem(index) {
@@ -122,12 +122,12 @@ class _HostPageState extends State<HostPage> {
         backgroundColor: PayNestTheme.primaryColor,
         activeIndex: pageIndex,
         splashColor: PayNestTheme.blueAccent,
-        // notchAndCornersAnimation: borderRadiusAnimation,
-        splashSpeedInMilliseconds: 300,
+        splashSpeedInMilliseconds: 0,
+        notchMargin: sizes.heightRatio*12,
         notchSmoothness: NotchSmoothness.softEdge,
         gapLocation: GapLocation.center,
-        leftCornerRadius: 10,
-        rightCornerRadius: 10,
+        leftCornerRadius: 16,
+        rightCornerRadius: 16,
         onTap: (index) {
           payNow = 0;
           selectedNavItem(index);

@@ -42,14 +42,27 @@ class _MorePageState extends State<MorePage> {
                   decoration: BoxDecoration(
                     color: PayNestTheme.primaryColor,
                     borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(24.r),
+                      bottom: Radius.circular(32),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: PayNestTheme.dropShadow.withOpacity(.3),
+                        spreadRadius: 0,
+                        blurRadius: 10,
+                        offset: Offset(
+                          0,
+                          5,
+                        ), // changes position of shadow
+                      ),
+                    ],
                   ),
                   child: Center(
                     child: Text(
                       setting,
-                      style: PayNestTheme.title20white
-                          .copyWith(fontWeight: FontWeight.bold),
+                      style: PayNestTheme.title20white.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'montserratBold',
+                      ),
                     ),
                   ),
                 ),
@@ -57,11 +70,11 @@ class _MorePageState extends State<MorePage> {
                   top: 130,
                   child: Container(
                     margin: EdgeInsets.symmetric(
-                      horizontal: horizontalValue(20),
+                      horizontal: horizontalValue(30),
                     ),
                     padding: EdgeInsets.symmetric(
-                      horizontal: horizontalValue(16),
-                      vertical: verticalValue(16),
+                      horizontal: horizontalValue(12),
+                      vertical: verticalValue(18),
                     ),
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -77,7 +90,7 @@ class _MorePageState extends State<MorePage> {
                       ],
                       color: PayNestTheme.colorWhite,
                       borderRadius: BorderRadius.circular(
-                        24.r,
+                        26,
                       ),
                     ),
                     child: Row(
@@ -102,10 +115,11 @@ class _MorePageState extends State<MorePage> {
                             children: [
                               verticalSpacer(8),
                               Text(
-                                userController
-                                    .userResData.value.parent!.firstName
-                                    .toString(),
-                                style: PayNestTheme.title18black,
+                                '${userController.userResData.value.parent!.firstName} ${userController.userResData.value.parent!.lastName}',
+                                style: PayNestTheme.title18black.copyWith(
+                                  fontSize: sizes.fontRatio*18,
+                                  fontFamily: 'montserratBold',
+                                ),
                               ),
                               verticalSpacer(4),
                               GestureDetector(
@@ -118,7 +132,11 @@ class _MorePageState extends State<MorePage> {
                                 },
                                 child: Text(
                                   viewprofile,
-                                  style: PayNestTheme.h2_12blueAccent,
+                                  style: PayNestTheme.title18black.copyWith(
+                                    fontSize: sizes.fontRatio*12,
+                                    color: PayNestTheme.primaryColor,
+                                    fontFamily: 'montserratSemiBold',
+                                  ),
                                 ),
                               )
                             ],
@@ -150,12 +168,13 @@ class _MorePageState extends State<MorePage> {
                         payments,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           color: PayNestTheme.black,
+                          fontFamily: 'montserratBold',
                         ),
                       ),
                     ),
                     verticalSpacer(12),
                     SingleCard(
-                      icon: ic_paymentHistory,
+                      icon: icPaymentHistory,
                       value: paymentHistory,
                       onTap: () {
                         Navigator.of(context).push(
@@ -185,19 +204,20 @@ class _MorePageState extends State<MorePage> {
                         general,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           color: PayNestTheme.black,
+                          fontFamily: 'montserratBold',
                         ),
                       ),
                     ),
                     verticalSpacer(16),
                     SingleCardWithRadioButton(
                       value: biometricAuth,
-                      icon: ic_biometric,
+                      icon: icFingerPrint,
                       onTap: () {},
                     ),
                     verticalSpacer(16),
                     SingleCardWithRadioButton(
                       value: Location,
-                      icon: ic_location,
+                      icon: icLocation,
                       onTap: () {},
                     ),
                     verticalSpacer(16),
@@ -220,30 +240,31 @@ class _MorePageState extends State<MorePage> {
                         privacy,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           color: PayNestTheme.black,
+                          fontFamily: 'montserratBold',
                         ),
                       ),
                     ),
                     verticalSpacer(12),
                     SingleCard(
-                      icon: faq,
+                      icon: icFaq,
                       value: FAQ,
                       onTap: () {},
                     ),
                     verticalSpacer(16),
                     SingleCard(
-                      icon: ic_contactUs,
+                      icon: icContactUs,
                       value: contactUs,
                       onTap: () {},
                     ),
                     verticalSpacer(16),
                     SingleCard(
-                      icon: ic_privacyPolicy,
+                      icon: icPrivacyPolicy,
                       value: privacyPolicy,
                       onTap: () {},
                     ),
                     verticalSpacer(16),
                     SingleCard(
-                      icon: ic_terms,
+                      icon: icTermsAndCondition,
                       value: termConditions,
                       onTap: () {},
                     ),
@@ -257,17 +278,19 @@ class _MorePageState extends State<MorePage> {
                       color: PayNestTheme.lineColor,
                     ),
                     verticalSpacer(16),
-                    SizedBox(
-                      width: 1.sw,
-                      height: 60.h,
+                    Container(
+                      width: double.infinity,
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.redAccent,
+                          backgroundColor: PayNestTheme.colorRedShade,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                               12.r,
                             ),
                           ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: verticalValue(16),
+                          )
                         ),
                         onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
@@ -283,6 +306,7 @@ class _MorePageState extends State<MorePage> {
                           style: PayNestTheme.title_3_16white.copyWith(
                             fontSize: sizes.fontRatio * 14,
                             color: PayNestTheme.colorWhite,
+                            fontFamily: 'montserratBold',
                           ),
                         ),
                       ),

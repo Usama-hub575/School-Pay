@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../../constants/constants.dart';
 import '../../../../res/res.dart';
@@ -33,12 +35,16 @@ class SingleCard extends StatelessWidget {
               '$value',
               style: PayNestTheme.h2_12blueAccent.copyWith(
                 fontSize: sizes.fontRatio * 14,
-                color: PayNestTheme.textGrey,
+                color: PayNestTheme.lightBlack,
+                fontFamily: 'montserratBold',
               ),
             ),
             Spacer(),
-            SvgPicture.asset(
-              arrowNext,
+            Lottie.asset(
+              arrowForwardAnimation,
+              repeat: true,
+              width: sizes.widthRatio*22,
+              height: sizes.heightRatio*22,
             ),
           ],
         ),

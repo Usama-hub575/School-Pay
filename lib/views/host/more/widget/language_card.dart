@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 
@@ -35,17 +36,14 @@ class _LanguageCardState extends State<LanguageCard> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Icon(
-              Icons.language,
-              color: PayNestTheme.primaryColor,
-            ),
+            SvgPicture.asset(icLanguage),
             horizontalSpacer(12),
             Text(
               language,
               style: PayNestTheme.title_3_16white.copyWith(
                 fontSize: sizes.fontRatio * 14,
-                fontWeight: FontWeight.w700,
-                color: PayNestTheme.textGrey,
+                color: PayNestTheme.lightBlack,
+                fontFamily: 'montserratBold',
               ),
             ),
             const Spacer(),

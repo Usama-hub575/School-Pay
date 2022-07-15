@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
+import '../../../../constants/constants.dart';
 import '../../../../model/mystudents_resp_model.dart';
 
 class StudentCard extends StatefulWidget {
@@ -34,6 +36,7 @@ class _StudentCardState extends State<StudentCard> {
             ),
             child: _singleCard(
               widget.students[index],
+              index,
             ),
           );
         },
@@ -45,7 +48,7 @@ class _StudentCardState extends State<StudentCard> {
     );
   }
 
-  Widget _singleCard(StudentElement studentElement) {
+  Widget _singleCard(StudentElement studentElement, int index) {
     return Container(
       child: Stack(
         children: [
@@ -76,20 +79,24 @@ class _StudentCardState extends State<StudentCard> {
                   '${studentElement.student?.firstName} \n ${studentElement.student?.lastName} ',
                   textAlign: TextAlign.center,
                   style: PayNestTheme.title_2_16primaryColor.copyWith(
-                    fontSize: sizes.fontRatio * 12,
-                    color: PayNestTheme.colorWhite,
+                    fontSize: sizes.fontRatio * 14,
+                    color: index % 2 == 0
+                        ? PayNestTheme.colorWhite
+                        : PayNestTheme.black,
                   ),
                 ),
-                Spacer(),
+                verticalSpacer(6),
                 Container(
                   width: sizes.widthRatio * 80,
                   child: Text(
                     '${studentElement.student?.school!.name}',
                     maxLines: 2,
                     textAlign: TextAlign.center,
-                    style: PayNestTheme.title_2_16primaryColor.copyWith(
+                    style: PayNestTheme.small_2_10textGrey.copyWith(
                       fontSize: sizes.fontRatio * 11,
-                      color: PayNestTheme.colorWhite,
+                      color: index % 2 == 0
+                          ? PayNestTheme.colorWhite
+                          : PayNestTheme.black,
                       fontWeight: FontWeight.w300,
                     ),
                   ),
@@ -99,18 +106,11 @@ class _StudentCardState extends State<StudentCard> {
             ),
           ),
           Positioned(
-            bottom: 0,
+            bottom: 4,
             left: 0,
             right: 0,
-            child: CircleAvatar(
-              backgroundColor: PayNestTheme.primaryColor,
-              radius: 16,
-              child: Center(
-                child: Icon(
-                  Icons.add,
-                  color: PayNestTheme.colorWhite,
-                ),
-              ),
+            child: SvgPicture.asset(
+              icAdd,
             ),
           ),
         ],
