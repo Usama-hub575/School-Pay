@@ -12,6 +12,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../constants/constants.dart';
 import '../../../res/assets.dart';
 import '../../../res/res.dart';
+import '../../../widgets/emirates_id_add_dash_function.dart';
 
 class ViewProfile extends StatefulWidget {
   const ViewProfile({Key? key}) : super(key: key);
@@ -128,7 +129,7 @@ class _ViewProfileState extends State<ViewProfile> {
                   ),
                 ),
                 Positioned.fill(
-                  top: 90,
+                  top: verticalValue(100),
                   child: Obx(
                     () => Container(
                       margin: EdgeInsets.symmetric(
@@ -184,8 +185,21 @@ class _ViewProfileState extends State<ViewProfile> {
                           ),
                           Positioned(
                             top: 0,
-                            child: CircleAvatar(
-                              radius: 46.r,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(46),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    spreadRadius: 2,
+                                    blurRadius: 3,
+                                    offset: Offset(
+                                      1,
+                                      1,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               child: CircleAvatar(
                                 backgroundImage: NetworkImage(
                                   'https://cdn.pixabay.com/photo/2022/02/19/15/05/dark-7022879_960_720.jpg',
@@ -213,7 +227,7 @@ class _ViewProfileState extends State<ViewProfile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    verticalSpacer(28),
+                    verticalSpacer(20),
                     Text(
                       accountDetails,
                       style: PayNestTheme.title_2_16primaryColor.copyWith(
@@ -283,7 +297,7 @@ class _ViewProfileState extends State<ViewProfile> {
                     verticalSpacer(8),
                     Obx(
                       () => Text(
-                        '${userController.userResData.value.parent!.dialCode} + ${userController.userResData.value.parent!.phone}',
+                        '${userController.userResData.value.parent!.dialCode} ${userController.userResData.value.parent!.phone}',
                         style: PayNestTheme.title_3_16blackbold.copyWith(
                           fontSize: sizes.fontRatio * 16,
                           color: PayNestTheme.lightBlack,
@@ -310,7 +324,13 @@ class _ViewProfileState extends State<ViewProfile> {
                       () => Row(
                         children: [
                           Text(
-                            userController.userResData.value.parent!.emiratesId,
+                            userController.userResData.value.parent!.emiratesId
+                                        .length >=
+                                    14
+                                ? getDashedEmiratesId(userController
+                                    .userResData.value.parent!.emiratesId)
+                                : userController
+                                    .userResData.value.parent!.emiratesId,
                             style: PayNestTheme.title_3_16blackbold.copyWith(
                               fontSize: sizes.fontRatio * 16,
                               color: PayNestTheme.lightBlack,
@@ -446,7 +466,6 @@ class _ViewProfileState extends State<ViewProfile> {
                               fontSize: sizes.fontRatio * 8,
                               color: PayNestTheme.lightBlack,
                               fontFamily: 'montserratSemiBold',
-
                             ),
                           ),
                           Spacer(),

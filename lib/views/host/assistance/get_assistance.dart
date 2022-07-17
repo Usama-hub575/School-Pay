@@ -20,53 +20,49 @@ class _GetAssistanceState extends State<GetAssistance> {
       body: Column(
         children: [
           Container(
-            width: double.infinity,
+            height: sizes.heightRatio * 150,
             decoration: BoxDecoration(
-              color: PayNestTheme.primaryColor,
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(24.r),
-              ),
-            ),
+                color: PayNestTheme.primaryColor,
+                borderRadius:
+                BorderRadius.vertical(bottom: Radius.circular(24.r))),
             child: SafeArea(
               child: Padding(
-                padding: EdgeInsets.only(
-                  left: 25.w,
-                  right: 25.w,
-                ),
-                child: Row(
+                padding: EdgeInsets.only(left: 25.h),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(right: 25.h, top: 15.h),
-                      child: Container(
-                        height: 44.h,
-                        width: 44.w,
-                        decoration: BoxDecoration(
-                            color: PayNestTheme.colorWhite,
-                            borderRadius: BorderRadius.circular(12.r)),
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(Icons.arrow_back,
-                              size: 20.sp, color: PayNestTheme.blueAccent),
-                          // child: Text(""),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 25.h),
+                          child: Container(
+                            height: 44.h,
+                            width: 44.w,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12.r)),
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(Icons.arrow_back,
+                                  size: 20.sp, color: PayNestTheme.blueAccent),
+                              // child: Text(""),
+                            ),
+                          ),
                         ),
-                      ),
+                        Text(
+                          assistance,
+                          style: PayNestTheme.title20white
+                              .copyWith(fontSize: sizes.fontRatio * 18),
+                        ),
+                        SizedBox(
+                          height: 44.h,
+                          width: 44.w,
+                        )
+                      ],
                     ),
-                    Spacer(),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: 34.h,
-                        bottom: 11.h,
-                        left: 7.w,
-                        right: 7.w,
-                      ),
-                      child: Text(
-                        assistance,
-                        style: PayNestTheme.title20white,
-                      ),
-                    ),
-                    Spacer(),
                   ],
                 ),
               ),

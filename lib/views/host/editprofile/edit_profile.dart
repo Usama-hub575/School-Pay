@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -8,9 +9,11 @@ import 'package:paynest_flutter_app/controller/updateprofile_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
+import 'package:paynest_flutter_app/widgets/emirates_id_add_dash_function.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../res/res.dart';
+import '../../../widgets/editing_text_emirates_id_formater.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -45,7 +48,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
           userController.userResData.value.parent!.phone,
     );
     emiratesIdController = TextEditingController(
-      text: userController.userResData.value.parent!.emiratesId,
+      text: userController.userResData.value.parent!.emiratesId.length >= 14
+          ? getDashedEmiratesId(
+              userController.userResData.value.parent!.emiratesId)
+          : userController.userResData.value.parent!.emiratesId,
     );
     expiryDateController = TextEditingController(
       text: userController.userResData.value.parent!.expiryDate != null ||
@@ -116,9 +122,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               Text(
                                 editProfile,
                                 style: PayNestTheme.title20white.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'montserratBold',
-                                ),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'montserratBold',
+                                    fontSize: sizes.fontRatio * 18),
                               ),
                             ],
                           ),
@@ -128,7 +134,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                 ),
                 Positioned.fill(
-                  top: 90,
+                  top: verticalValue(100),
                   child: Obx(
                     () => Container(
                       margin: EdgeInsets.symmetric(
@@ -184,8 +190,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           ),
                           Positioned(
                             top: 0,
-                            child: CircleAvatar(
-                              radius: 46.r,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(46),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    spreadRadius: 2,
+                                    blurRadius: 3,
+                                    offset: Offset(
+                                      1,
+                                      1,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               child: CircleAvatar(
                                 backgroundImage: NetworkImage(
                                   'https://cdn.pixabay.com/photo/2022/02/19/15/05/dark-7022879_960_720.jpg',
@@ -215,11 +234,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     Padding(
                       padding: EdgeInsets.only(top: 30.h, bottom: 16.h),
                       child: Text(
-                        personalDetails,
-                        style: PayNestTheme.title_2_16primaryColor,
+                        accountDetails,
+                        style: PayNestTheme.title_2_16primaryColor
+                            .copyWith(color: PayNestTheme.black),
                       ),
                     ),
-                    verticalSpacer(16),
                     TextFormField(
                       controller: firstNameController,
                       style: PayNestTheme.title_3_16blackbold.copyWith(
@@ -231,7 +250,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         border: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
@@ -244,27 +263,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         errorBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         disabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
+                            color: PayNestTheme.textGrey.withOpacity(0.3),
                           ),
                         ),
                       ),
@@ -289,7 +308,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         border: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
@@ -302,27 +321,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         errorBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         disabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
+                            color: PayNestTheme.textGrey.withOpacity(0.3),
                           ),
                         ),
                       ),
@@ -348,7 +367,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         border: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
@@ -361,27 +380,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         errorBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         disabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
+                            color: PayNestTheme.textGrey.withOpacity(0.3),
                           ),
                         ),
                       ),
@@ -402,11 +421,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         color: PayNestTheme.lightBlack,
                         fontFamily: 'montserratSemiBold',
                       ),
+                      inputFormatters: <TextInputFormatter>[
+                        EmiratesIdFormatter(
+                          mask: 'xxx-xxxx-xxxxxxx-x',
+                          separator: '-',
+                        )
+                      ],
                       decoration: InputDecoration(
                         border: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
@@ -419,27 +444,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         errorBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         disabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
+                            color: PayNestTheme.textGrey.withOpacity(0.3),
                           ),
                         ),
                       ),
@@ -464,7 +489,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         border: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
@@ -477,27 +502,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         errorBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         disabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
+                              0.3,
                             ),
                           ),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
+                            color: PayNestTheme.textGrey.withOpacity(0.3),
                           ),
                         ),
                       ),

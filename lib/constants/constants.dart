@@ -200,6 +200,7 @@ const save = "Save";
 
 const pleaseconfirmDetailsbelow = "Please confirm below details before we proceed.";
 const pleaseenterdetailbelow = "Please enter the details below";
+const pleaseEnterYourPhoneNumberAndEmailId = "Please Enter Your Phone Number & Email ID";
 const pleaseenteramount = "Please enter the amount that you want to pay.";
 const youneedtosetuppin = "You need to setup PIN before making any transaction";
 const weuseyourphone = "We'll use your mobile phone and e-mail to send you the activation code.";

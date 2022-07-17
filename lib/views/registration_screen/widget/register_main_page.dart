@@ -48,13 +48,9 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
           Padding(
             padding: EdgeInsets.only(top: 23.h, bottom: 12.h),
             child: Text(
-              pleaseenterdetailbelow,
-              style: PayNestTheme.title22black,
+              pleaseEnterYourPhoneNumberAndEmailId,
+              style: PayNestTheme.title22black.copyWith(fontSize: 18),
             ),
-          ),
-          Text(
-            weuseyourphone,
-            style: PayNestTheme.h2_14textGrey,
           ),
           Expanded(
             child: Form(

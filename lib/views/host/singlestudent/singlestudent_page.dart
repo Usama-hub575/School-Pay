@@ -44,26 +44,23 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     vertical: verticalValue(16),
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(right: 25.w),
-                        child: Container(
-                          height: 44.h,
-                          width: 44.w,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12.r)),
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: Icon(Icons.arrow_back,
-                                size: 20.sp, color: PayNestTheme.blueAccent),
-                            // child: Text(""),
-                          ),
+                      Container(
+                        height: 44.h,
+                        width: 44.w,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12.r)),
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.arrow_back,
+                              size: 20.sp, color: PayNestTheme.blueAccent),
+                          // child: Text(""),
                         ),
                       ),
-                      Spacer(),
                       Text(
                         'Student Details',
                         style: PayNestTheme.h2_12blueAccent.copyWith(
@@ -71,7 +68,10 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                           color: PayNestTheme.colorWhite,
                         ),
                       ),
-                      Spacer(),
+                      SizedBox(
+                        height: 44.h,
+                        width: 44.w,
+                      )
                     ],
                   ),
                 ),
@@ -226,7 +226,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                         color: PayNestTheme.primaryColor,
                       ),
                     ),
-                    verticalSpacer(8),
+                    verticalSpacer(4),
                     Text(
                       'Grade ${widget.singleStudentModel.student!.grade}',
                       style: PayNestTheme.h2_12blueAccent.copyWith(
@@ -242,11 +242,12 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                         color: PayNestTheme.black,
                       ),
                     ),
-                    verticalSpacer(8),
+                    verticalSpacer(4),
                     Text(
                       'Grade ${widget.singleStudentModel.student!.school!.address}',
                       style: PayNestTheme.small_2_10textGrey.copyWith(
                         fontSize: sizes.fontRatio * 16,
+                        color: PayNestTheme.black
                       ),
                     ),
                   ],

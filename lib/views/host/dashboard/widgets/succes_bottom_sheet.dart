@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import '../../../../constants/constants.dart';
 import '../../../../res/res.dart';
@@ -63,8 +64,11 @@ class SuccessWidget extends StatelessWidget {
                         color: PayNestTheme.textGrey.withOpacity(0.5),
                       ),
                       verticalSpacer(16),
-                      Container(
-                        height: sizes.heightRatio * 80,
+                      Lottie.asset(
+                        checkAnimation,
+                        repeat: true,
+                        height: sizes.heightRatio*100,
+                        width: sizes.widthRatio*100,
                       ),
                       Text(
                         successfully,

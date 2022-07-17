@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/addstudent_controller.dart';
 import 'package:paynest_flutter_app/controller/all_studentslist_controller.dart';
@@ -162,184 +163,167 @@ class _AddStudentState extends State<AddStudent> {
                           ),
                           //FOR STACK
                           SizedBox(
-                            height: 350.h,
+                            height: 370.h,
                             width: 326.w,
                             // color: Colors.grey,
-                            child: Stack(
-                              alignment: Alignment.topCenter,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(top: 41.h),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 60.w),
-                                        height: 149.h,
-                                        width: 1.sw,
-                                        decoration: BoxDecoration(
-                                            color: PayNestTheme.colorWhite,
-                                            borderRadius:
-                                                BorderRadius.circular(16.r)),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            SizedBox(
-                                              height: 19.h,
-                                            ),
-                                            Text(
-                                              widget.schoolData.name,
-                                              style: PayNestTheme.title18black,
-                                            ),
-                                            Text(
-                                              widget.schoolData.address,
-                                              style: PayNestTheme.h2_14textGrey,
-                                            ),
-                                          ],
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 41.h),
+                              child: Column(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 170.h,
+                                    width: 1.sw,
+                                    decoration: BoxDecoration(
+                                        color: PayNestTheme.colorWhite,
+                                        borderRadius:
+                                            BorderRadius.circular(16.r)),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Lottie.asset(
+                                          schoolCampusAnimation,
+                                          repeat: true,
+                                          width: sizes.widthRatio * 120,
+                                          height: sizes.heightRatio * 80,
+                                          fit: BoxFit.fill
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Expanded(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.white,
-                                                    width: 1.w),
+                                        Text(
+                                          widget.schoolData.name,
+                                          style: PayNestTheme.title22blackbold,
+                                        ),
+                                        Text(
+                                          widget.schoolData.address,
+                                          style: PayNestTheme.h2_14textGrey.copyWith(
+                                            fontFamily: "montserratRegular",
+                                            fontWeight: FontWeight.normal
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
                                                 color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(
-                                                    10,
-                                                  ),
-                                                ),
+                                                width: 1.w),
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(
+                                                10,
                                               ),
-                                              child:
-                                                  DropdownButtonHideUnderline(
-                                                child: ButtonTheme(
-                                                  alignedDropdown: true,
-                                                  child: DropdownButton(
-                                                    elevation: 0,
-                                                    isExpanded: true,
-                                                    items: filters
-                                                        .map((String value) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        value: value,
-                                                        child: Text(
-                                                          value,
-                                                          style: PayNestTheme
-                                                              .h2_12blueAccent
-                                                              .copyWith(
-                                                                  fontSize:
-                                                                      sizes.fontRatio *
-                                                                          14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  color:
-                                                                      PayNestTheme
-                                                                          .black),
-                                                        ),
-                                                      );
-                                                    }).toList(),
-                                                    value: _selectedFilter,
-                                                    hint: Text(
-                                                      "Search by",
+                                            ),
+                                          ),
+                                          child:
+                                              DropdownButtonHideUnderline(
+                                            child: ButtonTheme(
+                                              alignedDropdown: true,
+                                              child: DropdownButton(
+                                                elevation: 0,
+                                                isExpanded: true,
+                                                items: filters
+                                                    .map((String value) {
+                                                  return DropdownMenuItem<
+                                                      String>(
+                                                    value: value,
+                                                    child: Text(
+                                                      value,
+                                                      style: PayNestTheme
+                                                          .h2_12blueAccent
+                                                          .copyWith(
+                                                              fontSize:
+                                                                  sizes.fontRatio *
+                                                                      14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  PayNestTheme
+                                                                      .black),
                                                     ),
-                                                    // value: selection,
-                                                    onChanged: (newValue) {
-                                                      setState(
-                                                        () {
-                                                          _selectedFilter =
-                                                              newValue
-                                                                  .toString();
-                                                          print(
-                                                            _selectedFilter,
-                                                          );
-                                                        },
+                                                  );
+                                                }).toList(),
+                                                value: _selectedFilter,
+                                                hint: Text(
+                                                  "Search by",
+                                                ),
+                                                // value: selection,
+                                                onChanged: (newValue) {
+                                                  setState(
+                                                    () {
+                                                      _selectedFilter =
+                                                          newValue
+                                                              .toString();
+                                                      print(
+                                                        _selectedFilter,
                                                       );
                                                     },
-                                                  ),
-                                                ),
+                                                  );
+                                                },
                                               ),
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 5.h),
-                                        child: TextFormField(
-                                          controller: searchController,
-                                          onTap: () {
-                                            onSearchTextChanged('');
-                                          },
-                                          onEditingComplete: () {
-                                            if (searchController
-                                                .text.isNotEmpty) {
-                                              onSearchTextChanged(
-                                                searchController.text,
-                                              );
-                                            } else {
-                                              _searchResult.clear();
-                                            }
-                                            FocusManager.instance.primaryFocus
-                                                ?.unfocus();
-                                          },
-                                          decoration: InputDecoration(
-                                            contentPadding: EdgeInsets.all(13),
-                                            filled: true,
-                                            fillColor: Colors.white,
-                                            focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: PayNestTheme.primaryColor
-                                                    .withOpacity(0.5),
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            prefixIcon: Icon(
-                                              Icons.search,
-                                              color: PayNestTheme.primaryColor,
-                                            ),
-                                            hintText: searchStudent,
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12.r),
-                                            ),
-                                          ),
-                                          style: TextStyle(
-                                            color: Colors.black,
                                           ),
                                         ),
-                                      ),
+                                      )
                                     ],
                                   ),
-                                ),
-                                Positioned(
-                                  top: 0,
-                                  child: CircleAvatar(
-                                    radius: 41.r,
-                                    backgroundColor: PayNestTheme.blueAccent,
-                                    // backgroundImage: AssetImage(ic_schoolWhite),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(21.h),
-                                      child: Image.asset(
-                                        ic_schoolWhite,
-                                        fit: BoxFit.fill,
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 5.h),
+                                    child: TextFormField(
+                                      controller: searchController,
+                                      onTap: () {
+                                        onSearchTextChanged('');
+                                      },
+                                      onEditingComplete: () {
+                                        if (searchController
+                                            .text.isNotEmpty) {
+                                          onSearchTextChanged(
+                                            searchController.text,
+                                          );
+                                        } else {
+                                          _searchResult.clear();
+                                        }
+                                        FocusManager.instance.primaryFocus
+                                            ?.unfocus();
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(13),
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: PayNestTheme.primaryColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                        prefixIcon: Icon(
+                                          Icons.search,
+                                          color: PayNestTheme.primaryColor,
+                                        ),
+                                        hintText: searchStudent,
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12.r),
+                                        ),
+                                      ),
+                                      style: TextStyle(
+                                        color: Colors.black,
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           )
                         ],
