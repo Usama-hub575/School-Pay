@@ -42,6 +42,9 @@ const arrowForwardAnimation = 'assets/json/animation_forward.json';
 const notificationAnimation = 'assets/json/animation_notification.json';
 const supportAnimation = 'assets/json/support.json';
 const editAnimation = 'assets/json/edit.json';
+const checkAnimation = 'assets/json/check_animation.json';
+const schoolCampusAnimation = 'assets/json/school_campus_animation.json';
+const successCheckAnimation = 'assets/json/success_check_animation.json';
 
 
 //png
