@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+1
+version: 1.0.0+3
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
@@ -31,6 +31,9 @@ dependencies:
   xml2json:
   encrypt: ^5.0.1
   country_picker: ^2.0.12
+  lottie:
+  flutter_toggle_tab:
+  animated_bottom_navigation_bar:
 
 
 dev_dependencies:
@@ -54,4 +57,63 @@ flutter:
     - assets/
     - assets/icons/
     - assets/dashboard/
+    - assets/svg/
+    - assets/json/
+    - assets/png/
 
+  fonts:
+    - family: montserratBlack
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Black.ttf
+    - family: montserratBlackItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-BlackItalic.ttf
+    - family: montserratBoldItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-BoldItalic.ttf
+    - family: montserratExtraBold
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBold.ttf
+    - family: montserratExtraBoldItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf
+    - family: montserratBold
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+    - family: montserratExtraLight
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraLight.ttf
+    - family: montserratExtraLightItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraLightItalic.ttf
+    - family: montserratItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Italic.ttf
+    - family: montserratLight
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
+    - family: montserratLightItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-LightItalic.ttf
+    - family: montserratMedium
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
+    - family: montserratMediumItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-MediumItalic.ttf
+    - family: montserratRegular
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+    - family: montserratSemiBold
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBold.ttf
+    - family: montserratSemiBoldItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf
+    - family: montserratThin
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Thin.ttf
+    - family: montserratThinItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-ThinItalic.ttf
+          weight: 100

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/paynowtransaction_detail_model.dart';
+import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
 
@@ -14,10 +17,12 @@ class PayNowTransactionDetailsPage extends StatefulWidget {
   PayNowTransactionDetailsPage({required this.pntdm});
 
   @override
-  State<PayNowTransactionDetailsPage> createState() => _PayNowTransactionDetailsPageState();
+  State<PayNowTransactionDetailsPage> createState() =>
+      _PayNowTransactionDetailsPageState();
 }
 
-class _PayNowTransactionDetailsPageState extends State<PayNowTransactionDetailsPage> {
+class _PayNowTransactionDetailsPageState
+    extends State<PayNowTransactionDetailsPage> {
   final UserController userController = Get.find<UserController>();
 
   @override
@@ -34,60 +39,30 @@ class _PayNowTransactionDetailsPageState extends State<PayNowTransactionDetailsP
                   height: 210.h,
                   width: 1.sw,
                   decoration: BoxDecoration(
-                      color: PayNestTheme.primaryColor,
-                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(24.r))
+                    color: PayNestTheme.primaryColor,
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(
+                        24.r,
+                      ),
+                    ),
                   ),
                   child: SafeArea(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 25.h,top:25.h),
+                      padding: EdgeInsets.only(left: 25.h, top: 25.h),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 25.w),
-                                    child: Container(
-                                      height : 44.h,
-                                      width : 44.w,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(12.r)
-                                      ),
-                                      child: IconButton(
-                                        onPressed: (){
-                                          Navigator.pop(context);
-                                        },
-                                        icon: Icon(Icons.clear,size: 20.sp,color: PayNestTheme.blueAccent),
-                                        // child: Text(""),
-                                      ),
-                                    ),
-                                  ),
-                                  // Text(myProfile,style: PayNestTheme.title20white,),
-                                ],
+                          verticalSpacer(16),
+                          Container(
+                            width: double.infinity,
+                            child: Text(
+                              'Invoice Details',
+                              textAlign: TextAlign.center,
+                              style: PayNestTheme.title20white.copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'montserratBold',
                               ),
-                              // Padding(
-                              //   padding: EdgeInsets.only(right: 25.h),
-                              //   child: Container(
-                              //     height : 44.h,
-                              //     width : 44.w,
-                              //     decoration: BoxDecoration(
-                              //         color: Colors.white,
-                              //         borderRadius: BorderRadius.circular(12.r)
-                              //     ),
-                              //     child: IconButton(
-                              //       onPressed: (){
-                              //         Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditProfilePage()));
-                              //       },
-                              //       icon: Image.asset(ic_edit,width: 20.w,height: 20.h,),
-                              //       // child: Text(""),
-                              //     ),
-                              //   ),
-                              // ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
@@ -95,77 +70,75 @@ class _PayNowTransactionDetailsPageState extends State<PayNowTransactionDetailsP
                   ),
                 ),
                 Positioned.fill(
-                    top: 90,
-                    child:
-                    // Obx(()=>
-                    SizedBox(
-                      width: 1.sw,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 25.w,right: 25.w,top: 30.h),
-                            child: Container(
-                              // padding: EdgeInsets.symmetric(horizontal: 20.w),
-                              width: 1.sw,
-                              height: 223.h,
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: PayNestTheme.dropShadow,
-                                    spreadRadius: 0,
-                                    blurRadius: 1,
-                                    offset: Offset(0, 1), // changes position of shadow
+                  top: 90,
+                  child: SizedBox(
+                    width: 1.sw,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 25.w,
+                            right: 25.w,
+                            top: 30.h,
+                          ),
+                          child: Container(
+                            width: 1.sw,
+                            height: 223.h,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: PayNestTheme.borderGrey,
+                                  spreadRadius: 1,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                    0,
+                                    3,
                                   ),
-                                ],
-                                color: PayNestTheme.colorWhite,
-                                borderRadius: BorderRadius.circular(24.r),
-                              ),
-                              child: Column(
-                                // mainAxisAlignment: MainAxisAlignment.end,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 70.w,
-                                    height: 70.h,
-                                    decoration: BoxDecoration(
-                                      color: PayNestTheme.aqua,
-                                      borderRadius: BorderRadius.circular(50.r),
-                                    ),
-                                    child: ClipOval(
-                                      child: Icon(Icons.check,size: 30.sp,color: PayNestTheme.primaryColor,),
+                                ),
+                              ],
+                              color: PayNestTheme.colorWhite,
+                              borderRadius: BorderRadius.circular(24.r),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Lottie.asset(
+                                  successCheckAnimation,
+                                  height: sizes.heightRatio * 104,
+                                  width: sizes.widthRatio * 104,
+                                ),
+                                Text(
+                                  congratulations,
+                                  style: PayNestTheme.title24primaryColorBold
+                                      .copyWith(
+                                    fontFamily: 'montserratBold',
+                                    fontSize: sizes.fontRatio * 22,
+                                  ),
+                                ),
+                                verticalSpacer(8),
+                                Container(
+                                  width: sizes.width / 1.4,
+                                  child: Text(
+                                    youHaveSuccessfully,
+                                    textAlign: TextAlign.center,
+                                    style: PayNestTheme.title24primaryColorBold
+                                        .copyWith(
+                                      fontFamily: 'montserratRegular',
+                                      fontSize: sizes.fontRatio * 14,
+                                      color: PayNestTheme.lightBlack,
                                     ),
                                   ),
-                                  // Icon(Icons.check_circle,size: 50.sp,color: PayNestTheme.primaryColor,),
-                                  // Image.asset(ic_schooldark,height: 50.h,width: 50.w,),
-                                  SizedBox(height: 13.h,),
-                                  Text(congratulations,style: PayNestTheme.title24primaryColorBold,),
-                                  SizedBox(height: 5.h,),
-                                  Text(youHaveSuccessfully,style: PayNestTheme.h2_14textGrey,),
-                                  SizedBox(height: 31.h,),
-                                ],
-                              ),
+                                ),
+                                verticalSpacer(16),
+                              ],
                             ),
                           ),
-                          // Positioned(
-                          //   top: 0,
-                          //   child: CircleAvatar(
-                          //     radius: 46.r,
-                          //     backgroundColor: PayNestTheme.blueAccent,
-                          //     child: CircleAvatar(
-                          //       backgroundImage: userController.userResData.value.parent!.profileImage == null ?
-                          //       NetworkImage('https://cdn.pixabay.com/photo/2022/02/19/15/05/dark-7022879_960_720.jpg'):
-                          //       NetworkImage(userController.userResData.value.parent!.profileImage),
-                          //       radius: 45.r,
-                          //     ),
-                          //   ),
-                          // )
-                        ],
-                      ),
-                    )
-                  // )
-                )
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -173,115 +146,175 @@ class _PayNowTransactionDetailsPageState extends State<PayNowTransactionDetailsP
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.w,vertical: 34.h),
+                padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 34.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ListTile(
-                    //   onTap: (){
-                    //     Navigator.of(context).push(MaterialPageRoute(builder: (context) => InvoicePaymentPage(singleStudentModel: widget.singleStudentModel)));
-                    //   },
-                    //   title:Text(feepayment,style: PayNestTheme.title_3_16black),
-                    //   subtitle:Text(payment,style: PayNestTheme.floating_12primaryColor),
-                    //   trailing:SvgPicture.asset(arrowNext),
-                    //   shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(12.r),
-                    //       side: BorderSide(
-                    //         width: 1.w,
-                    //         color: PayNestTheme.borderGrey,
-                    //       )
-                    //   ),
-                    // ),
-
-                    /// Title
-                    Text(invoiceDetails,style: PayNestTheme.title_2_16primaryColor,),
-                    SizedBox(height: 15.h,),
-
-                    Text(referenceNumber,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text(widget.pntdm.referenceNo.toString(),style: PayNestTheme.title_3_16black),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
+                    Text(
+                      studentName,
+                      style: PayNestTheme.h2_14textGrey.copyWith(
+                        color: PayNestTheme.primaryColor,
+                        fontFamily: 'montserratBold',
                       ),
                     ),
-
-                    Text(studentID,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text(widget.pntdm.student!.studentRegNo.toString(),style: PayNestTheme.title_3_16black),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
+                    verticalSpacer(4),
+                    Text(
+                      widget.pntdm.student!.firstName +
+                          widget.pntdm.student!.lastName,
+                      style: PayNestTheme.title_3_16blackbold.copyWith(
+                        fontSize: sizes.fontRatio * 16,
+                        color: PayNestTheme.lightBlack,
+                        fontFamily: 'montserratSemiBold',
                       ),
                     ),
-
-                    Text(studentName,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text(widget.pntdm.student!.firstName.toString()+" "+widget.pntdm.student!.lastName.toString(),style: PayNestTheme.title_3_16black),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
+                    verticalSpacer(4),
+                    Container(
+                      width: 1.sw,
+                      height: 1.h,
+                      color: PayNestTheme.lineColor,
+                    ),
+                    verticalSpacer(16),
+                    Text(
+                      studentclass,
+                      style: PayNestTheme.h2_14textGrey.copyWith(
+                        color: PayNestTheme.primaryColor,
+                        fontFamily: 'montserratBold',
                       ),
                     ),
-
-                    Text(studentclass,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text("Grade "+widget.pntdm.student!.grade.toString(),style: PayNestTheme.title_3_16black),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
+                    verticalSpacer(4),
+                    Text(
+                      "Grade " + widget.pntdm.student!.grade.toString(),
+                      style: PayNestTheme.title_3_16blackbold.copyWith(
+                        fontSize: sizes.fontRatio * 16,
+                        color: PayNestTheme.lightBlack,
+                        fontFamily: 'montserratSemiBold',
                       ),
                     ),
-
-                    Text(amountPaid,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text('AED '+widget.pntdm.amountPaid.toString(),style: PayNestTheme.title_3_16black),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
+                    verticalSpacer(4),
+                    Container(
+                      width: 1.sw,
+                      height: 1.h,
+                      color: PayNestTheme.lineColor,
+                    ),
+                    verticalSpacer(16),
+                    Text(
+                      studentID,
+                      style: PayNestTheme.h2_14textGrey.copyWith(
+                        color: PayNestTheme.primaryColor,
+                        fontFamily: 'montserratBold',
                       ),
                     ),
-
-                    Text(paidon,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text(DateFormat("yyyy-MM-dd").format(widget.pntdm.paidOn!.toLocal()).toString(),style: PayNestTheme.title_3_16black),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
+                    verticalSpacer(4),
+                    Text(
+                      widget.pntdm.student!.schoolId.toString(),
+                      style: PayNestTheme.title_3_16blackbold.copyWith(
+                        fontSize: sizes.fontRatio * 16,
+                        color: PayNestTheme.lightBlack,
+                        fontFamily: 'montserratSemiBold',
                       ),
                     ),
-
-                    Text(dueAmount,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text('AED '+ "0",style: PayNestTheme.title_3_16black),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
+                    verticalSpacer(4),
+                    Container(
+                      width: 1.sw,
+                      height: 1.h,
+                      color: PayNestTheme.lineColor,
+                    ),
+                    verticalSpacer(16),
+                    Text(
+                      referenceNumber,
+                      style: PayNestTheme.h2_14textGrey.copyWith(
+                        color: PayNestTheme.primaryColor,
+                        fontFamily: 'montserratBold',
                       ),
                     ),
-
-
+                    verticalSpacer(4),
+                    Text(
+                      widget.pntdm.referenceNo.toString(),
+                      style: PayNestTheme.title_3_16blackbold.copyWith(
+                        fontSize: sizes.fontRatio * 16,
+                        color: PayNestTheme.lightBlack,
+                        fontFamily: 'montserratSemiBold',
+                      ),
+                    ),
+                    verticalSpacer(4),
+                    Container(
+                      width: 1.sw,
+                      height: 1.h,
+                      color: PayNestTheme.lineColor,
+                    ),
+                    verticalSpacer(16),
+                    Text(
+                      schoolName,
+                      style: PayNestTheme.h2_14textGrey.copyWith(
+                        color: PayNestTheme.primaryColor,
+                        fontFamily: 'montserratBold',
+                      ),
+                    ),
+                    verticalSpacer(4),
+                    Text(
+                      '-',
+                      style: PayNestTheme.title_3_16blackbold.copyWith(
+                        fontSize: sizes.fontRatio * 16,
+                        color: PayNestTheme.lightBlack,
+                        fontFamily: 'montserratSemiBold',
+                      ),
+                    ),
+                    verticalSpacer(4),
+                    Container(
+                      width: 1.sw,
+                      height: 1.h,
+                      color: PayNestTheme.lineColor,
+                    ),
+                    verticalSpacer(16),
+                    Text(
+                      amountPaid,
+                      style: PayNestTheme.h2_14textGrey.copyWith(
+                        color: PayNestTheme.primaryColor,
+                        fontFamily: 'montserratBold',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Text(
+                      'AED ' + widget.pntdm.amountPaid.toString(),
+                      style: PayNestTheme.title_3_16black,
+                    ),
+                    verticalSpacer(100),
+                    Container(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: PayNestTheme.primaryColor,
+                          elevation: 0,
+                          side: BorderSide(
+                            width: 1,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              14,
+                            ),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: verticalValue(14),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Center(
+                          child: Text(
+                            done,
+                            style: PayNestTheme.title_2_16primaryColor.copyWith(
+                              fontFamily: 'montserratBold',
+                              fontSize: sizes.fontRatio * 14,
+                              color: PayNestTheme.colorWhite,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

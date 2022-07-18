@@ -8,10 +8,12 @@
 .buildlog/
 .history
 .svn/
-.flutter-plugins
-.flutter-plugins-dependencies
-.packages
-./build
+/.fvm/
+/pubspec.lock
+/.flutter-plugins
+/.flutter-plugins-dependencies
+/.packages
+/build/
 
 # IntelliJ related
 *.iml

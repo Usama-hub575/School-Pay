@@ -10,7 +10,6 @@ class SchoolController extends GetxController{
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     hitSchoolList();
   }
@@ -24,7 +23,6 @@ class SchoolController extends GetxController{
         SchoolListRespModel lrm = schoolListRespModelFromJson(res);
         schoolResList.value = lrm;
         schoolResList.refresh();
-        // print(lrm.message);
       }else if(decoded['status'] == false){
         isLoading(false);
       }
@@ -32,5 +30,17 @@ class SchoolController extends GetxController{
     finally{
       isLoading(false);
     }
+  }
+
+  void updateList({required int id}){
+    for(int i=0;i<schoolResList.value.log!.length;i++){
+      if(schoolResList.value.log![i].id == id){
+        schoolResList.value.log![i].isSelected = !schoolResList.value.log![i].isSelected;
+      }else{
+        schoolResList.value.log![i].isSelected = false;
+      }
+    }
+
+    schoolResList.refresh();
   }
 }

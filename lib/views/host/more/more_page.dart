@@ -5,11 +5,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
+import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
+import 'package:paynest_flutter_app/views/host/more/widget/language_card.dart';
+import 'package:paynest_flutter_app/views/host/more/widget/single_card.dart';
+import 'package:paynest_flutter_app/views/host/more/widget/single_card_with_radio_button.dart';
 import 'package:paynest_flutter_app/views/host/transaction/recent_transaction_page.dart';
 import 'package:paynest_flutter_app/views/host/viewprofile/view_profile.dart';
 import 'package:paynest_flutter_app/views/welcome_page.dart';
+import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 class MorePage extends StatefulWidget {
   const MorePage({Key? key}) : super(key: key);
@@ -35,72 +40,111 @@ class _MorePageState extends State<MorePage> {
                   height: 172.h,
                   width: 1.sw,
                   decoration: BoxDecoration(
-                      color: PayNestTheme.primaryColor,
-                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(24.r))
+                    color: PayNestTheme.primaryColor,
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(32),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: PayNestTheme.dropShadow.withOpacity(.3),
+                        spreadRadius: 0,
+                        blurRadius: 10,
+                        offset: Offset(
+                          0,
+                          5,
+                        ), // changes position of shadow
+                      ),
+                    ],
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 25.h),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(paynest,style: PayNestTheme.title20white,),
-                        Text(PSMore,style: PayNestTheme.small_2_12white,),
-                      ],
+                  child: Center(
+                    child: Text(
+                      setting,
+                      style: PayNestTheme.title20white.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'montserratBold',
+                      ),
                     ),
                   ),
                 ),
                 Positioned.fill(
                   top: 130,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25.w),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      width: 347.h,
-                      height: 99.w,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: PayNestTheme.dropShadow.withOpacity(.3),
-                            spreadRadius: 0,
-                            blurRadius: 10,
-                            offset: Offset(0, 5), // changes position of shadow
-                          ),
-                        ],
-                        color: PayNestTheme.colorWhite,
-                        borderRadius: BorderRadius.circular(24.r),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Obx(()=>Row(
-                            children: [
-                              CircleAvatar(
-                                backgroundImage: userController.userResData.value.parent!.profileImage == null ?
-                                NetworkImage('https://cdn.pixabay.com/photo/2022/02/19/15/05/dark-7022879_960_720.jpg'):
-                                NetworkImage(userController.userResData.value.parent!.profileImage),
-
-                              ),
-                              SizedBox(width: 5.w,),
-                              Text(userController.userResData.value.parent!.firstName.toString(),style: PayNestTheme.title18black,),
-                            ],
-                          )),
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewProfile()));
-                            },
-                            child: Row(
-                              children: [
-                                Text(viewprofile,style: PayNestTheme.h2_12blueAccent,),
-                                Icon(Icons.arrow_forward_ios,size: 15.sp,color: PayNestTheme.blueAccent),
-                              ],
-                            ),
-                          )
-
-                        ],
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: horizontalValue(30),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: horizontalValue(12),
+                      vertical: verticalValue(18),
+                    ),
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: PayNestTheme.dropShadow.withOpacity(.3),
+                          spreadRadius: 0,
+                          blurRadius: 10,
+                          offset: Offset(
+                            0,
+                            5,
+                          ), // changes position of shadow
+                        ),
+                      ],
+                      color: PayNestTheme.colorWhite,
+                      borderRadius: BorderRadius.circular(
+                        26,
                       ),
                     ),
-                  )
+                    child: Row(
+                      children: [
+                        Obx(
+                          () => CircleAvatar(
+                            backgroundImage: userController.userResData.value
+                                        .parent!.profileImage ==
+                                    null
+                                ? NetworkImage(
+                                    'https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg',
+                                  )
+                                : NetworkImage(
+                                    'https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg',
+                                  ),
+                          ),
+                        ),
+                        horizontalSpacer(16),
+                        Obx(
+                          () => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              verticalSpacer(8),
+                              Text(
+                                '${userController.userResData.value.parent!.firstName} ${userController.userResData.value.parent!.lastName}',
+                                style: PayNestTheme.title18black.copyWith(
+                                  fontSize: sizes.fontRatio*18,
+                                  fontFamily: 'montserratBold',
+                                ),
+                              ),
+                              verticalSpacer(4),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => ViewProfile(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  viewprofile,
+                                  style: PayNestTheme.title18black.copyWith(
+                                    fontSize: sizes.fontRatio*12,
+                                    color: PayNestTheme.primaryColor,
+                                    fontFamily: 'montserratSemiBold',
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 )
               ],
             ),
@@ -108,134 +152,166 @@ class _MorePageState extends State<MorePage> {
           Expanded(
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: horizontalValue(16),
+                  vertical: verticalValue(16),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 32.h,bottom: 22.h),
-                      child: Text(payments,style: PayNestTheme.title_2_16primaryColor,),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(24),
+                      ),
+                      child: Text(
+                        payments,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          color: PayNestTheme.black,
+                          fontFamily: 'montserratBold',
+                        ),
+                      ),
                     ),
-                    ListTile(
-                      onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => RecentTransactionPage(whichStack: "other",)));
+                    verticalSpacer(12),
+                    SingleCard(
+                      icon: icPaymentHistory,
+                      value: paymentHistory,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => RecentTransactionPage(
+                              whichStack: "other",
+                            ),
+                          ),
+                        );
                       },
-                      leading:SvgPicture.asset(ic_paymentHistory),
-                      title: Text(paymentHistory,style: PayNestTheme.title_3_16black,),
-                      trailing:SvgPicture.asset(arrowNext),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
+                    verticalSpacer(16),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(16),
                       ),
-                    ),
-
-                    Padding(
-                      padding: EdgeInsets.only(top: 32.h,bottom: 22.h),
-                      child: Text(setting,style: PayNestTheme.title_2_16primaryColor),
-                    ),
-                    ListTile(
-                      onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePIN()));
-                      },
-                      leading: SvgPicture.asset(ic_changeSecurity),
-                      title: Text(chgPIN,style: PayNestTheme.title_3_16black,),
-                      trailing:SvgPicture.asset(arrowNext),
-                    ),
-                    ListTile(
-                      leading: SvgPicture.asset(ic_biometric),
-                      title: Text(biometricAuth,style: PayNestTheme.title_3_16black,),
-                      trailing:CupertinoSwitch(
-                        onChanged: (value){},
-                        value: false,
-                      ),
-                    ),
-                    ListTile(
-                      leading: SvgPicture.asset(ic_location),
-                      title: Text(Location,style: PayNestTheme.title_3_16black,),
-                      trailing:CupertinoSwitch(
-                        onChanged: (value){},
-                        value: true,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 32.h,bottom: 22.h),
-                      child: Text(about,style: PayNestTheme.title_2_16primaryColor),
-                    ),
-                    ListTile(
-                      leading: SvgPicture.asset(faq),
-                      title: Text(FAQ,style: PayNestTheme.title_3_16black,),
-                      trailing:SvgPicture.asset(arrowNext),
-                    ),
-                    ListTile(
-                      leading: SvgPicture.asset(ic_contactUs),
-                      title: Text(contactUs,style: PayNestTheme.title_3_16black,),
-                      trailing:SvgPicture.asset(arrowNext),
-                    ),
-                    ListTile(
-                      leading: SvgPicture.asset(ic_privacyPolicy),
-                      title: Text(privacyPolicy,style: PayNestTheme.title_3_16black,),
-                      trailing:SvgPicture.asset(arrowNext),
-                    ),
-                    ListTile(
-                      leading: SvgPicture.asset(ic_terms),
-                      title: Text(termConditions,style: PayNestTheme.title_3_16black,),
-                      trailing:SvgPicture.asset(arrowNext),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
-                      ),
-                    ),
-                    SizedBox(height: 10.h,),
-                    
-                    SizedBox(
                       width: 1.sw,
-                      height: 60.h,
+                      height: 1.h,
+                      color: PayNestTheme.lineColor,
+                    ),
+                    verticalSpacer(16),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(24),
+                      ),
+                      child: Text(
+                        general,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          color: PayNestTheme.black,
+                          fontFamily: 'montserratBold',
+                        ),
+                      ),
+                    ),
+                    verticalSpacer(16),
+                    SingleCardWithRadioButton(
+                      value: biometricAuth,
+                      icon: icFingerPrint,
+                      onTap: () {},
+                    ),
+                    verticalSpacer(16),
+                    SingleCardWithRadioButton(
+                      value: Location,
+                      icon: icLocation,
+                      onTap: () {},
+                    ),
+                    verticalSpacer(16),
+                    LanguageCard(),
+                    verticalSpacer(16),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(16),
+                      ),
+                      width: 1.sw,
+                      height: 1.h,
+                      color: PayNestTheme.lineColor,
+                    ),
+                    verticalSpacer(16),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(24),
+                      ),
+                      child: Text(
+                        privacy,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          color: PayNestTheme.black,
+                          fontFamily: 'montserratBold',
+                        ),
+                      ),
+                    ),
+                    verticalSpacer(12),
+                    SingleCard(
+                      icon: icFaq,
+                      value: FAQ,
+                      onTap: () {},
+                    ),
+                    verticalSpacer(16),
+                    SingleCard(
+                      icon: icContactUs,
+                      value: contactUs,
+                      onTap: () {},
+                    ),
+                    verticalSpacer(16),
+                    SingleCard(
+                      icon: icPrivacyPolicy,
+                      value: privacyPolicy,
+                      onTap: () {},
+                    ),
+                    verticalSpacer(16),
+                    SingleCard(
+                      icon: icTermsAndCondition,
+                      value: termConditions,
+                      onTap: () {},
+                    ),
+                    verticalSpacer(16),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(16),
+                      ),
+                      width: 1.sw,
+                      height: 1.h,
+                      color: PayNestTheme.lineColor,
+                    ),
+                    verticalSpacer(16),
+                    Container(
+                      width: double.infinity,
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          shape:RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.r)),
-                          side: BorderSide(
-                            color: Colors.red,
-                            style: BorderStyle.solid,
-                            width: 1.w,
+                          backgroundColor: PayNestTheme.colorRedShade,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              12.r,
+                            ),
                           ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: verticalValue(16),
+                          )
                         ),
-                        onPressed: (){
-                          // Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                        onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
                             // the new route
                             MaterialPageRoute(
                               builder: (BuildContext context) => WelcomePage(),
                             ),
-
-                            // this function should return true when we're done removing routes
-                            // but because we want to remove all other screens, we make it
-                            // always return false
-                                (Route route) => false,
+                            (Route route) => false,
                           );
                         },
-                        child: Text(signOut,style: PayNestTheme.title_3_16red,),
+                        child: Text(
+                          signOut,
+                          style: PayNestTheme.title_3_16white.copyWith(
+                            fontSize: sizes.fontRatio * 14,
+                            color: PayNestTheme.colorWhite,
+                            fontFamily: 'montserratBold',
+                          ),
+                        ),
                       ),
                     ),
-                    SizedBox(height: 40.h,),
-
+                    verticalSpacer(16),
                   ],
                 ),
               ),

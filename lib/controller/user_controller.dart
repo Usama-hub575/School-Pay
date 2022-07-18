@@ -79,9 +79,6 @@ class UserController extends GetxController{
       var res = await APIService().apiLogin(loginModelToJson(loginData));
       var decoded = jsonDecode(res);
       if(decoded['status'] == true){
-        // LoginResponseModel lrm = loginResponseModelFromJson(res);
-        // loginResData.value = lrm;
-        // loginResData.refresh();
         RegisterRespModel lrm = registerRespModelFromJson(res);
         userResData.value = lrm;
         userResData.refresh();

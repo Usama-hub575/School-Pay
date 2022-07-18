@@ -4,7 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
+import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/widgets/spacer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -17,7 +20,6 @@ class _WelcomePageState extends State<WelcomePage> {
   final fcmToken = GetStorage();
   late FirebaseMessaging messaging;
 
-
   @override
   void initState() {
     super.initState();
@@ -28,96 +30,131 @@ class _WelcomePageState extends State<WelcomePage> {
     messaging = FirebaseMessaging.instance;
     messaging.getToken().then((value) {
       fcmToken.write('fcmToken', value);
-      print(value);
     });
   }
+
   @override
   Widget build(BuildContext context) {
+    initializeResources(context: context);
     print(fcmToken.read('fcmToken'));
     return Scaffold(
-      body: SizedBox(
-        height: 1.sh,
-        width: 1.sw,
-        child: Stack(
-          alignment: Alignment.center,
+      body: Container(
+        height: sizes.height,
+        width: sizes.width,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              icBackground,
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            Image.asset(
+              paynestLogoNew,
+              width: sizes.widthRatio* 230,
+            ),
+            verticalSpacer(220),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'English',
+                    style: PayNestTheme.subtitle16white.copyWith(
+                      fontSize: sizes.fontRatio * 14,
+                      color: PayNestTheme.colorWhite,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 2,
+                  height: 18.h,
+                  color: PayNestTheme.colorWhite,
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Arabic',
+                    style: PayNestTheme.subtitle16white.copyWith(
+                      fontSize: sizes.fontRatio * 14,
+                      color: PayNestTheme.textGrey,
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Container(
-              width: 1.sw,
-              height: 1.sh,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(splash),
-                  fit: BoxFit.fill
-                ),
+              width: double.infinity,
+              height: sizes.heightRatio * 46,
+              margin: EdgeInsets.symmetric(
+                horizontal: horizontalValue(16),
               ),
-            ),
-            Positioned(
-              top: ScreenUtil().screenHeight * 0.35,
-              // left: ScreenUtil().screenWidth * 0.3,
-              // right: ScreenUtil().screenWidth * 0.35,
-              child: AnimatedOpacity(
-                opacity: 1.0,
-                duration: Duration(milliseconds: 500),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(paynestLogo,semanticsLabel: paynest),
-                    SizedBox(height: 30.63.h,),
-                    Text(slogan,style: PayNestTheme.title24white),
-                  ],
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: PayNestTheme.primaryColor,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
-              ),
-            ),
-            Positioned(
-              bottom: ScreenUtil().screenHeight * 0.05,
-              child: AnimatedOpacity(
-                opacity: 1.0,
-                duration: Duration(milliseconds: 500),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 25.w),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 60.h,
-                        width: 326.w,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: PayNestTheme.blueAccent,
-                            elevation: 0,
-                            // side: BorderSide(width:1, color:Colors.white),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                          ),
-                          onPressed: (){
-                            Navigator.pushNamed(context, '/SignInPage');
-                          },
-                          child: Text(signIn,style: PayNestTheme.subtitle16white,)
-                        ),
-                      ),
-                      SizedBox(height: 16.h,),
-                      SizedBox(
-                        height: 60.h,
-                        width: 326.w,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: PayNestTheme.colorWhite,
-                            elevation: 0,
-                            // side: BorderSide(width:1, color:Colors.white),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                          ),
-                          onPressed: (){
-                            Navigator.pushNamed(context, '/RegisterPage');
-                          },
-                          child: Text(register,style: PayNestTheme.title_2_16primaryColor,)
-                        ),
-                      ),
-                    ],
+                onPressed: () {
+                  Navigator.pushNamed(context, '/SignInPage');
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: verticalValue(8),
+                  ),
+                  child: Text(
+                    signIn,
+                    style: PayNestTheme.subtitle16white,
                   ),
                 ),
               ),
-            )
+            ),
+            verticalSpacer(16),
+            Container(
+              width: double.infinity,
+              height: sizes.heightRatio * 46,
+              margin: EdgeInsets.symmetric(
+                horizontal: horizontalValue(16),
+              ),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: PayNestTheme.colorWhite,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/RegisterPage');
+                },
+                child: Text(
+                  register,
+                  style: PayNestTheme.title_2_16primaryColor,
+                ),
+              ),
+            ),
+            verticalSpacer(16),
+            GestureDetector(
+              onTap: () {
+                launch(
+                  'https://paynest.ae/privacy-policy.html',
+                );
+              },
+              child: Text(
+                privacyPolicy,
+                style: PayNestTheme.h2_14textGrey.copyWith(
+                  color: PayNestTheme.textGrey,
+                  fontSize: sizes.fontRatio * 12,
+                ),
+              ),
+            ),
+            verticalSpacer(16),
           ],
         ),
       ),

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/passwordreset_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
+import 'package:paynest_flutter_app/widgets/spacer.dart';
+
+import '../../../res/assets.dart';
+import '../../../res/res.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({Key? key}) : super(key: key);
@@ -23,233 +28,373 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   // final FocusNode inputFocusNode = FocusNode();
 
-
-
   bool isObscure = true;
   bool isObscurenew = true;
   bool isObscurere = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       body: SizedBox(
-         height: 1.sh,
-         child: Column(
-           children: [
-             Container(
-               height: 129.h,
-               decoration: BoxDecoration(
-                   color: PayNestTheme.primaryColor,
-                   borderRadius: BorderRadius.vertical(bottom: Radius.circular(24.r))
-               ),
-               child: SafeArea(
-                 child: Padding(
-                   padding: EdgeInsets.only(left: 25.h),
-                   child: Column(
-                     mainAxisAlignment: MainAxisAlignment.center,
-                     children: [
-                       Row(
-                         children: [
-                           Padding(
-                             padding: EdgeInsets.only(right: 25.h),
-                             child: Container(
-                               height : 44.h,
-                               width : 44.w,
-                               decoration: BoxDecoration(
-                                   color: Colors.white,
-                                   borderRadius: BorderRadius.circular(12.r)
-                               ),
-                               child: IconButton(
-                                 onPressed: (){
-                                   Navigator.pop(context);
-                                 },
-                                 icon: Icon(Icons.arrow_back,size: 20.sp,color: PayNestTheme.blueAccent,),
-                                 // child: Text(""),
-                               ),
-                             ),
-                           ),
-                           Text(chgPassword,style: PayNestTheme.title20white,),
-                         ],
-                       ),
-                     ],
-                   ),
-                 ),
-               ),
-             ),
-
-             Expanded(
-               child: SingleChildScrollView(
-                 child: Padding(
-                   padding: EdgeInsets.symmetric(horizontal: 25.w,vertical: 25.h),
-                   child: Form(
-                     key: Utils.changePasswordFormKey,
-                     child: Column(
-                       children: [
-                         Padding(
-                           padding: EdgeInsets.only(bottom: 17.h),
-                           child: TextFormField(
-                             controller: oldPassController,
-                             obscureText: isObscure,
-                             autovalidateMode: AutovalidateMode.onUserInteraction,
-                             validator: (value){
-                               if(value!.isEmpty){
-                                 return "Required";
-                               }else{
-                                 return null;
-                               }
-                             },
-                             decoration: InputDecoration(
-                               border: OutlineInputBorder(
-                                   borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                                   borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
-                               labelText: oldPassword,
-                               // labelStyle: CustomizedTheme.b_W400_12,
-                               focusedBorder: OutlineInputBorder(
-                                 borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                                 borderSide: BorderSide(color: Colors.black),
-                               ),
-                               suffixIcon: Column(
-                                 mainAxisAlignment: MainAxisAlignment.center,
-                                 children: [
-                                   GestureDetector(
-                                       onTap: (){
-                                         setState(() {
-                                           isObscure = !isObscure;
-                                         });
-                                       },
-                                       child: Text(isObscure ? show : hide,style: PayNestTheme.h2_14blueAccent)
-                                   ),
-                                 ],
-                               ),
-                             ),
-                           ),
-                         ),
-                         Padding(
-                           padding: EdgeInsets.only(bottom: 17.h),
-                           child: TextFormField(
-                             obscureText: isObscurenew,
-                             controller: newPassController,
-                             autovalidateMode: AutovalidateMode.onUserInteraction,
-                             validator: (value){
-                               if(value!.length < 6 ){
-                                 return "6 Characters";
-                               }else if(value.isEmpty){
-                                 return "Required";
-                               }else{
-                                 return null;
-                               }
-                             },
-                             decoration: InputDecoration(
-                               border: OutlineInputBorder(
-                                   borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                                   borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
-                               labelText: newPassword,
-                               // labelStyle: CustomizedTheme.b_W400_12,
-                               focusedBorder: OutlineInputBorder(
-                                 borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                                 borderSide: BorderSide(color: Colors.black),
-                               ),
-                               suffixIcon: Column(
-                                 mainAxisAlignment: MainAxisAlignment.center,
-                                 children: [
-                                   GestureDetector(
-                                       onTap: (){
-                                         setState(() {
-                                           isObscurenew = !isObscurenew;
-                                         });
-                                       },
-                                       child: Text(isObscurenew ? show : hide,style: PayNestTheme.h2_14blueAccent)
-                                   ),
-                                 ],
-                               ),
-                             ),
-                           ),
-                         ),
-                         Padding(
-                           padding: EdgeInsets.only(bottom: 17.h),
-                           child: TextFormField(
-                             controller: rePassController,
-                             autovalidateMode: AutovalidateMode.onUserInteraction,
-                             validator: (value){
-                               if(value!.isNotEmpty && value != newPassController.text){
-                                 return "Password does not match";
-                               }else if(value.isEmpty){
-                                 return "Required";
-                               }
-                               return null;
-                             },
-                             obscureText: isObscurere,
-                             decoration: InputDecoration(
-                               border: OutlineInputBorder(
-                                   borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                                   borderSide: BorderSide(color: Colors.black,width: 1.0.w)),
-                               labelText: confirmpassword,
-                               // labelStyle: CustomizedTheme.b_W400_12,
-                               focusedBorder: OutlineInputBorder(
-                                 borderRadius: BorderRadius.all(Radius.circular(10.0.r)),
-                                 borderSide: BorderSide(color: Colors.black),
-                               ),
-                               suffixIcon: Column(
-                                 mainAxisAlignment: MainAxisAlignment.center,
-                                 children: [
-                                   GestureDetector(
-                                       onTap: (){
-                                         setState(() {
-                                           isObscurere = !isObscurere;
-                                         });
-                                       },
-                                       child: Text(isObscurere ? show : hide,style: PayNestTheme.h2_14blueAccent)
-                                   ),
-                                 ],
-                               ),
-                             ),
-                           ),
-                         ),
-                       ],
-                     ),
-                   ),
-                 ),
-               ),
-             ),
-
-             Padding(
-               padding: EdgeInsets.symmetric(vertical: 20),
-               child: Obx(()=>SizedBox(
-                 height: 60.h,
-                 width: 326.w,
-                 child: TextButton(
-                   style: TextButton.styleFrom(
-                     backgroundColor:PayNestTheme.blueAccent,
-                     elevation: 0,
-                     // side: BorderSide(width:1, color:Colors.white),
-                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                   ),
-                   onPressed: () async {
-                     if(Utils.changePasswordFormKey.currentState!.validate()){
-                       await resetController.hitResetPassword(userController.userResData.value.parent!.id.toString(), oldPassController.text, newPassController.text);
-                       if(resetController.resetPassData.value.status == true){
-                         oldPassController.clear();
-                         newPassController.clear();
-                         rePassController.clear();
-                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
-                           // resetController.resetPassData.value.message.toString()
-                             "Password Reset Successfully"
-                         ),
-                           backgroundColor: Colors.green,));
-                         Navigator.pop(context);
-                       }else{
-                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(resetController.resetPassData.value.message.toString()),backgroundColor: Colors.red,));
-                       }
-                     }
-                     // Navigator.pushNamed(context, '/DashboardPage');
-                   },
-                   child: !resetController.isLoading.value ? Text(submit,style: PayNestTheme.subtitle16white,) :Center(child: CircularProgressIndicator(backgroundColor: PayNestTheme.colorWhite,color: PayNestTheme.blueAccent,)),
-                   // label:
-                 ),
-               )),
-             )
-           ],
-         ),
-       ),
+      body: SizedBox(
+        height: 1.sh,
+        child: Column(
+          children: [
+            Container(
+              height: 129.h,
+              decoration: BoxDecoration(
+                  color: PayNestTheme.primaryColor,
+                  borderRadius:
+                      BorderRadius.vertical(bottom: Radius.circular(24.r))),
+              child: SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 25.h),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 25.h),
+                            child: Container(
+                              height: 44.h,
+                              width: 44.w,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12.r)),
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(
+                                  Icons.arrow_back,
+                                  size: 20.sp,
+                                  color: PayNestTheme.primaryColor,
+                                ),
+                                // child: Text(""),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            chgPassword,
+                            style: PayNestTheme.title20white.copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'montserratBold',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: horizontalValue(16),
+                vertical: verticalValue(16),
+              ),
+              child: Form(
+                key: Utils.changePasswordFormKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: oldPassController,
+                      enabled: false,
+                      style: PayNestTheme.title_2_16primaryColor.copyWith(
+                        fontSize: sizes.fontRatio * 14,
+                        color: PayNestTheme.textGrey,
+                      ),
+                      decoration: InputDecoration(
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.5,
+                            ),
+                          ),
+                        ),
+                        labelText: oldPassword,
+                        labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                          fontSize: sizes.fontRatio * 12,
+                          color: PayNestTheme.primaryColor,
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.5,
+                            ),
+                          ),
+                        ),
+                        errorBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.5,
+                            ),
+                          ),
+                        ),
+                        disabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.5,
+                            ),
+                          ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(0.5),
+                          ),
+                        ),
+                        errorStyle: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 12,
+                          color: PayNestTheme.red,
+                        ),
+                      ),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value!.trim().isEmpty) {
+                          return 'Please enter password';
+                        }
+                        if (value.trim().length < 5) {
+                          return 'Password must not be less than 5';
+                        }
+                        return null;
+                      },
+                    ),
+                    verticalSpacer(12),
+                    TextFormField(
+                      controller: newPassController,
+                      obscureText: isObscure,
+                      enabled: false,
+                      style: PayNestTheme.title_2_16primaryColor.copyWith(
+                        fontSize: sizes.fontRatio * 14,
+                        color: PayNestTheme.textGrey,
+                      ),
+                      decoration: InputDecoration(
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.5,
+                            ),
+                          ),
+                        ),
+                        labelText: newPassword,
+                        labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                          fontSize: sizes.fontRatio * 12,
+                          color: PayNestTheme.primaryColor,
+                        ),
+                        suffixIcon: IconButton(
+                          icon: SvgPicture.asset(
+                            AppAssets.passwordEye,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                          onPressed: () {
+                            setState(
+                              () {
+                                isObscure = !isObscure;
+                              },
+                            );
+                          },
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.5,
+                            ),
+                          ),
+                        ),
+                        errorBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.5,
+                            ),
+                          ),
+                        ),
+                        disabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.5,
+                            ),
+                          ),
+                        ),
+                        errorStyle: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 12,
+                          color: PayNestTheme.red,
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(0.5),
+                          ),
+                        ),
+                      ),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value!.trim().isEmpty) {
+                          return 'Please enter password';
+                        }
+                        if (value.trim().length < 5) {
+                          return 'Password must not be less than 5';
+                        }
+                        return null;
+                      },
+                    ),
+                    verticalSpacer(12),
+                    TextFormField(
+                      controller: rePassController,
+                      obscureText: isObscure,
+                      enabled: false,
+                      style: PayNestTheme.title_2_16primaryColor.copyWith(
+                        fontSize: sizes.fontRatio * 14,
+                        color: PayNestTheme.textGrey,
+                      ),
+                      decoration: InputDecoration(
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.5,
+                            ),
+                          ),
+                        ),
+                        labelText: confirmPassword,
+                        labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                          fontSize: sizes.fontRatio * 12,
+                          color: PayNestTheme.primaryColor,
+                        ),
+                        errorStyle: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 12,
+                          color: PayNestTheme.red,
+                        ),
+                        suffixIcon: IconButton(
+                          icon: SvgPicture.asset(
+                            AppAssets.passwordEye,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                          onPressed: () {
+                            setState(
+                              () {
+                                isObscure = !isObscure;
+                              },
+                            );
+                          },
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.5,
+                            ),
+                          ),
+                        ),
+                        errorBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.5,
+                            ),
+                          ),
+                        ),
+                        disabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.5,
+                            ),
+                          ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(0.5),
+                          ),
+                        ),
+                      ),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value!.trim().isEmpty) {
+                          return 'Please enter password';
+                        }
+                        if (value.trim().length < 5) {
+                          return 'Password must not be less than 5';
+                        }
+                        if(newPassController.text != rePassController.text){
+                          return 'New password and confirm password not matched';
+                        }
+                        return null;
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Spacer(),
+            Obx(
+              () => Container(
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(
+                  horizontal: horizontalValue(16),
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: PayNestTheme.primaryColor,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        14,
+                      ),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      vertical: verticalValue(16),
+                    ),
+                  ),
+                  onPressed: () async {
+                    if (Utils.changePasswordFormKey.currentState!.validate()) {
+                      await resetController.hitResetPassword(
+                          userController.userResData.value.parent!.id
+                              .toString(),
+                          oldPassController.text,
+                          newPassController.text);
+                      if (resetController.resetPassData.value.status == true) {
+                        oldPassController.clear();
+                        newPassController.clear();
+                        rePassController.clear();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              "Password Reset Successfully",
+                            ),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                        Navigator.pop(context);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              resetController.resetPassData.value.message
+                                  .toString(),
+                            ),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: Center(
+                    child: !resetController.isLoading.value
+                        ? Text(
+                            changePassword,
+                            style: PayNestTheme.title_2_16primaryColor.copyWith(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                              color: PayNestTheme.colorWhite,
+                            ),
+                          )
+                        : CircularProgressIndicator(
+                            backgroundColor: PayNestTheme.colorWhite,
+                            color: PayNestTheme.blueAccent,
+                          ),
+                  ),
+                ),
+              ),
+            ),
+            verticalSpacer(16),
+          ],
+        ),
+      ),
     );
   }
 }
