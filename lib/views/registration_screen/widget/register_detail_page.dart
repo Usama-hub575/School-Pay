@@ -1,15 +1,14 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import '../../../constants/constants.dart';
 import '../../../controller/user_controller.dart';
+import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
-import '../../../widgets/blue_back_button.dart';
+import '../../../widgets/spacer.dart';
 
 class RegisterDetailPage extends StatefulWidget {
   const RegisterDetailPage({
@@ -18,440 +17,567 @@ class RegisterDetailPage extends StatefulWidget {
     required this.password,
     required this.phoneNumber,
     required this.email,
+    required this.onTap,
   }) : super(key: key);
 
   final String phoneCode;
   final String phoneNumber;
   final String email;
   final String password;
+  final Function(
+    String fName,
+    String lName,
+    String gender,
+    String emiratesId,
+    String expiryDate,
+    String address,
+    String city,
+  ) onTap;
 
   @override
   State<RegisterDetailPage> createState() => _RegisterDetailPageState();
 }
 
 class _RegisterDetailPageState extends State<RegisterDetailPage> {
-
   bool loading = false;
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
   TextEditingController fnameController = TextEditingController();
   TextEditingController lnameController = TextEditingController();
   TextEditingController emirateIDController = TextEditingController();
   TextEditingController expiryController = TextEditingController();
-
   TextEditingController addressController = TextEditingController();
-  TextEditingController areaController = TextEditingController();
-  TextEditingController countryController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+
   UserController registerController = Get.put(UserController());
+
+  List<String> gender = ['Male', 'Female'];
+  String? _selectedFilter;
+  bool isEmiratesSelected = true;
+  bool isPassportSelected = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedFilter = 'Male';
+    isEmiratesSelected = true;
+    isPassportSelected = false;
+  }
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      phoneController.text = widget.phoneCode + widget.phoneNumber;
-      emailController.text = widget.email;
-    });
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 44.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          verticalSpacer(32),
+          Text(
+            pleaseenterdetailbelow,
+            style: PayNestTheme.title_2_16primaryColor.copyWith(
+              fontSize: sizes.fontRatio * 18,
+              fontFamily: 'montserratExtraBold',
+              color: PayNestTheme.black,
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
               children: [
-                BlueBackButton(
-                  context: context,
-                ),
-                SizedBox(
-                  width: 20.w,
-                ),
-                Text(register, style: PayNestTheme.title20primaryColor),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 23.h, bottom: 38.h),
-              child: Text(
-                pleaseenterdetailbelow,
-                style: PayNestTheme.title22black,
-              ),
-            ),
-            Expanded(
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                shrinkWrap: true,
-                children: [
-                  Form(
-                    key: Utils.registrationFormKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          personalInformation,
-                          style: PayNestTheme.title_2_16primaryColor,
+                Form(
+                  key: Utils.registrationFormKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: fnameController,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.textGrey,
                         ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        TextFormField(
-                          controller: phoneController,
-                          enabled: false,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10.0.r)),
-                                borderSide: BorderSide(
-                                    color: Colors.black, width: 1.0.w)),
-                            labelText: phone,
-                            // labelStyle: CustomizedTheme.b_W400_12,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10.0.r)),
-                              borderSide: BorderSide(color: Colors.black),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          labelText: fullNameSignup,
+                          labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          disabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorStyle:
+                              PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.red,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(0.5),
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 13.h,
-                        ),
-                        TextFormField(
-                          controller: emailController,
-                          enabled: false,
-                          decoration: InputDecoration(
-                            // contentPadding: EdgeInsets.only(left: 24.44.w,right: 34.47.w, bottom: 12.3.h,top: 15.03.h),
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10.0.r)),
-                                borderSide: BorderSide(
-                                    color: Colors.black, width: 1.0.w)),
-                            labelText: email,
-                            // labelStyle: CustomizedTheme.b_W400_12,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10.0.r)),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.trim().isEmpty) {
+                            return 'Please enter your Full name';
+                          }
+                          if (value.trim().length < 5) {
+                            return 'Name must not be less than 5';
+                          }
+                          return null;
+                        },
+                      ),
+                      verticalSpacer(12),
+                      Container(
+                        width: double.infinity,
+                        child: Text(
+                          'Gender *',
+                          textAlign: TextAlign.start,
+                          style: PayNestTheme.title20white.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: PayNestTheme.primaryColor,
+                            fontSize: sizes.fontRatio * 12,
+                            fontFamily: 'montserratMedium',
                           ),
                         ),
-                        SizedBox(
-                          height: 13.h,
-                        ),
-                        TextFormField(
-                          controller: fnameController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10.0.r)),
-                                borderSide: BorderSide(
-                                    color: Colors.black, width: 1.0.w)),
-                            labelText: fname,
-                            // labelStyle: CustomizedTheme.b_W400_12,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10.0.r)),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                          ),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value!.trim().isEmpty) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 13.h,
-                        ),
-                        TextFormField(
-                          controller: lnameController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10.0.r)),
-                                borderSide: BorderSide(
-                                    color: Colors.black, width: 1.0.w)),
-                            labelText: lname,
-                            // labelStyle: CustomizedTheme.b_W400_12,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10.0.r)),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                          ),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value!.trim().isEmpty) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 13.h,
-                        ),
-                        TextFormField(
-                          controller: emirateIDController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10.0.r)),
-                                borderSide: BorderSide(
-                                    color: Colors.black, width: 1.0.w)),
-                            labelText: emiratesID,
-                            // labelStyle: CustomizedTheme.b_W400_12,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10.0.r)),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                          ),
-                          inputFormatters: <TextInputFormatter>[
-                            EmiratesIdFormatter(
-                              mask: 'xxx-xxxx-xxxxxxx-x',
-                              separator: '-',
-                            )
-                          ],
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value!.trim().isEmpty) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 13.h,
-                        ),
-                        TextFormField(
-                          readOnly: true,
-                          controller: expiryController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10.0.r)),
-                                borderSide: BorderSide(
-                                    color: Colors.black, width: 1.0.w)),
-                            labelText: expiry,
-                            // labelStyle: CustomizedTheme.b_W400_12,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10.0.r)),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                          ),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value!.trim().isEmpty) {
-                              return 'Expiry date is invalid';
-                            }
-                            return null;
-                          },
-                          onTap: () {
-                            _selectExpiryDate(context);
-                          },
-                        ),
-                        SizedBox(
-                          height: 24.h,
-                        ),
-                        Text(
-                          addressDetails,
-                          style: PayNestTheme.title_2_16primaryColor,
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        TextFormField(
-                          controller: addressController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10.0.r)),
-                                borderSide: BorderSide(
-                                    color: Colors.black, width: 1.0.w)),
-                            labelText: address,
-                            // labelStyle: CustomizedTheme.b_W400_12,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10.0.r)),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                          ),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value!.trim().isEmpty) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 13.h,
-                        ),
-                        TextFormField(
-                          controller: areaController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10.0.r)),
-                                borderSide: BorderSide(
-                                    color: Colors.black, width: 1.0.w)),
-                            labelText: area,
-                            // labelStyle: CustomizedTheme.b_W400_12,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10.0.r)),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                          ),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value!.trim().isEmpty) {
-                              return '';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 13.h,
-                        ),
-                        TextFormField(
-                          readOnly: true,
-                          controller: countryController,
-                          validator: (value) {
-                            if (countryController.text.isEmpty) {
-                              return 'Country is empty';
-                            }
-                            // Return null if the entered
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10.0.r)),
-                                borderSide: BorderSide(
-                                    color: Colors.black, width: 1.0.w)),
-                            labelText: country,
-                            // labelStyle: CustomizedTheme.b_W400_12,
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10.0.r)),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                          ),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          onTap: () {
-                            showCountryPicker(
-                              context: context,
-                              showPhoneCode: false,
-                              showWorldWide: false,
-                              onSelect: (Country country) {
-                                setState(
-                                      () {
-                                    countryController.text = country.name;
-                                  },
-                                );
-                              },
-                              countryListTheme: CountryListThemeData(
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(8.0),
-                                  topRight: Radius.circular(8.0),
-                                ),
-                                // Optional. Styles the search field.
-                                inputDecoration: InputDecoration(
-                                  labelText: 'Search',
-                                  hintText: 'Find your Country',
-                                  prefixIcon: const Icon(Icons.search),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: const Color(0xFF8C98A8)
-                                          .withOpacity(0.2),
-                                    ),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: DropdownButtonHideUnderline(
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                child: DropdownButton(
+                                  elevation: 0,
+                                  isExpanded: true,
+                                  items: gender.map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: PayNestTheme.h2_12blueAccent
+                                            .copyWith(
+                                          fontSize: sizes.fontRatio * 14,
+                                          fontWeight: FontWeight.bold,
+                                          color: PayNestTheme.black,
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  value: _selectedFilter,
+                                  hint: Text(
+                                    "Gender",
                                   ),
+                                  // value: selection,
+                                  onChanged: (newValue) {
+                                    setState(
+                                      () {
+                                        _selectedFilter = newValue.toString();
+                                        print(
+                                          _selectedFilter,
+                                        );
+                                      },
+                                    );
+                                  },
                                 ),
                               ),
-                            );
-                          },
-                        ),
-                        SizedBox(
-                          height: 24.h,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Obx(() => SizedBox(
-                    height: 60.h,
-                    width: 326.w,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: PayNestTheme.blueAccent,
-                        elevation: 0,
-                        // side: BorderSide(width:1, color:Colors.white),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                      onPressed: () async {
-                        if (Utils.registrationFormKey.currentState!
-                            .validate()) {
-                          /// Hit Register API via Controller
-                          await registerController.hitRegister(
-                              emailController.text,
-                              phoneController.text,
-                              widget.password,
-                              fnameController.text,
-                              lnameController.text,
-                              widget.phoneCode,
-                              countryController.text,
-                              emirateIDController.text,
-                              areaController.text,
-                              countryController.text,
-                              addressController.text,
-                              "E23123");
-                          if (registerController.userResData.value.status ==
-                              true) {
-                            Navigator.pushNamed(context, '/CreatePin');
-                          } else if (registerController
-                              .userResData.value.status ==
-                              true) {
-                            print("");
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    content: Text(registerController
-                                        .isFailed
-                                        .toString())));
-                            print(registerController.isFailed);
-                          }
-                        }
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            next,
-                            style: PayNestTheme.subtitle16white,
-                          ),
-                          !registerController.isLoading.value
-                              ? Icon(
-                            Icons.play_circle_fill,
-                            color: PayNestTheme.colorWhite,
-                          )
-                              : SizedBox(
-                            height: 10.sp,
-                            width: 10.sp,
-                            child: CircularProgressIndicator(
-                              backgroundColor:
-                              PayNestTheme.colorWhite,
                             ),
                           ),
                         ],
                       ),
-                      // label:
-                    ),
-                  )),
-                  SizedBox(
-                    height: 24.h,
+                      Container(
+                        width: 1.sw,
+                        height: 1.h,
+                        color: PayNestTheme.textGrey.withOpacity(
+                          0.5,
+                        ),
+                      ),
+                      verticalSpacer(12),
+                      Row(
+                        children: [
+                          const Spacer(),
+                          _optionalButton(
+                            value: 'Emirates ID',
+                            buttonColor: isEmiratesSelected
+                                ? PayNestTheme.primaryColor
+                                : PayNestTheme.primaryColor.withOpacity(
+                                    0.5,
+                                  ),
+                            onTap: () {
+                              isEmiratesSelected = true;
+                              isPassportSelected = false;
+                              setState(() {});
+                            },
+                          ),
+                          horizontalSpacer(16),
+                          _optionalButton(
+                            value: 'Passport   ',
+                            buttonColor: isPassportSelected
+                                ? PayNestTheme.primaryColor
+                                : PayNestTheme.primaryColor.withOpacity(
+                                    0.5,
+                                  ),
+                            onTap: () {
+                              isEmiratesSelected = false;
+                              isPassportSelected = true;
+                              setState(() {});
+                            },
+                          ),
+                          const Spacer(),
+                        ],
+                      ),
+                      verticalSpacer(12),
+                      TextFormField(
+                        controller: emirateIDController,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.textGrey,
+                        ),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          labelText:
+                              isEmiratesSelected ? emiratesIDD : passportNumber,
+                          labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          disabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorStyle:
+                              PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.red,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(0.5),
+                            ),
+                          ),
+                        ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      ),
+                      verticalSpacer(12),
+                      TextFormField(
+                        controller: expiryController,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.textGrey,
+                        ),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          labelText: expiry,
+                          labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          disabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorStyle:
+                              PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.red,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(0.5),
+                            ),
+                          ),
+                        ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      ),
+                      verticalSpacer(12),
+                      Container(
+                        width: double.infinity,
+                        child: Text(
+                          'Address Detail',
+                          textAlign: TextAlign.start,
+                          style: PayNestTheme.title20white.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: PayNestTheme.primaryColor,
+                            fontSize: sizes.fontRatio * 16,
+                            fontFamily: 'montserratBold',
+                          ),
+                        ),
+                      ),
+                      verticalSpacer(12),
+                      TextFormField(
+                        controller: addressController,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.textGrey,
+                        ),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          labelText: address,
+                          labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          disabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorStyle:
+                              PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.red,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(0.5),
+                            ),
+                          ),
+                        ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      ),
+                      verticalSpacer(12),
+                      TextFormField(
+                        controller: cityController,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.textGrey,
+                        ),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          labelText: city,
+                          labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          disabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorStyle:
+                              PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.red,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(0.5),
+                            ),
+                          ),
+                        ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      ),
+                      verticalSpacer(12),
+                    ],
                   ),
-                ],
+                ),
+                Obx(
+                  () => TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: PayNestTheme.primaryColor,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: verticalValue(16),
+                        )),
+                    onPressed: () async {
+                      if (Utils.registrationFormKey.currentState!.validate()) {
+                        widget.onTap(
+                          fnameController.text,
+                          lnameController.text,
+                          _selectedFilter!,
+                          emirateIDController.text,
+                          expiryController.text,
+                          addressController.text,
+                          cityController.text,
+                        );
+                      }
+                    },
+                    child: Row(
+                      children: [
+                        const Spacer(),
+                        Text(
+                          next,
+                          style: PayNestTheme.subtitle16white,
+                        ),
+                        const Spacer(),
+                        !registerController.isLoading.value
+                            ? const SizedBox.shrink()
+                            : Container(
+                                height: sizes.heightRatio * 16,
+                                width: sizes.widthRatio * 16,
+                                child: CircularProgressIndicator(
+                                  backgroundColor: PayNestTheme.colorWhite,
+                                  color: PayNestTheme.primaryColor,
+                                  strokeWidth: 2,
+                                ),
+                              ),
+                        horizontalSpacer(16),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 24.h,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _optionalButton({
+    required Color buttonColor,
+    required Function onTap,
+    required String value,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        onTap();
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalValue(40),
+          vertical: verticalValue(16),
+        ),
+        decoration: BoxDecoration(
+          color: buttonColor,
+          borderRadius: BorderRadius.circular(32),
+        ),
+        child: Column(
+          children: [
+            Text(
+              '$value',
+              textAlign: TextAlign.center,
+              style: PayNestTheme.title20white.copyWith(
+                fontWeight: FontWeight.bold,
+                color: PayNestTheme.colorWhite,
+                fontSize: sizes.fontRatio * 14,
+                fontFamily: 'montserratBold',
+              ),
+            ),
+            Text(
+              'OPTIONAL',
+              textAlign: TextAlign.center,
+              style: PayNestTheme.title20white.copyWith(
+                fontSize: sizes.fontRatio * 10,
+                color: PayNestTheme.colorWhite,
+                fontFamily: 'montserratMedium',
               ),
             ),
           ],
@@ -470,7 +596,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
     if (selected != null)
       setState(() {
         expiryController.text =
-        '${selected.day}-${selected.month}-${selected.year}';
+            '${selected.day}-${selected.month}-${selected.year}';
       });
   }
 }
@@ -497,7 +623,7 @@ class EmiratesIdFormatter extends TextInputFormatter {
             mask[newValue.text.length - 1] == separator) {
           return TextEditingValue(
             text:
-            '${oldValue.text}$separator${newValue.text.substring(newValue.text.length - 1)}',
+                '${oldValue.text}$separator${newValue.text.substring(newValue.text.length - 1)}',
             selection: TextSelection.collapsed(
               offset: newValue.selection.end + 1,
             ),

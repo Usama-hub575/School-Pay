@@ -34,11 +34,11 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                   width: 1.sw,
                   decoration: BoxDecoration(
                       color: PayNestTheme.primaryColor,
-                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(24.r))
-                  ),
+                      borderRadius:
+                          BorderRadius.vertical(bottom: Radius.circular(24.r))),
                   child: SafeArea(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 25.h,top:25.h),
+                      padding: EdgeInsets.only(left: 25.h, top: 25.h),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -50,42 +50,33 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                                   Padding(
                                     padding: EdgeInsets.only(right: 25.w),
                                     child: Container(
-                                      height : 44.h,
-                                      width : 44.w,
+                                      height: 44.h,
+                                      width: 44.w,
                                       decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.circular(12.r)
-                                      ),
+                                          borderRadius:
+                                              BorderRadius.circular(12.r)),
                                       child: IconButton(
-                                        onPressed: (){
+                                        onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        icon: Icon(Icons.clear,size: 20.sp,color: PayNestTheme.blueAccent),
+                                        icon: Icon(Icons.arrow_back,
+                                            size: 20.sp,
+                                            color: PayNestTheme.blueAccent),
                                         // child: Text(""),
                                       ),
                                     ),
                                   ),
-                                  // Text(myProfile,style: PayNestTheme.title20white,),
+                                  Text(
+                                    recentTransaction,
+                                    style: PayNestTheme.title20white,
+                                  ),
+                                  SizedBox(
+                                    height: 44.h,
+                                    width: 44.w,
+                                  )
                                 ],
                               ),
-                              // Padding(
-                              //   padding: EdgeInsets.only(right: 25.h),
-                              //   child: Container(
-                              //     height : 44.h,
-                              //     width : 44.w,
-                              //     decoration: BoxDecoration(
-                              //         color: Colors.white,
-                              //         borderRadius: BorderRadius.circular(12.r)
-                              //     ),
-                              //     child: IconButton(
-                              //       onPressed: (){
-                              //         Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditProfilePage()));
-                              //       },
-                              //       icon: Image.asset(ic_edit,width: 20.w,height: 20.h,),
-                              //       // child: Text(""),
-                              //     ),
-                              //   ),
-                              // ),
                             ],
                           ),
                         ],
@@ -94,27 +85,29 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                   ),
                 ),
                 Positioned.fill(
-                    top: 90,
+                    top: 70,
                     child:
-                    // Obx(()=>
+                        // Obx(()=>
                         SizedBox(
                       width: 1.sw,
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(left: 25.w,right: 25.w,top: 30.h),
+                            padding: EdgeInsets.only(
+                                left: 25.w, right: 25.w, top: 30.h),
                             child: Container(
                               // padding: EdgeInsets.symmetric(horizontal: 20.w),
                               width: 1.sw,
-                              height: 223.h,
+                              height: 118.h,
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
                                     color: PayNestTheme.dropShadow,
                                     spreadRadius: 0,
                                     blurRadius: 1,
-                                    offset: Offset(0, 1), // changes position of shadow
+                                    offset: Offset(
+                                        0, 1), // changes position of shadow
                                   ),
                                 ],
                                 color: PayNestTheme.colorWhite,
@@ -122,27 +115,28 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                               ),
                               child: Column(
                                 // mainAxisAlignment: MainAxisAlignment.end,
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Container(
-                                    width: 70.w,
-                                    height: 70.h,
-                                    decoration: BoxDecoration(
-                                      color: PayNestTheme.aqua,
-                                      borderRadius: BorderRadius.circular(50.r),
-                                    ),
-                                    child: ClipOval(
-                                      child: Icon(Icons.check,size: 30.sp,color: PayNestTheme.primaryColor,),
-                                    ),
-                                  ),
                                   // Icon(Icons.check_circle,size: 50.sp,color: PayNestTheme.primaryColor,),
                                   // Image.asset(ic_schooldark,height: 50.h,width: 50.w,),
-                                  SizedBox(height: 13.h,),
-                                  Text(congratulations,style: PayNestTheme.title24primaryColorBold,),
-                                  SizedBox(height: 5.h,),
-                                  Text(youHaveSuccessfully,style: PayNestTheme.h2_14textGrey,),
-                                  SizedBox(height: 31.h,),
+                                  SizedBox(
+                                    height: 13.h,
+                                  ),
+                                  Text(
+                                    congratulations,
+                                    style: PayNestTheme.title24primaryColorBold,
+                                  ),
+                                  SizedBox(
+                                    height: 5.h,
+                                  ),
+                                  Text(
+                                    youHaveSuccessfully,
+                                    style: PayNestTheme.h2_14textGrey,
+                                  ),
+                                  SizedBox(
+                                    height: 31.h,
+                                  ),
                                 ],
                               ),
                             ),
@@ -164,7 +158,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       ),
                     )
                     // )
-                )
+                    )
               ],
             ),
           ),
@@ -172,7 +166,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.w,vertical: 34.h),
+                padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 34.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -193,12 +187,23 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     // ),
 
                     /// Title
-                    Text(invoiceDetails,style: PayNestTheme.title_2_16primaryColor,),
-                    SizedBox(height: 15.h,),
+                    Text(
+                      invoiceDetails,
+                      style: PayNestTheme.title_2_16primaryColor,
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
 
-                    Text(referenceNumber,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text(widget.tdm.refNo.toString(),style: PayNestTheme.title_3_16black),
+                    Text(
+                      referenceNumber,
+                      style: PayNestTheme.h2_14textGrey,
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Text(widget.tdm.refNo.toString(),
+                        style: PayNestTheme.title_3_16black),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -208,9 +213,15 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       ),
                     ),
 
-                    Text(studentID,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text(widget.tdm.studentId.toString(),style: PayNestTheme.title_3_16black),
+                    Text(
+                      studentID,
+                      style: PayNestTheme.h2_14textGrey,
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Text(widget.tdm.studentId.toString(),
+                        style: PayNestTheme.title_3_16black),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -220,9 +231,18 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       ),
                     ),
 
-                    Text(studentName,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text(widget.tdm.student!.firstName.toString()+" "+widget.tdm.student!.lastName.toString(),style: PayNestTheme.title_3_16black),
+                    Text(
+                      studentName,
+                      style: PayNestTheme.h2_14textGrey,
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Text(
+                        widget.tdm.student!.firstName.toString() +
+                            " " +
+                            widget.tdm.student!.lastName.toString(),
+                        style: PayNestTheme.title_3_16black),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -232,9 +252,15 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       ),
                     ),
 
-                    Text(studentclass,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text("Grade "+widget.tdm.student!.grade.toString(),style: PayNestTheme.title_3_16black),
+                    Text(
+                      studentclass,
+                      style: PayNestTheme.h2_14textGrey,
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Text("Grade " + widget.tdm.student!.grade.toString(),
+                        style: PayNestTheme.title_3_16black),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -244,9 +270,15 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       ),
                     ),
 
-                    Text(amountPaid,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text('AED '+widget.tdm.amount.toString(),style: PayNestTheme.title_3_16black),
+                    Text(
+                      amountPaid,
+                      style: PayNestTheme.h2_14textGrey,
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Text('AED ' + widget.tdm.amount.toString(),
+                        style: PayNestTheme.title_3_16black),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -256,9 +288,18 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       ),
                     ),
 
-                    Text(paidon,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text(DateFormat("yyyy-MM-dd").format(widget.tdm.payedOn).toString(),style: PayNestTheme.title_3_16black),
+                    Text(
+                      paidon,
+                      style: PayNestTheme.h2_14textGrey,
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Text(
+                        DateFormat("yyyy-MM-dd")
+                            .format(widget.tdm.payedOn)
+                            .toString(),
+                        style: PayNestTheme.title_3_16black),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -268,9 +309,17 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       ),
                     ),
 
-                    Text(dueAmount,style: PayNestTheme.h2_14textGrey,),
-                    SizedBox(height: 5.h,),
-                    Text('AED '+widget.tdm.student!.totalBalanceAmount.toString(),style: PayNestTheme.title_3_16black),
+                    Text(
+                      dueAmount,
+                      style: PayNestTheme.h2_14textGrey,
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Text(
+                        'AED ' +
+                            widget.tdm.student!.totalBalanceAmount.toString(),
+                        style: PayNestTheme.title_3_16black),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -279,8 +328,6 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                         color: PayNestTheme.lineColor,
                       ),
                     ),
-
-
                   ],
                 ),
               ),

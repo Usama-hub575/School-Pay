@@ -80,10 +80,10 @@ class _AmountWidgetState extends State<AmountWidget> {
                       verticalSpacer(36),
                       Text(
                         enterAmount,
-                        style: PayNestTheme.title_2_16primaryColor.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: sizes.fontRatio * 15,
+                        style: PayNestTheme.h2_12blueAccent.copyWith(
+                          fontSize: sizes.fontRatio * 16,
                           color: PayNestTheme.primaryColor,
+                          fontFamily: 'montserratBold',
                         ),
                       ),
                       verticalSpacer(24),
@@ -94,13 +94,17 @@ class _AmountWidgetState extends State<AmountWidget> {
                               'Current Payable Amount',
                               style: PayNestTheme.h2_12blueAccentLight.copyWith(
                                 fontSize: sizes.fontRatio * 14,
+                                color: PayNestTheme.primaryColor,
+                                fontFamily: 'montserratSemiBold',
                               ),
                             ),
                             Spacer(),
                             Text(
-                              '${widget.singleStudentModel.student?.totalBalanceAmount}',
+                              'AED ${widget.singleStudentModel.student?.totalBalanceAmount}',
                               style: PayNestTheme.h2_12blueAccent.copyWith(
-                                fontSize: sizes.fontRatio * 14,
+                                fontSize: sizes.fontRatio * 16,
+                                color: PayNestTheme.primaryColor,
+                                fontFamily: 'montserratExtraBold',
                               ),
                             ),
                           ],
@@ -116,12 +120,18 @@ class _AmountWidgetState extends State<AmountWidget> {
                       TextFormField(
                         controller: _enterAmount,
                         keyboardType: TextInputType.number,
+                        style: PayNestTheme.h2_12blueAccent.copyWith(
+                          fontSize: sizes.fontRatio * 16,
+                          color: PayNestTheme.black,
+                          fontFamily: 'montserratExtraBold',
+                        ),
                         decoration: InputDecoration(
                           suffix: Text(
                             'AED',
                             style: PayNestTheme.h2_12blueAccent.copyWith(
-                              fontSize: sizes.fontRatio * 12,
-                              color: PayNestTheme.primaryColor,
+                              fontSize: sizes.fontRatio * 16,
+                              color: PayNestTheme.black,
+                              fontFamily: 'montserratExtraBold',
                             ),
                           ),
                           contentPadding: EdgeInsets.symmetric(

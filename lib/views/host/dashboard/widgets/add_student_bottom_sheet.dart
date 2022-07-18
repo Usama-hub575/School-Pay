@@ -48,12 +48,13 @@ class StudentWidget extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: horizontalValue(30)),
                 child: Column(
                   children: [
-                    verticalSpacer(22.0),
+                    verticalSpacer(35),
                     Text(
                       addStudent,
                       style: PayNestTheme.title_2_16primaryColor.copyWith(
-                        fontWeight: FontWeight.bold,
+                        fontSize: sizes.fontRatio * 14,
                         color: PayNestTheme.black,
+                        fontFamily: 'montserratBold',
                       ),
                     ),
                     verticalSpacer(22.0),

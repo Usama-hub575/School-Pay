@@ -40,31 +40,41 @@ class _NotificationPageState extends State<NotificationPage> {
                             height: 44.h,
                             width: 44.w,
                             decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.r)),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
                             child: IconButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              icon: Icon(Icons.arrow_back,
-                                  size: 20.sp, color: PayNestTheme.blueAccent),
+                              icon: Icon(
+                                Icons.arrow_back,
+                                size: 20.sp,
+                                color: PayNestTheme.primaryColor,
+                              ),
                               // child: Text(""),
                             ),
                           ),
                         ),
+                        horizontalSpacer(8),
                         Row(
                           children: [
                             Container(
                               height: 44.h,
                               width: 44.w,
-                              child: Lottie.asset(notificationAnimation,
-                                  repeat: false, animate: false),
+                              child: Lottie.asset(
+                                notificationAnimation,
+                                repeat: false,
+                                animate: false,
+                              ),
                             ),
                             horizontalSpacer(5),
                             Text(
                               notifications,
-                              style: PayNestTheme.title20white
-                                  .copyWith(fontSize: sizes.fontRatio * 18),
+                              style: PayNestTheme.title20white.copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'montserratBold',
+                              ),
                             ),
                           ],
                         )
@@ -85,7 +95,7 @@ class _NotificationPageState extends State<NotificationPage> {
           ),
           Expanded(
             child: ListView(
-              physics: const BouncingScrollPhysics() ,
+              physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               padding: EdgeInsets.all(0),
               scrollDirection: Axis.vertical,

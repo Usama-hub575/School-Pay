@@ -68,7 +68,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                 icon: Icon(
                                   Icons.arrow_back,
                                   size: 20.sp,
-                                  color: PayNestTheme.blueAccent,
+                                  color: PayNestTheme.primaryColor,
                                 ),
                                 // child: Text(""),
                               ),
@@ -76,7 +76,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                           ),
                           Text(
                             chgPassword,
-                            style: PayNestTheme.title20white,
+                            style: PayNestTheme.title20white.copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'montserratBold',
+                            ),
                           ),
                         ],
                       ),

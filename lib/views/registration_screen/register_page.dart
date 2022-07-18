@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/custom_slider.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_detail_page.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_main_page.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_otp_page.dart';
 import '../../constants/constants.dart';
+import '../../controller/user_controller.dart';
 import '../../res/res.dart';
 import '../../theme/theme.dart';
 import '../../widgets/spacer.dart';
@@ -22,6 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String password = '';
   String phoneNumber = '';
   String phoneCode = '';
+  UserController registerController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +106,49 @@ class _RegisterPageState extends State<RegisterPage> {
                               password: password,
                               phoneCode: phoneCode,
                               phoneNumber: phoneCode,
+                              onTap: (
+                                fName,
+                                lName,
+                                gender,
+                                emiratesID,
+                                expiryDate,
+                                address,
+                                city,
+                              ) async {
+                                await registerController.hitRegister(
+                                  email,
+                                  phoneNumber,
+                                  password,
+                                  fName,
+                                  lName,
+                                  phoneCode,
+                                  '',
+                                  emiratesID,
+                                  expiryDate,
+                                  '',
+                                  '',
+                                  "E23123",
+                                );
+                                if (registerController
+                                        .userResData.value.status ==
+                                    true) {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/CreatePin',
+                                  );
+                                } else if (registerController
+                                        .userResData.value.status ==
+                                    true) {
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        registerController.isFailed.toString(),
+                                      ),
+                                    ),
+                                  );
+                                }
+                              },
                             );
                 },
                 itemCount: 3,

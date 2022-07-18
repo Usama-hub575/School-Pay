@@ -26,7 +26,6 @@ class VerifyOTPController extends GetxController{
         otpVerifyData.value = lrm;
         otpVerifyData.refresh();
         isSuccess(true);
-        // print(lrm.message);
       }else{
         isSuccess(false);
         isLoading(false);

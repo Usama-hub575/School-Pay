@@ -63,7 +63,7 @@ class _StudentCardState extends State<StudentCard> {
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
-              color: PayNestTheme.primaryColor.withOpacity(0.5),
+              color: index % 2 == 0 ? PayNestTheme.primaryColor.withOpacity(0.5) : PayNestTheme.primaryColor.withOpacity(0.2),
             ),
             child: Column(
               children: [

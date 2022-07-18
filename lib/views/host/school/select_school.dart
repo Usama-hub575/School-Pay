@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/school_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/selectedschool_to_addstudent.dart';
@@ -73,6 +74,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                         child: Column(
                           children: [
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
                                   padding: EdgeInsets.only(right: 25.w),
@@ -96,12 +98,14 @@ class _SelectSchoolState extends State<SelectSchool> {
                                     ),
                                   ),
                                 ),
-                                Spacer(),
                                 Text(
                                   selectSchool,
                                   style: PayNestTheme.title20white,
                                 ),
-                                Spacer(),
+                                SizedBox(
+                                  height: 44.h,
+                                  width: 44.w,
+                                )
                               ],
                             ),
                           ],
@@ -252,7 +256,7 @@ class _SelectSchoolState extends State<SelectSchool> {
         children: [
           GestureDetector(
             onTap: () {
-              if(log.isSelected){
+              if (log.isSelected) {
                 SelectedSchoolData schoolData = SelectedSchoolData(
                     id: log.id,
                     name: log.name,
@@ -277,16 +281,29 @@ class _SelectSchoolState extends State<SelectSchool> {
                 );
               }
             },
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(
-                'https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg',
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 7,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(
+                  'https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg',
+                ),
               ),
             ),
           ),
           horizontalSpacer(16),
           GestureDetector(
             onTap: () {
-              if(log.isSelected){
+              if (log.isSelected) {
                 SelectedSchoolData schoolData = SelectedSchoolData(
                     id: log.id,
                     name: log.name,
@@ -340,21 +357,32 @@ class _SelectSchoolState extends State<SelectSchool> {
                 id: log.id,
               );
             },
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: horizontalValue(10),
-                vertical: verticalValue(10),
-              ),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: log.isSelected ? Colors.green : PayNestTheme.colorWhite,
-                border: Border.all(
-                  color: log.isSelected
-                      ? Colors.transparent
-                      : PayNestTheme.black.withOpacity(0.5),
-                ),
-              ),
-            ),
+            child: log.isSelected
+                ? Lottie.asset(
+                    checkAnimation,
+                    height: sizes.heightRatio * 32,
+                    width: sizes.widthRatio * 32,
+                  )
+                : Padding(
+                    padding: EdgeInsets.only(
+                      right: horizontalValue(8),
+                    ),
+                    child: Container(
+                      height: sizes.heightRatio * 16,
+                      width: sizes.widthRatio * 16,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: log.isSelected
+                            ? Colors.green
+                            : PayNestTheme.colorWhite,
+                        border: Border.all(
+                          color: log.isSelected
+                              ? Colors.transparent
+                              : PayNestTheme.black.withOpacity(0.5),
+                        ),
+                      ),
+                    ),
+                  ),
           ),
           horizontalSpacer(8),
         ],

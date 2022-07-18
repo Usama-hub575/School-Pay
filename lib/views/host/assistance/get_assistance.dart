@@ -24,7 +24,7 @@ class _GetAssistanceState extends State<GetAssistance> {
             decoration: BoxDecoration(
                 color: PayNestTheme.primaryColor,
                 borderRadius:
-                BorderRadius.vertical(bottom: Radius.circular(24.r))),
+                    BorderRadius.vertical(bottom: Radius.circular(24.r))),
             child: SafeArea(
               child: Padding(
                 padding: EdgeInsets.only(left: 25.h),
@@ -40,22 +40,28 @@ class _GetAssistanceState extends State<GetAssistance> {
                             height: 44.h,
                             width: 44.w,
                             decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.r)),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
                             child: IconButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              icon: Icon(Icons.arrow_back,
-                                  size: 20.sp, color: PayNestTheme.blueAccent),
+                              icon: Icon(
+                                Icons.arrow_back,
+                                size: 20.sp,
+                                color: PayNestTheme.primaryColor,
+                              ),
                               // child: Text(""),
                             ),
                           ),
                         ),
                         Text(
                           assistance,
-                          style: PayNestTheme.title20white
-                              .copyWith(fontSize: sizes.fontRatio * 18),
+                          style: PayNestTheme.title20white.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'montserratBold',
+                          ),
                         ),
                         SizedBox(
                           height: 44.h,

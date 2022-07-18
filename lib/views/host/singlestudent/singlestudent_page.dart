@@ -56,8 +56,11 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          icon: Icon(Icons.arrow_back,
-                              size: 20.sp, color: PayNestTheme.blueAccent),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            size: 20.sp,
+                            color: PayNestTheme.primaryColor,
+                          ),
                           // child: Text(""),
                         ),
                       ),
@@ -80,8 +83,8 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
+                        topLeft: Radius.circular(32),
+                        topRight: Radius.circular(32),
                       ),
                       color: PayNestTheme.colorWhite,
                     ),
@@ -100,13 +103,16 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                     PayNestTheme.h2_12blueAccentLight.copyWith(
                                   fontSize: sizes.fontRatio * 14,
                                   color: PayNestTheme.primaryColor,
+                                  fontFamily: 'montserratSemiBold',
                                 ),
                               ),
                               Spacer(),
                               Text(
-                                '${widget.singleStudentModel.student!.totalBalanceAmount}',
+                                'AED ${widget.singleStudentModel.student!.totalBalanceAmount}',
                                 style: PayNestTheme.h2_12blueAccent.copyWith(
                                   fontSize: sizes.fontRatio * 14,
+                                  fontFamily: 'montserratExtraBold',
+                                  color: PayNestTheme.primaryColor,
                                 ),
                               ),
                             ],
@@ -173,6 +179,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14,
                                   color: PayNestTheme.primaryColor,
+                                  fontFamily: 'montserratBold',
                                 ),
                               ),
                             ),
@@ -203,7 +210,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                   ],
                 ),
                 margin: EdgeInsets.symmetric(
-                  horizontal: horizontalValue(16),
+                  horizontal: horizontalValue(32),
                 ),
                 padding: EdgeInsets.symmetric(
                   horizontal: horizontalValue(16),
@@ -236,7 +243,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     ),
                     verticalSpacer(16),
                     Text(
-                      'Grade ${widget.singleStudentModel.student!.school!.name}',
+                      '${widget.singleStudentModel.student!.school!.name}',
                       style: PayNestTheme.h2_12blueAccent.copyWith(
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.black,
@@ -244,11 +251,10 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     ),
                     verticalSpacer(4),
                     Text(
-                      'Grade ${widget.singleStudentModel.student!.school!.address}',
+                      '${widget.singleStudentModel.student!.school!.address}',
                       style: PayNestTheme.small_2_10textGrey.copyWith(
-                        fontSize: sizes.fontRatio * 16,
-                        color: PayNestTheme.black
-                      ),
+                          fontSize: sizes.fontRatio * 16,
+                          color: PayNestTheme.black),
                     ),
                   ],
                 ),

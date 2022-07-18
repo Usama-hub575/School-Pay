@@ -8,7 +8,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/model/datamodel/reg1_to_otp.dart';
-import 'package:paynest_flutter_app/views/details_page.dart';
 import 'package:paynest_flutter_app/views/host/host_page.dart';
 import 'package:paynest_flutter_app/views/otp_page.dart';
 import 'package:paynest_flutter_app/views/reg_pin_page.dart';
@@ -142,15 +141,6 @@ class _MyAppState extends State<MyApp> {
             case '/OTPPage':
               Reg1toOtp data = routes.arguments as Reg1toOtp;
               page = OTPPage(
-                email: data.email,
-                password: data.password,
-                phoneCode: data.phoneCode,
-                phoneNumber: data.phoneNumber,
-              );
-              break;
-            case '/DetailsPage':
-              Reg1toOtp data = routes.arguments as Reg1toOtp;
-              page = DetailsPage(
                 email: data.email,
                 password: data.password,
                 phoneCode: data.phoneCode,

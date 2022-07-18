@@ -58,8 +58,10 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                 ),
                 Spacer(),
-                Image.asset(welcomeRegisterLogo,
-                width: sizes.widthRatio* 120,),
+                Image.asset(
+                  welcomeRegisterLogo,
+                  width: sizes.widthRatio * 120,
+                ),
                 Spacer(),
               ],
             ),
@@ -94,7 +96,7 @@ class _SignInPageState extends State<SignInPage> {
                         TextFormField(
                           controller: emailController,
                           decoration: InputDecoration(
-                            border:UnderlineInputBorder(
+                            border: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: PayNestTheme.textGrey.withOpacity(
                                   0.5,
@@ -132,11 +134,9 @@ class _SignInPageState extends State<SignInPage> {
                             if (value!.trim().isEmpty) {
                               return 'Please enter email';
                             }
-                            // Check if the entered email has the right format
                             if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
                               return 'Invalid email';
                             }
-                            // Return null if the entered email is valid
                             return null;
                           },
                         ),
@@ -280,79 +280,69 @@ class _SignInPageState extends State<SignInPage> {
                       width: double.infinity,
                       height: sizes.heightRatio * 46,
                       child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: PayNestTheme.primaryColor,
-                            elevation: 0,
-                            // side: BorderSide(width:1, color:Colors.white),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                12,
-                              ),
+                        style: ElevatedButton.styleFrom(
+                          primary: PayNestTheme.primaryColor,
+                          elevation: 0,
+                          // side: BorderSide(width:1, color:Colors.white),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              12,
                             ),
                           ),
-                          onPressed: () async {
-                            if (Utils.loginFormKey.currentState!.validate()) {
-                              await userController.hitLogin(
-                                emailController.text.trim(),
-                                passwordController.text.trim(),
-                                storage.read('fcmToken'),
+                        ),
+                        onPressed: () async {
+                          if (Utils.loginFormKey.currentState!.validate()) {
+                            await userController.hitLogin(
+                              emailController.text.trim(),
+                              passwordController.text.trim(),
+                              storage.read('fcmToken'),
+                            );
+                            if (userController.userResData.value.status ==
+                                true) {
+                              storage.write(
+                                'accessToken',
+                                userController.userResData.value.token,
                               );
-                              if (userController.userResData.value.status ==
-                                  true) {
-                                storage.write(
-                                  'accessToken',
-                                  userController.userResData.value.token,
-                                );
-                                storage.write(
-                                    'email',
-                                    userController
-                                        .userResData.value.parent!.email);
-                                Navigator.pushNamedAndRemoveUntil(
-                                  context,
-                                  '/DashboardPage',
-                                  (Route<dynamic> route) => false,
-                                );
-                              } else if (userController
-                                      .userResData.value.status ==
-                                  false) {
-                                passwordController.clear();
-                                userController.isLoading.value = false;
+                              storage.write(
+                                  'email',
+                                  userController
+                                      .userResData.value.parent!.email);
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                '/DashboardPage',
+                                (Route<dynamic> route) => false,
+                              );
+                            } else if (userController
+                                    .userResData.value.status ==
+                                false) {
+                              passwordController.clear();
+                              userController.isLoading.value = false;
 
-                                if (userController.retriesTime.value != '') {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        "Please retry after " +
-                                            userController.retriesTime.value
-                                                .toString() +
-                                            " min",
-                                      ),
-                                      backgroundColor: Colors.red,
+                              if (userController.retriesTime.value != '') {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      "Please retry after " +
+                                          userController.retriesTime.value
+                                              .toString() +
+                                          " min",
                                     ),
-                                  );
-                                } else if (userController
-                                        .attemptsRemain.value !=
-                                    '') {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        userController.attemptsRemain.value
-                                                .toString() +
-                                            " attempts remaining",
-                                      ),
-                                      backgroundColor: Colors.red,
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              } else if (userController.attemptsRemain.value !=
+                                  '') {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      userController.attemptsRemain.value
+                                              .toString() +
+                                          " attempts remaining",
                                     ),
-                                  );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        "Entered email or password does not match",
-                                      ),
-                                      backgroundColor: Colors.red,
-                                    ),
-                                  );
-                                }
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
@@ -362,16 +352,26 @@ class _SignInPageState extends State<SignInPage> {
                                   ),
                                 );
                               }
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    "Entered email or password does not match",
+                                  ),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
                             }
-                          },
-                          child: !userController.isLoading.value
-                              ? Text(signIn,
-                                  style: PayNestTheme.subtitle16white)
-                              : Center(
-                                  child: CircularProgressIndicator(
+                          }
+                        },
+                        child: !userController.isLoading.value
+                            ? Text(signIn, style: PayNestTheme.subtitle16white)
+                            : Center(
+                                child: CircularProgressIndicator(
                                   backgroundColor: PayNestTheme.colorWhite,
                                   color: PayNestTheme.blueAccent,
-                                ))),
+                                ),
+                              ),
+                      ),
                     ),
                   ),
                   verticalSpacer(20),

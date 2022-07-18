@@ -32,13 +32,21 @@ class MyStudentController extends GetxController {
     }
   }
 
-  void updateSelectedCard(int studentId){
-    for(int i=0;i<myStudentData.value.students!.length;i++){
-      if(myStudentData.value.students![i].id == studentId){
+  void updateSelectedCard(int studentId) {
+    for (int i = 0; i < myStudentData.value.students!.length; i++) {
+      if (myStudentData.value.students![i].id == studentId) {
         myStudentData.value.students![i].isSelected = true;
-      }else{
+      } else {
         myStudentData.value.students![i].isSelected = false;
       }
+    }
+
+    myStudentData.refresh();
+  }
+
+  void resetStudentCard() {
+    for (int i = 0; i < myStudentData.value.students!.length; i++) {
+      myStudentData.value.students![i].isSelected = false;
     }
 
     myStudentData.refresh();

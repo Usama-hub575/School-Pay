@@ -129,7 +129,7 @@ class _StudentPageState extends State<StudentPage> {
                                             PayNestTheme.h2_12blueAccent.copyWith(
                                           fontSize: sizes.fontRatio * 16,
                                           color: PayNestTheme.primaryColor,
-                                          fontFamily: 'montserratBold',
+                                          fontFamily: 'montserratExtraBold',
                                         ),
                                       ),
                                     ),

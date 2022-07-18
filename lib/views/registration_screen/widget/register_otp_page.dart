@@ -54,140 +54,152 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox(
-        height: 1.sh,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 44.h),
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 23.h, bottom: 6.h),
-                child: Text(
-                  confirmCode,
-                  style: PayNestTheme.title22blackbold,
+      body: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: verticalValue(16),
+        ),
+        child: Column(
+          children: [
+            verticalSpacer(16),
+            Text(
+              confirmCode,
+              style: PayNestTheme.h2_14textGrey.copyWith(
+                color: PayNestTheme.black,
+                fontSize: sizes.fontRatio * 18,
+                fontFamily: 'montserratExtraBold',
+              ),
+            ),
+            verticalSpacer(16),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontalValue(12),
+              ),
+              child: Text(
+                'The Code Has Been sent to ${widget.phoneCode + widget.phoneNumber} & ${widget.email}. Please Enter The Code Below.',
+                style: PayNestTheme.h2_14textGrey.copyWith(
+                  fontFamily: "montserratRegular",
+                  fontSize: sizes.fontRatio * 12,
                 ),
               ),
-              Text(
-                'The code has been sent to ${widget.phoneCode + widget.phoneNumber} and ${widget.email}.\n Please enter the code below.',
-                style: PayNestTheme.h2_14textGrey,
+            ),
+            verticalSpacer(80),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontalValue(16),
               ),
-              verticalSpacer(16),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: horizontalValue(16),
-                ),
-                child: Pinput(
-                  defaultPinTheme: PinTheme(
-                    textStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                      fontSize: sizes.fontRatio*16,
-                      color: PayNestTheme.black,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: PayNestTheme.black.withOpacity(0.5),
-                        ),
+              child: Pinput(
+                defaultPinTheme: PinTheme(
+                  textStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                    fontSize: sizes.fontRatio * 16,
+                    color: PayNestTheme.black,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: PayNestTheme.black.withOpacity(0.5),
                       ),
                     ),
-                    width: sizes.widthRatio*80,
-                    height: sizes.heightRatio*50,
                   ),
-                  controller: otpController,
-                  validator: (s) {
-                    if (s!.length < 4) {
+                  width: sizes.widthRatio * 80,
+                  height: sizes.heightRatio * 50,
+                ),
+                controller: otpController,
+                validator: (s) {
+                  if (s!.length < 4) {
+                    setState(() {
+                      completeCode = false;
+                    });
+                  }
+                  return s.isEmpty ? "Enter Code" : '';
+                },
+                pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+                keyboardType: TextInputType.phone,
+                showCursor: true,
+                onCompleted: (pin) {
+                  setState(
+                    () {
+                      completeCode = true;
+                    },
+                  );
+                },
+              ),
+            ),
+            verticalSpacer(32),
+            !timeUpFlag
+                ? Text("Try it after $_start seconds")
+                : GestureDetector(
+                    onTap: () => startTimer(),
+                    child: Text(
+                      resend,
+                      style: PayNestTheme.h2_12blueAccent.copyWith(
+                        fontSize: sizes.fontRatio * 14,
+                        color: PayNestTheme.primaryColor,
+                      ),
+                    ),
+                  ),
+            Spacer(),
+            Obx(
+              () => TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor:
+                        completeCode ? PayNestTheme.primaryColor : Colors.grey,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      vertical: verticalValue(16),
+                    )),
+                onPressed: () async {
+                  if (otpController.length == 4) {
+                    await verifyOTPController.hitVerifyOTP(
+                        widget.phoneCode + widget.phoneNumber,
+                        otpController.text);
+                    if (verifyOTPController.isSuccess.value) {
+                      verifyOTPController.otpVerifyData.update((val) {
+                        val!.type = null;
+                      });
+                      otpController.clear();
                       setState(() {
                         completeCode = false;
                       });
+                      widget.onSuccess();
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Entered OTP is wrong'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                      // otpController.clear();
                     }
-                    return s.isEmpty ? "Enter Code" : '';
-                  },
-                  pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-                  keyboardType: TextInputType.phone,
-                  showCursor: true,
-                  onCompleted: (pin) {
-                    setState(
-                      () {
-                        completeCode = true;
-                      },
-                    );
-                  },
-                ),
-              ),
-              verticalSpacer(32),
-              !timeUpFlag
-                  ? Text("Try it after $_start seconds")
-                  : GestureDetector(
-                      onTap: () => startTimer(),
-                      child: Text(
-                        resend,
-                        style: PayNestTheme.h2_12blueAccent.copyWith(
-                          fontSize: sizes.fontRatio*14,
-                          color: PayNestTheme.primaryColor,
-                        ),
-                      )),
-              Spacer(),
-              Obx(
-                () => Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: PayNestTheme.primaryColor,
-                      elevation: 0,
-                      side: BorderSide(
-                        width: 1,
-                        color: PayNestTheme.primaryColor,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          14,
-                        ),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        vertical: verticalValue(14),
-                      ),
+                  }
+                },
+                child: Row(
+                  children: [
+                    const Spacer(),
+                    Text(
+                      next,
+                      style: PayNestTheme.subtitle16white,
                     ),
-                    onPressed: () async {
-                      if (otpController.length == 4) {
-                        await verifyOTPController.hitVerifyOTP(
-                            widget.phoneCode + widget.phoneNumber,
-                            otpController.text);
-                        if (verifyOTPController.isSuccess.value) {
-                          () => widget.onSuccess();
-                          verifyOTPController.otpVerifyData.update((val) {
-                            val!.type = null;
-                          });
-                          otpController.clear();
-                          setState(
-                            () {
-                              completeCode = false;
-                            },
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Entered OTP is wrong'),
-                              backgroundColor: Colors.red,
+                    const Spacer(),
+                    !verifyOTPController.isLoading.value
+                        ? const SizedBox.shrink()
+                        : Container(
+                            height: sizes.heightRatio * 16,
+                            width: sizes.widthRatio * 16,
+                            child: CircularProgressIndicator(
+                              backgroundColor: PayNestTheme.colorWhite,
+                              color: PayNestTheme.primaryColor,
+                              strokeWidth: 2,
                             ),
-                          );
-                          // otpController.clear();
-                        }
-                      }
-                    },
-                    child: Center(
-                      child: Text(
-                        next,
-                        style: PayNestTheme.title_2_16primaryColor.copyWith(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: PayNestTheme.colorWhite,
-                        ),
-                      ),
-                    ),
-                  ),
+                          ),
+                    horizontalSpacer(16),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

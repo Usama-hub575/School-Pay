@@ -33,6 +33,7 @@ const icPaymentHistory = "assets/svg/ic_payment_history.svg";
 const icPrivacyPolicy = "assets/svg/ic_privacy_policy.svg";
 const icTermsAndCondition = "assets/svg/ic_terms_and_condition.svg";
 const icAdd = "assets/svg/ic_add.svg";
+const icArrowDown = "assets/svg/ic_arrow_down.svg";
 
 //json
 
@@ -58,6 +59,10 @@ const ic_transaction_non = "assets/dashboard/ic_transaction_non.png";
 const ic_menu = "assets/dashboard/ic_menu.png";
 const ic_menu_non = "assets/dashboard/ic_menu_non.png";
 const icBackground = "assets/png/ic_background.png";
+const noData = "assets/png/no-data.png";
+const icCommercialBank = "assets/png/ic_commercial_bank.png";
+const icLean = "assets/png/ic_leantech_logo.png";
+const icPostPay = "assets/png/ic_postpay.png";
 
 
 
@@ -91,6 +96,7 @@ const fname = "First name";
 const lname = "Last name";
 const emiratesID = "Emirates ID number";
 const emiratesIDD = "Emirates ID";
+const schoolID = "School ID";
 const expiry = "Expiry Date";
 const address = "Address";
 const notifications = "Notifications";
@@ -99,6 +105,8 @@ const selectStudent = "Select Student";
 const area = "Area";
 const country = "Country";
 const forgotpassword = "Forgot Password?";
+const noDataText = "No Data Found";
+const sorryWeCant = "Sorry, we can’t process your request At the moment, please try again later";
 const show = "Show";
 const hide = "Hide";
 const or = "OR";
@@ -107,7 +115,7 @@ const cancel = "Cancel";
 const create = "Create";
 const submit = "Submit";
 const skip = "Skip";
-const resend = "Resend code?";
+const resend = "Resend Code?";
 const slogan = "Payments Anywhere, Anytime";
 const payments = "Payments";
 const setting = "Setting";
@@ -122,7 +130,7 @@ const searchSchool = "Search School";
 
 const accountDetails = "Account Detail";
 const name = "Name";
-const referenceNumber = "Reference number";
+const referenceNumber = "Reference Number";
 const emailID = "Email ID";
 const emailAddress = "Email Address";
 const contactNumber = "Contact Number";
@@ -136,6 +144,8 @@ const addStudentManually = "Add Student Manually";
 const passwordDetails = "Password details";
 const chgPassword = "Change Password";
 const deleteAcc = "Delete Account";
+const done = "Done";
+const search = "Search";
 
 const personalDetails = "Personal details";
 const firstName = "First name";
@@ -143,12 +153,18 @@ const lastName = "Last name";
 
 const oldPassword = "Old password";
 const newPassword = "New password";
+const fullNameSignup = "Full Name *";
+const apartment = "Apartment";
+const city = "City";
 const confirmpassword = "Confirm password";
 const updateProfile = "Update Profile";
+const payBy = "Pay By Credit / Debit Card";
+const payByBankTransfer = "Pay By Bank Transfer";
+const payByInstallments = "Pay By Installment's";
 
 const confirm = "Confirm";
 const congratulations = "Congratulations!";
-const youHaveSuccessfully = "You have successfully transferred the amount.";
+const youHaveSuccessfully = "You Have Successfully Transferred The Amount.";
 const language = "Language";
 
 
@@ -167,13 +183,13 @@ const fullName = "Full Name";
 const phoneNumber = "Phone Number";
 const studentclass = "Class";
 const schoolName = "School Name";
-const dueDate = "Due date";
+const dueDate = "Due Date";
 const dueAmount = "Due Amount";
 const payableAmount = "Payable amount";
 const amountPaid = "Amount Paid";
 const optional = "OPTIONAL";
 const amountToBePaid = "Amount To Be Paid";
-const continueToPayment = "Continue to payment";
+const continueToPayment = "Continue To Payment";
 const deleteAccount = "Delete Account";
 const changePassword = "Change Password";
 const continueTo = "Continue";
@@ -182,7 +198,7 @@ const currentPayableMmount = "Current Payable amount";
 const downloadInvoice = 'Download Invoice';
 const verifyStudent = "Verify students";
 const enterAmount = "Enter Amount";
-const addStudent = "Add Students";
+const addStudent = "Add Student";
 const enterStudent = "Please Enter Student ID Or Date Of Birth";
 const enterStudentDetail = "Enter Student Details";
 const studentAdded = "Student Added";
@@ -199,12 +215,12 @@ const save = "Save";
 
 
 const pleaseconfirmDetailsbelow = "Please confirm below details before we proceed.";
-const pleaseenterdetailbelow = "Please enter the details below";
+const pleaseenterdetailbelow = "Please Enter Your Personal Details";
 const pleaseEnterYourPhoneNumberAndEmailId = "Please Enter Your Phone Number & Email ID";
 const pleaseenteramount = "Please enter the amount that you want to pay.";
 const youneedtosetuppin = "You need to setup PIN before making any transaction";
 const weuseyourphone = "We'll use your mobile phone and e-mail to send you the activation code.";
-const confirmCode = "Confirmation code has been sent to your mobile and e-mail";
+const confirmCode = "Confirmation Code Has Been Sent!";
 const thePINwill = "This PIN will be used to authorize transactions and adding students and properties.";
 const noStudent = "No student available";
 
@@ -213,6 +229,7 @@ const createPIN = "Create PIN to secure your account";
 const welcome = "Welcome";
 const welcomeBack = "Welcome Back";
 const recentTransactions = "Recent Transactions";
+const recentTransaction = "Recent Transaction";
 const transactions = "Transactions";
 const PSMore = "Profile, settings and more";
 
@@ -230,7 +247,7 @@ const paymentfor = "Payment For";
 const currentPayableamount = "Current Payable amount";
 const feepayment = "Fee Payment";
 const paymentHistory = "Payment History";
-const invoiceDetails = "Invoice details";
+const invoiceDetails = "Invoice Details";
 const paymentCategory = "Payment Category";
 const paymentCategories = "Payment Categories";
 const chgPIN = "Change PIN";

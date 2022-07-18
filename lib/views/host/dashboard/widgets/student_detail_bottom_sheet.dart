@@ -4,7 +4,6 @@ import 'package:paynest_flutter_app/views/host/dashboard/widgets/succes_bottom_s
 import '../../../../constants/constants.dart';
 import '../../../../res/res.dart';
 import '../../../../widgets/spacer.dart';
-import '../../school/select_school.dart';
 
 class StudentDetailBottomSheet {
   static void show({
@@ -12,6 +11,7 @@ class StudentDetailBottomSheet {
   }) {
     showModalBottomSheet(
       isScrollControlled: true,
+      isDismissible: true,
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) {
@@ -44,7 +44,6 @@ class _StudentWidgetState extends State<StudentWidget> {
       color: PayNestTheme.black.withOpacity(0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        mainAxisSize: MainAxisSize.min,
         children: [
           IntrinsicHeight(
             child: Container(
@@ -60,101 +59,111 @@ class _StudentWidgetState extends State<StudentWidget> {
                 color: PayNestTheme.colorWhite,
               ),
               child: Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: horizontalValue(30)),
-                child: Column(
-                  children: [
-                    verticalSpacer(48),
-                    Text(
-                      enterStudentDetail,
-                      style: PayNestTheme.title_2_16primaryColor.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: PayNestTheme.primaryColor,
+                padding: EdgeInsets.symmetric(
+                  horizontal: horizontalValue(30),
+                ),
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      verticalSpacer(48),
+                      Text(
+                        enterStudentDetail,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: PayNestTheme.primaryColor,
+                          fontFamily: 'montserratBold',
+                        ),
                       ),
-                    ),
-                    verticalSpacer(22.0),
-                    Container(
-                      height: sizes.heightRatio * 40,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom,
+                      verticalSpacer(16),
+                      Container(
+                        height: sizes.heightRatio * 60,
                       ),
-                      child: TextFormField(
-                        controller: _studentCode,
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(
-                                0.5,
+                      Padding(
+                        padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom,
+                        ),
+                        child: TextFormField(
+                          controller: _studentCode,
+                          style: PayNestTheme.title_3_16blackbold.copyWith(
+                            fontSize: sizes.fontRatio * 16,
+                            color: PayNestTheme.lightBlack,
+                            fontFamily: 'montserratSemiBold',
+                          ),
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(
+                                  0.5,
+                                ),
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                            labelText: enterPaynestStudentCode,
+                            labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                              fontSize: sizes.fontRatio * 12,
+                              color: PayNestTheme.primaryColor,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                            errorBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                            disabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
                               ),
                             ),
                           ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(0.5),
-                            ),
-                          ),
-                          labelText: enterPaynestStudentCode,
-                          labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                            fontSize: sizes.fontRatio * 12,
-                            color: PayNestTheme.primaryColor,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(0.5),
-                            ),
-                          ),
-                          errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(0.5),
-                            ),
-                          ),
-                          disabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(0.5),
-                            ),
-                          ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                         ),
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
-                    ),
-                    verticalSpacer(22.0),
-                    Container(
-                      width: double.infinity,
-                      height: sizes.heightRatio * 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
-                          elevation: 0,
-                          // side: BorderSide(width:1, color:Colors.white),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              14,
+                      verticalSpacer(22.0),
+                      Container(
+                        width: double.infinity,
+                        height: sizes.heightRatio * 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: PayNestTheme.primaryColor,
+                            elevation: 0,
+                            // side: BorderSide(width:1, color:Colors.white),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                14,
+                              ),
                             ),
                           ),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          SuccessBottomSheet.show(
-                            context: context,
-                          );
-                        },
-                        child: Center(
-                          child: Text(
-                            next,
-                            style:
-                                PayNestTheme.title_2_16primaryColor.copyWith(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              color: PayNestTheme.colorWhite,
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            SuccessBottomSheet.show(
+                              context: context,
+                            );
+                          },
+                          child: Center(
+                            child: Text(
+                              next,
+                              style:
+                                  PayNestTheme.title_2_16primaryColor.copyWith(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                color: PayNestTheme.colorWhite,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    verticalSpacer(22.0),
-                  ],
+                      verticalSpacer(22.0),
+                    ],
+                  ),
                 ),
               ),
             ),
