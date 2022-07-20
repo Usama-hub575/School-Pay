@@ -16,6 +16,10 @@ import 'package:paynest_flutter_app/views/host/viewprofile/view_profile.dart';
 import 'package:paynest_flutter_app/views/welcome_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
+import '../../../auth/local_auth_api.dart';
+import '../../../utils/sharedPrefKeys.dart';
+import '../../../utils/sharedpref.dart';
+
 class MorePage extends StatefulWidget {
   const MorePage({Key? key}) : super(key: key);
 
@@ -25,6 +29,15 @@ class MorePage extends StatefulWidget {
 
 class _MorePageState extends State<MorePage> {
   final UserController userController = Get.find<UserController>();
+  MySharedPreferences storage = MySharedPreferences.instance;
+  bool isAuthenticated = false;
+
+  @override
+  void initState() {
+    isAuthenticated = storage.getBoolValue(SharedPrefKeys.isBioMatric);
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -212,11 +225,13 @@ class _MorePageState extends State<MorePage> {
                     SingleCardWithRadioButton(
                       value: biometricAuth,
                       icon: icFingerPrint,
+                      isEnable: isAuthenticated,
                       onTap: () {},
                     ),
                     verticalSpacer(16),
                     SingleCardWithRadioButton(
                       value: Location,
+                      isEnable: false,
                       icon: icLocation,
                       onTap: () {},
                     ),
