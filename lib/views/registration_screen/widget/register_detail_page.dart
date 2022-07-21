@@ -215,8 +215,8 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                       ),
                       verticalSpacer(12),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Spacer(),
                           _optionalButton(
                             value: 'Emirates ID',
                             buttonColor: isEmiratesSelected
@@ -230,7 +230,6 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                               setState(() {});
                             },
                           ),
-                          horizontalSpacer(16),
                           _optionalButton(
                             value: 'Passport   ',
                             buttonColor: isPassportSelected
@@ -244,7 +243,6 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                               setState(() {});
                             },
                           ),
-                          const Spacer(),
                         ],
                       ),
                       verticalSpacer(12),
@@ -259,6 +257,17 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             borderSide: BorderSide(
                               color: PayNestTheme.textGrey.withOpacity(
                                 0.5,
+                              ),
+                            ),
+                          ),
+                          suffixIcon: Padding(
+                            padding:  EdgeInsets.only(top: verticalValue(24)),
+                            child: Text(
+                              optional,
+                              style: PayNestTheme.h2_14textGrey.copyWith(
+                                color: PayNestTheme.primaryColor.withOpacity(0.5),
+                                fontSize: sizes.fontRatio * 8,
+                                fontFamily: 'montserratBold',
                               ),
                             ),
                           ),
@@ -314,6 +323,17 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             borderSide: BorderSide(
                               color: PayNestTheme.textGrey.withOpacity(
                                 0.5,
+                              ),
+                            ),
+                          ),
+                          suffixIcon: Padding(
+                            padding:  EdgeInsets.only(top: verticalValue(24)),
+                            child: Text(
+                              optional,
+                              style: PayNestTheme.h2_14textGrey.copyWith(
+                                color: PayNestTheme.primaryColor.withOpacity(0.5),
+                                fontSize: sizes.fontRatio * 8,
+                                fontFamily: 'montserratBold',
                               ),
                             ),
                           ),
@@ -385,6 +405,17 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                               ),
                             ),
                           ),
+                          suffixIcon: Padding(
+                            padding:  EdgeInsets.only(top: verticalValue(24)),
+                            child: Text(
+                              optional,
+                              style: PayNestTheme.h2_14textGrey.copyWith(
+                                color: PayNestTheme.primaryColor.withOpacity(0.5),
+                                fontSize: sizes.fontRatio * 8,
+                                fontFamily: 'montserratBold',
+                              ),
+                            ),
+                          ),
                           labelText: address,
                           labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
                             fontSize: sizes.fontRatio * 12,
@@ -436,6 +467,17 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             borderSide: BorderSide(
                               color: PayNestTheme.textGrey.withOpacity(
                                 0.5,
+                              ),
+                            ),
+                          ),
+                          suffixIcon: Padding(
+                            padding:  EdgeInsets.only(top: verticalValue(24)),
+                            child: Text(
+                              optional,
+                              style: PayNestTheme.h2_14textGrey.copyWith(
+                                color: PayNestTheme.primaryColor.withOpacity(0.5),
+                                fontSize: sizes.fontRatio * 8,
+                                fontFamily: 'montserratBold',
                               ),
                             ),
                           ),
