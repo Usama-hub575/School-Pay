@@ -65,8 +65,9 @@ class _WelcomePageState extends State<WelcomePage> {
                   child: Text(
                     'English',
                     style: PayNestTheme.subtitle16white.copyWith(
-                      fontSize: sizes.fontRatio * 14,
+                      fontSize: sizes.fontRatio * 18,
                       color: PayNestTheme.colorWhite,
+                        fontFamily: 'montserratBold'
                     ),
                   ),
                 ),
@@ -80,8 +81,9 @@ class _WelcomePageState extends State<WelcomePage> {
                   child: Text(
                     'Arabic',
                     style: PayNestTheme.subtitle16white.copyWith(
-                      fontSize: sizes.fontRatio * 14,
-                      color: PayNestTheme.textGrey,
+                      fontSize: sizes.fontRatio * 18,
+                      color: PayNestTheme.dropShadow,
+                        fontFamily: 'montserratBold'
                     ),
                   ),
                 ),
@@ -110,7 +112,10 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                   child: Text(
                     signIn,
-                    style: PayNestTheme.subtitle16white,
+                    style: PayNestTheme.subtitle16white.copyWith(
+                      fontSize: 14.sp,
+                        fontFamily: 'montserratBold'
+                    ),
                   ),
                 ),
               ),
@@ -135,7 +140,10 @@ class _WelcomePageState extends State<WelcomePage> {
                 },
                 child: Text(
                   register,
-                  style: PayNestTheme.title_2_16primaryColor,
+                  style: PayNestTheme.title_2_16primaryColor.copyWith(
+                    fontSize: 14.sp,
+                      fontFamily: 'montserratBold'
+                  ),
                 ),
               ),
             ),
@@ -149,8 +157,9 @@ class _WelcomePageState extends State<WelcomePage> {
               child: Text(
                 privacyPolicy,
                 style: PayNestTheme.h2_14textGrey.copyWith(
-                  color: PayNestTheme.textGrey,
+                  color: PayNestTheme.textGreyWhiteShade,
                   fontSize: sizes.fontRatio * 12,
+                    fontFamily: 'montserratBold'
                 ),
               ),
             ),

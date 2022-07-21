@@ -10,6 +10,7 @@ class PayNestTheme {
   static Color lineColor = const Color(0xffE4E6EC);
   static Color black = const Color(0xff000000);
   static Color textGrey = const Color(0xff8C8C8C);
+  static Color textGreyWhiteShade = const Color(0xffB8C1C5);
   static Color paidGreen = const Color(0xffBBD84C);
   static Color red = const Color(0xffFF423B);
   static Color aqua = const Color(0xffCCECF7);

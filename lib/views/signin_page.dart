@@ -9,9 +9,13 @@ import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/res/assets.dart';
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/widgets/blue_back_button.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+
+import '../auth/local_auth_api.dart';
+import '../utils/sharedPrefKeys.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -23,12 +27,24 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   UserController userController = Get.put(UserController());
   final storage = GetStorage();
+  MySharedPreferences _preferences = MySharedPreferences.instance;
 
-  bool isBioMatric = true;
+  bool isBioMatric = false;
   bool isLoading = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isObscure = true;
+
+  isBioMatricEnable() {
+    isBioMatric = _preferences.getBoolValue(SharedPrefKeys.isBioMatric);
+  }
+
+  @override
+  void initState() {
+    isBioMatricEnable();
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -233,21 +249,46 @@ class _SignInPageState extends State<SignInPage> {
                             child: GestureDetector(
                               onTap: () async {
                                 if (!isLoading) {
-                                  // bool isAuthenticated = await LocalAuthApi
-                                  //     .authenticateWithBiometrics();
-                                  // if (isAuthenticated) {
-                                  //   setState(() {
-                                  //     isLoading = true;
-                                  //   });
-                                  //   // String phone = storage
-                                  //   //     .getStringValue(SharedPrefKeys.userPhone);
-                                  //   // String password = storage.getStringValue(
-                                  //   //     SharedPrefKeys.userPassword);
-                                  //   // await userLogin(
-                                  //   //   phone,
-                                  //   //   password,
-                                  //   // );
-                                  // }
+                                  bool isAuthenticated = await LocalAuthApi
+                                      .authenticateWithBiometrics();
+                                  if (isAuthenticated) {
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    String email = _preferences.getStringValue(
+                                      SharedPrefKeys.userEmail,
+                                    );
+                                    String password =
+                                        _preferences.getStringValue(
+                                      SharedPrefKeys.userPassword,
+                                    );
+
+                                    await userController.hitLogin(
+                                      email,
+                                      password,
+                                      storage.read(
+                                        'fcmToken',
+                                      ),
+                                    );
+                                    if (userController
+                                            .userResData.value.status ==
+                                        true) {
+                                      storage.write(
+                                        SharedPrefKeys.accessToken,
+                                        userController.userResData.value.token,
+                                      );
+                                      storage.write(
+                                        SharedPrefKeys.userEmail,
+                                        userController
+                                            .userResData.value.parent!.email,
+                                      );
+                                      Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        '/DashboardPage',
+                                        (Route<dynamic> route) => false,
+                                      );
+                                    }
+                                  }
                                 }
                               },
                               child: Column(

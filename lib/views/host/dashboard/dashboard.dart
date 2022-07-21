@@ -18,6 +18,7 @@ import 'package:paynest_flutter_app/views/host/notification/notification_page.da
 import 'package:paynest_flutter_app/views/host/pay/paynow_page.dart';
 import 'package:paynest_flutter_app/views/host/pendingtask/pending_task.dart';
 import 'package:paynest_flutter_app/views/host/singlestudent/singlestudent_page.dart';
+import 'package:paynest_flutter_app/views/host/student/student_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../controller/transactionlist_controller.dart';
 import '../../../model/mystudents_resp_model.dart' as studentElement;
@@ -370,7 +371,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => PayNowPage(
+                                      builder: (context) => StudentPage(
                                         whichStack: "other",
                                       ),
                                     ),
