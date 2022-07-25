@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/addstudent_controller.dart';
 import 'package:paynest_flutter_app/controller/all_studentslist_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/model/addstudent_model.dart';
 import 'package:paynest_flutter_app/model/datamodel/selectedschool_to_addstudent.dart';
 import 'package:paynest_flutter_app/model/studentlist_res_model.dart';
 import 'package:paynest_flutter_app/res/res.dart';
@@ -16,6 +14,7 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/addstudent/widget/student_bottom_sheet.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/succes_bottom_sheet.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 class AddStudent extends StatefulWidget {
   SelectedSchoolData schoolData;
@@ -37,9 +36,11 @@ class _AddStudentState extends State<AddStudent> {
 
   List<String> filters = ['First Name', 'Last Name', 'Email ID', 'Student ID'];
   String? _selectedFilter;
+  bool isExpanded = false;
 
   @override
   void initState() {
+    isExpanded = false;
     super.initState();
   }
 
@@ -109,22 +110,22 @@ class _AddStudentState extends State<AddStudent> {
     return Scaffold(
       body: Obx(
         () => !studentListController.isLoading.value
-            ? ListView(
+            ? SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: PayNestTheme.primaryColor,
-                      borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(
-                          24.r,
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: PayNestTheme.primaryColor,
+                        borderRadius: BorderRadius.vertical(
+                          bottom: Radius.circular(
+                            24.r,
+                          ),
                         ),
                       ),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: horizontalValue(16),
-                    ),
-                    child: SafeArea(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(16),
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -197,45 +198,110 @@ class _AddStudentState extends State<AddStudent> {
                                           ),
                                         ),
                                       ),
+                                      // child: DropdownButtonHideUnderline(
+                                      //   child: ButtonTheme(
+                                      //     alignedDropdown: true,
+                                      //     child: DropdownButton(
+                                      //       borderRadius:
+                                      //           BorderRadius.circular(16),
+                                      //       elevation: 0,
+                                      //       isExpanded: true,
+                                      //       items: filters.map((String value) {
+                                      //         return DropdownMenuItem<String>(
+                                      //           value: value,
+                                      //           child: Text(
+                                      //             value,
+                                      //             style: PayNestTheme
+                                      //                 .h2_12blueAccent
+                                      //                 .copyWith(
+                                      //               fontSize:
+                                      //                   sizes.fontRatio * 14,
+                                      //               fontWeight: FontWeight.bold,
+                                      //               color: PayNestTheme.black,
+                                      //             ),
+                                      //           ),
+                                      //         );
+                                      //       }).toList(),
+                                      //       value: _selectedFilter,
+                                      //       hint: Text(
+                                      //         "Search by",
+                                      //       ),
+                                      //       // value: selection,
+                                      //       onChanged: (newValue) {
+                                      //         setState(
+                                      //           () {
+                                      //             _selectedFilter =
+                                      //                 newValue.toString();
+                                      //             print(
+                                      //               _selectedFilter,
+                                      //             );
+                                      //           },
+                                      //         );
+                                      //       },
+                                      //     ),
+                                      //   ),
+                                      // ),
                                       child: DropdownButtonHideUnderline(
-                                        child: ButtonTheme(
-                                          alignedDropdown: true,
-                                          child: DropdownButton(
-                                            elevation: 0,
-                                            isExpanded: true,
-                                            items: filters.map((String value) {
-                                              return DropdownMenuItem<String>(
-                                                value: value,
-                                                child: Text(
-                                                  value,
-                                                  style: PayNestTheme
-                                                      .h2_12blueAccent
-                                                      .copyWith(
-                                                    fontSize:
-                                                        sizes.fontRatio * 14,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: PayNestTheme.black,
+                                        child: DropdownButton2(
+                                          buttonPadding: EdgeInsets.symmetric(
+                                            horizontal: horizontalValue(16),
+                                          ),
+                                          style: PayNestTheme
+                                              .h2_12blueAccentLight
+                                              .copyWith(
+                                            fontSize: sizes.fontRatio * 15,
+                                            color: PayNestTheme.lightBlack,
+                                            fontFamily: 'montserratRegular',
+                                          ),
+                                          dropdownDecoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(16),
+                                              bottomRight: Radius.circular(16),
+                                            ),
+                                            border: Border.all(
+                                              color: PayNestTheme.primaryColor,
+                                            ),
+                                          ),
+                                          isExpanded: false,
+                                          hint: Text(
+                                            'Search By',
+                                            style: PayNestTheme
+                                                .h2_12blueAccentLight
+                                                .copyWith(
+                                              fontSize: sizes.fontRatio * 15,
+                                              color: PayNestTheme.lightBlack,
+                                              fontFamily: 'montserratRegular',
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          items: filters
+                                              .map(
+                                                (item) =>
+                                                    DropdownMenuItem<String>(
+                                                  value: item,
+                                                  child: Text(
+                                                    item,
+                                                    style: PayNestTheme
+                                                        .h2_12blueAccentLight
+                                                        .copyWith(
+                                                      fontSize:
+                                                          sizes.fontRatio * 15,
+                                                      color: PayNestTheme.black,
+                                                      fontFamily:
+                                                          'montserratBold',
+                                                    ),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
                                                 ),
-                                              );
-                                            }).toList(),
-                                            value: _selectedFilter,
-                                            hint: Text(
-                                              "Search by",
-                                            ),
-                                            // value: selection,
-                                            onChanged: (newValue) {
-                                              setState(
-                                                () {
-                                                  _selectedFilter =
-                                                      newValue.toString();
-                                                  print(
-                                                    _selectedFilter,
-                                                  );
-                                                },
-                                              );
-                                            },
-                                          ),
+                                              )
+                                              .toList(),
+                                          value: _selectedFilter,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _selectedFilter = value as String;
+                                            });
+                                          },
                                         ),
                                       ),
                                     ),
@@ -294,138 +360,161 @@ class _AddStudentState extends State<AddStudent> {
                         ],
                       ),
                     ),
-                  ),
-                  _searchResult.isNotEmpty || searchController.text.isNotEmpty
-                      ? studentListController
-                                  .studentList.value.getStudent!.rows!.length !=
-                              0
-                          ? Column(
-                              children: [
-                                verticalSpacer(16),
-                                _getText(
-                                  _searchResult.length,
-                                ),
-                                ListView.builder(
-                                  itemCount: _searchResult.length,
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemBuilder: (context, index) {
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        verticalSpacer(16),
-                                        GestureDetector(
-                                          onTap: () {},
-                                          child: Container(
-                                            margin: EdgeInsets.symmetric(
-                                              horizontal: horizontalValue(32),
-                                            ),
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: horizontalValue(12),
-                                              vertical: verticalValue(8),
-                                            ),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                color:
-                                                    PayNestTheme.primaryColor,
+                    _searchResult.isNotEmpty || searchController.text.isNotEmpty
+                        ? studentListController.studentList.value.getStudent!
+                                    .rows!.length !=
+                                0
+                            ? Column(
+                                children: [
+                                  verticalSpacer(16),
+                                  _getText(
+                                    _searchResult.length,
+                                  ),
+                                  ListView.separated(
+                                    itemCount: _searchResult.length,
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          verticalSpacer(16),
+                                          GestureDetector(
+                                            onTap: () {},
+                                            child: Container(
+                                              margin: EdgeInsets.symmetric(
+                                                horizontal: horizontalValue(32),
                                               ),
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height:
-                                                      sizes.heightRatio * 50,
-                                                  width: sizes.heightRatio * 50,
-                                                  child: CircleAvatar(
-                                                    backgroundImage:
-                                                        NetworkImage(
-                                                      'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: horizontalValue(12),
+                                                vertical: verticalValue(8),
+                                              ),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                border: Border.all(
+                                                  color:
+                                                      PayNestTheme.primaryColor,
+                                                ),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    height:
+                                                        sizes.heightRatio * 50,
+                                                    width:
+                                                        sizes.heightRatio * 50,
+                                                    child: CircleAvatar(
+                                                      backgroundImage:
+                                                          NetworkImage(
+                                                        'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                horizontalSpacer(12),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      '${_searchResult[index].firstName} ${_searchResult[index].lastName}',
-                                                      style: PayNestTheme
-                                                          .title20white
-                                                          .copyWith(
-                                                        fontSize:
-                                                            sizes.fontRatio *
-                                                                14,
-                                                        fontFamily:
-                                                            'montserratBold',
-                                                        color:
-                                                            PayNestTheme.black,
+                                                  horizontalSpacer(12),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        '${_searchResult[index].firstName} ${_searchResult[index].lastName}',
+                                                        style: PayNestTheme
+                                                            .title20white
+                                                            .copyWith(
+                                                          fontSize:
+                                                              sizes.fontRatio *
+                                                                  14,
+                                                          fontFamily:
+                                                              'montserratBold',
+                                                          color: PayNestTheme
+                                                              .black,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    verticalSpacer(4),
-                                                    Text(
-                                                      'Grade ${_searchResult[index].grade}',
-                                                      style: PayNestTheme
-                                                          .h2_14textGrey
-                                                          .copyWith(
-                                                        fontSize:
-                                                            sizes.fontRatio *
-                                                                10,
-                                                        fontFamily:
-                                                            'montserratRegular',
+                                                      verticalSpacer(4),
+                                                      Text(
+                                                        'Grade ${_searchResult[index].grade}',
+                                                        style: PayNestTheme
+                                                            .h2_14textGrey
+                                                            .copyWith(
+                                                          fontSize:
+                                                              sizes.fontRatio *
+                                                                  10,
+                                                          fontFamily:
+                                                              'montserratRegular',
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Spacer(),
-                                                _getActionButton(
-                                                  onTap: () {
-                                                    StudentBottomSheet.show(
-                                                      context: context,
-                                                      selectedStudentID:
-                                                          _searchResult[index]
-                                                              .id
-                                                              .toString(),
-                                                      selectedStudentRegNo:
-                                                          _searchResult[index]
-                                                              .studentRegNo
-                                                              .toString(),
-                                                      onTap: (studentId,
-                                                          dob) async {
-                                                        if (studentId
-                                                                .isNotEmpty &&
-                                                            dob.isNotEmpty) {
-                                                          final model = {
-                                                            "parentId":
-                                                                userController
-                                                                    .userResData
-                                                                    .value
-                                                                    .parent!
-                                                                    .id
-                                                                    .toString(),
-                                                            "dob": dob,
-                                                            "studentId":
-                                                                studentId,
-                                                            "studentRegNo":
-                                                                _searchResult[
-                                                                        index]
-                                                                    .studentRegNo
-                                                                    .toString(),
-                                                          };
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                          await addStudentController
-                                                              .hitAddStudent(
-                                                                  model);
-                                                          if (addStudentController
-                                                              .isStudentAdded) {
-                                                            SuccessBottomSheet
-                                                                .show(
-                                                                    context:
-                                                                        context);
+                                                    ],
+                                                  ),
+                                                  Spacer(),
+                                                  _getActionButton(
+                                                    onTap: () {
+                                                      StudentBottomSheet.show(
+                                                        context: context,
+                                                        selectedStudentID:
+                                                            _searchResult[index]
+                                                                .id
+                                                                .toString(),
+                                                        selectedStudentRegNo:
+                                                            _searchResult[index]
+                                                                .studentRegNo
+                                                                .toString(),
+                                                        onTap: (studentId,
+                                                            dob) async {
+                                                          if (studentId
+                                                                  .isNotEmpty &&
+                                                              dob.isNotEmpty) {
+                                                            final model = {
+                                                              "parentId":
+                                                                  userController
+                                                                      .userResData
+                                                                      .value
+                                                                      .parent!
+                                                                      .id
+                                                                      .toString(),
+                                                              "dob": dob,
+                                                              "studentId":
+                                                                  studentId,
+                                                              "studentRegNo":
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .studentRegNo
+                                                                      .toString(),
+                                                            };
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                            await addStudentController
+                                                                .hitAddStudent(
+                                                                    model);
+                                                            if (addStudentController
+                                                                .isStudentAdded) {
+                                                              SuccessBottomSheet
+                                                                  .show(
+                                                                      context:
+                                                                          context);
+                                                            } else {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  behavior:
+                                                                      SnackBarBehavior
+                                                                          .floating,
+                                                                  content: Text(
+                                                                    'Verification failed',
+                                                                  ),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .red,
+                                                                ),
+                                                              );
+                                                            }
                                                           } else {
                                                             Navigator.of(
                                                                     context)
@@ -438,113 +527,101 @@ class _AddStudentState extends State<AddStudent> {
                                                                     SnackBarBehavior
                                                                         .floating,
                                                                 content: Text(
-                                                                  'Verification failed',
+                                                                  'Fields can not be empty',
                                                                 ),
                                                                 backgroundColor:
                                                                     Colors.red,
                                                               ),
                                                             );
                                                           }
-                                                        } else {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                            SnackBar(
-                                                              behavior:
-                                                                  SnackBarBehavior
-                                                                      .floating,
-                                                              content: Text(
-                                                                'Fields can not be empty',
-                                                              ),
-                                                              backgroundColor:
-                                                                  Colors.red,
-                                                            ),
-                                                          );
-                                                        }
-                                                      },
-                                                    );
-                                                  },
-                                                ),
-                                                horizontalSpacer(12),
-                                              ],
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                  horizontalSpacer(12),
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ),
-                                verticalSpacer(24),
-                                Container(
-                                  width: double.infinity,
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: horizontalValue(40),
+                                        ],
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) {
+                                      return verticalSpacer(4);
+                                    },
                                   ),
+                                  verticalSpacer(24),
+                                  Container(
+                                    width: double.infinity,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: horizontalValue(40),
+                                    ),
+                                    child: Text(
+                                      'For Alternate Use Case With All Text Fields Please Click Here. (This Will Not Be Shown On Actual App)',
+                                      textAlign: TextAlign.center,
+                                      maxLines: 3,
+                                      style:
+                                          PayNestTheme.h2_14textGrey.copyWith(
+                                        fontFamily: "montserratRegular",
+                                        fontSize: sizes.fontRatio * 10,
+                                      ),
+                                    ),
+                                  ),
+                                  verticalSpacer(16),
+                                  Container(
+                                    width: double.infinity,
+                                    margin: EdgeInsets.symmetric(
+                                      horizontal: horizontalValue(32),
+                                    ),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: PayNestTheme.primaryColor,
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            14,
+                                          ),
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: verticalValue(16),
+                                        ),
+                                      ),
+                                      onPressed: () {},
+                                      child: Center(
+                                        child: Text(
+                                          search,
+                                          style: PayNestTheme
+                                              .title_2_16primaryColor
+                                              .copyWith(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14,
+                                            color: PayNestTheme.colorWhite,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  verticalSpacer(16),
+                                ],
+                              )
+                            : Container(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 80,
+                                  horizontal: 10,
+                                ),
+                                child: Center(
                                   child: Text(
-                                    'For Alternate Use Case With All Text Fields Please Click Here. \n (This Will Not Be Shown On Actual App)',
-                                    textAlign: TextAlign.center,
-                                    maxLines: 3,
-                                    style: PayNestTheme.h2_14textGrey.copyWith(
-                                      fontFamily: "montserratRegular",
-                                      fontSize: sizes.fontRatio * 10,
+                                    'No data found  !!',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w300,
                                     ),
                                   ),
                                 ),
-                                verticalSpacer(32),
-                                Container(
-                                  width: double.infinity,
-                                  margin: EdgeInsets.symmetric(
-                                    horizontal: horizontalValue(32),
-                                  ),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary: PayNestTheme.primaryColor,
-                                      elevation: 0,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          14,
-                                        ),
-                                      ),
-                                      padding: EdgeInsets.symmetric(
-                                        vertical: verticalValue(16),
-                                      ),
-                                    ),
-                                    onPressed: () {},
-                                    child: Center(
-                                      child: Text(
-                                        search,
-                                        style: PayNestTheme
-                                            .title_2_16primaryColor
-                                            .copyWith(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 14,
-                                          color: PayNestTheme.colorWhite,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          : Container(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 80,
-                                horizontal: 10,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'No data found  !!',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                                ),
-                              ),
-                            )
-                      : SizedBox(),
-                ],
+                              )
+                        : SizedBox(),
+                  ],
+                ),
               )
             : Center(
                 child: CircularProgressIndicator(),
