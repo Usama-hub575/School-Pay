@@ -36,6 +36,7 @@ dependencies:
   animated_bottom_navigation_bar:
   local_auth: ^1.1.8
   shared_preferences:
+  dropdown_button2:
 
 
 dev_dependencies:

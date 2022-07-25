@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/addstudent_controller.dart';
@@ -15,6 +14,7 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/addstudent/widget/student_bottom_sheet.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/succes_bottom_sheet.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 class AddStudent extends StatefulWidget {
   SelectedSchoolData schoolData;
@@ -36,9 +36,11 @@ class _AddStudentState extends State<AddStudent> {
 
   List<String> filters = ['First Name', 'Last Name', 'Email ID', 'Student ID'];
   String? _selectedFilter;
+  bool isExpanded = false;
 
   @override
   void initState() {
+    isExpanded = false;
     super.initState();
   }
 
@@ -109,8 +111,8 @@ class _AddStudentState extends State<AddStudent> {
       body: Obx(
         () => !studentListController.isLoading.value
             ? SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-              child: Column(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
                   children: [
                     Container(
                       decoration: BoxDecoration(
@@ -196,47 +198,110 @@ class _AddStudentState extends State<AddStudent> {
                                           ),
                                         ),
                                       ),
+                                      // child: DropdownButtonHideUnderline(
+                                      //   child: ButtonTheme(
+                                      //     alignedDropdown: true,
+                                      //     child: DropdownButton(
+                                      //       borderRadius:
+                                      //           BorderRadius.circular(16),
+                                      //       elevation: 0,
+                                      //       isExpanded: true,
+                                      //       items: filters.map((String value) {
+                                      //         return DropdownMenuItem<String>(
+                                      //           value: value,
+                                      //           child: Text(
+                                      //             value,
+                                      //             style: PayNestTheme
+                                      //                 .h2_12blueAccent
+                                      //                 .copyWith(
+                                      //               fontSize:
+                                      //                   sizes.fontRatio * 14,
+                                      //               fontWeight: FontWeight.bold,
+                                      //               color: PayNestTheme.black,
+                                      //             ),
+                                      //           ),
+                                      //         );
+                                      //       }).toList(),
+                                      //       value: _selectedFilter,
+                                      //       hint: Text(
+                                      //         "Search by",
+                                      //       ),
+                                      //       // value: selection,
+                                      //       onChanged: (newValue) {
+                                      //         setState(
+                                      //           () {
+                                      //             _selectedFilter =
+                                      //                 newValue.toString();
+                                      //             print(
+                                      //               _selectedFilter,
+                                      //             );
+                                      //           },
+                                      //         );
+                                      //       },
+                                      //     ),
+                                      //   ),
+                                      // ),
                                       child: DropdownButtonHideUnderline(
-                                        child: ButtonTheme(
-                                          alignedDropdown: true,
-                                          child: DropdownButton(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                            elevation: 0,
-                                            isExpanded: true,
-                                            items: filters.map((String value) {
-                                              return DropdownMenuItem<String>(
-                                                value: value,
-                                                child: Text(
-                                                  value,
-                                                  style: PayNestTheme
-                                                      .h2_12blueAccent
-                                                      .copyWith(
-                                                    fontSize:
-                                                        sizes.fontRatio * 14,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: PayNestTheme.black,
+                                        child: DropdownButton2(
+                                          buttonPadding: EdgeInsets.symmetric(
+                                            horizontal: horizontalValue(16),
+                                          ),
+                                          style: PayNestTheme
+                                              .h2_12blueAccentLight
+                                              .copyWith(
+                                            fontSize: sizes.fontRatio * 15,
+                                            color: PayNestTheme.lightBlack,
+                                            fontFamily: 'montserratRegular',
+                                          ),
+                                          dropdownDecoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(16),
+                                              bottomRight: Radius.circular(16),
+                                            ),
+                                            border: Border.all(
+                                              color: PayNestTheme.primaryColor,
+                                            ),
+                                          ),
+                                          isExpanded: false,
+                                          hint: Text(
+                                            'Search By',
+                                            style: PayNestTheme
+                                                .h2_12blueAccentLight
+                                                .copyWith(
+                                              fontSize: sizes.fontRatio * 15,
+                                              color: PayNestTheme.lightBlack,
+                                              fontFamily: 'montserratRegular',
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          items: filters
+                                              .map(
+                                                (item) =>
+                                                    DropdownMenuItem<String>(
+                                                  value: item,
+                                                  child: Text(
+                                                    item,
+                                                    style: PayNestTheme
+                                                        .h2_12blueAccentLight
+                                                        .copyWith(
+                                                      fontSize:
+                                                          sizes.fontRatio * 15,
+                                                      color: PayNestTheme.black,
+                                                      fontFamily:
+                                                          'montserratBold',
+                                                    ),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
                                                 ),
-                                              );
-                                            }).toList(),
-                                            value: _selectedFilter,
-                                            hint: Text(
-                                              "Search by",
-                                            ),
-                                            // value: selection,
-                                            onChanged: (newValue) {
-                                              setState(
-                                                () {
-                                                  _selectedFilter =
-                                                      newValue.toString();
-                                                  print(
-                                                    _selectedFilter,
-                                                  );
-                                                },
-                                              );
-                                            },
-                                          ),
+                                              )
+                                              .toList(),
+                                          value: _selectedFilter,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              _selectedFilter = value as String;
+                                            });
+                                          },
                                         ),
                                       ),
                                     ),
@@ -261,7 +326,8 @@ class _AddStudentState extends State<AddStudent> {
                                     } else {
                                       _searchResult.clear();
                                     }
-                                    FocusManager.instance.primaryFocus?.unfocus();
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
                                   },
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.all(13),
@@ -295,8 +361,8 @@ class _AddStudentState extends State<AddStudent> {
                       ),
                     ),
                     _searchResult.isNotEmpty || searchController.text.isNotEmpty
-                        ? studentListController
-                                    .studentList.value.getStudent!.rows!.length !=
+                        ? studentListController.studentList.value.getStudent!
+                                    .rows!.length !=
                                 0
                             ? Column(
                                 children: [
@@ -305,9 +371,10 @@ class _AddStudentState extends State<AddStudent> {
                                     _searchResult.length,
                                   ),
                                   ListView.separated(
-                                    itemCount:  _searchResult.length,
+                                    itemCount: _searchResult.length,
                                     shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       return Column(
                                         crossAxisAlignment:
@@ -337,7 +404,8 @@ class _AddStudentState extends State<AddStudent> {
                                                   Container(
                                                     height:
                                                         sizes.heightRatio * 50,
-                                                    width: sizes.heightRatio * 50,
+                                                    width:
+                                                        sizes.heightRatio * 50,
                                                     child: CircleAvatar(
                                                       backgroundImage:
                                                           NetworkImage(
@@ -348,7 +416,8 @@ class _AddStudentState extends State<AddStudent> {
                                                   horizontalSpacer(12),
                                                   Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Text(
                                                         '${_searchResult[index].firstName} ${_searchResult[index].lastName}',
@@ -360,8 +429,8 @@ class _AddStudentState extends State<AddStudent> {
                                                                   14,
                                                           fontFamily:
                                                               'montserratBold',
-                                                          color:
-                                                              PayNestTheme.black,
+                                                          color: PayNestTheme
+                                                              .black,
                                                         ),
                                                       ),
                                                       verticalSpacer(4),
@@ -414,7 +483,8 @@ class _AddStudentState extends State<AddStudent> {
                                                                       .studentRegNo
                                                                       .toString(),
                                                             };
-                                                            Navigator.of(context)
+                                                            Navigator.of(
+                                                                    context)
                                                                 .pop();
                                                             await addStudentController
                                                                 .hitAddStudent(
@@ -440,15 +510,17 @@ class _AddStudentState extends State<AddStudent> {
                                                                     'Verification failed',
                                                                   ),
                                                                   backgroundColor:
-                                                                      Colors.red,
+                                                                      Colors
+                                                                          .red,
                                                                 ),
                                                               );
                                                             }
                                                           } else {
-                                                            Navigator.of(context)
-                                                                .pop();
-                                                            ScaffoldMessenger.of(
+                                                            Navigator.of(
                                                                     context)
+                                                                .pop();
+                                                            ScaffoldMessenger
+                                                                    .of(context)
                                                                 .showSnackBar(
                                                               SnackBar(
                                                                 behavior:
@@ -474,7 +546,7 @@ class _AddStudentState extends State<AddStudent> {
                                         ],
                                       );
                                     },
-                                    separatorBuilder: (context, index){
+                                    separatorBuilder: (context, index) {
                                       return verticalSpacer(4);
                                     },
                                   ),
@@ -488,7 +560,8 @@ class _AddStudentState extends State<AddStudent> {
                                       'For Alternate Use Case With All Text Fields Please Click Here. (This Will Not Be Shown On Actual App)',
                                       textAlign: TextAlign.center,
                                       maxLines: 3,
-                                      style: PayNestTheme.h2_14textGrey.copyWith(
+                                      style:
+                                          PayNestTheme.h2_14textGrey.copyWith(
                                         fontFamily: "montserratRegular",
                                         fontSize: sizes.fontRatio * 10,
                                       ),
@@ -549,7 +622,7 @@ class _AddStudentState extends State<AddStudent> {
                         : SizedBox(),
                   ],
                 ),
-            )
+              )
             : Center(
                 child: CircularProgressIndicator(),
               ),
