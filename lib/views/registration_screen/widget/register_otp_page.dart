@@ -69,75 +69,82 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
                 fontFamily: 'montserratExtraBold',
               ),
             ),
-            verticalSpacer(16),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: horizontalValue(12),
-              ),
-              child: Text(
-                'The Code Has Been sent to ${widget.phoneCode + widget.phoneNumber} & ${widget.email}. Please Enter The Code Below.',
-                style: PayNestTheme.h2_14textGrey.copyWith(
-                  fontFamily: "montserratRegular",
-                  fontSize: sizes.fontRatio * 12,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    verticalSpacer(16),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(12),
+                      ),
+                      child: Text(
+                        'The Code Has Been sent to ${widget.phoneCode + widget.phoneNumber} & ${widget.email}. Please Enter The Code Below.',
+                        style: PayNestTheme.h2_14textGrey.copyWith(
+                          fontFamily: "montserratRegular",
+                          fontSize: sizes.fontRatio * 12,
+                        ),
+                      ),
+                    ),
+                    verticalSpacer(80),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(16),
+                      ),
+                      child: Pinput(
+                        defaultPinTheme: PinTheme(
+                          textStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 16,
+                            color: PayNestTheme.black,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: PayNestTheme.black.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
+                          width: sizes.widthRatio * 80,
+                          height: sizes.heightRatio * 50,
+                        ),
+                        controller: otpController,
+                        validator: (s) {
+                          if (s!.length < 4) {
+                            setState(() {
+                              completeCode = false;
+                            });
+                          }
+                          return s.isEmpty ? "Enter Code" : '';
+                        },
+                        pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+                        keyboardType: TextInputType.phone,
+                        showCursor: true,
+                        onCompleted: (pin) {
+                          setState(
+                            () {
+                              completeCode = true;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    verticalSpacer(32),
+                    !timeUpFlag
+                        ? Text("Try it after $_start seconds")
+                        : GestureDetector(
+                            onTap: () => startTimer(),
+                            child: Text(
+                              resend,
+                              style: PayNestTheme.h2_12blueAccent.copyWith(
+                                fontSize: sizes.fontRatio * 14,
+                                color: PayNestTheme.primaryColor,
+                              ),
+                            ),
+                          ),
+                  ],
                 ),
               ),
             ),
-            verticalSpacer(80),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: horizontalValue(16),
-              ),
-              child: Pinput(
-                defaultPinTheme: PinTheme(
-                  textStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                    fontSize: sizes.fontRatio * 16,
-                    color: PayNestTheme.black,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: PayNestTheme.black.withOpacity(0.5),
-                      ),
-                    ),
-                  ),
-                  width: sizes.widthRatio * 80,
-                  height: sizes.heightRatio * 50,
-                ),
-                controller: otpController,
-                validator: (s) {
-                  if (s!.length < 4) {
-                    setState(() {
-                      completeCode = false;
-                    });
-                  }
-                  return s.isEmpty ? "Enter Code" : '';
-                },
-                pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-                keyboardType: TextInputType.phone,
-                showCursor: true,
-                onCompleted: (pin) {
-                  setState(
-                    () {
-                      completeCode = true;
-                    },
-                  );
-                },
-              ),
-            ),
-            verticalSpacer(32),
-            !timeUpFlag
-                ? Text("Try it after $_start seconds")
-                : GestureDetector(
-                    onTap: () => startTimer(),
-                    child: Text(
-                      resend,
-                      style: PayNestTheme.h2_12blueAccent.copyWith(
-                        fontSize: sizes.fontRatio * 14,
-                        color: PayNestTheme.primaryColor,
-                      ),
-                    ),
-                  ),
-            Spacer(),
             Obx(
               () => TextButton(
                 style: TextButton.styleFrom(
