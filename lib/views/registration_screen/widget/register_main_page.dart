@@ -1,4 +1,3 @@
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,6 +10,7 @@ import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/blue_back_button.dart';
+import '../../custom_phone_number_field/country_code_picker.dart';
 
 class RegisterMainPage extends StatefulWidget {
   const RegisterMainPage({
@@ -136,6 +136,8 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         fontSize: sizes.fontRatio * 14,
                         color: PayNestTheme.textGrey,
                       ),
+                      obscureText: isObscure,
+                      obscuringCharacter: '*',
                       controller: createPasswordController,
                       decoration: InputDecoration(
                         border: UnderlineInputBorder(
@@ -152,7 +154,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           ),
                           onPressed: () {
                             setState(
-                                  () {
+                              () {
                                 isObscure = !isObscure;
                               },
                             );
@@ -205,6 +207,12 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                     ),
                     child: TextFormField(
                       controller: confirmPasswordController,
+                      obscureText: cPassword,
+                      style: PayNestTheme.title_2_16primaryColor.copyWith(
+                        fontSize: sizes.fontRatio * 14,
+                        color: PayNestTheme.textGrey,
+                      ),
+                      obscuringCharacter: '*',
                       decoration: InputDecoration(
                         border: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -220,7 +228,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           ),
                           onPressed: () {
                             setState(
-                                  () {
+                              () {
                                 cPassword = !cPassword;
                               },
                             );
@@ -264,48 +272,52 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                       },
                     ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.symmetric(
-                      horizontal: horizontalValue(
-                        16,
+                  verticalSpacer(16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                        value: terms,
+                        focusColor: PayNestTheme.primaryColor,
+                        activeColor: PayNestTheme.primaryColor,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(5.0))),
+                        onChanged: (newValue) {
+                          setState(() {
+                            terms = !terms;
+                          });
+                        },
                       ),
-                    ),
-                    child: CheckboxListTile(
-                      value: terms,
-                      controlAffinity: ListTileControlAffinity.leading,
-                      title: Row(
-                        children: [
-                          Text(
-                            'I accept',
-                            style: PayNestTheme.h2_12blueAccent.copyWith(
-                              fontSize: sizes.fontRatio * 14,
-                              color: PayNestTheme.black,
-                              fontFamily: 'montserratBold',
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Text(
-                              ' Terms & Conditions.',
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'I accept',
                               style: PayNestTheme.h2_12blueAccent.copyWith(
                                 fontSize: sizes.fontRatio * 14,
-                                color: PayNestTheme.primaryColor,
+                                color: PayNestTheme.black,
                                 fontFamily: 'montserratBold',
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      onChanged: (newValue) {
-                        setState(() {
-                          terms = !terms;
-                        });
-                      },
-                      activeColor: PayNestTheme.blueAccent,
-                    ),
+                            const TextSpan(
+                              text: '  ',
+                            ),
+                            TextSpan(
+                              text: ' Terms & Conditions',
+                              style: PayNestTheme.h2_12blueAccent.copyWith(
+                                fontSize: sizes.fontRatio * 14,
+                                color: PayNestTheme.primaryColor,
+                                decoration: TextDecoration.underline,
+                                fontFamily: 'montserratBold',
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                  verticalSpacer(54),
+                  verticalSpacer(44),
                   Container(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -347,12 +359,13 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 12.h),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
                           height: 1.h,
                           width: 129.w,
                           decoration: BoxDecoration(
-                            color: PayNestTheme.textGrey,
+                            color: PayNestTheme.primaryColor,
                           ),
                         ),
                         Padding(
@@ -366,14 +379,14 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           height: 1.h,
                           width: 129.w,
                           decoration: BoxDecoration(
-                            color: PayNestTheme.textGrey,
+                            color: PayNestTheme.primaryColor,
                           ),
                         ),
                       ],
                     ),
                   ),
                   SizedBox(
-                    height: 60.h,
+                    height: 50.h,
                     width: 326.w,
                     child: OutlinedButton.icon(
                       onPressed: () {},
@@ -386,9 +399,11 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         // primary: MyTheme.sharpGreen,
                         elevation: 0,
                         // side: BorderSide(width:1, color:Colors.white),
+                        side: BorderSide(
+                            color: PayNestTheme.primaryColor, width: 1.sp),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
-                            12,
+                            15,
                           ),
                         ),
                       ),
@@ -398,7 +413,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                     height: 16.h,
                   ),
                   SizedBox(
-                    height: 60.h,
+                    height: 50.h,
                     width: 326.w,
                     child: OutlinedButton.icon(
                       onPressed: () {},
@@ -411,8 +426,10 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         // primary: MyTheme.sharpGreen,
                         elevation: 0,
                         // side: BorderSide(width:1, color:Colors.white),
+                        side: BorderSide(
+                            color: PayNestTheme.primaryColor, width: 1.sp),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(15),
                         ),
                       ),
                     ),
@@ -456,7 +473,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
             flagDecoration: BoxDecoration(
               shape: BoxShape.circle,
             ),
-            flagWidth: sizes.fontRatio*40,
+            flagWidth: sizes.fontRatio * 50,
             textStyle: PayNestTheme.title_2_16primaryColor.copyWith(
               fontSize: sizes.fontRatio * 14,
               color: PayNestTheme.primaryColor,
@@ -466,8 +483,13 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
             child: TextFormField(
               keyboardType: TextInputType.phone,
               controller: phoneController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: '987 654 321',
+                hintStyle: TextStyle(
+                  fontSize: 14,
+                  color: PayNestTheme.lightBlack,
+                  fontFamily: 'montserratBold',
+                ),
                 border: InputBorder.none,
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
