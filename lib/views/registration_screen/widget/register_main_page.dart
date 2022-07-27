@@ -69,9 +69,6 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                   _numberField(),
                   verticalSpacer(12),
                   Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: horizontalValue(16),
-                    ),
                     child: TextFormField(
                       controller: emailController,
                       style: PayNestTheme.title_2_16primaryColor.copyWith(
@@ -128,9 +125,6 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                   ),
                   verticalSpacer(12),
                   Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: horizontalValue(16),
-                    ),
                     child: TextFormField(
                       style: PayNestTheme.title_2_16primaryColor.copyWith(
                         fontSize: sizes.fontRatio * 14,
@@ -202,9 +196,6 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                   ),
                   verticalSpacer(12),
                   Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: horizontalValue(16),
-                    ),
                     child: TextFormField(
                       controller: confirmPasswordController,
                       obscureText: cPassword,
@@ -272,7 +263,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                       },
                     ),
                   ),
-                  verticalSpacer(16),
+                  verticalSpacer(20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -317,7 +308,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                       )
                     ],
                   ),
-                  verticalSpacer(44),
+                  verticalSpacer(40),
                   Container(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -357,7 +348,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    padding: EdgeInsets.symmetric(vertical: 29.h),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -372,7 +363,10 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           padding: EdgeInsets.symmetric(horizontal: 16.w),
                           child: Text(
                             or,
-                            style: PayNestTheme.h2_14textGrey,
+                            style: PayNestTheme.h2_14textGrey.copyWith(
+                              color: PayNestTheme.black,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         Container(
@@ -446,9 +440,6 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
   Widget _numberField() {
     return Container(
       padding: EdgeInsets.zero,
-      margin: EdgeInsets.symmetric(
-        horizontal: horizontalValue(16),
-      ),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
@@ -482,12 +473,16 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
           Expanded(
             child: TextFormField(
               keyboardType: TextInputType.phone,
+              style: PayNestTheme.title_2_16primaryColor.copyWith(
+                fontSize: sizes.fontRatio * 14,
+                color: PayNestTheme.textGrey,
+              ),
               controller: phoneController,
               decoration: InputDecoration(
                 hintText: '987 654 321',
                 hintStyle: TextStyle(
-                  fontSize: 14,
-                  color: PayNestTheme.lightBlack,
+                  fontSize: sizes.fontRatio * 14,
+                  color: PayNestTheme.textGrey,
                   fontFamily: 'montserratBold',
                 ),
                 border: InputBorder.none,
