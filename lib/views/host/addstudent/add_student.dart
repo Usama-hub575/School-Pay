@@ -249,7 +249,7 @@ class _AddStudentState extends State<AddStudent> {
                                           style: PayNestTheme
                                               .h2_12blueAccentLight
                                               .copyWith(
-                                            fontSize: sizes.fontRatio * 15,
+                                            fontSize: sizes.fontRatio * 14,
                                             color: PayNestTheme.lightBlack,
                                             fontFamily: 'montserratRegular',
                                           ),
@@ -268,9 +268,11 @@ class _AddStudentState extends State<AddStudent> {
                                             style: PayNestTheme
                                                 .h2_12blueAccentLight
                                                 .copyWith(
-                                              fontSize: sizes.fontRatio * 15,
-                                              color: PayNestTheme.lightBlack,
-                                              fontFamily: 'montserratRegular',
+                                              fontSize:
+                                              sizes.fontRatio * 14,
+                                              color: PayNestTheme.black,
+                                              fontFamily:
+                                              'montserratBold',
                                             ),
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -284,11 +286,9 @@ class _AddStudentState extends State<AddStudent> {
                                                     style: PayNestTheme
                                                         .h2_12blueAccentLight
                                                         .copyWith(
-                                                      fontSize:
-                                                          sizes.fontRatio * 15,
-                                                      color: PayNestTheme.black,
-                                                      fontFamily:
-                                                          'montserratBold',
+                                                      fontSize: sizes.fontRatio * 14,
+                                                      color: PayNestTheme.lightBlack,
+                                                      fontFamily: 'montserratSemiBold',
                                                     ),
                                                     overflow:
                                                         TextOverflow.ellipsis,
