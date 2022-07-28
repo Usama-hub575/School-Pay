@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/transactiondetail_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
 
@@ -26,7 +27,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 350.h,
+            height: 300.h,
             child: Stack(
               children: [
                 Container(
@@ -132,6 +133,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                                   ),
                                   Text(
                                     youHaveSuccessfully,
+                                    textAlign: TextAlign.center,
                                     style: PayNestTheme.h2_14textGrey,
                                   ),
                                   SizedBox(
@@ -166,7 +168,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 34.h),
+                padding: EdgeInsets.symmetric(horizontal: 32.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -185,7 +187,6 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     //       )
                     //   ),
                     // ),
-
                     /// Title
                     Text(
                       invoiceDetails,

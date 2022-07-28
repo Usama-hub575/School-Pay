@@ -157,62 +157,62 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                           },
                         ),
                       )
-                    : Container(
-                        height: sizes.height,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: horizontalValue(16),
-                        ),
-                        child: Column(
-                          children: [
-                            verticalSpacer(40),
-                            const Spacer(),
-                            Container(
-                              width: sizes.widthRatio * 150,
-                              height: sizes.heightRatio * 150,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    noData,
+                    : Expanded(
+                      child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: horizontalValue(16),
+                          ),
+                          child: Column(
+                            children: [
+                              verticalSpacer(100),
+                              Container(
+                                width: sizes.widthRatio * 150,
+                                height: sizes.heightRatio * 150,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      noData,
+                                    ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  fit: BoxFit.cover,
                                 ),
                               ),
-                            ),
-                            verticalSpacer(20),
-                            Container(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              child: Text(
-                                noDataText,
-                                style:
-                                    PayNestTheme.title_3_16blackbold.copyWith(
-                                  fontSize: sizes.fontRatio * 22,
-                                  color: PayNestTheme.primaryColor,
-                                  fontFamily: 'montserratBold',
+                              verticalSpacer(20),
+                              Container(
+                                width: double.infinity,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  noDataText,
+                                  style:
+                                      PayNestTheme.title_3_16blackbold.copyWith(
+                                    fontSize: sizes.fontRatio * 22,
+                                    color: PayNestTheme.primaryColor,
+                                    fontFamily: 'montserratBold',
+                                  ),
                                 ),
                               ),
-                            ),
-                            verticalSpacer(10),
-                            Container(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              child: Text(
-                                sorryWeCant,
-                                textAlign: TextAlign.center,
-                                style:
-                                    PayNestTheme.title_3_16blackbold.copyWith(
-                                  fontSize: sizes.fontRatio * 16,
-                                  color: PayNestTheme.lightBlack,
-                                  fontFamily: 'montserratBold',
+                              verticalSpacer(10),
+                              Container(
+                                width: double.infinity,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  sorryWeCant,
+                                  textAlign: TextAlign.center,
+                                  style:
+                                      PayNestTheme.title_3_16blackbold.copyWith(
+                                    fontSize: sizes.fontRatio * 16,
+                                    color: PayNestTheme.lightBlack,
+                                    fontFamily: 'montserratBold',
+                                  ),
                                 ),
                               ),
-                            ),
-                            const Spacer(),
-                            verticalSpacer(16),
-                          ],
+                              const Spacer(),
+                              verticalSpacer(16),
+                            ],
+                          ),
                         ),
-                      )
+                    )
                 : SizedBox(),
           ),
         ],

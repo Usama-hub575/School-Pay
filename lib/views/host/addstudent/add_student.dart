@@ -37,6 +37,7 @@ class _AddStudentState extends State<AddStudent> {
   List<String> filters = ['First Name', 'Last Name', 'Email ID', 'Student ID'];
   String? _selectedFilter;
   bool isExpanded = false;
+  bool isSearchFieldEnable = false;
 
   @override
   void initState() {
@@ -298,9 +299,9 @@ class _AddStudentState extends State<AddStudent> {
                                               .toList(),
                                           value: _selectedFilter,
                                           onChanged: (value) {
-                                            setState(() {
-                                              _selectedFilter = value as String;
-                                            });
+                                            _selectedFilter = value as String;
+                                            isSearchFieldEnable = true;
+                                            setState(() {});
                                           },
                                         ),
                                       ),
@@ -316,8 +317,25 @@ class _AddStudentState extends State<AddStudent> {
                                 child: TextFormField(
                                   controller: searchController,
                                   onTap: () {
-                                    onSearchTextChanged('');
+                                    if(isSearchFieldEnable == true){
+                                      onSearchTextChanged('');
+                                    }else{
+                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                        content: Text(
+                                          "Please Select Search By Field First",
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        behavior: SnackBarBehavior.floating,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(24),
+                                        ),
+                                        backgroundColor: PayNestTheme.primaryColor,
+                                      ));
+                                    }
+                                    setState(() {
+                                    });
                                   },
+                                  enabled: isSearchFieldEnable,
                                   onEditingComplete: () {
                                     if (searchController.text.isNotEmpty) {
                                       onSearchTextChanged(

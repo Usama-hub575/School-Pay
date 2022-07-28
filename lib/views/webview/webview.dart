@@ -11,7 +11,6 @@ import 'package:xml2json/xml2json.dart';
 class MyWebView extends StatefulWidget {
   final String title;
 
-  // final int resID;
   final String amount;
   final int indx;
   final int orderId;
@@ -19,7 +18,6 @@ class MyWebView extends StatefulWidget {
 
   MyWebView({
     required this.title,
-    // required this.resID,
     required this.amount,
     required this.indx,
     required this.orderId,

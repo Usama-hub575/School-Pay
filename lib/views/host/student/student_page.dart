@@ -110,64 +110,175 @@ class _StudentPageState extends State<StudentPage> {
                   ),
                   color: PayNestTheme.colorWhite,
                 ),
-                child: Obx(
-                  () => controller.isLoading.value == false
-                      ? controller.myStudentData.value.status == true
-                          ? controller.myStudentData.value.students == null
-                              ? SizedBox()
-                              : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Obx(() => controller.isLoading.value == false
+                    ? controller.myStudentData.value.status == true
+                        ? controller.myStudentData.value.students == null &&
+                                controller
+                                        .myStudentData.value.students!.length >
+                                    0
+                            ? Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: horizontalValue(16),
+                                ),
+                                child: Column(
                                   children: [
-                                    verticalSpacer(16),
+                                    verticalSpacer(100),
                                     Container(
-                                      margin: EdgeInsets.symmetric(
-                                        horizontal: horizontalValue(24),
-                                      ),
-                                      child: Text(
-                                        selectStudent,
-                                        style:
-                                            PayNestTheme.h2_12blueAccent.copyWith(
-                                          fontSize: sizes.fontRatio * 16,
-                                          color: PayNestTheme.primaryColor,
-                                          fontFamily: 'montserratExtraBold',
+                                      width: sizes.widthRatio * 150,
+                                      height: sizes.heightRatio * 150,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            noData,
+                                          ),
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: SingleStudentCard(
-                                        onTap: (student) {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SingleStudentPage(
-                                                singleStudentModel:
-                                                    getStudentModel(
-                                                  studentElement: student,
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        students: controller
-                                            .myStudentData.value.students!,
+                                    verticalSpacer(20),
+                                    Container(
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        noDataText,
+                                        style: PayNestTheme.title_3_16blackbold
+                                            .copyWith(
+                                          fontSize: sizes.fontRatio * 22,
+                                          color: PayNestTheme.primaryColor,
+                                          fontFamily: 'montserratBold',
+                                        ),
                                       ),
                                     ),
+                                    verticalSpacer(10),
+                                    Container(
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        sorryWeCant,
+                                        textAlign: TextAlign.center,
+                                        style: PayNestTheme.title_3_16blackbold
+                                            .copyWith(
+                                          fontSize: sizes.fontRatio * 16,
+                                          color: PayNestTheme.lightBlack,
+                                          fontFamily: 'montserratBold',
+                                        ),
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    verticalSpacer(16),
                                   ],
-                                )
-                          : SizedBox()
-                      : Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 15.h,
+                                ),
+                              )
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  verticalSpacer(16),
+                                  Container(
+                                    margin: EdgeInsets.symmetric(
+                                      horizontal: horizontalValue(24),
+                                    ),
+                                    child: Text(
+                                      selectStudent,
+                                      style:
+                                          PayNestTheme.h2_12blueAccent.copyWith(
+                                        fontSize: sizes.fontRatio * 16,
+                                        color: PayNestTheme.primaryColor,
+                                        fontFamily: 'montserratExtraBold',
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: SingleStudentCard(
+                                      onTap: (student) {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                SingleStudentPage(
+                                              singleStudentModel:
+                                                  getStudentModel(
+                                                studentElement: student,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      students: controller
+                                          .myStudentData.value.students!,
+                                    ),
+                                  ),
+                                ],
+                              )
+                        : Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: horizontalValue(16),
                             ),
+                            child: Column(
+                              children: [
+                                verticalSpacer(100),
+                                Container(
+                                  width: sizes.widthRatio * 150,
+                                  height: sizes.heightRatio * 150,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        warning,
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                verticalSpacer(20),
+                                Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    error,
+                                    style: PayNestTheme.title_3_16blackbold
+                                        .copyWith(
+                                      fontSize: sizes.fontRatio * 22,
+                                      color: PayNestTheme.primaryColor,
+                                      fontFamily: 'montserratBold',
+                                    ),
+                                  ),
+                                ),
+                                verticalSpacer(10),
+                                Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    sorryWeCant,
+                                    textAlign: TextAlign.center,
+                                    style: PayNestTheme.title_3_16blackbold
+                                        .copyWith(
+                                      fontSize: sizes.fontRatio * 16,
+                                      color: PayNestTheme.lightBlack,
+                                      fontFamily: 'montserratBold',
+                                    ),
+                                  ),
+                                ),
+                                const Spacer(),
+                                verticalSpacer(16),
+                              ],
+                            ),
+                          )
+                    : Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: horizontalValue(16),
+                        ),
+                        child: Column(
+                          children: [
+                            const Spacer(),
                             CircularProgressIndicator(
                               backgroundColor: PayNestTheme.colorWhite,
                               color: PayNestTheme.blueAccent,
                             ),
+                            const Spacer(),
                           ],
                         ),
-                ),
+                      )),
               ),
             ),
           ],

@@ -86,7 +86,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             this.password = password;
                             this.phoneCode = phoneCode;
                             this.phoneNumber = phoneNumber;
-
                             setState(() {});
                           },
                         )
@@ -132,10 +131,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                 if (registerController
                                         .userResData.value.status ==
                                     true) {
-                                  Navigator.pushNamed(
-                                    context,
-                                    '/CreatePin',
-                                  );
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      '/DashboardPage',
+                                      (Route<dynamic> route) => false);
                                 } else if (registerController
                                         .userResData.value.status ==
                                     true) {

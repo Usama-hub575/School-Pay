@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,8 +14,11 @@ import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/widget/amount_bottom_sheet.dart';
+import 'package:paynest_flutter_app/views/host/payment_method/payment_method.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:pinput/pinput.dart';
+
+import '../../download_pdf/download_pdf.dart';
 
 class InvoicePaymentPage extends StatefulWidget {
   SingleStudentModel singleStudentModel;
@@ -36,6 +41,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
 
   TextEditingController feeController = TextEditingController();
   TextEditingController pinController = TextEditingController();
+  bool isLoading = false;
 
   int index = 1;
 
@@ -141,7 +147,10 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          setState(() {
+                            generateScreenshotImages(
+                                'L${widget.singleStudentModel.id.toString()}');
+                          });
                         },
                         child: Row(
                           children: [
@@ -351,10 +360,16 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                           AmountBottomSheet.show(
                             singleStudentModel: widget.singleStudentModel,
                             context: context,
-                            onTap: () {
+                            onTap: (value) {
                               Navigator.of(context).pop();
-                              showCodeModal(
-                                context,
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => PaymentMethod(
+                                    singleStudentModel:
+                                        widget.singleStudentModel,
+                                    payment: value,
+                                  ),
+                                ),
                               );
                             },
                           );
@@ -379,157 +394,6 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
           ),
         ],
       ),
-    );
-  }
-
-  Future<dynamic> showCodeModal(BuildContext context) {
-    return showModalBottomSheet(
-      isDismissible: false,
-      isScrollControlled: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.r),
-          topRight: Radius.circular(20.r),
-        ),
-      ),
-      context: context,
-      builder: (ctx) {
-        return SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: 28.w,
-              right: 28.w,
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: Column(
-              children: [
-                verticalSpacer(16),
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: horizontalValue(16),
-                  ),
-                  child: Text(
-                    enterYourPin,
-                    textAlign: TextAlign.center,
-                    style: PayNestTheme.title22blackbold.copyWith(
-                      fontSize: sizes.fontRatio * 16,
-                      color: PayNestTheme.primaryColor,
-                    ),
-                  ),
-                ),
-                Form(
-                  key: Utils.pinFormKey,
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 40.h, bottom: 40.h),
-                      child: Pinput(
-                        defaultPinTheme: PinTheme(
-                          textStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                            fontSize: sizes.fontRatio * 16,
-                            color: PayNestTheme.black,
-                          ),
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: PayNestTheme.black.withOpacity(0.5),
-                              ),
-                            ),
-                          ),
-                          width: sizes.widthRatio * 80,
-                          height: sizes.heightRatio * 50,
-                        ),
-                        controller: pinController,
-                        validator: (s) {
-                          return s!.isEmpty
-                              ? 'Enter Pin'
-                              : s.length < 4
-                                  ? '4 Digit Pin '
-                                  : null;
-                        },
-                        pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-                        showCursor: true,
-                        onCompleted: (pin) => print(pin),
-                      ),
-                    ),
-                  ),
-                ),
-                Obx(
-                  () => Container(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: PayNestTheme.colorWhite,
-                        elevation: 0,
-                        side: BorderSide(
-                          width: 1,
-                          color: PayNestTheme.primaryColor,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            14,
-                          ),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          vertical: verticalValue(14),
-                        ),
-                      ),
-                      onPressed: () {
-                        if (Utils.pinFormKey.currentState!.validate()) {
-                          verifyPinController.hitVerifyPin(
-                              userController.userResData.value.parent!.id,
-                              pinController.text);
-                          if (verifyPinController.verifyPinData.value.status ==
-                              true) {
-                            Navigator.pop(context);
-                            partialPayment();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  verifyPinController
-                                      .verifyPinData.value.message
-                                      .toString(),
-                                ),
-                              ),
-                            );
-                            pinController.clear();
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Pin Verification failed',
-                                ),
-                              ),
-                            );
-                            Navigator.pop(context);
-                          }
-                        } else {}
-                      },
-                      child: Center(
-                        child: !verifyPinController.isLoading.value
-                            ? Text(
-                                continueTo,
-                                style: PayNestTheme.title_2_16primaryColor
-                                    .copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  color: PayNestTheme.primaryColor,
-                                ),
-                              )
-                            : CircularProgressIndicator(
-                                backgroundColor: PayNestTheme.colorWhite,
-                                color: PayNestTheme.blueAccent,
-                              ),
-                      ),
-                    ),
-                  ),
-                ),
-                verticalSpacer(16),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 
@@ -565,5 +429,33 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
         ),
       );
     }
+  }
+
+  Future generateScreenshotImages(String fileName) async {
+    setState(() {
+      isLoading = true;
+    });
+    final pdfFile = await PdfApi.generatePdfFile(
+      widget.singleStudentModel,
+    );
+
+    PdfApi.openFile(file: File(pdfFile.path));
+
+    setState(() {
+      isLoading = false;
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          "Successful!",
+          textAlign: TextAlign.center,
+        ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        backgroundColor: PayNestTheme.primaryColor,
+      ),
+    );
   }
 }

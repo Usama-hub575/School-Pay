@@ -17,6 +17,7 @@ class MyStudentController extends GetxController {
       var res = await APIService().apiMyStudents(
         myStudentsModelToJson(model),
       );
+
       var decoded = jsonDecode(res);
       if (decoded['status'] == true) {
         MyStudentsRespModel respModel = myStudentsRespModelFromJson(res);
@@ -45,10 +46,11 @@ class MyStudentController extends GetxController {
   }
 
   void resetStudentCard() {
-    for (int i = 0; i < myStudentData.value.students!.length; i++) {
-      myStudentData.value.students![i].isSelected = false;
+    if(myStudentData.value.students !=null && myStudentData.value.students!.length > 0){
+      for (int i = 0; i < myStudentData.value.students!.length; i++) {
+        myStudentData.value.students![i].isSelected = false;
+      }
+      myStudentData.refresh();
     }
-
-    myStudentData.refresh();
   }
 }

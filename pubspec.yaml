@@ -36,6 +36,8 @@ dependencies:
   local_auth: ^1.1.8
   shared_preferences:
   dropdown_button2:
+  pdf:
+  open_file:
 
 
   modal_bottom_sheet:
@@ -67,6 +69,7 @@ flutter:
     - assets/svg/
     - assets/json/
     - assets/png/
+    - assets/jpg/
     - assets/flags/
 
   fonts:

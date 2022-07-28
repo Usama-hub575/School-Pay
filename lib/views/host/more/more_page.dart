@@ -15,6 +15,7 @@ import 'package:paynest_flutter_app/views/host/transaction/recent_transaction_pa
 import 'package:paynest_flutter_app/views/host/viewprofile/view_profile.dart';
 import 'package:paynest_flutter_app/views/welcome_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../auth/local_auth_api.dart';
 import '../../../utils/sharedPrefKeys.dart';
@@ -30,11 +31,11 @@ class MorePage extends StatefulWidget {
 class _MorePageState extends State<MorePage> {
   final UserController userController = Get.find<UserController>();
   MySharedPreferences storage = MySharedPreferences.instance;
-  bool isAuthenticated = false;
+  bool isBioMetricButtonEnable = false;
 
   @override
   void initState() {
-    isAuthenticated = storage.getBoolValue(SharedPrefKeys.isBioMatric);
+    isBioMetricButtonEnable = storage.getBoolValue(SharedPrefKeys.isBioMatric);
     // TODO: implement initState
     super.initState();
   }
@@ -130,7 +131,7 @@ class _MorePageState extends State<MorePage> {
                               Text(
                                 '${userController.userResData.value.parent!.firstName} ${userController.userResData.value.parent!.lastName}',
                                 style: PayNestTheme.title18black.copyWith(
-                                  fontSize: sizes.fontRatio*18,
+                                  fontSize: sizes.fontRatio * 18,
                                   fontFamily: 'montserratBold',
                                 ),
                               ),
@@ -146,7 +147,7 @@ class _MorePageState extends State<MorePage> {
                                 child: Text(
                                   viewprofile,
                                   style: PayNestTheme.title18black.copyWith(
-                                    fontSize: sizes.fontRatio*12,
+                                    fontSize: sizes.fontRatio * 12,
                                     color: PayNestTheme.primaryColor,
                                     fontFamily: 'montserratSemiBold',
                                   ),
@@ -225,8 +226,23 @@ class _MorePageState extends State<MorePage> {
                     SingleCardWithRadioButton(
                       value: biometricAuth,
                       icon: icFingerPrint,
-                      isEnable: isAuthenticated,
-                      onTap: () {},
+                      isEnable: isBioMetricButtonEnable,
+                      onTap: () async {
+                        if (!isBioMetricButtonEnable) {
+                          isBioMetricButtonEnable =
+                              await LocalAuthApi.authenticateWithBiometrics();
+                          isBioMetricButtonEnable = !isBioMetricButtonEnable;
+                        } else {
+                          isBioMetricButtonEnable = !isBioMetricButtonEnable;
+                          storage.setBoolValue(SharedPrefKeys.isBioMatric,
+                              isBioMetricButtonEnable);
+                        }
+                        storage.setBoolValue(
+                          SharedPrefKeys.isBioMatric,
+                          isBioMetricButtonEnable,
+                        );
+                        setState(() {});
+                      },
                     ),
                     verticalSpacer(16),
                     SingleCardWithRadioButton(
@@ -263,19 +279,37 @@ class _MorePageState extends State<MorePage> {
                     SingleCard(
                       icon: icFaq,
                       value: FAQ,
-                      onTap: () {},
+                      onTap: () {
+                        launch(
+                          'https://paynest.ae/#faq',
+                        );
+                        setState(() {
+                        });
+                      },
                     ),
                     verticalSpacer(16),
                     SingleCard(
                       icon: icContactUs,
                       value: contactUs,
-                      onTap: () {},
+                      onTap: () {
+                        launch(
+                          'https://paynest.ae/#faq',
+                        );
+                        setState(() {
+                        });
+                      },
                     ),
                     verticalSpacer(16),
                     SingleCard(
                       icon: icPrivacyPolicy,
                       value: privacyPolicy,
-                      onTap: () {},
+                      onTap: () {
+                        launch(
+                          'https://paynest.ae/privacy-policy.html',
+                        );
+                        setState(() {
+                        });
+                      },
                     ),
                     verticalSpacer(16),
                     SingleCard(
@@ -297,16 +331,15 @@ class _MorePageState extends State<MorePage> {
                       width: double.infinity,
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          backgroundColor: PayNestTheme.colorRedShade,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              12.r,
+                            backgroundColor: PayNestTheme.colorRedShade,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                12.r,
+                              ),
                             ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            vertical: verticalValue(16),
-                          )
-                        ),
+                            padding: EdgeInsets.symmetric(
+                              vertical: verticalValue(16),
+                            )),
                         onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
                             // the new route

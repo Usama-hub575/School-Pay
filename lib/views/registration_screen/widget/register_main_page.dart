@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../constants/constants.dart';
+import '../../../controller/sendOTP_controller.dart';
 import '../../../model/datamodel/reg1_to_otp.dart';
 import '../../../res/assets.dart';
 import '../../../res/res.dart';
@@ -41,6 +44,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController createPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  SendOTPController sendOTPController = Get.put(SendOTPController());
 
   @override
   Widget build(BuildContext context) {
@@ -327,23 +331,48 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                       onPressed: () {
                         if (Utils.reg1FormKey.currentState!.validate() &&
                             terms == true) {
-                          widget.onNextTap(
-                            emailController.text,
-                            createPasswordController.text,
-                            phCodeController.text,
-                            phoneController.text,
+                          setState(() {
+                            loading = !loading;
+                          });
+                          //hit otp
+                          Future.delayed(Duration(seconds: 2)).then(
+                            (value) => {
+                              sendOTPController.hitSendOTP(
+                                  phCodeController.text + phoneController.text),
+                              setState(() {
+                                loading = !loading;
+                              }),
+                              widget.onNextTap(
+                                emailController.text,
+                                createPasswordController.text,
+                                phCodeController.text,
+                                phoneController.text,
+                              ),
+                            },
                           );
-                        }
+                        };
                       },
                       child: Center(
-                        child: Text(
-                          next,
-                          style: PayNestTheme.title_2_16primaryColor.copyWith(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            color: PayNestTheme.colorWhite,
-                          ),
-                        ),
+                        child: loading == false
+                            ? Text(
+                                next,
+                                style: PayNestTheme.title_2_16primaryColor
+                                    .copyWith(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                  color: PayNestTheme.colorWhite,
+                                ),
+                              )
+                            : Center(
+                                child: SizedBox(
+                                  width: sizes.heightRatio * 20,
+                                  height: sizes.heightRatio * 20,
+                                  child: CircularProgressIndicator(
+                                    backgroundColor: PayNestTheme.colorWhite,
+                                    color: PayNestTheme.blueAccent,
+                                  ),
+                                ),
+                              ),
                       ),
                     ),
                   ),

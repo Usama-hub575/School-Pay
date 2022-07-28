@@ -132,7 +132,6 @@ class _HostPageState extends State<HostPage> {
           payNow = 0;
           selectedNavItem(index);
         },
-        // hideAnimationController: _hideBottomBarAnimationController,
         shadow: BoxShadow(
           offset: Offset(0, 1),
           blurRadius: 12,

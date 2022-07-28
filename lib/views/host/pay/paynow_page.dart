@@ -155,262 +155,300 @@ class _PayNowPageState extends State<PayNowPage> {
                     horizontal: 20.w,
                     vertical: 10.h,
                   ),
-                  child: studentController.myStudentData.value.status
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            verticalSpacer(16),
-                            Text(
-                              selectStudent,
-                              style:
-                                  PayNestTheme.title_2_16primaryColor.copyWith(
-                                fontFamily: 'montserratExtraBold',
-                                fontSize: sizes.fontRatio * 16,
-                              ),
-                            ),
-                            verticalSpacer(13),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: PayNestTheme.colorWhite,
-                                borderRadius: BorderRadius.circular(16),
-                                border: Border.all(
-                                  color: PayNestTheme.primaryColor,
+                  child: studentController.myStudentData.value.status == true
+                      ? studentController.myStudentData.value.students !=
+                                  null &&
+                              studentController
+                                      .myStudentData.value.students!.length >
+                                  0
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                verticalSpacer(16),
+                                Text(
+                                  selectStudent,
+                                  style: PayNestTheme.title_2_16primaryColor
+                                      .copyWith(
+                                    fontFamily: 'montserratExtraBold',
+                                    fontSize: sizes.fontRatio * 16,
+                                  ),
                                 ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color:
-                                        PayNestTheme.dropShadow.withOpacity(.3),
-                                    spreadRadius: 0,
-                                    blurRadius: 10,
-                                    offset: Offset(
-                                      0,
-                                      5,
-                                    ), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: horizontalValue(16),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.search,
-                                    color: PayNestTheme.primaryColor,
-                                  ),
-                                  horizontalSpacer(12),
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller: searchController,
-                                      style: PayNestTheme.title_2_16primaryColor
-                                          .copyWith(
-                                        fontSize: sizes.fontRatio * 14,
-                                        color: PayNestTheme.black,
-                                      ),
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        labelText: searchStudent,
-                                        labelStyle: PayNestTheme.h2_12blueAccent
-                                            .copyWith(
-                                          fontSize: sizes.fontRatio * 12,
-                                          color: PayNestTheme.lightBlack
-                                              .withOpacity(0.5),
-                                          fontFamily: 'montserratRegular',
-                                        ),
-                                        enabledBorder: InputBorder.none,
-                                        errorBorder: InputBorder.none,
-                                        disabledBorder: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                      ),
-                                      autovalidateMode:
-                                          AutovalidateMode.onUserInteraction,
+                                verticalSpacer(13),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: PayNestTheme.colorWhite,
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color: PayNestTheme.primaryColor,
                                     ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: PayNestTheme.dropShadow
+                                            .withOpacity(.3),
+                                        spreadRadius: 0,
+                                        blurRadius: 10,
+                                        offset: Offset(
+                                          0,
+                                          5,
+                                        ), // changes position of shadow
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: ListView(
-                                physics: const BouncingScrollPhysics(),
-                                children: [
-                                  Container(
-                                    height: sizes.heightRatio * 156,
-                                    child: ListView.separated(
-                                      itemCount: studentController
-                                          .myStudentData.value.students!.length,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        return _singleCard(
-                                          studentController.myStudentData.value
-                                              .students![index],
-                                          (StudentElement student) {
-                                            payAbleAmount = student
-                                                .student!.totalBalanceAmount
-                                                .toString();
-                                            studentController
-                                                .updateSelectedCard(
-                                              student.id,
-                                            );
-                                            studentElement = student;
-                                            setState(() {});
-                                          },
-                                          index,
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) {
-                                        return horizontalSpacer(16);
-                                      },
-                                    ),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: horizontalValue(16),
                                   ),
-                                  verticalSpacer(30),
-                                  Container(
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Current Payable Amount',
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.search,
+                                        color: PayNestTheme.primaryColor,
+                                      ),
+                                      horizontalSpacer(12),
+                                      Expanded(
+                                        child: TextFormField(
+                                          controller: searchController,
                                           style: PayNestTheme
-                                              .h2_12blueAccentLight
+                                              .title_2_16primaryColor
                                               .copyWith(
                                             fontSize: sizes.fontRatio * 14,
-                                            color: PayNestTheme.primaryColor,
-                                            fontFamily: 'montserratSemiBold',
+                                            color: PayNestTheme.black,
                                           ),
-                                        ),
-                                        Spacer(),
-                                        Text(
-                                          '${payAbleAmount != '0' ? payAbleAmount : ''}',
-                                          style: PayNestTheme.h2_12blueAccent
-                                              .copyWith(
-                                            fontSize: sizes.fontRatio * 12,
-                                            color: PayNestTheme.primaryColor,
-                                          ),
-                                        ),
-                                        horizontalSpacer(16),
-                                      ],
-                                    ),
-                                  ),
-                                  verticalSpacer(8),
-                                  Container(
-                                    width: double.infinity,
-                                    height: 1,
-                                    color:
-                                        PayNestTheme.textGrey.withOpacity(0.5),
-                                  ),
-                                  Container(
-                                    alignment: Alignment.center,
-                                    child: Lottie.asset(
-                                      singleStudentJson,
-                                      repeat: true,
-                                      height: payAbleAmount == '0'
-                                          ? sizes.heightRatio * 327
-                                          : sizes.heightRatio * 114,
-                                      width: payAbleAmount == '0'
-                                          ? sizes.widthRatio * 327
-                                          : sizes.widthRatio * 114,
-                                    ),
-                                  ),
-                                  verticalSpacer(16),
-                                  payAbleAmount != '0'
-                                      ? Container(
-                                          width: double.infinity,
-                                          margin: EdgeInsets.symmetric(
-                                            horizontal: horizontalValue(4),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: PayNestTheme.colorWhite,
-                                            border: Border.all(
-                                              color: PayNestTheme.primaryColor,
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            labelText: searchStudent,
+                                            labelStyle: PayNestTheme
+                                                .h2_12blueAccent
+                                                .copyWith(
+                                              fontSize: sizes.fontRatio * 12,
+                                              color: PayNestTheme.lightBlack
+                                                  .withOpacity(0.5),
+                                              fontFamily: 'montserratRegular',
                                             ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 0.5,
-                                                blurRadius: 5,
-                                                offset: Offset(1, 3),
-                                              ),
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(16),
+                                            enabledBorder: InputBorder.none,
+                                            errorBorder: InputBorder.none,
+                                            disabledBorder: InputBorder.none,
+                                            focusedBorder: InputBorder.none,
                                           ),
-                                          child: Row(
-                                            children: [
-                                              horizontalSpacer(16),
-                                              _commercial_image(
-                                                imagePath: icCommercialBank,
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: ListView(
+                                    physics: const BouncingScrollPhysics(),
+                                    children: [
+                                      Container(
+                                        height: sizes.heightRatio * 156,
+                                        child: ListView.separated(
+                                          itemCount: studentController
+                                              .myStudentData
+                                              .value
+                                              .students!
+                                              .length,
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            return _singleCard(
+                                              studentController.myStudentData
+                                                  .value.students![index],
+                                              (StudentElement student) {
+                                                payAbleAmount = student
+                                                    .student!.totalBalanceAmount
+                                                    .toString();
+                                                studentController
+                                                    .updateSelectedCard(
+                                                  student.id,
+                                                );
+                                                studentElement = student;
+                                                setState(() {});
+                                              },
+                                              index,
+                                            );
+                                          },
+                                          separatorBuilder: (context, index) {
+                                            return horizontalSpacer(16);
+                                          },
+                                        ),
+                                      ),
+                                      verticalSpacer(30),
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Current Payable Amount',
+                                              style: PayNestTheme
+                                                  .h2_12blueAccentLight
+                                                  .copyWith(
+                                                fontSize: sizes.fontRatio * 14,
+                                                color:
+                                                    PayNestTheme.primaryColor,
+                                                fontFamily:
+                                                    'montserratSemiBold',
                                               ),
-                                              Expanded(
-                                                child: FlatButton(
-                                                  padding: EdgeInsets.zero,
-                                                  onPressed: () async {
-                                                    if (studentController
-                                                        .myStudentData
-                                                        .value
-                                                        .status) {
-                                                      final result =
-                                                          await Navigator.of(
-                                                                  context)
-                                                              .push(
-                                                        MaterialPageRoute(
-                                                          builder: (BuildContext
-                                                                  context) =>
-                                                              MyWebView(
-                                                            title: "CBD",
-                                                            amount: '1300',
-                                                            indx: idx,
-                                                            orderId: Random()
-                                                                .nextInt(
-                                                              1000000000,
-                                                            ),
-                                                            schoolId: int.parse(
-                                                              schoolIDController
-                                                                  .text,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      );
-                                                      if (result != null) {
-                                                        var amount =
-                                                            payAbleAmount;
-                                                        bool status =
-                                                            await ctrcController
-                                                                .hitCreateTransaction(
-                                                          schoolIDController
-                                                              .text,
-                                                          parentIDController
-                                                              .text,
-                                                          studentIDController
-                                                              .text,
-                                                          '1300',
-                                                          result,
-                                                        );
-                                                        if (status) {
-                                                          studentController
-                                                              .myStudentData
-                                                              .update(
-                                                            (val) {
-                                                              PayNowTransactionDetailModel
-                                                                  model;
-                                                              model = _getModel(
-                                                                studentElement,
-                                                                amount,
-                                                              );
-                                                              Navigator.of(
+                                            ),
+                                            Spacer(),
+                                            Text(
+                                              '${payAbleAmount != '0' ? payAbleAmount : ''}',
+                                              style: PayNestTheme
+                                                  .h2_12blueAccent
+                                                  .copyWith(
+                                                fontSize: sizes.fontRatio * 12,
+                                                color:
+                                                    PayNestTheme.primaryColor,
+                                              ),
+                                            ),
+                                            horizontalSpacer(16),
+                                          ],
+                                        ),
+                                      ),
+                                      verticalSpacer(8),
+                                      Container(
+                                        width: double.infinity,
+                                        height: 1,
+                                        color: PayNestTheme.textGrey
+                                            .withOpacity(0.5),
+                                      ),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        child: Lottie.asset(
+                                          singleStudentJson,
+                                          repeat: true,
+                                          height: payAbleAmount == '0'
+                                              ? sizes.heightRatio * 327
+                                              : sizes.heightRatio * 114,
+                                          width: payAbleAmount == '0'
+                                              ? sizes.widthRatio * 327
+                                              : sizes.widthRatio * 114,
+                                        ),
+                                      ),
+                                      verticalSpacer(16),
+                                      payAbleAmount != '0'
+                                          ? Container(
+                                              width: double.infinity,
+                                              margin: EdgeInsets.symmetric(
+                                                horizontal: horizontalValue(4),
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: PayNestTheme.colorWhite,
+                                                border: Border.all(
+                                                  color:
+                                                      PayNestTheme.primaryColor,
+                                                ),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.5),
+                                                    spreadRadius: 0.5,
+                                                    blurRadius: 5,
+                                                    offset: Offset(1, 3),
+                                                  ),
+                                                ],
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  horizontalSpacer(16),
+                                                  _commercial_image(
+                                                    imagePath: icCommercialBank,
+                                                  ),
+                                                  Expanded(
+                                                    child: FlatButton(
+                                                      padding: EdgeInsets.zero,
+                                                      onPressed: () async {
+                                                        if (studentController
+                                                            .myStudentData
+                                                            .value
+                                                            .status) {
+                                                          final result =
+                                                              await Navigator.of(
                                                                       context)
                                                                   .push(
-                                                                MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          PayNowTransactionDetailsPage(
-                                                                    pntdm:
-                                                                        model,
+                                                            MaterialPageRoute(
+                                                              builder: (BuildContext
+                                                                      context) =>
+                                                                  MyWebView(
+                                                                title: "CBD",
+                                                                amount: '1300',
+                                                                indx: idx,
+                                                                orderId: Random()
+                                                                    .nextInt(
+                                                                  1000000000,
+                                                                ),
+                                                                schoolId:
+                                                                    int.parse(
+                                                                  schoolIDController
+                                                                      .text,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          );
+                                                          if (result != null) {
+                                                            var amount =
+                                                                payAbleAmount;
+                                                            bool status =
+                                                                await ctrcController
+                                                                    .hitCreateTransaction(
+                                                              schoolIDController
+                                                                  .text,
+                                                              parentIDController
+                                                                  .text,
+                                                              studentIDController
+                                                                  .text,
+                                                              '1300',
+                                                              result,
+                                                            );
+                                                            if (status) {
+                                                              studentController
+                                                                  .myStudentData
+                                                                  .update(
+                                                                (val) {
+                                                                  PayNowTransactionDetailModel
+                                                                      model;
+                                                                  model =
+                                                                      _getModel(
+                                                                    studentElement,
+                                                                    amount,
+                                                                  );
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .push(
+                                                                    MaterialPageRoute(
+                                                                      builder:
+                                                                          (context) =>
+                                                                              PayNowTransactionDetailsPage(
+                                                                        pntdm:
+                                                                            model,
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              );
+                                                            } else {
+                                                              ScaffoldMessenger
+                                                                  .of(
+                                                                context,
+                                                              ).showSnackBar(
+                                                                SnackBar(
+                                                                  behavior:
+                                                                      SnackBarBehavior
+                                                                          .floating,
+                                                                  content: Text(
+                                                                    'Something went wrong with the transaction',
                                                                   ),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .red,
                                                                 ),
                                                               );
-                                                            },
-                                                          );
-                                                        } else {
+                                                            }
+                                                          }
+                                                        } else if (int.parse(
+                                                                payAbleAmount) <
+                                                            0) {
                                                           ScaffoldMessenger.of(
                                                             context,
                                                           ).showSnackBar(
@@ -419,229 +457,321 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                   SnackBarBehavior
                                                                       .floating,
                                                               content: Text(
-                                                                'Something went wrong with the transaction',
+                                                                "Amount is not correct",
                                                               ),
                                                               backgroundColor:
-                                                                  Colors.red,
+                                                                  Colors
+                                                                      .redAccent,
+                                                            ),
+                                                          );
+                                                        } else if (int.parse(
+                                                                payAbleAmount) ==
+                                                            0) {
+                                                          ScaffoldMessenger.of(
+                                                            context,
+                                                          ).showSnackBar(
+                                                            SnackBar(
+                                                              behavior:
+                                                                  SnackBarBehavior
+                                                                      .floating,
+                                                              content: Text(
+                                                                "Fees already paid",
+                                                              ),
+                                                              backgroundColor:
+                                                                  Colors.green,
                                                             ),
                                                           );
                                                         }
-                                                      }
-                                                    } else if (int.parse(
-                                                            payAbleAmount) <
-                                                        0) {
-                                                      ScaffoldMessenger.of(
-                                                        context,
-                                                      ).showSnackBar(
-                                                        SnackBar(
-                                                          behavior:
-                                                              SnackBarBehavior
-                                                                  .floating,
-                                                          content: Text(
-                                                            "Amount is not correct",
+                                                      },
+                                                      child: Center(
+                                                        child: Text(
+                                                          payBy,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: PayNestTheme
+                                                              .title_2_16primaryColor
+                                                              .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 14,
+                                                            color: PayNestTheme
+                                                                .primaryColor,
                                                           ),
-                                                          backgroundColor:
-                                                              Colors.redAccent,
                                                         ),
-                                                      );
-                                                    } else if (int.parse(
-                                                            payAbleAmount) ==
-                                                        0) {
-                                                      ScaffoldMessenger.of(
-                                                        context,
-                                                      ).showSnackBar(
-                                                        SnackBar(
-                                                          behavior:
-                                                              SnackBarBehavior
-                                                                  .floating,
-                                                          content: Text(
-                                                            "Fees already paid",
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  horizontalSpacer(16),
+                                                ],
+                                              ),
+                                            )
+                                          : const SizedBox.shrink(),
+                                      verticalSpacer(8),
+                                      payAbleAmount != '0'
+                                          ? Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    height: 2,
+                                                    color: PayNestTheme
+                                                        .primaryColor,
+                                                  ),
+                                                ),
+                                                horizontalSpacer(10),
+                                                Text(
+                                                  'OR',
+                                                  style: PayNestTheme
+                                                      .h2_12blueAccent
+                                                      .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize:
+                                                        sizes.fontRatio * 14,
+                                                    color: PayNestTheme.black,
+                                                  ),
+                                                ),
+                                                horizontalSpacer(10),
+                                                Expanded(
+                                                  child: Container(
+                                                    height: 2,
+                                                    color: PayNestTheme
+                                                        .primaryColor,
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          : const SizedBox.shrink(),
+                                      verticalSpacer(8),
+                                      payAbleAmount != '0'
+                                          ? Container(
+                                              width: double.infinity,
+                                              margin: EdgeInsets.symmetric(
+                                                horizontal: horizontalValue(4),
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: PayNestTheme.colorWhite,
+                                                border: Border.all(
+                                                  color:
+                                                      PayNestTheme.primaryColor,
+                                                ),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.5),
+                                                    spreadRadius: 0.5,
+                                                    blurRadius: 5,
+                                                    offset: Offset(1, 3),
+                                                  ),
+                                                ],
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  horizontalSpacer(32),
+                                                  _otherImage(
+                                                    imagePath: icLean,
+                                                  ),
+                                                  horizontalSpacer(16),
+                                                  Expanded(
+                                                    child: FlatButton(
+                                                      padding: EdgeInsets.zero,
+                                                      onPressed: () {},
+                                                      child: Center(
+                                                        child: Text(
+                                                          payByBankTransfer,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: PayNestTheme
+                                                              .title_2_16primaryColor
+                                                              .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 14,
+                                                            color: PayNestTheme
+                                                                .primaryColor,
                                                           ),
-                                                          backgroundColor:
-                                                              Colors.green,
                                                         ),
-                                                      );
-                                                    }
-                                                  },
-                                                  child: Center(
-                                                    child: Text(
-                                                      payBy,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: PayNestTheme
-                                                          .title_2_16primaryColor
-                                                          .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14,
-                                                        color: PayNestTheme
-                                                            .primaryColor,
                                                       ),
                                                     ),
                                                   ),
+                                                  horizontalSpacer(16),
+                                                ],
+                                              ),
+                                            )
+                                          : const SizedBox.shrink(),
+                                      verticalSpacer(8),
+                                      payAbleAmount != '0'
+                                          ? Container(
+                                              width: double.infinity,
+                                              margin: EdgeInsets.symmetric(
+                                                horizontal: horizontalValue(4),
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: PayNestTheme.colorWhite,
+                                                border: Border.all(
+                                                  color:
+                                                      PayNestTheme.primaryColor,
                                                 ),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.5),
+                                                    spreadRadius: 0.5,
+                                                    blurRadius: 5,
+                                                    offset: Offset(1, 3),
+                                                  ),
+                                                ],
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
                                               ),
-                                              horizontalSpacer(16),
-                                            ],
-                                          ),
-                                        )
-                                      : const SizedBox.shrink(),
-                                  verticalSpacer(8),
-                                  payAbleAmount != '0'
-                                      ? Row(
-                                          children: [
-                                            Expanded(
-                                              child: Container(
-                                                height: 2,
-                                                color:
-                                                    PayNestTheme.primaryColor,
-                                              ),
-                                            ),
-                                            horizontalSpacer(10),
-                                            Text(
-                                              'OR',
-                                              style: PayNestTheme
-                                                  .h2_12blueAccent
-                                                  .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: sizes.fontRatio * 14,
-                                                color: PayNestTheme.black,
-                                              ),
-                                            ),
-                                            horizontalSpacer(10),
-                                            Expanded(
-                                              child: Container(
-                                                height: 2,
-                                                color:
-                                                    PayNestTheme.primaryColor,
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      : const SizedBox.shrink(),
-                                  verticalSpacer(8),
-                                  payAbleAmount != '0'
-                                      ? Container(
-                                          width: double.infinity,
-                                          margin: EdgeInsets.symmetric(
-                                            horizontal: horizontalValue(4),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: PayNestTheme.colorWhite,
-                                            border: Border.all(
-                                              color: PayNestTheme.primaryColor,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 0.5,
-                                                blurRadius: 5,
-                                                offset: Offset(1, 3),
-                                              ),
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              horizontalSpacer(32),
-                                              _otherImage(
-                                                imagePath: icLean,
-                                              ),
-                                              horizontalSpacer(16),
-                                              Expanded(
-                                                child: FlatButton(
-                                                  padding: EdgeInsets.zero,
-                                                  onPressed: () {},
-                                                  child: Center(
-                                                    child: Text(
-                                                      payByBankTransfer,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: PayNestTheme
-                                                          .title_2_16primaryColor
-                                                          .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14,
-                                                        color: PayNestTheme
-                                                            .primaryColor,
+                                              child: Row(
+                                                children: [
+                                                  horizontalSpacer(32),
+                                                  _otherImage(
+                                                    imagePath: icPostPay,
+                                                  ),
+                                                  horizontalSpacer(16),
+                                                  Expanded(
+                                                    child: FlatButton(
+                                                      padding: EdgeInsets.zero,
+                                                      onPressed: () {},
+                                                      child: Center(
+                                                        child: Text(
+                                                          payByInstallments,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: PayNestTheme
+                                                              .title_2_16primaryColor
+                                                              .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 14,
+                                                            color: PayNestTheme
+                                                                .primaryColor,
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
-                                                ),
+                                                  horizontalSpacer(16),
+                                                ],
                                               ),
-                                              horizontalSpacer(16),
-                                            ],
-                                          ),
-                                        )
-                                      : const SizedBox.shrink(),
-                                  verticalSpacer(8),
-                                  payAbleAmount != '0'
-                                      ? Container(
-                                          width: double.infinity,
-                                          margin: EdgeInsets.symmetric(
-                                            horizontal: horizontalValue(4),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: PayNestTheme.colorWhite,
-                                            border: Border.all(
-                                              color: PayNestTheme.primaryColor,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 0.5,
-                                                blurRadius: 5,
-                                                offset: Offset(1, 3),
-                                              ),
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              horizontalSpacer(32),
-                                              _otherImage(
-                                                imagePath: icPostPay,
-                                              ),
-                                              horizontalSpacer(16),
-                                              Expanded(
-                                                child: FlatButton(
-                                                  padding: EdgeInsets.zero,
-                                                  onPressed: () {},
-                                                  child: Center(
-                                                    child: Text(
-                                                      payByInstallments,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: PayNestTheme
-                                                          .title_2_16primaryColor
-                                                          .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14,
-                                                        color: PayNestTheme
-                                                            .primaryColor,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              horizontalSpacer(16),
-                                            ],
-                                          ),
-                                        )
-                                      : const SizedBox.shrink(),
+                                            )
+                                          : const SizedBox.shrink(),
+                                      verticalSpacer(16),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: horizontalValue(16),
+                              ),
+                              child: Column(
+                                children: [
+                                  verticalSpacer(100),
+                                  Container(
+                                    width: sizes.widthRatio * 150,
+                                    height: sizes.heightRatio * 150,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          noData,
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  verticalSpacer(20),
+                                  Container(
+                                    width: double.infinity,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      noDataText,
+                                      style: PayNestTheme.title_3_16blackbold
+                                          .copyWith(
+                                        fontSize: sizes.fontRatio * 22,
+                                        color: PayNestTheme.primaryColor,
+                                        fontFamily: 'montserratBold',
+                                      ),
+                                    ),
+                                  ),
+                                  verticalSpacer(10),
+                                  Container(
+                                    width: double.infinity,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      sorryWeCant,
+                                      textAlign: TextAlign.center,
+                                      style: PayNestTheme.title_3_16blackbold
+                                          .copyWith(
+                                        fontSize: sizes.fontRatio * 16,
+                                        color: PayNestTheme.lightBlack,
+                                        fontFamily: 'montserratBold',
+                                      ),
+                                    ),
+                                  ),
+                                  const Spacer(),
                                   verticalSpacer(16),
                                 ],
                               ),
-                            ),
-                          ],
-                        )
-                      : SizedBox(),
+                            )
+                      : Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: horizontalValue(16),
+                          ),
+                          child: Column(
+                            children: [
+                              verticalSpacer(100),
+                              Container(
+                                width: sizes.widthRatio * 150,
+                                height: sizes.heightRatio * 150,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      warning,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              verticalSpacer(20),
+                              Container(
+                                width: double.infinity,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  error,
+                                  style:
+                                      PayNestTheme.title_3_16blackbold.copyWith(
+                                    fontSize: sizes.fontRatio * 22,
+                                    color: PayNestTheme.primaryColor,
+                                    fontFamily: 'montserratBold',
+                                  ),
+                                ),
+                              ),
+                              verticalSpacer(10),
+                              Container(
+                                width: double.infinity,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  sorryWeCant,
+                                  textAlign: TextAlign.center,
+                                  style:
+                                      PayNestTheme.title_3_16blackbold.copyWith(
+                                    fontSize: sizes.fontRatio * 16,
+                                    color: PayNestTheme.lightBlack,
+                                    fontFamily: 'montserratBold',
+                                  ),
+                                ),
+                              ),
+                              const Spacer(),
+                              verticalSpacer(16),
+                            ],
+                          ),
+                        ),
                 ),
               ),
             ),

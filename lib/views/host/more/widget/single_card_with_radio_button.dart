@@ -29,7 +29,6 @@ class SingleCardWithRadioButton extends StatefulWidget {
 
 class _SingleCardWithRadioButtonState extends State<SingleCardWithRadioButton> {
   bool isButtonEnable = false;
-  MySharedPreferences storage = MySharedPreferences.instance;
 
   @override
   void initState() {
@@ -67,22 +66,12 @@ class _SingleCardWithRadioButtonState extends State<SingleCardWithRadioButton> {
                 activeColor: Colors.green,
                 trackColor: PayNestTheme.colorWhite,
                 value: isButtonEnable,
-                onChanged: (value) async {
-                  if (!isButtonEnable) {
-                    isButtonEnable = await LocalAuthApi
-                        .authenticateWithBiometrics();
-                  } else {
-                    isButtonEnable = !isButtonEnable;
-                    storage.setBoolValue(
-                        SharedPrefKeys.isBioMatric,
-                        isButtonEnable);
+                onChanged: (value){
+                  if(value){
+                    widget.onTap();
+                    setState(() {});
                   }
-                  storage.setBoolValue(
-                      SharedPrefKeys.isBioMatric,
-                      isButtonEnable);
-
-                  setState(() {});
-                },
+                }
               ),
             ),
           )
