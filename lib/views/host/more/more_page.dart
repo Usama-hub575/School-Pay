@@ -31,12 +31,12 @@ class MorePage extends StatefulWidget {
 class _MorePageState extends State<MorePage> {
   final UserController userController = Get.find<UserController>();
   MySharedPreferences storage = MySharedPreferences.instance;
-  bool isBioMetricButtonEnable = false;
+  late bool isBioMetricButtonEnable;
 
   @override
   void initState() {
+    isBioMetricButtonEnable = false;
     isBioMetricButtonEnable = storage.getBoolValue(SharedPrefKeys.isBioMatric);
-    // TODO: implement initState
     super.initState();
   }
 
@@ -226,21 +226,25 @@ class _MorePageState extends State<MorePage> {
                     SingleCardWithRadioButton(
                       value: biometricAuth,
                       icon: icFingerPrint,
-                      isEnable: isBioMetricButtonEnable,
-                      onTap: () async {
-                        if (!isBioMetricButtonEnable) {
+                      isEnable: storage.getBoolValue(
+                        SharedPrefKeys.isBioMatric,
+                      ),
+                      onTap: (value) async {
+                        if (value) {
                           isBioMetricButtonEnable =
                               await LocalAuthApi.authenticateWithBiometrics();
-                          isBioMetricButtonEnable = !isBioMetricButtonEnable;
-                        } else {
-                          isBioMetricButtonEnable = !isBioMetricButtonEnable;
-                          storage.setBoolValue(SharedPrefKeys.isBioMatric,
-                              isBioMetricButtonEnable);
                         }
-                        storage.setBoolValue(
-                          SharedPrefKeys.isBioMatric,
-                          isBioMetricButtonEnable,
-                        );
+                        if (!value) {
+                          storage.setBoolValue(
+                            SharedPrefKeys.isBioMatric,
+                            isBioMetricButtonEnable = false,
+                          );
+                        } else {
+                          storage.setBoolValue(
+                            SharedPrefKeys.isBioMatric,
+                            isBioMetricButtonEnable,
+                          );
+                        }
                         setState(() {});
                       },
                     ),
@@ -283,8 +287,7 @@ class _MorePageState extends State<MorePage> {
                         launch(
                           'https://paynest.ae/#faq',
                         );
-                        setState(() {
-                        });
+                        setState(() {});
                       },
                     ),
                     verticalSpacer(16),
@@ -295,8 +298,7 @@ class _MorePageState extends State<MorePage> {
                         launch(
                           'https://paynest.ae/#faq',
                         );
-                        setState(() {
-                        });
+                        setState(() {});
                       },
                     ),
                     verticalSpacer(16),
@@ -307,8 +309,7 @@ class _MorePageState extends State<MorePage> {
                         launch(
                           'https://paynest.ae/privacy-policy.html',
                         );
-                        setState(() {
-                        });
+                        setState(() {});
                       },
                     ),
                     verticalSpacer(16),

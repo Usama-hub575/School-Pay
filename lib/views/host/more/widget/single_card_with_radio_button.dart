@@ -4,8 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../auth/local_auth_api.dart';
 import '../../../../res/res.dart';
 import '../../../../theme/theme.dart';
-import '../../../../utils/sharedPrefKeys.dart';
-import '../../../../utils/sharedpref.dart';
 import '../../../../widgets/spacer.dart';
 
 class SingleCardWithRadioButton extends StatefulWidget {
@@ -28,13 +26,12 @@ class SingleCardWithRadioButton extends StatefulWidget {
 }
 
 class _SingleCardWithRadioButtonState extends State<SingleCardWithRadioButton> {
-  bool isButtonEnable = false;
 
   @override
   void initState() {
-    isButtonEnable = widget.isEnable;
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,12 +62,9 @@ class _SingleCardWithRadioButtonState extends State<SingleCardWithRadioButton> {
                 thumbColor: PayNestTheme.colorWhite,
                 activeColor: Colors.green,
                 trackColor: PayNestTheme.colorWhite,
-                value: isButtonEnable,
+                value: widget.isEnable,
                 onChanged: (value){
-                  if(value){
-                    widget.onTap();
-                    setState(() {});
-                  }
+                  widget.onTap(value);
                 }
               ),
             ),
