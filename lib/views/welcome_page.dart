@@ -20,13 +20,10 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   final fcmToken = GetStorage();
   late FirebaseMessaging messaging;
-  late FirebaseRemoteConfig remoteConfig;
 
   @override
   void initState() {
     super.initState();
-    remoteConfig = FirebaseRemoteConfig.instance;
-    setUpRemoteConfig();
     getFCMToken();
   }
 
@@ -169,20 +166,6 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
             verticalSpacer(16),
           ],
-        ),
-      ),
-    );
-  }
-
-  Future<void> setUpRemoteConfig() async {
-    await remoteConfig.fetchAndActivate();
-    await remoteConfig.setConfigSettings(
-      RemoteConfigSettings(
-        fetchTimeout: const Duration(
-          minutes: 1,
-        ),
-        minimumFetchInterval: const Duration(
-          minutes: 30,
         ),
       ),
     );
