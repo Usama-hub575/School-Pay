@@ -60,10 +60,12 @@ const ic_menu = "assets/dashboard/ic_menu.png";
 const ic_menu_non = "assets/dashboard/ic_menu_non.png";
 const icBackground = "assets/png/ic_background.png";
 const noData = "assets/png/no-data.png";
+const warning = "assets/png/warning.png";
 const icCommercialBank = "assets/png/ic_commercial_bank.png";
 const icLean = "assets/png/ic_leantech_logo.png";
 const icPostPay = "assets/png/ic_postpay.png";
-
+// const icPaymentMethod = "assets/png/ic_payment.png";
+const icPaymentMethod = "assets/jpg/ic_payment.jpg";
 
 
 
@@ -73,6 +75,7 @@ const signOut = "Sign Out";
 const register = "Register";
 const registration = "Registration";
 const email = "Email address";
+const sendEmail = "Send Email";
 const emiratesId = "Emirates ID";
 const passportNumber = "Passport Number";
 const passwordDetail = "Password Detail";
@@ -106,6 +109,7 @@ const area = "Area";
 const country = "Country";
 const forgotpassword = "Forgot Password?";
 const noDataText = "No Data Found";
+const error = "Error";
 const sorryWeCant = "Sorry, we can’t process your request At the moment, please try again later";
 const show = "Show";
 const hide = "Hide";
@@ -118,6 +122,9 @@ const skip = "Skip";
 const resend = "Resend Code?";
 const slogan = "Payments Anywhere, Anytime";
 const payments = "Payments";
+const paymentsMethod = "Payment Method";
+const selectPaymentsMethod = "Please Select The Payment Method";
+const selectPaymentsMethodSecure = "Choose One Of Our Safe And Secure Payment Methods To Complete Your Transaction.";
 const setting = "Setting";
 const about = "About";
 const paid = "Paid";

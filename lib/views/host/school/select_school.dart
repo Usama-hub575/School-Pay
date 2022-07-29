@@ -206,6 +206,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                                     height: 1,
                                     color: PayNestTheme.textGrey,
                                   ),
+                                  verticalSpacer(8),
                                 ],
                               );
                             },
@@ -233,6 +234,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                                     height: 1,
                                     color: PayNestTheme.textGrey,
                                   ),
+                                  verticalSpacer(8),
                                 ],
                               );
                             },
@@ -256,7 +258,6 @@ class _SelectSchoolState extends State<SelectSchool> {
         children: [
           GestureDetector(
             onTap: () {
-              if (log.isSelected) {
                 SelectedSchoolData schoolData = SelectedSchoolData(
                     id: log.id,
                     name: log.name,
@@ -279,7 +280,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                     ),
                   ),
                 );
-              }
+
             },
             child: Container(
               decoration: BoxDecoration(
@@ -303,7 +304,6 @@ class _SelectSchoolState extends State<SelectSchool> {
           horizontalSpacer(16),
           GestureDetector(
             onTap: () {
-              if (log.isSelected) {
                 SelectedSchoolData schoolData = SelectedSchoolData(
                     id: log.id,
                     name: log.name,
@@ -326,7 +326,6 @@ class _SelectSchoolState extends State<SelectSchool> {
                     ),
                   ),
                 );
-              }
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -350,41 +349,41 @@ class _SelectSchoolState extends State<SelectSchool> {
               ],
             ),
           ),
-          Spacer(),
-          GestureDetector(
-            onTap: () {
-              schoolController.updateList(
-                id: log.id,
-              );
-            },
-            child: log.isSelected
-                ? Lottie.asset(
-                    checkAnimation,
-                    height: sizes.heightRatio * 32,
-                    width: sizes.widthRatio * 32,
-                  )
-                : Padding(
-                    padding: EdgeInsets.only(
-                      right: horizontalValue(8),
-                    ),
-                    child: Container(
-                      height: sizes.heightRatio * 16,
-                      width: sizes.widthRatio * 16,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: log.isSelected
-                            ? Colors.green
-                            : PayNestTheme.colorWhite,
-                        border: Border.all(
-                          color: log.isSelected
-                              ? Colors.transparent
-                              : PayNestTheme.black.withOpacity(0.5),
-                        ),
-                      ),
-                    ),
-                  ),
-          ),
-          horizontalSpacer(8),
+          // Spacer(),
+          // GestureDetector(
+          //   onTap: () {
+          //     schoolController.updateList(
+          //       id: log.id,
+          //     );
+          //   },
+          //   child: log.isSelected
+          //       ? Lottie.asset(
+          //           checkAnimation,
+          //           height: sizes.heightRatio * 32,
+          //           width: sizes.widthRatio * 32,
+          //         )
+          //       : Padding(
+          //           padding: EdgeInsets.only(
+          //             right: horizontalValue(8),
+          //           ),
+          //           child: Container(
+          //             height: sizes.heightRatio * 16,
+          //             width: sizes.widthRatio * 16,
+          //             decoration: BoxDecoration(
+          //               shape: BoxShape.circle,
+          //               color: log.isSelected
+          //                   ? Colors.green
+          //                   : PayNestTheme.colorWhite,
+          //               border: Border.all(
+          //                 color: log.isSelected
+          //                     ? Colors.transparent
+          //                     : PayNestTheme.black.withOpacity(0.5),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          // ),
+          // horizontalSpacer(8),
         ],
       ),
     );

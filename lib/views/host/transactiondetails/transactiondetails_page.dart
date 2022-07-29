@@ -5,8 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/transactiondetail_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
+import '../../../res/res.dart';
 
 class TransactionDetailsPage extends StatefulWidget {
   TransactionDetailModel tdm;
@@ -26,7 +28,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 350.h,
+            height: 300.h,
             child: Stack(
               children: [
                 Container(
@@ -120,22 +122,23 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                                 children: [
                                   // Icon(Icons.check_circle,size: 50.sp,color: PayNestTheme.primaryColor,),
                                   // Image.asset(ic_schooldark,height: 50.h,width: 50.w,),
+                                  Text(
+                                    widget.tdm.school!.name,
+                                    style: PayNestTheme.h2_16textGrey.copyWith(
+                                      color: PayNestTheme.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'montserratBold',
+                                    ),
+                                  ),
                                   SizedBox(
-                                    height: 13.h,
+                                    height: 10.h,
                                   ),
                                   Text(
-                                    congratulations,
-                                    style: PayNestTheme.title24primaryColorBold,
-                                  ),
-                                  SizedBox(
-                                    height: 5.h,
-                                  ),
-                                  Text(
-                                    youHaveSuccessfully,
+                                    DateFormat("yyyy-MM-dd")
+                                        .format(widget.tdm.payedOn)
+                                        .toString(),
+                                    textAlign: TextAlign.center,
                                     style: PayNestTheme.h2_14textGrey,
-                                  ),
-                                  SizedBox(
-                                    height: 31.h,
                                   ),
                                 ],
                               ),
@@ -166,7 +169,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 34.h),
+                padding: EdgeInsets.symmetric(horizontal: 32.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -185,55 +188,11 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     //       )
                     //   ),
                     // ),
-
                     /// Title
                     Text(
-                      invoiceDetails,
-                      style: PayNestTheme.title_2_16primaryColor,
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-
-                    Text(
-                      referenceNumber,
-                      style: PayNestTheme.h2_14textGrey,
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Text(widget.tdm.refNo.toString(),
-                        style: PayNestTheme.title_3_16black),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
-                      ),
-                    ),
-
-                    Text(
-                      studentID,
-                      style: PayNestTheme.h2_14textGrey,
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Text(widget.tdm.studentId.toString(),
-                        style: PayNestTheme.title_3_16black),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
-                      ),
-                    ),
-
-                    Text(
                       studentName,
-                      style: PayNestTheme.h2_14textGrey,
+                      style: PayNestTheme.title_2_16primaryColor
+                          .copyWith(fontSize: 12),
                     ),
                     SizedBox(
                       height: 5.h,
@@ -242,7 +201,8 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                         widget.tdm.student!.firstName.toString() +
                             " " +
                             widget.tdm.student!.lastName.toString(),
-                        style: PayNestTheme.title_3_16black),
+                        style: PayNestTheme.title_2_16primaryColor
+                            .copyWith(color: PayNestTheme.textGrey)),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -254,13 +214,55 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
 
                     Text(
                       studentclass,
-                      style: PayNestTheme.h2_14textGrey,
+                      style: PayNestTheme.title_2_16primaryColor
+                          .copyWith(fontSize: 12),
                     ),
                     SizedBox(
                       height: 5.h,
                     ),
                     Text("Grade " + widget.tdm.student!.grade.toString(),
-                        style: PayNestTheme.title_3_16black),
+                        style: PayNestTheme.title_2_16primaryColor
+                            .copyWith(color: PayNestTheme.textGrey)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      child: Container(
+                        width: 1.sw,
+                        height: 1.h,
+                        color: PayNestTheme.lineColor,
+                      ),
+                    ),
+
+                    Text(
+                      studentID,
+                      style: PayNestTheme.title_2_16primaryColor
+                          .copyWith(fontSize: 12),
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Text(widget.tdm.studentId.toString(),
+                        style: PayNestTheme.title_2_16primaryColor
+                            .copyWith(color: PayNestTheme.textGrey)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      child: Container(
+                        width: 1.sw,
+                        height: 1.h,
+                        color: PayNestTheme.lineColor,
+                      ),
+                    ),
+
+                    Text(
+                      referenceNumber,
+                      style: PayNestTheme.title_2_16primaryColor
+                          .copyWith(fontSize: 12),
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Text(widget.tdm.refNo.toString(),
+                        style: PayNestTheme.title_2_16primaryColor
+                            .copyWith(color: PayNestTheme.textGrey)),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -272,13 +274,18 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
 
                     Text(
                       amountPaid,
-                      style: PayNestTheme.h2_14textGrey,
+                      style: PayNestTheme.title_2_16primaryColor
+                          .copyWith(fontSize: 12),
                     ),
                     SizedBox(
                       height: 5.h,
                     ),
                     Text('AED ' + widget.tdm.amount.toString(),
-                        style: PayNestTheme.title_3_16black),
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                            color: PayNestTheme.black,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "montserratBold")),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -288,46 +295,30 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       ),
                     ),
 
-                    Text(
-                      paidon,
-                      style: PayNestTheme.h2_14textGrey,
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Text(
-                        DateFormat("yyyy-MM-dd")
-                            .format(widget.tdm.payedOn)
-                            .toString(),
-                        style: PayNestTheme.title_3_16black),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
-                      ),
-                    ),
+                    verticalSpacer(30),
 
-                    Text(
-                      dueAmount,
-                      style: PayNestTheme.h2_14textGrey,
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Text(
-                        'AED ' +
-                            widget.tdm.student!.totalBalanceAmount.toString(),
-                        style: PayNestTheme.title_3_16black),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
-                      ),
-                    ),
+                    Container(
+                      width: double.infinity,
+                      height: sizes.heightRatio * 46,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: PayNestTheme.primaryColor,
+                            elevation: 0,
+                            // side: BorderSide(width:1, color:Colors.white),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                12,
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              Navigator.of(context).pop();
+                            });
+                          },
+                          child:
+                              Text(done, style: PayNestTheme.subtitle16white)),
+                    )
                   ],
                 ),
               ),

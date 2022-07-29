@@ -9,7 +9,7 @@ import '../../../../widgets/spacer.dart';
 class AmountBottomSheet {
   static void show({
     required BuildContext context,
-    required Function onTap,
+    required Function(int value) onTap,
     required SingleStudentModel singleStudentModel,
   }) {
     showModalBottomSheet(
@@ -19,7 +19,7 @@ class AmountBottomSheet {
       backgroundColor: Colors.transparent,
       builder: (context) {
         return AmountWidget(
-          onTap: () => onTap(),
+          onTap: (int value) => onTap(value),
           singleStudentModel: singleStudentModel,
         );
       },
@@ -33,7 +33,7 @@ class AmountWidget extends StatefulWidget {
     required this.singleStudentModel,
   });
 
-  final Function onTap;
+  final Function(int value) onTap;
   final SingleStudentModel singleStudentModel;
 
   @override
@@ -207,7 +207,15 @@ class _AmountWidgetState extends State<AmountWidget> {
                               vertical: verticalValue(14),
                             ),
                           ),
-                          onPressed: () => widget.onTap(),
+                          onPressed: () {
+                            if (_enterAmount.text.isNotEmpty) {
+                              widget.onTap(
+                                int.parse(
+                                  _enterAmount.text,
+                                ),
+                              );
+                            }
+                          },
                           child: Center(
                             child: Text(
                               continueTo,

@@ -4,8 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../auth/local_auth_api.dart';
 import '../../../../res/res.dart';
 import '../../../../theme/theme.dart';
-import '../../../../utils/sharedPrefKeys.dart';
-import '../../../../utils/sharedpref.dart';
 import '../../../../widgets/spacer.dart';
 
 class SingleCardWithRadioButton extends StatefulWidget {
@@ -28,14 +26,12 @@ class SingleCardWithRadioButton extends StatefulWidget {
 }
 
 class _SingleCardWithRadioButtonState extends State<SingleCardWithRadioButton> {
-  bool isButtonEnable = false;
-  MySharedPreferences storage = MySharedPreferences.instance;
 
   @override
   void initState() {
-    isButtonEnable = widget.isEnable;
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,23 +62,10 @@ class _SingleCardWithRadioButtonState extends State<SingleCardWithRadioButton> {
                 thumbColor: PayNestTheme.colorWhite,
                 activeColor: Colors.green,
                 trackColor: PayNestTheme.colorWhite,
-                value: isButtonEnable,
-                onChanged: (value) async {
-                  if (!isButtonEnable) {
-                    isButtonEnable = await LocalAuthApi
-                        .authenticateWithBiometrics();
-                  } else {
-                    isButtonEnable = !isButtonEnable;
-                    storage.setBoolValue(
-                        SharedPrefKeys.isBioMatric,
-                        isButtonEnable);
-                  }
-                  storage.setBoolValue(
-                      SharedPrefKeys.isBioMatric,
-                      isButtonEnable);
-
-                  setState(() {});
-                },
+                value: widget.isEnable,
+                onChanged: (value){
+                  widget.onTap(value);
+                }
               ),
             ),
           )

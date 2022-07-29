@@ -11,8 +11,10 @@ class RecentTransactions extends StatefulWidget {
   const RecentTransactions({
     Key? key,
     required this.transactions,
+    required this.onTap,
   }) : super(key: key);
   final Transactions? transactions;
+  final Function(TransactionsRow transactionsRow) onTap;
 
   @override
   State<RecentTransactions> createState() => _RecentTransactionsState();
@@ -73,56 +75,59 @@ class _RecentTransactionsState extends State<RecentTransactions> {
       padding: EdgeInsets.symmetric(
         horizontal: horizontalValue(16),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            height: sizes.heightRatio * 23,
-            width: sizes.heightRatio * 23,
-            decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Center(
-              child: Icon(
-                Icons.check,
-                color: PayNestTheme.colorWhite,
-                size: 14,
+      child: GestureDetector(
+        onTap: () => widget.onTap(transactionsRow),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: sizes.heightRatio * 23,
+              width: sizes.heightRatio * 23,
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.circular(20),
               ),
-            ),
-          ),
-          horizontalSpacer(16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${transactionsRow.school!.name}',
-                style: PayNestTheme.h2_12blueAccent.copyWith(
-                  fontSize: sizes.fontRatio * 13,
-                  color: PayNestTheme.black,
-                  fontFamily: 'montserratBold',
+              child: Center(
+                child: Icon(
+                  Icons.check,
+                  color: PayNestTheme.colorWhite,
+                  size: 14,
                 ),
               ),
-              Text(
-                '${dateFormat.format(DateTime.parse(transactionsRow.payedOn.toString().substring(0, 10)))}',
-                style: PayNestTheme.h2_12blueAccentLight.copyWith(
-                  fontSize: sizes.fontRatio * 10,
-                  color: PayNestTheme.textGrey,
-                  fontFamily: 'montserratRegular',
-                ),
-              ),
-            ],
-          ),
-          Spacer(),
-          Text(
-            'AED ${transactionsRow.amount}',
-            style: PayNestTheme.h2_12blueAccent.copyWith(
-              fontSize: sizes.fontRatio * 16,
-              color: PayNestTheme.blueAccent,
             ),
-          ),
-          horizontalSpacer(12),
-        ],
+            horizontalSpacer(16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${transactionsRow.school!.name}',
+                  style: PayNestTheme.h2_12blueAccent.copyWith(
+                    fontSize: sizes.fontRatio * 13,
+                    color: PayNestTheme.black,
+                    fontFamily: 'montserratBold',
+                  ),
+                ),
+                Text(
+                  '${dateFormat.format(DateTime.parse(transactionsRow.payedOn.toString().substring(0, 10)))}',
+                  style: PayNestTheme.h2_12blueAccentLight.copyWith(
+                    fontSize: sizes.fontRatio * 10,
+                    color: PayNestTheme.textGrey,
+                    fontFamily: 'montserratRegular',
+                  ),
+                ),
+              ],
+            ),
+            Spacer(),
+            Text(
+              'AED ${transactionsRow.amount}',
+              style: PayNestTheme.h2_12blueAccent.copyWith(
+                fontSize: sizes.fontRatio * 16,
+                color: PayNestTheme.blueAccent,
+              ),
+            ),
+            horizontalSpacer(12),
+          ],
+        ),
       ),
     );
   }
