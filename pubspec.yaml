@@ -21,8 +21,6 @@ dependencies:
   get:
   get_storage:
   intl:
-  firebase_core:
-  firebase_messaging:
   flutter_local_notifications:
   webview_flutter:
   flutter_inappwebview:
@@ -38,11 +36,18 @@ dependencies:
   dropdown_button2:
   pdf:
   open_file:
-
+  package_info_plus:
+  store_redirect:
 
   modal_bottom_sheet:
   collection:
   universal_platform:
+
+
+  #Firebase Packages
+  firebase_remote_config:
+  firebase_core:
+  firebase_messaging:
 
 
 dev_dependencies:

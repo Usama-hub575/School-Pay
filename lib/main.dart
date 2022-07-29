@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
+import 'package:paynest_flutter_app/views/Initilizer.dart';
 import 'package:paynest_flutter_app/views/host/forgotpassword/forgot_password.dart';
 import 'package:paynest_flutter_app/views/host/host_page.dart';
 import 'package:paynest_flutter_app/views/registration_screen/register_page.dart';
@@ -126,9 +127,11 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.blue,
         ),
         onGenerateRoute: (routes) {
-          Widget page = WelcomePage();
+          Widget page = InitializerScreen();
           switch (routes.name) {
             case '/':
+              page = InitializerScreen();
+              break;case '/Welcome':
               page = WelcomePage();
               break;
             case '/SignInPage':

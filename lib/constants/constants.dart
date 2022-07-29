@@ -278,3 +278,18 @@ const FAQs = "FAQS";
 const commonQuestion = "Get the query to your most common questions here.";
 const startLChat = "Immediately start live chat with one of our customer care representative.";
 
+
+
+
+String baseUrl = "base_url";
+String minAndroidAppVersion = "school_pay_android_min_version";
+String maxAndroidAppVersion = "school_pay_max_android_version";
+
+String minIosAppVersion = "school_pay_ios_min_version";
+String maxIosAppVersion = "school_pay_ios_max_version";
+
+
+const String googlePlayPackageName = "com.paynest.schoolpay";
+const String huaweiPackageName = "com.paynest.fintech.borderpay";
+const String iosAppId = "1629376846";
+

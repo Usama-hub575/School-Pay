@@ -86,7 +86,7 @@ class _MyWebViewState extends State<MyWebView> {
             print("This is Parsed");
             print(Uri.parse(url).queryParameters['string']);
             if (CBDReferenceNo != null) {
-              Navigator.of(context, rootNavigator: true).pop(CBDReferenceNo);
+              Navigator.of(context).pop(CBDReferenceNo);
             } else {
               var decoded = jsonDecode(CBDReferenceNo);
               !sbrController.isLoading.value ? Navigator.pop(context) : null;

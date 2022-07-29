@@ -47,8 +47,13 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     super.initState();
-    fetchStudents();
-    fetchTransactions();
+    Future.delayed(
+      Duration.zero,
+      () {
+        fetchStudents();
+        fetchTransactions();
+      },
+    );
   }
 
   fetchStudents() async {
@@ -62,7 +67,9 @@ class _DashboardPageState extends State<DashboardPage> {
       userController.userResData.value.parent!.id.toString(),
     );
     isLoading = false;
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
@@ -228,8 +235,10 @@ class _DashboardPageState extends State<DashboardPage> {
                     children: [
                       Obx(
                         () => myStudentController
-                                    .myStudentData.value.students !=
-                                null
+                                        .myStudentData.value.students !=
+                                    null &&
+                                myStudentController
+                                    .myStudentData.value.students!.isNotEmpty
                             ? StudentCard(
                                 students: myStudentController
                                     .myStudentData.value.students!,
