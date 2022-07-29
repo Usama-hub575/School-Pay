@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/welcome_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
@@ -13,14 +14,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:store_redirect/store_redirect.dart';
 
-
-
 import '../Utils/sharedPrefKeys.dart';
 import '../Utils/sharedpref.dart';
 import '../constants/constants.dart';
 import '../res/res.dart';
 import '../widgets/custom_alert_dialog.dart';
-
 
 class InitializerScreen extends StatefulWidget {
   const InitializerScreen({Key? key}) : super(key: key);
@@ -57,8 +55,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
         height: sizes.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(icBackground),
-              fit: BoxFit.fill),
+              image: AssetImage(icBackground), fit: BoxFit.fill),
         ),
         child: Container(
           color: PayNestTheme.primaryColor.withOpacity(0.30),
@@ -69,7 +66,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
               children: [
                 Image.asset(
                   paynestLogoNew,
-                  width: sizes.widthRatio* 180,
+                  width: sizes.widthRatio * 180,
                   fit: BoxFit.fill,
                 ),
                 verticalSpacer(16),
@@ -126,8 +123,9 @@ class _InitializerScreenState extends State<InitializerScreen> {
   void getForcefulAppUpdateDialog() {
     CustomAlertDialog.forcefulAppUpdateDialog(
         context: context,
-        title: "Update Available",
-        message: "Go to store",
+        title: "Update!",
+        message:
+            "For More Features And Better User Experience, You Need To Update This App",
         showCrossIcon: false,
         updateButtonAction: () {
           if (Platform.isIOS) {
@@ -155,17 +153,17 @@ class _InitializerScreenState extends State<InitializerScreen> {
 
   Future<void> getCountries() async {
     try {
-        Future.delayed(
-          const Duration(seconds: 2),
-          () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const WelcomePage(),
-              ),
-            );
-          },
-        );
+      Future.delayed(
+        const Duration(seconds: 2),
+        () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const WelcomePage(),
+            ),
+          );
+        },
+      );
     } catch (e) {
       setState(() {
         print(e);
@@ -191,6 +189,13 @@ class _InitializerScreenState extends State<InitializerScreen> {
   }
 
   Future<void> setUpRemoteConfig() async {
+    remoteConfig.setDefaults(<String, String>{
+      baseUrl: 'https://api.paynestschools.ae',
+      maxAndroidAppVersion: '2.0.0',
+      minAndroidAppVersion: '1.0.0',
+      maxIosAppVersion: '2.0.0',
+      minIosAppVersion: '1.0.0',
+    });
     await remoteConfig.ensureInitialized();
     await remoteConfig.setConfigSettings(
       RemoteConfigSettings(
@@ -198,26 +203,34 @@ class _InitializerScreenState extends State<InitializerScreen> {
           minutes: 1,
         ),
         minimumFetchInterval: const Duration(
-          seconds: 30,
+          seconds: 1,
         ),
       ),
     );
     await remoteConfig.fetchAndActivate();
 
+    APIService.baseurl = Uri.parse(remoteConfig.getString(baseUrl));
+    minAndroidAppVersion = remoteConfig.getString(minAndroidAppVersion);
+    maxAndroidAppVersion = remoteConfig.getString(maxAndroidAppVersion);
+    minIosAppVersion = remoteConfig.getString(minIosAppVersion);
+    maxIosAppVersion = remoteConfig.getString(maxIosAppVersion);
+
     if (Platform.isAndroid) {
-      minAppVersion = remoteConfig.getString(minAndroidAppVersion);
-      maxAppVersion = remoteConfig.getString(maxAndroidAppVersion);
+      minAppVersion = minAndroidAppVersion;
+      maxAppVersion = maxAndroidAppVersion;
     }
     if (Platform.isIOS) {
-      minAppVersion = remoteConfig.getString(minIosAppVersion);
-      maxAppVersion = remoteConfig.getString(maxIosAppVersion);
+      minAppVersion = minIosAppVersion;
+      maxAppVersion = maxIosAppVersion;
     }
 
     isVersionGreaterThan(maxAppVersion, localAppVersion) == true
-        ? Future.delayed(const Duration(seconds: 2)).then((value) =>
-            isVersionGreaterThan(minAppVersion, localAppVersion) == true
-                ? getForcefulAppUpdateDialog()
-                : getOptionalAppUpdateDialog())
+        ? Future.delayed(const Duration(seconds: 2)).then(
+            (value) =>
+                isVersionGreaterThan(minAppVersion, localAppVersion) == true
+                    ? getForcefulAppUpdateDialog()
+                    : getOptionalAppUpdateDialog(),
+          )
         : Future.delayed(const Duration(seconds: 2))
             .then((value) => getCountries());
   }

@@ -301,7 +301,10 @@ class _PayNowTransactionDetailsPageState
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/DashboardPage',
+                            (Route<dynamic> route) => false,
+                          );
                         },
                         child: Center(
                           child: Text(

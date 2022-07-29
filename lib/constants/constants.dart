@@ -281,11 +281,12 @@ const startLChat = "Immediately start live chat with one of our customer care re
 
 
 
-const String minAndroidAppVersion = "min_android_app_version";
-const String maxAndroidAppVersion = "max_android_app_version";
+String baseUrl = "base_url";
+String minAndroidAppVersion = "school_pay_android_min_version";
+String maxAndroidAppVersion = "school_pay_max_android_version";
 
-const String minIosAppVersion = "min_iOS_app_version";
-const String maxIosAppVersion = "max_iOS_app_version";
+String minIosAppVersion = "school_pay_ios_min_version";
+String maxIosAppVersion = "school_pay_ios_max_version";
 
 
 const String googlePlayPackageName = "com.paynest.schoolpay";

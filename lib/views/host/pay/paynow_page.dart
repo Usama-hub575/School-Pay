@@ -161,7 +161,7 @@ class _PayNowPageState extends State<PayNowPage> {
                       ? studentController.myStudentData.value.students !=
                                   null &&
                               studentController
-                                      .myStudentData.value.students!.isNotEmpty
+                                  .myStudentData.value.students!.isNotEmpty
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -655,7 +655,6 @@ class _PayNowPageState extends State<PayNowPage> {
                           ),
                         ),
                 ),
-
               ),
             ),
           ],
@@ -688,7 +687,7 @@ class _PayNowPageState extends State<PayNowPage> {
           schoolIDController.text,
           parentIDController.text,
           studentIDController.text,
-          '1300',
+          amountController.text,
           result,
         );
         if (status) {
@@ -700,7 +699,9 @@ class _PayNowPageState extends State<PayNowPage> {
                 amount,
               );
               Future.delayed(
-                Duration.zero,
+                Duration(
+                  seconds: 1,
+                ),
                 () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
