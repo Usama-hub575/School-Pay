@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -5,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../constants/constants.dart';
 import '../../../controller/sendOTP_controller.dart';
 import '../../../model/datamodel/reg1_to_otp.dart';
@@ -300,6 +302,13 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                             ),
                             TextSpan(
                               text: ' Terms & Conditions',
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  launch(
+                                    'https://paynest.ae/terms.html',
+                                  );
+                                  setState(() {});
+                                },
                               style: PayNestTheme.h2_12blueAccent.copyWith(
                                 fontSize: sizes.fontRatio * 14,
                                 color: PayNestTheme.primaryColor,
@@ -376,87 +385,87 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 29.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 1.h,
-                          width: 129.w,
-                          decoration: BoxDecoration(
-                            color: PayNestTheme.primaryColor,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: Text(
-                            or,
-                            style: PayNestTheme.h2_14textGrey.copyWith(
-                              color: PayNestTheme.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 1.h,
-                          width: 129.w,
-                          decoration: BoxDecoration(
-                            color: PayNestTheme.primaryColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50.h,
-                    width: 326.w,
-                    child: OutlinedButton.icon(
-                      onPressed: () {},
-                      icon: Image.asset(googleicon),
-                      label: Text(
-                        google,
-                        style: PayNestTheme.title_3_16black,
-                      ),
-                      style: OutlinedButton.styleFrom(
-                        // primary: MyTheme.sharpGreen,
-                        elevation: 0,
-                        // side: BorderSide(width:1, color:Colors.white),
-                        side: BorderSide(
-                            color: PayNestTheme.primaryColor, width: 1.sp),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            15,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  SizedBox(
-                    height: 50.h,
-                    width: 326.w,
-                    child: OutlinedButton.icon(
-                      onPressed: () {},
-                      icon: Image.asset(facebookicon),
-                      label: Text(
-                        facebook,
-                        style: PayNestTheme.title_3_16black,
-                      ),
-                      style: OutlinedButton.styleFrom(
-                        // primary: MyTheme.sharpGreen,
-                        elevation: 0,
-                        // side: BorderSide(width:1, color:Colors.white),
-                        side: BorderSide(
-                            color: PayNestTheme.primaryColor, width: 1.sp),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(vertical: 29.h),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       Container(
+                  //         height: 1.h,
+                  //         width: 129.w,
+                  //         decoration: BoxDecoration(
+                  //           color: PayNestTheme.primaryColor,
+                  //         ),
+                  //       ),
+                  //       Padding(
+                  //         padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  //         child: Text(
+                  //           or,
+                  //           style: PayNestTheme.h2_14textGrey.copyWith(
+                  //             color: PayNestTheme.black,
+                  //             fontWeight: FontWeight.bold,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       Container(
+                  //         height: 1.h,
+                  //         width: 129.w,
+                  //         decoration: BoxDecoration(
+                  //           color: PayNestTheme.primaryColor,
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 50.h,
+                  //   width: 326.w,
+                  //   child: OutlinedButton.icon(
+                  //     onPressed: () {},
+                  //     icon: Image.asset(googleicon),
+                  //     label: Text(
+                  //       google,
+                  //       style: PayNestTheme.title_3_16black,
+                  //     ),
+                  //     style: OutlinedButton.styleFrom(
+                  //       // primary: MyTheme.sharpGreen,
+                  //       elevation: 0,
+                  //       // side: BorderSide(width:1, color:Colors.white),
+                  //       side: BorderSide(
+                  //           color: PayNestTheme.primaryColor, width: 1.sp),
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(
+                  //           15,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 16.h,
+                  // ),
+                  // SizedBox(
+                  //   height: 50.h,
+                  //   width: 326.w,
+                  //   child: OutlinedButton.icon(
+                  //     onPressed: () {},
+                  //     icon: Image.asset(facebookicon),
+                  //     label: Text(
+                  //       facebook,
+                  //       style: PayNestTheme.title_3_16black,
+                  //     ),
+                  //     style: OutlinedButton.styleFrom(
+                  //       // primary: MyTheme.sharpGreen,
+                  //       elevation: 0,
+                  //       // side: BorderSide(width:1, color:Colors.white),
+                  //       side: BorderSide(
+                  //           color: PayNestTheme.primaryColor, width: 1.sp),
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(15),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

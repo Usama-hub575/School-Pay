@@ -86,8 +86,7 @@ class _MyWebViewState extends State<MyWebView> {
             print("This is Parsed");
             print(Uri.parse(url).queryParameters['string']);
             if (CBDReferenceNo != null) {
-              print(CBDReferenceNo);
-              Navigator.pop(context, CBDReferenceNo);
+              Navigator.of(context, rootNavigator: true).pop(CBDReferenceNo);
             } else {
               var decoded = jsonDecode(CBDReferenceNo);
               !sbrController.isLoading.value ? Navigator.pop(context) : null;
@@ -112,10 +111,7 @@ class _MyWebViewState extends State<MyWebView> {
     response = response.replaceAll('\"', '');
     myTransformer.parse(response);
     var jsonString = myTransformer.toParker();
-    print("myDATA");
     print(jsonString);
-    // var data = jsonDecode(jsonString);
-    // return data['Response']['Header']['ResponseCode'];
     return response;
   }
 }

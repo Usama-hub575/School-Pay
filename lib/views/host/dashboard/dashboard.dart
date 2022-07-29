@@ -21,7 +21,12 @@ import 'package:paynest_flutter_app/views/host/singlestudent/singlestudent_page.
 import 'package:paynest_flutter_app/views/host/student/student_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../controller/transactionlist_controller.dart';
+import '../../../model/datamodel/transactiondetail_model.dart';
 import '../../../model/mystudents_resp_model.dart' as studentElement;
+import '../../../model/transactionlist_resp_model.dart';
+import '../transactiondetails/transactiondetails_page.dart';
+import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart'
+    as student;
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -466,6 +471,9 @@ class _DashboardPageState extends State<DashboardPage> {
                           ? RecentTransactions(
                               transactions: transactionListController
                                   .transactionListData.value.transactions!,
+                              onTap: (transactionRow) {
+                                onTap(row: transactionRow);
+                              },
                             )
                           : const SizedBox.shrink(),
                     ],
@@ -489,7 +497,7 @@ class _DashboardPageState extends State<DashboardPage> {
       deletedAt: studentElement.deletedAt,
       createdAt: studentElement.createdAt,
       updatedAt: studentElement.updatedAt,
-      student: Student(
+      student: student.Student(
         dob: studentElement.student!.dob,
         admissionDate: studentElement.student!.admissionDate,
         id: studentElement.student!.id,
@@ -524,7 +532,7 @@ class _DashboardPageState extends State<DashboardPage> {
         privacy: studentElement.student!.privacy,
         createdAt: studentElement.student!.createdAt,
         updatedAt: studentElement.student!.updatedAt,
-        school: School(
+        school: student.School(
           id: studentElement.student!.school!.id,
           name: studentElement.student!.school!.name,
           deletedAt: studentElement.student!.school!.deletedAt,
@@ -539,6 +547,87 @@ class _DashboardPageState extends State<DashboardPage> {
           privacy: studentElement.student!.school!.privacy,
           createdAt: studentElement.student!.school!.createdAt,
           updatedAt: studentElement.student!.school!.updatedAt,
+        ),
+      ),
+    );
+  }
+
+  void onTap({required TransactionsRow row}) {
+    TransactionDetailModel tdm = TransactionDetailModel(
+      id: row.id,
+      schoolId: row.schoolId,
+      parentId: row.parentId,
+      invoiceId: row.invoiceId,
+      studentId: row.studentId,
+      payedOn: row.payedOn,
+      amount: row.amount,
+      deletedAt: row.deletedAt,
+      refNo: row.refNo,
+      type: row.type,
+      vat: row.vat,
+      paynestFee: row.paynestFee,
+      country: row.country,
+      bankResponse: row.bankResponse,
+      amountToPay: row.amountToPay,
+      stringToBank: row.stringToBank,
+      stringFromBank: row.stringFromBank,
+      createdAt: row.createdAt,
+      updatedAt: row.updatedAt,
+      school: TransactionDetailSchool(
+          id: row.school!.id,
+          name: row.school!.name,
+          deletedAt: row.school!.deletedAt,
+          addedBy: row.school!.addedBy,
+          address: row.school!.address,
+          description: row.school!.description,
+          vat: row.school!.vat,
+          paynestFee: row.school!.paynestFee,
+          apiKey: row.school!.apiKey,
+          merchantId: row.school!.merchantId,
+          file: row.school!.file,
+          privacy: row.school!.privacy,
+          createdAt: row.school!.createdAt,
+          updatedAt: row.school!.updatedAt),
+      student: TransactionDetailStudent(
+          dob: row.student!.dob,
+          admissionDate: row.student!.admissionDate,
+          id: row.student!.id,
+          studentRegNo: row.student!.studentRegNo,
+          firstName: row.student!.firstName,
+          lastName: row.student!.lastName,
+          grade: row.student!.grade,
+          parentEmiratesId: row.student!.parentEmiratesId,
+          parentPhoneNumber: row.student!.parentPhoneNumber,
+          deletedAt: row.student!.deletedAt,
+          schoolId: row.student!.schoolId,
+          totalBalanceAmount: row.student!.totalBalanceAmount,
+          guardianFirstName: row.student!.guardianFirstName,
+          guardianLastName: row.student!.guardianLastName,
+          guardianGender: row.student!.guardianGender,
+          guardianEmiratesId: row.student!.guardianEmiratesId,
+          guardianNationality: row.student!.guardianNationality,
+          guardianReligion: row.student!.guardianReligion,
+          area: row.student!.area,
+          region: row.student!.region,
+          streetAddress: row.student!.streetAddress,
+          email: row.student!.email,
+          phoneNumber: row.student!.phoneNumber,
+          otherNumber: row.student!.otherNumber,
+          profile: row.student!.profile,
+          religion: row.student!.religion,
+          nationality: row.student!.nationality,
+          gender: row.student!.gender,
+          dueDate: row.student!.dueDate,
+          file: row.student!.file,
+          privacy: row.student!.privacy,
+          createdAt: row.student!.createdAt,
+          updatedAt: row.student!.updatedAt),
+    );
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TransactionDetailsPage(
+          tdm: tdm,
         ),
       ),
     );

@@ -19,7 +19,7 @@ import '../transactiondetails/paynowltransactiondetails_page.dart';
 
 class PaymentMethod extends StatefulWidget {
   final SingleStudentModel singleStudentModel;
-  final double payment;
+  final int payment;
 
   const PaymentMethod({
     Key? key,
@@ -351,10 +351,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
       if (result != null) {
         var amount = widget.payment;
         bool status = await ctrcController.hitCreateTransaction(
-          widget.singleStudentModel.student!.schoolId,
-          widget.singleStudentModel.parentId,
-          widget.singleStudentModel.student!.id,
-          widget.payment,
+          widget.singleStudentModel.student!.schoolId.toString(),
+          widget.singleStudentModel.parentId.toString(),
+          widget.singleStudentModel.student!.id.toString(),
+          widget.payment.toString(),
           result,
         );
         if (status) {
@@ -365,12 +365,17 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 widget.singleStudentModel,
                 amount.toString(),
               );
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => PayNowTransactionDetailsPage(
-                    pntdm: model,
-                  ),
-                ),
+              Future.delayed(
+                Duration.zero,
+                    () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PayNowTransactionDetailsPage(
+                        pntdm: model,
+                      ),
+                    ),
+                  );
+                },
               );
             },
           );

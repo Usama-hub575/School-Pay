@@ -16,7 +16,12 @@ class CreateTransactionRespController extends GetxController {
   // schoolId=56&parentId=225&InvoiceId=452&studentId=638
 
   Future<bool> hitCreateTransaction(
-      schoolId, parentId, studentId, amount, bankResponse) async {
+    schoolId,
+    parentId,
+    studentId,
+    amount,
+    bankResponse,
+  ) async {
     try {
       final bankRes = Xml2Json();
       bankRes.parse(bankResponse);

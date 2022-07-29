@@ -263,6 +263,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                   student.id,
                                                 );
                                                 studentElement = student;
+                                                amountController.text = student.student!.totalBalanceAmount.toString();
                                                 setState(() {});
                                               },
                                               index,
@@ -358,130 +359,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                   Expanded(
                                                     child: FlatButton(
                                                       padding: EdgeInsets.zero,
-                                                      onPressed: () async {
-                                                        if (studentController
-                                                            .myStudentData
-                                                            .value
-                                                            .status) {
-                                                          final result =
-                                                              await Navigator.of(
-                                                                      context)
-                                                                  .push(
-                                                            MaterialPageRoute(
-                                                              builder: (BuildContext
-                                                                      context) =>
-                                                                  MyWebView(
-                                                                title: "CBD",
-                                                                amount: '1300',
-                                                                indx: idx,
-                                                                orderId: Random()
-                                                                    .nextInt(
-                                                                  1000000000,
-                                                                ),
-                                                                schoolId:
-                                                                    int.parse(
-                                                                  schoolIDController
-                                                                      .text,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          );
-                                                          if (result != null) {
-                                                            var amount =
-                                                                payAbleAmount;
-                                                            bool status =
-                                                                await ctrcController
-                                                                    .hitCreateTransaction(
-                                                              schoolIDController
-                                                                  .text,
-                                                              parentIDController
-                                                                  .text,
-                                                              studentIDController
-                                                                  .text,
-                                                              '1300',
-                                                              result,
-                                                            );
-                                                            if (status) {
-                                                              studentController
-                                                                  .myStudentData
-                                                                  .update(
-                                                                (val) {
-                                                                  PayNowTransactionDetailModel
-                                                                      model;
-                                                                  model =
-                                                                      _getModel(
-                                                                    studentElement,
-                                                                    amount,
-                                                                  );
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .push(
-                                                                    MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) =>
-                                                                              PayNowTransactionDetailsPage(
-                                                                        pntdm:
-                                                                            model,
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                              );
-                                                            } else {
-                                                              ScaffoldMessenger
-                                                                  .of(
-                                                                context,
-                                                              ).showSnackBar(
-                                                                SnackBar(
-                                                                  behavior:
-                                                                      SnackBarBehavior
-                                                                          .floating,
-                                                                  content: Text(
-                                                                    'Something went wrong with the transaction',
-                                                                  ),
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .red,
-                                                                ),
-                                                              );
-                                                            }
-                                                          }
-                                                        } else if (int.parse(
-                                                                payAbleAmount) <
-                                                            0) {
-                                                          ScaffoldMessenger.of(
-                                                            context,
-                                                          ).showSnackBar(
-                                                            SnackBar(
-                                                              behavior:
-                                                                  SnackBarBehavior
-                                                                      .floating,
-                                                              content: Text(
-                                                                "Amount is not correct",
-                                                              ),
-                                                              backgroundColor:
-                                                                  Colors
-                                                                      .redAccent,
-                                                            ),
-                                                          );
-                                                        } else if (int.parse(
-                                                                payAbleAmount) ==
-                                                            0) {
-                                                          ScaffoldMessenger.of(
-                                                            context,
-                                                          ).showSnackBar(
-                                                            SnackBar(
-                                                              behavior:
-                                                                  SnackBarBehavior
-                                                                      .floating,
-                                                              content: Text(
-                                                                "Fees already paid",
-                                                              ),
-                                                              backgroundColor:
-                                                                  Colors.green,
-                                                            ),
-                                                          );
-                                                        }
+                                                      onPressed: () {
+                                                        onPress();
                                                       },
                                                       child: Center(
                                                         child: Text(
@@ -779,6 +658,104 @@ class _PayNowPageState extends State<PayNowPage> {
         ),
       ),
     );
+  }
+
+  void onPress() async {
+    if (studentController.myStudentData.value.status &&
+        int.parse(amountController.text) > 0) {
+      final result = await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) => MyWebView(
+            title: "CBD",
+            amount: amountController.text,
+            indx: idx,
+            orderId: Random().nextInt(
+              1000000000,
+            ),
+            schoolId: int.parse(
+              schoolIDController.text,
+            ),
+          ),
+        ),
+      );
+      if (result != null) {
+        var amount = payAbleAmount;
+        bool status = await ctrcController.hitCreateTransaction(
+          schoolIDController.text,
+          parentIDController.text,
+          studentIDController.text,
+          '1300',
+          result,
+        );
+        if (status) {
+          studentController.myStudentData.update(
+            (val) {
+              PayNowTransactionDetailModel model;
+              model = _getModel(
+                studentElement,
+                amount,
+              );
+              Future.delayed(
+                Duration.zero,
+                () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PayNowTransactionDetailsPage(
+                        pntdm: model,
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          );
+        } else {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(
+            SnackBar(
+              behavior: SnackBarBehavior.floating,
+              content: Text(
+                'Something went wrong with the transaction',
+              ),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } else if (int.parse(payAbleAmount) < 0) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          padding: EdgeInsets.symmetric(
+            vertical: verticalValue(16),
+          ),
+          content: Text(
+            "Amount is not correct",
+            textAlign: TextAlign.center,
+            style: PayNestTheme.small_2_10textGrey.copyWith(
+              fontSize: sizes.fontRatio*14,
+              color: PayNestTheme.colorWhite,
+            ),
+          ),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    } else if (int.parse(payAbleAmount) == 0) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            "Fees already paid",
+          ),
+          backgroundColor: Colors.green,
+        ),
+      );
+    }
   }
 
   Widget _commercial_image({required String imagePath}) {

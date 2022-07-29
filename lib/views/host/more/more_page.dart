@@ -249,14 +249,14 @@ class _MorePageState extends State<MorePage> {
                       },
                     ),
                     verticalSpacer(16),
-                    SingleCardWithRadioButton(
-                      value: Location,
-                      isEnable: false,
-                      icon: icLocation,
-                      onTap: () {},
-                    ),
+                    // SingleCardWithRadioButton(
+                    //   value: Location,
+                    //   isEnable: false,
+                    //   icon: icLocation,
+                    //   onTap: () {},
+                    // ),
                     verticalSpacer(16),
-                    LanguageCard(),
+                    // LanguageCard(),
                     verticalSpacer(16),
                     Container(
                       margin: EdgeInsets.symmetric(
@@ -316,7 +316,12 @@ class _MorePageState extends State<MorePage> {
                     SingleCard(
                       icon: icTermsAndCondition,
                       value: termConditions,
-                      onTap: () {},
+                      onTap: () {
+                        launch(
+                          'https://paynest.ae/terms.html',
+                        );
+                        setState(() {});
+                      },
                     ),
                     verticalSpacer(16),
                     Container(

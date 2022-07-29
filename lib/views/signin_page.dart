@@ -416,88 +416,88 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   verticalSpacer(20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 1.5,
-                          color: PayNestTheme.primaryColor,
-                        ),
-                      ),
-                      horizontalSpacer(10),
-                      Text(
-                        or,
-                        style: PayNestTheme.title_2_16primaryColor.copyWith(
-                          fontSize: sizes.fontRatio * 14,
-                          color: PayNestTheme.black,
-                        ),
-                      ),
-                      horizontalSpacer(10),
-                      Expanded(
-                        child: Container(
-                          height: 1.5,
-                          color: PayNestTheme.primaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                  verticalSpacer(20),
-                  Container(
-                    width: double.infinity,
-                    height: sizes.heightRatio * 46,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: PayNestTheme.primaryColor,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          googleicon,
-                        ),
-                        horizontalSpacer(8),
-                        Text(
-                          google,
-                          style: PayNestTheme.title_2_16primaryColor.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: PayNestTheme.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  verticalSpacer(16),
-                  Container(
-                    width: double.infinity,
-                    height: sizes.heightRatio * 46,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: PayNestTheme.primaryColor,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          facebookicon,
-                        ),
-                        horizontalSpacer(8),
-                        Text(
-                          facebook,
-                          style: PayNestTheme.title_2_16primaryColor.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: PayNestTheme.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Expanded(
+                  //       child: Container(
+                  //         height: 1.5,
+                  //         color: PayNestTheme.primaryColor,
+                  //       ),
+                  //     ),
+                  //     horizontalSpacer(10),
+                  //     Text(
+                  //       or,
+                  //       style: PayNestTheme.title_2_16primaryColor.copyWith(
+                  //         fontSize: sizes.fontRatio * 14,
+                  //         color: PayNestTheme.black,
+                  //       ),
+                  //     ),
+                  //     horizontalSpacer(10),
+                  //     Expanded(
+                  //       child: Container(
+                  //         height: 1.5,
+                  //         color: PayNestTheme.primaryColor,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // verticalSpacer(20),
+                  // Container(
+                  //   width: double.infinity,
+                  //   height: sizes.heightRatio * 46,
+                  //   decoration: BoxDecoration(
+                  //     border: Border.all(
+                  //       color: PayNestTheme.primaryColor,
+                  //       width: 1,
+                  //     ),
+                  //     borderRadius: BorderRadius.circular(12),
+                  //   ),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       Image.asset(
+                  //         googleicon,
+                  //       ),
+                  //       horizontalSpacer(8),
+                  //       Text(
+                  //         google,
+                  //         style: PayNestTheme.title_2_16primaryColor.copyWith(
+                  //           fontWeight: FontWeight.bold,
+                  //           color: PayNestTheme.black,
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // verticalSpacer(16),
+                  // Container(
+                  //   width: double.infinity,
+                  //   height: sizes.heightRatio * 46,
+                  //   decoration: BoxDecoration(
+                  //     border: Border.all(
+                  //       color: PayNestTheme.primaryColor,
+                  //       width: 1,
+                  //     ),
+                  //     borderRadius: BorderRadius.circular(12),
+                  //   ),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       Image.asset(
+                  //         facebookicon,
+                  //       ),
+                  //       horizontalSpacer(8),
+                  //       Text(
+                  //         facebook,
+                  //         style: PayNestTheme.title_2_16primaryColor.copyWith(
+                  //           fontWeight: FontWeight.bold,
+                  //           color: PayNestTheme.black,
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),
