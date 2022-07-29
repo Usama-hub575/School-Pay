@@ -42,7 +42,6 @@ class _SignInPageState extends State<SignInPage> {
   @override
   void initState() {
     isBioMatricEnable();
-    // TODO: implement initState
     super.initState();
   }
 
@@ -232,13 +231,20 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   verticalSpacer(16),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      forgotpassword,
-                      style: PayNestTheme.title_2_16primaryColor.copyWith(
-                        fontSize: sizes.fontRatio * 14,
-                        color: PayNestTheme.primaryColor,
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        Navigator.of(context).pushNamed("/ForgotPassword");
+                      });
+                    },
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        forgotpassword,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.primaryColor,
+                        ),
                       ),
                     ),
                   ),
