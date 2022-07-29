@@ -50,6 +50,12 @@ dependencies:
   firebase_messaging:
 
 
+  #Firebase Packages
+  firebase_remote_config:
+  firebase_core:
+  firebase_messaging:
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
