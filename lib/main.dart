@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
+import 'package:paynest_flutter_app/views/host/forgotpassword/forgot_password.dart';
 import 'package:paynest_flutter_app/views/host/host_page.dart';
 import 'package:paynest_flutter_app/views/registration_screen/register_page.dart';
 import 'package:paynest_flutter_app/views/signin_page.dart';
@@ -119,7 +120,7 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       designSize: Size(375, 812),
       builder: () => MaterialApp(
-        title: 'Flutter Demo',
+        title: 'PayNest School',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -132,6 +133,9 @@ class _MyAppState extends State<MyApp> {
               break;
             case '/SignInPage':
               page = SignInPage();
+              break;
+            case '/ForgotPassword':
+              page = ForgotPassword();
               break;
             case '/RegisterPage':
               page = RegisterPage();
