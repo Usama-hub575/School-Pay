@@ -104,7 +104,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
           ),
           Obx(
             () => !transactionListController.isLoading.value
-                ? transactionListController.list.value.isNotEmpty
+                ? transactionListController.transactionListData.value.transactions!.rows!.isNotEmpty
                     ? Expanded(
                         child: ListView.builder(
                           shrinkWrap: true,

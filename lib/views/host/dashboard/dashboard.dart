@@ -229,7 +229,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       Obx(
                         () => myStudentController
                                     .myStudentData.value.students !=
-                                null
+                                null && myStudentController.myStudentData.value.students!.isNotEmpty
                             ? StudentCard(
                                 students: myStudentController
                                     .myStudentData.value.students!,

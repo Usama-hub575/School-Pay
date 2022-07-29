@@ -36,7 +36,8 @@ dependencies:
   dropdown_button2:
   pdf:
   open_file:
-
+  package_info_plus:
+  store_redirect:
 
   modal_bottom_sheet:
   collection:

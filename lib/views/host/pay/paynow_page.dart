@@ -54,7 +54,9 @@ class _PayNowPageState extends State<PayNowPage> {
     super.initState();
     studentElement = StudentElement.empty();
     studentController.resetStudentCard();
-    if (studentController.myStudentData.value.status) {
+    if (studentController.myStudentData.value.status &&
+        studentController.myStudentData.value.students != null &&
+        studentController.myStudentData.value.students!.isNotEmpty) {
       amountController.text = studentController
           .myStudentData.value.students![0].student!.totalBalanceAmount
           .toString();
@@ -159,8 +161,7 @@ class _PayNowPageState extends State<PayNowPage> {
                       ? studentController.myStudentData.value.students !=
                                   null &&
                               studentController
-                                      .myStudentData.value.students!.length >
-                                  0
+                                      .myStudentData.value.students!.isNotEmpty
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -263,7 +264,9 @@ class _PayNowPageState extends State<PayNowPage> {
                                                   student.id,
                                                 );
                                                 studentElement = student;
-                                                amountController.text = student.student!.totalBalanceAmount.toString();
+                                                amountController.text = student
+                                                    .student!.totalBalanceAmount
+                                                    .toString();
                                                 setState(() {});
                                               },
                                               index,
@@ -652,6 +655,7 @@ class _PayNowPageState extends State<PayNowPage> {
                           ),
                         ),
                 ),
+
               ),
             ),
           ],
@@ -736,7 +740,7 @@ class _PayNowPageState extends State<PayNowPage> {
             "Amount is not correct",
             textAlign: TextAlign.center,
             style: PayNestTheme.small_2_10textGrey.copyWith(
-              fontSize: sizes.fontRatio*14,
+              fontSize: sizes.fontRatio * 14,
               color: PayNestTheme.colorWhite,
             ),
           ),

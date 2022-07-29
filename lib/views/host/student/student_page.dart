@@ -112,10 +112,8 @@ class _StudentPageState extends State<StudentPage> {
                 ),
                 child: Obx(() => controller.isLoading.value == false
                     ? controller.myStudentData.value.status == true
-                        ? controller.myStudentData.value.students == null &&
-                                controller
-                                        .myStudentData.value.students!.length >
-                                    0
+                        ? controller.myStudentData.value.students == null ||
+                                controller.myStudentData.value.students!.isEmpty
                             ? Container(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: horizontalValue(16),
@@ -175,6 +173,7 @@ class _StudentPageState extends State<StudentPage> {
                                 children: [
                                   verticalSpacer(16),
                                   Container(
+                                    width: double.infinity,
                                     margin: EdgeInsets.symmetric(
                                       horizontal: horizontalValue(24),
                                     ),
