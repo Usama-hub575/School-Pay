@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/succes_bottom_sheet.dart';
 import '../../../../constants/constants.dart';
+import '../../../../controller/addstudent_controller.dart';
+import '../../../../controller/user_controller.dart';
 import '../../../../res/res.dart';
 import '../../../../widgets/spacer.dart';
 
@@ -30,6 +36,8 @@ class StudentWidget extends StatefulWidget {
 
 class _StudentWidgetState extends State<StudentWidget> {
   final TextEditingController _studentCode = TextEditingController();
+  final UserController userController = Get.find<UserController>();
+  AddStudentController addStudentController = Get.put(AddStudentController());
 
   @override
   void initState() {
@@ -85,6 +93,11 @@ class _StudentWidgetState extends State<StudentWidget> {
                         ),
                         child: TextFormField(
                           controller: _studentCode,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.allow(
+                              RegExp("[0-9a-zA-Z,-]"),
+                            ),
+                          ], // Only num,
                           style: PayNestTheme.title_3_16blackbold.copyWith(
                             fontSize: sizes.fontRatio * 16,
                             color: PayNestTheme.lightBlack,
@@ -128,35 +141,65 @@ class _StudentWidgetState extends State<StudentWidget> {
                         ),
                       ),
                       verticalSpacer(22.0),
-                      Container(
-                        width: double.infinity,
-                        height: sizes.heightRatio * 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: PayNestTheme.primaryColor,
-                            elevation: 0,
-                            // side: BorderSide(width:1, color:Colors.white),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                14,
+                      Obx(
+                        () => Container(
+                          width: double.infinity,
+                          height: sizes.heightRatio * 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: PayNestTheme.primaryColor,
+                              elevation: 0,
+                              // side: BorderSide(width:1, color:Colors.white),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  14,
+                                ),
                               ),
                             ),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            SuccessBottomSheet.show(
-                              context: context,
-                            );
-                          },
-                          child: Center(
-                            child: Text(
-                              next,
-                              style:
-                                  PayNestTheme.title_2_16primaryColor.copyWith(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: PayNestTheme.colorWhite,
-                              ),
+                            onPressed: () async {
+                              final model = {
+                                "paynestNumber": _studentCode.text,
+                              };
+                              await addStudentController
+                                  .addStudentWithPaynestNumber(model);
+                              if(addStudentController.isStudentAdded == true){
+                                Navigator.of(context).pop();
+                                addStudentController.isStudentAdded == true
+                                    ? SuccessBottomSheet.show(
+                                  context: context,
+                                )
+                                    : addStudentController.isLoading.value =
+                                false;
+                              }
+                              else{
+                                addStudentController.isLoading.value =
+                                false;
+                                Navigator.of(context).pop();
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  behavior: SnackBarBehavior.floating,
+                                  content: Text(
+                                    addStudentController.errorMessage.toString(),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  backgroundColor: Colors.red,
+                                ));
+                              }
+                            },
+                            child: Center(
+                              child: !addStudentController.isLoading.value
+                                  ? Text(
+                                      next,
+                                      style: PayNestTheme.title_2_16primaryColor
+                                          .copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14,
+                                        color: PayNestTheme.colorWhite,
+                                      ),
+                                    )
+                                  : CircularProgressIndicator(
+                                      backgroundColor: PayNestTheme.colorWhite,
+                                      color: PayNestTheme.blueAccent,
+                                    ),
                             ),
                           ),
                         ),
