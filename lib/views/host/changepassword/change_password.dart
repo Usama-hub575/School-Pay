@@ -99,7 +99,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   children: [
                     TextFormField(
                       controller: oldPassController,
-                      enabled: false,
+                      enabled: true,
                       style: PayNestTheme.title_2_16primaryColor.copyWith(
                         fontSize: sizes.fontRatio * 14,
                         color: PayNestTheme.textGrey,
@@ -163,7 +163,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     TextFormField(
                       controller: newPassController,
                       obscureText: isObscure,
-                      enabled: false,
+                      enabled: true,
                       style: PayNestTheme.title_2_16primaryColor.copyWith(
                         fontSize: sizes.fontRatio * 14,
                         color: PayNestTheme.textGrey,
@@ -240,7 +240,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     TextFormField(
                       controller: rePassController,
                       obscureText: isObscure,
-                      enabled: false,
+                      enabled: true,
                       style: PayNestTheme.title_2_16primaryColor.copyWith(
                         fontSize: sizes.fontRatio * 14,
                         color: PayNestTheme.textGrey,
@@ -357,6 +357,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                               "Password Reset Successfully",
                             ),
                             backgroundColor: Colors.green,
+                            behavior: SnackBarBehavior.floating,
                           ),
                         );
                         Navigator.pop(context);

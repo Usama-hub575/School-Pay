@@ -152,10 +152,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               "Email Send Successfully",
                               showCrossIcon: false,
                               buttonAction: () {
-                                Navigator.pushNamed(
-                                  context,
-                                 "/SignInPage"
-                                );
+                                Navigator.of(context).pop();
                               },
                             );
                           });

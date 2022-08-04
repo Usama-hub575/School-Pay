@@ -38,8 +38,8 @@ class GetStudent {
   List<StudentListRowData>? rows;
 
   factory GetStudent.fromJson(Map<String, dynamic> json) => GetStudent(
-    count: json["count"] == null ? null : json["count"],
-    rows: json["rows"] == null ? null : List<StudentListRowData>.from(json["rows"].map((x) => StudentListRowData.fromJson(x))),
+    count: json["count"] == null ? 0 : json["count"],
+    rows: json["rows"] == null ? [] : List<StudentListRowData>.from(json["rows"].map((x) => StudentListRowData.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {

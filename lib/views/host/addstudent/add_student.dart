@@ -34,7 +34,7 @@ class _AddStudentState extends State<AddStudent> {
   AddStudentController addStudentController = Get.put(AddStudentController());
   final UserController userController = Get.find<UserController>();
 
-  List<String> filters = ['First Name', 'Last Name', 'Email ID', 'Student ID'];
+  List<String> filters = ['First Name', 'Last Name', 'Student ID'];
   String? _selectedFilter;
   bool isExpanded = false;
   bool isSearchFieldEnable = false;
@@ -58,10 +58,12 @@ class _AddStudentState extends State<AddStudent> {
           queryParam: searchController.text,
           schoolId: widget.schoolData.id,
         );
-        studentListController.studentList.value.getStudent!.rows!
-            .forEach((studentDetails) {
-          _searchResult.add(studentDetails);
-        });
+        if(studentListController.studentList.value.getStudent != null){
+          studentListController.studentList.value.getStudent!.rows!
+              .forEach((studentDetails) {
+            _searchResult.add(studentDetails);
+          });
+        }
         setState(() {});
         break;
       case 'Last Name':
@@ -70,22 +72,26 @@ class _AddStudentState extends State<AddStudent> {
           queryParam: searchController.text,
           schoolId: widget.schoolData.id,
         );
-        studentListController.studentList.value.getStudent!.rows!
-            .forEach((studentDetails) {
-          _searchResult.add(studentDetails);
-        });
+       if(studentListController.studentList.value.getStudent != null){
+         studentListController.studentList.value.getStudent!.rows!
+             .forEach((studentDetails) {
+           _searchResult.add(studentDetails);
+         });
+       }
         setState(() {});
         break;
-      case 'Email ID':
+      case 'Parent ID':
         await studentListController.search(
-          searchBy: 'email',
+          searchBy: 'parent',
           queryParam: searchController.text,
           schoolId: widget.schoolData.id,
         );
-        studentListController.studentList.value.getStudent!.rows!
-            .forEach((studentDetails) {
-          _searchResult.add(studentDetails);
-        });
+       if(studentListController.studentList.value.getStudent != null){
+         studentListController.studentList.value.getStudent!.rows!
+             .forEach((studentDetails) {
+           _searchResult.add(studentDetails);
+         });
+       }
         setState(() {});
         break;
       case 'Student ID':
@@ -94,10 +100,12 @@ class _AddStudentState extends State<AddStudent> {
           queryParam: searchController.text,
           schoolId: widget.schoolData.id,
         );
-        studentListController.studentList.value.getStudent!.rows!
-            .forEach((studentDetails) {
-          _searchResult.add(studentDetails);
-        });
+        if(studentListController.studentList.value.getStudent != null){
+          studentListController.studentList.value.getStudent!.rows!
+              .forEach((studentDetails) {
+            _searchResult.add(studentDetails);
+          });
+        }
         setState(() {});
         break;
     }
@@ -269,11 +277,9 @@ class _AddStudentState extends State<AddStudent> {
                                             style: PayNestTheme
                                                 .h2_12blueAccentLight
                                                 .copyWith(
-                                              fontSize:
-                                              sizes.fontRatio * 14,
+                                              fontSize: sizes.fontRatio * 14,
                                               color: PayNestTheme.black,
-                                              fontFamily:
-                                              'montserratBold',
+                                              fontFamily: 'montserratBold',
                                             ),
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -287,9 +293,12 @@ class _AddStudentState extends State<AddStudent> {
                                                     style: PayNestTheme
                                                         .h2_12blueAccentLight
                                                         .copyWith(
-                                                      fontSize: sizes.fontRatio * 14,
-                                                      color: PayNestTheme.lightBlack,
-                                                      fontFamily: 'montserratSemiBold',
+                                                      fontSize:
+                                                          sizes.fontRatio * 14,
+                                                      color: PayNestTheme
+                                                          .lightBlack,
+                                                      fontFamily:
+                                                          'montserratSemiBold',
                                                     ),
                                                     overflow:
                                                         TextOverflow.ellipsis,
@@ -317,23 +326,25 @@ class _AddStudentState extends State<AddStudent> {
                                 child: TextFormField(
                                   controller: searchController,
                                   onTap: () {
-                                    if(isSearchFieldEnable == true){
+                                    if (isSearchFieldEnable == true) {
                                       onSearchTextChanged('');
-                                    }else{
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
                                         content: Text(
                                           "Please Select Search By Field First",
                                           textAlign: TextAlign.center,
                                         ),
                                         behavior: SnackBarBehavior.floating,
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(24),
+                                          borderRadius:
+                                              BorderRadius.circular(24),
                                         ),
-                                        backgroundColor: PayNestTheme.primaryColor,
+                                        backgroundColor:
+                                            PayNestTheme.primaryColor,
                                       ));
                                     }
-                                    setState(() {
-                                    });
+                                    setState(() {});
                                   },
                                   enabled: isSearchFieldEnable,
                                   onEditingComplete: () {
@@ -379,9 +390,11 @@ class _AddStudentState extends State<AddStudent> {
                       ),
                     ),
                     _searchResult.isNotEmpty || searchController.text.isNotEmpty
-                        ? studentListController.studentList.value.getStudent!
-                                    .rows!.length !=
-                                0
+                        ? studentListController.studentList.value.getStudent !=
+                                    null &&
+                                studentListController.studentList.value
+                                        .getStudent!.rows!.length !=
+                                    0
                             ? Column(
                                 children: [
                                   verticalSpacer(16),
