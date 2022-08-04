@@ -231,23 +231,23 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   verticalSpacer(16),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        Navigator.of(context).pushNamed("/ForgotPassword");
-                      });
-                    },
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        forgotpassword,
-                        style: PayNestTheme.title_2_16primaryColor.copyWith(
-                          fontSize: sizes.fontRatio * 14,
-                          color: PayNestTheme.primaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     setState(() {
+                  //       Navigator.of(context).pushNamed("/ForgotPassword");
+                  //     });
+                  //   },
+                  //   child: Container(
+                  //     alignment: Alignment.centerRight,
+                  //     child: Text(
+                  //       forgotpassword,
+                  //       style: PayNestTheme.title_2_16primaryColor.copyWith(
+                  //         fontSize: sizes.fontRatio * 14,
+                  //         color: PayNestTheme.primaryColor,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   isBioMatric
                       ? Center(
                           child: Padding(
