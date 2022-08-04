@@ -172,8 +172,8 @@ class APIService {
             schoolId.toString(),
           );
       endPoint = Uri.parse("$baseurl$query");
-    } else if (searchBy == 'email') {
-      query = searchByEmail.replaceAll('{email}', queryParam).replaceAll(
+    } else if (searchBy == 'parent') {
+      query = searchByEmail.replaceAll('{parent}', queryParam).replaceAll(
             '{school_id}',
             schoolId.toString(),
           );

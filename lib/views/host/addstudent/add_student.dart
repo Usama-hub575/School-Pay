@@ -34,7 +34,7 @@ class _AddStudentState extends State<AddStudent> {
   AddStudentController addStudentController = Get.put(AddStudentController());
   final UserController userController = Get.find<UserController>();
 
-  List<String> filters = ['First Name', 'Last Name', 'Email ID', 'Student ID'];
+  List<String> filters = ['First Name', 'Last Name', 'Student ID'];
   String? _selectedFilter;
   bool isExpanded = false;
   bool isSearchFieldEnable = false;
@@ -80,9 +80,9 @@ class _AddStudentState extends State<AddStudent> {
        }
         setState(() {});
         break;
-      case 'Email ID':
+      case 'Parent ID':
         await studentListController.search(
-          searchBy: 'email',
+          searchBy: 'parent',
           queryParam: searchController.text,
           schoolId: widget.schoolData.id,
         );
