@@ -804,71 +804,70 @@ class _PayNowPageState extends State<PayNowPage> {
       onTap: () => onTap(studentElement),
       child: Opacity(
         opacity: studentElement.isSelected ? 1 : 0.5,
-        child: Container(
-          child: Stack(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(
-                  vertical: verticalValue(10),
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: horizontalValue(12),
-                  vertical: verticalValue(16),
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
-                  color: PayNestTheme.primaryColor.withOpacity(0.5),
-                ),
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
-                      ),
-                      minRadius: 16,
-                      maxRadius: 24,
+        child: Stack(
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(
+                vertical: 8,
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontalValue(12),
+                vertical: verticalValue(16),
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                color: PayNestTheme.primaryColor.withOpacity(0.5),
+              ),
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
                     ),
-                    verticalSpacer(12),
-                    Text(
-                      '"AED ${studentElement.student?.firstName} \n ${studentElement.student?.lastName} ',
+                    minRadius: 16,
+                    maxRadius: 24,
+                  ),
+                  verticalSpacer(8),
+                  Text(
+                    '${studentElement.student?.firstName} \n ${studentElement.student?.lastName} ',
+                    textAlign: TextAlign.center,
+                    style: PayNestTheme.title_2_16primaryColor.copyWith(
+                      fontSize: sizes.fontRatio * 14,
+                      color: index % 2 == 0
+                          ? PayNestTheme.colorWhite
+                          : PayNestTheme.black,
+                    ),
+                  ),
+                  Spacer(),
+                  Container(
+                    width: sizes.widthRatio * 80,
+                    child: Text(
+                      '${studentElement.student?.school!.name}',
+                      maxLines: 2,
                       textAlign: TextAlign.center,
-                      style: PayNestTheme.title_2_16primaryColor.copyWith(
-                        fontSize: sizes.fontRatio * 14,
+                      style: PayNestTheme.small_2_10textGrey.copyWith(
+                        fontSize: sizes.fontRatio * 11,
                         color: index % 2 == 0
                             ? PayNestTheme.colorWhite
                             : PayNestTheme.black,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
-                    Spacer(),
-                    Container(
-                      width: sizes.widthRatio * 80,
-                      child: Text(
-                        '${studentElement.student?.school!.name}',
-                        maxLines: 2,
-                        textAlign: TextAlign.center,
-                        style: PayNestTheme.small_2_10textGrey.copyWith(
-                          fontSize: sizes.fontRatio * 11,
-                          color: index % 2 == 0
-                              ? PayNestTheme.colorWhite
-                              : PayNestTheme.black,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                    Spacer()
-                  ],
-                ),
+                  ),
+                  Spacer()
+                ],
               ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: SvgPicture.asset(
-                  icAdd,
-                ),
+            ),
+
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: SvgPicture.asset(
+                icAdd,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

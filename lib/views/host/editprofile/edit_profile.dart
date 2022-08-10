@@ -25,6 +25,7 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   final UserController userController = Get.find<UserController>();
   TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController emiratesIdController = TextEditingController();
@@ -254,7 +255,65 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             ),
                           ),
                         ),
-                        labelText: fullName,
+                        labelText: firstName,
+                        labelStyle: PayNestTheme.h2_14textGrey.copyWith(
+                          color: PayNestTheme.primaryColor,
+                          fontFamily: 'montserratBold',
+                          fontSize: sizes.fontRatio * 12,
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.3,
+                            ),
+                          ),
+                        ),
+                        errorBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.3,
+                            ),
+                          ),
+                        ),
+                        disabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.3,
+                            ),
+                          ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(0.3),
+                          ),
+                        ),
+                      ),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Required";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    verticalSpacer(8),
+                    TextFormField(
+                      controller: lastNameController,
+                      style: PayNestTheme.title_3_16blackbold.copyWith(
+                        fontSize: sizes.fontRatio * 16,
+                        color: PayNestTheme.lightBlack,
+                        fontFamily: 'montserratSemiBold',
+                      ),
+                      decoration: InputDecoration(
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: PayNestTheme.textGrey.withOpacity(
+                              0.3,
+                            ),
+                          ),
+                        ),
+                        labelText: lastName,
                         labelStyle: PayNestTheme.h2_14textGrey.copyWith(
                           color: PayNestTheme.primaryColor,
                           fontFamily: 'montserratBold',

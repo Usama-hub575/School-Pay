@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/updatebank_response_controller.dart';
+import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:xml2json/xml2json.dart';
@@ -46,8 +47,9 @@ class _MyWebViewState extends State<MyWebView> {
   @override
   void initState() {
     super.initState();
+    var gateway = APIService.paymentGateway;
     paymentGateWay =
-        "https://discoveritech.com/schoolpay-transactions/school_pay_init_new.php?schoolId=${widget.schoolId}&amount=${widget.amount}&orderid=${widget.orderId}";
+        "$gateway?amountId=${widget.amount}&orderId=${widget.orderId}&schoolId=${widget.schoolId}";
     print(paymentGateWay);
   }
 
@@ -105,6 +107,7 @@ class _MyWebViewState extends State<MyWebView> {
       ),
     );
   }
+
 
   getResponse(String response) {
     response = response.replaceAll('\\', '');

@@ -8,6 +8,7 @@ class APIService {
   GetStorage storage = GetStorage();
   static var client = http.Client();
   static var baseurl = Uri.parse("https://api.paynestschools.ae");
+  static var paymentGateway = Uri.parse('https://paynestschools.ae/pl');
  // static var baseurl = Uri.parse("https://payschool.azurewebsites.net");
   static var baseurl1 = "discoveritech.com";
 
@@ -23,6 +24,10 @@ class APIService {
   static var pinUpdate = "/api/parent/update";
   static var resetPassword = "/api/parent/resetpassword";
   static var updateProfile = "/api/parent/updateProfile";
+  static var getCountries = "/api/countries";
+  static var addStudentByFirstName = "/api/parent/addStudentByFName";
+  static var addStudentByParentRegistrationNumber = "/api/parent/addStudentByPRN";
+  static var addStudentByStudentRegistrationNumber = "/api/parent/addStudentBySRN";
 
   ///Fetch Transaction
   static var transaction = "/api/transaction/all";
@@ -38,8 +43,7 @@ class APIService {
       "/api/student/getByLName?LName={last_name}&schoolId={school_id}";
   static var searchByFirstName =
       "/api/student/getByFName?FName={first_name}&schoolId={school_id}";
-  static var searchByEmail =
-      "/api/student/getByEmail?email={email}&schoolId={school_id}";
+  static var searchByPID = "/api/student/getByPID?PID={pid}&schoolId={school_id}";
   static var searchBySID =
       "/api/student/getBySID?SID={sid}&schoolId={school_id}";
 
@@ -88,6 +92,20 @@ class APIService {
       body: data,
     );
     // print("Login Data");
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  /// * Get Countries * ///
+  Future apiGetCountries() async {
+    var endPoint = Uri.parse("$baseurl$getCountries");
+    var response = await client.get(
+      endPoint,
+    );
     print(response.body);
     if (response.statusCode == 200) {
       return response.body;
@@ -173,7 +191,7 @@ class APIService {
           );
       endPoint = Uri.parse("$baseurl$query");
     } else if (searchBy == 'parent') {
-      query = searchByEmail.replaceAll('{parent}', queryParam).replaceAll(
+      query = searchByPID.replaceAll('{pid}', queryParam).replaceAll(
             '{school_id}',
             schoolId.toString(),
           );
@@ -240,6 +258,70 @@ class APIService {
       return response.body;
     }
   }
+
+  /// * Parent Add Student BY First Name * ///
+  Future apiAddStudentByFirstName(data) async {
+    print("Student data");
+    print(data);
+    var endPoint = Uri.parse("$baseurl$addStudentByFirstName");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+      body: data,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  /// * Parent Add Student BY First Name * ///
+  Future apiAddStudentByParentRegistrationNumber(data) async {
+    print("Student data");
+    print(data);
+    var endPoint = Uri.parse("$baseurl$addStudentByParentRegistrationNumber");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+      body: data,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  /// * Parent Add Student BY First Name * ///
+  Future apiAddStudentByStudentRegistrationNumber(data) async {
+    print("Student data");
+    print(data);
+    var endPoint = Uri.parse("$baseurl$addStudentByStudentRegistrationNumber");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+      body: data,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
 
   /// * Parent Add Student By PayNest Number * ///
   Future addStudentWithPaynestNumber(data) async {

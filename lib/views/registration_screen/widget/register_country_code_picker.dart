@@ -11,13 +11,12 @@ import 'package:paynest_flutter_app/views/custom_phone_number_field/selection_di
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:universal_platform/universal_platform.dart';
 
-import '../../constants/constants.dart';
-import 'country_code.dart';
-import 'country_codes.dart';
+import '../../../constants/constants.dart';
+import '../../custom_phone_number_field/country_code.dart';
+import '../../custom_phone_number_field/country_code_picker.dart';
+import '../../custom_phone_number_field/country_codes.dart';
 
-export 'country_code.dart';
-
-class CountryCodePicker extends StatefulWidget {
+class RegisterCountryCodePicker extends StatefulWidget {
   final ValueChanged<CountryCode>? onChanged;
   final ValueChanged<CountryCode?>? onInit;
   final String? initialSelection;
@@ -92,7 +91,7 @@ class CountryCodePicker extends StatefulWidget {
 
   Color borderColor;
 
-  CountryCodePicker({
+  RegisterCountryCodePicker({
     this.onChanged,
     this.onInit,
     required this.borderColor,
@@ -135,7 +134,7 @@ class CountryCodePicker extends StatefulWidget {
     List<Map<String, String>> jsonList = countryList;
 
     List<CountryCode> elements =
-        jsonList.map((json) => CountryCode.fromJson(json)).toList();
+    jsonList.map((json) => CountryCode.fromJson(json)).toList();
 
     if (comparator != null) {
       elements.sort(comparator);
@@ -143,12 +142,12 @@ class CountryCodePicker extends StatefulWidget {
 
     if (countryFilter != null && countryFilter!.isNotEmpty) {
       final uppercaseCustomList =
-          countryFilter!.map((c) => c.toUpperCase()).toList();
+      countryFilter!.map((c) => c.toUpperCase()).toList();
       elements = elements
           .where((c) =>
-              uppercaseCustomList.contains(c.code) ||
-              uppercaseCustomList.contains(c.name) ||
-              uppercaseCustomList.contains(c.dialCode))
+      uppercaseCustomList.contains(c.code) ||
+          uppercaseCustomList.contains(c.name) ||
+          uppercaseCustomList.contains(c.dialCode))
           .toList();
     }
 
@@ -156,7 +155,7 @@ class CountryCodePicker extends StatefulWidget {
   }
 }
 
-class CountryCodePickerState extends State<CountryCodePicker> {
+class CountryCodePickerState extends State<RegisterCountryCodePicker> {
   CountryCode? selectedItem;
   List<CountryCode> elements = [];
   List<CountryCode> favoriteElements = [];
@@ -165,6 +164,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
 
   @override
   Widget build(BuildContext context) {
+
     Widget _widget;
     if (widget.builder != null)
       _widget = InkWell(
@@ -172,12 +172,10 @@ class CountryCodePickerState extends State<CountryCodePicker> {
         child: widget.builder!(selectedItem),
       );
     else {
-      _widget = TextButton(
-        onPressed: widget.enabled ? showCountryCodePickerDialog : null,
-        child: Flex(
-          direction: Axis.horizontal,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
+      _widget = GestureDetector(
+        onTap: ()=> widget.enabled ? showCountryCodePickerDialog() : null,
+        child: Row(
+          children:[
             if (widget.showFlagMain != null
                 ? widget.showFlagMain!
                 : widget.showFlag)
@@ -196,35 +194,21 @@ class CountryCodePickerState extends State<CountryCodePicker> {
               ),
             horizontalSpacer(10),
             if (!widget.hideMainText)
-              Flexible(
-                fit: widget.alignLeft ? FlexFit.tight : FlexFit.loose,
-                child: Text(
-                  widget.showOnlyCountryWhenClosed
-                      ? selectedItem!.toCountryStringOnly()
-                      : selectedItem.toString(),
-                  style: PayNestTheme.h2_12blueAccent.copyWith(
-                    fontSize: sizes.fontRatio * 14,
-                    fontFamily: 'montserratBold',
-                    color: PayNestTheme.black,
-                  ),
+              Text(
+                widget.showOnlyCountryWhenClosed
+                    ? selectedItem.toString()
+                    : selectedItem!.toCountryStringOnly(),
+                style: PayNestTheme.h2_12blueAccent.copyWith(
+                  fontSize: sizes.fontRatio * 14,
+                  fontFamily: 'montserratBold',
+                  color: PayNestTheme.black,
                 ),
               ),
-            horizontalSpacer(10),
+            const Spacer(),
             if (widget.showDropDownButton)
-              Flexible(
-                flex: widget.alignLeft ? 0 : 1,
-                fit: widget.alignLeft ? FlexFit.tight : FlexFit.loose,
-                child: SvgPicture.asset(
-                  icArrowDown,
-                ),
+              SvgPicture.asset(
+                icArrowDown,
               ),
-            horizontalSpacer(10),
-            Container(
-              width: 1.5,
-              height: sizes.heightRatio * 30,
-              color: widget.borderColor,
-            ),
-            horizontalSpacer(16),
           ],
         ),
       );
@@ -241,15 +225,15 @@ class CountryCodePickerState extends State<CountryCodePicker> {
   }
 
   @override
-  void didUpdateWidget(CountryCodePicker oldWidget) {
+  void didUpdateWidget(RegisterCountryCodePicker oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.initialSelection != widget.initialSelection) {
       if (widget.initialSelection != null) {
         selectedItem = elements.firstWhere(
-            (e) =>
-                (e.code!.toUpperCase() ==
-                    widget.initialSelection!.toUpperCase()) ||
+                (e) =>
+            (e.code!.toUpperCase() ==
+                widget.initialSelection!.toUpperCase()) ||
                 (e.dialCode == widget.initialSelection) ||
                 (e.name!.toUpperCase() ==
                     widget.initialSelection!.toUpperCase()),
@@ -267,9 +251,9 @@ class CountryCodePickerState extends State<CountryCodePicker> {
 
     if (widget.initialSelection != null) {
       selectedItem = elements.firstWhere(
-          (e) =>
-              (e.code!.toUpperCase() ==
-                  widget.initialSelection!.toUpperCase()) ||
+              (e) =>
+          (e.code!.toUpperCase() ==
+              widget.initialSelection!.toUpperCase()) ||
               (e.dialCode == widget.initialSelection) ||
               (e.name!.toUpperCase() == widget.initialSelection!.toUpperCase()),
           orElse: () => elements[0]);
@@ -279,11 +263,11 @@ class CountryCodePickerState extends State<CountryCodePicker> {
 
     favoriteElements = elements
         .where((e) =>
-            widget.favorite.firstWhereOrNull((f) =>
-                e.code!.toUpperCase() == f.toUpperCase() ||
-                e.dialCode == f ||
-                e.name!.toUpperCase() == f.toUpperCase()) !=
-            null)
+    widget.favorite.firstWhereOrNull((f) =>
+    e.code!.toUpperCase() == f.toUpperCase() ||
+        e.dialCode == f ||
+        e.name!.toUpperCase() == f.toUpperCase()) !=
+        null)
         .toList();
   }
 
@@ -315,7 +299,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
         ),
       ),
     ).then(
-      (e) {
+          (e) {
         if (e != null) {
           setState(() {
             selectedItem = e;

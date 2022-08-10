@@ -37,6 +37,7 @@ class RegisterModel {
   String address;
   String passport;
 
+
   factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
     email: json["email"],
     phone: json["phone"],

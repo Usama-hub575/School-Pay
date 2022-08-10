@@ -32,6 +32,90 @@ class AddStudentController extends GetxController{
     }
   }
 
+  hitAddStudentByFirstName(data) async {
+    try{
+      isStudentAdded = false;
+      isLoading(true);
+      var res = await APIService().apiAddStudentByFirstName(data);
+      var decoded = jsonDecode(res);
+      AddStudentRespModel addStudentRespModel = addStudentRespModelFromJson(res);
+      addStudentData.value = addStudentRespModel;
+      if(decoded['status'] == true){
+        isStudentAdded = true;
+      }else if(decoded['status'] == false){
+        isStudentAdded = false;
+        isLoading(false);
+      }
+      addStudentData.refresh();
+    }
+    finally{
+      isLoading(false);
+    }
+  }
+
+  hitAddStudentByParentId(data) async {
+    try{
+      isStudentAdded = false;
+      isLoading(true);
+      var res = await APIService().apiAddStudentByParentRegistrationNumber(data);
+      var decoded = jsonDecode(res);
+      AddStudentRespModel addStudentRespModel = addStudentRespModelFromJson(res);
+      addStudentData.value = addStudentRespModel;
+      if(decoded['status'] == true){
+        isStudentAdded = true;
+      }else if(decoded['status'] == false){
+        isStudentAdded = false;
+        isLoading(false);
+      }
+      addStudentData.refresh();
+    }
+    finally{
+      isLoading(false);
+    }
+  }
+
+  hitAddStudentByStudentId(data) async {
+    try{
+      isStudentAdded = false;
+      isLoading(true);
+      var res = await APIService().apiAddStudentByStudentRegistrationNumber(data);
+      var decoded = jsonDecode(res);
+      AddStudentRespModel addStudentRespModel = addStudentRespModelFromJson(res);
+      addStudentData.value = addStudentRespModel;
+      if(decoded['status'] == true){
+        isStudentAdded = true;
+      }else if(decoded['status'] == false){
+        isStudentAdded = false;
+        isLoading(false);
+      }
+      addStudentData.refresh();
+    }
+    finally{
+      isLoading(false);
+    }
+  }
+
+  hitAddStudentByStudentFirstName(data) async {
+    try{
+      isStudentAdded = false;
+      isLoading(true);
+      var res = await APIService().apiAddStudentByFirstName(data);
+      var decoded = jsonDecode(res);
+      AddStudentRespModel addStudentRespModel = addStudentRespModelFromJson(res);
+      addStudentData.value = addStudentRespModel;
+      if(decoded['status'] == true){
+        isStudentAdded = true;
+      }else if(decoded['status'] == false){
+        isStudentAdded = false;
+        isLoading(false);
+      }
+      addStudentData.refresh();
+    }
+    finally{
+      isLoading(false);
+    }
+  }
+
 
   addStudentWithPaynestNumber(data) async {
     try{
@@ -43,12 +127,12 @@ class AddStudentController extends GetxController{
         AddStudentRespModel addStudentRespModel = addStudentRespModelFromJson(res);
         addStudentData.value = addStudentRespModel;
         isStudentAdded = true;
-        addStudentData.refresh();
         isLoading(false);
       }else if(decoded['status'] == false){
         errorMessage = decoded['message'];
         isLoading(false);
       }
+      addStudentData.refresh();
     }
     finally{
       isLoading(false);

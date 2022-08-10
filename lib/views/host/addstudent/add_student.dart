@@ -34,14 +34,16 @@ class _AddStudentState extends State<AddStudent> {
   AddStudentController addStudentController = Get.put(AddStudentController());
   final UserController userController = Get.find<UserController>();
 
-  List<String> filters = ['First Name', 'Last Name', 'Student ID'];
+  List<String> filters = ['First Name', 'Last Name', 'Parent ID', 'Student ID'];
   String? _selectedFilter;
   bool isExpanded = false;
   bool isSearchFieldEnable = false;
+  bool isLoading = false;
 
   @override
   void initState() {
     isExpanded = false;
+    isLoading = false;
     super.initState();
   }
 
@@ -53,12 +55,18 @@ class _AddStudentState extends State<AddStudent> {
     }
     switch (_selectedFilter) {
       case 'First Name':
+        if (studentListController.studentList.value.getStudent != null &&
+            studentListController.studentList.value.getStudent!.rows!.length >
+                0) {
+          studentListController.studentList.value.getStudent!.rows!.clear();
+        }
         await studentListController.search(
           searchBy: 'first',
           queryParam: searchController.text,
           schoolId: widget.schoolData.id,
         );
-        if(studentListController.studentList.value.getStudent != null){
+        isLoading = false;
+        if (studentListController.studentList.value.getStudent != null) {
           studentListController.studentList.value.getStudent!.rows!
               .forEach((studentDetails) {
             _searchResult.add(studentDetails);
@@ -67,40 +75,58 @@ class _AddStudentState extends State<AddStudent> {
         setState(() {});
         break;
       case 'Last Name':
+        if (studentListController.studentList.value.getStudent != null &&
+            studentListController.studentList.value.getStudent!.rows!.length >
+                0) {
+          studentListController.studentList.value.getStudent!.rows!.clear();
+        }
         await studentListController.search(
           searchBy: 'last',
           queryParam: searchController.text,
           schoolId: widget.schoolData.id,
         );
-       if(studentListController.studentList.value.getStudent != null){
-         studentListController.studentList.value.getStudent!.rows!
-             .forEach((studentDetails) {
-           _searchResult.add(studentDetails);
-         });
-       }
+        isLoading = false;
+        if (studentListController.studentList.value.getStudent != null) {
+          studentListController.studentList.value.getStudent!.rows!
+              .forEach((studentDetails) {
+            _searchResult.add(studentDetails);
+          });
+        }
         setState(() {});
         break;
       case 'Parent ID':
+        if (studentListController.studentList.value.getStudent != null &&
+            studentListController.studentList.value.getStudent!.rows!.length >
+                0) {
+          studentListController.studentList.value.getStudent!.rows!.clear();
+        }
         await studentListController.search(
           searchBy: 'parent',
           queryParam: searchController.text,
           schoolId: widget.schoolData.id,
         );
-       if(studentListController.studentList.value.getStudent != null){
-         studentListController.studentList.value.getStudent!.rows!
-             .forEach((studentDetails) {
-           _searchResult.add(studentDetails);
-         });
-       }
+        isLoading = false;
+        if (studentListController.studentList.value.getStudent != null) {
+          studentListController.studentList.value.getStudent!.rows!
+              .forEach((studentDetails) {
+            _searchResult.add(studentDetails);
+          });
+        }
         setState(() {});
         break;
       case 'Student ID':
+        if (studentListController.studentList.value.getStudent != null &&
+            studentListController.studentList.value.getStudent!.rows!.length >
+                0) {
+          studentListController.studentList.value.getStudent!.rows!.clear();
+        }
         await studentListController.search(
           searchBy: 'sid',
           queryParam: searchController.text,
           schoolId: widget.schoolData.id,
         );
-        if(studentListController.studentList.value.getStudent != null){
+        isLoading = false;
+        if (studentListController.studentList.value.getStudent != null) {
           studentListController.studentList.value.getStudent!.rows!
               .forEach((studentDetails) {
             _searchResult.add(studentDetails);
@@ -207,49 +233,6 @@ class _AddStudentState extends State<AddStudent> {
                                           ),
                                         ),
                                       ),
-                                      // child: DropdownButtonHideUnderline(
-                                      //   child: ButtonTheme(
-                                      //     alignedDropdown: true,
-                                      //     child: DropdownButton(
-                                      //       borderRadius:
-                                      //           BorderRadius.circular(16),
-                                      //       elevation: 0,
-                                      //       isExpanded: true,
-                                      //       items: filters.map((String value) {
-                                      //         return DropdownMenuItem<String>(
-                                      //           value: value,
-                                      //           child: Text(
-                                      //             value,
-                                      //             style: PayNestTheme
-                                      //                 .h2_12blueAccent
-                                      //                 .copyWith(
-                                      //               fontSize:
-                                      //                   sizes.fontRatio * 14,
-                                      //               fontWeight: FontWeight.bold,
-                                      //               color: PayNestTheme.black,
-                                      //             ),
-                                      //           ),
-                                      //         );
-                                      //       }).toList(),
-                                      //       value: _selectedFilter,
-                                      //       hint: Text(
-                                      //         "Search by",
-                                      //       ),
-                                      //       // value: selection,
-                                      //       onChanged: (newValue) {
-                                      //         setState(
-                                      //           () {
-                                      //             _selectedFilter =
-                                      //                 newValue.toString();
-                                      //             print(
-                                      //               _selectedFilter,
-                                      //             );
-                                      //           },
-                                      //         );
-                                      //       },
-                                      //     ),
-                                      //   ),
-                                      // ),
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButton2(
                                           buttonPadding: EdgeInsets.symmetric(
@@ -348,13 +331,6 @@ class _AddStudentState extends State<AddStudent> {
                                   },
                                   enabled: isSearchFieldEnable,
                                   onEditingComplete: () {
-                                    if (searchController.text.isNotEmpty) {
-                                      onSearchTextChanged(
-                                        searchController.text,
-                                      );
-                                    } else {
-                                      _searchResult.clear();
-                                    }
                                     FocusManager.instance.primaryFocus
                                         ?.unfocus();
                                   },
@@ -451,7 +427,7 @@ class _AddStudentState extends State<AddStudent> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        '${_searchResult[index].firstName} ${_searchResult[index].lastName}',
+                                                        '${_searchResult[index].firstName}\n${_searchResult[index].lastName}',
                                                         style: PayNestTheme
                                                             .title20white
                                                             .copyWith(
@@ -480,65 +456,263 @@ class _AddStudentState extends State<AddStudent> {
                                                     ],
                                                   ),
                                                   Spacer(),
+
                                                   _getActionButton(
-                                                    onTap: () {
-                                                      StudentBottomSheet.show(
-                                                        context: context,
-                                                        selectedStudentID:
-                                                            _searchResult[index]
-                                                                .id
-                                                                .toString(),
-                                                        selectedStudentRegNo:
-                                                            _searchResult[index]
-                                                                .studentRegNo
-                                                                .toString(),
-                                                        onTap: (studentId,
-                                                            dob) async {
-                                                          if (studentId
-                                                                  .isNotEmpty &&
-                                                              dob.isNotEmpty) {
-                                                            final model = {
-                                                              "parentId":
-                                                                  userController
-                                                                      .userResData
-                                                                      .value
-                                                                      .parent!
-                                                                      .id
-                                                                      .toString(),
-                                                              "dob": dob,
-                                                              "studentId":
-                                                                  studentId,
-                                                              "studentRegNo":
-                                                                  _searchResult[
-                                                                          index]
-                                                                      .studentRegNo
-                                                                      .toString(),
-                                                            };
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                            await addStudentController
-                                                                .hitAddStudent(
-                                                                    model);
-                                                            if (addStudentController
-                                                                .isStudentAdded) {
-                                                              SuccessBottomSheet
-                                                                  .show(
-                                                                      context:
-                                                                          context);
-                                                            } else {
+                                                    onTap: () async {
+                                                      if (_selectedFilter ==
+                                                          'Parent ID') {
+                                                        final model = {
+                                                          "parentRegNo":
+                                                              searchController
+                                                                  .text
+                                                                  .toString(),
+                                                          "studentId":
+                                                              _searchResult[
+                                                                      index]
+                                                                  .id
+                                                                  .toString(),
+                                                        };
+                                                        await addStudentController
+                                                            .hitAddStudentByParentId(
+                                                          model,
+                                                        );
+                                                        Navigator.of(
+                                                          context,
+                                                        ).pop();
+                                                        setState(() {});
+                                                        if (addStudentController
+                                                            .isStudentAdded) {
+                                                          SuccessBottomSheet.show(
+                                                            context: context,
+                                                          );
+                                                        } else {
+                                                          ScaffoldMessenger.of(
+                                                            context,
+                                                          ).showSnackBar(
+                                                            SnackBar(
+                                                              behavior:
+                                                              SnackBarBehavior
+                                                                  .floating,
+                                                              content: Text(
+                                                                addStudentController
+                                                                    .addStudentData
+                                                                    .value
+                                                                    .message ??
+                                                                    'Verification Failed',
+                                                                textAlign:
+                                                                TextAlign
+                                                                    .center,
+                                                              ),
+                                                              backgroundColor:
+                                                              Colors.red,
+                                                            ),
+                                                          );
+                                                        }
+
+                                                        searchController.text =
+                                                        '';
+                                                        if (studentListController
+                                                            .studentList
+                                                            .value
+                                                            .getStudent !=
+                                                            null &&
+                                                            studentListController
+                                                                .studentList
+                                                                .value
+                                                                .getStudent!
+                                                                .rows!
+                                                                .length >
+                                                                0) {
+                                                          studentListController
+                                                              .studentList
+                                                              .value
+                                                              .getStudent!
+                                                              .rows!
+                                                              .clear();
+                                                        }
+                                                      }
+                                                      if (_selectedFilter ==
+                                                          'Student ID') {
+                                                        final model = {
+                                                          "studentRegisterNo":
+                                                              searchController
+                                                                  .text
+                                                                  .toString(),
+                                                          "studentId":
+                                                              _searchResult[
+                                                                      index]
+                                                                  .id
+                                                                  .toString(),
+                                                        };
+
+                                                        await addStudentController
+                                                            .hitAddStudentByStudentId(
+                                                          model,
+                                                        );
+                                                        Navigator.of(
+                                                          context,
+                                                        ).pop();
+                                                        setState(() {});
+                                                        if (addStudentController
+                                                            .isStudentAdded) {
+                                                          SuccessBottomSheet.show(
+                                                            context: context,
+                                                          );
+
+                                                        } else {
+                                                          ScaffoldMessenger.of(
+                                                            context,
+                                                          ).showSnackBar(
+                                                            SnackBar(
+                                                              behavior:
+                                                              SnackBarBehavior
+                                                                  .floating,
+                                                              content: Text(
+                                                                addStudentController
+                                                                    .addStudentData
+                                                                    .value
+                                                                    .message ??
+                                                                    'Verification Failed',
+                                                                textAlign:
+                                                                TextAlign
+                                                                    .center,
+                                                              ),
+                                                              backgroundColor:
+                                                              Colors.red,
+                                                            ),
+                                                          );
+                                                        }
+
+                                                        searchController.text =
+                                                        '';
+                                                        if (studentListController
+                                                            .studentList
+                                                            .value
+                                                            .getStudent !=
+                                                            null &&
+                                                            studentListController
+                                                                .studentList
+                                                                .value
+                                                                .getStudent!
+                                                                .rows!
+                                                                .length >
+                                                                0) {
+                                                          studentListController
+                                                              .studentList
+                                                              .value
+                                                              .getStudent!
+                                                              .rows!
+                                                              .clear();
+                                                        }
+                                                      }
+                                                      if (_selectedFilter !=
+                                                              'Parent ID' &&
+                                                          _selectedFilter !=
+                                                              'Student ID') {
+                                                        StudentBottomSheet.show(
+                                                          context: context,
+                                                          selectedStudentID:
+                                                              _searchResult[
+                                                                      index]
+                                                                  .id
+                                                                  .toString(),
+                                                          selectedStudentRegNo:
+                                                              _searchResult[
+                                                                      index]
+                                                                  .studentRegNo
+                                                                  .toString(),
+                                                          onTap: (
+                                                            studentId,
+                                                            parentId,
+                                                            dob,
+                                                          ) async {
+                                                            if (studentId
+                                                                    .isNotEmpty ||
+                                                                dob
+                                                                    .isNotEmpty ||
+                                                                parentId
+                                                                    .isNotEmpty) {
+                                                              final model = {
+                                                                "parentRegNo":
+                                                                    parentId,
+                                                                "dob": dob,
+                                                                "studentId":
+                                                                    _searchResult[
+                                                                            index]
+                                                                        .id
+                                                                        .toString(),
+                                                                "studentRegNo":
+                                                                    studentId,
+                                                              };
+                                                              await addStudentController
+                                                                  .hitAddStudentByFirstName(
+                                                                model,
+                                                              );
                                                               Navigator.of(
-                                                                      context)
-                                                                  .pop();
+                                                                context,
+                                                              ).pop();
+                                                              setState(() {});
+                                                              if (addStudentController
+                                                                  .isStudentAdded) {
+                                                                SuccessBottomSheet.show(
+                                                                  context: context,
+                                                                );
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                  context,
+                                                                ).showSnackBar(
+                                                                  SnackBar(
+                                                                    behavior:
+                                                                    SnackBarBehavior
+                                                                        .floating,
+                                                                    content: Text(
+                                                                      addStudentController
+                                                                          .addStudentData
+                                                                          .value
+                                                                          .message ??
+                                                                          'Verification Failed',
+                                                                      textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                    ),
+                                                                    backgroundColor:
+                                                                    Colors.red,
+                                                                  ),
+                                                                );
+                                                              }
+
+                                                              searchController.text =
+                                                              '';
+                                                              if (studentListController
+                                                                  .studentList
+                                                                  .value
+                                                                  .getStudent !=
+                                                                  null &&
+                                                                  studentListController
+                                                                      .studentList
+                                                                      .value
+                                                                      .getStudent!
+                                                                      .rows!
+                                                                      .length >
+                                                                      0) {
+                                                                studentListController
+                                                                    .studentList
+                                                                    .value
+                                                                    .getStudent!
+                                                                    .rows!
+                                                                    .clear();
+                                                              }
+                                                            } else {
                                                               ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
+                                                                  .of(
+                                                                context,
+                                                              ).showSnackBar(
                                                                 SnackBar(
                                                                   behavior:
                                                                       SnackBarBehavior
                                                                           .floating,
                                                                   content: Text(
-                                                                    'Verification failed',
+                                                                    'Fields can not be empty',
                                                                   ),
                                                                   backgroundColor:
                                                                       Colors
@@ -546,27 +720,9 @@ class _AddStudentState extends State<AddStudent> {
                                                                 ),
                                                               );
                                                             }
-                                                          } else {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                              SnackBar(
-                                                                behavior:
-                                                                    SnackBarBehavior
-                                                                        .floating,
-                                                                content: Text(
-                                                                  'Fields can not be empty',
-                                                                ),
-                                                                backgroundColor:
-                                                                    Colors.red,
-                                                              ),
-                                                            );
-                                                          }
-                                                        },
-                                                      );
+                                                          },
+                                                        );
+                                                      }
                                                     },
                                                   ),
                                                   horizontalSpacer(12),
@@ -599,40 +755,6 @@ class _AddStudentState extends State<AddStudent> {
                                     ),
                                   ),
                                   verticalSpacer(16),
-                                  Container(
-                                    width: double.infinity,
-                                    margin: EdgeInsets.symmetric(
-                                      horizontal: horizontalValue(32),
-                                    ),
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        primary: PayNestTheme.primaryColor,
-                                        elevation: 0,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            14,
-                                          ),
-                                        ),
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: verticalValue(16),
-                                        ),
-                                      ),
-                                      onPressed: () {},
-                                      child: Center(
-                                        child: Text(
-                                          search,
-                                          style: PayNestTheme
-                                              .title_2_16primaryColor
-                                              .copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 14,
-                                            color: PayNestTheme.colorWhite,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  verticalSpacer(16),
                                 ],
                               )
                             : Container(
@@ -650,7 +772,83 @@ class _AddStudentState extends State<AddStudent> {
                                   ),
                                 ),
                               )
-                        : SizedBox(),
+                        : SizedBox.shrink(),
+                    _searchResult.isNotEmpty || searchController.text.isNotEmpty
+                        ? studentListController.studentList.value.getStudent !=
+                                    null &&
+                                studentListController.studentList.value
+                                        .getStudent!.rows!.length !=
+                                    0
+                            ? verticalSpacer(0)
+                            : verticalSpacer(80)
+                        : verticalSpacer(220),
+                    Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(32),
+                      ),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: PayNestTheme.primaryColor,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              14,
+                            ),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: verticalValue(16),
+                          ),
+                        ),
+                        onPressed: () {
+                          if (searchController.text.isEmpty) {
+                            ScaffoldMessenger.of(
+                              context,
+                            ).showSnackBar(
+                              SnackBar(
+                                behavior: SnackBarBehavior.floating,
+                                content: Text(
+                                  'Search can not be empty!',
+                                ),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
+                          if (searchController.text.isNotEmpty) {
+                            isLoading = true;
+                            onSearchTextChanged(
+                              searchController.text,
+                            );
+                          } else {
+                            _searchResult.clear();
+                          }
+                          setState(() {});
+                        },
+                        child: Center(
+                          child: !isLoading
+                              ? Text(
+                                  search,
+                                  style: PayNestTheme.title_2_16primaryColor
+                                      .copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    color: PayNestTheme.colorWhite,
+                                  ),
+                                )
+                              : Center(
+                                  child: Container(
+                                    height: sizes.heightRatio * 16,
+                                    width: sizes.widthRatio * 16,
+                                    child: CircularProgressIndicator(
+                                      backgroundColor: PayNestTheme.colorWhite,
+                                      color: PayNestTheme.blueAccent,
+                                    ),
+                                  ),
+                                ),
+                        ),
+                      ),
+                    ),
+                    verticalSpacer(16),
                   ],
                 ),
               )
@@ -674,7 +872,9 @@ class _AddStudentState extends State<AddStudent> {
           borderRadius: BorderRadius.circular(4),
         ),
         child: Text(
-          'Verify & Add',
+          _selectedFilter == 'Parent ID' || _selectedFilter == 'Student ID'
+              ? 'Add'
+              : 'Verify & Add',
           style: PayNestTheme.h2_12blueAccent.copyWith(
             fontSize: sizes.fontRatio * 9,
             color: PayNestTheme.colorWhite,
@@ -752,6 +952,7 @@ class _AddStudentState extends State<AddStudent> {
           ),
           Text(
             widget.schoolData.name,
+            textAlign: TextAlign.center,
             style: PayNestTheme.h2_12blueAccent.copyWith(
               fontSize: sizes.fontRatio * 22,
               color: PayNestTheme.black,

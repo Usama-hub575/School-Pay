@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:paynest_flutter_app/model/get_countries_response.dart';
 import 'package:paynest_flutter_app/model/login_model.dart';
 import 'package:paynest_flutter_app/model/login_response_model.dart';
 import 'package:paynest_flutter_app/model/register_model.dart';
@@ -11,7 +12,7 @@ import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import '../constants/constants.dart';
 import '../utils/sharedPrefKeys.dart';
 
-MySharedPreferences preferences =MySharedPreferences.instance;
+MySharedPreferences preferences = MySharedPreferences.instance;
 
 class UserController extends GetxController {
   var isLoading = false.obs;
@@ -21,24 +22,29 @@ class UserController extends GetxController {
   final userResData =
       RegisterRespModel(status: false, message: null, token: null, parent: null)
           .obs;
+  final getCountriesResponse = GetCountriesResponse(
+    status: false,
+    countries: [],
+  ).obs;
 
   hitRegister(email, phone, password, firstName, lastName, dialCode,
       countryCode, emiratesId, area, country, address, passport) async {
     try {
       isLoading(true);
       RegisterModel registerModel = RegisterModel(
-          email: email,
-          phone: phone,
-          password: password,
-          firstName: firstName,
-          lastName: lastName,
-          dialCode: dialCode,
-          countryCode: countryCode,
-          emiratesId: emiratesId,
-          area: area,
-          country: country,
-          address: address,
-          passport: passport);
+        email: email,
+        phone: phone,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        dialCode: dialCode,
+        countryCode: countryCode,
+        emiratesId: emiratesId,
+        area: area,
+        country: country,
+        address: address,
+        passport: passport,
+      );
       var res =
           await APIService().apiResister(registerModelToJson(registerModel));
       var decoded = jsonDecode(res);
@@ -102,6 +108,21 @@ class UserController extends GetxController {
       }
     } finally {
       isLoading(false);
+    }
+  }
+
+  void hitGetCountriesAPI() async{
+    var res =
+        await APIService().apiGetCountries();
+    var decoded = jsonDecode(res);
+    if (decoded['status'] == true) {
+      GetCountriesResponse getCountries = GetCountriesResponse.fromJson(decoded);
+      getCountriesResponse.value = getCountries;
+      getCountriesResponse.refresh();
+      isLoading(false);
+    } else if (decoded['status'] == false) {
+    } else {
+      isFailed.value = decoded['message'];
     }
   }
 }
