@@ -35,6 +35,8 @@ class RegisterDetailPage extends StatefulWidget {
     String expiryDate,
     String address,
     String city,
+    String countryCode,
+    String country,
   ) onTap;
 
   @override
@@ -59,6 +61,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
   bool isEmiratesSelected = true;
   bool isPassportSelected = false;
   String selectedCountry = "Select Country";
+  String countryCode = "";
   String flag = '';
 
   @override
@@ -627,7 +630,8 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           showDropDownButton: true,
                           onChanged: (value) {
                             setState(() {
-                              phCodeController.text = value.name.toString();
+                              phCodeController.text =      value.name.toString();
+                              countryCode= value.code.toString();
                             });
                           },
                           initialSelection: phCodeController.text,
@@ -676,6 +680,9 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           expiryController.text,
                           addressController.text,
                           cityController.text,
+                          countryCode,
+                          countryRegionController.text,
+
                         );
                       }
                     },

@@ -15,13 +15,11 @@ class RegisterModel {
     required this.password,
     required this.firstName,
     required this.lastName,
-    required this.dialCode,
     required this.countryCode,
     required this.emiratesId,
-    required this.area,
-    required this.country,
-    required this.address,
-    required this.passport
+    required this.passport,
+    required this.gender,
+    required this.birth,
   });
 
   String email;
@@ -29,13 +27,11 @@ class RegisterModel {
   String password;
   String firstName;
   String lastName;
-  String dialCode;
   String countryCode;
   String emiratesId;
-  String area;
-  String country;
-  String address;
   String passport;
+  String gender;
+  String birth;
 
 
   factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
@@ -44,13 +40,11 @@ class RegisterModel {
     password: json["password"],
     firstName: json["firstName"],
     lastName: json["lastName"],
-    dialCode: json["dialCode"],
     countryCode: json["countryCode"],
     emiratesId: json["emiratesId"],
-    area: json["area"],
-    country: json["country"],
-    address: json["address"],
-    passport: json["passport"]
+    passport: json["passport"],
+    gender: json["gender"],
+    birth: json["birth"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -59,12 +53,10 @@ class RegisterModel {
     "password": password,
     "firstName": firstName,
     "lastName": lastName,
-    "dialCode": dialCode,
     "countryCode": countryCode,
     "emiratesId": emiratesId,
-    "area": area,
-    "country": country,
-    "address": address,
-    "passport" : passport
+    "passport" : passport,
+    "gender" : gender,
+    "birth" : birth
   };
 }

@@ -27,8 +27,18 @@ class UserController extends GetxController {
     countries: [],
   ).obs;
 
-  hitRegister(email, phone, password, firstName, lastName, dialCode,
-      countryCode, emiratesId, area, country, address, passport) async {
+  hitRegister(
+    firstName,
+    lastName,
+    password,
+    email,
+    countryCode,
+    phone,
+    emiratesId,
+    gender,
+    birth,
+    passport,
+  ) async {
     try {
       isLoading(true);
       RegisterModel registerModel = RegisterModel(
@@ -37,13 +47,11 @@ class UserController extends GetxController {
         password: password,
         firstName: firstName,
         lastName: lastName,
-        dialCode: dialCode,
         countryCode: countryCode,
         emiratesId: emiratesId,
-        area: area,
-        country: country,
-        address: address,
-        passport: passport,
+        passport: emiratesId,
+        gender: gender,
+        birth: birth,
       );
       var res =
           await APIService().apiResister(registerModelToJson(registerModel));
@@ -111,12 +119,12 @@ class UserController extends GetxController {
     }
   }
 
-  void hitGetCountriesAPI() async{
-    var res =
-        await APIService().apiGetCountries();
+  void hitGetCountriesAPI() async {
+    var res = await APIService().apiGetCountries();
     var decoded = jsonDecode(res);
     if (decoded['status'] == true) {
-      GetCountriesResponse getCountries = GetCountriesResponse.fromJson(decoded);
+      GetCountriesResponse getCountries =
+          GetCountriesResponse.fromJson(decoded);
       getCountriesResponse.value = getCountries;
       getCountriesResponse.refresh();
       isLoading(false);

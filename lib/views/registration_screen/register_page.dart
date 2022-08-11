@@ -25,7 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String password = '';
   String phoneNumber = '';
   String phoneCode = '';
-  UserController registerController = Get.put(UserController());
+  UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -113,36 +113,35 @@ class _RegisterPageState extends State<RegisterPage> {
                                 expiryDate,
                                 address,
                                 city,
+                                countryCode,
+                                country,
                               ) async {
-                                await registerController.hitRegister(
-                                  email,
-                                  phoneNumber,
-                                  password,
+                                await userController.hitRegister(
                                   fName,
                                   lName,
-                                  phoneCode,
-                                  '',
+                                  password,
+                                  countryCode,
+                                  phoneNumber,
+                                  email,
                                   emiratesID,
-                                  expiryDate,
                                   '',
-                                  '',
-                                  "E23123",
+                                  gender,
+                                  emiratesID,
                                 );
-                                if (registerController
-                                        .userResData.value.status ==
+                                if (userController.userResData.value.status ==
                                     true) {
                                   Navigator.pushNamedAndRemoveUntil(
                                       context,
                                       '/DashboardPage',
                                       (Route<dynamic> route) => false);
-                                } else if (registerController
+                                } else if (userController
                                         .userResData.value.status ==
                                     true) {
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        registerController.isFailed.toString(),
+                                        userController.isFailed.toString(),
                                       ),
                                     ),
                                   );
