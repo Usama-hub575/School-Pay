@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/custom_slider.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_detail_page.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_main_page.dart';
@@ -26,6 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String phoneNumber = '';
   String phoneCode = '';
   UserController userController = Get.put(UserController());
+  MySharedPreferences preferences = MySharedPreferences.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -116,16 +118,18 @@ class _RegisterPageState extends State<RegisterPage> {
                                 countryCode,
                                 country,
                               ) async {
+
+
                                 await userController.hitRegister(
                                   fName,
                                   lName,
                                   password,
+                                  email,
                                   countryCode,
                                   phoneNumber,
-                                  email,
                                   emiratesID,
-                                  '',
                                   gender,
+                                  '',
                                   emiratesID,
                                 );
                                 if (userController.userResData.value.status ==
@@ -134,9 +138,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                       context,
                                       '/DashboardPage',
                                       (Route<dynamic> route) => false);
-                                } else if (userController
-                                        .userResData.value.status ==
-                                    true) {
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(

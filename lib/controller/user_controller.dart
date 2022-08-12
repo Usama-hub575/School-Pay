@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:paynest_flutter_app/model/get_countries_response.dart';
 import 'package:paynest_flutter_app/model/login_model.dart';
 import 'package:paynest_flutter_app/model/login_response_model.dart';
@@ -19,6 +20,7 @@ class UserController extends GetxController {
   final isFailed = "".obs;
   var retriesTime = ''.obs;
   var attemptsRemain = ''.obs;
+  final storage = GetStorage();
   final userResData =
       RegisterRespModel(status: false, message: null, token: null, parent: null)
           .obs;
@@ -59,6 +61,10 @@ class UserController extends GetxController {
       if (decoded['status'] == true) {
         RegisterRespModel lrm = registerRespModelFromJson(res);
         userResData.value = lrm;
+        storage.write(
+          SharedPrefKeys.accessToken,
+            lrm.token.toString(),
+        );
         userResData.refresh();
       } else if (decoded['status'] == false) {
         isFailed.value = decoded['message'];
