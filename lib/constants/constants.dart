@@ -81,6 +81,7 @@ const passportNumber = "Passport Number";
 const passwordDetail = "Password Detail";
 const enterPaynestStudentCode = "Enter Paynest Student Code";
 const studentID = "Student ID";
+const parentId = "Parent ID";
 const dob = "yyyy/mm/dd";
 const password = "Password";
 const searchStudent = "Search Student";
@@ -163,6 +164,7 @@ const newPassword = "New password";
 const fullNameSignup = "Full Name *";
 const apartment = "Apartment";
 const city = "City";
+const countryRegion = "Country / Region*";
 const confirmpassword = "Confirm password";
 const updateProfile = "Update Profile";
 const payBy = "Pay By Credit / Debit Card";
@@ -211,6 +213,7 @@ const enterStudentDetail = "Enter Student Details";
 const studentAdded = "Student Added";
 const studentAddedSuccessfully = "Student Added Successfully";
 const addDetails = "Please Add Below Details Before We Proceed";
+const pleaseSelect = "Please Select";
 const successfully = "Successfully!";
 const paynow = "Pay\nNow";
 const pay = "Pay Now";
@@ -282,6 +285,7 @@ const startLChat = "Immediately start live chat with one of our customer care re
 
 
 String baseUrl = "base_url";
+String paymentGatewayUrl = "payment_gateway_url";
 String minAndroidAppVersion = "school_pay_android_min_version";
 String maxAndroidAppVersion = "school_pay_max_android_version";
 

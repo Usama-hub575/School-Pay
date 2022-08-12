@@ -265,6 +265,9 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         if (value.trim().length < 5) {
                           return 'Password must not be less than 5';
                         }
+                        if(createPasswordController.text != confirmPasswordController.text){
+                          return 'Password not matched';
+                        }
                         return null;
                       },
                     ),
@@ -488,6 +491,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
       child: Row(
         children: [
           CountryCodePicker(
+            borderColor: PayNestTheme.lightBlack,
             padding: EdgeInsets.zero,
             showDropDownButton: true,
             onChanged: (value) {

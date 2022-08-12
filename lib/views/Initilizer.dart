@@ -191,6 +191,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
   Future<void> setUpRemoteConfig() async {
     remoteConfig.setDefaults(<String, String>{
       baseUrl: 'https://api.paynestschools.ae',
+      paymentGatewayUrl: 'https://paynestschools.ae/pl',
       maxAndroidAppVersion: '2.0.0',
       minAndroidAppVersion: '1.0.0',
       maxIosAppVersion: '2.0.0',
@@ -210,6 +211,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
     await remoteConfig.fetchAndActivate();
 
     APIService.baseurl = Uri.parse(remoteConfig.getString(baseUrl));
+    APIService.paymentGateway = Uri.parse(remoteConfig.getString(paymentGatewayUrl));
     minAndroidAppVersion = remoteConfig.getString(minAndroidAppVersion);
     maxAndroidAppVersion = remoteConfig.getString(maxAndroidAppVersion);
     minIosAppVersion = remoteConfig.getString(minIosAppVersion);

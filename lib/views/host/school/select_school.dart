@@ -330,12 +330,15 @@ class _SelectSchoolState extends State<SelectSchool> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '${log.name}',
-                  style: PayNestTheme.title_2_16primaryColor.copyWith(
-                    fontSize: sizes.fontRatio * 16,
-                    fontWeight: FontWeight.bold,
-                    color: PayNestTheme.black,
+                Container(
+                  width: sizes.widthRatio*260,
+                  child: Text(
+                    '${log.name}',
+                    style: PayNestTheme.title_2_16primaryColor.copyWith(
+                      fontSize: sizes.fontRatio * 16,
+                      fontWeight: FontWeight.bold,
+                      color: PayNestTheme.black,
+                    ),
                   ),
                 ),
                 Text(

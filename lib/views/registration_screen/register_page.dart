@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/custom_slider.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_detail_page.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_main_page.dart';
@@ -25,7 +26,8 @@ class _RegisterPageState extends State<RegisterPage> {
   String password = '';
   String phoneNumber = '';
   String phoneCode = '';
-  UserController registerController = Get.put(UserController());
+  UserController userController = Get.put(UserController());
+  MySharedPreferences preferences = MySharedPreferences.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -113,36 +115,34 @@ class _RegisterPageState extends State<RegisterPage> {
                                 expiryDate,
                                 address,
                                 city,
+                                countryCode,
+                                country,
                               ) async {
-                                await registerController.hitRegister(
-                                  email,
-                                  phoneNumber,
-                                  password,
+
+
+                                await userController.hitRegister(
                                   fName,
                                   lName,
-                                  phoneCode,
+                                  password,
+                                  email,
+                                  countryCode,
+                                  phoneNumber,
+                                  emiratesID,
+                                  gender,
                                   '',
                                   emiratesID,
-                                  expiryDate,
-                                  '',
-                                  '',
-                                  "E23123",
                                 );
-                                if (registerController
-                                        .userResData.value.status ==
+                                if (userController.userResData.value.status ==
                                     true) {
                                   Navigator.pushNamedAndRemoveUntil(
                                       context,
                                       '/DashboardPage',
                                       (Route<dynamic> route) => false);
-                                } else if (registerController
-                                        .userResData.value.status ==
-                                    true) {
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        registerController.isFailed.toString(),
+                                        userController.isFailed.toString(),
                                       ),
                                     ),
                                   );

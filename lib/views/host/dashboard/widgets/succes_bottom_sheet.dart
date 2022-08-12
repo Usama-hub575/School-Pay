@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import '../../../../constants/constants.dart';
+import '../../../../controller/myStudent_controller.dart';
+import '../../../../controller/user_controller.dart';
 import '../../../../res/res.dart';
 import '../../../../widgets/spacer.dart';
 import '../../school/select_school.dart';
@@ -23,6 +27,9 @@ class SuccessBottomSheet {
 
 class SuccessWidget extends StatelessWidget {
   SuccessWidget();
+  final MyStudentController myStudentController =
+  Get.put(MyStudentController());
+  final UserController lc = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -101,8 +108,11 @@ class SuccessWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             Navigator.of(context).pop();
+                            await myStudentController.hitMyStudents(
+                              lc.userResData.value.parent!.id,
+                            );
                           },
                           child: Center(
                             child: Text(

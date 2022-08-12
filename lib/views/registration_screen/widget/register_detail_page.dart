@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:paynest_flutter_app/views/registration_screen/widget/register_country_code_picker.dart';
 import '../../../constants/constants.dart';
 import '../../../controller/user_controller.dart';
 import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/spacer.dart';
+import '../../custom_phone_number_field/country_code_picker.dart';
 
 class RegisterDetailPage extends StatefulWidget {
   const RegisterDetailPage({
@@ -32,6 +35,8 @@ class RegisterDetailPage extends StatefulWidget {
     String expiryDate,
     String address,
     String city,
+    String countryCode,
+    String country,
   ) onTap;
 
   @override
@@ -46,6 +51,8 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
   TextEditingController expiryController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController cityController = TextEditingController();
+  TextEditingController countryRegionController = TextEditingController();
+  TextEditingController phCodeController = TextEditingController(text: "+971");
 
   UserController registerController = Get.put(UserController());
 
@@ -53,6 +60,9 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
   String? _selectedFilter;
   bool isEmiratesSelected = true;
   bool isPassportSelected = false;
+  String selectedCountry = "Select Country";
+  String countryCode = "";
+  String flag = '';
 
   @override
   void initState() {
@@ -60,6 +70,11 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
     _selectedFilter = 'Male';
     isEmiratesSelected = true;
     isPassportSelected = false;
+    getCountries();
+  }
+
+  void getCountries() {
+    registerController.hitGetCountriesAPI();
   }
 
   @override
@@ -100,7 +115,70 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                               ),
                             ),
                           ),
-                          labelText: fullNameSignup,
+                          labelText: firstName,
+                          labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          disabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorStyle:
+                              PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.red,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(0.5),
+                            ),
+                          ),
+                        ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.trim().isEmpty) {
+                            return 'Please enter your Full name';
+                          }
+                          if (value.trim().length < 5) {
+                            return 'Name must not be less than 5';
+                          }
+                          return null;
+                        },
+                      ),
+                      verticalSpacer(12),
+                      TextFormField(
+                        controller: lnameController,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.textGrey,
+                        ),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          labelText: lastName,
                           labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
                             fontSize: sizes.fontRatio * 12,
                             color: PayNestTheme.primaryColor,
@@ -252,6 +330,9 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           fontSize: sizes.fontRatio * 14,
                           color: PayNestTheme.textGrey,
                         ),
+                        onChanged: (value) {
+                          setState(() {});
+                        },
                         decoration: InputDecoration(
                           border: UnderlineInputBorder(
                             borderSide: BorderSide(
@@ -261,11 +342,12 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             ),
                           ),
                           suffixIcon: Padding(
-                            padding:  EdgeInsets.only(top: verticalValue(24)),
+                            padding: EdgeInsets.only(top: verticalValue(24)),
                             child: Text(
                               optional,
                               style: PayNestTheme.h2_14textGrey.copyWith(
-                                color: PayNestTheme.primaryColor.withOpacity(0.5),
+                                color:
+                                    PayNestTheme.primaryColor.withOpacity(0.5),
                                 fontSize: sizes.fontRatio * 8,
                                 fontFamily: 'montserratBold',
                               ),
@@ -314,6 +396,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                       verticalSpacer(12),
                       TextFormField(
                         controller: expiryController,
+                        enabled: emirateIDController.text != "" ? true : false,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           fontSize: sizes.fontRatio * 14,
                           color: PayNestTheme.textGrey,
@@ -327,11 +410,12 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             ),
                           ),
                           suffixIcon: Padding(
-                            padding:  EdgeInsets.only(top: verticalValue(24)),
+                            padding: EdgeInsets.only(top: verticalValue(24)),
                             child: Text(
                               optional,
                               style: PayNestTheme.h2_14textGrey.copyWith(
-                                color: PayNestTheme.primaryColor.withOpacity(0.5),
+                                color:
+                                    PayNestTheme.primaryColor.withOpacity(0.5),
                                 fontSize: sizes.fontRatio * 8,
                                 fontFamily: 'montserratBold',
                               ),
@@ -406,11 +490,12 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             ),
                           ),
                           suffixIcon: Padding(
-                            padding:  EdgeInsets.only(top: verticalValue(24)),
+                            padding: EdgeInsets.only(top: verticalValue(24)),
                             child: Text(
                               optional,
                               style: PayNestTheme.h2_14textGrey.copyWith(
-                                color: PayNestTheme.primaryColor.withOpacity(0.5),
+                                color:
+                                    PayNestTheme.primaryColor.withOpacity(0.5),
                                 fontSize: sizes.fontRatio * 8,
                                 fontFamily: 'montserratBold',
                               ),
@@ -471,11 +556,12 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             ),
                           ),
                           suffixIcon: Padding(
-                            padding:  EdgeInsets.only(top: verticalValue(24)),
+                            padding: EdgeInsets.only(top: verticalValue(24)),
                             child: Text(
                               optional,
                               style: PayNestTheme.h2_14textGrey.copyWith(
-                                color: PayNestTheme.primaryColor.withOpacity(0.5),
+                                color:
+                                    PayNestTheme.primaryColor.withOpacity(0.5),
                                 fontSize: sizes.fontRatio * 8,
                                 fontFamily: 'montserratBold',
                               ),
@@ -521,6 +607,55 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       verticalSpacer(12),
+                      Container(
+                        width: double.infinity,
+                        child: Text(
+                          countryRegion,
+                          textAlign: TextAlign.start,
+                          style: PayNestTheme.title20white.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: PayNestTheme.primaryColor,
+                            fontSize: sizes.fontRatio * 12,
+                            fontFamily: 'montserratMedium',
+                          ),
+                        ),
+                      ),
+                      verticalSpacer(8),
+                      Container(
+                        width: double.infinity,
+                        alignment: Alignment.topLeft,
+                        child: RegisterCountryCodePicker(
+                          borderColor: Colors.transparent,
+                          padding: EdgeInsets.zero,
+                          showDropDownButton: true,
+                          onChanged: (value) {
+                            setState(() {
+                              phCodeController.text =      value.name.toString();
+                              countryCode= value.code.toString();
+                            });
+                          },
+                          initialSelection: phCodeController.text,
+                          showCountryOnly: false,
+                          showOnlyCountryWhenClosed: false,
+                          alignLeft: false,
+                          flagDecoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          flagWidth: sizes.fontRatio * 50,
+                          textStyle:
+                              PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontSize: sizes.fontRatio * 14,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                        ),
+                      ),
+                      verticalSpacer(12),
+                      Container(
+                        width: double.infinity,
+                        height: 1,
+                        color: PayNestTheme.textGrey.withOpacity(0.5),
+                      ),
+                      verticalSpacer(12),
                     ],
                   ),
                 ),
@@ -545,6 +680,9 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           expiryController.text,
                           addressController.text,
                           cityController.text,
+                          countryCode,
+                          countryRegionController.text,
+
                         );
                       }
                     },

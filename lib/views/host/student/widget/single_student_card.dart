@@ -105,35 +105,38 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
               ),
             ),
             horizontalSpacer(12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  '${student.student!.firstName}  ${student.student!.lastName}',
-                  style: PayNestTheme.h2_12blueAccent.copyWith(
-                    fontSize: sizes.fontRatio * 14,
-                    color: PayNestTheme.black,
-                    fontFamily: 'montserratBold',
+            Flexible(
+              fit: FlexFit.loose,
+              flex: 12,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${student.student!.firstName}  ${student.student!.lastName}',
+                    style: PayNestTheme.h2_12blueAccent.copyWith(
+                      fontSize: sizes.fontRatio * 14,
+                      color: PayNestTheme.black,
+                      fontFamily: 'montserratBold',
+                    ),
                   ),
-                ),
-                verticalSpacer(4),
-                Text(
-                  '${student.student!.school!.name}',
-                  style: PayNestTheme.h2_12blueAccentLight.copyWith(
-                    fontSize: sizes.fontRatio * 12,
-                    color: PayNestTheme.textGrey,
-                    fontFamily: 'montserratRegular',
+                  verticalSpacer(4),
+                  Text(
+                    '${student.student!.school!.name}',
+                    style: PayNestTheme.h2_12blueAccentLight.copyWith(
+                      fontSize: sizes.fontRatio * 12,
+                      color: PayNestTheme.textGrey,
+                      fontFamily: 'montserratRegular',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Spacer(),
             Lottie.asset(
               arrowForwardAnimation,
               repeat: true,
-              width: sizes.widthRatio * 36,
-              height: sizes.heightRatio * 36,
+              width: sizes.widthRatio * 26,
+              height: sizes.heightRatio * 26,
             ),
             horizontalSpacer(12),
           ],

@@ -96,26 +96,31 @@ class _RecentTransactionsState extends State<RecentTransactions> {
               ),
             ),
             horizontalSpacer(16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${transactionsRow.school!.name}',
-                  style: PayNestTheme.h2_12blueAccent.copyWith(
-                    fontSize: sizes.fontRatio * 13,
-                    color: PayNestTheme.black,
-                    fontFamily: 'montserratBold',
+            Flexible(
+              fit: FlexFit.loose,
+              flex: 12,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${transactionsRow.school!.name}',
+                    textAlign: TextAlign.start,
+                    style: PayNestTheme.h2_12blueAccent.copyWith(
+                      fontSize: sizes.fontRatio * 13,
+                      color: PayNestTheme.black,
+                      fontFamily: 'montserratBold',
+                    ),
                   ),
-                ),
-                Text(
-                  '${dateFormat.format(DateTime.parse(transactionsRow.payedOn.toString().substring(0, 10)))}',
-                  style: PayNestTheme.h2_12blueAccentLight.copyWith(
-                    fontSize: sizes.fontRatio * 10,
-                    color: PayNestTheme.textGrey,
-                    fontFamily: 'montserratRegular',
+                  Text(
+                    '${dateFormat.format(DateTime.parse(transactionsRow.payedOn.toString().substring(0, 10)))}',
+                    style: PayNestTheme.h2_12blueAccentLight.copyWith(
+                      fontSize: sizes.fontRatio * 10,
+                      color: PayNestTheme.textGrey,
+                      fontFamily: 'montserratRegular',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Spacer(),
             Text(

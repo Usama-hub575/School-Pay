@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +13,7 @@ class StudentBottomSheet {
     required BuildContext context,
     required String selectedStudentID,
     required String selectedStudentRegNo,
-    required Function(String studentId, String studentDOB) onTap,
+    required Function(String studentId, String parentId,String studentDOB) onTap,
   }) {
     showModalBottomSheet(
       context: context,
@@ -23,8 +24,9 @@ class StudentBottomSheet {
         return StudentWidget(
           selectedStudentID: selectedStudentID,
           selectedStudentRegNo: selectedStudentRegNo,
-          onTap: (studentId, studentDOB) => onTap(
+          onTap: (studentId, parentId, studentDOB) => onTap(
             studentId,
+            parentId,
             studentDOB,
           ),
         );
@@ -36,7 +38,7 @@ class StudentBottomSheet {
 class StudentWidget extends StatefulWidget {
   final String selectedStudentID;
   final String selectedStudentRegNo;
-  final Function(String studentId, String studentDOB) onTap;
+  final Function(String studentId, String parentId, String studentDOB) onTap;
 
   StudentWidget({
     required this.selectedStudentID,
@@ -50,13 +52,19 @@ class StudentWidget extends StatefulWidget {
 
 class _StudentWidgetState extends State<StudentWidget> {
   TextEditingController _studentId = TextEditingController();
+  TextEditingController _parentId = TextEditingController();
   TextEditingController _dob = TextEditingController();
   DateTime tempPickedDate = DateTime.now();
+
+  List<String> filters = ['Student ID', 'Parent ID', 'Date Of Birth'];
+  String? _selectedFilter;
+  bool isSearchFieldEnable = false;
 
   @override
   void initState() {
     super.initState();
     _studentId.text = '';
+    _parentId.text = '';
     _dob.text = '';
   }
 
@@ -106,73 +114,139 @@ class _StudentWidgetState extends State<StudentWidget> {
                         ),
                       ),
                       verticalSpacer(16),
-                      TextFormField(
-                        controller: _studentId,
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(
-                                0.5,
-                              ),
-                            ),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(0.5),
-                            ),
-                          ),
-                          labelText: studentID,
-                          labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                      Container(
+                        width: double.infinity,
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          pleaseSelect,
+                          style: PayNestTheme.small_2_12black.copyWith(
+                            fontWeight: FontWeight.w200,
                             fontSize: sizes.fontRatio * 12,
                             color: PayNestTheme.primaryColor,
                           ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(0.5),
-                            ),
-                          ),
-                          errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(0.5),
-                            ),
-                          ),
-                          disabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(0.5),
-                            ),
-                          ),
                         ),
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
-                      verticalSpacer(10),
+                      verticalSpacer(16),
                       Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Expanded(
                             child: Container(
-                              height: 2,
-                              color: PayNestTheme.primaryColor,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: PayNestTheme.primaryColor,
+                                  width: 1.w,
+                                ),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                    10,
+                                  ),
+                                ),
+                              ),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton2(
+                                  buttonPadding: EdgeInsets.symmetric(
+                                    horizontal: horizontalValue(16),
+                                  ),
+                                  style: PayNestTheme
+                                      .h2_12blueAccentLight
+                                      .copyWith(
+                                    fontSize: sizes.fontRatio * 14,
+                                    color: PayNestTheme.lightBlack,
+                                    fontFamily: 'montserratRegular',
+                                  ),
+                                  dropdownDecoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(16),
+                                      bottomRight: Radius.circular(16),
+                                    ),
+                                    border: Border.all(
+                                      color: PayNestTheme.primaryColor,
+                                    ),
+                                  ),
+                                  isExpanded: false,
+                                  hint: Text(
+                                    'Select',
+                                    style: PayNestTheme
+                                        .h2_12blueAccentLight
+                                        .copyWith(
+                                      fontSize: sizes.fontRatio * 14,
+                                      color: PayNestTheme.black,
+                                      fontFamily: 'montserratBold',
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  items: filters
+                                      .map(
+                                        (item) =>
+                                        DropdownMenuItem<String>(
+                                          value: item,
+                                          child: Text(
+                                            item,
+                                            style: PayNestTheme
+                                                .h2_12blueAccentLight
+                                                .copyWith(
+                                              fontSize:
+                                              sizes.fontRatio * 14,
+                                              color: PayNestTheme
+                                                  .lightBlack,
+                                              fontFamily:
+                                              'montserratSemiBold',
+                                            ),
+                                            overflow:
+                                            TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                  )
+                                      .toList(),
+                                  value: _selectedFilter,
+                                  onChanged: (value) {
+                                    _selectedFilter = value as String;
+                                    isSearchFieldEnable = true;
+                                    setState(() {});
+                                  },
+                                ),
+                              ),
                             ),
-                          ),
-                          horizontalSpacer(10),
-                          Text(
-                            'OR',
-                            style: PayNestTheme.h2_12blueAccent.copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontSize: sizes.fontRatio * 14,
-                              color: PayNestTheme.black,
-                            ),
-                          ),
-                          horizontalSpacer(10),
-                          Expanded(
-                            child: Container(
-                              height: 2,
-                              color: PayNestTheme.primaryColor,
-                            ),
-                          ),
+                          )
                         ],
                       ),
-                      verticalSpacer(10),
-                      GestureDetector(
+                      verticalSpacer(16),
+                      _selectedFilter == 'Date Of Birth' ? const SizedBox.shrink() : Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: horizontalValue(16),
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: PayNestTheme.primaryColor,
+                            width: 1.w,
+                          ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              10,
+                            ),
+                          ),
+                        ),
+                        child: TextFormField(
+                          controller: _studentId,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            focusedBorder:InputBorder.none,
+                            labelText: _selectedFilter,
+                            labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                              fontSize: sizes.fontRatio * 12,
+                              color: PayNestTheme.primaryColor,
+                            ),
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                          ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        ),
+                      ),
+                      _selectedFilter == 'Date Of Birth' ? GestureDetector(
                         onTap: () {
                           showDialog(
                             builder: (sdCTX) {
@@ -220,54 +294,74 @@ class _StudentWidgetState extends State<StudentWidget> {
                             context: context,
                           );
                         },
-                        child: TextFormField(
-                          controller: _dob,
-                          enabled: false,
-                          decoration: InputDecoration(
-                            border: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: PayNestTheme.textGrey.withOpacity(
-                                  0.5,
-                                ),
-                              ),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: PayNestTheme.textGrey.withOpacity(0.5),
-                              ),
-                            ),
-                            labelText: dateOfBirth,
-                            labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                              fontSize: sizes.fontRatio * 12,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: horizontalValue(16),
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(
                               color: PayNestTheme.primaryColor,
+                              width: 1.w,
                             ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: PayNestTheme.textGrey.withOpacity(0.5),
-                              ),
-                            ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: PayNestTheme.textGrey.withOpacity(0.5),
-                              ),
-                            ),
-                            disabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(
+                                10,
                               ),
                             ),
                           ),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          child: TextFormField(
+                            controller: _dob,
+                            enabled: false,
+                            decoration: InputDecoration(
+                              border: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: PayNestTheme.textGrey.withOpacity(
+                                    0.5,
+                                  ),
+                                ),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: PayNestTheme.textGrey.withOpacity(0.5),
+                                ),
+                              ),
+                              labelText: dateOfBirth,
+                              labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                                fontSize: sizes.fontRatio * 12,
+                                color: PayNestTheme.primaryColor,
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: PayNestTheme.textGrey.withOpacity(0.5),
+                                ),
+                              ),
+                              errorBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: PayNestTheme.textGrey.withOpacity(0.5),
+                                ),
+                              ),
+                              disabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: PayNestTheme.textGrey.withOpacity(0.5),
+                                ),
+                              ),
+                            ),
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                          ),
                         ),
-                      ),
-                      verticalSpacer(16),
+                      ) : const SizedBox.shrink(),
+                      verticalSpacer(12),
                       Container(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: PayNestTheme.primaryColor,
                             elevation: 0,
-                            // side: BorderSide(width:1, color:Colors.white),
+                            side: BorderSide(
+                              width: 1,
+                              color: PayNestTheme.primaryColor,
+                            ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                 14,
@@ -277,16 +371,18 @@ class _StudentWidgetState extends State<StudentWidget> {
                               vertical: verticalValue(14),
                             ),
                           ),
-                          onPressed: (){
+                          onPressed: () {
                             widget.onTap(
-                              _studentId.text,
-                              _dob.text,
+                              _selectedFilter == 'Student ID' ? _studentId.text : '',
+                              _selectedFilter == 'Parent ID' ? _studentId.text : '',
+                              _selectedFilter == 'Date Of Birth' ? _dob.text : '',
                             );
                           },
                           child: Center(
                             child: Text(
                               next,
-                              style: PayNestTheme.title_2_16primaryColor.copyWith(
+                              style:
+                              PayNestTheme.title_2_16primaryColor.copyWith(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
                                 color: PayNestTheme.colorWhite,

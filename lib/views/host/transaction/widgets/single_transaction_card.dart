@@ -62,26 +62,30 @@ class SingleTransaction extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${transactionsRow.school?.name}',
-                  style: PayNestTheme.h2_12blueAccent.copyWith(
-                    fontSize: sizes.fontRatio*13,
-                    color: PayNestTheme.black,
+            Flexible(
+              fit: FlexFit.loose,
+              flex: 12,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${transactionsRow.school?.name}',
+                    style: PayNestTheme.h2_12blueAccent.copyWith(
+                      fontSize: sizes.fontRatio*13,
+                      color: PayNestTheme.black,
+                    ),
                   ),
-                ),
-                verticalSpacer(4),
-                Text(
-                  '${dateFormat.format(DateTime.parse(transactionsRow.payedOn.toString().substring(0, 10)))}',
-                  style: PayNestTheme.h2_12blueAccent.copyWith(
-                    fontSize: sizes.fontRatio*10,
-                    color: PayNestTheme.textGrey.withOpacity(0.5),
-                    fontWeight: FontWeight.w300,
+                  verticalSpacer(4),
+                  Text(
+                    '${dateFormat.format(DateTime.parse(transactionsRow.payedOn.toString().substring(0, 10)))}',
+                    style: PayNestTheme.h2_12blueAccent.copyWith(
+                      fontSize: sizes.fontRatio*10,
+                      color: PayNestTheme.textGrey.withOpacity(0.5),
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Spacer(),
             Text(
