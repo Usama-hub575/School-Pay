@@ -1,73 +1,93 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:paynest_flutter_app/model/get_countries_response.dart';
 import 'package:paynest_flutter_app/model/login_model.dart';
 import 'package:paynest_flutter_app/model/login_response_model.dart';
 import 'package:paynest_flutter_app/model/register_model.dart';
 import 'package:paynest_flutter_app/model/register_resp_model.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
+import 'package:paynest_flutter_app/utils/sharedpref.dart';
 
-class UserController extends GetxController{
+import '../constants/constants.dart';
+import '../utils/sharedPrefKeys.dart';
+
+MySharedPreferences preferences = MySharedPreferences.instance;
+
+class UserController extends GetxController {
   var isLoading = false.obs;
   final isFailed = "".obs;
-  var retriesTime= ''.obs;
-  var attemptsRemain= ''.obs;
-  final userResData = RegisterRespModel(
-      status: false,
-      message: null,
-      token: null,
-      parent: null
+  var retriesTime = ''.obs;
+  var attemptsRemain = ''.obs;
+  final storage = GetStorage();
+  final userResData =
+      RegisterRespModel(status: false, message: null, token: null, parent: null)
+          .obs;
+  final getCountriesResponse = GetCountriesResponse(
+    status: false,
+    countries: [],
   ).obs;
 
-  hitRegister(email,phone,password,firstName,lastName ,dialCode,countryCode,emiratesId,area,country,address,) async {
-    try{
+  hitRegister(
+    firstName,
+    lastName,
+    password,
+    email,
+    countryCode,
+    phone,
+    emiratesId,
+    gender,
+    birth,
+    passport,
+  ) async {
+    try {
       isLoading(true);
       RegisterModel registerModel = RegisterModel(
-          email: email,
-          phone: phone,
-          password: password,
-          firstName: firstName,
-          lastName: lastName,
-          dialCode: dialCode,
-          countryCode: countryCode,
-          emiratesId: emiratesId,
-          area: area,
-          country: country,
-          address: address
+        email: email,
+        phone: phone,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        countryCode: countryCode,
+        emiratesId: emiratesId,
+        passport: emiratesId,
+        gender: gender,
+        birth: birth,
       );
-      var res = await APIService().apiResister(registerModelToJson(registerModel));
+      var res =
+          await APIService().apiResister(registerModelToJson(registerModel));
       var decoded = jsonDecode(res);
-      if(decoded['status'] == true){
+      if (decoded['status'] == true) {
         RegisterRespModel lrm = registerRespModelFromJson(res);
         userResData.value = lrm;
+        storage.write(
+          SharedPrefKeys.accessToken,
+            lrm.token.toString(),
+        );
         userResData.refresh();
-      }else if(decoded['status'] == false){
+      } else if (decoded['status'] == false) {
         isFailed.value = decoded['message'];
         isLoading(false);
-      }else{
+      } else {
         isFailed.value = decoded['message'];
       }
-    }
-    finally{
+    } finally {
       isLoading(false);
     }
   }
 
-
-
   /// ** Login ** ///
-  
 
-  final loginResData =  LoginResponseModel(
+  final loginResData = LoginResponseModel(
     status: false,
     message: null,
     token: null,
     parent: null,
   ).obs;
 
-
-  hitLogin(email,password,fcmToken) async {
-    try{
+  hitLogin(email, password, fcmToken) async {
+    try {
       isLoading(true);
       LoginModel loginData = LoginModel(
         email: email,
@@ -77,22 +97,22 @@ class UserController extends GetxController{
 
       var res = await APIService().apiLogin(loginModelToJson(loginData));
       var decoded = jsonDecode(res);
-      if(decoded['status'] == true){
-        // LoginResponseModel lrm = loginResponseModelFromJson(res);
-        // loginResData.value = lrm;
-        // loginResData.refresh();
+      if (decoded['status'] == true) {
         RegisterRespModel lrm = registerRespModelFromJson(res);
         userResData.value = lrm;
         userResData.refresh();
         print(lrm.message);
-      }else if(decoded['status'] == false){
-        if(decoded['retryInMins'] != null){
+        preferences.setStringValue(SharedPrefKeys.userEmail, email);
+        preferences.setStringValue(SharedPrefKeys.userPassword, password);
+        preferences.setStringValue(SharedPrefKeys.fcmToken, fcmToken);
+      } else if (decoded['status'] == false) {
+        if (decoded['retryInMins'] != null) {
           retriesTime.value = decoded['retryInMins'].toString();
           retriesTime.refresh();
-        }else if(decoded['remainingAttempts'] != null){
+        } else if (decoded['remainingAttempts'] != null) {
           attemptsRemain.value = decoded['remainingAttempts'].toString();
           attemptsRemain.refresh();
-        }else{
+        } else {
           retriesTime.value = '';
           retriesTime.refresh();
           attemptsRemain.value = '';
@@ -100,9 +120,23 @@ class UserController extends GetxController{
         }
         isLoading(false);
       }
-    }
-    finally{
+    } finally {
       isLoading(false);
+    }
+  }
+
+  void hitGetCountriesAPI() async {
+    var res = await APIService().apiGetCountries();
+    var decoded = jsonDecode(res);
+    if (decoded['status'] == true) {
+      GetCountriesResponse getCountries =
+          GetCountriesResponse.fromJson(decoded);
+      getCountriesResponse.value = getCountries;
+      getCountriesResponse.refresh();
+      isLoading(false);
+    } else if (decoded['status'] == false) {
+    } else {
+      isFailed.value = decoded['message'];
     }
   }
 }

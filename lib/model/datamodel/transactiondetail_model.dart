@@ -81,7 +81,7 @@ class TransactionDetailSchool {
   double vat;
   int paynestFee;
   dynamic apiKey;
-  int merchantId;
+  String merchantId;
   String file;
   String privacy;
   DateTime? createdAt;
@@ -137,7 +137,7 @@ class TransactionDetailStudent {
   String parentPhoneNumber;
   dynamic deletedAt;
   int schoolId;
-  String totalBalanceAmount;
+  double totalBalanceAmount;
   String guardianFirstName;
   String guardianLastName;
   String guardianGender;

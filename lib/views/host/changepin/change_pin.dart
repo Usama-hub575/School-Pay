@@ -128,13 +128,13 @@ class _ChangePINState extends State<ChangePIN> {
                   await pinUpdateController.hitUpdatePin(pinController.text,userController.userResData.value.parent!.id);
                   if(pinUpdateController.pinData.value.status){
                     pinController.clear();
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Pin Updated"),backgroundColor: Colors.green,));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Pin Updated"),backgroundColor: Colors.green,behavior: SnackBarBehavior.floating,));
                     Navigator.pop(context);
                   }
                 }else{
                   pinController.clear();
                   print('Invalidated');
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Some error occurred"),backgroundColor: Colors.red,));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Some error occurred"),backgroundColor: Colors.red,behavior: SnackBarBehavior.floating,));
                 }
               },
               child: !pinUpdateController.isLoading.value ? Text(userController.userResData.value.parent!.pin ==null ? create: confirm,style: PayNestTheme.subtitle16white,) : Center(child: CircularProgressIndicator(color: PayNestTheme.colorWhite,backgroundColor: PayNestTheme.blueAccent,)),

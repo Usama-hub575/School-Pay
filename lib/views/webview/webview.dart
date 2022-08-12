@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/updatebank_response_controller.dart';
+import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:xml2json/xml2json.dart';
@@ -11,7 +12,6 @@ import 'package:xml2json/xml2json.dart';
 class MyWebView extends StatefulWidget {
   final String title;
 
-  // final int resID;
   final String amount;
   final int indx;
   final int orderId;
@@ -19,7 +19,6 @@ class MyWebView extends StatefulWidget {
 
   MyWebView({
     required this.title,
-    // required this.resID,
     required this.amount,
     required this.indx,
     required this.orderId,
@@ -48,8 +47,9 @@ class _MyWebViewState extends State<MyWebView> {
   @override
   void initState() {
     super.initState();
+    var gateway = APIService.paymentGateway;
     paymentGateWay =
-        "https://discoveritech.com/schoolpay-transactions/school_pay_init_new.php?schoolId=${widget.schoolId}&amount=${widget.amount}&orderid=${widget.orderId}";
+        "$gateway?amountId=${widget.amount}&orderId=${widget.orderId}&schoolId=${widget.schoolId}";
     print(paymentGateWay);
   }
 
@@ -88,8 +88,7 @@ class _MyWebViewState extends State<MyWebView> {
             print("This is Parsed");
             print(Uri.parse(url).queryParameters['string']);
             if (CBDReferenceNo != null) {
-              print(CBDReferenceNo);
-              Navigator.pop(context, CBDReferenceNo);
+              Navigator.of(context).pop(CBDReferenceNo);
             } else {
               var decoded = jsonDecode(CBDReferenceNo);
               !sbrController.isLoading.value ? Navigator.pop(context) : null;
@@ -109,15 +108,13 @@ class _MyWebViewState extends State<MyWebView> {
     );
   }
 
+
   getResponse(String response) {
     response = response.replaceAll('\\', '');
     response = response.replaceAll('\"', '');
     myTransformer.parse(response);
     var jsonString = myTransformer.toParker();
-    print("myDATA");
     print(jsonString);
-    // var data = jsonDecode(jsonString);
-    // return data['Response']['Header']['ResponseCode'];
     return response;
   }
 }

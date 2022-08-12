@@ -40,7 +40,7 @@ class Student {
   dynamic parentPhoneNumber;
   dynamic deletedAt;
   int schoolId;
-  String totalBalanceAmount;
+  double totalBalanceAmount;
   dynamic guardianFirstName;
   dynamic guardianLastName;
   dynamic guardianGender;
@@ -112,7 +112,7 @@ class School {
   dynamic vat;
   int paynestFee;
   String? apiKey;
-  int? merchantId;
+  String? merchantId;
   dynamic file;
   String? privacy;
   DateTime createdAt;

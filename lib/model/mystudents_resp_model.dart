@@ -4,9 +4,14 @@
 
 import 'dart:convert';
 
-MyStudentsRespModel myStudentsRespModelFromJson(String str) => MyStudentsRespModel.fromJson(json.decode(str));
+import 'package:flutter/scheduler.dart';
+import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 
-String myStudentsRespModelToJson(MyStudentsRespModel data) => json.encode(data.toJson());
+MyStudentsRespModel myStudentsRespModelFromJson(String str) =>
+    MyStudentsRespModel.fromJson(json.decode(str));
+
+String myStudentsRespModelToJson(MyStudentsRespModel data) =>
+    json.encode(data.toJson());
 
 class MyStudentsRespModel {
   MyStudentsRespModel({
@@ -17,15 +22,17 @@ class MyStudentsRespModel {
   bool status;
   List<StudentElement>? students;
 
-  factory MyStudentsRespModel.fromJson(Map<String, dynamic> json) => MyStudentsRespModel(
-    status: json["status"],
-    students: List<StudentElement>.from(json["students"].map((x) => StudentElement.fromJson(x))),
-  );
+  factory MyStudentsRespModel.fromJson(Map<String, dynamic> json) =>
+      MyStudentsRespModel(
+        status: json["status"],
+        students: List<StudentElement>.from(
+            json["students"].map((x) => StudentElement.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "status": status,
-    "students": List<dynamic>.from(students!.map((x) => x.toJson())),
-  };
+        "status": status,
+        "students": List<dynamic>.from(students!.map((x) => x.toJson())),
+      };
 }
 
 class StudentElement {
@@ -37,7 +44,21 @@ class StudentElement {
     required this.createdAt,
     required this.updatedAt,
     required this.student,
+    required this.isSelected,
   });
+
+  static StudentElement empty() {
+    return StudentElement(
+      id: 0,
+      parentId: 0,
+      studentId: 0,
+      deletedAt: '',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+      student: StudentStudent.empty(),
+      isSelected: false,
+    );
+  }
 
   int id;
   int parentId;
@@ -46,26 +67,35 @@ class StudentElement {
   DateTime createdAt;
   DateTime updatedAt;
   StudentStudent? student;
+  bool isSelected;
 
   factory StudentElement.fromJson(Map<String, dynamic> json) => StudentElement(
-    id: json["id"],
-    parentId: json["parentId"],
-    studentId: json["studentId"],
-    deletedAt: json["deletedAt"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
-    student: json["student"] == null ? null : StudentStudent.fromJson(json["student"]),
-  );
+        id: json["id"] != null ? json["id"] : -1,
+        parentId: json["parentId"] != null ? json["parentId"] : -1,
+        studentId: json["studentId"] != null ? json["studentId"] : -1,
+        deletedAt: json["deletedAt"] != null ? json["deletedAt"] : -1,
+        createdAt: json["createdAt"] != null
+            ? DateTime.parse(json["createdAt"])
+            : DateTime.now(),
+        updatedAt: json["updatedAt"] != null
+            ? DateTime.parse(json["updatedAt"])
+            : DateTime.now(),
+        student: json["student"] == null
+            ? StudentStudent.empty()
+            : StudentStudent.fromJson(json["student"]),
+        isSelected: false,
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "parentId": parentId,
-    "studentId": studentId,
-    "deletedAt": deletedAt,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
-    "student": student == null ? null : student!.toJson(),
-  };
+        "id": id,
+        "parentId": parentId,
+        "studentId": studentId,
+        "deletedAt": deletedAt,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "student": student == null ? null : student!.toJson(),
+        'isSelected': isSelected,
+      };
 }
 
 class StudentStudent {
@@ -117,7 +147,7 @@ class StudentStudent {
   dynamic parentPhoneNumber;
   dynamic deletedAt;
   int schoolId;
-  String totalBalanceAmount;
+  dynamic totalBalanceAmount;
   String? guardianFirstName;
   String? guardianLastName;
   String? guardianGender;
@@ -141,79 +171,148 @@ class StudentStudent {
   DateTime? updatedAt;
   School? school;
 
+  static StudentStudent empty() {
+    return StudentStudent(
+        dob: DateTime.now(),
+        admissionDate: DateTime.now(),
+        id: -1,
+        studentRegNo: "",
+        firstName: "",
+        lastName: "",
+        grade: "",
+        parentEmiratesId: "",
+        parentPhoneNumber: "",
+        deletedAt: "",
+        schoolId: -1,
+        totalBalanceAmount: "0",
+        guardianFirstName: "",
+        guardianLastName: "",
+        guardianGender: "",
+        guardianEmiratesId: "",
+        guardianNationality: "",
+        guardianReligion: "",
+        area: "",
+        region: "",
+        streetAddress: "",
+        email: "",
+        phoneNumber: "",
+        otherNumber: "",
+        profile: "",
+        religion: "",
+        nationality: "",
+        gender: "",
+        dueDate: DateTime.now(),
+        file: "",
+        privacy: "",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        school: School.empty());
+  }
+
   factory StudentStudent.fromJson(Map<String, dynamic> json) => StudentStudent(
-    dob: DateTime.parse(json["dob"]),
-    admissionDate: DateTime.parse(json["admissionDate"]),
-    id: json["id"],
-    studentRegNo: json["studentRegNo"],
-    firstName: json["firstName"],
-    lastName: json["lastName"],
-    grade: json["grade"],
-    parentEmiratesId: json["parentEmiratesId"],
-    parentPhoneNumber: json["parentPhoneNumber"] == null ? null : json["parentPhoneNumber"],
-    deletedAt: json["deletedAt"],
-    schoolId: json["schoolId"],
-    totalBalanceAmount: json["total_balance_amount"],
-    guardianFirstName: json["guardianFirstName"] == null ? null : json["guardianFirstName"],
-    guardianLastName: json["guardianLastName"] == null ? null : json["guardianLastName"],
-    guardianGender: json["guardianGender"] == null ? null : json["guardianGender"],
-    guardianEmiratesId: json["guardianEmiratesId"] == null ? null : json["guardianEmiratesId"],
-    guardianNationality: json["guardianNationality"] == null ? null : json["guardianNationality"],
-    guardianReligion: json["guardianReligion"] == null ? null : json["guardianReligion"],
-    area: json["area"] == null ? null : json["area"],
-    region: json["region"] == null ? null : json["region"],
-    streetAddress: json["streetAddress"] == null ? null : json["streetAddress"],
-    email: json["email"] == null ? null : json["email"],
-    phoneNumber: json["phoneNumber"],
-    otherNumber: json["otherNumber"] == null ? null : json["otherNumber"],
-    profile: json["profile"],
-    religion: json["religion"] == null ? null : json["religion"],
-    nationality: json["nationality"] == null ? null : json["nationality"],
-    gender: json["gender"] == null ? null : json["gender"],
-    dueDate: json["dueDate"] == null ? null : DateTime.parse(json["dueDate"]),
-    file: json["file"] == null ? null : json["file"],
-    privacy: json["privacy"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
-    school: School.fromJson(json["school"]),
-  );
+        dob: json["dob"] != null ? DateTime.parse(json["dob"]) : DateTime.now(),
+        admissionDate: json["admissionDate"] != null
+            ? DateTime.parse(json["admissionDate"])
+            : DateTime.now(),
+        id: json["id"] != null ? json["id"] : -1,
+        studentRegNo: json["studentRegNo"] != null ? json["studentRegNo"] : "-",
+        firstName: json["firstName"] != null ? json["firstName"] : "-",
+        lastName: json["lastName"] != null ? json["lastName"] : "-",
+        grade: json["grade"] != null ? json["grade"] : "-",
+        parentEmiratesId:
+            json["parentEmiratesId"] != null ? json["parentEmiratesId"] : "-",
+        parentPhoneNumber:
+            json["parentPhoneNumber"] == null ? "-" : json["parentPhoneNumber"],
+        deletedAt: json["deletedAt"] != null ? json["deletedAt"] : "",
+        schoolId: json["schoolId"] != null ? json["schoolId"] : -1,
+        totalBalanceAmount: json["total_balance_amount"] != null
+            ? json["total_balance_amount"]
+            : "-",
+        guardianFirstName:
+            json["guardianFirstName"] == null ? "-" : json["guardianFirstName"],
+        guardianLastName:
+            json["guardianLastName"] == null ? "-" : json["guardianLastName"],
+        guardianGender:
+            json["guardianGender"] == null ? "-" : json["guardianGender"],
+        guardianEmiratesId: json["guardianEmiratesId"] == null
+            ? "-"
+            : json["guardianEmiratesId"],
+        guardianNationality: json["guardianNationality"] == null
+            ? "-"
+            : json["guardianNationality"],
+        guardianReligion:
+            json["guardianReligion"] == null ? "-" : json["guardianReligion"],
+        area: json["area"] == null ? "-" : json["area"],
+        region: json["region"] == null ? "-" : json["region"],
+        streetAddress:
+            json["streetAddress"] == null ? "-" : json["streetAddress"],
+        email: json["email"] == null ? "-" : json["email"],
+        phoneNumber: json["phoneNumber"] != null ? json["phoneNumber"] : "-",
+        otherNumber: json["otherNumber"] == null ? "-" : json["otherNumber"],
+        profile: json["profile"] != null ? json["profile"] : "-",
+        religion: json["religion"] == null ? "-" : json["religion"],
+        nationality: json["nationality"] == null ? "-" : json["nationality"],
+        gender: json["gender"] == null ? "-" : json["gender"],
+        dueDate: json["dueDate"] == null
+            ? DateTime.now()
+            : DateTime.parse(json["dueDate"]),
+        file: json["file"] == null ? "-" : json["file"],
+        privacy: json["privacy"] != null ? json["privacy"] : "-",
+        createdAt: json["createdAt"] != null
+            ? DateTime.parse(json["createdAt"])
+            : DateTime.now(),
+        updatedAt: json["updatedAt"] != null
+            ? DateTime.parse(json["updatedAt"])
+            : DateTime.now(),
+        school: json["school"] != null
+            ? School.fromJson(json["school"])
+            : School.empty(),
+      );
 
   Map<String, dynamic> toJson() => {
-    "dob": "${dob.year.toString().padLeft(4, '0')}-${dob.month.toString().padLeft(2, '0')}-${dob.day.toString().padLeft(2, '0')}",
-    "admissionDate": "${admissionDate.year.toString().padLeft(4, '0')}-${admissionDate.month.toString().padLeft(2, '0')}-${admissionDate.day.toString().padLeft(2, '0')}",
-    "id": id,
-    "studentRegNo": studentRegNo,
-    "firstName": firstName,
-    "lastName": lastName,
-    "grade": grade,
-    "parentEmiratesId": parentEmiratesId,
-    "parentPhoneNumber": parentPhoneNumber == null ? null : parentPhoneNumber,
-    "deletedAt": deletedAt,
-    "schoolId": schoolId,
-    "total_balance_amount": totalBalanceAmount,
-    "guardianFirstName": guardianFirstName == null ? null : guardianFirstName,
-    "guardianLastName": guardianLastName == null ? null : guardianLastName,
-    "guardianGender": guardianGender == null ? null : guardianGender,
-    "guardianEmiratesId": guardianEmiratesId == null ? null : guardianEmiratesId,
-    "guardianNationality": guardianNationality == null ? null : guardianNationality,
-    "guardianReligion": guardianReligion == null ? null : guardianReligion,
-    "area": area == null ? null : area,
-    "region": region == null ? null : region,
-    "streetAddress": streetAddress == null ? null : streetAddress,
-    "email": email == null ? null : email,
-    "phoneNumber": phoneNumber,
-    "otherNumber": otherNumber == null ? null : otherNumber,
-    "profile": profile,
-    "religion": religion == null ? null : religion,
-    "nationality": nationality == null ? null : nationality,
-    "gender": gender == null ? null : gender,
-    "dueDate": dueDate == null ? null : "${dueDate!.year.toString().padLeft(4, '0')}-${dueDate!.month.toString().padLeft(2, '0')}-${dueDate!.day.toString().padLeft(2, '0')}",
-    "file": file == null ? null : file,
-    "privacy": privacy,
-    "createdAt": createdAt!.toIso8601String(),
-    "updatedAt": updatedAt!.toIso8601String(),
-    "school": school!.toJson(),
-  };
+        "dob":
+            "${dob.year.toString().padLeft(4, '0')}-${dob.month.toString().padLeft(2, '0')}-${dob.day.toString().padLeft(2, '0')}",
+        "admissionDate":
+            "${admissionDate.year.toString().padLeft(4, '0')}-${admissionDate.month.toString().padLeft(2, '0')}-${admissionDate.day.toString().padLeft(2, '0')}",
+        "id": id,
+        "studentRegNo": studentRegNo,
+        "firstName": firstName,
+        "lastName": lastName,
+        "grade": grade,
+        "parentEmiratesId": parentEmiratesId,
+        "parentPhoneNumber":
+            parentPhoneNumber == null ? null : parentPhoneNumber,
+        "deletedAt": deletedAt,
+        "schoolId": schoolId,
+        "total_balance_amount": totalBalanceAmount,
+        "guardianFirstName":
+            guardianFirstName == null ? null : guardianFirstName,
+        "guardianLastName": guardianLastName == null ? null : guardianLastName,
+        "guardianGender": guardianGender == null ? null : guardianGender,
+        "guardianEmiratesId":
+            guardianEmiratesId == null ? null : guardianEmiratesId,
+        "guardianNationality":
+            guardianNationality == null ? null : guardianNationality,
+        "guardianReligion": guardianReligion == null ? null : guardianReligion,
+        "area": area == null ? null : area,
+        "region": region == null ? null : region,
+        "streetAddress": streetAddress == null ? null : streetAddress,
+        "email": email == null ? null : email,
+        "phoneNumber": phoneNumber,
+        "otherNumber": otherNumber == null ? null : otherNumber,
+        "profile": profile,
+        "religion": religion == null ? null : religion,
+        "nationality": nationality == null ? null : nationality,
+        "gender": gender == null ? null : gender,
+        "dueDate": dueDate == null
+            ? null
+            : "${dueDate!.year.toString().padLeft(4, '0')}-${dueDate!.month.toString().padLeft(2, '0')}-${dueDate!.day.toString().padLeft(2, '0')}",
+        "file": file == null ? null : file,
+        "privacy": privacy,
+        "createdAt": createdAt!.toIso8601String(),
+        "updatedAt": updatedAt!.toIso8601String(),
+        "school": school!.toJson(),
+      };
 }
 
 class School {
@@ -243,43 +342,65 @@ class School {
   double vat;
   int paynestFee;
   String? apiKey;
-  int? merchantId;
+  String? merchantId;
   String? file;
   String? privacy;
   DateTime createdAt;
   DateTime updatedAt;
 
+  static School empty() {
+    return School(
+        id: -1,
+        name: "-",
+        deletedAt: "-",
+        addedBy: "-",
+        address: "-",
+        description: "-",
+        vat: -1.0,
+        paynestFee: -1,
+        apiKey: "-",
+        merchantId: "-",
+        file: "-",
+        privacy: "-",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now());
+  }
+
   factory School.fromJson(Map<String, dynamic> json) => School(
-    id: json["id"],
-    name: json["name"],
-    deletedAt: json["deletedAt"],
-    addedBy: json["addedBy"],
-    address: json["address"],
-    description: json["description"],
-    vat: json["vat"].toDouble(),
-    paynestFee: json["paynestFee"],
-    apiKey: json["APIKey"] == null ? null : json["APIKey"],
-    merchantId: json["merchantId"],
-    file: json["file"] == null ? null : json["file"],
-    privacy: json["privacy"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
-  );
+        id: json["id"] ?? 0,
+        name: json["name"] ?? "-",
+        deletedAt: json["deletedAt"] ?? "-",
+        addedBy: json["addedBy"] ?? "-",
+        address: json["address"] ?? "-",
+        description: json["description"] ?? "-",
+        vat: double.parse(json["vat"]),
+        paynestFee: json["paynestFee"] ?? 0,
+        apiKey: json["APIKey"] == null ? "" : json["APIKey"],
+        merchantId: json["merchantId"] ?? "-",
+        file: json["file"] == null ? "-" : json["file"],
+        privacy: json["privacy"] ?? "-",
+        createdAt: json["createdAt"] != null
+            ? DateTime.parse(json["createdAt"])
+            : DateTime.now(),
+        updatedAt: json["updatedAt"] != null
+            ? DateTime.parse(json["updatedAt"])
+            : DateTime.now(),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "deletedAt": deletedAt,
-    "addedBy": addedBy,
-    "address": address,
-    "description": description,
-    "vat": vat,
-    "paynestFee": paynestFee,
-    "APIKey": apiKey == null ? null : apiKey,
-    "merchantId": merchantId,
-    "file": file == null ? null : file,
-    "privacy": privacy,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
-  };
+        "id": id,
+        "name": name,
+        "deletedAt": deletedAt,
+        "addedBy": addedBy,
+        "address": address,
+        "description": description,
+        "vat": vat,
+        "paynestFee": paynestFee,
+        "APIKey": apiKey == null ? null : apiKey,
+        "merchantId": merchantId,
+        "file": file == null ? null : file,
+        "privacy": privacy,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+      };
 }

@@ -7,7 +7,9 @@ import 'package:http/http.dart' as http;
 class APIService {
   GetStorage storage = GetStorage();
   static var client = http.Client();
-  static var baseurl = Uri.parse("https://payschool.azurewebsites.net");
+  static var baseurl = Uri.parse("https://api.paynestschools.ae");
+  static var paymentGateway = Uri.parse('https://paynestschools.ae/pl');
+ // static var baseurl = Uri.parse("https://payschool.azurewebsites.net");
   static var baseurl1 = "discoveritech.com";
 
   static var login = "/api/parent/auth/login";
@@ -18,9 +20,15 @@ class APIService {
   static var allSchools = "/api/school/allSchools";
   static var allStudents = "/api/student/all";
   static var addStudents = "/api/parent/addStudent";
+  static var addStudentByPaynestNumber = "/api/parent/addStudentByPaynestNumber";
   static var pinUpdate = "/api/parent/update";
   static var resetPassword = "/api/parent/resetpassword";
+  static var forgotPassword = "/api/parent/forgotPassword";
   static var updateProfile = "/api/parent/updateProfile";
+  static var getCountries = "/api/countries";
+  static var addStudentByFirstName = "/api/parent/addStudentByFName";
+  static var addStudentByParentRegistrationNumber = "/api/parent/addStudentByPRN";
+  static var addStudentByStudentRegistrationNumber = "/api/parent/addStudentBySRN";
 
   ///Fetch Transaction
   static var transaction = "/api/transaction/all";
@@ -29,14 +37,14 @@ class APIService {
   static var payNow = "/schoolpay-transactions/PaymentInitiator.php";
 
   /// To set payment data to server
-  static var createTransaction = "/api/transaction";
+  // static var createTransaction = "/api/transaction";
+  static var createTransaction = "/api/transaction/mobile";
   static var updateBankResponse = "/api/transaction/setBankResponse";
   static var searchByLastName =
       "/api/student/getByLName?LName={last_name}&schoolId={school_id}";
   static var searchByFirstName =
       "/api/student/getByFName?FName={first_name}&schoolId={school_id}";
-  static var searchByEmail =
-      "/api/student/getByEmail?email={email}&schoolId={school_id}";
+  static var searchByPID = "/api/student/getByPID?PID={pid}&schoolId={school_id}";
   static var searchBySID =
       "/api/student/getBySID?SID={sid}&schoolId={school_id}";
 
@@ -93,6 +101,20 @@ class APIService {
     }
   }
 
+  /// * Get Countries * ///
+  Future apiGetCountries() async {
+    var endPoint = Uri.parse("$baseurl$getCountries");
+    var response = await client.get(
+      endPoint,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
   /// * Verify OTP * ///
   Future apiVerifyOTP(data) async {
     var endPoint = Uri.parse("$baseurl$verifyOTP");
@@ -100,7 +122,6 @@ class APIService {
       endPoint,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + storage.read('accessToken'),
       },
       body: data,
     );
@@ -170,8 +191,8 @@ class APIService {
             schoolId.toString(),
           );
       endPoint = Uri.parse("$baseurl$query");
-    } else if (searchBy == 'email') {
-      query = searchByEmail.replaceAll('{email}', queryParam).replaceAll(
+    } else if (searchBy == 'parent') {
+      query = searchByPID.replaceAll('{pid}', queryParam).replaceAll(
             '{school_id}',
             schoolId.toString(),
           );
@@ -226,7 +247,92 @@ class APIService {
     var response = await client.post(
       endPoint,
       headers: {
-        // "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+      body: data,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  /// * Parent Add Student BY First Name * ///
+  Future apiAddStudentByFirstName(data) async {
+    print("Student data");
+    print(data);
+    var endPoint = Uri.parse("$baseurl$addStudentByFirstName");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+      body: data,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  /// * Parent Add Student BY First Name * ///
+  Future apiAddStudentByParentRegistrationNumber(data) async {
+    print("Student data");
+    print(data);
+    var endPoint = Uri.parse("$baseurl$addStudentByParentRegistrationNumber");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+      body: data,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  /// * Parent Add Student BY First Name * ///
+  Future apiAddStudentByStudentRegistrationNumber(data) async {
+    print("Student data");
+    print(data);
+    var endPoint = Uri.parse("$baseurl$addStudentByStudentRegistrationNumber");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+      body: data,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+
+  /// * Parent Add Student By PayNest Number * ///
+  Future addStudentWithPaynestNumber(data) async {
+    print("Student data");
+    print(data);
+    var endPoint = Uri.parse("$baseurl$addStudentByPaynestNumber");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer " + storage.read('accessToken'),
       },
       body: data,
@@ -279,6 +385,27 @@ class APIService {
     }
   }
 
+
+  /// * ForgotPassword * ///
+  Future apiForgotPassword(data) async {
+    var endPoint = Uri.parse("$baseurl$forgotPassword");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+
+
   /// * UpdateProfile * ///
   Future apiUpdateProfile(data) async {
     var endPoint = Uri.parse("$baseurl$updateProfile");
@@ -304,7 +431,7 @@ class APIService {
     var response = await client.post(
       endPoint,
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer " + storage.read('accessToken'),
       },
       body: data,
@@ -379,6 +506,7 @@ class APIService {
     var response = await client.get(
       endPoint,
       headers: {
+        "Content-Type": "application/json",
         "Authorization": "Bearer " + storage.read('accessToken'),
       },
     );
@@ -395,7 +523,7 @@ class APIService {
   /// Sending Data of student to server for which payment is made
   Future apiCreateTransaction(queryParams) async {
     var endPoint = Uri.https(
-      'payschool.azurewebsites.net',
+      "api.paynestschools.ae",
       createTransaction,
     );
     print(endPoint);
@@ -403,6 +531,7 @@ class APIService {
       endPoint,
       body: queryParams,
       headers: {
+        "Content-Type" : "application/x-www-form-urlencoded",
         "Authorization": "Bearer " + storage.read('accessToken'),
       },
     );

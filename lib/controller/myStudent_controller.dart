@@ -17,6 +17,7 @@ class MyStudentController extends GetxController {
       var res = await APIService().apiMyStudents(
         myStudentsModelToJson(model),
       );
+
       var decoded = jsonDecode(res);
       if (decoded['status'] == true) {
         MyStudentsRespModel respModel = myStudentsRespModelFromJson(res);
@@ -29,6 +30,27 @@ class MyStudentController extends GetxController {
       }
     } finally {
       isLoading(false);
+    }
+  }
+
+  void updateSelectedCard(int studentId) {
+    for (int i = 0; i < myStudentData.value.students!.length; i++) {
+      if (myStudentData.value.students![i].id == studentId) {
+        myStudentData.value.students![i].isSelected = true;
+      } else {
+        myStudentData.value.students![i].isSelected = false;
+      }
+    }
+
+    myStudentData.refresh();
+  }
+
+  void resetStudentCard() {
+    if(myStudentData.value.students !=null && myStudentData.value.students!.length > 0){
+      for (int i = 0; i < myStudentData.value.students!.length; i++) {
+        myStudentData.value.students![i].isSelected = false;
+      }
+      myStudentData.refresh();
     }
   }
 }

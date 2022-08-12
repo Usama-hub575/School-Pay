@@ -1,56 +1,53 @@
 name: paynest_flutter_app
 description: A new Flutter project.
 
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
-# Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.1+8
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
 
-# Dependencies specify other packages that your package needs in order to work.
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
-# dependencies can be manually updated by changing the version numbers below to
-# the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
     sdk: flutter
 
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons:
   flutter_screenutil:
   flutter_svg:
   pinput:
   carousel_slider:
-  country_code_picker:
   http:
   get:
   get_storage:
   intl:
-  firebase_core:
-  firebase_messaging:
   flutter_local_notifications:
   webview_flutter:
   flutter_inappwebview:
   url_launcher:
   xml2json:
   encrypt: ^5.0.1
+  country_picker: ^2.0.12
+  lottie:
+  flutter_toggle_tab:
+  animated_bottom_navigation_bar:
+  local_auth: ^1.1.8
+  shared_preferences:
+  dropdown_button2:
+  pdf:
+  open_file:
+  package_info_plus:
+  store_redirect:
+
+  modal_bottom_sheet:
+  collection:
+  universal_platform:
+
+
+  #Firebase Packages
+  firebase_remote_config:
+  firebase_core:
+  firebase_messaging:
 
 
 dev_dependencies:
@@ -64,52 +61,75 @@ flutter_icons:
   remove_alpha_ios: true
   image_path: "assets/launcher_icon.png"
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^1.0.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter.
 flutter:
 
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
     - assets/icons/
     - assets/dashboard/
+    - assets/svg/
+    - assets/json/
+    - assets/png/
+    - assets/jpg/
+    - assets/flags/
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: montserratBlack
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Black.ttf
+    - family: montserratBlackItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-BlackItalic.ttf
+    - family: montserratBoldItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-BoldItalic.ttf
+    - family: montserratExtraBold
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBold.ttf
+    - family: montserratExtraBoldItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf
+    - family: montserratBold
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+    - family: montserratExtraLight
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraLight.ttf
+    - family: montserratExtraLightItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraLightItalic.ttf
+    - family: montserratItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Italic.ttf
+    - family: montserratLight
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
+    - family: montserratLightItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-LightItalic.ttf
+    - family: montserratMedium
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
+    - family: montserratMediumItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-MediumItalic.ttf
+    - family: montserratRegular
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+    - family: montserratSemiBold
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBold.ttf
+    - family: montserratSemiBoldItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf
+    - family: montserratThin
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Thin.ttf
+    - family: montserratThinItalic
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-ThinItalic.ttf
+          weight: 100
