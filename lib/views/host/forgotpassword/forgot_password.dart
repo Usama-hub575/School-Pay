@@ -22,6 +22,7 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   UserController userController = Get.put(UserController());
   TextEditingController emailController = TextEditingController();
+
   RegisterController registerController = RegisterController();
 
   @override
@@ -152,12 +153,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 true) {
                               Navigator.of(context).pushNamed(
                                 '/NewPassword',
+                                arguments: [emailController.text.toString()]
                               );
                             }else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    registerController.forgotPasswordResData.value.message.toString(),
+                                    registerController.isFailed.value.toString(),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -173,8 +175,20 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               ),
                             );
                           }
+                          // setState(() {
+                          //   CustomAlertDialog.baseDialog(
+                          //     context: context,
+                          //     title: "Success!",
+                          //     message:
+                          //     "Email Send Successfully",
+                          //     showCrossIcon: false,
+                          //     buttonAction: () {
+                          //       Navigator.of(context).pop();
+                          //     },
+                          //   );
+                          // });
                         },
-                        child: !userController.isLoading.value
+                        child: !registerController.isLoading.value
                             ? Text("Send Email",
                                 style: PayNestTheme.subtitle16white.copyWith(
                                   fontWeight: FontWeight.bold,

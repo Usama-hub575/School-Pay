@@ -15,7 +15,7 @@ class RegisterController extends GetxController {
   final registerResData =
       RegisterRespModel(status: false, message: null, token: null, parent: null)
           .obs;
-  final forgotPasswordResData =
+  var forgotPasswordResData =
       ForgotPasswordRespModel(status: false, message: null).obs;
 
   hitRegister(
@@ -63,6 +63,7 @@ class RegisterController extends GetxController {
   }
 
   hitForgotPassword(email) async {
+    isLoading(true);
     try {
       ForgotPasswordModel forgotPasswordModel =
           ForgotPasswordModel(email: email);
@@ -78,6 +79,8 @@ class RegisterController extends GetxController {
         forgotPasswordResData.value = lrm;
         print(decoded['message']);
       } else if (decoded['status'] == false) {
+        isFailed.value = decoded['message'];
+        forgotPasswordResData.refresh();
         isLoading(false);
       } else {
         isFailed.value = decoded['message'];

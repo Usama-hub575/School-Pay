@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(375, 812),
-      builder: (BuildContext context, child) => MaterialApp(
+      builder: (BuildContext context, child)=> MaterialApp(
         title: 'PayNest School',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -134,6 +134,7 @@ class _MyAppState extends State<MyApp> {
               page = InitializerScreen();
               break;
             case '/Welcome':
+              break;case '/Welcome':
               page = WelcomePage();
               break;
             case '/SignInPage':

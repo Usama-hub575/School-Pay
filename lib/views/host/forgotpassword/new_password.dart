@@ -16,7 +16,7 @@ import '../../../widgets/custom_alert_dialog.dart';
 import '../../../widgets/spacer.dart';
 
 class NewPassword extends StatefulWidget {
-  const NewPassword({Key? key}) : super(key: key);
+   NewPassword({Key? key}) : super(key: key);
 
   @override
   State<NewPassword> createState() => _NewPasswordState();
@@ -30,6 +30,14 @@ class _NewPasswordState extends State<NewPassword> {
   RegisterController registerController = RegisterController();
   bool isObscure = true;
   bool cPassword = true;
+  String email = "";
+
+   @override
+  void initState() {
+    // TODO: implement initState
+     email = this.email;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
