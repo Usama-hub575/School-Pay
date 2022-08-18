@@ -43,13 +43,14 @@ class _MyWebViewState extends State<MyWebView> {
   final myTransformer = Xml2Json();
   bool isLoading = false;
   bool isCodeReceived = false;
+  var gateway;
 
   @override
   void initState() {
     super.initState();
-    var gateway = APIService.paymentGateway;
+    gateway = APIService.paymentGateway;
     paymentGateWay =
-        "$gateway?amountId=${widget.amount}&orderId=${widget.orderId}&schoolId=${widget.schoolId}";
+        "$gateway?amount=${widget.amount}&orderId=${widget.orderId}&schoolId=${widget.schoolId}";
     print(paymentGateWay);
   }
 
@@ -79,8 +80,8 @@ class _MyWebViewState extends State<MyWebView> {
         onPageFinished: (url) async {
           print('on page finish allowing navigation to $url');
           // 'https://discoveritech.com/schoolpay-transactions/PaymentInitiator.php'
-          if (url.contains(
-              'https://discoveritech.com/BorderPay_Payment_Api/cdb_recieve.php?')) {
+          String comparedGatewayUrl = gateway.toString() + "-receive?";
+          if (url.contains(comparedGatewayUrl)) {
             print('got it');
             isCodeReceived = true;
             var CBDReferenceNo =
@@ -107,7 +108,6 @@ class _MyWebViewState extends State<MyWebView> {
       ),
     );
   }
-
 
   getResponse(String response) {
     response = response.replaceAll('\\', '');

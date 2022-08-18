@@ -173,6 +173,7 @@ class _PayNowTransactionDetailsPageState
                       height: 1.h,
                       color: PayNestTheme.lineColor,
                     ),
+
                     verticalSpacer(16),
                     Text(
                       studentclass,
@@ -206,7 +207,7 @@ class _PayNowTransactionDetailsPageState
                     ),
                     verticalSpacer(4),
                     Text(
-                      widget.pntdm.student!.schoolId.toString(),
+                      widget.pntdm.student?.id.toString() ?? '-',
                       style: PayNestTheme.title_3_16blackbold.copyWith(
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.lightBlack,
@@ -229,7 +230,7 @@ class _PayNowTransactionDetailsPageState
                     ),
                     verticalSpacer(4),
                     Text(
-                      widget.pntdm.referenceNo.toString(),
+                      widget.pntdm.student?.studentRegNo.toString() ?? '-',
                       style: PayNestTheme.title_3_16blackbold.copyWith(
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.lightBlack,
@@ -252,7 +253,7 @@ class _PayNowTransactionDetailsPageState
                     ),
                     verticalSpacer(4),
                     Text(
-                      '-',
+                      widget.pntdm.schoolName ?? '-',
                       style: PayNestTheme.title_3_16blackbold.copyWith(
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.lightBlack,

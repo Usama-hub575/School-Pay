@@ -144,7 +144,10 @@ class _MyAppState extends State<MyApp> {
               page = ForgotPassword();
               break;
             case '/NewPassword':
-              page = NewPassword();
+              final args = routes.arguments;
+              page = NewPassword(
+                email: args as String,
+              );
               break;
             case '/RegisterPage':
               page = RegisterPage();

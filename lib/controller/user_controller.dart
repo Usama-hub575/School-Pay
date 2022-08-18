@@ -7,10 +7,12 @@ import 'package:paynest_flutter_app/model/login_model.dart';
 import 'package:paynest_flutter_app/model/login_response_model.dart';
 import 'package:paynest_flutter_app/model/register_model.dart';
 import 'package:paynest_flutter_app/model/register_resp_model.dart';
+import 'package:paynest_flutter_app/model/reset_password_by_otp.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
 
 import '../constants/constants.dart';
+import '../model/forgot_password_resp_model.dart';
 import '../utils/sharedPrefKeys.dart';
 
 MySharedPreferences preferences = MySharedPreferences.instance;
@@ -28,6 +30,8 @@ class UserController extends GetxController {
     status: false,
     countries: [],
   ).obs;
+  var forgotPasswordResData =
+      ForgotPasswordRespModel(status: false, message: null).obs;
 
   hitRegister(
     firstName,
@@ -63,7 +67,7 @@ class UserController extends GetxController {
         userResData.value = lrm;
         storage.write(
           SharedPrefKeys.accessToken,
-            lrm.token.toString(),
+          lrm.token.toString(),
         );
         userResData.refresh();
       } else if (decoded['status'] == false) {
@@ -137,6 +141,40 @@ class UserController extends GetxController {
     } else if (decoded['status'] == false) {
     } else {
       isFailed.value = decoded['message'];
+    }
+  }
+
+  hitResetPasswordByOTP(
+    email,
+    otpValue,
+    password,
+  ) async {
+    try {
+      isLoading(true);
+      ResetPasswordByOTP resetPasswordByOTP = ResetPasswordByOTP(
+        email: email,
+        otpValue: otpValue,
+        password: password,
+      );
+      var res = await APIService().apiResetPasswordByOTP(
+        resetPasswordByOTPModelToJson(
+          resetPasswordByOTP,
+        ),
+      );
+      var decoded = jsonDecode(res);
+      ForgotPasswordRespModel lrm = forgotPasswordRespModelFromJson(res);
+      if (decoded['status'] == true) {
+        forgotPasswordResData.value = lrm;
+        print(decoded['message']);
+      } else if (decoded['status'] == false) {
+        isFailed.value = decoded['message'];
+        isLoading(false);
+      } else {
+        isFailed.value = decoded['message'];
+      }
+      forgotPasswordResData.refresh();
+    } finally {
+      isLoading(false);
     }
   }
 }

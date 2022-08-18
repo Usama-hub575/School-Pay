@@ -1,16 +1,20 @@
 
+import '../mystudents_resp_model.dart';
+
 class PayNowTransactionDetailModel {
   PayNowTransactionDetailModel({
     required this.student,
     required this.paidOn,
     required this.referenceNo,
     required this.amountPaid,
+    required this.schoolName,
   });
 
   PayNowTransactionDetailStudent? student;
   DateTime? paidOn;
   String? referenceNo;
   String amountPaid;
+  String? schoolName;
 }
 
 class PayNowTransactionDetailStudent {

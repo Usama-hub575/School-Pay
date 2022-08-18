@@ -22,12 +22,14 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   UserController userController = Get.put(UserController());
   TextEditingController emailController = TextEditingController();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(debugLabel: 'forgotPassword');
 
   RegisterController registerController = RegisterController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Container(
         margin: EdgeInsets.symmetric(
           horizontal: horizontalValue(16),
@@ -153,7 +155,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 true) {
                               Navigator.of(context).pushNamed(
                                 '/NewPassword',
-                                arguments: [emailController.text.toString()]
+                                arguments: emailController.text.toString()
                               );
                             }else {
                               ScaffoldMessenger.of(context).showSnackBar(

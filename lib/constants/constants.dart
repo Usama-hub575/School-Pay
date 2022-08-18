@@ -133,6 +133,7 @@ const paid = "Paid";
 const paidon = "Paid On";
 const dues = "Dues";
 const backToHome = "Back To Home";
+const takeToHome = "Take To Home";
 const view = "View";
 const searchSchool = "Search School";
 

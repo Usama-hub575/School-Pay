@@ -27,8 +27,9 @@ class SuccessBottomSheet {
 
 class SuccessWidget extends StatelessWidget {
   SuccessWidget();
+
   final MyStudentController myStudentController =
-  Get.put(MyStudentController());
+      Get.put(MyStudentController());
   final UserController lc = Get.put(UserController());
 
   @override
@@ -53,7 +54,7 @@ class SuccessWidget extends StatelessWidget {
                 ),
                 child: Padding(
                   padding:
-                  EdgeInsets.symmetric(horizontal: horizontalValue(30)),
+                      EdgeInsets.symmetric(horizontal: horizontalValue(30)),
                   child: Column(
                     children: [
                       verticalSpacer(24),
@@ -74,14 +75,14 @@ class SuccessWidget extends StatelessWidget {
                       Lottie.asset(
                         checkAnimation,
                         repeat: true,
-                        height: sizes.heightRatio*100,
-                        width: sizes.widthRatio*100,
+                        height: sizes.heightRatio * 100,
+                        width: sizes.widthRatio * 100,
                       ),
                       Text(
                         successfully,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           fontWeight: FontWeight.bold,
-                          fontSize: sizes.fontRatio*16,
+                          fontSize: sizes.fontRatio * 16,
                           color: PayNestTheme.primaryColor,
                         ),
                       ),
@@ -89,7 +90,7 @@ class SuccessWidget extends StatelessWidget {
                         studentAddedSuccessfully,
                         style: PayNestTheme.small_2_12black.copyWith(
                           fontWeight: FontWeight.w200,
-                          fontSize: sizes.fontRatio*12,
+                          fontSize: sizes.fontRatio * 12,
                           color: PayNestTheme.black.withOpacity(0.7),
                         ),
                       ),
@@ -109,16 +110,16 @@ class SuccessWidget extends StatelessWidget {
                             ),
                           ),
                           onPressed: () async {
-                            Navigator.of(context).pop();
-                            await myStudentController.hitMyStudents(
-                              lc.userResData.value.parent!.id,
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                              '/DashboardPage',
+                              (Route<dynamic> route) => false,
                             );
                           },
                           child: Center(
                             child: Text(
-                              backToHome,
+                              takeToHome,
                               style:
-                              PayNestTheme.title_2_16primaryColor.copyWith(
+                                  PayNestTheme.title_2_16primaryColor.copyWith(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
                                 color: PayNestTheme.colorWhite,

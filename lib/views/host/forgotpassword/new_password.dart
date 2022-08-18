@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:paynest_flutter_app/controller/register_controller.dart';
+import 'package:pinput/pinput.dart';
 
 import '../../../constants/constants.dart';
 import '../../../controller/user_controller.dart';
@@ -16,7 +17,12 @@ import '../../../widgets/custom_alert_dialog.dart';
 import '../../../widgets/spacer.dart';
 
 class NewPassword extends StatefulWidget {
-   NewPassword({Key? key}) : super(key: key);
+  NewPassword({
+    Key? key,
+    required this.email,
+  }) : super(key: key);
+
+  final String email;
 
   @override
   State<NewPassword> createState() => _NewPasswordState();
@@ -28,20 +34,25 @@ class _NewPasswordState extends State<NewPassword> {
   TextEditingController otpController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   RegisterController registerController = RegisterController();
+  GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>(debugLabel: 'newPassword');
   bool isObscure = true;
   bool cPassword = true;
+  bool completeCode = false;
   String email = "";
+  String otp = '';
 
-   @override
+  @override
   void initState() {
-    // TODO: implement initState
-     email = this.email;
+    email = widget.email;
+    otpController.text = '';
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Container(
         margin: EdgeInsets.symmetric(
           horizontal: horizontalValue(16),
@@ -55,16 +66,22 @@ class _NewPasswordState extends State<NewPassword> {
                   height: 54.h,
                   width: 44.w,
                   decoration: BoxDecoration(
-                      color: PayNestTheme.primaryColor,
-                      borderRadius: BorderRadius.circular(15.r)),
+                    color: PayNestTheme.primaryColor,
+                    borderRadius: BorderRadius.circular(
+                      15.r,
+                    ),
+                  ),
                   child: IconButton(
                     onPressed: () {
                       setState(() {
                         Navigator.pop(context);
                       });
                     },
-                    icon: Icon(Icons.arrow_back,
-                        size: 20.sp, color: PayNestTheme.colorWhite),
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: 20.sp,
+                      color: PayNestTheme.colorWhite,
+                    ),
                     // child: Text(""),
                   ),
                 ),
@@ -97,76 +114,6 @@ class _NewPasswordState extends State<NewPassword> {
                         verticalSpacer(16),
                         Container(
                           child: TextFormField(
-                            controller: otpController,
-                            style: PayNestTheme.title_2_16primaryColor.copyWith(
-                              fontSize: sizes.fontRatio * 14,
-                              color: PayNestTheme.textGrey,
-                            ),
-                            decoration: InputDecoration(
-                              border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(
-                                    0.5,
-                                  ),
-                                ),
-                              ),
-                              labelText: otp,
-                              labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                                fontSize: sizes.fontRatio * 12,
-                                color: PayNestTheme.primaryColor,
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(
-                                    0.5,
-                                  ),
-                                ),
-                              ),
-                              errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(
-                                    0.5,
-                                  ),
-                                ),
-                              ),
-                              disabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(
-                                    0.5,
-                                  ),
-                                ),
-                              ),
-                              errorStyle:
-                              PayNestTheme.title_2_16primaryColor.copyWith(
-                                fontSize: sizes.fontRatio * 12,
-                                color: PayNestTheme.red,
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(0.5),
-                                ),
-                              ),
-                            ),
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              if (value!.trim().isEmpty) {
-                                return 'Required';
-                              }
-                              // Check if the entered email has the right format
-                              if (value.trim().length < 4) {
-                                return 'OTP must not be less than 4';
-                              }
-                              if (value.trim().length > 4) {
-                                return 'OTP must not be grater than 4';
-                              }
-                              // Return null if the entered email is valid
-                              return null;
-                            },
-                          ),
-                        ),
-                        verticalSpacer(16),
-                        Container(
-                          child: TextFormField(
                             style: PayNestTheme.title_2_16primaryColor.copyWith(
                               fontSize: sizes.fontRatio * 14,
                               color: PayNestTheme.textGrey,
@@ -189,7 +136,7 @@ class _NewPasswordState extends State<NewPassword> {
                                 ),
                                 onPressed: () {
                                   setState(
-                                        () {
+                                    () {
                                       isObscure = !isObscure;
                                     },
                                   );
@@ -221,7 +168,8 @@ class _NewPasswordState extends State<NewPassword> {
                                 ),
                               ),
                             ),
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.trim().isEmpty) {
                                 return 'Required';
@@ -260,7 +208,7 @@ class _NewPasswordState extends State<NewPassword> {
                                 ),
                                 onPressed: () {
                                   setState(
-                                        () {
+                                    () {
                                       cPassword = !cPassword;
                                     },
                                   );
@@ -292,7 +240,8 @@ class _NewPasswordState extends State<NewPassword> {
                                 ),
                               ),
                             ),
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.trim().isEmpty) {
                                 return 'Required';
@@ -300,7 +249,62 @@ class _NewPasswordState extends State<NewPassword> {
                               if (value.trim().length < 4) {
                                 return 'Confirm Password must not be less than 4';
                               }
+                              if (value.toString() !=
+                                  newPasswordController.text) {
+                                return 'password not matched';
+                              }
                               return null;
+                            },
+                          ),
+                        ),
+                        verticalSpacer(16),
+                        Text(
+                          'OTP',
+                          style: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 14,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: horizontalValue(16),
+                          ),
+                          child: Pinput(
+                            length: 5,
+                            defaultPinTheme: PinTheme(
+                              textStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                                fontSize: sizes.fontRatio * 16,
+                                color: PayNestTheme.black,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: PayNestTheme.black.withOpacity(0.5),
+                                  ),
+                                ),
+                              ),
+                              width: sizes.widthRatio * 80,
+                              height: sizes.heightRatio * 50,
+                            ),
+                            controller: otpController,
+                            validator: (s) {
+                              if (s!.length < 5) {
+                                setState(() {
+                                  completeCode = false;
+                                });
+                              }
+                              return s.isEmpty ? "Enter Code" : '';
+                            },
+                            keyboardType: TextInputType.phone,
+                            showCursor: true,
+                            onCompleted: (pin) {
+                              otp = pin;
+                              setState(
+                                () {
+                                  completeCode = true;
+                                  otpController.text = pin;
+                                },
+                              );
                             },
                           ),
                         ),
@@ -309,7 +313,7 @@ class _NewPasswordState extends State<NewPassword> {
                   ),
                   verticalSpacer(60),
                   Obx(
-                        () => Container(
+                    () => Container(
                       width: double.infinity,
                       height: sizes.heightRatio * 46,
                       child: ElevatedButton(
@@ -324,31 +328,64 @@ class _NewPasswordState extends State<NewPassword> {
                           ),
                         ),
                         onPressed: () async {
-                          setState(() {
-                            CustomAlertDialog.baseDialog(
-                              context: context,
-                              title: "Success!",
-                              message:
-                              "Email Send Successfully",
-                              showCrossIcon: false,
-                              buttonAction: () {
-                                Navigator.of(context).pop();
-                              },
+                          if (otp.isNotEmpty &&
+                              newPasswordController.text.isNotEmpty) {
+                            await userController.hitResetPasswordByOTP(
+                              email,
+                              otp,
+                              newPasswordController.text,
                             );
-                          });
+                            if (userController
+                                .forgotPasswordResData.value.status) {
+                              CustomAlertDialog.baseDialog(
+                                context: context,
+                                title: "Success!",
+                                message: "Password Updated Successfully",
+                                showCrossIcon: false,
+                                buttonAction: () {
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                    '/SignInPage',
+                                    (Route<dynamic> route) => false,
+                                  );
+                                },
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    userController.isFailed.value.toString(),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  behavior: SnackBarBehavior.floating,
+                                ),
+                              );
+                            }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Fields can not be empty',
+                                  textAlign: TextAlign.center,
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          }
                         },
                         child: !userController.isLoading.value
-                            ? Text("Reset Password",
-                            style: PayNestTheme.subtitle16white.copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'montserratBold',
-                            ))
+                            ? Text(
+                                "Reset Password",
+                                style: PayNestTheme.subtitle16white.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'montserratBold',
+                                ),
+                              )
                             : Center(
-                          child: CircularProgressIndicator(
-                            backgroundColor: PayNestTheme.colorWhite,
-                            color: PayNestTheme.blueAccent,
-                          ),
-                        ),
+                                child: CircularProgressIndicator(
+                                  backgroundColor: PayNestTheme.colorWhite,
+                                  color: PayNestTheme.blueAccent,
+                                ),
+                              ),
                       ),
                     ),
                   ),
