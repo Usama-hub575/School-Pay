@@ -1,26 +1,26 @@
 [
     {
-        "merged": "/Users/muhammadbhatti/AndroidStudioProjects/pn_school/build/path_provider_android/intermediates/merged_res/debug/layout/notification_action.xml",
-        "source": "/Users/muhammadbhatti/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/layout/notification_action.xml"
+        "merged": "/Users/ehsananjum/pn_school/build/path_provider_android/intermediates/merged_res/debug/layout/notification_action.xml",
+        "source": "/Users/ehsananjum/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/layout/notification_action.xml"
     },
     {
-        "merged": "/Users/muhammadbhatti/AndroidStudioProjects/pn_school/build/path_provider_android/intermediates/merged_res/debug/layout/notification_action_tombstone.xml",
-        "source": "/Users/muhammadbhatti/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/layout/notification_action_tombstone.xml"
+        "merged": "/Users/ehsananjum/pn_school/build/path_provider_android/intermediates/merged_res/debug/layout/notification_template_icon_group.xml",
+        "source": "/Users/ehsananjum/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/layout/notification_template_icon_group.xml"
     },
     {
-        "merged": "/Users/muhammadbhatti/AndroidStudioProjects/pn_school/build/path_provider_android/intermediates/merged_res/debug/layout/notification_template_part_chronometer.xml",
-        "source": "/Users/muhammadbhatti/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/layout/notification_template_part_chronometer.xml"
+        "merged": "/Users/ehsananjum/pn_school/build/path_provider_android/intermediates/merged_res/debug/layout/custom_dialog.xml",
+        "source": "/Users/ehsananjum/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/layout/custom_dialog.xml"
     },
     {
-        "merged": "/Users/muhammadbhatti/AndroidStudioProjects/pn_school/build/path_provider_android/intermediates/merged_res/debug/layout/notification_template_icon_group.xml",
-        "source": "/Users/muhammadbhatti/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/layout/notification_template_icon_group.xml"
+        "merged": "/Users/ehsananjum/pn_school/build/path_provider_android/intermediates/merged_res/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/ehsananjum/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/layout/notification_template_part_chronometer.xml"
     },
     {
-        "merged": "/Users/muhammadbhatti/AndroidStudioProjects/pn_school/build/path_provider_android/intermediates/merged_res/debug/layout/custom_dialog.xml",
-        "source": "/Users/muhammadbhatti/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/layout/custom_dialog.xml"
+        "merged": "/Users/ehsananjum/pn_school/build/path_provider_android/intermediates/merged_res/debug/layout/notification_action_tombstone.xml",
+        "source": "/Users/ehsananjum/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/layout/notification_action_tombstone.xml"
     },
     {
-        "merged": "/Users/muhammadbhatti/AndroidStudioProjects/pn_school/build/path_provider_android/intermediates/merged_res/debug/layout/notification_template_part_time.xml",
-        "source": "/Users/muhammadbhatti/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/layout/notification_template_part_time.xml"
+        "merged": "/Users/ehsananjum/pn_school/build/path_provider_android/intermediates/merged_res/debug/layout/notification_template_part_time.xml",
+        "source": "/Users/ehsananjum/.gradle/caches/transforms-3/232f72f0c2eb7fab30ea4a5f434f8c37/transformed/core-1.6.0/res/layout/notification_template_part_time.xml"
     }
 ]

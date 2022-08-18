@@ -4,15 +4,15 @@
     "type": "MERGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "com.paynest.paynest_flutter_app",
+  "applicationId": "com.paynest.schoolpay",
   "variantName": "debug",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1,
-      "versionName": "1.0.0",
+      "versionCode": 8,
+      "versionName": "1.0.1",
       "outputFile": "AndroidManifest.xml"
     }
   ],
