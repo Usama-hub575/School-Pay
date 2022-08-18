@@ -23,6 +23,8 @@ class APIService {
   static var addStudentByPaynestNumber = "/api/parent/addStudentByPaynestNumber";
   static var pinUpdate = "/api/parent/update";
   static var resetPassword = "/api/parent/resetpassword";
+  static var resetPasswordByOTP = "/api/parent/resetPasswordByOtp";
+  static var forgotPassword = "/api/parent/forgotPassword";
   static var updateProfile = "/api/parent/updateProfile";
   static var getCountries = "/api/countries";
   static var addStudentByFirstName = "/api/parent/addStudentByFName";
@@ -384,6 +386,46 @@ class APIService {
     }
   }
 
+  /// * ResetPasswordByOTP * ///
+  Future apiResetPasswordByOTP(data) async {
+    var endPoint = Uri.parse("$baseurl$resetPasswordByOTP");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+      body: data,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+
+  /// * ForgotPassword * ///
+  Future apiForgotPassword(data) async {
+    var endPoint = Uri.parse("$baseurl$forgotPassword");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+
+
   /// * UpdateProfile * ///
   Future apiUpdateProfile(data) async {
     var endPoint = Uri.parse("$baseurl$updateProfile");
@@ -500,10 +542,7 @@ class APIService {
 
   /// Sending Data of student to server for which payment is made
   Future apiCreateTransaction(queryParams) async {
-    var endPoint = Uri.https(
-      "api.paynestschools.ae",
-      createTransaction,
-    );
+    var endPoint = Uri.parse("$baseurl$createTransaction");
     print(endPoint);
     var response = await client.post(
       endPoint,

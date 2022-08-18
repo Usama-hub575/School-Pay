@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/views/Initilizer.dart';
 import 'package:paynest_flutter_app/views/host/forgotpassword/forgot_password.dart';
+import 'package:paynest_flutter_app/views/host/forgotpassword/new_password.dart';
 import 'package:paynest_flutter_app/views/host/host_page.dart';
 import 'package:paynest_flutter_app/views/registration_screen/register_page.dart';
 import 'package:paynest_flutter_app/views/signin_page.dart';
@@ -114,13 +115,13 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     initializeDateFormatting();
     dateFormat = DateFormat.yMMMMd('en_GB');
-
   }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(375, 812),
-      builder: () => MaterialApp(
+      builder: (BuildContext context, child)=> MaterialApp(
         title: 'PayNest School',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -131,6 +132,8 @@ class _MyAppState extends State<MyApp> {
           switch (routes.name) {
             case '/':
               page = InitializerScreen();
+              break;
+            case '/Welcome':
               break;case '/Welcome':
               page = WelcomePage();
               break;
@@ -139,6 +142,12 @@ class _MyAppState extends State<MyApp> {
               break;
             case '/ForgotPassword':
               page = ForgotPassword();
+              break;
+            case '/NewPassword':
+              final args = routes.arguments;
+              page = NewPassword(
+                email: args as String,
+              );
               break;
             case '/RegisterPage':
               page = RegisterPage();

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-
+import 'package:paynest_flutter_app/controller/register_controller.dart';
 import '../../../constants/constants.dart';
 import '../../../controller/user_controller.dart';
 import '../../../res/res.dart';
@@ -22,10 +22,14 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   UserController userController = Get.put(UserController());
   TextEditingController emailController = TextEditingController();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(debugLabel: 'forgotPassword');
+
+  RegisterController registerController = RegisterController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Container(
         margin: EdgeInsets.symmetric(
           horizontal: horizontalValue(16),
@@ -144,20 +148,49 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           ),
                         ),
                         onPressed: () async {
-                          setState(() {
-                            CustomAlertDialog.baseDialog(
-                              context: context,
-                              title: "Success!",
-                              message:
-                              "Email Send Successfully",
-                              showCrossIcon: false,
-                              buttonAction: () {
-                                Navigator.of(context).pop();
-                              },
+                          if(Utils.forgotPasswordKey.currentState!.validate()){
+                            await registerController
+                                .hitForgotPassword(emailController.text);
+                            if (registerController.forgotPasswordResData.value.status ==
+                                true) {
+                              Navigator.of(context).pushNamed(
+                                '/NewPassword',
+                                arguments: emailController.text.toString()
+                              );
+                            }else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    registerController.isFailed.value.toString(),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              );
+                            }
+                          }else{
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Email field is empty',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
                             );
-                          });
+                          }
+                          // setState(() {
+                          //   CustomAlertDialog.baseDialog(
+                          //     context: context,
+                          //     title: "Success!",
+                          //     message:
+                          //     "Email Send Successfully",
+                          //     showCrossIcon: false,
+                          //     buttonAction: () {
+                          //       Navigator.of(context).pop();
+                          //     },
+                          //   );
+                          // });
                         },
-                        child: !userController.isLoading.value
+                        child: !registerController.isLoading.value
                             ? Text("Send Email",
                                 style: PayNestTheme.subtitle16white.copyWith(
                                   fontWeight: FontWeight.bold,

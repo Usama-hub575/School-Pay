@@ -664,6 +664,7 @@ class _PayNowPageState extends State<PayNowPage> {
   }
 
   void onPress() async {
+    
     if (studentController.myStudentData.value.status &&
         int.parse(amountController.text) > 0) {
       final result = await Navigator.of(context).push(
@@ -693,9 +694,17 @@ class _PayNowPageState extends State<PayNowPage> {
         if (status) {
           studentController.myStudentData.update(
             (val) {
+              String? schoolName;
+              for(int i=0;i<val!.students!.length;i++){
+                if(val.students![i].student!.totalBalanceAmount == payAbleAmount){
+                  schoolName = val.students![i].student!.school?.name ?? '';
+                  break;
+                }
+              }
               PayNowTransactionDetailModel model;
               model = _getModel(
                 studentElement,
+                schoolName,
                 amount,
               );
               Future.delayed(
@@ -875,9 +884,11 @@ class _PayNowPageState extends State<PayNowPage> {
 
   PayNowTransactionDetailModel _getModel(
     StudentElement studentElement,
+    String? schoolName,
     String amount,
   ) {
     return PayNowTransactionDetailModel(
+      schoolName: schoolName,
       student: PayNowTransactionDetailStudent(
         id: studentElement.id,
         studentRegNo: studentElement.student!.studentRegNo,

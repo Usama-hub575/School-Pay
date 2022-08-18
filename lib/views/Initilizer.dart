@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:paynest_flutter_app/res/constants.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/welcome_page.dart';
@@ -211,7 +212,8 @@ class _InitializerScreenState extends State<InitializerScreen> {
     await remoteConfig.fetchAndActivate();
 
     APIService.baseurl = Uri.parse(remoteConfig.getString(baseUrl));
-    APIService.paymentGateway = Uri.parse(remoteConfig.getString(paymentGatewayUrl));
+    APIService.paymentGateway =
+        Uri.parse(remoteConfig.getString(paymentGatewayUrl));
     minAndroidAppVersion = remoteConfig.getString(minAndroidAppVersion);
     maxAndroidAppVersion = remoteConfig.getString(maxAndroidAppVersion);
     minIosAppVersion = remoteConfig.getString(minIosAppVersion);
@@ -226,14 +228,30 @@ class _InitializerScreenState extends State<InitializerScreen> {
       maxAppVersion = maxIosAppVersion;
     }
 
-    isVersionGreaterThan(maxAppVersion, localAppVersion) == true
-        ? Future.delayed(const Duration(seconds: 2)).then(
-            (value) =>
-                isVersionGreaterThan(minAppVersion, localAppVersion) == true
-                    ? getForcefulAppUpdateDialog()
-                    : getOptionalAppUpdateDialog(),
-          )
-        : Future.delayed(const Duration(seconds: 2))
+    if(Platform.isAndroid){
+      if (appPackage == huaweiPackageName) {
+        getCountries();
+      } else {
+        isVersionGreaterThan(maxAppVersion, localAppVersion) == true
+            ? Future.delayed(const Duration(seconds: 1)).then(
+              (value) =>
+          isVersionGreaterThan(minAppVersion, localAppVersion) == true
+              ? getForcefulAppUpdateDialog()
+              : getOptionalAppUpdateDialog(),
+        )
+            : Future.delayed(const Duration(seconds: 2))
             .then((value) => getCountries());
+      }
+    }else{
+      isVersionGreaterThan(maxAppVersion, localAppVersion) == true
+          ? Future.delayed(const Duration(seconds: 1)).then(
+            (value) =>
+        isVersionGreaterThan(minAppVersion, localAppVersion) == true
+            ? getForcefulAppUpdateDialog()
+            : getOptionalAppUpdateDialog(),
+      )
+          : Future.delayed(const Duration(seconds: 2))
+          .then((value) => getCountries());
+    }
   }
 }

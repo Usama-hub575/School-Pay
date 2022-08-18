@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_country_code_picker.dart';
 import '../../../constants/constants.dart';
 import '../../../controller/user_controller.dart';
@@ -55,6 +57,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
   TextEditingController phCodeController = TextEditingController(text: "+971");
 
   UserController registerController = Get.put(UserController());
+  DateTime tempPickedDate = DateTime.now();
 
   List<String> gender = ['Male', 'Female'];
   String? _selectedFilter;
@@ -394,71 +397,124 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       verticalSpacer(12),
-                      TextFormField(
-                        controller: expiryController,
-                        enabled: emirateIDController.text != "" ? true : false,
-                        style: PayNestTheme.title_2_16primaryColor.copyWith(
-                          fontSize: sizes.fontRatio * 14,
-                          color: PayNestTheme.textGrey,
+                      GestureDetector(
+                        onTap: emirateIDController.text != ""
+                            ? () {
+                                showDialog(
+                                  builder: (sdCTX) {
+                                    return AlertDialog(
+                                      title: Row(
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.pop(sdCTX);
+                                            },
+                                            child: Container(
+                                              height: 25.h,
+                                              width: 70.w,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(12.r),
+                                                color: PayNestTheme.blueAccent,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "Done",
+                                                  style: PayNestTheme
+                                                      .small_2_12white,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      content: SizedBox(
+                                        width: .9.sw,
+                                        height: .5.sh,
+                                        child: CupertinoDatePicker(
+                                          mode: CupertinoDatePickerMode.date,
+                                          onDateTimeChanged:
+                                              (DateTime dateTime) {
+                                            tempPickedDate = dateTime;
+                                            expiryController.text =
+                                                DateFormat("yyyy-MM-dd")
+                                                    .format(dateTime)
+                                                    .toString();
+                                          },
+                                          initialDateTime: DateTime.now(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  context: context,
+                                );
+                              }: () {},
+                        child: TextFormField(
+                          controller: expiryController,
+                          enabled: false,
+                          style: PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontSize: sizes.fontRatio * 14,
+                            color: PayNestTheme.textGrey,
+                          ),
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(
+                                  0.5,
+                                ),
+                              ),
+                            ),
+                            suffixIcon: Padding(
+                              padding: EdgeInsets.only(top: verticalValue(24)),
+                              child: Text(
+                                optional,
+                                style: PayNestTheme.h2_14textGrey.copyWith(
+                                  color: PayNestTheme.primaryColor
+                                      .withOpacity(0.5),
+                                  fontSize: sizes.fontRatio * 8,
+                                  fontFamily: 'montserratBold',
+                                ),
+                              ),
+                            ),
+                            labelText: expiry,
+                            labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                              fontSize: sizes.fontRatio * 12,
+                              color: PayNestTheme.primaryColor,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(
+                                  0.5,
+                                ),
+                              ),
+                            ),
+                            errorBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(
+                                  0.5,
+                                ),
+                              ),
+                            ),
+                            disabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(
+                                  0.5,
+                                ),
+                              ),
+                            ),
+                            errorStyle:
+                                PayNestTheme.title_2_16primaryColor.copyWith(
+                              fontSize: sizes.fontRatio * 12,
+                              color: PayNestTheme.red,
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                         ),
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(
-                                0.5,
-                              ),
-                            ),
-                          ),
-                          suffixIcon: Padding(
-                            padding: EdgeInsets.only(top: verticalValue(24)),
-                            child: Text(
-                              optional,
-                              style: PayNestTheme.h2_14textGrey.copyWith(
-                                color:
-                                    PayNestTheme.primaryColor.withOpacity(0.5),
-                                fontSize: sizes.fontRatio * 8,
-                                fontFamily: 'montserratBold',
-                              ),
-                            ),
-                          ),
-                          labelText: expiry,
-                          labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                            fontSize: sizes.fontRatio * 12,
-                            color: PayNestTheme.primaryColor,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(
-                                0.5,
-                              ),
-                            ),
-                          ),
-                          errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(
-                                0.5,
-                              ),
-                            ),
-                          ),
-                          disabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(
-                                0.5,
-                              ),
-                            ),
-                          ),
-                          errorStyle:
-                              PayNestTheme.title_2_16primaryColor.copyWith(
-                            fontSize: sizes.fontRatio * 12,
-                            color: PayNestTheme.red,
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: PayNestTheme.textGrey.withOpacity(0.5),
-                            ),
-                          ),
-                        ),
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       verticalSpacer(12),
                       Container(
@@ -630,8 +686,8 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           showDropDownButton: true,
                           onChanged: (value) {
                             setState(() {
-                              phCodeController.text =      value.name.toString();
-                              countryCode= value.code.toString();
+                              phCodeController.text = value.name.toString();
+                              countryCode = value.code.toString();
                             });
                           },
                           initialSelection: phCodeController.text,
@@ -682,7 +738,6 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           cityController.text,
                           countryCode,
                           countryRegionController.text,
-
                         );
                       }
                     },

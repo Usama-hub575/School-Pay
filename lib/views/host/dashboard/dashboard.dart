@@ -29,7 +29,12 @@ import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart'
     as student;
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  DashboardPage({
+    Key? key,
+    required this.onTap,
+  }) : super(key: key);
+
+  final Function onTap;
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -211,13 +216,16 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                   ),
                   Spacer(),
-                  Text(
-                    'Show All',
-                    style: PayNestTheme.h2_12blueAccent.copyWith(
-                      fontSize: sizes.fontRatio * 12,
-                      color: PayNestTheme.textGrey,
+                  InkWell(
+                    onTap: ()=> widget.onTap(),
+                    child: Text(
+                      'Show All',
+                      style: PayNestTheme.h2_12blueAccent.copyWith(
+                        fontSize: sizes.fontRatio * 12,
+                        color: PayNestTheme.textGrey,
+                      ),
                     ),
-                  ),
+                  ), 
                 ],
               ),
             ),

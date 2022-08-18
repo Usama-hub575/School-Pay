@@ -4,7 +4,7 @@
     "type": "COMPATIBLE_SCREEN_MANIFEST",
     "kind": "Directory"
   },
-  "applicationId": "com.paynest.paynest_flutter_app",
+  "applicationId": "com.paynest.schoolpay",
   "variantName": "debug",
   "elements": []
 }

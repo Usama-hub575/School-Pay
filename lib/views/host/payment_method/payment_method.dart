@@ -34,9 +34,9 @@ class PaymentMethod extends StatefulWidget {
 class _PaymentMethodState extends State<PaymentMethod> {
   final MyStudentController studentController = Get.find<MyStudentController>();
   final CreateTransactionRespController ctrcController =
-  Get.put(CreateTransactionRespController());
+      Get.put(CreateTransactionRespController());
   final SetBankResponseController sbrController =
-  Get.put(SetBankResponseController());
+      Get.put(SetBankResponseController());
 
   @override
   Widget build(BuildContext context) {
@@ -348,6 +348,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           ),
         ),
       );
+
       if (result != null) {
         var amount = widget.payment;
         bool status = await ctrcController.hitCreateTransaction(
@@ -360,14 +361,22 @@ class _PaymentMethodState extends State<PaymentMethod> {
         if (status) {
           studentController.myStudentData.update(
             (val) {
+              String? schoolName;
+              for(int i=0;i<val!.students!.length;i++){
+                if(val.students![i].student!.school!.id == widget.singleStudentModel.student!.schoolId){
+                  schoolName = val.students![i].student!.school?.name ?? '';
+                  break;
+                }
+              }
               PayNowTransactionDetailModel model;
               model = _getModel(
                 widget.singleStudentModel,
+                schoolName ?? '',
                 amount.toString(),
               );
               Future.delayed(
                 Duration.zero,
-                    () {
+                () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => PayNowTransactionDetailsPage(
@@ -380,17 +389,24 @@ class _PaymentMethodState extends State<PaymentMethod> {
             },
           );
         } else {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(
-            SnackBar(
-              behavior: SnackBarBehavior.floating,
-              content: Text(
-                'Something went wrong with the transaction',
-              ),
-              backgroundColor: Colors.red,
-            ),
-          );
+          if(mounted){
+            Future.delayed(
+              Duration.zero,
+                  () {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(
+                  SnackBar(
+                    behavior: SnackBarBehavior.floating,
+                    content: Text(
+                      'Something went wrong with the transaction',
+                    ),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              },
+            );
+          }
         }
       }
     } else if (widget.payment < 0) {
@@ -421,45 +437,47 @@ class _PaymentMethodState extends State<PaymentMethod> {
   }
 
   PayNowTransactionDetailModel _getModel(
-      SingleStudentModel singleStudentModel,
-      String amount,
-      ) {
+    SingleStudentModel singleStudentModel,
+    String? schoolName,
+    String amount,
+  ) {
     return PayNowTransactionDetailModel(
+      schoolName: schoolName,
       student: PayNowTransactionDetailStudent(
-        id: singleStudentModel.id,
-        studentRegNo: singleStudentModel.student!.studentRegNo,
-        firstName: singleStudentModel.student!.firstName,
-        lastName: singleStudentModel.student!.lastName,
-        grade: singleStudentModel.student!.grade,
-        parentEmiratesId: singleStudentModel.student!.parentEmiratesId,
-        parentPhoneNumber: singleStudentModel.student!.parentPhoneNumber,
-        dob: singleStudentModel.student!.dob,
-        admissionDate: singleStudentModel.student!.admissionDate,
-        deletedAt: singleStudentModel.student!.deletedAt,
-        schoolId: singleStudentModel.student!.schoolId,
+        id: singleStudentModel.student?.id ?? 0,
+        studentRegNo: singleStudentModel.student?.studentRegNo ?? '-',
+        firstName: singleStudentModel.student?.firstName ?? '-',
+        lastName: singleStudentModel.student?.lastName ?? '-',
+        grade: singleStudentModel.student?.grade ?? '-',
+        parentEmiratesId: singleStudentModel.student?.parentEmiratesId ?? '-',
+        parentPhoneNumber: singleStudentModel.student?.parentPhoneNumber ?? '-',
+        dob: singleStudentModel.student?.dob ?? DateTime.now(),
+        admissionDate: singleStudentModel.student?.admissionDate ?? DateTime.now(),
+        deletedAt: singleStudentModel.student?.deletedAt ?? '-',
+        schoolId: singleStudentModel.student?.schoolId ?? 0,
         totalBalanceAmount:
-        singleStudentModel.student!.totalBalanceAmount.toString(),
-        guardianFirstName: singleStudentModel.student!.guardianFirstName!,
-        guardianLastName: singleStudentModel.student!.guardianLastName!,
-        guardianGender: singleStudentModel.student!.guardianGender!,
-        guardianEmiratesId: singleStudentModel.student!.guardianEmiratesId!,
-        guardianNationality: singleStudentModel.student!.guardianNationality!,
-        guardianReligion: singleStudentModel.student!.guardianReligion!,
-        area: singleStudentModel.student!.area!,
-        region: singleStudentModel.student!.region!,
-        streetAddress: singleStudentModel.student!.streetAddress!,
-        email: singleStudentModel.student!.email!,
-        phoneNumber: singleStudentModel.student!.phoneNumber!,
-        otherNumber: singleStudentModel.student!.otherNumber!,
-        profile: singleStudentModel.student!.profile,
-        religion: singleStudentModel.student!.religion!,
-        nationality: singleStudentModel.student!.nationality!,
-        gender: singleStudentModel.student!.gender!,
-        dueDate: singleStudentModel.student!.dueDate!,
-        file: singleStudentModel.student!.file,
-        privacy: singleStudentModel.student!.privacy!,
-        createdAt: singleStudentModel.student!.createdAt!,
-        updatedAt: singleStudentModel.student!.updatedAt!,
+            singleStudentModel.student?.totalBalanceAmount.toString()  ?? '-',
+        guardianFirstName: singleStudentModel.student?.guardianFirstName,
+        guardianLastName: singleStudentModel.student?.guardianLastName!,
+        guardianGender: singleStudentModel.student?.guardianGender!,
+        guardianEmiratesId: singleStudentModel.student?.guardianEmiratesId!,
+        guardianNationality: singleStudentModel.student?.guardianNationality!,
+        guardianReligion: singleStudentModel.student?.guardianReligion!,
+        area: singleStudentModel.student?.area,
+        region: singleStudentModel.student?.region,
+        streetAddress: singleStudentModel.student?.streetAddress,
+        email: singleStudentModel.student?.email,
+        phoneNumber: singleStudentModel.student?.phoneNumber  ?? '-',
+        otherNumber: singleStudentModel.student?.otherNumber,
+        profile: singleStudentModel.student?.profile,
+        religion: singleStudentModel.student?.religion,
+        nationality: singleStudentModel.student?.nationality,
+        gender: singleStudentModel.student?.gender,
+        dueDate: singleStudentModel.student?.dueDate,
+        file: singleStudentModel.student?.file,
+        privacy: singleStudentModel.student?.privacy  ?? '-',
+        createdAt: singleStudentModel.student?.createdAt ?? DateTime.now(),
+        updatedAt: singleStudentModel.student?.updatedAt ?? DateTime.now(),
       ),
       referenceNo: '',
       paidOn: DateTime.now(),

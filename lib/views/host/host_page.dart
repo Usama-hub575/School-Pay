@@ -24,12 +24,7 @@ class _HostPageState extends State<HostPage> {
   bool bottomTabIsActive = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final pages = [
-    const DashboardPage(),
-    StudentPage(whichStack: "host"),
-    RecentTransactionPage(whichStack: "host"),
-    const MorePage(),
-  ];
+  List<Widget> pages = [];
 
   final pay = [
     PayNowPage(whichStack: 'host'),
@@ -60,6 +55,32 @@ class _HostPageState extends State<HostPage> {
     setState(() {
       pageIndex = index;
     });
+  }
+
+  initializePages() {
+    pages.add(
+      DashboardPage(
+        onTap: () {
+          selectedNavItem(1);
+        },
+      ),
+    );
+    pages.add(
+      StudentPage(whichStack: "host"),
+    );
+    pages.add(
+      RecentTransactionPage(whichStack: "host"),
+    );
+    pages.add(
+      const MorePage(),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    pages = [];
+    initializePages();
   }
 
   @override

@@ -9,7 +9,7 @@ import 'package:paynest_flutter_app/model/datamodel/selectedschool_to_addstudent
 import 'package:paynest_flutter_app/model/schoollist_model.dart';
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/views/host/addstudent/add_student.dart';
+import 'package:paynest_flutter_app/views/host/addstudent/add_student.dart' as add_student;
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 class SelectSchool extends StatefulWidget {
@@ -275,7 +275,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                     updatedAt: log.updatedAt);
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => AddStudent(
+                    builder: (context) => add_student.AddStudent(
                       schoolData: schoolData,
                     ),
                   ),
@@ -321,7 +321,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                     updatedAt: log.updatedAt);
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => AddStudent(
+                    builder: (context) => add_student.AddStudent(
                       schoolData: schoolData,
                     ),
                   ),

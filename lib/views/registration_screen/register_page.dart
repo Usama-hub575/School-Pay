@@ -118,8 +118,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                 countryCode,
                                 country,
                               ) async {
-
-
                                 await userController.hitRegister(
                                   fName,
                                   lName,

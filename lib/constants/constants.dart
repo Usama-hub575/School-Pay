@@ -111,6 +111,7 @@ const country = "Country";
 const forgotpassword = "Forgot Password?";
 const noDataText = "No Data Found";
 const error = "Error";
+const otp = "OTP";
 const sorryWeCant = "Sorry, we can’t process your request At the moment, please try again later";
 const show = "Show";
 const hide = "Hide";
@@ -132,6 +133,7 @@ const paid = "Paid";
 const paidon = "Paid On";
 const dues = "Dues";
 const backToHome = "Back To Home";
+const takeToHome = "Take To Home";
 const view = "View";
 const searchSchool = "Search School";
 

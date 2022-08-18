@@ -233,6 +233,49 @@ class _AddStudentState extends State<AddStudent> {
                                           ),
                                         ),
                                       ),
+                                      // child: DropdownButtonHideUnderline(
+                                      //   child: ButtonTheme(
+                                      //     alignedDropdown: true,
+                                      //     child: DropdownButton(
+                                      //       borderRadius:
+                                      //           BorderRadius.circular(16),
+                                      //       elevation: 0,
+                                      //       isExpanded: true,
+                                      //       items: filters.map((String value) {
+                                      //         return DropdownMenuItem<String>(
+                                      //           value: value,
+                                      //           child: Text(
+                                      //             value,
+                                      //             style: PayNestTheme
+                                      //                 .h2_12blueAccent
+                                      //                 .copyWith(
+                                      //               fontSize:
+                                      //                   sizes.fontRatio * 14,
+                                      //               fontWeight: FontWeight.bold,
+                                      //               color: PayNestTheme.black,
+                                      //             ),
+                                      //           ),
+                                      //         );
+                                      //       }).toList(),
+                                      //       value: _selectedFilter,
+                                      //       hint: Text(
+                                      //         "Search by",
+                                      //       ),
+                                      //       // value: selection,
+                                      //       onChanged: (newValue) {
+                                      //         setState(
+                                      //           () {
+                                      //             _selectedFilter =
+                                      //                 newValue.toString();
+                                      //             print(
+                                      //               _selectedFilter,
+                                      //             );
+                                      //           },
+                                      //         );
+                                      //       },
+                                      //     ),
+                                      //   ),
+                                      // ),
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButton2(
                                           buttonPadding: EdgeInsets.symmetric(
@@ -331,6 +374,13 @@ class _AddStudentState extends State<AddStudent> {
                                   },
                                   enabled: isSearchFieldEnable,
                                   onEditingComplete: () {
+                                    if (searchController.text.isNotEmpty) {
+                                      onSearchTextChanged(
+                                        searchController.text,
+                                      );
+                                    } else {
+                                      _searchResult.clear();
+                                    }
                                     FocusManager.instance.primaryFocus
                                         ?.unfocus();
                                   },

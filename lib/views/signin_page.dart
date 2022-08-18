@@ -34,6 +34,8 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isObscure = true;
+  GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>(debugLabel: 'signIn');
 
   isBioMatricEnable() {
     isBioMatric = _preferences.getBoolValue(SharedPrefKeys.isBioMatric);
@@ -48,6 +50,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Container(
         margin: EdgeInsets.symmetric(
           horizontal: horizontalValue(16),
@@ -231,23 +234,23 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   verticalSpacer(16),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     setState(() {
-                  //       Navigator.of(context).pushNamed("/ForgotPassword");
-                  //     });
-                  //   },
-                  //   child: Container(
-                  //     alignment: Alignment.centerRight,
-                  //     child: Text(
-                  //       forgotpassword,
-                  //       style: PayNestTheme.title_2_16primaryColor.copyWith(
-                  //         fontSize: sizes.fontRatio * 14,
-                  //         color: PayNestTheme.primaryColor,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        Navigator.of(context).pushNamed("/ForgotPassword");
+                      });
+                    },
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        forgotpassword,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.primaryColor,
+                        ),
+                      ),
+                    ),
+                  ),
                   isBioMatric
                       ? Center(
                           child: Padding(
@@ -268,7 +271,6 @@ class _SignInPageState extends State<SignInPage> {
                                         _preferences.getStringValue(
                                       SharedPrefKeys.userPassword,
                                     );
-
                                     await userController.hitLogin(
                                       email,
                                       password,
@@ -292,6 +294,17 @@ class _SignInPageState extends State<SignInPage> {
                                         context,
                                         '/DashboardPage',
                                         (Route<dynamic> route) => false,
+                                      );
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Something Went wrong',
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          behavior: SnackBarBehavior.floating,
+                                        ),
                                       );
                                     }
                                   }
@@ -375,6 +388,7 @@ class _SignInPageState extends State<SignInPage> {
                                           " min",
                                     ),
                                     backgroundColor: Colors.red,
+                                    behavior: SnackBarBehavior.floating,
                                   ),
                                 );
                               } else if (userController.attemptsRemain.value !=
@@ -387,6 +401,7 @@ class _SignInPageState extends State<SignInPage> {
                                           " attempts remaining",
                                     ),
                                     backgroundColor: Colors.red,
+                                    behavior: SnackBarBehavior.floating,
                                   ),
                                 );
                               } else {
@@ -396,17 +411,10 @@ class _SignInPageState extends State<SignInPage> {
                                       "Entered email or password does not match",
                                     ),
                                     backgroundColor: Colors.red,
+                                    behavior: SnackBarBehavior.floating,
                                   ),
                                 );
                               }
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    "Entered email or password does not match",
-                                  ),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
                             }
                           }
                         },
