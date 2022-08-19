@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(375, 812),
-      builder: (BuildContext context, child)=> MaterialApp(
+      builder: ()=> MaterialApp(
         title: 'PayNest School',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

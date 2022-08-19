@@ -10,6 +10,7 @@ import 'package:paynest_flutter_app/views/host/editprofile/edit_profile.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
+import '../../../main.dart';
 import '../../../res/assets.dart';
 import '../../../res/res.dart';
 import '../../../widgets/emirates_id_add_dash_function.dart';
@@ -370,13 +371,12 @@ class _ViewProfileState extends State<ViewProfile> {
                         children: [
                           Text(
                             userController.userResData.value.parent!
-                                            .expiryDate !=
+                                            .expiryDate ==
                                         null ||
                                     userController.userResData.value.parent!
                                         .expiryDate.isEmpty
                                 ? '-'
-                                : userController
-                                    .userResData.value.parent!.expiryDate,
+                                : '${dateFormat.format(DateTime.parse(userController.userResData.value.parent!.expiryDate.toString().substring(0, 10)))}',
                             style: PayNestTheme.title_3_16blackbold.copyWith(
                               fontSize: sizes.fontRatio * 16,
                               color: PayNestTheme.lightBlack,
@@ -455,15 +455,14 @@ class _ViewProfileState extends State<ViewProfile> {
                         children: [
                           Text(
                             userController.userResData.value.parent!
-                                            .expiryDate !=
+                                            .expiryDate ==
                                         null ||
                                     userController.userResData.value.parent!
                                         .expiryDate.isEmpty
                                 ? '-'
-                                : userController
-                                    .userResData.value.parent!.expiryDate,
+                                : '${dateFormat.format(DateTime.parse(userController.userResData.value.parent!.expiryDate.toString().substring(0, 10)))}',
                             style: PayNestTheme.title_3_16blackbold.copyWith(
-                              fontSize: sizes.fontRatio * 8,
+                              fontSize: sizes.fontRatio * 16,
                               color: PayNestTheme.lightBlack,
                               fontFamily: 'montserratSemiBold',
                             ),
