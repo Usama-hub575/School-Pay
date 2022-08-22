@@ -6,6 +6,9 @@ import 'package:paynest_flutter_app/model/updateprofile_model.dart';
 import 'package:paynest_flutter_app/model/updateprofile_resp_model.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 
+import '../model/login_response_model.dart';
+import '../model/register_resp_model.dart';
+
 class UpdateProfileController extends GetxController {
   var isLoading = false.obs;
   var isFailed = "".obs;
@@ -41,10 +44,11 @@ class UpdateProfileController extends GetxController {
             updateProfileRespModelFromJson(res);
         updateProfileData.value = updateProfileRespModel;
         message.value = decoded["message"];
-        await APIService().refreshUserData(
-          parentId: updateProfileRespModel.parent![0],
+        var updateRes =await APIService().refreshUserData(
+          parentId: id,
         );
-
+        userController.userResData.value = registerRespModelFromJson(updateRes);
+        userController.userResData.refresh();
         updateProfileData.refresh();
         isLoading(false);
       } else if (decoded['status'] == false) {

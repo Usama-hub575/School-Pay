@@ -2,10 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/updateprofile_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
@@ -617,6 +614,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               if (updateProfileController
                                       .updateProfileData.value.status ==
                                   true) {
+                                Navigator.pop(context);
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
