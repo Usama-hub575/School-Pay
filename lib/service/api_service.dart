@@ -9,7 +9,7 @@ class APIService {
   static var client = http.Client();
   static var baseurl = Uri.parse("https://api.paynestschools.ae");
   static var paymentGateway = Uri.parse('https://paynestschools.ae/pl');
- // static var baseurl = Uri.parse("https://payschool.azurewebsites.net");
+  // static var baseurl = Uri.parse("https://payschool.azurewebsites.net");
   static var baseurl1 = "discoveritech.com";
 
   static var login = "/api/parent/auth/login";
@@ -20,7 +20,8 @@ class APIService {
   static var allSchools = "/api/school/allSchools";
   static var allStudents = "/api/student/all";
   static var addStudents = "/api/parent/addStudent";
-  static var addStudentByPaynestNumber = "/api/parent/addStudentByPaynestNumber";
+  static var addStudentByPaynestNumber =
+      "/api/parent/addStudentByPaynestNumber";
   static var pinUpdate = "/api/parent/update";
   static var resetPassword = "/api/parent/resetpassword";
   static var resetPasswordByOTP = "/api/parent/resetPasswordByOtp";
@@ -28,8 +29,12 @@ class APIService {
   static var updateProfile = "/api/parent/updateProfile";
   static var getCountries = "/api/countries";
   static var addStudentByFirstName = "/api/parent/addStudentByFName";
-  static var addStudentByParentRegistrationNumber = "/api/parent/addStudentByPRN";
-  static var addStudentByStudentRegistrationNumber = "/api/parent/addStudentBySRN";
+  static var addStudentByParentRegistrationNumber =
+      "/api/parent/addStudentByPRN";
+  static var addStudentByStudentRegistrationNumber =
+      "/api/parent/addStudentBySRN";
+  static var getUserDataAfterProfileUpdate =
+      "/api/parent/getInfo?parentId={parentId}";
 
   ///Fetch Transaction
   static var transaction = "/api/transaction/all";
@@ -45,7 +50,8 @@ class APIService {
       "/api/student/getByLName?LName={last_name}&schoolId={school_id}";
   static var searchByFirstName =
       "/api/student/getByFName?FName={first_name}&schoolId={school_id}";
-  static var searchByPID = "/api/student/getByPID?PID={pid}&schoolId={school_id}";
+  static var searchByPID =
+      "/api/student/getByPID?PID={pid}&schoolId={school_id}";
   static var searchBySID =
       "/api/student/getBySID?SID={sid}&schoolId={school_id}";
 
@@ -324,7 +330,6 @@ class APIService {
     }
   }
 
-
   /// * Parent Add Student By PayNest Number * ///
   Future addStudentWithPaynestNumber(data) async {
     print("Student data");
@@ -405,7 +410,6 @@ class APIService {
     }
   }
 
-
   /// * ForgotPassword * ///
   Future apiForgotPassword(data) async {
     var endPoint = Uri.parse("$baseurl$forgotPassword");
@@ -423,8 +427,6 @@ class APIService {
       return response.body;
     }
   }
-
-
 
   /// * UpdateProfile * ///
   Future apiUpdateProfile(data) async {
@@ -548,7 +550,7 @@ class APIService {
       endPoint,
       body: queryParams,
       headers: {
-        "Content-Type" : "application/x-www-form-urlencoded",
+        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer " + storage.read('accessToken'),
       },
     );
@@ -612,6 +614,30 @@ class APIService {
       body: data,
     );
     print("Bank Response");
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  /// * After Update Profile Info * ///
+  Future refreshUserData({
+    required int parentId,
+  }) async {
+    var endPoint;
+    String query;
+
+    query = getUserDataAfterProfileUpdate.replaceAll(
+        '{parentId}', parentId.toString());
+    endPoint = Uri.parse("$baseurl$query");
+    var response = await client.get(
+      endPoint,
+      headers: {
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+    );
     print(response.body);
     if (response.statusCode == 200) {
       return response.body;

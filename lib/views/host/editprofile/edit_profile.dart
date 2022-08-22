@@ -1,9 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/updateprofile_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
@@ -12,6 +11,7 @@ import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/widgets/emirates_id_add_dash_function.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
+import '../../../main.dart';
 import '../../../res/res.dart';
 import '../../../widgets/editing_text_emirates_id_formater.dart';
 
@@ -26,12 +26,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final UserController userController = Get.find<UserController>();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController expiryDate = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController emiratesIdController = TextEditingController();
-  TextEditingController expiryDateController = TextEditingController();
   UpdateProfileController updateProfileController =
       Get.put(UpdateProfileController());
+
+  DateTime tempPickedDate = DateTime.now();
 
   @override
   void initState() {
@@ -40,27 +41,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
       text: userController.userResData.value.parent!.email,
     );
     firstNameController = TextEditingController(
-      text: userController.userResData.value.parent!.firstName +
-          ' ' +
-          userController.userResData.value.parent!.lastName,
+        text: userController.userResData.value.parent!.firstName);
+    lastNameController = TextEditingController(
+      text: userController.userResData.value.parent!.lastName,
     );
-    phoneNumberController = TextEditingController(
-      text: userController.userResData.value.parent!.dialCode +
-          userController.userResData.value.parent!.phone,
+    expiryDate = TextEditingController(
+      text: userController.userResData.value.parent!.expiryDate == null ||
+              userController.userResData.value.parent!.expiryDate
+                  .toString()
+                  .isEmpty
+          ? '-'
+          : '${dateFormat.format(DateTime.parse(userController.userResData.value.parent!.expiryDate.toString().substring(0, 10)))}',
     );
     emiratesIdController = TextEditingController(
       text: userController.userResData.value.parent!.emiratesId.length >= 14
           ? getDashedEmiratesId(
               userController.userResData.value.parent!.emiratesId)
           : userController.userResData.value.parent!.emiratesId,
-    );
-    expiryDateController = TextEditingController(
-      text: userController.userResData.value.parent!.expiryDate != null ||
-              userController.userResData.value.parent!.expiryDate
-                  .toString()
-                  .isEmpty
-          ? '-'
-          : userController.userResData.value.parent!.expiryDate,
     );
   }
 
@@ -414,63 +411,110 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       },
                     ),
                     verticalSpacer(8),
-                    TextFormField(
-                      controller: phoneNumberController,
-                      style: PayNestTheme.title_3_16blackbold.copyWith(
-                        fontSize: sizes.fontRatio * 16,
-                        color: PayNestTheme.lightBlack,
-                        fontFamily: 'montserratSemiBold',
-                      ),
-                      enabled: false,
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(
-                              0.3,
-                            ),
-                          ),
-                        ),
-                        labelText: phoneNumber,
-                        labelStyle: PayNestTheme.h2_14textGrey.copyWith(
-                          color: PayNestTheme.primaryColor,
-                          fontFamily: 'montserratBold',
-                          fontSize: sizes.fontRatio * 12,
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(
-                              0.3,
-                            ),
-                          ),
-                        ),
-                        errorBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(
-                              0.3,
-                            ),
-                          ),
-                        ),
-                        disabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(
-                              0.3,
-                            ),
-                          ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.3),
-                          ),
-                        ),
-                      ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Required";
-                        } else {
-                          return null;
-                        }
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          builder: (sdCTX) {
+                            return AlertDialog(
+                              title: Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pop(sdCTX);
+                                    },
+                                    child: Container(
+                                      height: 25.h,
+                                      width: 70.w,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(12.r),
+                                        color: PayNestTheme.blueAccent,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "Done",
+                                          style: PayNestTheme.small_2_12white,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              content: SizedBox(
+                                width: .9.sw,
+                                height: .5.sh,
+                                child: CupertinoDatePicker(
+                                  mode: CupertinoDatePickerMode.date,
+                                  onDateTimeChanged: (DateTime dateTime) {
+                                    tempPickedDate = dateTime;
+                                    expiryDate.text =
+                                        dateFormat.format(dateTime).toString();
+                                  },
+                                  initialDateTime: DateTime.parse(userController
+                                      .userResData.value.parent!.expiryDate
+                                      .toString()
+                                      .substring(0, 10)),
+                                ),
+                              ),
+                            );
+                          },
+                          context: context,
+                        );
                       },
+                      child: TextFormField(
+                        controller: expiryDate,
+                        enabled: false,
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.textGrey,
+                        ),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          labelText: expiry,
+                          labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          disabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(
+                                0.5,
+                              ),
+                            ),
+                          ),
+                          errorStyle:
+                              PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.red,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: PayNestTheme.textGrey.withOpacity(0.5),
+                            ),
+                          ),
+                        ),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      ),
                     ),
                     verticalSpacer(8),
                     TextFormField(
@@ -536,90 +580,84 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         }
                       },
                     ),
-                    verticalSpacer(8),
-                    TextFormField(
-                      controller: expiryDateController,
-                      style: PayNestTheme.title_3_16blackbold.copyWith(
-                        fontSize: sizes.fontRatio * 16,
-                        color: PayNestTheme.lightBlack,
-                        fontFamily: 'montserratSemiBold',
-                      ),
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(
-                              0.3,
-                            ),
-                          ),
-                        ),
-                        labelText: expiry,
-                        labelStyle: PayNestTheme.h2_14textGrey.copyWith(
-                          color: PayNestTheme.primaryColor,
-                          fontFamily: 'montserratBold',
-                          fontSize: sizes.fontRatio * 12,
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(
-                              0.3,
-                            ),
-                          ),
-                        ),
-                        errorBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(
-                              0.3,
-                            ),
-                          ),
-                        ),
-                        disabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(
-                              0.3,
-                            ),
-                          ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.3),
-                          ),
-                        ),
-                      ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Required";
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
                     verticalSpacer(70),
-                    Container(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              14,
+                    Obx(
+                      () => Container(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: PayNestTheme.primaryColor,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                14,
+                              ),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              vertical: verticalValue(16),
                             ),
                           ),
-                          padding: EdgeInsets.symmetric(
-                            vertical: verticalValue(16),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Center(
-                          child: Text(
-                            updateProfile,
-                            style: PayNestTheme.title_2_16primaryColor.copyWith(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              color: PayNestTheme.colorWhite,
-                            ),
-                          ),
+                          onPressed: () async {
+                            if (Utils.editProfileFormKey.currentState!
+                                .validate()) {
+                              await updateProfileController.hitUpdateProfile(
+                                userController.userResData.value.parent?.id,
+                                firstNameController.text.toString(),
+                                lastNameController.text.toString(),
+                                emailController.text.toString(),
+                                tempPickedDate.toString(),
+                                emiratesIdController.text
+                                    .toString()
+                                    .replaceAll('-', ''),
+                                userController,
+                              );
+                              if (updateProfileController
+                                      .updateProfileData.value.status ==
+                                  true) {
+                                Navigator.pop(context);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      updateProfileController.message.value
+                                          .toString(),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      updateProfileController.isFailed.value
+                                          .toString(),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                );
+                              }
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Email field is empty',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                          child: !updateProfileController.isLoading.value
+                              ? Text(updateProfile,
+                                  style: PayNestTheme.subtitle16white.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'montserratBold',
+                                  ))
+                              : Center(
+                                  child: CircularProgressIndicator(
+                                    backgroundColor: PayNestTheme.colorWhite,
+                                    color: PayNestTheme.blueAccent,
+                                  ),
+                                ),
                         ),
                       ),
                     ),
