@@ -142,30 +142,30 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           Row(
                             children: [
-                              Container(
-                                height: 44.h,
-                                width: 44.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(
-                                    12,
-                                  ),
-                                ),
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            NotificationPage(),
-                                      ),
-                                    );
-                                  },
-                                  icon: Lottie.asset(
-                                    notificationAnimation,
-                                    repeat: true,
-                                  ),
-                                ),
-                              ),
+                              // Container(
+                              //   height: 44.h,
+                              //   width: 44.w,
+                              //   decoration: BoxDecoration(
+                              //     color: Colors.white,
+                              //     borderRadius: BorderRadius.circular(
+                              //       12,
+                              //     ),
+                              //   ),
+                              //   child: IconButton(
+                              //     onPressed: () {
+                              //       Navigator.of(context).push(
+                              //         MaterialPageRoute(
+                              //           builder: (context) =>
+                              //               NotificationPage(),
+                              //         ),
+                              //       );
+                              //     },
+                              //     icon: Lottie.asset(
+                              //       notificationAnimation,
+                              //       repeat: true,
+                              //     ),
+                              //   ),
+                              // ),
                               SizedBox(
                                 width: 12.w,
                               ),

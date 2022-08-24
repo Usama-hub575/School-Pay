@@ -171,11 +171,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    userController.userResData.value.parent!
-                                            .firstName +
+                                    userController.userResData.value.parent!.firstName +
                                         " " +
-                                        userController
-                                            .userResData.value.parent!.lastName,
+                                        userController.userResData.value.parent!.lastName,
                                     style: PayNestTheme.title18black.copyWith(
                                       fontSize: sizes.fontRatio * 18,
                                       fontFamily: 'montserratBold',
@@ -403,11 +401,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Required";
-                        } else {
-                          return null;
+                        if (value!.trim().isEmpty) {
+                          return 'Please enter email';
                         }
+                        if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                          return 'Invalid email';
+                        }
+                        return null;
                       },
                     ),
                     verticalSpacer(8),

@@ -245,8 +245,8 @@ class _ViewProfileState extends State<ViewProfile> {
                     ),
                     verticalSpacer(4),
                     Obx(
-                      () => Text(
-                        userController.userResData.value.parent!.firstName +
+
+                      () => Text(userController.userResData.value.parent!.firstName +
                             " " +
                             userController.userResData.value.parent!.lastName,
                         style: PayNestTheme.title_3_16blackbold.copyWith(
@@ -415,7 +415,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       () => Row(
                         children: [
                           Text(
-                            userController.userResData.value.parent!.emiratesId,
+                            userController.userResData.value.parent?.passport ?? '',
                             style: PayNestTheme.title_3_16blackbold.copyWith(
                               fontSize: sizes.fontRatio * 16,
                               color: PayNestTheme.lightBlack,

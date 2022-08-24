@@ -228,30 +228,14 @@ class _InitializerScreenState extends State<InitializerScreen> {
       maxAppVersion = maxIosAppVersion;
     }
 
-    if(Platform.isAndroid){
-      if (appPackage == huaweiPackageName) {
-        getCountries();
-      } else {
-        isVersionGreaterThan(maxAppVersion, localAppVersion) == true
-            ? Future.delayed(const Duration(seconds: 1)).then(
-              (value) =>
-          isVersionGreaterThan(minAppVersion, localAppVersion) == true
-              ? getForcefulAppUpdateDialog()
-              : getOptionalAppUpdateDialog(),
-        )
-            : Future.delayed(const Duration(seconds: 2))
-            .then((value) => getCountries());
-      }
-    }else{
-      isVersionGreaterThan(maxAppVersion, localAppVersion) == true
-          ? Future.delayed(const Duration(seconds: 1)).then(
-            (value) =>
-        isVersionGreaterThan(minAppVersion, localAppVersion) == true
-            ? getForcefulAppUpdateDialog()
-            : getOptionalAppUpdateDialog(),
-      )
-          : Future.delayed(const Duration(seconds: 2))
-          .then((value) => getCountries());
-    }
+    isVersionGreaterThan(maxAppVersion, localAppVersion) == true
+        ? Future.delayed(const Duration(seconds: 1)).then(
+          (value) =>
+      isVersionGreaterThan(minAppVersion, localAppVersion) == true
+          ? getForcefulAppUpdateDialog()
+          : getOptionalAppUpdateDialog(),
+    )
+        : Future.delayed(const Duration(seconds: 2))
+        .then((value) => getCountries());
   }
 }

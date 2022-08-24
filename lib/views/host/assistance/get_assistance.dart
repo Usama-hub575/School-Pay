@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,6 +7,7 @@ import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GetAssistance extends StatefulWidget {
   const GetAssistance({Key? key}) : super(key: key);
@@ -75,179 +78,179 @@ class _GetAssistanceState extends State<GetAssistance> {
             ),
           ),
           verticalSpacer(24),
-          Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: horizontalValue(20),
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalValue(16),
-              vertical: verticalValue(16),
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: PayNestTheme.primaryColor,
+          InkWell(
+            onTap: () {
+              launch(
+                'https://paynest.ae/#contact',
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: horizontalValue(20),
               ),
-            ),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      appTutorials,
-                      style: PayNestTheme.h2_12blueAccent.copyWith(
-                        fontSize: sizes.fontRatio * 14,
-                        color: PayNestTheme.primaryColor,
-                      ),
-                    ),
-                    verticalSpacer(8),
-                    Container(
-                      width: sizes.widthRatio * 280,
-                      child: Text(
-                        appManual,
-                        style: PayNestTheme.small_2_12black.copyWith(
-                          fontSize: sizes.fontRatio * 12,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                  ],
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontalValue(16),
+                vertical: verticalValue(16),
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: PayNestTheme.primaryColor,
                 ),
-              ],
-            ),
-          ),
-          verticalSpacer(24),
-          Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: horizontalValue(20),
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalValue(16),
-              vertical: verticalValue(16),
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: PayNestTheme.primaryColor,
               ),
-            ),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      contactCustomerCare,
-                      style: PayNestTheme.h2_12blueAccent.copyWith(
-                        fontSize: sizes.fontRatio * 14,
-                        color: PayNestTheme.primaryColor,
-                      ),
-                    ),
-                    verticalSpacer(8),
-                    Container(
-                      width: sizes.widthRatio * 280,
-                      child: Text(
-                        shareYourQuery,
-                        style: PayNestTheme.small_2_12black.copyWith(
-                          fontSize: sizes.fontRatio * 12,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          verticalSpacer(24),
-          Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: horizontalValue(20),
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalValue(16),
-              vertical: verticalValue(16),
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: PayNestTheme.primaryColor,
-              ),
-            ),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      faqs,
-                      style: PayNestTheme.h2_12blueAccent.copyWith(
-                        fontSize: sizes.fontRatio * 14,
-                        color: PayNestTheme.primaryColor,
-                      ),
-                    ),
-                    verticalSpacer(8),
-                    Container(
-                      width: sizes.widthRatio * 280,
-                      child: Text(
-                        goThrough,
-                        style: PayNestTheme.small_2_12black.copyWith(
-                          fontSize: sizes.fontRatio * 12,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          verticalSpacer(24),
-          Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: horizontalValue(20),
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalValue(16),
-              vertical: verticalValue(16),
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: PayNestTheme.primaryColor,
-              ),
-            ),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      liveChat,
-                      style: PayNestTheme.h2_12blueAccent.copyWith(
-                        fontSize: sizes.fontRatio * 14,
-                        color: PayNestTheme.primaryColor,
-                      ),
-                    ),
-                    verticalSpacer(8),
-                    Container(
-                      width: sizes.widthRatio * 280,
-                      child: Text(
-                        chatWith,
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        contactCustomerCare,
                         style: PayNestTheme.h2_12blueAccent.copyWith(
-                          fontSize: sizes.fontRatio * 12,
-                          color: PayNestTheme.textGrey,
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.primaryColor,
                         ),
                       ),
-                    ),
-                  ],
+                      verticalSpacer(8),
+                      Container(
+                        width: sizes.widthRatio * 280,
+                        child: Text(
+                          shareYourQuery,
+                          style: PayNestTheme.small_2_12black.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          verticalSpacer(24),
+          InkWell(
+            onTap: () {
+              launch(
+                'https://paynest.ae/#faq',
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: horizontalValue(20),
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontalValue(16),
+                vertical: verticalValue(16),
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: PayNestTheme.primaryColor,
                 ),
-              ],
+              ),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        faqs,
+                        style: PayNestTheme.h2_12blueAccent.copyWith(
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.primaryColor,
+                        ),
+                      ),
+                      verticalSpacer(8),
+                      Container(
+                        width: sizes.widthRatio * 280,
+                        child: Text(
+                          goThrough,
+                          style: PayNestTheme.small_2_12black.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          verticalSpacer(24),
+          InkWell(
+            onTap: () {
+              openWhatsapp();
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: horizontalValue(20),
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontalValue(16),
+                vertical: verticalValue(16),
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: PayNestTheme.primaryColor,
+                ),
+              ),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        liveChat,
+                        style: PayNestTheme.h2_12blueAccent.copyWith(
+                          fontSize: sizes.fontRatio * 14,
+                          color: PayNestTheme.primaryColor,
+                        ),
+                      ),
+                      verticalSpacer(8),
+                      Container(
+                        width: sizes.widthRatio * 280,
+                        child: Text(
+                          chatWith,
+                          style: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 12,
+                            color: PayNestTheme.textGrey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  openWhatsapp() async {
+    var whatsapp = "+971526380400";
+    var whatsappUrlAndroid =
+        "whatsapp://send?phone=" + whatsapp + "&text=hello";
+    var whatAppUrlIOS = "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
+    if (Platform.isIOS) {
+      // for iOS phone only
+      if (await canLaunch(whatAppUrlIOS)) {
+        await launch(whatAppUrlIOS, forceSafariVC: false);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Whatsapp not installed',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      }
+    } else {
+      await launch(whatsappUrlAndroid);
+    }
   }
 }

@@ -46,6 +46,7 @@ class Parent {
     required this.dialCode,
     required this.countryCode,
     required this.emiratesId,
+    required this.passport,
     required this.area,
     required this.country,
     required this.address,
@@ -69,6 +70,7 @@ class Parent {
   String dialCode;
   String countryCode;
   String emiratesId;
+  String passport;
   String? area;
   String country;
   String address;
@@ -92,6 +94,7 @@ class Parent {
     dialCode: json["dialCode"] !=null ? json["dialCode"] : "",
     countryCode: json["countryCode"] !=null ? json["countryCode"] : "",
     emiratesId: json["emiratesId"] !=null ? json["emiratesId"] : "",
+    passport: json["passport"] !=null ? json["passport"] : "",
     area: json["area"] !=null ?json["area"] : "",
     country: json["country"] !=null ?json["country"] : "",
     address: json["address"] !=null ? json["address"] : "",
@@ -116,6 +119,7 @@ class Parent {
     "dialCode": dialCode,
     "countryCode": countryCode,
     "emiratesId": emiratesId,
+    "passport": passport,
     "area": area,
     "country": country,
     "address": address,
