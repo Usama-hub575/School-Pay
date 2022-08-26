@@ -46,7 +46,7 @@ class _SingleCardWithRadioButtonState extends State<SingleCardWithRadioButton> {
           Text(
             '${widget.value}',
             style: PayNestTheme.h2_12blueAccent.copyWith(
-              fontSize: sizes.fontRatio * 14,
+              fontSize: sizes.fontRatio * 16,
               color: PayNestTheme.lightBlack,
               fontFamily: 'montserratBold',
             ),

@@ -203,7 +203,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
                       ? selectedItem!.toCountryStringOnly()
                       : selectedItem.toString(),
                   style: PayNestTheme.h2_12blueAccent.copyWith(
-                    fontSize: sizes.fontRatio * 14,
+                    fontSize: sizes.fontRatio * 16,
                     fontFamily: 'montserratBold',
                     color: PayNestTheme.black,
                   ),

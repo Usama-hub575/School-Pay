@@ -67,7 +67,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                       Text(
                         'Student Details',
                         style: PayNestTheme.h2_12blueAccent.copyWith(
-                          fontSize: sizes.fontRatio * 16,
+                          fontSize: sizes.fontRatio * 18,
                           color: PayNestTheme.colorWhite,
                         ),
                       ),
@@ -90,7 +90,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     ),
                     child: Column(
                       children: [
-                        verticalSpacer(120),
+                        verticalSpacer(140),
                         Container(
                           margin: EdgeInsets.symmetric(
                             horizontal: horizontalValue(16),
@@ -110,7 +110,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                               Text(
                                 'AED ${widget.singleStudentModel.student!.totalBalanceAmount}',
                                 style: PayNestTheme.h2_12blueAccent.copyWith(
-                                  fontSize: sizes.fontRatio * 14,
+                                  fontSize: sizes.fontRatio * 16,
                                   fontFamily: 'montserratExtraBold',
                                   color: PayNestTheme.primaryColor,
                                 ),
@@ -177,7 +177,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                 style: PayNestTheme.title_2_16primaryColor
                                     .copyWith(
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 14,
+                                  fontSize: sizes.fontRatio*14,
                                   color: PayNestTheme.primaryColor,
                                   fontFamily: 'montserratBold',
                                 ),
@@ -229,7 +229,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     Text(
                       '${widget.singleStudentModel.student!.firstName + widget.singleStudentModel.student!.lastName}',
                       style: PayNestTheme.h2_12blueAccent.copyWith(
-                        fontSize: sizes.fontRatio * 16,
+                        fontSize: sizes.fontRatio * 22,
                         color: PayNestTheme.primaryColor,
                       ),
                     ),
@@ -244,6 +244,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     verticalSpacer(16),
                     Text(
                       '${widget.singleStudentModel.student!.school!.name}',
+                      textAlign: TextAlign.center,
                       style: PayNestTheme.h2_12blueAccent.copyWith(
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.black,

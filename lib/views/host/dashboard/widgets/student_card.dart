@@ -79,7 +79,7 @@ class _StudentCardState extends State<StudentCard> {
                   '${studentElement.student?.firstName} \n ${studentElement.student?.lastName} ',
                   textAlign: TextAlign.center,
                   style: PayNestTheme.title_2_16primaryColor.copyWith(
-                    fontSize: sizes.fontRatio * 14,
+                    fontSize: sizes.fontRatio * 13,
                     color: index % 2 == 0
                         ? PayNestTheme.colorWhite
                         : PayNestTheme.black,
@@ -93,7 +93,7 @@ class _StudentCardState extends State<StudentCard> {
                     maxLines: 2,
                     textAlign: TextAlign.center,
                     style: PayNestTheme.small_2_10textGrey.copyWith(
-                      fontSize: sizes.fontRatio * 11,
+                      fontSize: sizes.fontRatio * 8,
                       color: index % 2 == 0
                           ? PayNestTheme.colorWhite
                           : PayNestTheme.black,

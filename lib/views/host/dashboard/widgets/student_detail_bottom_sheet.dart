@@ -81,6 +81,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                           fontWeight: FontWeight.bold,
                           color: PayNestTheme.primaryColor,
                           fontFamily: 'montserratBold',
+                          fontSize: sizes.fontRatio*16,
                         ),
                       ),
                       verticalSpacer(16),
@@ -99,7 +100,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                             ),
                           ], // Only num,
                           style: PayNestTheme.title_3_16blackbold.copyWith(
-                            fontSize: sizes.fontRatio * 16,
+                            fontSize: sizes.fontRatio * 12,
                             color: PayNestTheme.lightBlack,
                             fontFamily: 'montserratSemiBold',
                           ),

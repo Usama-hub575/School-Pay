@@ -100,7 +100,8 @@ class _SelectSchoolState extends State<SelectSchool> {
                                 ),
                                 Text(
                                   selectSchool,
-                                  style: PayNestTheme.title20white,
+                                  style: PayNestTheme.title20white.copyWith(fontSize: sizes.fontRatio*18,),
+
                                 ),
                                 SizedBox(
                                   height: 44.h,
@@ -335,7 +336,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                   child: Text(
                     '${log.name}',
                     style: PayNestTheme.title_2_16primaryColor.copyWith(
-                      fontSize: sizes.fontRatio * 16,
+                      fontSize: sizes.fontRatio * 14,
                       fontWeight: FontWeight.bold,
                       color: PayNestTheme.black,
                     ),
@@ -344,7 +345,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                 Text(
                   '${log.address}',
                   style: PayNestTheme.title_2_16primaryColor.copyWith(
-                    fontSize: sizes.fontRatio * 13,
+                    fontSize: sizes.fontRatio * 10,
                     fontWeight: FontWeight.w300,
                     color: PayNestTheme.textGrey,
                   ),

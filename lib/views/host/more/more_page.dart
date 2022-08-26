@@ -76,6 +76,7 @@ class _MorePageState extends State<MorePage> {
                       style: PayNestTheme.title20white.copyWith(
                         fontWeight: FontWeight.bold,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio * 18
                       ),
                     ),
                   ),
@@ -182,6 +183,7 @@ class _MorePageState extends State<MorePage> {
                         payments,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           color: PayNestTheme.black,
+                          fontSize: sizes.fontRatio * 16,
                           fontFamily: 'montserratBold',
                         ),
                       ),
@@ -218,6 +220,7 @@ class _MorePageState extends State<MorePage> {
                         general,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           color: PayNestTheme.black,
+                          fontSize: sizes.fontRatio * 16,
                           fontFamily: 'montserratBold',
                         ),
                       ),
@@ -275,6 +278,7 @@ class _MorePageState extends State<MorePage> {
                         privacy,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           color: PayNestTheme.black,
+                          fontSize: sizes.fontRatio * 16,
                           fontFamily: 'montserratBold',
                         ),
                       ),

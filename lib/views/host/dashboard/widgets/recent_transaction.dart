@@ -126,7 +126,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
             Text(
               'AED ${transactionsRow.amount}',
               style: PayNestTheme.h2_12blueAccent.copyWith(
-                fontSize: sizes.fontRatio * 16,
+                fontSize: sizes.fontRatio * 13,
                 color: PayNestTheme.blueAccent,
               ),
             ),

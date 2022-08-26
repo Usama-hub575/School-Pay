@@ -92,6 +92,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                         style: PayNestTheme.title20white.copyWith(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'montserratBold',
+                          fontSize: sizes.fontRatio*18,
                         ),
                       ),
                       Spacer(),
@@ -163,7 +164,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                                 style: PayNestTheme.title_2_16primaryColor
                                     .copyWith(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: sizes.fontRatio * 14,
+                                        fontSize: sizes.fontRatio * 13,
                                         color: PayNestTheme.black),
                               ),
                             ),
@@ -176,7 +177,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                     Text(
                       invoiceDetails,
                       style: PayNestTheme.h2_12blueAccent.copyWith(
-                        fontSize: sizes.fontRatio * 14,
+                        fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratExtraBold',
                       ),
@@ -187,6 +188,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -210,6 +212,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -233,6 +236,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -256,6 +260,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -279,6 +284,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -302,6 +308,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -379,7 +386,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                             continueToPayment,
                             style: PayNestTheme.title_2_16primaryColor.copyWith(
                               fontWeight: FontWeight.w500,
-                              fontSize: 14,
+                              fontSize: sizes.fontRatio*14,
                               color: PayNestTheme.primaryColor,
                             ),
                           ),

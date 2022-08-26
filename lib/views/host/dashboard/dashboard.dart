@@ -134,7 +134,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               Text(
                                 fullName,
                                 style: PayNestTheme.subtitle16white.copyWith(
-                                  fontSize: sizes.fontRatio * 22,
+                                  fontSize: sizes.fontRatio * 18,
                                   fontFamily: 'montserratSemiBold',
                                 ),
                               ),
@@ -221,7 +221,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     child: Text(
                       'Show All',
                       style: PayNestTheme.h2_12blueAccent.copyWith(
-                        fontSize: sizes.fontRatio * 12,
+                        fontSize: sizes.fontRatio * 10,
                         color: PayNestTheme.textGrey,
                       ),
                     ),
@@ -291,8 +291,8 @@ class _DashboardPageState extends State<DashboardPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  height: sizes.heightRatio * 30,
-                                  width: sizes.heightRatio * 30,
+                                  height: sizes.heightRatio * 25,
+                                  width: sizes.heightRatio * 25,
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                         color: PayNestTheme.colorWhite,
@@ -303,7 +303,6 @@ class _DashboardPageState extends State<DashboardPage> {
                                     child: Icon(
                                       Icons.add,
                                       color: PayNestTheme.colorWhite,
-                                      size: 20,
                                     ),
                                   ),
                                 ),
@@ -314,6 +313,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                       .copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: PayNestTheme.colorWhite,
+                                    fontSize: sizes.fontRatio * 14
                                   ),
                                 ),
                               ],
@@ -343,7 +343,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             child: Text(
                               showAll,
                               style: PayNestTheme.h2_12blueAccent.copyWith(
-                                fontSize: sizes.fontRatio * 12,
+                                fontSize: sizes.fontRatio * 10,
                                 color: PayNestTheme.textGrey,
                               ),
                             ),
@@ -431,7 +431,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                         style: PayNestTheme.small_2_12black
                                             .copyWith(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: sizes.fontRatio * 13,
+                                          fontSize: sizes.fontRatio * 14,
                                           color: PayNestTheme.black,
                                         ),
                                       ),
@@ -473,7 +473,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               child: Text(
                                 showAll,
                                 style: PayNestTheme.h2_12blueAccent.copyWith(
-                                  fontSize: sizes.fontRatio * 12,
+                                  fontSize: sizes.fontRatio * 10,
                                   color: PayNestTheme.textGrey,
                                 ),
                               ),

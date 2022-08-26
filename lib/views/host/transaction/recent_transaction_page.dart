@@ -93,6 +93,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                           style: PayNestTheme.title20white.copyWith(
                             fontWeight: FontWeight.bold,
                             fontFamily: 'montserratBold',
+                            fontSize: sizes.fontRatio * 18
                           ),
                         ),
                       ),

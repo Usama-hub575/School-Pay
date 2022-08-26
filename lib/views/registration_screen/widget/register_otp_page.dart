@@ -129,7 +129,7 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
                         },
                       ),
                     ),
-                    verticalSpacer(32),
+                    verticalSpacer(50),
                     !timeUpFlag
                         ? Text("Try it after $_start seconds")
                         : GestureDetector(
@@ -137,7 +137,7 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
                             child: Text(
                               resend,
                               style: PayNestTheme.h2_12blueAccent.copyWith(
-                                fontSize: sizes.fontRatio * 14,
+                                fontSize: sizes.fontRatio * 16,
                                 color: PayNestTheme.primaryColor,
                               ),
                             ),
@@ -188,7 +188,9 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
                     const Spacer(),
                     Text(
                       next,
-                      style: PayNestTheme.subtitle16white,
+                      style: PayNestTheme.subtitle16white.copyWith(
+                        fontSize: sizes.fontRatio * 14
+                      ),
                     ),
                     const Spacer(),
                     !verifyOTPController.isLoading.value

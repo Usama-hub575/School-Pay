@@ -85,8 +85,8 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
         child: Row(
           children: [
             Container(
-              height: sizes.heightRatio * 50,
-              width: sizes.heightRatio * 50,
+              height: sizes.heightRatio * 38,
+              width: sizes.heightRatio * 38,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 boxShadow: [
