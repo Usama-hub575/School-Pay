@@ -357,8 +357,7 @@ class _SignInPageState extends State<SignInPage> {
                               passwordController.text.trim(),
                               storage.read('fcmToken'),
                             );
-                            if (userController.userResData.value.status ==
-                                true) {
+                            if (userController.userResData.value.status) {
                               storage.write(
                                 'accessToken',
                                 userController.userResData.value.token,
@@ -372,12 +371,10 @@ class _SignInPageState extends State<SignInPage> {
                                 '/DashboardPage',
                                 (Route<dynamic> route) => false,
                               );
-                            } else if (userController
-                                    .userResData.value.status ==
-                                false) {
+                            } else if (!userController
+                                    .userResData.value.status) {
                               passwordController.clear();
                               userController.isLoading.value = false;
-
                               if (userController.retriesTime.value != '') {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -415,6 +412,17 @@ class _SignInPageState extends State<SignInPage> {
                                   ),
                                 );
                               }
+                            }
+                            else{
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    "Something went wrong. Try again !!",
+                                  ),
+                                  backgroundColor: Colors.red,
+                                  behavior: SnackBarBehavior.floating,
+                                ),
+                              );
                             }
                           }
                         },
