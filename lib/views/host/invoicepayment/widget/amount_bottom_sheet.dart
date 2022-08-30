@@ -222,7 +222,7 @@ class _AmountWidgetState extends State<AmountWidget> {
                               style:
                                   PayNestTheme.title_2_16primaryColor.copyWith(
                                 fontWeight: FontWeight.w500,
-                                fontSize: 14,
+                                    fontSize: sizes.fontRatio*14,
                                 color: PayNestTheme.primaryColor,
                               ),
                             ),

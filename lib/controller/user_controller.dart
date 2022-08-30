@@ -19,7 +19,7 @@ MySharedPreferences preferences = MySharedPreferences.instance;
 
 class UserController extends GetxController {
   var isLoading = false.obs;
-  final isFailed = "".obs;
+  final isFailed = ''.obs;
   var retriesTime = ''.obs;
   var attemptsRemain = ''.obs;
   final storage = GetStorage();
@@ -100,6 +100,7 @@ class UserController extends GetxController {
       );
 
       var res = await APIService().apiLogin(loginModelToJson(loginData));
+      isLoading(false);
       var decoded = jsonDecode(res);
       if (decoded['status'] == true) {
         RegisterRespModel lrm = registerRespModelFromJson(res);
@@ -122,7 +123,6 @@ class UserController extends GetxController {
           attemptsRemain.value = '';
           attemptsRemain.refresh();
         }
-        isLoading(false);
       }
     } finally {
       isLoading(false);

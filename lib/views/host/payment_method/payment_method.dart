@@ -85,6 +85,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         style: PayNestTheme.title20white.copyWith(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'montserratBold',
+                          fontSize: sizes.fontRatio*18,
                         ),
                       ),
                       Spacer(),
@@ -184,7 +185,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                   style: PayNestTheme.title_2_16primaryColor
                                       .copyWith(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 14,
+                                    fontSize: sizes.fontRatio*14,
                                     color: PayNestTheme.primaryColor,
                                   ),
                                 ),
@@ -261,7 +262,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                   style: PayNestTheme.title_2_16primaryColor
                                       .copyWith(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 14,
+                                    fontSize: sizes.fontRatio*14,
                                     color: PayNestTheme.primaryColor,
                                   ),
                                 ),
@@ -311,7 +312,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                   style: PayNestTheme.title_2_16primaryColor
                                       .copyWith(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 14,
+                                    fontSize: sizes.fontRatio*14,
                                     color: PayNestTheme.primaryColor,
                                   ),
                                 ),

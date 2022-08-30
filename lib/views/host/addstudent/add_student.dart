@@ -202,6 +202,7 @@ class _AddStudentState extends State<AddStudent> {
                                   style: PayNestTheme.title20white.copyWith(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'montserratBold',
+                                    fontSize: sizes.fontRatio*18,
                                   ),
                                 ),
                               ),

@@ -12,6 +12,7 @@ import '../../../res/res.dart';
 
 class TransactionDetailsPage extends StatefulWidget {
   TransactionDetailModel tdm;
+
   TransactionDetailsPage({Key? key, required this.tdm}) : super(key: key);
 
   @override
@@ -63,7 +64,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                                           Navigator.pop(context);
                                         },
                                         icon: Icon(Icons.arrow_back,
-                                            size: 20.sp,
+                                            size: 24.sp,
                                             color: PayNestTheme.blueAccent),
                                         // child: Text(""),
                                       ),
@@ -71,7 +72,8 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                                   ),
                                   Text(
                                     recentTransaction,
-                                    style: PayNestTheme.title20white,
+                                    style: PayNestTheme.title20white.copyWith(
+                                        fontSize: sizes.fontRatio * 18),
                                   ),
                                   SizedBox(
                                     height: 44.h,
@@ -124,8 +126,10 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                                   // Image.asset(ic_schooldark,height: 50.h,width: 50.w,),
                                   Text(
                                     widget.tdm.school!.name,
+                                    textAlign: TextAlign.center,
                                     style: PayNestTheme.h2_16textGrey.copyWith(
                                       color: PayNestTheme.black,
+                                      fontSize: sizes.fontRatio * 16,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'montserratBold',
                                     ),
@@ -138,7 +142,8 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                                         .format(widget.tdm.payedOn)
                                         .toString(),
                                     textAlign: TextAlign.center,
-                                    style: PayNestTheme.h2_14textGrey,
+                                    style: PayNestTheme.h2_14textGrey.copyWith(
+                                        fontSize: sizes.fontRatio * 14),
                                   ),
                                 ],
                               ),
@@ -192,7 +197,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     Text(
                       studentName,
                       style: PayNestTheme.title_2_16primaryColor
-                          .copyWith(fontSize: 12),
+                          .copyWith(fontSize: sizes.fontRatio * 12),
                     ),
                     SizedBox(
                       height: 5.h,
@@ -201,8 +206,9 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                         widget.tdm.student!.firstName.toString() +
                             " " +
                             widget.tdm.student!.lastName.toString(),
-                        style: PayNestTheme.title_2_16primaryColor
-                            .copyWith(color: PayNestTheme.textGrey)),
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                            color: PayNestTheme.textGrey,
+                            fontSize: sizes.fontRatio * 16)),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -215,14 +221,15 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     Text(
                       studentclass,
                       style: PayNestTheme.title_2_16primaryColor
-                          .copyWith(fontSize: 12),
+                          .copyWith(fontSize: sizes.fontRatio * 12),
                     ),
                     SizedBox(
                       height: 5.h,
                     ),
                     Text("Grade " + widget.tdm.student!.grade.toString(),
-                        style: PayNestTheme.title_2_16primaryColor
-                            .copyWith(color: PayNestTheme.textGrey)),
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                            color: PayNestTheme.textGrey,
+                            fontSize: sizes.fontRatio * 16)),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -235,14 +242,15 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     Text(
                       studentID,
                       style: PayNestTheme.title_2_16primaryColor
-                          .copyWith(fontSize: 12),
+                          .copyWith(fontSize: sizes.fontRatio * 12),
                     ),
                     SizedBox(
                       height: 5.h,
                     ),
                     Text(widget.tdm.studentId.toString(),
-                        style: PayNestTheme.title_2_16primaryColor
-                            .copyWith(color: PayNestTheme.textGrey)),
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                            color: PayNestTheme.textGrey,
+                            fontSize: sizes.fontRatio * 16)),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -255,14 +263,15 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     Text(
                       referenceNumber,
                       style: PayNestTheme.title_2_16primaryColor
-                          .copyWith(fontSize: 12),
+                          .copyWith(fontSize: sizes.fontRatio * 12),
                     ),
                     SizedBox(
                       height: 5.h,
                     ),
                     Text(widget.tdm.refNo.toString(),
-                        style: PayNestTheme.title_2_16primaryColor
-                            .copyWith(color: PayNestTheme.textGrey)),
+                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                            color: PayNestTheme.textGrey,
+                            fontSize: sizes.fontRatio * 16)),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       child: Container(
@@ -275,7 +284,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     Text(
                       amountPaid,
                       style: PayNestTheme.title_2_16primaryColor
-                          .copyWith(fontSize: 12),
+                          .copyWith(fontSize: sizes.fontRatio * 12),
                     ),
                     SizedBox(
                       height: 5.h,
@@ -283,7 +292,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     Text('AED ' + widget.tdm.amount.toString(),
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                             color: PayNestTheme.black,
-                            fontSize: 22,
+                            fontSize: sizes.fontRatio * 22,
                             fontWeight: FontWeight.bold,
                             fontFamily: "montserratBold")),
                     Padding(
@@ -317,7 +326,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                             });
                           },
                           child:
-                              Text(done, style: PayNestTheme.subtitle16white)),
+                              Text(done, style: PayNestTheme.subtitle16white.copyWith(fontSize: sizes.fontRatio * 14))),
                     )
                   ],
                 ),

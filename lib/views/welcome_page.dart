@@ -114,7 +114,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   child: Text(
                     signIn,
                     style: PayNestTheme.subtitle16white.copyWith(
-                      fontSize: 14.sp,
+                      fontSize: sizes.fontRatio*14,
                         fontFamily: 'montserratBold'
                     ),
                   ),
@@ -142,7 +142,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 child: Text(
                   register,
                   style: PayNestTheme.title_2_16primaryColor.copyWith(
-                    fontSize: 14.sp,
+                    fontSize: sizes.fontRatio*14,
                       fontFamily: 'montserratBold'
                   ),
                 ),

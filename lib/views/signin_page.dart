@@ -97,7 +97,7 @@ class _SignInPageState extends State<SignInPage> {
                         Text(
                           'Sign In',
                           style: PayNestTheme.h2_12blueAccent.copyWith(
-                            fontSize: sizes.fontRatio * 20,
+                            fontSize: sizes.fontRatio * 22,
                             color: PayNestTheme.black,
                           ),
                         ),
@@ -105,13 +105,14 @@ class _SignInPageState extends State<SignInPage> {
                         Text(
                           'Please Enter Your Registered Email ID and Password',
                           style: PayNestTheme.h2_12blueAccent.copyWith(
-                            fontSize: sizes.fontRatio * 14,
+                            fontSize: sizes.fontRatio * 12,
                             color: PayNestTheme.black,
                             fontWeight: FontWeight.w300,
                           ),
                         ),
                         verticalSpacer(16),
                         TextFormField(
+                          style: TextStyle(fontSize: sizes.fontRatio * 16),
                           controller: emailController,
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(
@@ -163,7 +164,7 @@ class _SignInPageState extends State<SignInPage> {
                           controller: passwordController,
                           obscureText: isObscure,
                           style: PayNestTheme.title_2_16primaryColor.copyWith(
-                            fontSize: sizes.fontRatio * 14,
+                            fontSize: sizes.fontRatio * 16,
                             color: PayNestTheme.textGrey,
                           ),
                           decoration: InputDecoration(
@@ -357,8 +358,7 @@ class _SignInPageState extends State<SignInPage> {
                               passwordController.text.trim(),
                               storage.read('fcmToken'),
                             );
-                            if (userController.userResData.value.status ==
-                                true) {
+                            if (userController.userResData.value.status) {
                               storage.write(
                                 'accessToken',
                                 userController.userResData.value.token,
@@ -372,12 +372,10 @@ class _SignInPageState extends State<SignInPage> {
                                 '/DashboardPage',
                                 (Route<dynamic> route) => false,
                               );
-                            } else if (userController
-                                    .userResData.value.status ==
-                                false) {
+                            } else if (!userController
+                                    .userResData.value.status) {
                               passwordController.clear();
                               userController.isLoading.value = false;
-
                               if (userController.retriesTime.value != '') {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -416,10 +414,21 @@ class _SignInPageState extends State<SignInPage> {
                                 );
                               }
                             }
+                            else{
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    "Something went wrong. Try again !!",
+                                  ),
+                                  backgroundColor: Colors.red,
+                                  behavior: SnackBarBehavior.floating,
+                                ),
+                              );
+                            }
                           }
                         },
                         child: !userController.isLoading.value
-                            ? Text(signIn, style: PayNestTheme.subtitle16white)
+                            ? Text(signIn, style: PayNestTheme.subtitle16white.copyWith(fontSize: sizes.fontRatio * 14))
                             : Center(
                                 child: CircularProgressIndicator(
                                   backgroundColor: PayNestTheme.colorWhite,

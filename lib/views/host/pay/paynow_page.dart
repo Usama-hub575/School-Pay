@@ -132,6 +132,7 @@ class _PayNowPageState extends State<PayNowPage> {
                             style: PayNestTheme.title20white.copyWith(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'montserratBold',
+                              fontSize: sizes.fontRatio*18,
                             ),
                           ),
                           Spacer(),
@@ -299,7 +300,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                               style: PayNestTheme
                                                   .h2_12blueAccent
                                                   .copyWith(
-                                                fontSize: sizes.fontRatio * 12,
+                                                fontSize: sizes.fontRatio * 16,
                                                 color:
                                                     PayNestTheme.primaryColor,
                                               ),
@@ -375,7 +376,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                               .copyWith(
                                                             fontWeight:
                                                                 FontWeight.w500,
-                                                            fontSize: 14,
+                                                            fontSize: sizes.fontRatio*14,
                                                             color: PayNestTheme
                                                                 .primaryColor,
                                                           ),
@@ -468,7 +469,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                               .copyWith(
                                                             fontWeight:
                                                                 FontWeight.w500,
-                                                            fontSize: 14,
+                                                            fontSize: sizes.fontRatio*14,
                                                             color: PayNestTheme
                                                                 .primaryColor,
                                                           ),
@@ -527,7 +528,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                               .copyWith(
                                                             fontWeight:
                                                                 FontWeight.w500,
-                                                            fontSize: 14,
+                                                            fontSize: sizes.fontRatio*14,
                                                             color: PayNestTheme
                                                                 .primaryColor,
                                                           ),
@@ -841,7 +842,7 @@ class _PayNowPageState extends State<PayNowPage> {
                     '${studentElement.student?.firstName} \n ${studentElement.student?.lastName} ',
                     textAlign: TextAlign.center,
                     style: PayNestTheme.title_2_16primaryColor.copyWith(
-                      fontSize: sizes.fontRatio * 14,
+                      fontSize: sizes.fontRatio * 13,
                       color: index % 2 == 0
                           ? PayNestTheme.colorWhite
                           : PayNestTheme.black,
@@ -855,7 +856,7 @@ class _PayNowPageState extends State<PayNowPage> {
                       maxLines: 2,
                       textAlign: TextAlign.center,
                       style: PayNestTheme.small_2_10textGrey.copyWith(
-                        fontSize: sizes.fontRatio * 11,
+                        fontSize: sizes.fontRatio * 10,
                         color: index % 2 == 0
                             ? PayNestTheme.colorWhite
                             : PayNestTheme.black,

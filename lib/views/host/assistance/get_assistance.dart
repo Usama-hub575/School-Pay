@@ -64,6 +64,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                           style: PayNestTheme.title20white.copyWith(
                             fontWeight: FontWeight.bold,
                             fontFamily: 'montserratBold',
+                            fontSize: sizes.fontRatio*18,
                           ),
                         ),
                         SizedBox(
@@ -106,7 +107,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                       Text(
                         contactCustomerCare,
                         style: PayNestTheme.h2_12blueAccent.copyWith(
-                          fontSize: sizes.fontRatio * 14,
+                          fontSize: sizes.fontRatio * 16,
                           color: PayNestTheme.primaryColor,
                         ),
                       ),
@@ -116,7 +117,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                         child: Text(
                           shareYourQuery,
                           style: PayNestTheme.small_2_12black.copyWith(
-                            fontSize: sizes.fontRatio * 12,
+                            fontSize: sizes.fontRatio * 10,
                             fontWeight: FontWeight.w300,
                           ),
                         ),
@@ -156,7 +157,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                       Text(
                         faqs,
                         style: PayNestTheme.h2_12blueAccent.copyWith(
-                          fontSize: sizes.fontRatio * 14,
+                          fontSize: sizes.fontRatio * 16,
                           color: PayNestTheme.primaryColor,
                         ),
                       ),
@@ -166,7 +167,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                         child: Text(
                           goThrough,
                           style: PayNestTheme.small_2_12black.copyWith(
-                            fontSize: sizes.fontRatio * 12,
+                            fontSize: sizes.fontRatio * 10,
                             fontWeight: FontWeight.w300,
                           ),
                         ),
@@ -204,7 +205,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                       Text(
                         liveChat,
                         style: PayNestTheme.h2_12blueAccent.copyWith(
-                          fontSize: sizes.fontRatio * 14,
+                          fontSize: sizes.fontRatio * 16,
                           color: PayNestTheme.primaryColor,
                         ),
                       ),
@@ -214,7 +215,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                         child: Text(
                           chatWith,
                           style: PayNestTheme.h2_12blueAccent.copyWith(
-                            fontSize: sizes.fontRatio * 12,
+                            fontSize: sizes.fontRatio * 10,
                             color: PayNestTheme.textGrey,
                           ),
                         ),

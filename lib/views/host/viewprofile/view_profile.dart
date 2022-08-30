@@ -91,6 +91,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                 style: PayNestTheme.title20white.copyWith(
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'montserratBold',
+                                  fontSize: sizes.fontRatio * 18
                                 ),
                               ),
                               Spacer(),
@@ -168,6 +169,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
+                                  verticalSpacer(10),
                                   Text(
                                     userController.userResData.value.parent!
                                             .firstName +
@@ -233,6 +235,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       accountDetails,
                       style: PayNestTheme.title_2_16primaryColor.copyWith(
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio* 16,
                       ),
                     ),
                     verticalSpacer(16),
@@ -241,6 +244,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -268,6 +272,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(8),
@@ -293,6 +298,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(8),
@@ -318,6 +324,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(8),
@@ -363,6 +370,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(8),
@@ -408,6 +416,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(8),
@@ -447,6 +456,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(8),
@@ -500,6 +510,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*16,
                       ),
                     ),
                     verticalSpacer(8),

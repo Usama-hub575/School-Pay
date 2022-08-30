@@ -61,6 +61,7 @@ class _PayNowTransactionDetailsPageState
                               style: PayNestTheme.title20white.copyWith(
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'montserratBold',
+                                fontSize: sizes.fontRatio*18,
                               ),
                             ),
                           ),
@@ -155,6 +156,7 @@ class _PayNowTransactionDetailsPageState
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -180,6 +182,7 @@ class _PayNowTransactionDetailsPageState
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -189,6 +192,7 @@ class _PayNowTransactionDetailsPageState
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.lightBlack,
                         fontFamily: 'montserratSemiBold',
+
                       ),
                     ),
                     verticalSpacer(4),
@@ -203,6 +207,7 @@ class _PayNowTransactionDetailsPageState
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -226,6 +231,7 @@ class _PayNowTransactionDetailsPageState
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -249,6 +255,7 @@ class _PayNowTransactionDetailsPageState
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -272,6 +279,7 @@ class _PayNowTransactionDetailsPageState
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
+                        fontSize: sizes.fontRatio*12,
                       ),
                     ),
                     SizedBox(
@@ -279,7 +287,9 @@ class _PayNowTransactionDetailsPageState
                     ),
                     Text(
                       'AED ' + widget.pntdm.amountPaid.toString(),
-                      style: PayNestTheme.title_3_16black,
+                      style: PayNestTheme.title_3_16black.copyWith(
+                        fontSize: sizes.fontRatio*22,
+                      ),
                     ),
                     verticalSpacer(100),
                     Container(
