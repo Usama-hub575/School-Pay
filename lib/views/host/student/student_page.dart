@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/res/res.dart';
@@ -78,23 +79,23 @@ class _StudentPageState extends State<StudentPage> {
                     ),
                   ),
                   horizontalSpacer(82),
-                  Container(
-                    height: sizes.heightRatio * 40,
-                    width: sizes.widthRatio * 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16.r),
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        AddStudentBottomSheet.show(
-                          context: context,
-                        );
-                      },
-                      icon: Icon(
-                        Icons.add,
-                        size: 20.sp,
-                        color: PayNestTheme.blueAccent,
+                  GestureDetector(
+                    onTap: () {
+                      AddStudentBottomSheet.show(
+                        context: context,
+                      );
+                    },
+                    child: Container(
+                      height: sizes.heightRatio * 40,
+                      width: sizes.widthRatio * 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(
+                          16.r,
+                        ),
+                      ),
+                      child: Lottie.asset(
+                        addStudentAnimation,
                       ),
                     ),
                   ),

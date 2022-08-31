@@ -34,6 +34,7 @@ const icPrivacyPolicy = "assets/svg/ic_privacy_policy.svg";
 const icTermsAndCondition = "assets/svg/ic_terms_and_condition.svg";
 const icAdd = "assets/svg/ic_add.svg";
 const icArrowDown = "assets/svg/ic_arrow_down.svg";
+const icArrowDropDown = "assets/svg/ic_arrow_drop_down.svg";
 
 //json
 
@@ -46,6 +47,11 @@ const editAnimation = 'assets/json/edit.json';
 const checkAnimation = 'assets/json/check_animation.json';
 const schoolCampusAnimation = 'assets/json/school_campus_animation.json';
 const successCheckAnimation = 'assets/json/success_check_animation.json';
+const studentJumpingAnimation = 'assets/json/student_jumping.json';
+const addStudentAnimation = 'assets/json/add_student_animation.json';
+const customerSupportAnimation = 'assets/json/customer_support_animation.json';
+const faqAnimation = 'assets/json/faq _animation.json';
+const commentAnimation = 'assets/json/comment_animation.json';
 
 
 //png
@@ -265,21 +271,20 @@ const paymentCategories = "Payment Categories";
 const chgPIN = "Change PIN";
 const biometricAuth = "Biometric Authentication";
 const Location = "Location Access";
-const FAQ = "FAQ'S";
 const contactUs = "Contact Us";
 const privacyPolicy = "Privacy Policy";
 const privacy = "Privacy";
 const termConditions = "Terms And Conditions";
 const dontStudents = "You don't have any students";
 
-const assistance = "Get assistance";
+const assistance = "Get Assistance";
 const assistanceMSG = "Go through the App tutorials or feel free to contact us on customer care regarding your queries.";
 
 const appTutorial = "App tutorial";
 const appGUIDE = "This app will guide you how to perform transactions, add students and properties and more.";
 const contactCC = "Contact Customer Care";
 const contactAssistance = "Still not getting what you are looking for. Contact our customer care for further assistance";
-const FAQs = "FAQS";
+const FAQs = "FAQs";
 const commonQuestion = "Get the query to your most common questions here.";
 const startLChat = "Immediately start live chat with one of our customer care representative.";
 

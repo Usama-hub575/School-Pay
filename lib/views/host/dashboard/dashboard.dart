@@ -219,7 +219,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                   Spacer(),
                   InkWell(
-                    onTap: ()=> widget.onTap(),
+                    onTap: () => widget.onTap(),
                     child: Text(
                       'Show All',
                       style: PayNestTheme.h2_12blueAccent.copyWith(
@@ -227,7 +227,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         color: PayNestTheme.textGrey,
                       ),
                     ),
-                  ), 
+                  ),
                 ],
               ),
             ),
@@ -293,13 +293,12 @@ class _DashboardPageState extends State<DashboardPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  height: sizes.heightRatio * 25,
-                                  width: sizes.heightRatio * 25,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                        color: PayNestTheme.colorWhite,
-                                        width: 2.5),
-                                    borderRadius: BorderRadius.circular(30),
+                                      color: PayNestTheme.colorWhite,
+                                      width: 2,
+                                    ),
+                                    shape: BoxShape.circle,
                                   ),
                                   child: Center(
                                     child: Icon(
@@ -313,10 +312,9 @@ class _DashboardPageState extends State<DashboardPage> {
                                   addStudent,
                                   style: PayNestTheme.title_2_16primaryColor
                                       .copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: PayNestTheme.colorWhite,
-                                    fontSize: sizes.fontRatio * 14
-                                  ),
+                                          fontWeight: FontWeight.w500,
+                                          color: PayNestTheme.colorWhite,
+                                          fontSize: sizes.fontRatio * 14),
                                 ),
                               ],
                             ),

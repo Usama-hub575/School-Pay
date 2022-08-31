@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/student_detail_bottom_sheet.dart';
 import '../../../../constants/constants.dart';
@@ -58,8 +59,9 @@ class StudentWidget extends StatelessWidget {
                       ),
                     ),
                     verticalSpacer(22.0),
-                    Container(
-                      height: sizes.heightRatio * 40,
+                    Lottie.asset(
+                      studentJumpingAnimation,
+                      repeat: true,
                     ),
                     verticalSpacer(22.0),
                     Container(
@@ -87,7 +89,7 @@ class StudentWidget extends StatelessWidget {
                             enterThePayNestStudentCode,
                             style: PayNestTheme.title_2_16primaryColor.copyWith(
                               fontWeight: FontWeight.w500,
-                              fontSize: sizes.fontRatio*12,
+                              fontSize: sizes.fontRatio * 12,
                               color: PayNestTheme.colorWhite,
                             ),
                           ),

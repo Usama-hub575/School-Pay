@@ -286,7 +286,7 @@ class _MorePageState extends State<MorePage> {
                     verticalSpacer(12),
                     SingleCard(
                       icon: icFaq,
-                      value: FAQ,
+                      value: FAQs,
                       onTap: () {
                         launch(
                           'https://paynest.ae/#faq',

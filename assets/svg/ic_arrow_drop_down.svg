@@ -1,0 +1,7 @@
+<svg id="MDI_arrow-down-drop-circle" data-name="MDI / arrow-down-drop-circle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Boundary" fill="#006e7d" stroke="rgba(0,0,0,0)" stroke-width="1" opacity="0">
+    <rect width="24" height="24" stroke="none"/>
+    <rect x="0.5" y="0.5" width="23" height="23" fill="none"/>
+  </g>
+  <path id="Path_arrow-down-drop-circle" data-name="Path / arrow-down-drop-circle" d="M12,2A10,10,0,1,1,2,12,10,10,0,0,1,12,2M7,10l5,5,5-5Z" fill="#006e7d"/>
+</svg>

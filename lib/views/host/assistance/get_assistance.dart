@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
@@ -64,7 +65,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                           style: PayNestTheme.title20white.copyWith(
                             fontWeight: FontWeight.bold,
                             fontFamily: 'montserratBold',
-                            fontSize: sizes.fontRatio*18,
+                            fontSize: sizes.fontRatio * 18,
                           ),
                         ),
                         SizedBox(
@@ -90,7 +91,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                 horizontal: horizontalValue(20),
               ),
               padding: EdgeInsets.symmetric(
-                horizontal: horizontalValue(16),
+                horizontal: horizontalValue(8),
                 vertical: verticalValue(16),
               ),
               decoration: BoxDecoration(
@@ -101,28 +102,39 @@ class _GetAssistanceState extends State<GetAssistance> {
               ),
               child: Row(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        contactCustomerCare,
-                        style: PayNestTheme.h2_12blueAccent.copyWith(
-                          fontSize: sizes.fontRatio * 16,
-                          color: PayNestTheme.primaryColor,
-                        ),
-                      ),
-                      verticalSpacer(8),
-                      Container(
-                        width: sizes.widthRatio * 280,
-                        child: Text(
-                          shareYourQuery,
-                          style: PayNestTheme.small_2_12black.copyWith(
-                            fontSize: sizes.fontRatio * 10,
-                            fontWeight: FontWeight.w300,
+                  Container(
+                    height: sizes.heightRatio*80,
+                    width: sizes.widthRatio*80,
+                    child: Lottie.asset(
+                      customerSupportAnimation,
+                    ),
+                  ),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          contactCustomerCare,
+                          style: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 16,
+                            color: PayNestTheme.primaryColor,
                           ),
                         ),
-                      ),
-                    ],
+                        verticalSpacer(8),
+                        Wrap(
+                          children: [
+                            Text(
+                              shareYourQuery,
+                              maxLines: 2,
+                              style: PayNestTheme.small_2_12black.copyWith(
+                                fontSize: sizes.fontRatio * 10,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -151,28 +163,37 @@ class _GetAssistanceState extends State<GetAssistance> {
               ),
               child: Row(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        faqs,
-                        style: PayNestTheme.h2_12blueAccent.copyWith(
-                          fontSize: sizes.fontRatio * 16,
-                          color: PayNestTheme.primaryColor,
-                        ),
-                      ),
-                      verticalSpacer(8),
-                      Container(
-                        width: sizes.widthRatio * 280,
-                        child: Text(
-                          goThrough,
-                          style: PayNestTheme.small_2_12black.copyWith(
-                            fontSize: sizes.fontRatio * 10,
-                            fontWeight: FontWeight.w300,
+                  Container(
+                    height: sizes.heightRatio*80,
+                    width: sizes.widthRatio*80,
+                    child: Lottie.asset(
+                      faqAnimation,
+                    ),
+                  ),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          FAQs,
+                          style: PayNestTheme.h2_12blueAccent.copyWith(
+                            fontSize: sizes.fontRatio * 16,
+                            color: PayNestTheme.primaryColor,
                           ),
                         ),
-                      ),
-                    ],
+                        verticalSpacer(8),
+                        Container(
+                          width: sizes.widthRatio * 280,
+                          child: Text(
+                            goThrough,
+                            style: PayNestTheme.small_2_12black.copyWith(
+                              fontSize: sizes.fontRatio * 10,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -198,29 +219,39 @@ class _GetAssistanceState extends State<GetAssistance> {
                 ),
               ),
               child: Row(
+
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        liveChat,
-                        style: PayNestTheme.h2_12blueAccent.copyWith(
-                          fontSize: sizes.fontRatio * 16,
-                          color: PayNestTheme.primaryColor,
-                        ),
-                      ),
-                      verticalSpacer(8),
-                      Container(
-                        width: sizes.widthRatio * 280,
-                        child: Text(
-                          chatWith,
+                  Container(
+                    height: sizes.heightRatio*56,
+                    width: sizes.widthRatio*56,
+                    child: Lottie.asset(
+                      commentAnimation,
+                    ),
+                  ),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          liveChat,
                           style: PayNestTheme.h2_12blueAccent.copyWith(
-                            fontSize: sizes.fontRatio * 10,
-                            color: PayNestTheme.textGrey,
+                            fontSize: sizes.fontRatio * 16,
+                            color: PayNestTheme.primaryColor,
                           ),
                         ),
-                      ),
-                    ],
+                        verticalSpacer(8),
+                        Container(
+                          width: sizes.widthRatio * 280,
+                          child: Text(
+                            chatWith,
+                            style: PayNestTheme.small_2_12black.copyWith(
+                              fontSize: sizes.fontRatio * 10,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

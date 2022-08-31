@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
@@ -288,6 +289,9 @@ class _AddStudentState extends State<AddStudent> {
                                             fontSize: sizes.fontRatio * 14,
                                             color: PayNestTheme.lightBlack,
                                             fontFamily: 'montserratRegular',
+                                          ),
+                                          icon: SvgPicture.asset(
+                                            icArrowDropDown,
                                           ),
                                           dropdownDecoration: BoxDecoration(
                                             borderRadius: BorderRadius.only(
