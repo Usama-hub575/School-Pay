@@ -60,19 +60,29 @@ class _SignInPageState extends State<SignInPage> {
             verticalSpacer(40),
             Row(
               children: [
-                Container(
-                  height: 54.h,
-                  width: 44.w,
-                  decoration: BoxDecoration(
+                Padding(
+                  padding: EdgeInsets.only(
+                    right: 25.w,
+                  ),
+                  child: Container(
+                    height: 44.h,
+                    width: 44.w,
+                    decoration: BoxDecoration(
                       color: PayNestTheme.primaryColor,
-                      borderRadius: BorderRadius.circular(15.r)),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.arrow_back,
-                        size: 20.sp, color: PayNestTheme.colorWhite),
-                    // child: Text(""),
+                      borderRadius: BorderRadius.circular(
+                        12.r,
+                      ),
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.arrow_back,
+                        size: 20.sp,
+                        color: PayNestTheme.colorWhite,
+                      ),
+                    ),
                   ),
                 ),
                 Spacer(),

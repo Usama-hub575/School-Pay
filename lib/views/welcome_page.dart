@@ -58,38 +58,38 @@ class _WelcomePageState extends State<WelcomePage> {
               width: sizes.widthRatio* 230,
             ),
             verticalSpacer(220),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'English',
-                    style: PayNestTheme.subtitle16white.copyWith(
-                      fontSize: sizes.fontRatio * 18,
-                      color: PayNestTheme.colorWhite,
-                        fontFamily: 'montserratBold'
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 2,
-                  height: 18.h,
-                  color: PayNestTheme.colorWhite,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Arabic',
-                    style: PayNestTheme.subtitle16white.copyWith(
-                      fontSize: sizes.fontRatio * 18,
-                      color: PayNestTheme.dropShadow,
-                        fontFamily: 'montserratBold'
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     TextButton(
+            //       onPressed: () {},
+            //       child: Text(
+            //         'English',
+            //         style: PayNestTheme.subtitle16white.copyWith(
+            //           fontSize: sizes.fontRatio * 18,
+            //           color: PayNestTheme.colorWhite,
+            //             fontFamily: 'montserratBold'
+            //         ),
+            //       ),
+            //     ),
+            //     Container(
+            //       width: 2,
+            //       height: 18.h,
+            //       color: PayNestTheme.colorWhite,
+            //     ),
+            //     TextButton(
+            //       onPressed: () {},
+            //       child: Text(
+            //         'Arabic',
+            //         style: PayNestTheme.subtitle16white.copyWith(
+            //           fontSize: sizes.fontRatio * 18,
+            //           color: PayNestTheme.dropShadow,
+            //             fontFamily: 'montserratBold'
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             Container(
               width: double.infinity,
               height: sizes.heightRatio * 46,
