@@ -209,33 +209,36 @@ class _InitializerScreenState extends State<InitializerScreen> {
         ),
       ),
     );
-    await remoteConfig.fetchAndActivate();
+    try{
+      await remoteConfig.fetchAndActivate();
+      APIService.baseurl = Uri.parse(remoteConfig.getString(baseUrl));
+      APIService.paymentGateway =
+          Uri.parse(remoteConfig.getString(paymentGatewayUrl));
+      minAndroidAppVersion = remoteConfig.getString(minAndroidAppVersion);
+      maxAndroidAppVersion = remoteConfig.getString(maxAndroidAppVersion);
+      minIosAppVersion = remoteConfig.getString(minIosAppVersion);
+      maxIosAppVersion = remoteConfig.getString(maxIosAppVersion);
 
-    APIService.baseurl = Uri.parse(remoteConfig.getString(baseUrl));
-    APIService.paymentGateway =
-        Uri.parse(remoteConfig.getString(paymentGatewayUrl));
-    minAndroidAppVersion = remoteConfig.getString(minAndroidAppVersion);
-    maxAndroidAppVersion = remoteConfig.getString(maxAndroidAppVersion);
-    minIosAppVersion = remoteConfig.getString(minIosAppVersion);
-    maxIosAppVersion = remoteConfig.getString(maxIosAppVersion);
+      if (Platform.isAndroid) {
+        minAppVersion = minAndroidAppVersion;
+        maxAppVersion = maxAndroidAppVersion;
+      }
+      if (Platform.isIOS) {
+        minAppVersion = minIosAppVersion;
+        maxAppVersion = maxIosAppVersion;
+      }
 
-    if (Platform.isAndroid) {
-      minAppVersion = minAndroidAppVersion;
-      maxAppVersion = maxAndroidAppVersion;
+      isVersionGreaterThan(maxAppVersion, localAppVersion) == true
+          ? Future.delayed(const Duration(seconds: 1)).then(
+            (value) =>
+        isVersionGreaterThan(minAppVersion, localAppVersion) == true
+            ? getForcefulAppUpdateDialog()
+            : getOptionalAppUpdateDialog(),
+      )
+          : Future.delayed(const Duration(seconds: 2))
+          .then((value) => getCountries());
+    }catch(e){
+      getCountries();
     }
-    if (Platform.isIOS) {
-      minAppVersion = minIosAppVersion;
-      maxAppVersion = maxIosAppVersion;
-    }
-
-    isVersionGreaterThan(maxAppVersion, localAppVersion) == true
-        ? Future.delayed(const Duration(seconds: 1)).then(
-          (value) =>
-      isVersionGreaterThan(minAppVersion, localAppVersion) == true
-          ? getForcefulAppUpdateDialog()
-          : getOptionalAppUpdateDialog(),
-    )
-        : Future.delayed(const Duration(seconds: 2))
-        .then((value) => getCountries());
   }
 }

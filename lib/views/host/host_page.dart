@@ -1,6 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
@@ -31,17 +32,17 @@ class _HostPageState extends State<HostPage> {
   ];
 
   final selectedIcons = <String>[
-    ic_dashboard_non,
-    ic_student_non,
-    ic_transaction_non,
-    ic_menu_non,
-  ];
-
-  final unSelectedIcons = <String>[
     ic_dashboard,
     ic_student,
     ic_transaction,
     ic_menu,
+  ];
+
+  final unSelectedIcons = <String>[
+    ic_dashboard_non,
+    ic_student_non,
+    ic_transaction_non,
+    ic_menu_non,
   ];
 
   final names = <String>[
@@ -62,6 +63,9 @@ class _HostPageState extends State<HostPage> {
       DashboardPage(
         onTap: () {
           selectedNavItem(1);
+        },
+        onRecentTransactionTap: () {
+          selectedNavItem(2);
         },
       ),
     );
@@ -92,8 +96,8 @@ class _HostPageState extends State<HostPage> {
         child: payNow == -1 ? pay[0] : pages[pageIndex],
       ),
       floatingActionButton: Container(
-        height: 70.h,
-        width: 70.h,
+        height: 64.h,
+        width: 64.h,
         child: FloatingActionButton.extended(
           backgroundColor: PayNestTheme.primaryColor,
           onPressed: () {
@@ -120,12 +124,14 @@ class _HostPageState extends State<HostPage> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                bottomTabIsActive ? selectedIcons[index] : unSelectedIcons[index],
-                height: sizes.heightRatio * 26,
-                width: sizes.widthRatio * 26,
+              SvgPicture.asset(
+                bottomTabIsActive
+                    ? selectedIcons[index]
+                    : unSelectedIcons[index],
               ),
-              const SizedBox(height: 4),
+              const SizedBox(
+                height: 4,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
@@ -133,7 +139,7 @@ class _HostPageState extends State<HostPage> {
                   maxLines: 1,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: sizes.fontRatio * 10,
+                    fontSize: sizes.fontRatio * 8,
                   ),
                 ),
               )
@@ -144,7 +150,8 @@ class _HostPageState extends State<HostPage> {
         activeIndex: pageIndex,
         splashColor: PayNestTheme.blueAccent,
         splashSpeedInMilliseconds: 0,
-        notchMargin: sizes.heightRatio*12,
+        notchMargin: sizes.heightRatio * 8,
+        hideAnimationCurve: Curves.linear,
         notchSmoothness: NotchSmoothness.softEdge,
         gapLocation: GapLocation.center,
         leftCornerRadius: 16,

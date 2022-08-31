@@ -32,9 +32,11 @@ class DashboardPage extends StatefulWidget {
   DashboardPage({
     Key? key,
     required this.onTap,
+    required this.onRecentTransactionTap,
   }) : super(key: key);
 
   final Function onTap;
+  final Function onRecentTransactionTap;
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();

@@ -122,7 +122,7 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       designSize: Size(375, 812),
       builder: ()=> MaterialApp(
-        title: 'PayNest School',
+        title: 'PayNest',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,

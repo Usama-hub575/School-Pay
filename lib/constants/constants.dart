@@ -49,15 +49,15 @@ const successCheckAnimation = 'assets/json/success_check_animation.json';
 
 
 //png
-const ic_dashboard = "assets/dashboard/ic_dashboard.png";
-const ic_dashboard_non = "assets/dashboard/ic_dashboard_non.png";
-const ic_student = "assets/dashboard/ic_student.png";
-const ic_student_non = "assets/dashboard/ic_student_non.png";
+const ic_dashboard = "assets/svg/ic_dashboard_selected.svg";
+const ic_dashboard_non = "assets/svg/ic_dashboard_unselected.svg";
+const ic_student = "assets/svg/ic_student_selected.svg";
+const ic_student_non = "assets/svg/ic_student_unselected.svg";
 const ic_bell = "assets/dashboard/ic_bell.png";
-const ic_transaction = "assets/dashboard/ic_transaction.png";
-const ic_transaction_non = "assets/dashboard/ic_transaction_non.png";
-const ic_menu = "assets/dashboard/ic_menu.png";
-const ic_menu_non = "assets/dashboard/ic_menu_non.png";
+const ic_transaction = "assets/svg/ic_transaction_selected.svg";
+const ic_transaction_non = "assets/svg/ic_transaction_unselected.svg";
+const ic_menu = "assets/svg/ic_setting_selected.svg";
+const ic_menu_non = "assets/svg/ic_setting_unselected.svg";
 const icBackground = "assets/png/ic_background.png";
 const noData = "assets/png/no-data.png";
 const warning = "assets/png/warning.png";
