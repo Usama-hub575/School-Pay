@@ -9,7 +9,8 @@ import 'package:paynest_flutter_app/model/datamodel/selectedschool_to_addstudent
 import 'package:paynest_flutter_app/model/schoollist_model.dart';
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/views/host/addstudent/add_student.dart' as add_student;
+import 'package:paynest_flutter_app/views/host/addstudent/add_student.dart'
+    as add_student;
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 class SelectSchool extends StatefulWidget {
@@ -100,8 +101,9 @@ class _SelectSchoolState extends State<SelectSchool> {
                                 ),
                                 Text(
                                   selectSchool,
-                                  style: PayNestTheme.title20white.copyWith(fontSize: sizes.fontRatio*18,),
-
+                                  style: PayNestTheme.title20white.copyWith(
+                                    fontSize: sizes.fontRatio * 18,
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 44.h,
@@ -251,39 +253,39 @@ class _SelectSchoolState extends State<SelectSchool> {
   }
 
   Widget _singleCard({required Log log}) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: horizontalValue(16),
-      ),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-                SelectedSchoolData schoolData = SelectedSchoolData(
-                    id: log.id,
-                    name: log.name,
-                    deletedAt: log.deletedAt,
-                    addedBy: log.addedBy,
-                    address: log.address,
-                    description: log.description,
-                    vat: log.vat,
-                    paynestFee: log.paynestFee,
-                    apiKey: log.apiKey,
-                    merchantId: log.merchantId,
-                    file: log.file,
-                    privacy: log.privacy,
-                    createdAt: log.createdAt,
-                    updatedAt: log.updatedAt);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => add_student.AddStudent(
-                      schoolData: schoolData,
-                    ),
-                  ),
-                );
-
-            },
-            child: Container(
+    return GestureDetector(
+      onTap: () {
+        SelectedSchoolData schoolData = SelectedSchoolData(
+          id: log.id,
+          name: log.name,
+          deletedAt: log.deletedAt,
+          addedBy: log.addedBy,
+          address: log.address,
+          description: log.description,
+          vat: log.vat,
+          paynestFee: log.paynestFee,
+          apiKey: log.apiKey,
+          merchantId: log.merchantId,
+          file: log.file,
+          privacy: log.privacy,
+          createdAt: log.createdAt,
+          updatedAt: log.updatedAt,
+        );
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => add_student.AddStudent(
+              schoolData: schoolData,
+            ),
+          ),
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: horizontalValue(16),
+        ),
+        child: Row(
+          children: [
+            Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 boxShadow: [
@@ -301,38 +303,12 @@ class _SelectSchoolState extends State<SelectSchool> {
                 ),
               ),
             ),
-          ),
-          horizontalSpacer(16),
-          GestureDetector(
-            onTap: () {
-                SelectedSchoolData schoolData = SelectedSchoolData(
-                    id: log.id,
-                    name: log.name,
-                    deletedAt: log.deletedAt,
-                    addedBy: log.addedBy,
-                    address: log.address,
-                    description: log.description,
-                    vat: log.vat,
-                    paynestFee: log.paynestFee,
-                    apiKey: log.apiKey,
-                    merchantId: log.merchantId,
-                    file: log.file,
-                    privacy: log.privacy,
-                    createdAt: log.createdAt,
-                    updatedAt: log.updatedAt);
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => add_student.AddStudent(
-                      schoolData: schoolData,
-                    ),
-                  ),
-                );
-            },
-            child: Column(
+            horizontalSpacer(16),
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: sizes.widthRatio*260,
+                  width: sizes.widthRatio * 260,
                   child: Text(
                     '${log.name}',
                     style: PayNestTheme.title_2_16primaryColor.copyWith(
@@ -352,43 +328,8 @@ class _SelectSchoolState extends State<SelectSchool> {
                 ),
               ],
             ),
-          ),
-          // Spacer(),
-          // GestureDetector(
-          //   onTap: () {
-          //     schoolController.updateList(
-          //       id: log.id,
-          //     );
-          //   },
-          //   child: log.isSelected
-          //       ? Lottie.asset(
-          //           checkAnimation,
-          //           height: sizes.heightRatio * 32,
-          //           width: sizes.widthRatio * 32,
-          //         )
-          //       : Padding(
-          //           padding: EdgeInsets.only(
-          //             right: horizontalValue(8),
-          //           ),
-          //           child: Container(
-          //             height: sizes.heightRatio * 16,
-          //             width: sizes.widthRatio * 16,
-          //             decoration: BoxDecoration(
-          //               shape: BoxShape.circle,
-          //               color: log.isSelected
-          //                   ? Colors.green
-          //                   : PayNestTheme.colorWhite,
-          //               border: Border.all(
-          //                 color: log.isSelected
-          //                     ? Colors.transparent
-          //                     : PayNestTheme.black.withOpacity(0.5),
-          //               ),
-          //             ),
-          //           ),
-          //         ),
-          // ),
-          // horizontalSpacer(8),
-        ],
+          ],
+        ),
       ),
     );
   }

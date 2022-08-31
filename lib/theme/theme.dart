@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PayNestTheme {
   static Color primaryColor = const Color(0xff006E7D);
-  static Color colorDimPrimary = const Color(0xffe6fafc);
+  static Color colorDimPrimary = const Color(0xffEDF6F7);
   static Color colorWhite = const Color(0xffFFFFFF);
   static Color dropShadow = const Color(0xff7a7a7a);
   static Color borderGrey = const Color(0xffE4E6EC);

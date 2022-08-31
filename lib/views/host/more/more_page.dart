@@ -112,15 +112,19 @@ class _MorePageState extends State<MorePage> {
                       children: [
                         Obx(
                           () => CircleAvatar(
-                            backgroundImage: userController.userResData.value
-                                        .parent!.profileImage ==
-                                    null
+                            backgroundImage: userController.userResData
+                                .value.parent!.profileImage ==
+                                null &&
+                                userController.userResData.value.parent!
+                                    .profileImage !=
+                                    ""
                                 ? NetworkImage(
-                                    'https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg',
-                                  )
+                              userController.userResData.value.parent!
+                                  .profileImage,
+                            )
                                 : NetworkImage(
-                                    'https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg',
-                                  ),
+                              'https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg',
+                            ),
                           ),
                         ),
                         horizontalSpacer(16),

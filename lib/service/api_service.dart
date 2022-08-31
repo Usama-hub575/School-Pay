@@ -7,9 +7,15 @@ import 'package:http/http.dart' as http;
 class APIService {
   GetStorage storage = GetStorage();
   static var client = http.Client();
-  static var baseurl = Uri.parse("https://api.paynestschools.ae");
-  static var paymentGateway = Uri.parse('https://paynestschools.ae/pl');
-  // static var baseurl = Uri.parse("https://payschool.azurewebsites.net");
+
+  //Production Url
+  // static var baseUrl = Uri.parse("https://api.paynestschools.ae");
+  // static var paymentGatewayUrl = Uri.parse('https://paynestschools.ae/pl');
+
+  //Staging Url
+  static var baseUrl = Uri.parse("https://stage-api.paynestschools.ae");
+  static var paymentGatewayUrl = Uri.parse('https://staging.paynestschools.ae');
+
   static var baseurl1 = "discoveritech.com";
 
   static var login = "/api/parent/auth/login";
@@ -59,7 +65,7 @@ class APIService {
 
   /// * Login * ///
   Future apiLogin(data) async {
-    var endPoint = Uri.parse("$baseurl$login");
+    var endPoint = Uri.parse("$baseUrl$login");
     var response = await client.post(
       endPoint,
       headers: headers,
@@ -76,7 +82,7 @@ class APIService {
 
   /// * Send OTP * ///
   Future apiSendOTP(data) async {
-    var endPoint = Uri.parse("$baseurl$sendOTP");
+    var endPoint = Uri.parse("$baseUrl$sendOTP");
     var response = await client.post(
       endPoint,
       headers: headers,
@@ -93,7 +99,7 @@ class APIService {
 
   /// * Register * ///
   Future apiResister(data) async {
-    var endPoint = Uri.parse("$baseurl$register");
+    var endPoint = Uri.parse("$baseUrl$register");
     var response = await client.post(
       endPoint,
       headers: headers,
@@ -110,7 +116,7 @@ class APIService {
 
   /// * Get Countries * ///
   Future apiGetCountries() async {
-    var endPoint = Uri.parse("$baseurl$getCountries");
+    var endPoint = Uri.parse("$baseUrl$getCountries");
     var response = await client.get(
       endPoint,
     );
@@ -124,7 +130,7 @@ class APIService {
 
   /// * Verify OTP * ///
   Future apiVerifyOTP(data) async {
-    var endPoint = Uri.parse("$baseurl$verifyOTP");
+    var endPoint = Uri.parse("$baseUrl$verifyOTP");
     var response = await client.post(
       endPoint,
       headers: {
@@ -143,7 +149,7 @@ class APIService {
 
   /// * Fetch MyStudents already added students * ///
   Future apiMyStudents(data) async {
-    var endPoint = Uri.parse("$baseurl$myStudents");
+    var endPoint = Uri.parse("$baseUrl$myStudents");
     var response = await client.post(
       endPoint,
       headers: {
@@ -162,7 +168,7 @@ class APIService {
 
   /// * Student List * ///
   Future apiStudentList() async {
-    var endPoint = Uri.parse("$baseurl$allStudents");
+    var endPoint = Uri.parse("$baseUrl$allStudents");
     var response = await client.get(
       endPoint,
       headers: {
@@ -191,25 +197,25 @@ class APIService {
                 '{school_id}',
                 schoolId.toString(),
               );
-      endPoint = Uri.parse("$baseurl$query");
+      endPoint = Uri.parse("$baseUrl$query");
     } else if (searchBy == 'last') {
       query = searchByLastName.replaceAll('{last_name}', queryParam).replaceAll(
             '{school_id}',
             schoolId.toString(),
           );
-      endPoint = Uri.parse("$baseurl$query");
+      endPoint = Uri.parse("$baseUrl$query");
     } else if (searchBy == 'parent') {
       query = searchByPID.replaceAll('{pid}', queryParam).replaceAll(
             '{school_id}',
             schoolId.toString(),
           );
-      endPoint = Uri.parse("$baseurl$query");
+      endPoint = Uri.parse("$baseUrl$query");
     } else if (searchBy == 'sid') {
       query = searchBySID.replaceAll('{sid}', queryParam).replaceAll(
             '{school_id}',
             schoolId.toString(),
           );
-      endPoint = Uri.parse("$baseurl$query");
+      endPoint = Uri.parse("$baseUrl$query");
     }
 
     var response = await client.get(
@@ -229,7 +235,7 @@ class APIService {
 
   /// * Schools List * ///
   Future apiSchoolList() async {
-    var endPoint = Uri.parse("$baseurl$allSchools");
+    var endPoint = Uri.parse("$baseUrl$allSchools");
     var response = await client.get(
       endPoint,
       headers: {
@@ -250,7 +256,7 @@ class APIService {
   Future apiAddStudent(data) async {
     print("Student data");
     print(data);
-    var endPoint = Uri.parse("$baseurl$addStudents");
+    var endPoint = Uri.parse("$baseUrl$addStudents");
     var response = await client.post(
       endPoint,
       headers: {
@@ -271,7 +277,7 @@ class APIService {
   Future apiAddStudentByFirstName(data) async {
     print("Student data");
     print(data);
-    var endPoint = Uri.parse("$baseurl$addStudentByFirstName");
+    var endPoint = Uri.parse("$baseUrl$addStudentByFirstName");
     var response = await client.post(
       endPoint,
       headers: {
@@ -292,7 +298,7 @@ class APIService {
   Future apiAddStudentByParentRegistrationNumber(data) async {
     print("Student data");
     print(data);
-    var endPoint = Uri.parse("$baseurl$addStudentByParentRegistrationNumber");
+    var endPoint = Uri.parse("$baseUrl$addStudentByParentRegistrationNumber");
     var response = await client.post(
       endPoint,
       headers: {
@@ -313,7 +319,7 @@ class APIService {
   Future apiAddStudentByStudentRegistrationNumber(data) async {
     print("Student data");
     print(data);
-    var endPoint = Uri.parse("$baseurl$addStudentByStudentRegistrationNumber");
+    var endPoint = Uri.parse("$baseUrl$addStudentByStudentRegistrationNumber");
     var response = await client.post(
       endPoint,
       headers: {
@@ -334,7 +340,7 @@ class APIService {
   Future addStudentWithPaynestNumber(data) async {
     print("Student data");
     print(data);
-    var endPoint = Uri.parse("$baseurl$addStudentByPaynestNumber");
+    var endPoint = Uri.parse("$baseUrl$addStudentByPaynestNumber");
     var response = await client.post(
       endPoint,
       headers: {
@@ -355,7 +361,7 @@ class APIService {
   Future apiPinUpdate(data) async {
     print("Student data");
     print(data);
-    var endPoint = Uri.parse("$baseurl$pinUpdate");
+    var endPoint = Uri.parse("$baseUrl$pinUpdate");
     var response = await client.put(
       endPoint,
       headers: {
@@ -374,7 +380,7 @@ class APIService {
 
   /// * ResetPassword * ///
   Future apiResetPassword(data) async {
-    var endPoint = Uri.parse("$baseurl$resetPassword");
+    var endPoint = Uri.parse("$baseUrl$resetPassword");
     var response = await client.post(
       endPoint,
       headers: {
@@ -393,7 +399,7 @@ class APIService {
 
   /// * ResetPasswordByOTP * ///
   Future apiResetPasswordByOTP(data) async {
-    var endPoint = Uri.parse("$baseurl$resetPasswordByOTP");
+    var endPoint = Uri.parse("$baseUrl$resetPasswordByOTP");
     var response = await client.post(
       endPoint,
       headers: {
@@ -412,7 +418,7 @@ class APIService {
 
   /// * ForgotPassword * ///
   Future apiForgotPassword(data) async {
-    var endPoint = Uri.parse("$baseurl$forgotPassword");
+    var endPoint = Uri.parse("$baseUrl$forgotPassword");
     var response = await client.post(
       endPoint,
       headers: {
@@ -430,7 +436,7 @@ class APIService {
 
   /// * UpdateProfile * ///
   Future apiUpdateProfile(data) async {
-    var endPoint = Uri.parse("$baseurl$updateProfile");
+    var endPoint = Uri.parse("$baseUrl$updateProfile");
     var response = await client.put(
       endPoint,
       headers: {
@@ -449,7 +455,7 @@ class APIService {
 
   /// * Fetch all previous Transactions * ///
   Future apiTransactionList(data) async {
-    var endPoint = Uri.parse("$baseurl$transaction");
+    var endPoint = Uri.parse("$baseUrl$transaction");
     var response = await client.post(
       endPoint,
       headers: {
@@ -468,7 +474,7 @@ class APIService {
 
   /// * Verify Pin * ///
   Future apiVerifyPin(data) async {
-    var endPoint = Uri.parse("$baseurl$verifyPin");
+    var endPoint = Uri.parse("$baseUrl$verifyPin");
     var response = await client.post(
       endPoint,
       headers: {
@@ -487,7 +493,7 @@ class APIService {
 
   /// * Half Fee payment * ///
   Future apiPartialPay(data) async {
-    var endPoint = Uri.parse("$baseurl$partialPay");
+    var endPoint = Uri.parse("$baseUrl$partialPay");
     var response = await client.put(
       endPoint,
       headers: {
@@ -544,7 +550,7 @@ class APIService {
 
   /// Sending Data of student to server for which payment is made
   Future apiCreateTransaction(queryParams) async {
-    var endPoint = Uri.parse("$baseurl$createTransaction");
+    var endPoint = Uri.parse("$baseUrl$createTransaction");
     print(endPoint);
     var response = await client.post(
       endPoint,
@@ -604,7 +610,7 @@ class APIService {
 
   /// * Update Bank Response * ///
   Future apiUpdateBankResponse(data) async {
-    var endPoint = Uri.parse("$baseurl$updateBankResponse");
+    var endPoint = Uri.parse("$baseUrl$updateBankResponse");
     var response = await client.post(
       endPoint,
       headers: {
@@ -631,7 +637,7 @@ class APIService {
 
     query = getUserDataAfterProfileUpdate.replaceAll(
         '{parentId}', parentId.toString());
-    endPoint = Uri.parse("$baseurl$query");
+    endPoint = Uri.parse("$baseUrl$query");
     var response = await client.get(
       endPoint,
       headers: {

@@ -63,18 +63,23 @@ class _StudentCardState extends State<StudentCard> {
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
-              color: index % 2 == 0 ? PayNestTheme.primaryColor.withOpacity(0.5) : PayNestTheme.primaryColor.withOpacity(0.2),
+              color: index % 2 == 0
+                  ? PayNestTheme.primaryColor.withOpacity(0.5)
+                  : PayNestTheme.primaryColor.withOpacity(0.2),
             ),
             child: Column(
               children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
+                Container(
+                  height: sizes.heightRatio * 60,
+                  width: sizes.widthRatio * 60,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
                   ),
-                  minRadius: 16,
-                  maxRadius: 24,
+                  child: SvgPicture.asset(
+                    studentElement.student?.gender == "male" ? icMale : icFemale,
+                  ),
                 ),
-                verticalSpacer(12),
+                verticalSpacer(6),
                 Text(
                   '${studentElement.student?.firstName} \n ${studentElement.student?.lastName} ',
                   textAlign: TextAlign.center,

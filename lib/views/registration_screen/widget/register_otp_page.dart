@@ -92,7 +92,7 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
                         horizontal: horizontalValue(16),
                       ),
                       child: Pinput(
-                        length: 5,
+                        length: 4,
                         defaultPinTheme: PinTheme(
                           textStyle: PayNestTheme.h2_12blueAccent.copyWith(
                             fontSize: sizes.fontRatio * 16,

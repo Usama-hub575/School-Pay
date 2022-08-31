@@ -89,10 +89,9 @@ class _ViewProfileState extends State<ViewProfile> {
                               Text(
                                 myProfile,
                                 style: PayNestTheme.title20white.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'montserratBold',
-                                  fontSize: sizes.fontRatio * 18
-                                ),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'montserratBold',
+                                    fontSize: sizes.fontRatio * 18),
                               ),
                               Spacer(),
                               Padding(
@@ -204,10 +203,20 @@ class _ViewProfileState extends State<ViewProfile> {
                                 ],
                               ),
                               child: CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                  'https://cdn.pixabay.com/photo/2022/02/19/15/05/dark-7022879_960_720.jpg',
-                                ),
-                                radius: 45.r,
+                                backgroundImage: userController.userResData
+                                                .value.parent!.profileImage ==
+                                            null &&
+                                        userController.userResData.value.parent!
+                                                .profileImage !=
+                                            ""
+                                    ? NetworkImage(
+                                        userController.userResData.value.parent!
+                                            .profileImage,
+                                      )
+                                    : NetworkImage(
+                                        'https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg',
+                                      ),
+                                radius: 42.r,
                               ),
                             ),
                           )
@@ -235,7 +244,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       accountDetails,
                       style: PayNestTheme.title_2_16primaryColor.copyWith(
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio* 16,
+                        fontSize: sizes.fontRatio * 16,
                       ),
                     ),
                     verticalSpacer(16),
@@ -244,13 +253,13 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(4),
                     Obx(
-
-                      () => Text(userController.userResData.value.parent!.firstName +
+                      () => Text(
+                        userController.userResData.value.parent!.firstName +
                             " " +
                             userController.userResData.value.parent!.lastName,
                         style: PayNestTheme.title_3_16blackbold.copyWith(
@@ -272,7 +281,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(8),
@@ -298,7 +307,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(8),
@@ -324,7 +333,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(8),
@@ -370,7 +379,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(8),
@@ -416,7 +425,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(8),
@@ -424,7 +433,8 @@ class _ViewProfileState extends State<ViewProfile> {
                       () => Row(
                         children: [
                           Text(
-                            userController.userResData.value.parent?.passport ?? '',
+                            userController.userResData.value.parent?.passport ??
+                                '',
                             style: PayNestTheme.title_3_16blackbold.copyWith(
                               fontSize: sizes.fontRatio * 16,
                               color: PayNestTheme.lightBlack,
@@ -456,7 +466,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(8),
@@ -510,7 +520,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*16,
+                        fontSize: sizes.fontRatio * 16,
                       ),
                     ),
                     verticalSpacer(8),

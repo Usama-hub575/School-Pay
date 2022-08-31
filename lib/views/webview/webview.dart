@@ -48,7 +48,7 @@ class _MyWebViewState extends State<MyWebView> {
   @override
   void initState() {
     super.initState();
-    gateway = APIService.paymentGateway;
+    gateway = APIService.paymentGatewayUrl;
     paymentGateWay =
         "$gateway?amount=${widget.amount}&orderId=${widget.orderId}&schoolId=${widget.schoolId}";
     print(paymentGateWay);

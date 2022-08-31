@@ -101,28 +101,36 @@ class UserController extends GetxController {
 
       var res = await APIService().apiLogin(loginModelToJson(loginData));
       isLoading(false);
-      var decoded = jsonDecode(res);
-      if (decoded['status'] == true) {
-        RegisterRespModel lrm = registerRespModelFromJson(res);
-        userResData.value = lrm;
-        userResData.refresh();
-        print(lrm.message);
-        preferences.setStringValue(SharedPrefKeys.userEmail, email);
-        preferences.setStringValue(SharedPrefKeys.userPassword, password);
-        preferences.setStringValue(SharedPrefKeys.fcmToken, fcmToken);
-      } else if (decoded['status'] == false) {
-        if (decoded['retryInMins'] != null) {
-          retriesTime.value = decoded['retryInMins'].toString();
-          retriesTime.refresh();
-        } else if (decoded['remainingAttempts'] != null) {
-          attemptsRemain.value = decoded['remainingAttempts'].toString();
-          attemptsRemain.refresh();
-        } else {
-          retriesTime.value = '';
-          retriesTime.refresh();
-          attemptsRemain.value = '';
-          attemptsRemain.refresh();
+      if(res!= ""){
+        var decoded = jsonDecode(res);
+        if (decoded['status'] == true) {
+          RegisterRespModel lrm = registerRespModelFromJson(res);
+          userResData.value = lrm;
+          userResData.refresh();
+          print(lrm.message);
+          preferences.setStringValue(SharedPrefKeys.userEmail, email);
+          preferences.setStringValue(SharedPrefKeys.userPassword, password);
+          preferences.setStringValue(SharedPrefKeys.fcmToken, fcmToken);
+        } else if (decoded['status'] == false) {
+          if (decoded['retryInMins'] != null) {
+            retriesTime.value = decoded['retryInMins'].toString();
+            retriesTime.refresh();
+          } else if (decoded['remainingAttempts'] != null) {
+            attemptsRemain.value = decoded['remainingAttempts'].toString();
+            attemptsRemain.refresh();
+          } else {
+            retriesTime.value = '';
+            retriesTime.refresh();
+            attemptsRemain.value = '';
+            attemptsRemain.refresh();
+          }
         }
+      }else{
+        userResData.value.status == "";
+        retriesTime.value = '';
+        retriesTime.refresh();
+        attemptsRemain.value = '';
+        attemptsRemain.refresh();
       }
     } finally {
       isLoading(false);

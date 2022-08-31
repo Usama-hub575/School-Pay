@@ -35,6 +35,8 @@ const icTermsAndCondition = "assets/svg/ic_terms_and_condition.svg";
 const icAdd = "assets/svg/ic_add.svg";
 const icArrowDown = "assets/svg/ic_arrow_down.svg";
 const icArrowDropDown = "assets/svg/ic_arrow_drop_down.svg";
+const icMale = "assets/svg/male.svg";
+const icFemale = "assets/svg/female.svg";
 
 //json
 

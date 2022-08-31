@@ -290,8 +290,7 @@ class _SignInPageState extends State<SignInPage> {
                                       ),
                                     );
                                     if (userController
-                                            .userResData.value.status ==
-                                        true) {
+                                        .userResData.value.status) {
                                       storage.write(
                                         SharedPrefKeys.accessToken,
                                         userController.userResData.value.token,
@@ -306,7 +305,11 @@ class _SignInPageState extends State<SignInPage> {
                                         '/DashboardPage',
                                         (Route<dynamic> route) => false,
                                       );
-                                    } else {
+                                    } else if (userController
+                                                .userResData.value.status ==
+                                            "" ||
+                                        !userController
+                                            .userResData.value.status) {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(
@@ -383,7 +386,7 @@ class _SignInPageState extends State<SignInPage> {
                                 (Route<dynamic> route) => false,
                               );
                             } else if (!userController
-                                    .userResData.value.status) {
+                                .userResData.value.status) {
                               passwordController.clear();
                               userController.isLoading.value = false;
                               if (userController.retriesTime.value != '') {
@@ -423,8 +426,7 @@ class _SignInPageState extends State<SignInPage> {
                                   ),
                                 );
                               }
-                            }
-                            else{
+                            } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -438,7 +440,9 @@ class _SignInPageState extends State<SignInPage> {
                           }
                         },
                         child: !userController.isLoading.value
-                            ? Text(signIn, style: PayNestTheme.subtitle16white.copyWith(fontSize: sizes.fontRatio * 14))
+                            ? Text(signIn,
+                                style: PayNestTheme.subtitle16white
+                                    .copyWith(fontSize: sizes.fontRatio * 14))
                             : Center(
                                 child: CircularProgressIndicator(
                                   backgroundColor: PayNestTheme.colorWhite,

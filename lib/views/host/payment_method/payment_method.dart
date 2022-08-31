@@ -10,7 +10,6 @@ import '../../../controller/myStudent_controller.dart';
 import '../../../controller/updatebank_response_controller.dart';
 import '../../../model/datamodel/paynowtransaction_detail_model.dart';
 import '../../../model/datamodel/singlestudent_model.dart';
-import '../../../model/mystudents_resp_model.dart';
 import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/spacer.dart';
@@ -85,7 +84,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         style: PayNestTheme.title20white.copyWith(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'montserratBold',
-                          fontSize: sizes.fontRatio*18,
+                          fontSize: sizes.fontRatio * 18,
                         ),
                       ),
                       Spacer(),
@@ -185,7 +184,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                   style: PayNestTheme.title_2_16primaryColor
                                       .copyWith(
                                     fontWeight: FontWeight.w500,
-                                    fontSize: sizes.fontRatio*14,
+                                    fontSize: sizes.fontRatio * 14,
                                     color: PayNestTheme.primaryColor,
                                   ),
                                 ),
@@ -224,103 +223,121 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       ],
                     ),
                     verticalSpacer(8),
-                    Container(
-                      width: double.infinity,
-                      margin: EdgeInsets.symmetric(
-                        horizontal: horizontalValue(4),
-                      ),
-                      decoration: BoxDecoration(
-                        color: PayNestTheme.colorWhite,
-                        border: Border.all(
-                          color: PayNestTheme.primaryColor,
+                    GestureDetector(
+                      onTap: () {
+                        showToast();
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.symmetric(
+                          horizontal: horizontalValue(4),
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0.5,
-                            blurRadius: 5,
-                            offset: Offset(1, 3),
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Row(
-                        children: [
-                          horizontalSpacer(32),
-                          _otherImage(
-                            imagePath: icLean,
-                          ),
-                          horizontalSpacer(16),
-                          Expanded(
-                            child: FlatButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {},
-                              child: Center(
-                                child: Text(
-                                  payByBankTransfer,
-                                  textAlign: TextAlign.center,
-                                  style: PayNestTheme.title_2_16primaryColor
-                                      .copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: sizes.fontRatio*14,
-                                    color: PayNestTheme.primaryColor,
+                        decoration: BoxDecoration(
+                          color: PayNestTheme.textGrey.withOpacity(0.5),
+                          // border: Border.all(
+                          //   color: PayNestTheme.primaryColor,
+                          // ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 0.5,
+                              blurRadius: 5,
+                              offset: Offset(1, 3),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Row(
+                          children: [
+                            horizontalSpacer(32),
+                            _otherImage(
+                              imagePath: icLean,
+                            ),
+                            horizontalSpacer(16),
+                            Expanded(
+                              child: FlatButton(
+                                padding: EdgeInsets.zero,
+                                splashColor: Colors.transparent,
+                                disabledColor: Colors.transparent,
+                                onPressed: () {
+                                  showToast();
+                                },
+                                child: Center(
+                                  child: Text(
+                                    payByBankTransfer,
+                                    textAlign: TextAlign.center,
+                                    style: PayNestTheme.title_2_16primaryColor
+                                        .copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: sizes.fontRatio * 14,
+                                      color: PayNestTheme.primaryColor,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          horizontalSpacer(16),
-                        ],
+                            horizontalSpacer(16),
+                          ],
+                        ),
                       ),
                     ),
                     verticalSpacer(8),
-                    Container(
-                      width: double.infinity,
-                      margin: EdgeInsets.symmetric(
-                        horizontal: horizontalValue(4),
-                      ),
-                      decoration: BoxDecoration(
-                        color: PayNestTheme.colorWhite,
-                        border: Border.all(
-                          color: PayNestTheme.primaryColor,
+                    GestureDetector(
+                      onTap: () {
+                        showToast();
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.symmetric(
+                          horizontal: horizontalValue(4),
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0.5,
-                            blurRadius: 5,
-                            offset: Offset(1, 3),
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Row(
-                        children: [
-                          horizontalSpacer(32),
-                          _otherImage(
-                            imagePath: icPostPay,
-                          ),
-                          horizontalSpacer(16),
-                          Expanded(
-                            child: FlatButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {},
-                              child: Center(
-                                child: Text(
-                                  payByInstallments,
-                                  textAlign: TextAlign.center,
-                                  style: PayNestTheme.title_2_16primaryColor
-                                      .copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: sizes.fontRatio*14,
-                                    color: PayNestTheme.primaryColor,
+                        decoration: BoxDecoration(
+                          color: PayNestTheme.textGrey.withOpacity(0.5),
+                          // border: Border.all(
+                          //   color: PayNestTheme.primaryColor,
+                          // ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 0.5,
+                              blurRadius: 5,
+                              offset: Offset(1, 3),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Row(
+                          children: [
+                            horizontalSpacer(32),
+                            _otherImage(
+                              imagePath: icPostPay,
+                            ),
+                            horizontalSpacer(16),
+                            Expanded(
+                              child: FlatButton(
+                                padding: EdgeInsets.zero,
+                                splashColor: Colors.transparent,
+                                disabledColor: Colors.transparent,
+                                onPressed: () {
+                                  showToast();
+                                },
+                                child: Center(
+                                  child: Text(
+                                    payByInstallments,
+                                    textAlign: TextAlign.center,
+                                    style: PayNestTheme.title_2_16primaryColor
+                                        .copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: sizes.fontRatio * 14,
+                                      color: PayNestTheme.primaryColor,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          horizontalSpacer(16),
-                        ],
+                            horizontalSpacer(16),
+                          ],
+                        ),
                       ),
                     ),
                     verticalSpacer(24),
@@ -363,8 +380,9 @@ class _PaymentMethodState extends State<PaymentMethod> {
           studentController.myStudentData.update(
             (val) {
               String? schoolName;
-              for(int i=0;i<val!.students!.length;i++){
-                if(val.students![i].student!.school!.id == widget.singleStudentModel.student!.schoolId){
+              for (int i = 0; i < val!.students!.length; i++) {
+                if (val.students![i].student!.school!.id ==
+                    widget.singleStudentModel.student!.schoolId) {
                   schoolName = val.students![i].student!.school?.name ?? '';
                   break;
                 }
@@ -390,10 +408,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
             },
           );
         } else {
-          if(mounted){
+          if (mounted) {
             Future.delayed(
               Duration.zero,
-                  () {
+              () {
                 ScaffoldMessenger.of(
                   context,
                 ).showSnackBar(
@@ -453,11 +471,12 @@ class _PaymentMethodState extends State<PaymentMethod> {
         parentEmiratesId: singleStudentModel.student?.parentEmiratesId ?? '-',
         parentPhoneNumber: singleStudentModel.student?.parentPhoneNumber ?? '-',
         dob: singleStudentModel.student?.dob ?? DateTime.now(),
-        admissionDate: singleStudentModel.student?.admissionDate ?? DateTime.now(),
+        admissionDate:
+            singleStudentModel.student?.admissionDate ?? DateTime.now(),
         deletedAt: singleStudentModel.student?.deletedAt ?? '-',
         schoolId: singleStudentModel.student?.schoolId ?? 0,
         totalBalanceAmount:
-            singleStudentModel.student?.totalBalanceAmount.toString()  ?? '-',
+            singleStudentModel.student?.totalBalanceAmount.toString() ?? '-',
         guardianFirstName: singleStudentModel.student?.guardianFirstName,
         guardianLastName: singleStudentModel.student?.guardianLastName!,
         guardianGender: singleStudentModel.student?.guardianGender!,
@@ -468,7 +487,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
         region: singleStudentModel.student?.region,
         streetAddress: singleStudentModel.student?.streetAddress,
         email: singleStudentModel.student?.email,
-        phoneNumber: singleStudentModel.student?.phoneNumber  ?? '-',
+        phoneNumber: singleStudentModel.student?.phoneNumber ?? '-',
         otherNumber: singleStudentModel.student?.otherNumber,
         profile: singleStudentModel.student?.profile,
         religion: singleStudentModel.student?.religion,
@@ -476,7 +495,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
         gender: singleStudentModel.student?.gender,
         dueDate: singleStudentModel.student?.dueDate,
         file: singleStudentModel.student?.file,
-        privacy: singleStudentModel.student?.privacy  ?? '-',
+        privacy: singleStudentModel.student?.privacy ?? '-',
         createdAt: singleStudentModel.student?.createdAt ?? DateTime.now(),
         updatedAt: singleStudentModel.student?.updatedAt ?? DateTime.now(),
       ),
@@ -508,6 +527,26 @@ class _PaymentMethodState extends State<PaymentMethod> {
           image: AssetImage(imagePath),
           fit: BoxFit.fill,
         ),
+      ),
+    );
+  }
+
+  void showToast() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 1),
+        backgroundColor: PayNestTheme.primaryColor,
+        padding: EdgeInsets.symmetric(
+          vertical: verticalValue(16),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        content: Text(
+          'Coming soon !',
+          textAlign: TextAlign.center,
+        ),
+        behavior: SnackBarBehavior.floating,
       ),
     );
   }
