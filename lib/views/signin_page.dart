@@ -17,6 +17,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../auth/local_auth_api.dart';
 import '../utils/sharedPrefKeys.dart';
+import '../widgets/back_button.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -61,30 +62,9 @@ class _SignInPageState extends State<SignInPage> {
             verticalSpacer(40),
             Row(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    right: 25.w,
-                  ),
-                  child: Container(
-                    height: 44.h,
-                    width: 44.w,
-                    decoration: BoxDecoration(
-                      color: PayNestTheme.primaryColor,
-                      borderRadius: BorderRadius.circular(
-                        12.r,
-                      ),
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        size: 20.sp,
-                        color: PayNestTheme.colorWhite,
-                      ),
-                    ),
-                  ),
+                AppBarBackButton(
+                  iconColor: PayNestTheme.colorWhite, buttonColor: PayNestTheme.primaryColor,
+
                 ),
                 Spacer(),
                 Image.asset(

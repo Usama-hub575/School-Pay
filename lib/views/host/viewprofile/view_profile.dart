@@ -13,6 +13,7 @@ import '../../../constants/constants.dart';
 import '../../../main.dart';
 import '../../../res/assets.dart';
 import '../../../res/res.dart';
+import '../../../widgets/back_button.dart';
 import '../../../widgets/emirates_id_add_dash_function.dart';
 
 class ViewProfile extends StatefulWidget {
@@ -61,29 +62,9 @@ class _ViewProfileState extends State<ViewProfile> {
                         children: [
                           Row(
                             children: [
-                              Padding(
-                                padding: EdgeInsets.only(right: 25.w),
-                                child: Container(
-                                  height: 44.h,
-                                  width: 44.w,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(
-                                      12.r,
-                                    ),
-                                  ),
-                                  child: IconButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    icon: Icon(
-                                      Icons.arrow_back,
-                                      size: 20.sp,
-                                      color: PayNestTheme.primaryColor,
-                                    ),
-                                    // child: Text(""),
-                                  ),
-                                ),
+                              AppBarBackButton(
+                                iconColor: PayNestTheme.primaryColor,
+                                buttonColor: PayNestTheme.colorWhite,
                               ),
                               Spacer(),
                               Text(

@@ -12,6 +12,7 @@ import '../../../model/datamodel/paynowtransaction_detail_model.dart';
 import '../../../model/datamodel/singlestudent_model.dart';
 import '../../../res/res.dart';
 import '../../../theme/theme.dart';
+import '../../../widgets/back_button.dart';
 import '../../../widgets/inkwell_widget.dart';
 import '../../../widgets/spacer.dart';
 import '../../webview/webview.dart';
@@ -61,23 +62,9 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   verticalSpacer(16),
                   Row(
                     children: [
-                      Container(
-                        height: 44.h,
-                        width: 44.w,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                            size: 20.sp,
-                            color: PayNestTheme.primaryColor,
-                          ),
-                        ),
+                      AppBarBackButton(
+                        iconColor: PayNestTheme.primaryColor,
+                        buttonColor: PayNestTheme.colorWhite,
                       ),
                       Spacer(),
                       Text(

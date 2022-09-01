@@ -11,6 +11,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../res/assets.dart';
 import '../../../res/res.dart';
+import '../../../widgets/back_button.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({Key? key}) : super(key: key);
@@ -53,26 +54,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                     children: [
                       Row(
                         children: [
-                          Padding(
-                            padding: EdgeInsets.only(right: 25.h),
-                            child: Container(
-                              height: 44.h,
-                              width: 44.w,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12.r)),
-                              child: IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: Icon(
-                                  Icons.arrow_back,
-                                  size: 20.sp,
-                                  color: PayNestTheme.primaryColor,
-                                ),
-                                // child: Text(""),
-                              ),
-                            ),
+                          AppBarBackButton(
+                            iconColor: PayNestTheme.primaryColor,
+                            buttonColor: PayNestTheme.colorWhite,
                           ),
                           Text(
                             chgPassword,

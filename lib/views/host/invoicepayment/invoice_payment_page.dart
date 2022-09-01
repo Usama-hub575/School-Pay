@@ -18,6 +18,7 @@ import 'package:paynest_flutter_app/views/host/payment_method/payment_method.dar
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../../widgets/back_button.dart';
 import '../../../widgets/amount_formater.dart';
 import '../../download_pdf/download_pdf.dart';
 
@@ -69,23 +70,9 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                   verticalSpacer(16),
                   Row(
                     children: [
-                      Container(
-                        height: 44.h,
-                        width: 44.w,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                            size: 20.sp,
-                            color: PayNestTheme.primaryColor,
-                          ),
-                        ),
+                      AppBarBackButton(
+                        iconColor: PayNestTheme.primaryColor,
+                        buttonColor: PayNestTheme.colorWhite,
                       ),
                       Spacer(),
                       Text(

@@ -9,6 +9,7 @@ import '../../../controller/user_controller.dart';
 import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
+import '../../../widgets/back_button.dart';
 import '../../../widgets/custom_alert_dialog.dart';
 import '../../../widgets/spacer.dart';
 
@@ -22,7 +23,8 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   UserController userController = Get.put(UserController());
   TextEditingController emailController = TextEditingController();
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(debugLabel: 'forgotPassword');
+  GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>(debugLabel: 'forgotPassword');
 
   RegisterController registerController = RegisterController();
 
@@ -37,22 +39,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         child: Column(
           children: [
             verticalSpacer(40),
+
             Row(
               children: [
-                Container(
-                  height: 54.h,
-                  width: 44.w,
-                  decoration: BoxDecoration(
-                      color: PayNestTheme.primaryColor,
-                      borderRadius: BorderRadius.circular(15.r)),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.arrow_back,
-                        size: 20.sp, color: PayNestTheme.colorWhite),
-                    // child: Text(""),
-                  ),
+                AppBarBackButton(
+                  iconColor: PayNestTheme.colorWhite,
+                  buttonColor: PayNestTheme.primaryColor,
                 ),
                 Spacer(),
                 Image.asset(
@@ -148,26 +140,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           ),
                         ),
                         onPressed: () async {
-                          if(Utils.forgotPasswordKey.currentState!.validate()){
+                          if (Utils.forgotPasswordKey.currentState!
+                              .validate()) {
                             await registerController
                                 .hitForgotPassword(emailController.text);
-                            if (registerController.forgotPasswordResData.value.status ==
+                            if (registerController
+                                    .forgotPasswordResData.value.status ==
                                 true) {
-                              Navigator.of(context).pushNamed(
-                                '/NewPassword',
-                                arguments: emailController.text.toString()
-                              );
-                            }else {
+                              Navigator.of(context).pushNamed('/NewPassword',
+                                  arguments: emailController.text.toString());
+                            } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    registerController.isFailed.value.toString(),
+                                    registerController.isFailed.value
+                                        .toString(),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                               );
                             }
-                          }else{
+                          } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
