@@ -74,10 +74,9 @@ class _MorePageState extends State<MorePage> {
                     child: Text(
                       setting,
                       style: PayNestTheme.title20white.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio * 18
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'montserratBold',
+                          fontSize: sizes.fontRatio * 18),
                     ),
                   ),
                 ),
@@ -111,21 +110,28 @@ class _MorePageState extends State<MorePage> {
                     child: Row(
                       children: [
                         Obx(
-                          () => CircleAvatar(
-                            backgroundImage: userController.userResData
-                                .value.parent!.profileImage ==
-                                null &&
-                                userController.userResData.value.parent!
-                                    .profileImage !=
-                                    ""
-                                ? NetworkImage(
-                              userController.userResData.value.parent!
-                                  .profileImage,
-                            )
-                                : NetworkImage(
-                              'https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg',
-                            ),
-                          ),
+                          () => userController.userResData.value.parent!
+                                          .profileImage ==
+                                      null &&
+                                  userController.userResData.value.parent!
+                                          .profileImage !=
+                                      ""
+                              ? CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                    userController
+                                        .userResData.value.parent!.profileImage,
+                                  ),
+                                )
+                              : Container(
+                                  height: sizes.heightRatio * 60,
+                                  width: sizes.widthRatio * 60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: SvgPicture.asset(
+                                    icMale,
+                                  ),
+                                ),
                         ),
                         horizontalSpacer(16),
                         Obx(
@@ -141,7 +147,7 @@ class _MorePageState extends State<MorePage> {
                                 ),
                               ),
                               verticalSpacer(4),
-                              GestureDetector(
+                              InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(

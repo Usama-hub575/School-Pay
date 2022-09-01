@@ -37,6 +37,7 @@ const icArrowDown = "assets/svg/ic_arrow_down.svg";
 const icArrowDropDown = "assets/svg/ic_arrow_drop_down.svg";
 const icMale = "assets/svg/male.svg";
 const icFemale = "assets/svg/female.svg";
+const icSchoolBuilding = "assets/svg/school_building.svg";
 
 //json
 

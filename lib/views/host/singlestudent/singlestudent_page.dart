@@ -218,12 +218,15 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                 ),
                 child: Column(
                   children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
+                    Container(
+                      height: sizes.heightRatio * 60,
+                      width: sizes.widthRatio * 60,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
                       ),
-                      minRadius: 20,
-                      maxRadius: 32,
+                      child: SvgPicture.asset(
+                        widget.singleStudentModel.student?.gender == "male" ? icMale : icFemale,
+                      ),
                     ),
                     verticalSpacer(8),
                     Text(
