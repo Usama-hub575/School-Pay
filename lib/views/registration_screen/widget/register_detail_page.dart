@@ -158,10 +158,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.trim().isEmpty) {
-                            return 'Please enter your Full name';
-                          }
-                          if (value.trim().length < 5) {
-                            return 'Name must not be less than 5';
+                            return 'Please enter your First name';
                           }
                           return null;
                         },
@@ -221,10 +218,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.trim().isEmpty) {
-                            return 'Please enter your Full name';
-                          }
-                          if (value.trim().length < 5) {
-                            return 'Name must not be less than 5';
+                            return 'Please enter your Last name';
                           }
                           return null;
                         },
