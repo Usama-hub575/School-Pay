@@ -23,7 +23,8 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   UserController userController = Get.put(UserController());
   TextEditingController emailController = TextEditingController();
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(debugLabel: 'forgotPassword');
+  GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>(debugLabel: 'forgotPassword');
 
   RegisterController registerController = RegisterController();
 
@@ -41,9 +42,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             Row(
               children: [
                 AppBarBackButton(
-                  iconColor: PayNestTheme.colorWhite, buttonColor: PayNestTheme.primaryColor,
-
-                ),                Spacer(),
+                  iconColor: PayNestTheme.colorWhite,
+                  buttonColor: PayNestTheme.primaryColor,
+                ),
+                Spacer(),
                 Image.asset(
                   welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,
@@ -137,26 +139,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           ),
                         ),
                         onPressed: () async {
-                          if(Utils.forgotPasswordKey.currentState!.validate()){
+                          if (Utils.forgotPasswordKey.currentState!
+                              .validate()) {
                             await registerController
                                 .hitForgotPassword(emailController.text);
-                            if (registerController.forgotPasswordResData.value.status ==
+                            if (registerController
+                                    .forgotPasswordResData.value.status ==
                                 true) {
-                              Navigator.of(context).pushNamed(
-                                '/NewPassword',
-                                arguments: emailController.text.toString()
-                              );
-                            }else {
+                              Navigator.of(context).pushNamed('/NewPassword',
+                                  arguments: emailController.text.toString());
+                            } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    registerController.isFailed.value.toString(),
+                                    registerController.isFailed.value
+                                        .toString(),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                               );
                             }
-                          }else{
+                          } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
