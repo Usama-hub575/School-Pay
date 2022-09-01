@@ -6,6 +6,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../../main.dart';
 import '../../../../model/transactionlist_resp_model.dart';
 import '../../../../res/res.dart';
+import '../../../../widgets/amount_formater.dart';
 
 class RecentTransactions extends StatefulWidget {
   const RecentTransactions({
@@ -75,7 +76,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
       padding: EdgeInsets.symmetric(
         horizontal: horizontalValue(16),
       ),
-      child: GestureDetector(
+      child: InkWell(
         onTap: () => widget.onTap(transactionsRow),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -124,7 +125,9 @@ class _RecentTransactionsState extends State<RecentTransactions> {
             ),
             Spacer(),
             Text(
-              'AED ${transactionsRow.amount}',
+              'AED ${amountFormater(
+                double.parse('${transactionsRow.amount}'),
+              )}',
               style: PayNestTheme.h2_12blueAccent.copyWith(
                 fontSize: sizes.fontRatio * 13,
                 color: PayNestTheme.blueAccent,

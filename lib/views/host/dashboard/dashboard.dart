@@ -332,7 +332,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               color: PayNestTheme.black,
                             ),
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
@@ -461,15 +461,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {
-                                // Navigator.of(context).push(
-                                //   MaterialPageRoute(
-                                //     builder: (context) => StudentPage(
-                                //       whichStack: "other",
-                                //     ),
-                                //   ),
-                                // );
-                              },
+                              onTap: () => widget.onRecentTransactionTap(),
                               child: Text(
                                 showAll,
                                 style: PayNestTheme.h2_12blueAccent.copyWith(

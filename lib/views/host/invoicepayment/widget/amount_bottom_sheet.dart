@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 import '../../../../constants/constants.dart';
 import '../../../../res/res.dart';
 import '../../../../widgets/spacer.dart';
@@ -100,7 +101,13 @@ class _AmountWidgetState extends State<AmountWidget> {
                             ),
                             Spacer(),
                             Text(
-                              'AED ${widget.singleStudentModel.student?.totalBalanceAmount}',
+                              'AED ${amountFormater(
+                                double.parse(
+                                  widget.singleStudentModel.student!
+                                      .totalBalanceAmount
+                                      .toString(),
+                                ),
+                              )}',
                               style: PayNestTheme.h2_12blueAccent.copyWith(
                                 fontSize: sizes.fontRatio * 16,
                                 color: PayNestTheme.primaryColor,
@@ -222,7 +229,7 @@ class _AmountWidgetState extends State<AmountWidget> {
                               style:
                                   PayNestTheme.title_2_16primaryColor.copyWith(
                                 fontWeight: FontWeight.w500,
-                                    fontSize: sizes.fontRatio*14,
+                                fontSize: sizes.fontRatio * 14,
                                 color: PayNestTheme.primaryColor,
                               ),
                             ),

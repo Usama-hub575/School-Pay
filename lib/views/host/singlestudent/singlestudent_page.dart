@@ -7,6 +7,7 @@ import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
+import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
@@ -95,7 +96,13 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                               ),
                               Spacer(),
                               Text(
-                                'AED ${widget.singleStudentModel.student!.totalBalanceAmount}',
+                                'AED ${amountFormater(
+                                  double.parse(
+                                    widget.singleStudentModel.student!
+                                        .totalBalanceAmount
+                                        .toString(),
+                                  ),
+                                )}',
                                 style: PayNestTheme.h2_12blueAccent.copyWith(
                                   fontSize: sizes.fontRatio * 16,
                                   fontFamily: 'montserratExtraBold',
@@ -205,12 +212,15 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                 ),
                 child: Column(
                   children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
+                    Container(
+                      height: sizes.heightRatio * 60,
+                      width: sizes.widthRatio * 60,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
                       ),
-                      minRadius: 20,
-                      maxRadius: 32,
+                      child: SvgPicture.asset(
+                        widget.singleStudentModel.student?.gender == "male" ? icMale : icFemale,
+                      ),
                     ),
                     verticalSpacer(8),
                     Text(

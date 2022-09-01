@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/model/mystudents_resp_model.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
@@ -85,8 +86,8 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
         child: Row(
           children: [
             Container(
-              height: sizes.heightRatio * 38,
-              width: sizes.heightRatio * 38,
+              height: sizes.heightRatio * 45,
+              width: sizes.heightRatio * 45,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 boxShadow: [
@@ -98,10 +99,8 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
                   ),
                 ],
               ),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                  'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
-                ),
+              child: SvgPicture.asset(
+                student.student?.gender == 'male' ? icMale : icFemale,
               ),
             ),
             horizontalSpacer(12),

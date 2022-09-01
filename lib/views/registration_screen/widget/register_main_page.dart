@@ -265,7 +265,8 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         if (value.trim().length < 5) {
                           return 'Password must not be less than 5';
                         }
-                        if(createPasswordController.text != confirmPasswordController.text){
+                        if (createPasswordController.text !=
+                            confirmPasswordController.text) {
                           return 'Password not matched';
                         }
                         return null;
@@ -343,26 +344,43 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                       onPressed: () {
                         if (Utils.reg1FormKey.currentState!.validate() &&
                             terms == true) {
-                          setState(() {
-                            loading = !loading;
-                          });
-                          //hit otp
-                          Future.delayed(Duration(seconds: 2)).then(
-                            (value) => {
-                              sendOTPController.hitSendOTP(
-                                  phCodeController.text + phoneController.text),
-                              setState(() {
-                                loading = !loading;
-                              }),
-                              widget.onNextTap(
-                                emailController.text,
-                                createPasswordController.text,
-                                phCodeController.text,
-                                phoneController.text,
+                          if (phoneController.text.isNotEmpty &&
+                              emailController.text.isNotEmpty &&
+                              createPasswordController.text.isNotEmpty &&
+                              confirmPasswordController.text.isNotEmpty) {
+                            setState(() {
+                              loading = !loading;
+                            });
+                            //hit otp
+                            Future.delayed(Duration(seconds: 2)).then(
+                              (value) => {
+                                sendOTPController.hitSendOTP(
+                                    phCodeController.text +
+                                        phoneController.text),
+                                setState(() {
+                                  loading = !loading;
+                                }),
+                                widget.onNextTap(
+                                  emailController.text,
+                                  createPasswordController.text,
+                                  phCodeController.text,
+                                  phoneController.text,
+                                ),
+                              },
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Fields cannot be empty !!',
+                                  textAlign: TextAlign.center,
+                                ),
+                                behavior: SnackBarBehavior.floating,
                               ),
-                            },
-                          );
-                        };
+                            );
+                          }
+                        }
+                        ;
                       },
                       child: Center(
                         child: loading == false
@@ -371,7 +389,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                                 style: PayNestTheme.title_2_16primaryColor
                                     .copyWith(
                                   fontWeight: FontWeight.w500,
-                                  fontSize: sizes.fontRatio*14,
+                                  fontSize: sizes.fontRatio * 14,
                                   color: PayNestTheme.colorWhite,
                                 ),
                               )

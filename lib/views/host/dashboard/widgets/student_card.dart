@@ -30,7 +30,7 @@ class _StudentCardState extends State<StudentCard> {
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return GestureDetector(
+          return InkWell(
             onTap: () => widget.onTap(
               widget.students[index],
             ),

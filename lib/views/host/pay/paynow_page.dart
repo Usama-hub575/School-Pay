@@ -22,6 +22,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../model/mystudents_resp_model.dart';
 import '../../../res/assets.dart';
 import '../../../res/res.dart';
+import '../../../widgets/amount_formater.dart';
 
 class PayNowPage extends StatefulWidget {
   final String whichStack;
@@ -296,7 +297,9 @@ class _PayNowPageState extends State<PayNowPage> {
                                             ),
                                             Spacer(),
                                             Text(
-                                              '${payAbleAmount != '0' ? payAbleAmount : ''}',
+                                              '${payAbleAmount != '0' ? amountFormater(
+                                                  double.parse(payAbleAmount),
+                                                ) : ''}',
                                               style: PayNestTheme
                                                   .h2_12blueAccent
                                                   .copyWith(
@@ -467,8 +470,10 @@ class _PayNowPageState extends State<PayNowPage> {
                                                       child: FlatButton(
                                                         padding:
                                                             EdgeInsets.zero,
-                                                        splashColor: Colors.transparent,
-                                                        disabledColor: Colors.transparent,
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        disabledColor:
+                                                            Colors.transparent,
                                                         onPressed: () {
                                                           showToast();
                                                         },

@@ -10,6 +10,7 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
+import '../../../widgets/amount_formater.dart';
 
 class PayNowTransactionDetailsPage extends StatefulWidget {
   PayNowTransactionDetailModel pntdm;
@@ -61,7 +62,7 @@ class _PayNowTransactionDetailsPageState
                               style: PayNestTheme.title20white.copyWith(
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'montserratBold',
-                                fontSize: sizes.fontRatio*18,
+                                fontSize: sizes.fontRatio * 18,
                               ),
                             ),
                           ),
@@ -156,7 +157,7 @@ class _PayNowTransactionDetailsPageState
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -175,14 +176,13 @@ class _PayNowTransactionDetailsPageState
                       height: 1.h,
                       color: PayNestTheme.lineColor,
                     ),
-
                     verticalSpacer(16),
                     Text(
                       studentclass,
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -192,7 +192,6 @@ class _PayNowTransactionDetailsPageState
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.lightBlack,
                         fontFamily: 'montserratSemiBold',
-
                       ),
                     ),
                     verticalSpacer(4),
@@ -207,7 +206,7 @@ class _PayNowTransactionDetailsPageState
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -231,7 +230,7 @@ class _PayNowTransactionDetailsPageState
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -255,7 +254,7 @@ class _PayNowTransactionDetailsPageState
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -279,16 +278,19 @@ class _PayNowTransactionDetailsPageState
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     SizedBox(
                       height: 5.h,
                     ),
                     Text(
-                      'AED ' + widget.pntdm.amountPaid.toString(),
+                      'AED ' +
+                          amountFormater(double.parse(
+                            widget.pntdm.amountPaid.toString(),
+                          )),
                       style: PayNestTheme.title_3_16black.copyWith(
-                        fontSize: sizes.fontRatio*22,
+                        fontSize: sizes.fontRatio * 22,
                       ),
                     ),
                     verticalSpacer(100),

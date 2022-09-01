@@ -174,31 +174,36 @@ class _ViewProfileState extends State<ViewProfile> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.3),
-                                    spreadRadius: 2,
-                                    blurRadius: 3,
+                                    blurRadius: 16,
                                     offset: Offset(
-                                      1,
-                                      1,
+                                      0,
+                                      0,
                                     ),
                                   ),
                                 ],
                               ),
-                              child: CircleAvatar(
-                                backgroundImage: userController.userResData
-                                                .value.parent!.profileImage ==
-                                            null &&
-                                        userController.userResData.value.parent!
-                                                .profileImage !=
-                                            ""
-                                    ? NetworkImage(
+                              child: userController.userResData.value.parent!
+                                              .profileImage ==
+                                          null &&
+                                      userController.userResData.value.parent!
+                                              .profileImage !=
+                                          ""
+                                  ? CircleAvatar(
+                                      backgroundImage: NetworkImage(
                                         userController.userResData.value.parent!
                                             .profileImage,
-                                      )
-                                    : NetworkImage(
-                                        'https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg',
                                       ),
-                                radius: 42.r,
-                              ),
+                                    )
+                                  : Container(
+                                      height: sizes.heightRatio * 80,
+                                      width: sizes.widthRatio * 80,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: SvgPicture.asset(
+                                        icMale,
+                                      ),
+                                    ),
                             ),
                           )
                         ],
