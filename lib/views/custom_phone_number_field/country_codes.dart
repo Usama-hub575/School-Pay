@@ -710,7 +710,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+262",
   },
   {
-    "name": "México",
+    "name": "Mexico",
     "code": "MX",
     "dial_code": "+52",
   },
@@ -730,7 +730,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+377",
   },
   {
-    "name": "Монгол улс",
+    "name": "Mongolia",
     "code": "MN",
     "dial_code": "+976",
   },
@@ -770,7 +770,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+674",
   },
   {
-    "name": "नेपाल",
+    "name": "Nepal",
     "code": "NP",
     "dial_code": "+977",
   },
@@ -830,7 +830,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+47",
   },
   {
-    "name": "عمان",
+    "name": "Amman",
     "code": "OM",
     "dial_code": "+968",
   },
@@ -845,7 +845,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+680",
   },
   {
-    "name": "فلسطين",
+    "name": "Palestine",
     "code": "PS",
     "dial_code": "+970",
   },
@@ -920,7 +920,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+250",
   },
   {
-    "name": "La Réunion",
+    "name": "Réunion",
     "code": "RE",
     "dial_code": "+262",
   },
@@ -970,7 +970,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+378",
   },
   {
-    "name": "São Tomé e Príncipe",
+    "name": "Sao Tome and Principe",
     "code": "ST",
     "dial_code": "+239",
   },
@@ -1200,7 +1200,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+58",
   },
   {
-    "name": "Việt Nam",
+    "name": "Vietnam",
     "code": "VN",
     "dial_code": "+84",
   },
