@@ -39,6 +39,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         child: Column(
           children: [
             verticalSpacer(40),
+
             Row(
               children: [
                 AppBarBackButton(
