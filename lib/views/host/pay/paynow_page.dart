@@ -23,6 +23,7 @@ import '../../../model/mystudents_resp_model.dart';
 import '../../../res/assets.dart';
 import '../../../res/res.dart';
 import '../../../widgets/amount_formater.dart';
+import '../../../widgets/inkwell_widget.dart';
 
 class PayNowPage extends StatefulWidget {
   final String whichStack;
@@ -430,7 +431,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                           : const SizedBox.shrink(),
                                       verticalSpacer(8),
                                       payAbleAmount != '0'
-                                          ? GestureDetector(
+                                          ? InkWellWidget(
                                               onTap: () {
                                                 showToast();
                                               },
@@ -506,7 +507,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                           : const SizedBox.shrink(),
                                       verticalSpacer(8),
                                       payAbleAmount != '0'
-                                          ? GestureDetector(
+                                          ? InkWellWidget(
                                               onTap: () {
                                                 showToast();
                                               },
@@ -845,7 +846,7 @@ class _PayNowPageState extends State<PayNowPage> {
   }
 
   Widget _singleCard(StudentElement studentElement, Function onTap, int index) {
-    return GestureDetector(
+    return InkWellWidget(
       onTap: () => onTap(studentElement),
       child: Opacity(
         opacity: studentElement.isSelected ? 1 : 0.5,

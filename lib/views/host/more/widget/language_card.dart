@@ -5,6 +5,7 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../res/res.dart';
+import '../../../../widgets/inkwell_widget.dart';
 import '../../../../widgets/spacer.dart';
 
 class LanguageCard extends StatefulWidget {
@@ -27,7 +28,7 @@ class _LanguageCardState extends State<LanguageCard> {
   }
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWellWidget(
       onTap: () {},
       child: Container(
         padding: EdgeInsets.symmetric(
