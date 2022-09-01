@@ -664,6 +664,7 @@ const List<Map<String, String>> codes = [
     "code": "MW",
     "dial_code": "+265",
   },
+
   {
     "name": "Malaysia",
     "code": "MY",
