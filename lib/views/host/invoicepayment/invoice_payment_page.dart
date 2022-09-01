@@ -18,6 +18,7 @@ import 'package:paynest_flutter_app/views/host/payment_method/payment_method.dar
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../../widgets/amount_formater.dart';
 import '../../download_pdf/download_pdf.dart';
 
 class InvoicePaymentPage extends StatefulWidget {
@@ -336,7 +337,13 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                     ),
                     verticalSpacer(4),
                     Text(
-                      '${widget.singleStudentModel.student!.totalBalanceAmount}',
+                      amountFormater(
+                        double.parse(
+                          widget.singleStudentModel.student!
+                              .totalBalanceAmount
+                              .toString(),
+                        ),
+                      ),
                       style: PayNestTheme.title_3_16blackbold.copyWith(
                         fontSize: sizes.fontRatio * 22,
                         color: PayNestTheme.lightBlack,

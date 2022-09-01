@@ -209,7 +209,6 @@ class _SelectSchoolState extends State<SelectSchool> {
                                     height: 1,
                                     color: PayNestTheme.textGrey,
                                   ),
-                                  verticalSpacer(8),
                                 ],
                               );
                             },
@@ -228,7 +227,6 @@ class _SelectSchoolState extends State<SelectSchool> {
                                     log: schoolController
                                         .schoolResList.value.log![index],
                                   ),
-                                  verticalSpacer(8),
                                   Container(
                                     margin: EdgeInsets.symmetric(
                                       horizontal: horizontalValue(20),
@@ -237,7 +235,6 @@ class _SelectSchoolState extends State<SelectSchool> {
                                     height: 1,
                                     color: PayNestTheme.textGrey,
                                   ),
-                                  verticalSpacer(8),
                                 ],
                               );
                             },
@@ -253,7 +250,7 @@ class _SelectSchoolState extends State<SelectSchool> {
   }
 
   Widget _singleCard({required Log log}) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         SelectedSchoolData schoolData = SelectedSchoolData(
           id: log.id,
@@ -288,28 +285,17 @@ class _SelectSchoolState extends State<SelectSchool> {
             Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 7,
-                    offset: Offset(0, 2),
-                  ),
-                ],
               ),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                  'https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg',
-                ),
+              child: SvgPicture.asset(
+                icSchoolBuilding,
               ),
             ),
-            horizontalSpacer(16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: sizes.widthRatio * 260,
-                  child: Text(
+            horizontalSpacer(13),
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
                     '${log.name}',
                     style: PayNestTheme.title_2_16primaryColor.copyWith(
                       fontSize: sizes.fontRatio * 14,
@@ -317,16 +303,16 @@ class _SelectSchoolState extends State<SelectSchool> {
                       color: PayNestTheme.black,
                     ),
                   ),
-                ),
-                Text(
-                  '${log.address}',
-                  style: PayNestTheme.title_2_16primaryColor.copyWith(
-                    fontSize: sizes.fontRatio * 10,
-                    fontWeight: FontWeight.w300,
-                    color: PayNestTheme.textGrey,
+                  Text(
+                    '${log.address}',
+                    style: PayNestTheme.title_2_16primaryColor.copyWith(
+                      fontSize: sizes.fontRatio * 10,
+                      fontWeight: FontWeight.w300,
+                      color: PayNestTheme.textGrey,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
