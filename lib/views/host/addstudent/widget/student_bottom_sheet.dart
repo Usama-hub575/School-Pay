@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import '../../../../constants/constants.dart';
 import '../../../../res/res.dart';
+import '../../../../widgets/inkwell_widget.dart';
 import '../../../../widgets/spacer.dart';
 
 class StudentBottomSheet {
@@ -246,14 +247,14 @@ class _StudentWidgetState extends State<StudentWidget> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                         ),
                       ),
-                      _selectedFilter == 'Date Of Birth' ? GestureDetector(
+                      _selectedFilter == 'Date Of Birth' ? InkWellWidget(
                         onTap: () {
                           showDialog(
                             builder: (sdCTX) {
                               return AlertDialog(
                                 title: Row(
                                   children: [
-                                    GestureDetector(
+                                    InkWellWidget(
                                       onTap: () {
                                         Navigator.pop(sdCTX);
                                       },

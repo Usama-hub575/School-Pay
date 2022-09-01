@@ -10,6 +10,7 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/school/select_school.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../model/datamodel/singlestudent_model.dart';
+import '../../../widgets/inkwell_widget.dart';
 import '../dashboard/widgets/add_student_bottom_sheet.dart';
 import '../singlestudent/singlestudent_page.dart';
 import 'widget/single_student_card.dart';
@@ -79,7 +80,7 @@ class _StudentPageState extends State<StudentPage> {
                     ),
                   ),
                   horizontalSpacer(82),
-                  GestureDetector(
+                  InkWellWidget(
                     onTap: () {
                       AddStudentBottomSheet.show(
                         context: context,

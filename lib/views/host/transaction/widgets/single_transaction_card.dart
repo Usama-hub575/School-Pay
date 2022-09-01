@@ -8,6 +8,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../../constants/constants.dart';
 import '../../../../main.dart';
 import '../../../../theme/theme.dart';
+import '../../../../widgets/inkwell_widget.dart';
 
 class SingleTransaction extends StatelessWidget {
   const SingleTransaction({
@@ -35,7 +36,7 @@ class SingleTransaction extends StatelessWidget {
   }
 
   Widget _singleContainer({required TransactionsRow transactionsRow}){
-    return GestureDetector(
+    return InkWellWidget(
       onTap: ()=> onTap(transactionsRow),
       child: Container(
         margin: EdgeInsets.symmetric(

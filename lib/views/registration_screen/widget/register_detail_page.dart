@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_country_code_picker.dart';
+import 'package:paynest_flutter_app/widgets/inkwell_widget.dart';
 import '../../../constants/constants.dart';
 import '../../../controller/user_controller.dart';
 import '../../../res/res.dart';
@@ -397,7 +398,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       verticalSpacer(12),
-                      GestureDetector(
+                      InkWellWidget(
                         onTap: emirateIDController.text != ""
                             ? () {
                                 showDialog(
@@ -405,7 +406,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                                     return AlertDialog(
                                       title: Row(
                                         children: [
-                                          GestureDetector(
+                                          InkWellWidget(
                                             onTap: () {
                                               Navigator.pop(sdCTX);
                                             },
@@ -781,7 +782,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
     required Function onTap,
     required String value,
   }) {
-    return GestureDetector(
+    return InkWellWidget(
       onTap: () {
         onTap();
       },
