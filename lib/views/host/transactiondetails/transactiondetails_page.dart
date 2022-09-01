@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/transactiondetail_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
@@ -289,7 +290,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     SizedBox(
                       height: 5.h,
                     ),
-                    Text('AED ' + widget.tdm.amount.toString(),
+                    Text('AED ' + amountFormater(double.parse(widget.tdm.amount.toString(),)),
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                             color: PayNestTheme.black,
                             fontSize: sizes.fontRatio * 22,
