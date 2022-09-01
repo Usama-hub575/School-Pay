@@ -9,6 +9,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
 import '../../../res/res.dart';
+import '../../../widgets/back_button.dart';
 
 class TransactionDetailsPage extends StatefulWidget {
   TransactionDetailModel tdm;
@@ -50,25 +51,9 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                             children: [
                               Row(
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 25.w),
-                                    child: Container(
-                                      height: 44.h,
-                                      width: 44.w,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(12.r)),
-                                      child: IconButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        icon: Icon(Icons.arrow_back,
-                                            size: 24.sp,
-                                            color: PayNestTheme.blueAccent),
-                                        // child: Text(""),
-                                      ),
-                                    ),
+                                  AppBarBackButton(
+                                    iconColor: PayNestTheme.primaryColor,
+                                    buttonColor: PayNestTheme.colorWhite,
                                   ),
                                   Text(
                                     recentTransaction,

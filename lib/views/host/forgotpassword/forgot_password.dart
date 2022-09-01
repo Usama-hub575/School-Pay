@@ -9,6 +9,7 @@ import '../../../controller/user_controller.dart';
 import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
+import '../../../widgets/back_button.dart';
 import '../../../widgets/custom_alert_dialog.dart';
 import '../../../widgets/spacer.dart';
 
@@ -39,22 +40,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             verticalSpacer(40),
             Row(
               children: [
-                Container(
-                  height: 54.h,
-                  width: 44.w,
-                  decoration: BoxDecoration(
-                      color: PayNestTheme.primaryColor,
-                      borderRadius: BorderRadius.circular(15.r)),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.arrow_back,
-                        size: 20.sp, color: PayNestTheme.colorWhite),
-                    // child: Text(""),
-                  ),
-                ),
-                Spacer(),
+                AppBarBackButton(
+                  iconColor: PayNestTheme.colorWhite, buttonColor: PayNestTheme.primaryColor,
+
+                ),                Spacer(),
                 Image.asset(
                   welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,

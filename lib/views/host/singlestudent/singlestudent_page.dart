@@ -11,6 +11,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
 import '../../../res/res.dart';
+import '../../../widgets/back_button.dart';
 
 class SingleStudentPage extends StatefulWidget {
   SingleStudentModel singleStudentModel;
@@ -46,23 +47,9 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        height: 44.h,
-                        width: 44.w,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12.r)),
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                            size: 20.sp,
-                            color: PayNestTheme.primaryColor,
-                          ),
-                          // child: Text(""),
-                        ),
+                      AppBarBackButton(
+                        iconColor: PayNestTheme.primaryColor,
+                        buttonColor: PayNestTheme.colorWhite,
                       ),
                       Text(
                         'Student Details',
@@ -177,7 +164,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                 style: PayNestTheme.title_2_16primaryColor
                                     .copyWith(
                                   fontWeight: FontWeight.w500,
-                                  fontSize: sizes.fontRatio*14,
+                                  fontSize: sizes.fontRatio * 14,
                                   color: PayNestTheme.primaryColor,
                                   fontFamily: 'montserratBold',
                                 ),

@@ -11,6 +11,7 @@ import '../../constants/constants.dart';
 import '../../controller/user_controller.dart';
 import '../../res/res.dart';
 import '../../theme/theme.dart';
+import '../../widgets/back_button.dart';
 import '../../widgets/spacer.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -43,28 +44,9 @@ class _RegisterPageState extends State<RegisterPage> {
             verticalSpacer(40),
             Row(
               children: [
-                Container(
-                  height: 54.h,
-                  width: 44.w,
-                  decoration: BoxDecoration(
-                    color: PayNestTheme.primaryColor,
-                    borderRadius: BorderRadius.circular(15.r),
-                  ),
-                  child: IconButton(
-                    onPressed: () {
-                      if (_currentIndex == 0) {
-                        Navigator.of(context).pop();
-                      } else {
-                        _currentIndex -= _currentIndex;
-                        setState(() {});
-                      }
-                    },
-                    icon: Icon(
-                      Icons.arrow_back,
-                      size: 20.sp,
-                      color: PayNestTheme.colorWhite,
-                    ),
-                  ),
+                AppBarBackButton(
+                  iconColor: PayNestTheme.colorWhite, buttonColor: PayNestTheme.primaryColor,
+
                 ),
                 Spacer(),
                 Image.asset(
