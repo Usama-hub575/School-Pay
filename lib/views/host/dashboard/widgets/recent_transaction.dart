@@ -75,7 +75,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
       padding: EdgeInsets.symmetric(
         horizontal: horizontalValue(16),
       ),
-      child: GestureDetector(
+      child: InkWell(
         onTap: () => widget.onTap(transactionsRow),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
