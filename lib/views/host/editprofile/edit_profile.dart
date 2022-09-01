@@ -15,6 +15,7 @@ import '../../../main.dart';
 import '../../../res/res.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/editing_text_emirates_id_formater.dart';
+import '../../../widgets/inkwell_widget.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -392,14 +393,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       },
                     ),
                     verticalSpacer(8),
-                    GestureDetector(
+                    InkWellWidget(
                       onTap: () {
                         showDialog(
                           builder: (sdCTX) {
                             return AlertDialog(
                               title: Row(
                                 children: [
-                                  GestureDetector(
+                                  InkWellWidget(
                                     onTap: () {
                                       Navigator.pop(sdCTX);
                                     },

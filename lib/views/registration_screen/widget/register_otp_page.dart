@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:paynest_flutter_app/res/res.dart';
+import 'package:paynest_flutter_app/widgets/inkwell_widget.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../constants/constants.dart';
@@ -132,7 +133,7 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
                     verticalSpacer(50),
                     !timeUpFlag
                         ? Text("Try it after $_start seconds")
-                        : GestureDetector(
+                        : InkWellWidget(
                             onTap: () => startTimer(),
                             child: Text(
                               resend,

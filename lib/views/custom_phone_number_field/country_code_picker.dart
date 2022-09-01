@@ -172,8 +172,8 @@ class CountryCodePickerState extends State<CountryCodePicker> {
         child: widget.builder!(selectedItem),
       );
     else {
-      _widget = TextButton(
-        onPressed: widget.enabled ? showCountryCodePickerDialog : null,
+      _widget = InkWell(
+        onTap: widget.enabled ? showCountryCodePickerDialog : null,
         child: Flex(
           direction: Axis.horizontal,
           mainAxisSize: MainAxisSize.min,

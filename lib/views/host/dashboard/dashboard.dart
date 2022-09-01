@@ -24,6 +24,7 @@ import '../../../controller/transactionlist_controller.dart';
 import '../../../model/datamodel/transactiondetail_model.dart';
 import '../../../model/mystudents_resp_model.dart' as studentElement;
 import '../../../model/transactionlist_resp_model.dart';
+import '../../../widgets/inkwell_widget.dart';
 import '../transactiondetails/transactiondetails_page.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart'
     as student;
@@ -389,7 +390,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 lc.userResData.value.parent!.paymentConfigured
                                     .toString()
                                     .isEmpty
-                            ? GestureDetector(
+                            ? InkWellWidget(
                                 onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -460,7 +461,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 color: PayNestTheme.black,
                               ),
                             ),
-                            GestureDetector(
+                            InkWellWidget(
                               onTap: () => widget.onRecentTransactionTap(),
                               child: Text(
                                 showAll,

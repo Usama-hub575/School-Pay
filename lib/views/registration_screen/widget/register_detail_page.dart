@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_country_code_picker.dart';
+import 'package:paynest_flutter_app/widgets/inkwell_widget.dart';
 import '../../../constants/constants.dart';
 import '../../../controller/user_controller.dart';
 import '../../../res/res.dart';
@@ -158,10 +159,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.trim().isEmpty) {
-                            return 'Please enter your Full name';
-                          }
-                          if (value.trim().length < 5) {
-                            return 'Name must not be less than 5';
+                            return 'Please enter your First name';
                           }
                           return null;
                         },
@@ -221,10 +219,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.trim().isEmpty) {
-                            return 'Please enter your Full name';
-                          }
-                          if (value.trim().length < 5) {
-                            return 'Name must not be less than 5';
+                            return 'Please enter your Last name';
                           }
                           return null;
                         },
@@ -308,6 +303,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             onTap: () {
                               isEmiratesSelected = true;
                               isPassportSelected = false;
+                              emirateIDController.clear();
                               setState(() {});
                             },
                           ),
@@ -321,6 +317,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             onTap: () {
                               isEmiratesSelected = false;
                               isPassportSelected = true;
+                              emirateIDController.clear();
                               setState(() {});
                             },
                           ),
@@ -333,6 +330,14 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           fontSize: sizes.fontRatio * 14,
                           color: PayNestTheme.textGrey,
                         ),
+                        inputFormatters: isEmiratesSelected
+                            ? <TextInputFormatter>[
+                                EmiratesIdFormatter(
+                                  mask: 'xxx-xxxx-xxxxxxx-x',
+                                  separator: '-',
+                                )
+                              ]
+                            : [],
                         onChanged: (value) {
                           setState(() {});
                         },
@@ -397,7 +402,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       verticalSpacer(12),
-                      GestureDetector(
+                      InkWellWidget(
                         onTap: emirateIDController.text != ""
                             ? () {
                                 showDialog(
@@ -405,7 +410,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                                     return AlertDialog(
                                       title: Row(
                                         children: [
-                                          GestureDetector(
+                                          InkWellWidget(
                                             onTap: () {
                                               Navigator.pop(sdCTX);
                                             },
@@ -448,7 +453,8 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                                   },
                                   context: context,
                                 );
-                              }: () {},
+                              }
+                            : () {},
                         child: TextFormField(
                           controller: expiryController,
                           enabled: false,
@@ -732,7 +738,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           fnameController.text,
                           lnameController.text,
                           _selectedFilter!,
-                          emirateIDController.text,
+                          emirateIDController.text.replaceAll('-', ''),
                           expiryController.text,
                           addressController.text,
                           cityController.text,
@@ -781,7 +787,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
     required Function onTap,
     required String value,
   }) {
-    return GestureDetector(
+    return InkWellWidget(
       onTap: () {
         onTap();
       },

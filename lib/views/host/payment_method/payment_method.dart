@@ -13,6 +13,7 @@ import '../../../model/datamodel/singlestudent_model.dart';
 import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/back_button.dart';
+import '../../../widgets/inkwell_widget.dart';
 import '../../../widgets/spacer.dart';
 import '../../webview/webview.dart';
 import '../transactiondetails/paynowltransactiondetails_page.dart';
@@ -210,7 +211,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       ],
                     ),
                     verticalSpacer(8),
-                    GestureDetector(
+                    InkWellWidget(
                       onTap: () {
                         showToast();
                       },
@@ -269,7 +270,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       ),
                     ),
                     verticalSpacer(8),
-                    GestureDetector(
+                    InkWellWidget(
                       onTap: () {
                         showToast();
                       },
