@@ -366,16 +366,18 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                             },
                           );
                         }
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: PayNestTheme.colorRedShade,
-                            content: Text(
-                              'Phone Field Cannot Be Empty !!',
-                              textAlign: TextAlign.center,
+                        else{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: PayNestTheme.colorRedShade,
+                              content: Text(
+                                'Phone Field Cannot Be Empty !!',
+                                textAlign: TextAlign.center,
+                              ),
+                              behavior: SnackBarBehavior.floating,
                             ),
-                            behavior: SnackBarBehavior.floating,
-                          ),
-                        );
+                          );
+                        }
                       },
                       child: Center(
                         child: loading == false
