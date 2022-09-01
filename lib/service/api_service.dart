@@ -14,7 +14,7 @@ class APIService {
 
   //Staging Url
   static var baseUrl = Uri.parse("https://stage-api.paynestschools.ae");
-  static var paymentGatewayUrl = Uri.parse('https://staging.paynestschools.ae');
+  static var paymentGatewayUrl = Uri.parse('https://staging.paynestschools.ae/pl');
 
   static var baseurl1 = "discoveritech.com";
 
