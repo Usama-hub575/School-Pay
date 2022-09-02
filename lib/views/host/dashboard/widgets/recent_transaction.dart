@@ -56,6 +56,9 @@ class _RecentTransactionsState extends State<RecentTransactions> {
             child: ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
+              padding: EdgeInsets.only(
+                top: verticalValue(20),
+              ),
               itemBuilder: (context, index) {
                 return _singleCard(
                     transactionsRow: widget.transactions!.rows![index]);

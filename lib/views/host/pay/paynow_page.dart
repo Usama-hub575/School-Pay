@@ -340,6 +340,9 @@ class _PayNowPageState extends State<PayNowPage> {
                                               margin: EdgeInsets.symmetric(
                                                 horizontal: horizontalValue(4),
                                               ),
+                                              padding: EdgeInsets.symmetric(
+                                                vertical: verticalValue(6),
+                                              ),
                                               decoration: BoxDecoration(
                                                 color: PayNestTheme.colorWhite,
                                                 border: Border.all(
@@ -441,13 +444,16 @@ class _PayNowPageState extends State<PayNowPage> {
                                                   horizontal:
                                                       horizontalValue(4),
                                                 ),
+                                                padding: EdgeInsets.symmetric(
+                                                  vertical: verticalValue(6),
+                                                ),
                                                 decoration: BoxDecoration(
-                                                  color: PayNestTheme.textGrey
-                                                      .withOpacity(0.5),
-                                                  // border: Border.all(
-                                                  //   color:
-                                                  //       PayNestTheme.primaryColor,
-                                                  // ),
+                                                  color:
+                                                      PayNestTheme.colorWhite,
+                                                  border: Border.all(
+                                                    color: PayNestTheme
+                                                        .primaryColor,
+                                                  ),
                                                   boxShadow: [
                                                     BoxShadow(
                                                       color: Colors.grey
@@ -493,7 +499,9 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                       .fontRatio *
                                                                   14,
                                                               color: PayNestTheme
-                                                                  .primaryColor,
+                                                                  .primaryColor
+                                                                  .withOpacity(
+                                                                      0.5),
                                                             ),
                                                           ),
                                                         ),
@@ -517,13 +525,16 @@ class _PayNowPageState extends State<PayNowPage> {
                                                   horizontal:
                                                       horizontalValue(4),
                                                 ),
+                                                padding: EdgeInsets.symmetric(
+                                                  vertical: verticalValue(6),
+                                                ),
                                                 decoration: BoxDecoration(
-                                                  color: PayNestTheme.textGrey
-                                                      .withOpacity(0.5),
-                                                  // border: Border.all(
-                                                  //   color:
-                                                  //       PayNestTheme.primaryColor,
-                                                  // ),
+                                                  color:
+                                                      PayNestTheme.colorWhite,
+                                                  border: Border.all(
+                                                    color: PayNestTheme
+                                                        .primaryColor,
+                                                  ),
                                                   boxShadow: [
                                                     BoxShadow(
                                                       color: Colors.grey
@@ -565,7 +576,9 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                       .fontRatio *
                                                                   14,
                                                               color: PayNestTheme
-                                                                  .primaryColor,
+                                                                  .primaryColor
+                                                                  .withOpacity(
+                                                                      0.5),
                                                             ),
                                                           ),
                                                         ),
@@ -811,8 +824,8 @@ class _PayNowPageState extends State<PayNowPage> {
 
   Widget _commercial_image({required String imagePath}) {
     return Container(
-      height: sizes.heightRatio * 26,
-      width: sizes.widthRatio * 90,
+      height: sizes.heightRatio * 41,
+      width: sizes.widthRatio * 41,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(imagePath),
@@ -823,13 +836,16 @@ class _PayNowPageState extends State<PayNowPage> {
   }
 
   Widget _otherImage({required String imagePath}) {
-    return Container(
-      height: sizes.heightRatio * 26,
-      width: sizes.widthRatio * 70,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.fill,
+    return Opacity(
+      opacity: 0.5,
+      child: Container(
+        height: sizes.heightRatio * 26,
+        width: sizes.widthRatio * 70,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(imagePath),
+            fit: BoxFit.fill,
+          ),
         ),
       ),
     );

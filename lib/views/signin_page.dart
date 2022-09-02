@@ -366,7 +366,21 @@ class _SignInPageState extends State<SignInPage> {
                                 '/DashboardPage',
                                 (Route<dynamic> route) => false,
                               );
-                            } else if (!userController
+                            } else if(!userController
+                                .userResData.value.status){
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    userController.userResData.value.message.toString(),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  backgroundColor: Colors.red,
+                                  behavior: SnackBarBehavior.floating,
+                                ),
+                              );
+                            }
+
+                            else if (!userController
                                 .userResData.value.status) {
                               passwordController.clear();
                               userController.isLoading.value = false;
