@@ -63,8 +63,8 @@ class _SignInPageState extends State<SignInPage> {
             Row(
               children: [
                 AppBarBackButton(
-                  iconColor: PayNestTheme.colorWhite, buttonColor: PayNestTheme.primaryColor,
-
+                  iconColor: PayNestTheme.colorWhite,
+                  buttonColor: PayNestTheme.primaryColor,
                 ),
                 Spacer(),
                 Image.asset(
@@ -366,21 +366,20 @@ class _SignInPageState extends State<SignInPage> {
                                 '/DashboardPage',
                                 (Route<dynamic> route) => false,
                               );
-                            } else if(!userController
-                                .userResData.value.status){
+                            } else if (!userController
+                                .userResData.value.status) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    userController.userResData.value.message.toString(),
+                                    userController.userResData.value.message
+                                        .toString(),
                                     textAlign: TextAlign.center,
                                   ),
                                   backgroundColor: Colors.red,
                                   behavior: SnackBarBehavior.floating,
                                 ),
                               );
-                            }
-
-                            else if (!userController
+                            } else if (!userController
                                 .userResData.value.status) {
                               passwordController.clear();
                               userController.isLoading.value = false;
