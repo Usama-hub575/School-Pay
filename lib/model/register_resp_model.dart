@@ -22,10 +22,10 @@ class RegisterRespModel {
   Parent? parent;
 
   factory RegisterRespModel.fromJson(Map<String, dynamic> json) => RegisterRespModel(
-    status: json["status"],
-    message: json["message"],
-    token: json["token"],
-    parent: Parent.fromJson(json["parent"]),
+    status: json["status"] ?? '',
+    message: json["message"] ?? '',
+    token: json["token"] ?? '',
+    parent: json['parent'] != null ? Parent.fromJson(json["parent"]) : Parent.empty()
   );
 
   Map<String, dynamic> toJson() => {
@@ -61,6 +61,10 @@ class Parent {
     required this.token,
     required this.fcmToken,
   });
+
+  static Parent empty(){
+    return Parent(id: 0, email: '', phone: '', firstName: '', lastName: '', dialCode: '', countryCode: '', emiratesId: '', passport: '', area: '', country: '', address: '', updatedAt: DateTime.now(), createdAt: DateTime.now(), deletedAt: '', expiryDate: '', paymentConfigured:'', pinConfigured: '', pin: '', profileImage: '', token: '', fcmToken: '');
+  }
 
   int id;
   String email;

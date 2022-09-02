@@ -40,6 +40,8 @@ class _MorePageState extends State<MorePage> {
     super.initState();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -361,6 +363,9 @@ class _MorePageState extends State<MorePage> {
                               vertical: verticalValue(16),
                             )),
                         onPressed: () {
+                          storage.myPrefs!.remove('accessToken');
+                          storage.myPrefs!.remove('email');
+                          storage.myPrefs!.clear();
                           Navigator.of(context).pushAndRemoveUntil(
                             // the new route
                             MaterialPageRoute(
