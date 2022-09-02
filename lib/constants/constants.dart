@@ -39,6 +39,9 @@ const icMale = "assets/svg/male.svg";
 const icFemale = "assets/svg/female.svg";
 const icSchoolBuilding = "assets/svg/school_building.svg";
 
+//Videos
+const welcomeVideo = "assets/welcome_video.mp4";
+
 //json
 
 const notificationJson = 'assets/json/notification.json';
