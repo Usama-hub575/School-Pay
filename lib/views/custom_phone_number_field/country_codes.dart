@@ -1216,7 +1216,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+1340",
   },
   {
-    "name": "Wallis et Futuna",
+    "name": "Wallis and Futuna",
     "code": "WF",
     "dial_code": "+681",
   },
