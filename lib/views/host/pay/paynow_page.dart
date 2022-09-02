@@ -341,7 +341,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                 horizontal: horizontalValue(4),
                                               ),
                                               padding: EdgeInsets.symmetric(
-                                                vertical: verticalValue(6),
+                                                vertical: verticalValue(4),
                                               ),
                                               decoration: BoxDecoration(
                                                 color: PayNestTheme.colorWhite,
@@ -445,7 +445,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                       horizontalValue(4),
                                                 ),
                                                 padding: EdgeInsets.symmetric(
-                                                  vertical: verticalValue(6),
+                                                  vertical: verticalValue(4),
                                                 ),
                                                 decoration: BoxDecoration(
                                                   color:
@@ -526,7 +526,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                       horizontalValue(4),
                                                 ),
                                                 padding: EdgeInsets.symmetric(
-                                                  vertical: verticalValue(6),
+                                                  vertical: verticalValue(4),
                                                 ),
                                                 decoration: BoxDecoration(
                                                   color:

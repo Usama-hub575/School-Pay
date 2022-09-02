@@ -138,6 +138,9 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       margin: EdgeInsets.symmetric(
                         horizontal: horizontalValue(4),
                       ),
+                      padding: EdgeInsets.symmetric(
+                        vertical: verticalValue(4),
+                      ),
                       decoration: BoxDecoration(
                         color: PayNestTheme.colorWhite,
                         border: Border.all(
@@ -221,10 +224,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           horizontal: horizontalValue(4),
                         ),
                         decoration: BoxDecoration(
-                          color: PayNestTheme.textGrey.withOpacity(0.5),
-                          // border: Border.all(
-                          //   color: PayNestTheme.primaryColor,
-                          // ),
+                          color: PayNestTheme.colorWhite,
+                          border: Border.all(
+                            color: PayNestTheme.primaryColor,
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.5),
@@ -258,7 +261,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                         .copyWith(
                                       fontWeight: FontWeight.w500,
                                       fontSize: sizes.fontRatio * 14,
-                                      color: PayNestTheme.primaryColor,
+                                      color: PayNestTheme.primaryColor.withOpacity(0.5),
                                     ),
                                   ),
                                 ),
@@ -279,11 +282,14 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         margin: EdgeInsets.symmetric(
                           horizontal: horizontalValue(4),
                         ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: verticalValue(4),
+                        ),
                         decoration: BoxDecoration(
-                          color: PayNestTheme.textGrey.withOpacity(0.5),
-                          // border: Border.all(
-                          //   color: PayNestTheme.primaryColor,
-                          // ),
+                          color: PayNestTheme.colorWhite,
+                          border: Border.all(
+                            color: PayNestTheme.primaryColor,
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.5),
@@ -317,7 +323,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                         .copyWith(
                                       fontWeight: FontWeight.w500,
                                       fontSize: sizes.fontRatio * 14,
-                                      color: PayNestTheme.primaryColor,
+                                      color: PayNestTheme.primaryColor.withOpacity(0.5),
                                     ),
                                   ),
                                 ),
@@ -495,8 +501,8 @@ class _PaymentMethodState extends State<PaymentMethod> {
 
   Widget _commercial_image({required String imagePath}) {
     return Container(
-      height: sizes.heightRatio * 26,
-      width: sizes.widthRatio * 90,
+      height: sizes.heightRatio * 41,
+      width: sizes.widthRatio * 41,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(imagePath),
@@ -507,13 +513,16 @@ class _PaymentMethodState extends State<PaymentMethod> {
   }
 
   Widget _otherImage({required String imagePath}) {
-    return Container(
-      height: sizes.heightRatio * 26,
-      width: sizes.widthRatio * 70,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.fill,
+    return Opacity(
+      opacity: 0.5,
+      child: Container(
+        height: sizes.heightRatio * 26,
+        width: sizes.widthRatio * 70,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(imagePath),
+            fit: BoxFit.fill,
+          ),
         ),
       ),
     );
