@@ -17,6 +17,8 @@ import 'package:paynest_flutter_app/views/host/dashboard/widgets/succes_bottom_s
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
+import '../../../widgets/inkwell_widget.dart';
+
 class AddStudent extends StatefulWidget {
   SelectedSchoolData schoolData;
 
@@ -443,7 +445,7 @@ class _AddStudentState extends State<AddStudent> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           verticalSpacer(16),
-                                          GestureDetector(
+                                          InkWellWidget(
                                             onTap: () {},
                                             child: Container(
                                               margin: EdgeInsets.symmetric(
@@ -915,7 +917,7 @@ class _AddStudentState extends State<AddStudent> {
   }
 
   Widget _getActionButton({required Function onTap}) {
-    return GestureDetector(
+    return InkWellWidget(
       onTap: () => onTap(),
       child: Container(
         padding: EdgeInsets.symmetric(

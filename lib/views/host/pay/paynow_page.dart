@@ -23,6 +23,7 @@ import '../../../model/mystudents_resp_model.dart';
 import '../../../res/assets.dart';
 import '../../../res/res.dart';
 import '../../../widgets/amount_formater.dart';
+import '../../../widgets/inkwell_widget.dart';
 
 class PayNowPage extends StatefulWidget {
   final String whichStack;
@@ -339,6 +340,9 @@ class _PayNowPageState extends State<PayNowPage> {
                                               margin: EdgeInsets.symmetric(
                                                 horizontal: horizontalValue(4),
                                               ),
+                                              padding: EdgeInsets.symmetric(
+                                                vertical: verticalValue(4),
+                                              ),
                                               decoration: BoxDecoration(
                                                 color: PayNestTheme.colorWhite,
                                                 border: Border.all(
@@ -430,7 +434,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                           : const SizedBox.shrink(),
                                       verticalSpacer(8),
                                       payAbleAmount != '0'
-                                          ? GestureDetector(
+                                          ? InkWellWidget(
                                               onTap: () {
                                                 showToast();
                                               },
@@ -440,13 +444,16 @@ class _PayNowPageState extends State<PayNowPage> {
                                                   horizontal:
                                                       horizontalValue(4),
                                                 ),
+                                                padding: EdgeInsets.symmetric(
+                                                  vertical: verticalValue(4),
+                                                ),
                                                 decoration: BoxDecoration(
-                                                  color: PayNestTheme.textGrey
-                                                      .withOpacity(0.5),
-                                                  // border: Border.all(
-                                                  //   color:
-                                                  //       PayNestTheme.primaryColor,
-                                                  // ),
+                                                  color:
+                                                      PayNestTheme.colorWhite,
+                                                  border: Border.all(
+                                                    color: PayNestTheme
+                                                        .primaryColor,
+                                                  ),
                                                   boxShadow: [
                                                     BoxShadow(
                                                       color: Colors.grey
@@ -492,7 +499,9 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                       .fontRatio *
                                                                   14,
                                                               color: PayNestTheme
-                                                                  .primaryColor,
+                                                                  .primaryColor
+                                                                  .withOpacity(
+                                                                      0.5),
                                                             ),
                                                           ),
                                                         ),
@@ -506,7 +515,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                           : const SizedBox.shrink(),
                                       verticalSpacer(8),
                                       payAbleAmount != '0'
-                                          ? GestureDetector(
+                                          ? InkWellWidget(
                                               onTap: () {
                                                 showToast();
                                               },
@@ -516,13 +525,16 @@ class _PayNowPageState extends State<PayNowPage> {
                                                   horizontal:
                                                       horizontalValue(4),
                                                 ),
+                                                padding: EdgeInsets.symmetric(
+                                                  vertical: verticalValue(4),
+                                                ),
                                                 decoration: BoxDecoration(
-                                                  color: PayNestTheme.textGrey
-                                                      .withOpacity(0.5),
-                                                  // border: Border.all(
-                                                  //   color:
-                                                  //       PayNestTheme.primaryColor,
-                                                  // ),
+                                                  color:
+                                                      PayNestTheme.colorWhite,
+                                                  border: Border.all(
+                                                    color: PayNestTheme
+                                                        .primaryColor,
+                                                  ),
                                                   boxShadow: [
                                                     BoxShadow(
                                                       color: Colors.grey
@@ -564,7 +576,9 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                       .fontRatio *
                                                                   14,
                                                               color: PayNestTheme
-                                                                  .primaryColor,
+                                                                  .primaryColor
+                                                                  .withOpacity(
+                                                                      0.5),
                                                             ),
                                                           ),
                                                         ),
@@ -810,8 +824,8 @@ class _PayNowPageState extends State<PayNowPage> {
 
   Widget _commercial_image({required String imagePath}) {
     return Container(
-      height: sizes.heightRatio * 26,
-      width: sizes.widthRatio * 90,
+      height: sizes.heightRatio * 41,
+      width: sizes.widthRatio * 41,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(imagePath),
@@ -822,13 +836,16 @@ class _PayNowPageState extends State<PayNowPage> {
   }
 
   Widget _otherImage({required String imagePath}) {
-    return Container(
-      height: sizes.heightRatio * 26,
-      width: sizes.widthRatio * 70,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.fill,
+    return Opacity(
+      opacity: 0.5,
+      child: Container(
+        height: sizes.heightRatio * 26,
+        width: sizes.widthRatio * 70,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(imagePath),
+            fit: BoxFit.fill,
+          ),
         ),
       ),
     );
@@ -845,7 +862,7 @@ class _PayNowPageState extends State<PayNowPage> {
   }
 
   Widget _singleCard(StudentElement studentElement, Function onTap, int index) {
-    return GestureDetector(
+    return InkWellWidget(
       onTap: () => onTap(studentElement),
       child: Opacity(
         opacity: studentElement.isSelected ? 1 : 0.5,

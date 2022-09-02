@@ -103,8 +103,8 @@ class UserController extends GetxController {
       isLoading(false);
       if(res!= ""){
         var decoded = jsonDecode(res);
+        RegisterRespModel lrm = registerRespModelFromJson(res);
         if (decoded['status'] == true) {
-          RegisterRespModel lrm = registerRespModelFromJson(res);
           userResData.value = lrm;
           userResData.refresh();
           print(lrm.message);
@@ -112,6 +112,8 @@ class UserController extends GetxController {
           preferences.setStringValue(SharedPrefKeys.userPassword, password);
           preferences.setStringValue(SharedPrefKeys.fcmToken, fcmToken);
         } else if (decoded['status'] == false) {
+          userResData.value = lrm;
+          userResData.refresh();
           if (decoded['retryInMins'] != null) {
             retriesTime.value = decoded['retryInMins'].toString();
             retriesTime.refresh();
@@ -124,6 +126,7 @@ class UserController extends GetxController {
             attemptsRemain.value = '';
             attemptsRemain.refresh();
           }
+          userResData.refresh();
         }
       }else{
         userResData.value.status == "";

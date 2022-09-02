@@ -13,6 +13,8 @@ import 'package:paynest_flutter_app/views/host/addstudent/add_student.dart'
     as add_student;
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
+import '../../../widgets/back_button.dart';
+
 class SelectSchool extends StatefulWidget {
   const SelectSchool({Key? key}) : super(key: key);
 
@@ -77,27 +79,9 @@ class _SelectSchoolState extends State<SelectSchool> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Padding(
-                                  padding: EdgeInsets.only(right: 25.w),
-                                  child: Container(
-                                    height: 44.h,
-                                    width: 44.w,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(12.r),
-                                    ),
-                                    child: IconButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      icon: Icon(
-                                        Icons.arrow_back,
-                                        size: 20.sp,
-                                        color: PayNestTheme.blueAccent,
-                                      ),
-                                      // child: Text(""),
-                                    ),
-                                  ),
+                                AppBarBackButton(
+                                  iconColor: PayNestTheme.primaryColor,
+                                  buttonColor: PayNestTheme.colorWhite,
                                 ),
                                 Text(
                                   selectSchool,

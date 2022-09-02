@@ -5,8 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
+import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,6 +22,7 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   final fcmToken = GetStorage();
   late FirebaseMessaging messaging;
+  MySharedPreferences storage = MySharedPreferences.instance;
 
   @override
   void initState() {
@@ -137,6 +140,9 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                 ),
                 onPressed: () {
+                  storage.myPrefs!.remove('accessToken');
+                  storage.myPrefs!.remove('email');
+                  storage.myPrefs!.clear();
                   Navigator.pushNamed(context, '/RegisterPage');
                 },
                 child: Text(

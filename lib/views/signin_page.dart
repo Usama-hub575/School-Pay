@@ -12,10 +12,12 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/widgets/blue_back_button.dart';
+import 'package:paynest_flutter_app/widgets/inkwell_widget.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../auth/local_auth_api.dart';
 import '../utils/sharedPrefKeys.dart';
+import '../widgets/back_button.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -60,30 +62,9 @@ class _SignInPageState extends State<SignInPage> {
             verticalSpacer(40),
             Row(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    right: 25.w,
-                  ),
-                  child: Container(
-                    height: 44.h,
-                    width: 44.w,
-                    decoration: BoxDecoration(
-                      color: PayNestTheme.primaryColor,
-                      borderRadius: BorderRadius.circular(
-                        12.r,
-                      ),
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        size: 20.sp,
-                        color: PayNestTheme.colorWhite,
-                      ),
-                    ),
-                  ),
+                AppBarBackButton(
+                  iconColor: PayNestTheme.colorWhite, buttonColor: PayNestTheme.primaryColor,
+
                 ),
                 Spacer(),
                 Image.asset(
@@ -245,7 +226,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   verticalSpacer(16),
-                  GestureDetector(
+                  InkWellWidget(
                     onTap: () {
                       setState(() {
                         Navigator.of(context).pushNamed("/ForgotPassword");
@@ -266,7 +247,7 @@ class _SignInPageState extends State<SignInPage> {
                       ? Center(
                           child: Padding(
                             padding: EdgeInsets.only(bottom: 28.52.h),
-                            child: GestureDetector(
+                            child: InkWellWidget(
                               onTap: () async {
                                 if (!isLoading) {
                                   bool isAuthenticated = await LocalAuthApi
@@ -385,7 +366,21 @@ class _SignInPageState extends State<SignInPage> {
                                 '/DashboardPage',
                                 (Route<dynamic> route) => false,
                               );
-                            } else if (!userController
+                            } else if(!userController
+                                .userResData.value.status){
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    userController.userResData.value.message.toString(),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  backgroundColor: Colors.red,
+                                  behavior: SnackBarBehavior.floating,
+                                ),
+                              );
+                            }
+
+                            else if (!userController
                                 .userResData.value.status) {
                               passwordController.clear();
                               userController.isLoading.value = false;

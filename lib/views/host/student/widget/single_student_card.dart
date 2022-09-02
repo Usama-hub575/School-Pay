@@ -7,6 +7,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../../constants/constants.dart';
 import '../../../../res/res.dart';
 import '../../../../theme/theme.dart';
+import '../../../../widgets/inkwell_widget.dart';
 
 class SingleStudentCard extends StatefulWidget {
   const SingleStudentCard({
@@ -58,7 +59,7 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
   }
 
   Widget _singleCard({required StudentElement student}) {
-    return GestureDetector(
+    return InkWellWidget(
       onTap: ()=> widget.onTap(student),
       child: Container(
         margin: EdgeInsets.symmetric(

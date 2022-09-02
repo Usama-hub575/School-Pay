@@ -293,49 +293,54 @@ class _PayNowTransactionDetailsPageState
                         fontSize: sizes.fontRatio * 22,
                       ),
                     ),
-                    verticalSpacer(100),
-                    Container(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
-                          elevation: 0,
-                          side: BorderSide(
-                            width: 1,
-                            color: PayNestTheme.primaryColor,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              14,
-                            ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            vertical: verticalValue(14),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/DashboardPage',
-                            (Route<dynamic> route) => false,
-                          );
-                        },
-                        child: Center(
-                          child: Text(
-                            done,
-                            style: PayNestTheme.title_2_16primaryColor.copyWith(
-                              fontFamily: 'montserratBold',
-                              fontSize: sizes.fontRatio * 14,
-                              color: PayNestTheme.colorWhite,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    verticalSpacer(20),
                   ],
                 ),
               ),
             ),
-          )
+          ),
+
+          Padding(
+            padding:  EdgeInsets.symmetric(horizontal: horizontalValue(30)),
+            child: Container(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: PayNestTheme.primaryColor,
+                  elevation: 0,
+                  side: BorderSide(
+                    width: 1,
+                    color: PayNestTheme.primaryColor,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      14,
+                    ),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: verticalValue(14),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/DashboardPage',
+                        (Route<dynamic> route) => false,
+                  );
+                },
+                child: Center(
+                  child: Text(
+                    done,
+                    style: PayNestTheme.title_2_16primaryColor.copyWith(
+                      fontFamily: 'montserratBold',
+                      fontSize: sizes.fontRatio * 14,
+                      color: PayNestTheme.colorWhite,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          verticalSpacer(10)
         ],
       ),
     );
