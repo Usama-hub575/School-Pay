@@ -263,7 +263,7 @@ class _GetAssistanceState extends State<GetAssistance> {
   }
 
   openWhatsapp() async {
-    var whatsapp = "+971526380400";
+    var whatsapp = "+971505919430";
     var whatsappUrlAndroid =
         "whatsapp://send?phone=" + whatsapp + "&text=hello";
     var whatAppUrlIOS = "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
