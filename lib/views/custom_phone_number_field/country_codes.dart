@@ -5,8 +5,8 @@ const List<Map<String, String>> codes = [
     "dial_code": "+93",
   },
   {
-    "name": "Åland",
-    "code": "AX",
+    "name": "Finland",
+    "code": "FL",
     "dial_code": "+358",
   },
   {
