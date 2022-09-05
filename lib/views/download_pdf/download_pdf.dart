@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/model/schoollist_model.dart';
@@ -489,6 +489,6 @@ class PDFDocument {
   static Future openFile(File file) async {
     final url = file.path;
 
-    await OpenFile.open(url);
+    //await OpenFile.open(url);
   }
 }

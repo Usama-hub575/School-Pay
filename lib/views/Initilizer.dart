@@ -20,6 +20,7 @@ import '../Utils/sharedpref.dart';
 import '../constants/constants.dart';
 import '../res/res.dart';
 import '../widgets/custom_alert_dialog.dart';
+import 'package:video_player/video_player.dart';
 
 class InitializerScreen extends StatefulWidget {
   const InitializerScreen({Key? key}) : super(key: key);
@@ -37,12 +38,20 @@ class _InitializerScreenState extends State<InitializerScreen> {
   String localAppVersion = '';
   String appPackage = '';
   int languageIndex = 0;
+  late VideoPlayerController videoPlayerController;
 
   @override
   void initState() {
     getLocalPackageInfo();
     setUpRemoteConfig();
-    //getCountries();
+    // getCountries();
+    videoPlayerController = VideoPlayerController.asset(welcomeVideo);
+    videoPlayerController.initialize().then((value){
+      videoPlayerController.play();
+      videoPlayerController.setVolume(0);
+      videoPlayerController.setLooping(true);
+      setState(() {});
+    });
     super.initState();
   }
 
@@ -51,37 +60,47 @@ class _InitializerScreenState extends State<InitializerScreen> {
     initializeResources(context: context);
     return Scaffold(
       backgroundColor: PayNestTheme.primaryColor,
-      body: Container(
-        width: sizes.width,
-        height: sizes.height,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(icBackground), fit: BoxFit.fill),
-        ),
-        child: Container(
-          color: PayNestTheme.primaryColor.withOpacity(0.30),
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  paynestLogoNew,
-                  width: sizes.widthRatio * 180,
-                  fit: BoxFit.fill,
-                ),
-                verticalSpacer(16),
-                SizedBox(
-                  width: sizes.width / 2,
-                  child: LinearProgressIndicator(
-                    color: PayNestTheme.colorWhite,
-                    backgroundColor: Colors.transparent,
-                  ),
-                )
-              ],
+      body:Stack(
+        children: [
+          SizedBox.expand(
+            child: FittedBox(
+              fit: BoxFit.cover,
+              child: Container(
+                width: videoPlayerController.value.size.width,
+                height: videoPlayerController.value.size.height,
+                child: VideoPlayer(videoPlayerController),
+              ),
             ),
           ),
-        ),
+          Container(
+            width: sizes.width,
+            height: sizes.height,
+            child: Container(
+              color: PayNestTheme.primaryColor.withOpacity(0.30),
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      paynestLogoNew,
+                      width: sizes.widthRatio * 180,
+                      fit: BoxFit.fill,
+                    ),
+                    verticalSpacer(16),
+                    SizedBox(
+                      width: sizes.width / 2,
+                      child: LinearProgressIndicator(
+                        color: PayNestTheme.colorWhite,
+                        backgroundColor: Colors.transparent,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -157,6 +176,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
       Future.delayed(
         const Duration(seconds: 2),
         () {
+          videoPlayerController.pause();
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
