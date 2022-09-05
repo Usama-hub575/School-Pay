@@ -363,9 +363,6 @@ class _MorePageState extends State<MorePage> {
                               vertical: verticalValue(16),
                             )),
                         onPressed: () {
-                          storage.myPrefs!.remove('accessToken');
-                          storage.myPrefs!.remove('email');
-                          storage.myPrefs!.clear();
                           Navigator.of(context).pushAndRemoveUntil(
                             // the new route
                             MaterialPageRoute(

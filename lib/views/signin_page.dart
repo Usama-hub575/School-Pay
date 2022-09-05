@@ -347,11 +347,22 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         onPressed: () async {
                           if (Utils.loginFormKey.currentState!.validate()) {
-                            await userController.hitLogin(
-                              emailController.text.trim(),
-                              passwordController.text.trim(),
-                              storage.read('fcmToken'),
-                            );
+                            if(storage.read('email').toString() == emailController.text.toString()){
+                              await userController.hitLogin(
+                                emailController.text.trim(),
+                                passwordController.text.trim(),
+                                storage.read('fcmToken'),
+                              );
+                            }
+                            else{
+                              _preferences.removeAll();
+                              storage.write('isBioMatric', false);
+                              await userController.hitLogin(
+                                emailController.text.trim(),
+                                passwordController.text.trim(),
+                                storage.read('fcmToken'),
+                              );
+                            }
                             if (userController.userResData.value.status) {
                               storage.write(
                                 'accessToken',
