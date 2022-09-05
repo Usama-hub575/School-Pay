@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+import 'package:paynest_flutter_app/theme/theme.dart';
+
+import '../res/res.dart';
+
+Widget fullScreenLoader() => Material(
+  color: PayNestTheme.primaryColor.withOpacity(0.05),
+  child:   InkWell(
+    onTap: (){},
+    splashColor: Colors.white.withOpacity(0.0),
+    hoverColor: Colors.white.withOpacity(0.0),
+    highlightColor: Colors.white.withOpacity(0.0),
+    child: Container(
+      width: sizes.width,
+      height: sizes.height,
+      child: Center(
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.white,
+          valueColor: AlwaysStoppedAnimation<Color>(
+            PayNestTheme.primaryColor,
+          ),
+        ),
+      ),
+    ),
+  ),
+);

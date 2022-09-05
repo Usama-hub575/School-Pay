@@ -437,19 +437,16 @@ class _AddStudentState extends State<AddStudent> {
                                   ListView.separated(
                                     itemCount: _searchResult.length,
                                     shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
+                                    physics: const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       return Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment:CrossAxisAlignment.start,
                                         children: [
-                                          verticalSpacer(16),
                                           InkWellWidget(
                                             onTap: () {},
                                             child: Container(
                                               margin: EdgeInsets.symmetric(
-                                                horizontal: horizontalValue(32),
+                                                horizontal: horizontalValue(20),
                                               ),
                                               padding: EdgeInsets.symmetric(
                                                 horizontal: horizontalValue(12),
@@ -466,35 +463,36 @@ class _AddStudentState extends State<AddStudent> {
                                               child: Row(
                                                 children: [
                                                   Container(
-                                                    height:
-                                                        sizes.heightRatio * 50,
-                                                    width:
-                                                        sizes.heightRatio * 50,
-                                                    child: CircleAvatar(
-                                                      backgroundImage:
-                                                          NetworkImage(
-                                                        'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
-                                                      ),
+                                                    height: sizes.heightRatio * 50,
+                                                    width: sizes.widthRatio * 50,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: SvgPicture.asset(
+                                                      _searchResult[index].gender == "male" ? icMale : icFemale,
                                                     ),
                                                   ),
-                                                  horizontalSpacer(12),
+                                                  horizontalSpacer(26),
                                                   Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Text(
-                                                        '${_searchResult[index].firstName}\n${_searchResult[index].lastName}',
-                                                        style: PayNestTheme
-                                                            .title20white
-                                                            .copyWith(
-                                                          fontSize:
-                                                              sizes.fontRatio *
-                                                                  14,
-                                                          fontFamily:
-                                                              'montserratBold',
-                                                          color: PayNestTheme
-                                                              .black,
+                                                      Container(
+                                                        width: sizes.widthRatio*100,
+                                                        child: Text(
+                                                          '${_searchResult[index].firstName}\n${_searchResult[index].lastName}',
+                                                          style: PayNestTheme
+                                                              .title20white
+                                                              .copyWith(
+                                                            fontSize:
+                                                                sizes.fontRatio *
+                                                                    14,
+                                                            fontFamily:
+                                                                'montserratBold',
+                                                            color: PayNestTheme
+                                                                .black,
+                                                          ),
                                                         ),
                                                       ),
                                                       verticalSpacer(4),
@@ -513,7 +511,6 @@ class _AddStudentState extends State<AddStudent> {
                                                     ],
                                                   ),
                                                   Spacer(),
-
                                                   _getActionButton(
                                                     onTap: () async {
                                                       if (_selectedFilter ==
@@ -791,7 +788,7 @@ class _AddStudentState extends State<AddStudent> {
                                       );
                                     },
                                     separatorBuilder: (context, index) {
-                                      return verticalSpacer(4);
+                                      return verticalSpacer(12);
                                     },
                                   ),
                                   verticalSpacer(24),
@@ -1017,11 +1014,17 @@ class _AddStudentState extends State<AddStudent> {
             ),
           ),
           verticalSpacer(6),
-          Text(
-            widget.schoolData.address,
-            style: PayNestTheme.h2_14textGrey.copyWith(
-              fontFamily: "montserratRegular",
-              fontSize: sizes.fontRatio * 14,
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: horizontalValue(16),
+            ),
+            child: Text(
+              widget.schoolData.address,
+              textAlign: TextAlign.center,
+              style: PayNestTheme.h2_14textGrey.copyWith(
+                fontFamily: "montserratRegular",
+                fontSize: sizes.fontRatio * 14,
+              ),
             ),
           ),
         ],
