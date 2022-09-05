@@ -13,10 +13,12 @@ import '../../../model/datamodel/singlestudent_model.dart';
 import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/back_button.dart';
+import '../../../widgets/full_screen_loader.dart';
 import '../../../widgets/inkwell_widget.dart';
 import '../../../widgets/spacer.dart';
 import '../../webview/webview.dart';
 import '../transactiondetails/paynowltransactiondetails_page.dart';
+import 'package:paynest_flutter_app/extension/stack_extension.dart';
 
 class PaymentMethod extends StatefulWidget {
   final SingleStudentModel singleStudentModel;
@@ -39,8 +41,43 @@ class _PaymentMethodState extends State<PaymentMethod> {
   final SetBankResponseController sbrController =
       Get.put(SetBankResponseController());
 
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isLoading = false;
+  }
+
   @override
   Widget build(BuildContext context) {
+    return Material(
+      color: Colors.white,
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(
+              horizontalValue(14),
+            ),
+            topRight: Radius.circular(
+              horizontalValue(14),
+            ),
+          ),
+          color: Colors.white,
+        ),
+        child: SafeArea(
+          child: Stack().fullScreenLoader(
+            state: isLoading,
+            loadingWidget: fullScreenLoader(),
+            child: getBody(),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget getBody(){
     return Scaffold(
       backgroundColor: PayNestTheme.primaryColor,
       body: Column(
@@ -127,11 +164,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       height: sizes.heightRatio * 284,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                        image: AssetImage(
-                          icPaymentMethod,
-                        ),
-                        fit: BoxFit.cover,
-                      )),
+                            image: AssetImage(
+                              icPaymentMethod,
+                            ),
+                            fit: BoxFit.cover,
+                          )),
                     ),
                     InkWellWidget(
                       onTap: () async {
@@ -256,7 +293,8 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                       .copyWith(
                                     fontWeight: FontWeight.w500,
                                     fontSize: sizes.fontRatio * 14,
-                                    color: PayNestTheme.primaryColor.withOpacity(0.5),
+                                    color: PayNestTheme.primaryColor
+                                        .withOpacity(0.5),
                                   ),
                                 ),
                               ),
@@ -310,7 +348,8 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                       .copyWith(
                                     fontWeight: FontWeight.w500,
                                     fontSize: sizes.fontRatio * 14,
-                                    color: PayNestTheme.primaryColor.withOpacity(0.5),
+                                    color: PayNestTheme.primaryColor
+                                        .withOpacity(0.5),
                                   ),
                                 ),
                               ),
@@ -346,7 +385,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
           ),
         ),
       );
-
+      isLoading = true;
+      if (mounted) {
+        setState(() {});
+      }
       if (result != null) {
         var amount = widget.payment;
         bool status = await ctrcController.hitCreateTransaction(
@@ -373,6 +415,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 schoolName ?? '',
                 amount.toString(),
               );
+              isLoading = false;
+              if (mounted) {
+                setState(() {});
+              }
               Future.delayed(
                 Duration.zero,
                 () {
@@ -389,6 +435,8 @@ class _PaymentMethodState extends State<PaymentMethod> {
           );
         } else {
           if (mounted) {
+            isLoading = false;
+            setState(() {});
             Future.delayed(
               Duration.zero,
               () {
@@ -409,28 +457,42 @@ class _PaymentMethodState extends State<PaymentMethod> {
         }
       }
     } else if (widget.payment < 0) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(
-        SnackBar(
-          behavior: SnackBarBehavior.floating,
-          content: Text(
-            "Amount is not correct",
-          ),
-          backgroundColor: Colors.redAccent,
-        ),
+      isLoading = false;
+      setState(() {});
+      Future.delayed(
+        Duration(seconds: 1),
+        () {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(
+            SnackBar(
+              behavior: SnackBarBehavior.floating,
+              content: Text(
+                "Amount is not correct",
+              ),
+              backgroundColor: Colors.redAccent,
+            ),
+          );
+        },
       );
     } else if (widget.payment == 0) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(
-        SnackBar(
-          behavior: SnackBarBehavior.floating,
-          content: Text(
-            "Fees already paid",
-          ),
-          backgroundColor: Colors.green,
-        ),
+      isLoading = false;
+      setState(() {});
+      Future.delayed(
+        Duration(seconds: 1),
+        () {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(
+            SnackBar(
+              behavior: SnackBarBehavior.floating,
+              content: Text(
+                "Fees already paid",
+              ),
+              backgroundColor: Colors.green,
+            ),
+          );
+        },
       );
     }
   }

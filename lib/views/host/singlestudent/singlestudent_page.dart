@@ -225,6 +225,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     verticalSpacer(8),
                     Text(
                       '${widget.singleStudentModel.student!.firstName + widget.singleStudentModel.student!.lastName}',
+                      textAlign: TextAlign.center,
                       style: PayNestTheme.h2_12blueAccent.copyWith(
                         fontSize: sizes.fontRatio * 22,
                         color: PayNestTheme.primaryColor,
@@ -233,6 +234,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     verticalSpacer(4),
                     Text(
                       'Grade ${widget.singleStudentModel.student!.grade}',
+                      textAlign: TextAlign.center,
                       style: PayNestTheme.h2_12blueAccent.copyWith(
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.black,
@@ -250,6 +252,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     verticalSpacer(4),
                     Text(
                       '${widget.singleStudentModel.student!.school!.address}',
+                      textAlign: TextAlign.center,
                       style: PayNestTheme.small_2_10textGrey.copyWith(
                           fontSize: sizes.fontRatio * 16,
                           color: PayNestTheme.black),

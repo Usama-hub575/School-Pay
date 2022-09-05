@@ -7,24 +7,26 @@ enum LoadingState {
 
 extension ProgressLoader on Stack {
   Widget fullScreenLoader({
-    required LoadingState state,
+    required bool state,
     required loadingWidget,
     required child,
   }) {
     switch (state) {
-      case LoadingState.loaded:
+      case false:
         return Stack(
           children: [
             child,
           ],
         );
-      case LoadingState.loading:
+      case true:
         return Stack(
           children: [
             child,
             loadingWidget,
           ],
         );
+      default:
+        return Container();
     }
   }
 }
