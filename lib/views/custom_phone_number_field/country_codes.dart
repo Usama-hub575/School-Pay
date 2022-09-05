@@ -5,8 +5,8 @@ const List<Map<String, String>> codes = [
     "dial_code": "+93",
   },
   {
-    "name": "Åland",
-    "code": "AX",
+    "name": "Finland",
+    "code": "FL",
     "dial_code": "+358",
   },
   {
@@ -240,18 +240,18 @@ const List<Map<String, String>> codes = [
     "dial_code": "+57",
   },
   {
-    "name": "Komori",
-    "code": "KM",
+    "name": "Comoros",
+    "code": "CM",
     "dial_code": "+269",
   },
   {
-    "name": "République du Congo",
-    "code": "CG",
+    "name": "Republic of the Congo",
+    "code": "RC",
     "dial_code": "+242",
   },
   {
-    "name": "République démocratique du Congo",
-    "code": "CD",
+    "name": "Democratic Republic of the Congo",
+    "code": "DRC",
     "dial_code": "+243",
   },
   {
@@ -290,7 +290,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+420",
   },
   {
-    "name": "Danmark",
+    "name": "Denmark",
     "code": "DK",
     "dial_code": "+45",
   },
@@ -375,8 +375,8 @@ const List<Map<String, String>> codes = [
     "dial_code": "+594",
   },
   {
-    "name": "Polynésie française",
-    "code": "PF",
+    "name": "French Polynesia",
+    "code": "FP",
     "dial_code": "+689",
   },
   {
@@ -415,12 +415,12 @@ const List<Map<String, String>> codes = [
     "dial_code": "+350",
   },
   {
-    "name": "Hellas",
+    "name": "Greece",
     "code": "GR",
     "dial_code": "+30",
   },
   {
-    "name": "Kalaallit Nunaat",
+    "name": "Greenland",
     "code": "GL",
     "dial_code": "+299",
   },
@@ -475,7 +475,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+0",
   },
   {
-    "name": "Vaticano",
+    "name": "Vatican",
     "code": "VA",
     "dial_code": "+379",
   },
@@ -490,7 +490,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+852",
   },
   {
-    "name": "Magyarország",
+    "name": "Hungary",
     "code": "HU",
     "dial_code": "+36",
   },
@@ -585,8 +585,8 @@ const List<Map<String, String>> codes = [
     "dial_code": "+82",
   },
   {
-    "name": "Republika e Kosovës",
-    "code": "XK",
+    "name": "Republic of Kosova",
+    "code": "RK",
     "dial_code": "+383",
   },
   {
@@ -650,7 +650,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+853",
   },
   {
-    "name": "Македонија",
+    "name": "Macedonia",
     "code": "MK",
     "dial_code": "+389",
   },
@@ -736,7 +736,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+976",
   },
   {
-    "name": "Црна Гора",
+    "name": "Montenegro",
     "code": "ME",
     "dial_code": "+382",
   },
@@ -786,7 +786,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+599",
   },
   {
-    "name": "Nouvelle-Calédonie",
+    "name": "New Caledonia",
     "code": "NC",
     "dial_code": "+687",
   },
@@ -811,7 +811,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+234",
   },
   {
-    "name": "Niuē",
+    "name": "Niue",
     "code": "NU",
     "dial_code": "+683",
   },
@@ -831,7 +831,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+47",
   },
   {
-    "name": "Amman",
+    "name": "Omman",
     "code": "OM",
     "dial_code": "+968",
   },
@@ -851,12 +851,12 @@ const List<Map<String, String>> codes = [
     "dial_code": "+970",
   },
   {
-    "name": "Panamá",
+    "name": "Panama",
     "code": "PA",
     "dial_code": "+507",
   },
   {
-    "name": "Papua Niugini",
+    "name": "Papua New Guinea",
     "code": "PG",
     "dial_code": "+675",
   },
@@ -866,12 +866,12 @@ const List<Map<String, String>> codes = [
     "dial_code": "+595",
   },
   {
-    "name": "Perú",
+    "name": "Peru",
     "code": "PE",
     "dial_code": "+51",
   },
   {
-    "name": "Pilipinas",
+    "name": "Philippines",
     "code": "PH",
     "dial_code": "+63",
   },
@@ -881,7 +881,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+64",
   },
   {
-    "name": "Polska",
+    "name": "Poland",
     "code": "PL",
     "dial_code": "+48",
   },
@@ -906,7 +906,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+974",
   },
   {
-    "name": "România",
+    "name": "Romania",
     "code": "RO",
     "dial_code": "+40",
   },
@@ -926,7 +926,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+262",
   },
   {
-    "name": "Saint-Barthélemy",
+    "name": "Saint Barthélemy",
     "code": "BL",
     "dial_code": "+590",
   },
@@ -951,7 +951,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+590",
   },
   {
-    "name": "Saint-Pierre-et-Miquelon",
+    "name": "Saint Pierre and Miquelon",
     "code": "PM",
     "dial_code": "+508",
   },
@@ -1006,12 +1006,12 @@ const List<Map<String, String>> codes = [
     "dial_code": "+65",
   },
   {
-    "name": "Slovensko",
+    "name": "Slovakia",
     "code": "SK",
     "dial_code": "+421",
   },
   {
-    "name": "Slovenija",
+    "name": "Slovenia",
     "code": "SI",
     "dial_code": "+386",
   },
@@ -1021,13 +1021,13 @@ const List<Map<String, String>> codes = [
     "dial_code": "+677",
   },
   {
-    "name": "Soomaaliya",
+    "name": "Somalia",
     "code": "SO",
     "dial_code": "+252",
   },
   {
     "name": "South Africa",
-    "code": "ZA",
+    "code": "SA",
     "dial_code": "+27",
   },
   {
@@ -1041,7 +1041,7 @@ const List<Map<String, String>> codes = [
     "dial_code": "+500",
   },
   {
-    "name": "spain",
+    "name": "Spain",
     "code": "ES",
     "dial_code": "+34",
   },
@@ -1061,22 +1061,22 @@ const List<Map<String, String>> codes = [
     "dial_code": "+597",
   },
   {
-    "name": "Svalbard og Jan Mayen",
+    "name": "Svalbard and Jan Mayen",
     "code": "SJ",
     "dial_code": "+47",
   },
   {
-    "name": "Swaziland",
+    "name": "Eswatini",
     "code": "SZ",
     "dial_code": "+268",
   },
   {
-    "name": "Sverige",
+    "name": "Sweden",
     "code": "SE",
     "dial_code": "+46",
   },
   {
-    "name": "Schweiz",
+    "name": "Switzerland",
     "code": "CH",
     "dial_code": "+41",
   },
@@ -1215,8 +1215,9 @@ const List<Map<String, String>> codes = [
     "code": "VI",
     "dial_code": "+1340",
   },
+
   {
-    "name": "Wallis et Futuna",
+    "name": "Wallis and Futuna",
     "code": "WF",
     "dial_code": "+681",
   },
