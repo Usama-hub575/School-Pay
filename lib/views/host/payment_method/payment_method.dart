@@ -133,41 +133,40 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         fit: BoxFit.cover,
                       )),
                     ),
-                    Container(
-                      width: double.infinity,
-                      margin: EdgeInsets.symmetric(
-                        horizontal: horizontalValue(4),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        vertical: verticalValue(4),
-                      ),
-                      decoration: BoxDecoration(
-                        color: PayNestTheme.colorWhite,
-                        border: Border.all(
-                          color: PayNestTheme.primaryColor,
+                    InkWellWidget(
+                      onTap: () async {
+                        await onPaymentPress();
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.symmetric(
+                          horizontal: horizontalValue(4),
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0.5,
-                            blurRadius: 5,
-                            offset: Offset(1, 3),
+                        padding: EdgeInsets.symmetric(
+                          vertical: verticalValue(4),
+                        ),
+                        decoration: BoxDecoration(
+                          color: PayNestTheme.colorWhite,
+                          border: Border.all(
+                            color: PayNestTheme.primaryColor,
                           ),
-                        ],
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Row(
-                        children: [
-                          horizontalSpacer(16),
-                          _commercial_image(
-                            imagePath: icCommercialBank,
-                          ),
-                          Expanded(
-                            child: FlatButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () async {
-                                await onPaymentPress();
-                              },
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 0.5,
+                              blurRadius: 5,
+                              offset: Offset(1, 3),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Row(
+                          children: [
+                            horizontalSpacer(16),
+                            _commercial_image(
+                              imagePath: icCommercialBank,
+                            ),
+                            Expanded(
                               child: Center(
                                 child: Text(
                                   payBy,
@@ -181,9 +180,9 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                 ),
                               ),
                             ),
-                          ),
-                          horizontalSpacer(16),
-                        ],
+                            horizontalSpacer(16),
+                          ],
+                        ),
                       ),
                     ),
                     verticalSpacer(8),
@@ -223,6 +222,9 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         margin: EdgeInsets.symmetric(
                           horizontal: horizontalValue(4),
                         ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: verticalValue(12),
+                        ),
                         decoration: BoxDecoration(
                           color: PayNestTheme.colorWhite,
                           border: Border.all(
@@ -246,23 +248,15 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             ),
                             horizontalSpacer(16),
                             Expanded(
-                              child: FlatButton(
-                                padding: EdgeInsets.zero,
-                                splashColor: Colors.transparent,
-                                disabledColor: Colors.transparent,
-                                onPressed: () {
-                                  showToast();
-                                },
-                                child: Center(
-                                  child: Text(
-                                    payByBankTransfer,
-                                    textAlign: TextAlign.center,
-                                    style: PayNestTheme.title_2_16primaryColor
-                                        .copyWith(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: sizes.fontRatio * 14,
-                                      color: PayNestTheme.primaryColor.withOpacity(0.5),
-                                    ),
+                              child: Center(
+                                child: Text(
+                                  payByBankTransfer,
+                                  textAlign: TextAlign.center,
+                                  style: PayNestTheme.title_2_16primaryColor
+                                      .copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: sizes.fontRatio * 14,
+                                    color: PayNestTheme.primaryColor.withOpacity(0.5),
                                   ),
                                 ),
                               ),
@@ -283,7 +277,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           horizontal: horizontalValue(4),
                         ),
                         padding: EdgeInsets.symmetric(
-                          vertical: verticalValue(4),
+                          vertical: verticalValue(12),
                         ),
                         decoration: BoxDecoration(
                           color: PayNestTheme.colorWhite,
@@ -308,23 +302,15 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             ),
                             horizontalSpacer(16),
                             Expanded(
-                              child: FlatButton(
-                                padding: EdgeInsets.zero,
-                                splashColor: Colors.transparent,
-                                disabledColor: Colors.transparent,
-                                onPressed: () {
-                                  showToast();
-                                },
-                                child: Center(
-                                  child: Text(
-                                    payByInstallments,
-                                    textAlign: TextAlign.center,
-                                    style: PayNestTheme.title_2_16primaryColor
-                                        .copyWith(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: sizes.fontRatio * 14,
-                                      color: PayNestTheme.primaryColor.withOpacity(0.5),
-                                    ),
+                              child: Center(
+                                child: Text(
+                                  payByInstallments,
+                                  textAlign: TextAlign.center,
+                                  style: PayNestTheme.title_2_16primaryColor
+                                      .copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: sizes.fontRatio * 14,
+                                    color: PayNestTheme.primaryColor.withOpacity(0.5),
                                   ),
                                 ),
                               ),

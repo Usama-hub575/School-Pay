@@ -35,7 +35,7 @@ dependencies:
   shared_preferences:
   dropdown_button2:
   pdf:
-  open_file:
+  advance_pdf_viewer:
   package_info_plus:
   store_redirect:
 
