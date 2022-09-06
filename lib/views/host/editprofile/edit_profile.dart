@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/updateprofile_controller.dart';
@@ -153,9 +154,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    userController.userResData.value.parent!.firstName +
+                                    userController.userResData.value.parent!
+                                            .firstName +
                                         " " +
-                                        userController.userResData.value.parent!.lastName,
+                                        userController
+                                            .userResData.value.parent!.lastName,
                                     style: PayNestTheme.title18black.copyWith(
                                       fontSize: sizes.fontRatio * 18,
                                       fontFamily: 'montserratBold',
@@ -183,11 +186,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   ),
                                 ],
                               ),
-                              child: CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                  'https://cdn.pixabay.com/photo/2022/02/19/15/05/dark-7022879_960_720.jpg',
+                              child: Container(
+                                height: sizes.heightRatio * 60,
+                                width: sizes.widthRatio * 60,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
                                 ),
-                                radius: 45.r,
+                                child: SvgPicture.asset(
+                                  icMale,
+                                ),
                               ),
                             ),
                           )
