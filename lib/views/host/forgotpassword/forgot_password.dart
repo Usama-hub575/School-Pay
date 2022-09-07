@@ -12,6 +12,7 @@ import '../../../utils/utils.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/custom_alert_dialog.dart';
 import '../../../widgets/spacer.dart';
+import '../../../widgets/toast.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -150,25 +151,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               Navigator.of(context).pushNamed('/NewPassword',
                                   arguments: emailController.text.toString());
                             } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    registerController.isFailed.value
-                                        .toString(),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              );
+                              showToast(
+                                  context: context,
+                                  messege: registerController.isFailed.value
+                                      .toString(),
+                                  color: PayNestTheme.red);
                             }
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Email field is empty',
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            );
+                            showToast(
+                                context: context,
+                                messege: 'Email field is empty',
+                                color: PayNestTheme.red);
                           }
                           // setState(() {
                           //   CustomAlertDialog.baseDialog(

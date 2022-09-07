@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/views/Initilizer.dart';
 import 'package:paynest_flutter_app/views/host/forgotpassword/forgot_password.dart';
 import 'package:paynest_flutter_app/views/host/forgotpassword/new_password.dart';
@@ -16,7 +16,9 @@ import 'package:paynest_flutter_app/views/registration_screen/register_page.dart
 import 'package:paynest_flutter_app/views/signin_page.dart';
 import 'package:paynest_flutter_app/views/welcome_page.dart';
 
-late DateFormat dateFormat;
+import 'Utils/sharedpref.dart';
+
+//flutter build apk --flavor production -t lib/production_main.dart
 
 Future<void> backgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -33,7 +35,7 @@ late AndroidNotificationChannel channel;
 /// Initialize the [FlutterLocalNotificationsPlugin] package.
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   getFCMToken();
@@ -99,7 +101,7 @@ Future<void> main() async {
     sound: true,
   );
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -113,15 +115,13 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initializeDateFormatting();
-    dateFormat = DateFormat.yMMMMd('en_GB');
   }
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(375, 812),
-      builder: ()=> MaterialApp(
+      builder: (BuildContext context, child) => MaterialApp(
         title: 'PayNest',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -134,7 +134,8 @@ class _MyAppState extends State<MyApp> {
               page = InitializerScreen();
               break;
             case '/Welcome':
-              break;case '/Welcome':
+              break;
+            case '/Welcome':
               page = WelcomePage();
               break;
             case '/SignInPage':

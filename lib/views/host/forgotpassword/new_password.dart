@@ -15,6 +15,7 @@ import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/custom_alert_dialog.dart';
 import '../../../widgets/spacer.dart';
+import '../../../widgets/toast.dart';
 
 class NewPassword extends StatefulWidget {
   NewPassword({
@@ -350,26 +351,17 @@ class _NewPasswordState extends State<NewPassword> {
                                 },
                               );
                             } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    userController.isFailed.value.toString(),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  behavior: SnackBarBehavior.floating,
-                                ),
-                              );
+                              showToast(
+                                  context: context,
+                                  messege:
+                                      userController.isFailed.value.toString(),
+                                  color: PayNestTheme.primaryColor);
                             }
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Fields can not be empty',
-                                  textAlign: TextAlign.center,
-                                ),
-                                behavior: SnackBarBehavior.floating,
-                              ),
-                            );
+                            showToast(
+                                context: context,
+                                messege: 'Fields can not be empty!',
+                                color: PayNestTheme.primaryColor);
                           }
                         },
                         child: !userController.isLoading.value

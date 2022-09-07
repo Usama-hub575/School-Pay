@@ -7,6 +7,7 @@ import 'package:paynest_flutter_app/views/registration_screen/widget/custom_slid
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_detail_page.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_main_page.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_otp_page.dart';
+import 'package:paynest_flutter_app/widgets/toast.dart';
 import '../../constants/constants.dart';
 import '../../controller/user_controller.dart';
 import '../../res/res.dart';
@@ -119,13 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       '/DashboardPage',
                                       (Route<dynamic> route) => false);
                                 } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        userController.isFailed.toString(),
-                                      ),
-                                    ),
-                                  );
+                                  showToast(messege: userController.isFailed.toString(), context: context, color: PayNestTheme.red);
                                 }
                               },
                             );

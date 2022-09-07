@@ -14,6 +14,7 @@ import '../../../controller/verifyOTP_controller.dart';
 import '../../../model/datamodel/reg1_to_otp.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/spacer.dart';
+import '../../../widgets/toast.dart';
 
 class RegisterOtpPage extends StatefulWidget {
   const RegisterOtpPage({
@@ -174,12 +175,7 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
                       });
                       widget.onSuccess();
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Entered OTP is wrong'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
+                      showToast(messege: 'Entered OTP is wrong', context: context, color: PayNestTheme.red);
                       // otpController.clear();
                     }
                   }

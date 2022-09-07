@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/updateprofile_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
@@ -12,11 +14,12 @@ import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/widgets/emirates_id_add_dash_function.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../main.dart';
+import '../../../production_main.dart';
 import '../../../res/res.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/editing_text_emirates_id_formater.dart';
 import '../../../widgets/inkwell_widget.dart';
+import '../../../widgets/toast.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -36,10 +39,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
       Get.put(UpdateProfileController());
 
   DateTime tempPickedDate = DateTime.now();
+  late DateFormat dateFormat;
 
   @override
   void initState() {
     super.initState();
+    initializeDateFormatting();
+    dateFormat = DateFormat.yMMMMd('en_GB');
     emailController = TextEditingController(
       text: userController.userResData.value.parent!.email,
     );
@@ -604,35 +610,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       .updateProfileData.value.status ==
                                   true) {
                                 Navigator.pop(context);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      updateProfileController.message.value
-                                          .toString(),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                );
+                                showToast(
+                                    context: context,
+                                    messege:updateProfileController.message.value
+                                        .toString(),
+                                    color: PayNestTheme.primaryColor);
                               } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      updateProfileController.isFailed.value
-                                          .toString(),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                );
+
+                                showToast(
+                                    context: context,
+                                    messege: updateProfileController
+                                        .isFailed.value
+                                        .toString(),
+                                    color: PayNestTheme.primaryColor);
                               }
                             } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Email field is empty',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              );
+                              showToast(
+                                  context: context,
+                                  messege: 'Email field is empty!',
+                                  color: PayNestTheme.red);
                             }
                           },
                           child: !updateProfileController.isLoading.value

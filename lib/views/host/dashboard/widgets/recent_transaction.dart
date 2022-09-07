@@ -3,8 +3,8 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
-import '../../../../main.dart';
 import '../../../../model/transactionlist_resp_model.dart';
+import '../../../../production_main.dart';
 import '../../../../res/res.dart';
 import '../../../../widgets/amount_formater.dart';
 
@@ -23,11 +23,13 @@ class RecentTransactions extends StatefulWidget {
 
 class _RecentTransactionsState extends State<RecentTransactions> {
   bool isListEmpty = true;
+  late DateFormat dateFormat;
 
   @override
   void initState() {
     super.initState();
     initializeDateFormatting();
+    dateFormat = DateFormat.yMMMMd('en_GB');
     if (widget.transactions != null &&
         widget.transactions!.rows != null &&
         widget.transactions!.rows!.isNotEmpty) {
