@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/transactionlist_controller.dart';
@@ -31,10 +32,13 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
       Get.put(TransactionListController());
   final UserController userController = Get.find<UserController>();
   var sorted = [];
+  late DateFormat dateFormat;
 
   @override
   void initState() {
     super.initState();
+    initializeDateFormatting();
+    dateFormat = DateFormat.yMMMMd('en_GB');
     fetchTransactions();
   }
 

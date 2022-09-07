@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/model/transactionlist_resp_model.dart';
@@ -36,6 +37,9 @@ class SingleTransaction extends StatelessWidget {
   }
 
   Widget _singleContainer({required TransactionsRow transactionsRow}){
+    late DateFormat dateFormat;
+    initializeDateFormatting();
+    dateFormat = DateFormat.yMMMMd('en_GB');
     return InkWellWidget(
       onTap: ()=> onTap(transactionsRow),
       child: Container(

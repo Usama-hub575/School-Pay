@@ -22,7 +22,6 @@ import 'Utils/sharedpref.dart';
 //flutter build apk --flavor production -t lib/production_main.dart
 
 
-late DateFormat dateFormat;
 
 Future<void> backgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -120,8 +119,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initializeDateFormatting();
-    dateFormat = DateFormat.yMMMMd('en_GB');
   }
 
 

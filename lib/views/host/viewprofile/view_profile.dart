@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
@@ -27,9 +29,12 @@ class _ViewProfileState extends State<ViewProfile> {
   final UserController userController = Get.find<UserController>();
   TextEditingController passwordController = TextEditingController();
   bool isObscure = true;
+  late DateFormat dateFormat;
 
   @override
   void initState() {
+    initializeDateFormatting();
+    dateFormat = DateFormat.yMMMMd('en_GB');
     passwordController.text = '********';
     super.initState();
   }

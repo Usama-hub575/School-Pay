@@ -23,11 +23,13 @@ class RecentTransactions extends StatefulWidget {
 
 class _RecentTransactionsState extends State<RecentTransactions> {
   bool isListEmpty = true;
+  late DateFormat dateFormat;
 
   @override
   void initState() {
     super.initState();
     initializeDateFormatting();
+    dateFormat = DateFormat.yMMMMd('en_GB');
     if (widget.transactions != null &&
         widget.transactions!.rows != null &&
         widget.transactions!.rows!.isNotEmpty) {
