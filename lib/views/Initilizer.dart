@@ -231,9 +231,9 @@ class _InitializerScreenState extends State<InitializerScreen> {
     );
     try{
       await remoteConfig.fetchAndActivate();
-      // APIService.baseUrl = Uri.parse(remoteConfig.getString(baseUrl));
-      // APIService.paymentGatewayUrl =
-      //     Uri.parse(remoteConfig.getString(paymentGatewayUrl));
+      APIService.baseUrl = Uri.parse(remoteConfig.getString(baseUrl));
+      APIService.paymentGatewayUrl =
+          Uri.parse(remoteConfig.getString(paymentGatewayUrl));
       minAndroidAppVersion = remoteConfig.getString(minAndroidAppVersion);
       maxAndroidAppVersion = remoteConfig.getString(maxAndroidAppVersion);
       minIosAppVersion = remoteConfig.getString(minIosAppVersion);

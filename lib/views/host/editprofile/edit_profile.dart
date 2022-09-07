@@ -11,8 +11,7 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/widgets/emirates_id_add_dash_function.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
-
-import '../../../main.dart';
+import '../../../production_main.dart';
 import '../../../res/res.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/editing_text_emirates_id_formater.dart';

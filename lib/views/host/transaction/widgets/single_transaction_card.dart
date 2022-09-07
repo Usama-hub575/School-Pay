@@ -6,7 +6,7 @@ import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../../constants/constants.dart';
-import '../../../../main.dart';
+import '../../../../production_main.dart';
 import '../../../../theme/theme.dart';
 import '../../../../widgets/inkwell_widget.dart';
 
