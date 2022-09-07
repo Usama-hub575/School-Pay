@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/res/res.dart';
@@ -25,10 +27,13 @@ class _WelcomePageState extends State<WelcomePage> {
   late FirebaseMessaging messaging;
   MySharedPreferences storage = MySharedPreferences.instance;
   late VideoPlayerController videoPlayerController;
+  late DateFormat dateFormat;
 
   @override
   void initState() {
     super.initState();
+    initializeDateFormatting();
+    dateFormat = DateFormat.yMMMMd('en_GB');
     getFCMToken();
     videoPlayerController = VideoPlayerController.asset(welcomeVideo);
     videoPlayerController.initialize().then((value) {
