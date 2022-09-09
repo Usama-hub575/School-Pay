@@ -44,7 +44,6 @@ class UserController extends GetxController {
     gender,
     birth,
     passport,
-    dialCode,
   ) async {
     try {
       isLoading(true);
@@ -59,7 +58,6 @@ class UserController extends GetxController {
         passport: emiratesId,
         gender: gender,
         birth: birth,
-        dialCode: dialCode,
       );
       var res =
           await APIService().apiResister(registerModelToJson(registerModel));
@@ -103,7 +101,7 @@ class UserController extends GetxController {
 
       var res = await APIService().apiLogin(loginModelToJson(loginData));
       isLoading(false);
-      if (res != "") {
+      if(res!= ""){
         var decoded = jsonDecode(res);
         RegisterRespModel lrm = registerRespModelFromJson(res);
         if (decoded['status'] == true) {
@@ -130,13 +128,12 @@ class UserController extends GetxController {
           }
           userResData.refresh();
         }
-      } else {
+      }else{
         userResData.value.status == "";
         retriesTime.value = '';
         retriesTime.refresh();
         attemptsRemain.value = '';
         attemptsRemain.refresh();
-        userResData.refresh();
       }
     } finally {
       isLoading(false);

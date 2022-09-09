@@ -2,20 +2,12 @@ import 'dart:io';
 
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:paynest_flutter_app/res/constants.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/welcome_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:store_redirect/store_redirect.dart';
-
-import '../Utils/sharedPrefKeys.dart';
 import '../Utils/sharedpref.dart';
 import '../constants/constants.dart';
 import '../res/res.dart';

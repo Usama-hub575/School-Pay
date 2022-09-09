@@ -18,6 +18,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../../../widgets/inkwell_widget.dart';
+import '../../../widgets/toast.dart';
 
 class AddStudent extends StatefulWidget {
   SelectedSchoolData schoolData;
@@ -362,20 +363,11 @@ class _AddStudentState extends State<AddStudent> {
                                     if (isSearchFieldEnable == true) {
                                       onSearchTextChanged('');
                                     } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                        content: Text(
-                                          "Please Select Search By Field First",
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        behavior: SnackBarBehavior.floating,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(24),
-                                        ),
-                                        backgroundColor:
-                                            PayNestTheme.primaryColor,
-                                      ));
+
+                                      showToast(
+                                          context: context,
+                                          messege:  "Please Select Search By Field First",
+                                          color: PayNestTheme.primaryColor);
                                     }
                                     setState(() {});
                                   },
@@ -540,27 +532,15 @@ class _AddStudentState extends State<AddStudent> {
                                                             context: context,
                                                           );
                                                         } else {
-                                                          ScaffoldMessenger.of(
-                                                            context,
-                                                          ).showSnackBar(
-                                                            SnackBar(
-                                                              behavior:
-                                                              SnackBarBehavior
-                                                                  .floating,
-                                                              content: Text(
-                                                                addStudentController
-                                                                    .addStudentData
-                                                                    .value
-                                                                    .message ??
-                                                                    'Verification Failed',
-                                                                textAlign:
-                                                                TextAlign
-                                                                    .center,
-                                                              ),
-                                                              backgroundColor:
-                                                              Colors.red,
-                                                            ),
-                                                          );
+
+                                                          showToast(
+                                                              context: context,
+                                                              messege:  addStudentController
+                                                                  .addStudentData
+                                                                  .value
+                                                                  .message ??
+                                                                  'Verification Failed',
+                                                              color: PayNestTheme.red);
                                                         }
 
                                                         searchController.text =
@@ -614,27 +594,14 @@ class _AddStudentState extends State<AddStudent> {
                                                           );
 
                                                         } else {
-                                                          ScaffoldMessenger.of(
-                                                            context,
-                                                          ).showSnackBar(
-                                                            SnackBar(
-                                                              behavior:
-                                                              SnackBarBehavior
-                                                                  .floating,
-                                                              content: Text(
-                                                                addStudentController
-                                                                    .addStudentData
-                                                                    .value
-                                                                    .message ??
-                                                                    'Verification Failed',
-                                                                textAlign:
-                                                                TextAlign
-                                                                    .center,
-                                                              ),
-                                                              backgroundColor:
-                                                              Colors.red,
-                                                            ),
-                                                          );
+                                                          showToast(
+                                                              context: context,
+                                                              messege:   addStudentController
+                                                                  .addStudentData
+                                                                  .value
+                                                                  .message ??
+                                                                  'Verification Failed',
+                                                              color: PayNestTheme.red);
                                                         }
 
                                                         searchController.text =
@@ -712,27 +679,15 @@ class _AddStudentState extends State<AddStudent> {
                                                                   context: context,
                                                                 );
                                                               } else {
-                                                                ScaffoldMessenger.of(
-                                                                  context,
-                                                                ).showSnackBar(
-                                                                  SnackBar(
-                                                                    behavior:
-                                                                    SnackBarBehavior
-                                                                        .floating,
-                                                                    content: Text(
-                                                                      addStudentController
-                                                                          .addStudentData
-                                                                          .value
-                                                                          .message ??
-                                                                          'Verification Failed',
-                                                                      textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                    ),
-                                                                    backgroundColor:
-                                                                    Colors.red,
-                                                                  ),
-                                                                );
+
+                                                                showToast(
+                                                                    context: context,
+                                                                    messege:   addStudentController
+                                                                        .addStudentData
+                                                                        .value
+                                                                        .message ??
+                                                                        'Verification Failed',
+                                                                    color: PayNestTheme.red);
                                                               }
 
                                                               searchController.text =
@@ -757,22 +712,11 @@ class _AddStudentState extends State<AddStudent> {
                                                                     .clear();
                                                               }
                                                             } else {
-                                                              ScaffoldMessenger
-                                                                  .of(
-                                                                context,
-                                                              ).showSnackBar(
-                                                                SnackBar(
-                                                                  behavior:
-                                                                      SnackBarBehavior
-                                                                          .floating,
-                                                                  content: Text(
-                                                                    'Fields can not be empty',
-                                                                  ),
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .red,
-                                                                ),
-                                                              );
+
+                                                              showToast(
+                                                                  context: context,
+                                                                  messege:  'Fields can not be empty',
+                                                                  color: PayNestTheme.red);
                                                             }
                                                           },
                                                         );
@@ -856,17 +800,11 @@ class _AddStudentState extends State<AddStudent> {
                         ),
                         onPressed: () {
                           if (searchController.text.isEmpty) {
-                            ScaffoldMessenger.of(
-                              context,
-                            ).showSnackBar(
-                              SnackBar(
-                                behavior: SnackBarBehavior.floating,
-                                content: Text(
-                                  'Search can not be empty!',
-                                ),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
+
+                            showToast(
+                                context: context,
+                                messege:  'Search can not be empty!',
+                                color: PayNestTheme.red);
                           }
                           if (searchController.text.isNotEmpty) {
                             isLoading = true;

@@ -10,6 +10,7 @@ import '../../../../controller/addstudent_controller.dart';
 import '../../../../controller/user_controller.dart';
 import '../../../../res/res.dart';
 import '../../../../widgets/spacer.dart';
+import '../../../../widgets/toast.dart';
 
 class StudentDetailBottomSheet {
   static void show({
@@ -176,14 +177,10 @@ class _StudentWidgetState extends State<StudentWidget> {
                                 addStudentController.isLoading.value =
                                 false;
                                 Navigator.of(context).pop();
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                  behavior: SnackBarBehavior.floating,
-                                  content: Text(
-                                    addStudentController.errorMessage.toString(),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  backgroundColor: Colors.red,
-                                ));
+                                showToast(
+                                    context: context,
+                                    messege:addStudentController.errorMessage.toString(),
+                                    color: PayNestTheme.red);
                               }
                             },
                             child: Center(

@@ -12,6 +12,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../res/assets.dart';
 import '../../../res/res.dart';
 import '../../../widgets/back_button.dart';
+import '../../../widgets/toast.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({Key? key}) : super(key: key);
@@ -335,26 +336,18 @@ class _ChangePasswordState extends State<ChangePassword> {
                         oldPassController.clear();
                         newPassController.clear();
                         rePassController.clear();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              "Password Reset Successfully",
-                            ),
-                            backgroundColor: Colors.green,
-                            behavior: SnackBarBehavior.floating,
-                          ),
-                        );
+
+                        showToast(
+                            context: context,
+                            messege:  "Password Reset Successfully",
+                            color: PayNestTheme.paidGreen);
                         Navigator.pop(context);
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              resetController.resetPassData.value.message
-                                  .toString(),
-                            ),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
+                        showToast(
+                            context: context,
+                            messege:    resetController.resetPassData.value.message
+                                .toString(),
+                            color: PayNestTheme.red);
                       }
                     }
                   },

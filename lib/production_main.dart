@@ -1,4 +1,3 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,8 +20,6 @@ import 'Utils/sharedpref.dart';
 
 //flutter build apk --flavor production -t lib/production_main.dart
 
-
-
 Future<void> backgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
@@ -38,8 +35,7 @@ late AndroidNotificationChannel channel;
 /// Initialize the [FlutterLocalNotificationsPlugin] package.
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-
-void main()async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   getFCMToken();
@@ -86,7 +82,7 @@ void main()async{
   /// default FCM channel to enable heads up notifications.
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
-      AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
   /// Update the iOS foreground notification presentation options to allow
@@ -121,12 +117,11 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(375, 812),
-      builder: ()=> MaterialApp(
+      builder: (BuildContext context, child) => MaterialApp(
         title: 'PayNest',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -139,9 +134,10 @@ class _MyAppState extends State<MyApp> {
               page = InitializerScreen();
               break;
             case '/Welcome':
-              break;case '/Welcome':
-            page = WelcomePage();
-            break;
+              break;
+            case '/Welcome':
+              page = WelcomePage();
+              break;
             case '/SignInPage':
               page = SignInPage();
               break;

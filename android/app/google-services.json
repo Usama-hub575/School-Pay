@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "447855064635",
+    "project_id": "paynest-f14d4",
+    "storage_bucket": "paynest-f14d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447855064635:android:9ce3d1c18c251e0100ce1e",
+        "android_client_info": {
+          "package_name": "com.paynest.borderpay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUJNS_kQpOz0_ECEFiWEQwz8QNJaDATUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447855064635:android:5be57689011a11d900ce1e",
+        "android_client_info": {
+          "package_name": "com.paynest.fintech.borderpay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUJNS_kQpOz0_ECEFiWEQwz8QNJaDATUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447855064635:android:240a47dcfd889b3300ce1e",
+        "android_client_info": {
+          "package_name": "com.paynest.schoolpay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUJNS_kQpOz0_ECEFiWEQwz8QNJaDATUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

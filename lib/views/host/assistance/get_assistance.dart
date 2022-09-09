@@ -10,6 +10,8 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../widgets/toast.dart';
+
 class GetAssistance extends StatefulWidget {
   const GetAssistance({Key? key}) : super(key: key);
 
@@ -272,14 +274,11 @@ class _GetAssistanceState extends State<GetAssistance> {
       if (await canLaunch(whatAppUrlIOS)) {
         await launch(whatAppUrlIOS, forceSafariVC: false);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'Whatsapp not installed',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        );
+
+            showToast(
+                context: context,
+                messege:  'Whatsapp not installed',
+                color: PayNestTheme.red);
       }
     } else {
       await launch(whatsappUrlAndroid);

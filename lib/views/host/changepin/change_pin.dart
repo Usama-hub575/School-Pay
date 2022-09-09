@@ -8,6 +8,8 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../../widgets/toast.dart';
+
 class ChangePIN extends StatefulWidget {
   const ChangePIN({Key? key}) : super(key: key);
 
@@ -17,8 +19,10 @@ class ChangePIN extends StatefulWidget {
 
 class _ChangePINState extends State<ChangePIN> {
   TextEditingController pinController = TextEditingController();
-  final PinUpdateController pinUpdateController = Get.put(PinUpdateController());
+  final PinUpdateController pinUpdateController =
+      Get.put(PinUpdateController());
   final UserController userController = Get.find<UserController>();
+
   // var variable;
 
   @override
@@ -45,8 +49,8 @@ class _ChangePINState extends State<ChangePIN> {
             height: 129.h,
             decoration: BoxDecoration(
                 color: PayNestTheme.primaryColor,
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(24.r))
-            ),
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.circular(24.r))),
             child: SafeArea(
               child: Padding(
                 padding: EdgeInsets.only(left: 25.h),
@@ -58,17 +62,20 @@ class _ChangePINState extends State<ChangePIN> {
                         Padding(
                           padding: EdgeInsets.only(right: 25.h),
                           child: Container(
-                            height : 44.h,
-                            width : 44.w,
+                            height: 44.h,
+                            width: 44.w,
                             decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.r)
-                            ),
+                                borderRadius: BorderRadius.circular(12.r)),
                             child: IconButton(
-                              onPressed: (){
+                              onPressed: () {
                                 Navigator.pop(context);
                               },
-                              icon: Icon(Icons.arrow_back,size: 20.sp,color: PayNestTheme.blueAccent,),
+                              icon: Icon(
+                                Icons.arrow_back,
+                                size: 20.sp,
+                                color: PayNestTheme.blueAccent,
+                              ),
                               // child: Text(""),
                             ),
                           ),
@@ -76,7 +83,10 @@ class _ChangePINState extends State<ChangePIN> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        Text(chgPIN,style: PayNestTheme.title20white,),
+                        Text(
+                          chgPIN,
+                          style: PayNestTheme.title20white,
+                        ),
                       ],
                     ),
                   ],
@@ -84,16 +94,14 @@ class _ChangePINState extends State<ChangePIN> {
               ),
             ),
           ),
-
           SizedBox(height: 50.h),
           Text(enterPin),
           SizedBox(height: 10.h),
-
           Center(
             child: Form(
               key: Utils.pinFormKey,
               child: Padding(
-                padding: EdgeInsets.only(top: 48.h,bottom: 36.h),
+                padding: EdgeInsets.only(top: 48.h, bottom: 36.h),
                 child: Pinput(
                   controller: pinController,
                   defaultPinTheme: defaultPinTheme,
@@ -101,7 +109,11 @@ class _ChangePINState extends State<ChangePIN> {
                   followingPinTheme: followingPinTheme,
                   validator: (s) {
                     // return s == '2222' ? null : 'Pin is incorrect';
-                    return s!.isEmpty ? 'Enter Pin': s.length < 4 ? '4 Digit Pin ' : null;
+                    return s!.isEmpty
+                        ? 'Enter Pin'
+                        : s.length < 4
+                            ? '4 Digit Pin '
+                            : null;
                   },
                   pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                   showCursor: true,
@@ -111,45 +123,71 @@ class _ChangePINState extends State<ChangePIN> {
             ),
           ),
           Spacer(),
-          Obx(()=>SizedBox(
-            height: 60.h,
-            width: 326.w,
-            child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor:PayNestTheme.blueAccent,
-                elevation: 0,
-                // side: BorderSide(width:1, color:Colors.white),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              ),
-              onPressed: () async {
-                // Navigator.pushNamed(context, '/DashboardPage');
-                if(Utils.pinFormKey.currentState!.validate()){
-                  print('validated');
-                  await pinUpdateController.hitUpdatePin(pinController.text,userController.userResData.value.parent!.id);
-                  if(pinUpdateController.pinData.value.status){
-                    pinController.clear();
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Pin Updated"),backgroundColor: Colors.green,behavior: SnackBarBehavior.floating,));
-                    Navigator.pop(context);
-                  }
-                }else{
-                  pinController.clear();
-                  print('Invalidated');
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Some error occurred"),backgroundColor: Colors.red,behavior: SnackBarBehavior.floating,));
-                }
-              },
-              child: !pinUpdateController.isLoading.value ? Text(userController.userResData.value.parent!.pin ==null ? create: confirm,style: PayNestTheme.subtitle16white,) : Center(child: CircularProgressIndicator(color: PayNestTheme.colorWhite,backgroundColor: PayNestTheme.blueAccent,)),
-              // label:
-            ),
-          )),
-          SizedBox(height: 50.h,),
+          Obx(() => SizedBox(
+                height: 60.h,
+                width: 326.w,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: PayNestTheme.blueAccent,
+                    elevation: 0,
+                    // side: BorderSide(width:1, color:Colors.white),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                  ),
+                  onPressed: () async {
+                    // Navigator.pushNamed(context, '/DashboardPage');
+                    if (Utils.pinFormKey.currentState!.validate()) {
+                      print('validated');
+                      await pinUpdateController.hitUpdatePin(pinController.text,
+                          userController.userResData.value.parent!.id);
+                      if (pinUpdateController.pinData.value.status) {
+                        pinController.clear();
+                        showToast(
+                            context: context,
+                            messege: 'Pin Updated',
+                            color: PayNestTheme.paidGreen);
+
+                        Navigator.pop(context);
+                      }
+                    } else {
+                      pinController.clear();
+                      print('Invalidated');
+                      showToast(
+                          context: context,
+                          messege: 'Some error occurred',
+                          color: PayNestTheme.red);
+                    }
+                  },
+                  child: !pinUpdateController.isLoading.value
+                      ? Text(
+                          userController.userResData.value.parent!.pin == null
+                              ? create
+                              : confirm,
+                          style: PayNestTheme.subtitle16white,
+                        )
+                      : Center(
+                          child: CircularProgressIndicator(
+                          color: PayNestTheme.colorWhite,
+                          backgroundColor: PayNestTheme.blueAccent,
+                        )),
+                  // label:
+                ),
+              )),
+          SizedBox(
+            height: 50.h,
+          ),
         ],
       ),
     );
   }
+
   final defaultPinTheme = PinTheme(
     width: 60.w,
     height: 70.h,
-    textStyle: TextStyle(fontSize: 20.sp, color: PayNestTheme.primaryColor, fontWeight: FontWeight.w600),
+    textStyle: TextStyle(
+        fontSize: 20.sp,
+        color: PayNestTheme.primaryColor,
+        fontWeight: FontWeight.w600),
     decoration: BoxDecoration(
       border: Border.all(color: PayNestTheme.lineColor),
       borderRadius: BorderRadius.circular(20),
@@ -159,7 +197,10 @@ class _ChangePINState extends State<ChangePIN> {
   final focusPinTheme = PinTheme(
     width: 60.w,
     height: 70.h,
-    textStyle: TextStyle(fontSize: 20.sp, color: PayNestTheme.primaryColor, fontWeight: FontWeight.w600),
+    textStyle: TextStyle(
+        fontSize: 20.sp,
+        color: PayNestTheme.primaryColor,
+        fontWeight: FontWeight.w600),
     decoration: BoxDecoration(
       border: Border.all(color: PayNestTheme.blueAccent),
       borderRadius: BorderRadius.circular(20),
@@ -168,7 +209,10 @@ class _ChangePINState extends State<ChangePIN> {
   final followingPinTheme = PinTheme(
     width: 60.w,
     height: 70.h,
-    textStyle: TextStyle(fontSize: 20.sp, color: PayNestTheme.primaryColor, fontWeight: FontWeight.w600),
+    textStyle: TextStyle(
+        fontSize: 20.sp,
+        color: PayNestTheme.primaryColor,
+        fontWeight: FontWeight.w600),
     decoration: BoxDecoration(
       border: Border.all(color: PayNestTheme.primaryColor),
       borderRadius: BorderRadius.circular(20),

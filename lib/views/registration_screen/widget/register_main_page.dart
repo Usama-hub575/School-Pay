@@ -15,6 +15,7 @@ import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/blue_back_button.dart';
+import '../../../widgets/toast.dart';
 import '../../custom_phone_number_field/country_code_picker.dart';
 
 class RegisterMainPage extends StatefulWidget {
@@ -366,16 +367,8 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           );
                         }
                         else{
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: PayNestTheme.colorRedShade,
-                              content: Text(
-                                'Phone Field Cannot Be Empty !!',
-                                textAlign: TextAlign.center,
-                              ),
-                              behavior: SnackBarBehavior.floating,
-                            ),
-                          );
+                          showToast(messege: 'Phone Field Cannot Be Empty !!', context: context, color: PayNestTheme.red);
+
                         }
                       },
                       child: Center(

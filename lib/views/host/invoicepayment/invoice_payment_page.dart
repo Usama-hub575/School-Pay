@@ -20,6 +20,7 @@ import 'package:pinput/pinput.dart';
 
 import '../../../widgets/back_button.dart';
 import '../../../widgets/amount_formater.dart';
+import '../../../widgets/toast.dart';
 import '../../download_pdf/download_pdf.dart';
 
 class InvoicePaymentPage extends StatefulWidget {
@@ -80,7 +81,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                         style: PayNestTheme.title20white.copyWith(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'montserratBold',
-                          fontSize: sizes.fontRatio*18,
+                          fontSize: sizes.fontRatio * 18,
                         ),
                       ),
                       Spacer(),
@@ -176,7 +177,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -200,7 +201,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -224,7 +225,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -248,7 +249,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -272,7 +273,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -296,7 +297,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio*12,
+                        fontSize: sizes.fontRatio * 12,
                       ),
                     ),
                     verticalSpacer(4),
@@ -326,8 +327,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                     Text(
                       amountFormater(
                         double.parse(
-                          widget.singleStudentModel.student!
-                              .totalBalanceAmount
+                          widget.singleStudentModel.student!.totalBalanceAmount
                               .toString(),
                         ),
                       ),
@@ -380,7 +380,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                             continueToPayment,
                             style: PayNestTheme.title_2_16primaryColor.copyWith(
                               fontWeight: FontWeight.w500,
-                              fontSize: sizes.fontRatio*14,
+                              fontSize: sizes.fontRatio * 14,
                               color: PayNestTheme.primaryColor,
                             ),
                           ),
@@ -418,17 +418,13 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
     await partialPayController.hitPartialPay(
         widget.singleStudentModel.student!.id.toString(), feeController.text);
     if (partialPayController.partialPayData.value.status == true) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Payment Successful"),
-        ),
-      );
+      showToast(
+          context: context,
+          messege: 'Payment Successful',
+          color: PayNestTheme.primaryColor);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Payment Failed'),
-        ),
-      );
+      showToast(
+          context: context, messege: 'Payment Failed', color: PayNestTheme.red);
     }
   }
 
@@ -445,18 +441,10 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
     setState(() {
       isLoading = false;
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          "Successful!",
-          textAlign: TextAlign.center,
-        ),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        backgroundColor: PayNestTheme.primaryColor,
-      ),
-    );
+
+    showToast(
+        context: context,
+        messege: 'Successful!',
+        color: PayNestTheme.primaryColor);
   }
 }

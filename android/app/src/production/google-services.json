@@ -29,6 +29,49 @@
             {
               "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "447855064635-etr9a1clpgudj57450700ddthvu83n2n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.paynest.borderpay"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447855064635:android:e13575a8b114010000ce1e",
+        "android_client_info": {
+          "package_name": "com.paynest.borderpay.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUJNS_kQpOz0_ECEFiWEQwz8QNJaDATUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "447855064635-etr9a1clpgudj57450700ddthvu83n2n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.paynest.borderpay"
+              }
             }
           ]
         }
@@ -58,6 +101,49 @@
             {
               "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "447855064635-etr9a1clpgudj57450700ddthvu83n2n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.paynest.borderpay"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447855064635:android:3bb9f8e55f58072200ce1e",
+        "android_client_info": {
+          "package_name": "com.paynest.fintech.borderpay.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUJNS_kQpOz0_ECEFiWEQwz8QNJaDATUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "447855064635-etr9a1clpgudj57450700ddthvu83n2n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.paynest.borderpay"
+              }
             }
           ]
         }
@@ -87,6 +173,49 @@
             {
               "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "447855064635-etr9a1clpgudj57450700ddthvu83n2n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.paynest.borderpay"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447855064635:android:e7b487a6d2d2f4b800ce1e",
+        "android_client_info": {
+          "package_name": "com.paynest.schoolpay.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUJNS_kQpOz0_ECEFiWEQwz8QNJaDATUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447855064635-lnmqqucr9gjldu9f5iai5q63adhsoqao.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "447855064635-etr9a1clpgudj57450700ddthvu83n2n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.paynest.borderpay"
+              }
             }
           ]
         }

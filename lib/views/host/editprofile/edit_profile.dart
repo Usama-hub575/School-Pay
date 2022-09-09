@@ -13,11 +13,13 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/widgets/emirates_id_add_dash_function.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+
 import '../../../production_main.dart';
 import '../../../res/res.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/editing_text_emirates_id_formater.dart';
 import '../../../widgets/inkwell_widget.dart';
+import '../../../widgets/toast.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -608,35 +610,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       .updateProfileData.value.status ==
                                   true) {
                                 Navigator.pop(context);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      updateProfileController.message.value
-                                          .toString(),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                );
+                                showToast(
+                                    context: context,
+                                    messege:updateProfileController.message.value
+                                        .toString(),
+                                    color: PayNestTheme.primaryColor);
                               } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      updateProfileController.isFailed.value
-                                          .toString(),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                );
+
+                                showToast(
+                                    context: context,
+                                    messege: updateProfileController
+                                        .isFailed.value
+                                        .toString(),
+                                    color: PayNestTheme.primaryColor);
                               }
                             } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Email field is empty',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              );
+                              showToast(
+                                  context: context,
+                                  messege: 'Email field is empty!',
+                                  color: PayNestTheme.red);
                             }
                           },
                           child: !updateProfileController.isLoading.value

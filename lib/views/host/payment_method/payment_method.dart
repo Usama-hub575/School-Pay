@@ -16,6 +16,7 @@ import '../../../widgets/back_button.dart';
 import '../../../widgets/full_screen_loader.dart';
 import '../../../widgets/inkwell_widget.dart';
 import '../../../widgets/spacer.dart';
+import '../../../widgets/toast.dart';
 import '../../webview/webview.dart';
 import '../transactiondetails/paynowltransactiondetails_page.dart';
 import 'package:paynest_flutter_app/extension/stack_extension.dart';
@@ -77,7 +78,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
     );
   }
 
-  Widget getBody(){
+  Widget getBody() {
     return Scaffold(
       backgroundColor: PayNestTheme.primaryColor,
       body: Column(
@@ -164,11 +165,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       height: sizes.heightRatio * 284,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(
-                              icPaymentMethod,
-                            ),
-                            fit: BoxFit.cover,
-                          )),
+                        image: AssetImage(
+                          icPaymentMethod,
+                        ),
+                        fit: BoxFit.cover,
+                      )),
                     ),
                     InkWellWidget(
                       onTap: () async {
@@ -252,7 +253,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     verticalSpacer(8),
                     InkWellWidget(
                       onTap: () {
-                        showToast();
+                        showToast(
+                            context: context,
+                            messege: 'Coming Soon!',
+                            color: PayNestTheme.primaryColor);
                       },
                       child: Container(
                         width: double.infinity,
@@ -307,7 +311,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     verticalSpacer(8),
                     InkWellWidget(
                       onTap: () {
-                        showToast();
+                        showToast(
+                            context: context,
+                            messege: 'Coming Soon!',
+                            color: PayNestTheme.primaryColor);
                       },
                       child: Container(
                         width: double.infinity,
@@ -440,17 +447,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
             Future.delayed(
               Duration.zero,
               () {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(
-                  SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    content: Text(
-                      'Something went wrong with the transaction',
-                    ),
-                    backgroundColor: Colors.red,
-                  ),
-                );
+                showToast(
+                    context: context,
+                    messege: 'Something went wrong with the transaction',
+                    color: PayNestTheme.red);
               },
             );
           }
@@ -462,17 +462,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
       Future.delayed(
         Duration(seconds: 1),
         () {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(
-            SnackBar(
-              behavior: SnackBarBehavior.floating,
-              content: Text(
-                "Amount is not correct",
-              ),
-              backgroundColor: Colors.redAccent,
-            ),
-          );
+          showToast(
+              context: context,
+              messege: 'Amount is not correct',
+              color: PayNestTheme.red);
         },
       );
     } else if (widget.payment == 0) {
@@ -481,17 +474,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
       Future.delayed(
         Duration(seconds: 1),
         () {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(
-            SnackBar(
-              behavior: SnackBarBehavior.floating,
-              content: Text(
-                "Fees already paid",
-              ),
-              backgroundColor: Colors.green,
-            ),
-          );
+          showToast(
+              context: context,
+              messege: 'Fees already paid',
+              color: PayNestTheme.paidGreen);
         },
       );
     }
@@ -572,26 +558,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
             fit: BoxFit.fill,
           ),
         ),
-      ),
-    );
-  }
-
-  void showToast() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        duration: Duration(seconds: 1),
-        backgroundColor: PayNestTheme.primaryColor,
-        padding: EdgeInsets.symmetric(
-          vertical: verticalValue(16),
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        content: Text(
-          'Coming soon !',
-          textAlign: TextAlign.center,
-        ),
-        behavior: SnackBarBehavior.floating,
       ),
     );
   }
