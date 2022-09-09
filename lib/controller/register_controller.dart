@@ -18,55 +18,11 @@ class RegisterController extends GetxController {
   var forgotPasswordResData =
       ForgotPasswordRespModel(status: false, message: null).obs;
 
-  hitRegister(
-    email,
-    phone,
-    password,
-    firstName,
-    lastName,
-    dialCode,
-    countryCode,
-    emiratesId,
-    passport,
-    gender,
-    birth,
-  ) async {
-    try {
-      isLoading(true);
-      RegisterModel registerModel = RegisterModel(
-        email: email,
-        phone: phone,
-        password: password,
-        firstName: firstName,
-        lastName: lastName,
-        countryCode: countryCode,
-        emiratesId: emiratesId,
-        passport: passport,
-        birth: '',
-        gender: gender,
-      );
-      var res =
-          await APIService().apiResister(registerModelToJson(registerModel));
-      var decoded = jsonDecode(res);
-      if (decoded['status'] == true) {
-        RegisterRespModel lrm = registerRespModelFromJson(res);
-        registerResData.value = lrm;
-        registerResData.refresh();
-      } else if (decoded['status'] == false) {
-        isLoading(false);
-      } else {
-        isFailed.value = decoded['message'];
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
-
   hitForgotPassword(email) async {
     isLoading(true);
     try {
       ForgotPasswordModel forgotPasswordModel =
-          ForgotPasswordModel(email: email);
+      ForgotPasswordModel(email: email);
 
       var res = await APIService().apiForgotPassword(
         forgotPasswordModelToJson(

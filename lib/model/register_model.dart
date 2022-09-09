@@ -4,7 +4,8 @@
 
 import 'dart:convert';
 
-RegisterModel registerModelFromJson(String str) => RegisterModel.fromJson(json.decode(str));
+RegisterModel registerModelFromJson(String str) =>
+    RegisterModel.fromJson(json.decode(str));
 
 String registerModelToJson(RegisterModel data) => json.encode(data.toJson());
 
@@ -20,6 +21,7 @@ class RegisterModel {
     required this.passport,
     required this.gender,
     required this.birth,
+    required this.dialCode,
   });
 
   String email;
@@ -32,31 +34,33 @@ class RegisterModel {
   String passport;
   String gender;
   String birth;
-
+  String dialCode;
 
   factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
-    email: json["email"],
-    phone: json["phone"],
-    password: json["password"],
-    firstName: json["firstName"],
-    lastName: json["lastName"],
-    countryCode: json["countryCode"],
-    emiratesId: json["emiratesId"],
-    passport: json["passport"],
-    gender: json["gender"],
-    birth: json["birth"]
-  );
+        email: json["email"],
+        phone: json["phone"],
+        password: json["password"],
+        firstName: json["firstName"],
+        lastName: json["lastName"],
+        countryCode: json["countryCode"],
+        emiratesId: json["emiratesId"],
+        passport: json["passport"],
+        gender: json["gender"],
+        birth: json["birth"],
+        dialCode: json['dailCode'],
+      );
 
   Map<String, dynamic> toJson() => {
-    "email": email,
-    "phone": phone,
-    "password": password,
-    "firstName": firstName,
-    "lastName": lastName,
-    "countryCode": countryCode,
-    "emiratesId": emiratesId,
-    "passport" : passport,
-    "gender" : gender,
-    "birth" : birth
-  };
+        "email": email,
+        "phone": phone,
+        "password": password,
+        "firstName": firstName,
+        "lastName": lastName,
+        "countryCode": countryCode,
+        "emiratesId": emiratesId,
+        "passport": passport,
+        "gender": gender,
+        "birth": birth,
+        "dialCode": dialCode,
+      };
 }

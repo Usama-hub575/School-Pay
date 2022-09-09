@@ -111,6 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   gender,
                                   '',
                                   emiratesID,
+                                  phoneCode,
                                 );
                                 if (userController.userResData.value.status ==
                                     true) {
