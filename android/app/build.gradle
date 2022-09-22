@@ -77,19 +77,6 @@ android {
             applicationId "com.paynest.schoolpay"
         }
     }
-    flavorDimensions "app"
-    productFlavors {
-
-        staging {
-            dimension "app"
-            applicationId "com.paynest.schoolpay.staging"
-        }
-
-        production {
-            dimension "app"
-            applicationId "com.paynest.schoolpay"
-        }
-    }
 
 }
 
