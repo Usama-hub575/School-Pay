@@ -57,7 +57,7 @@ class _StudentWidgetState extends State<StudentWidget> {
   TextEditingController _dob = TextEditingController();
   DateTime tempPickedDate = DateTime.now();
 
-  List<String> filters = ['Student ID', 'Parent ID', 'Date Of Birth'];
+  List<String> filters = ['Student ID', 'Account ID', 'Date Of Birth'];
   String? _selectedFilter;
   bool isSearchFieldEnable = false;
 
@@ -375,7 +375,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                           onPressed: () {
                             widget.onTap(
                               _selectedFilter == 'Student ID' ? _studentId.text : '',
-                              _selectedFilter == 'Parent ID' ? _studentId.text : '',
+                              _selectedFilter == 'Account ID' ? _studentId.text : '',
                               _selectedFilter == 'Date Of Birth' ? _dob.text : '',
                             );
                           },

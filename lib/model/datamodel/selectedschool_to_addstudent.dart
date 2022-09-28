@@ -13,6 +13,7 @@ class SelectedSchoolData{
   String privacy;
   DateTime createdAt;
   DateTime updatedAt;
+  String payeeType;
 
   SelectedSchoolData({
     required this.id,
@@ -29,5 +30,6 @@ class SelectedSchoolData{
     required this.privacy,
     required this.createdAt,
     required this.updatedAt,
+    required this.payeeType,
   });
 }

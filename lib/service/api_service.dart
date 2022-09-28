@@ -204,7 +204,7 @@ class APIService {
             schoolId.toString(),
           );
       endPoint = Uri.parse("$baseUrl$query");
-    } else if (searchBy == 'parent') {
+    } else if (searchBy == 'account') {
       query = searchByPID.replaceAll('{pid}', queryParam).replaceAll(
             '{school_id}',
             schoolId.toString(),

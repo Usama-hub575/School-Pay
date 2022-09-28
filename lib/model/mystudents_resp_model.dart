@@ -134,6 +134,7 @@ class StudentStudent {
     required this.createdAt,
     required this.updatedAt,
     required this.school,
+    required this.payeeType,
   });
 
   DateTime dob;
@@ -169,6 +170,7 @@ class StudentStudent {
   String? privacy;
   DateTime? createdAt;
   DateTime? updatedAt;
+  String? payeeType;
   School? school;
 
   static StudentStudent empty() {
@@ -206,6 +208,7 @@ class StudentStudent {
         privacy: "",
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
+        payeeType: '',
         school: School.empty());
   }
 
@@ -264,6 +267,7 @@ class StudentStudent {
         updatedAt: json["updatedAt"] != null
             ? DateTime.parse(json["updatedAt"])
             : DateTime.now(),
+        payeeType: json['payeeType'] ?? '',
         school: json["school"] != null
             ? School.fromJson(json["school"])
             : School.empty(),
@@ -311,6 +315,7 @@ class StudentStudent {
         "privacy": privacy,
         "createdAt": createdAt!.toIso8601String(),
         "updatedAt": updatedAt!.toIso8601String(),
+        'payeeType': payeeType,
         "school": school!.toJson(),
       };
 }

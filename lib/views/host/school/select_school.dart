@@ -251,6 +251,7 @@ class _SelectSchoolState extends State<SelectSchool> {
           privacy: log.privacy,
           createdAt: log.createdAt,
           updatedAt: log.updatedAt,
+          payeeType: log.payeeType ?? '',
         );
         Navigator.of(context).push(
           MaterialPageRoute(

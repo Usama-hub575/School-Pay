@@ -38,7 +38,7 @@ class _AddStudentState extends State<AddStudent> {
   AddStudentController addStudentController = Get.put(AddStudentController());
   final UserController userController = Get.find<UserController>();
 
-  List<String> filters = ['First Name', 'Last Name', 'Parent ID', 'Student ID'];
+  List<String> filters = [];
   String? _selectedFilter;
   bool isExpanded = false;
   bool isSearchFieldEnable = false;
@@ -48,6 +48,7 @@ class _AddStudentState extends State<AddStudent> {
   void initState() {
     isExpanded = false;
     isLoading = false;
+    filters = widget.schoolData.payeeType == 'STUDENT' ? ['First Name', 'Last Name', 'Account ID', 'Student ID'] : ['Account ID'];
     super.initState();
   }
 
@@ -98,14 +99,14 @@ class _AddStudentState extends State<AddStudent> {
         }
         setState(() {});
         break;
-      case 'Parent ID':
+      case 'Account ID':
         if (studentListController.studentList.value.getStudent != null &&
             studentListController.studentList.value.getStudent!.rows!.length >
                 0) {
           studentListController.studentList.value.getStudent!.rows!.clear();
         }
         await studentListController.search(
-          searchBy: 'parent',
+          searchBy: 'account',
           queryParam: searchController.text,
           schoolId: widget.schoolData.id,
         );
