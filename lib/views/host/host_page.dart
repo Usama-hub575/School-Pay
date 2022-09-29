@@ -47,7 +47,7 @@ class _HostPageState extends State<HostPage> {
 
   final names = <String>[
     'Dashboard',
-    'Students',
+    'Payees',
     'Transactions',
     'Setting',
   ];

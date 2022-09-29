@@ -212,7 +212,7 @@ class _DashboardPageState extends State<DashboardPage> {
               child: Row(
                 children: [
                   Text(
-                    'Students',
+                    'Payees',
                     style: PayNestTheme.title20white.copyWith(
                       fontSize: sizes.fontRatio * 16,
                       color: PayNestTheme.black,

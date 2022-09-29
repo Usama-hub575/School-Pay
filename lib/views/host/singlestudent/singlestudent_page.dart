@@ -53,7 +53,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                         buttonColor: PayNestTheme.colorWhite,
                       ),
                       Text(
-                        'Student Details',
+                        'Payee Details',
                         style: PayNestTheme.h2_12blueAccent.copyWith(
                           fontSize: sizes.fontRatio * 18,
                           color: PayNestTheme.colorWhite,

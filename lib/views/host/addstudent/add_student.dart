@@ -507,7 +507,7 @@ class _AddStudentState extends State<AddStudent> {
                                                   _getActionButton(
                                                     onTap: () async {
                                                       if (_selectedFilter ==
-                                                          'Parent ID') {
+                                                          'Account ID') {
                                                         final model = {
                                                           "parentRegNo":
                                                               searchController
@@ -628,7 +628,7 @@ class _AddStudentState extends State<AddStudent> {
                                                         }
                                                       }
                                                       if (_selectedFilter !=
-                                                              'Parent ID' &&
+                                                              'Account ID' &&
                                                           _selectedFilter !=
                                                               'Student ID') {
                                                         StudentBottomSheet.show(
@@ -865,7 +865,7 @@ class _AddStudentState extends State<AddStudent> {
           borderRadius: BorderRadius.circular(4),
         ),
         child: Text(
-          _selectedFilter == 'Parent ID' || _selectedFilter == 'Student ID'
+          _selectedFilter == 'Account ID' || _selectedFilter == 'Student ID'
               ? 'Add'
               : 'Verify & Add',
           style: PayNestTheme.h2_12blueAccent.copyWith(

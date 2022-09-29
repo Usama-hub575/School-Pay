@@ -131,7 +131,6 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
                 ],
               ),
             ),
-            Spacer(),
             Lottie.asset(
               arrowForwardAnimation,
               repeat: true,
