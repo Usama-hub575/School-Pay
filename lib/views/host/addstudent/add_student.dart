@@ -48,7 +48,7 @@ class _AddStudentState extends State<AddStudent> {
   void initState() {
     isExpanded = false;
     isLoading = false;
-    filters = widget.schoolData.payeeType == 'STUDENT' ? ['First Name', 'Last Name', 'Account ID', 'Student ID'] : ['Account ID'];
+    filters = widget.schoolData.payeeType == 'STUDENT' ? ['First Name', 'Last Name', 'Account Number', 'Student ID'] : ['Account Number'];
     super.initState();
   }
 
@@ -99,7 +99,7 @@ class _AddStudentState extends State<AddStudent> {
         }
         setState(() {});
         break;
-      case 'Account ID':
+      case 'Account Number':
         if (studentListController.studentList.value.getStudent != null &&
             studentListController.studentList.value.getStudent!.rows!.length >
                 0) {

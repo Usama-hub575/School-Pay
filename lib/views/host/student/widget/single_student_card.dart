@@ -107,12 +107,12 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
             horizontalSpacer(12),
             Flexible(
               fit: FlexFit.loose,
-              flex: 12,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     '${student.student!.firstName}  ${student.student!.lastName}',
+                    softWrap: true,
                     style: PayNestTheme.h2_12blueAccent.copyWith(
                       fontSize: sizes.fontRatio * 14,
                       color: PayNestTheme.black,
@@ -122,6 +122,7 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
                   verticalSpacer(4),
                   Text(
                     '${student.student!.school!.name}',
+                    softWrap: true,
                     style: PayNestTheme.h2_12blueAccentLight.copyWith(
                       fontSize: sizes.fontRatio * 12,
                       color: PayNestTheme.textGrey,
@@ -131,13 +132,13 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
                 ],
               ),
             ),
+            const Spacer(),
             Lottie.asset(
               arrowForwardAnimation,
               repeat: true,
               width: sizes.widthRatio * 26,
               height: sizes.heightRatio * 26,
             ),
-            horizontalSpacer(12),
           ],
         ),
       ),

@@ -455,6 +455,19 @@ class _PaymentMethodState extends State<PaymentMethod> {
             );
           }
         }
+      } else if(result == null) {
+        isLoading = false;
+        setState(() {});
+        Future.delayed(
+          Duration(seconds: 1),
+              () {
+            showToast(
+              context: context,
+              messege: 'Something went wrong',
+              color: PayNestTheme.red,
+            );
+          },
+        );
       }
     } else if (widget.payment < 0) {
       isLoading = false;
@@ -475,9 +488,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
         Duration(seconds: 1),
         () {
           showToast(
-              context: context,
-              messege: 'Fees already paid',
-              color: PayNestTheme.paidGreen);
+            context: context,
+            messege: 'Fees already paid',
+            color: PayNestTheme.paidGreen,
+          );
         },
       );
     }

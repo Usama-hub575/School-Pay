@@ -808,6 +808,19 @@ class _PayNowPageState extends State<PayNowPage> {
             },
           );
         }
+      }else if(result == null) {
+        isLoading = false;
+        setState(() {});
+        Future.delayed(
+          Duration(seconds: 1),
+              () {
+            showToast(
+              context: context,
+              messege: 'Something went wrong',
+              color: PayNestTheme.red,
+            );
+          },
+        );
       }
     } else if (int.parse(payAbleAmount) < 0) {
       showToast(
