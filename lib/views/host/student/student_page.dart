@@ -82,8 +82,13 @@ class _StudentPageState extends State<StudentPage> {
                   horizontalSpacer(82),
                   InkWellWidget(
                     onTap: () {
-                      AddStudentBottomSheet.show(
-                        context: context,
+                      // AddStudentBottomSheet.show(
+                      //   context: context,
+                      // );
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SelectSchool(),
+                        ),
                       );
                     },
                     child: Container(
