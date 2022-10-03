@@ -25,6 +25,7 @@ import '../../../model/datamodel/transactiondetail_model.dart';
 import '../../../model/mystudents_resp_model.dart' as studentElement;
 import '../../../model/transactionlist_resp_model.dart';
 import '../../../widgets/inkwell_widget.dart';
+import '../school/select_school.dart';
 import '../transactiondetails/transactiondetails_page.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart'
     as student;
@@ -285,9 +286,14 @@ class _DashboardPageState extends State<DashboardPage> {
                             ),
                           ),
                           onPressed: () {
-                            AddStudentBottomSheet.show(
-                              context: context,
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => SelectSchool(),
+                              ),
                             );
+                            // AddStudentBottomSheet.show(
+                            //   context: context,
+                            // );
                           },
                           child: Center(
                             child: Row(
