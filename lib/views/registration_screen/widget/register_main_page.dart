@@ -266,7 +266,8 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         if (value.trim().length < 5) {
                           return 'Password must not be less than 5';
                         }
-                        if(createPasswordController.text != confirmPasswordController.text){
+                        if (createPasswordController.text !=
+                            confirmPasswordController.text) {
                           return 'Password not matched';
                         }
                         return null;
@@ -343,7 +344,8 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                       ),
                       onPressed: () {
                         if (Utils.reg1FormKey.currentState!.validate() &&
-                            terms == true && phoneController.text.isNotEmpty) {
+                            terms == true &&
+                            phoneController.text.isNotEmpty) {
                           setState(() {
                             loading = !loading;
                           });
@@ -351,24 +353,24 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           Future.delayed(Duration(seconds: 2)).then(
                             (value) => {
                               sendOTPController.hitSendOTP(
-                                  phCodeController.text + phoneController.text),
+                                phCodeController.text + phoneController.text,
+                              ),
                               setState(() {
                                 loading = !loading;
-
                               }),
                               widget.onNextTap(
                                 emailController.text,
                                 createPasswordController.text,
                                 phCodeController.text,
                                 phoneController.text,
-
                               ),
                             },
                           );
-                        }
-                        else{
-                          showToast(messege: 'Phone Field Cannot Be Empty !!', context: context, color: PayNestTheme.red);
-
+                        } else {
+                          showToast(
+                              messege: 'Phone Field Cannot Be Empty !!',
+                              context: context,
+                              color: PayNestTheme.red);
                         }
                       },
                       child: Center(

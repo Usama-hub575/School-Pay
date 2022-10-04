@@ -107,6 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   password,
                                   email,
                                   countryCode,
+                                  phoneCode,
                                   phoneNumber,
                                   emiratesID,
                                   gender,

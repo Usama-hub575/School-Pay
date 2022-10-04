@@ -75,7 +75,10 @@ class APIService {
     print(response.body);
     if (response.statusCode == 200) {
       return response.body;
-    } else {
+    }else if(response.statusCode == 503){
+      return null;
+    }
+    else {
       return response.body;
     }
   }
@@ -109,7 +112,10 @@ class APIService {
     print(response.body);
     if (response.statusCode == 200) {
       return response.body;
-    } else {
+    } else if(response.statusCode == 503){
+      return null;
+    }
+    else {
       return response.body;
     }
   }

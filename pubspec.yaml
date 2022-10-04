@@ -21,7 +21,7 @@ dependencies:
   get:
   get_storage:
   intl:
-  flutter_local_notifications:
+  flutter_local_notifications: ^9.3.2
   webview_flutter:
   flutter_inappwebview:
   url_launcher:

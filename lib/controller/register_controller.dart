@@ -40,6 +40,7 @@ class RegisterController extends GetxController {
         firstName: firstName,
         lastName: lastName,
         countryCode: countryCode,
+        dialCode: dialCode,
         emiratesId: emiratesId,
         passport: passport,
         birth: '',
