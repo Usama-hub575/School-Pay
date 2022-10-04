@@ -78,6 +78,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                   Container(
                     child: TextFormField(
                       controller: emailController,
+                      textInputAction: TextInputAction.next,
                       style: PayNestTheme.title_2_16primaryColor.copyWith(
                         fontSize: sizes.fontRatio * 14,
                         color: PayNestTheme.textGrey,
@@ -133,6 +134,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                   verticalSpacer(12),
                   Container(
                     child: TextFormField(
+                      textInputAction: TextInputAction.next,
                       style: PayNestTheme.title_2_16primaryColor.copyWith(
                         fontSize: sizes.fontRatio * 14,
                         color: PayNestTheme.textGrey,
@@ -204,6 +206,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                   verticalSpacer(12),
                   Container(
                     child: TextFormField(
+                      textInputAction: TextInputAction.next,
                       controller: confirmPasswordController,
                       obscureText: cPassword,
                       style: PayNestTheme.title_2_16primaryColor.copyWith(

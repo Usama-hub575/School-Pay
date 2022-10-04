@@ -85,11 +85,17 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(
-                                left: 25.w, right: 25.w, top: 30.h),
+                              left: 25.w,
+                              right: 25.w,
+                              top: 30.h,
+                            ),
                             child: Container(
                               // padding: EdgeInsets.symmetric(horizontal: 20.w),
                               width: 1.sw,
-                              height: 118.h,
+                              height: 110.h,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: horizontalValue(16),
+                              ),
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
@@ -191,7 +197,9 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     Text(
                         widget.tdm.student!.firstName.toString() +
                             " " +
-                            widget.tdm.student!.lastName.toString(),
+                            (widget.tdm.student!.lastName != '-'
+                                ? widget.tdm.student!.lastName
+                                : ''),
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                             color: PayNestTheme.textGrey,
                             fontSize: sizes.fontRatio * 16)),
@@ -203,27 +211,38 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                         color: PayNestTheme.lineColor,
                       ),
                     ),
-
-                    Text(
-                      studentclass,
-                      style: PayNestTheme.title_2_16primaryColor
-                          .copyWith(fontSize: sizes.fontRatio * 12),
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Text("Grade " + widget.tdm.student!.grade.toString(),
-                        style: PayNestTheme.title_2_16primaryColor.copyWith(
-                            color: PayNestTheme.textGrey,
-                            fontSize: sizes.fontRatio * 16)),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: Container(
-                        width: 1.sw,
-                        height: 1.h,
-                        color: PayNestTheme.lineColor,
-                      ),
-                    ),
+                    widget.tdm.student!.grade != '-'
+                        ? Text(
+                            studentclass,
+                            style: PayNestTheme.title_2_16primaryColor.copyWith(
+                              fontSize: sizes.fontRatio * 12,
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    widget.tdm.student!.grade != '-'
+                        ? SizedBox(
+                            height: 5.h,
+                          )
+                        : const SizedBox.shrink(),
+                    widget.tdm.student!.grade != '-'
+                        ? Text(
+                            "Grade " + widget.tdm.student!.grade.toString(),
+                            style: PayNestTheme.title_2_16primaryColor.copyWith(
+                              color: PayNestTheme.textGrey,
+                              fontSize: sizes.fontRatio * 16,
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    widget.tdm.student!.grade != '-'
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(vertical: 16.h),
+                            child: Container(
+                              width: 1.sw,
+                              height: 1.h,
+                              color: PayNestTheme.lineColor,
+                            ),
+                          )
+                        : const SizedBox.shrink(),
 
                     Text(
                       studentID,
@@ -275,7 +294,11 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     SizedBox(
                       height: 5.h,
                     ),
-                    Text('AED ' + amountFormater(double.parse(widget.tdm.amount.toString(),)),
+                    Text(
+                        'AED ' +
+                            amountFormater(double.parse(
+                              widget.tdm.amount.toString(),
+                            )),
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                             color: PayNestTheme.black,
                             fontSize: sizes.fontRatio * 22,
@@ -311,8 +334,9 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                               Navigator.of(context).pop();
                             });
                           },
-                          child:
-                              Text(done, style: PayNestTheme.subtitle16white.copyWith(fontSize: sizes.fontRatio * 14))),
+                          child: Text(done,
+                              style: PayNestTheme.subtitle16white
+                                  .copyWith(fontSize: sizes.fontRatio * 14))),
                     )
                   ],
                 ),

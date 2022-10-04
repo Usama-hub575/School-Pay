@@ -474,7 +474,8 @@ class _AddStudentState extends State<AddStudent> {
                                                       Container(
                                                         width: sizes.widthRatio*100,
                                                         child: Text(
-                                                          '${_searchResult[index].firstName}\n${_searchResult[index].lastName}',
+                                                          
+                                                          '${_searchResult[index].firstName}\n${_searchResult[index].lastName ?? ''}',
                                                           style: PayNestTheme
                                                               .title20white
                                                               .copyWith(
@@ -489,7 +490,7 @@ class _AddStudentState extends State<AddStudent> {
                                                         ),
                                                       ),
                                                       verticalSpacer(4),
-                                                      Text(
+                                                      _searchResult[index].grade != null ?Text(
                                                         'Grade ${_searchResult[index].grade}',
                                                         style: PayNestTheme
                                                             .h2_14textGrey
@@ -500,7 +501,7 @@ class _AddStudentState extends State<AddStudent> {
                                                           fontFamily:
                                                               'montserratRegular',
                                                         ),
-                                                      ),
+                                                      ): const SizedBox.shrink(),
                                                     ],
                                                   ),
                                                   Spacer(),

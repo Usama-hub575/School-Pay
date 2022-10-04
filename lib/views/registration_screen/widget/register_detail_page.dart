@@ -107,6 +107,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                     children: [
                       TextFormField(
                         controller: fnameController,
+                        textInputAction: TextInputAction.next,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           fontSize: sizes.fontRatio * 14,
                           color: PayNestTheme.textGrey,
@@ -167,6 +168,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                       verticalSpacer(12),
                       TextFormField(
                         controller: lnameController,
+                        textInputAction: TextInputAction.next,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           fontSize: sizes.fontRatio * 14,
                           color: PayNestTheme.textGrey,
@@ -326,6 +328,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                       verticalSpacer(12),
                       TextFormField(
                         controller: emirateIDController,
+                        textInputAction: TextInputAction.next,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           fontSize: sizes.fontRatio * 14,
                           color: PayNestTheme.textGrey,
@@ -457,6 +460,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             : () {},
                         child: TextFormField(
                           controller: expiryController,
+                          textInputAction: TextInputAction.next,
                           enabled: false,
                           style: PayNestTheme.title_2_16primaryColor.copyWith(
                             fontSize: sizes.fontRatio * 14,
@@ -539,6 +543,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                       verticalSpacer(12),
                       TextFormField(
                         controller: addressController,
+                        textInputAction: TextInputAction.next,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           fontSize: sizes.fontRatio * 14,
                           color: PayNestTheme.textGrey,
@@ -605,6 +610,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                       verticalSpacer(12),
                       TextFormField(
                         controller: cityController,
+                        textInputAction: TextInputAction.done,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           fontSize: sizes.fontRatio * 14,
                           color: PayNestTheme.textGrey,

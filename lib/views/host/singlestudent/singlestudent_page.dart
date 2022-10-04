@@ -204,7 +204,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                   ],
                 ),
                 margin: EdgeInsets.symmetric(
-                  horizontal: horizontalValue(32),
+                  horizontal: horizontalValue(16),
                 ),
                 padding: EdgeInsets.symmetric(
                   horizontal: horizontalValue(16),
@@ -213,18 +213,20 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                 child: Column(
                   children: [
                     Container(
-                      height: sizes.heightRatio * 60,
-                      width: sizes.widthRatio * 60,
+                      height: sizes.heightRatio * 50,
+                      width: sizes.widthRatio * 50,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                       ),
                       child: SvgPicture.asset(
-                        widget.singleStudentModel.student?.gender == "male" ? icMale : icFemale,
+                        widget.singleStudentModel.student?.gender == "male"
+                            ? icMale
+                            : icFemale,
                       ),
                     ),
                     verticalSpacer(8),
                     Text(
-                      '${widget.singleStudentModel.student!.firstName + widget.singleStudentModel.student!.lastName}',
+                      '${widget.singleStudentModel.student!.firstName + (widget.singleStudentModel.student?.lastName != '-' ? widget.singleStudentModel.student!.lastName : '')}',
                       textAlign: TextAlign.center,
                       style: PayNestTheme.h2_12blueAccent.copyWith(
                         fontSize: sizes.fontRatio * 22,
@@ -232,15 +234,18 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                       ),
                     ),
                     verticalSpacer(4),
-                    Text(
-                      'Grade ${widget.singleStudentModel.student!.grade}',
-                      textAlign: TextAlign.center,
-                      style: PayNestTheme.h2_12blueAccent.copyWith(
-                        fontSize: sizes.fontRatio * 16,
-                        color: PayNestTheme.black,
-                      ),
-                    ),
-                    verticalSpacer(16),
+                    widget.singleStudentModel.student != null &&
+                            widget.singleStudentModel.student!.grade != '-'
+                        ? Text(
+                            'Grade ${widget.singleStudentModel.student!.grade}',
+                            textAlign: TextAlign.center,
+                            style: PayNestTheme.h2_12blueAccent.copyWith(
+                              fontSize: sizes.fontRatio * 16,
+                              color: PayNestTheme.black,
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    verticalSpacer(8),
                     Text(
                       '${widget.singleStudentModel.student!.school!.name}',
                       textAlign: TextAlign.center,
