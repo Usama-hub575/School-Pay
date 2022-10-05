@@ -16,6 +16,7 @@ class RegisterModel {
     required this.firstName,
     required this.lastName,
     required this.countryCode,
+    required this.dialCode,
     required this.emiratesId,
     required this.passport,
     required this.gender,
@@ -28,6 +29,7 @@ class RegisterModel {
   String firstName;
   String lastName;
   String countryCode;
+  String dialCode;
   String emiratesId;
   String passport;
   String gender;
@@ -41,6 +43,7 @@ class RegisterModel {
     firstName: json["firstName"],
     lastName: json["lastName"],
     countryCode: json["countryCode"],
+    dialCode:json['dialCode'],
     emiratesId: json["emiratesId"],
     passport: json["passport"],
     gender: json["gender"],
@@ -54,6 +57,7 @@ class RegisterModel {
     "firstName": firstName,
     "lastName": lastName,
     "countryCode": countryCode,
+    'dialCode': dialCode,
     "emiratesId": emiratesId,
     "passport" : passport,
     "gender" : gender,

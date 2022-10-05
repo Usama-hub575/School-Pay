@@ -182,7 +182,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                     ),
                     verticalSpacer(4),
                     Text(
-                      '${widget.singleStudentModel.student!.firstName.toString()}  ${widget.singleStudentModel.student!.lastName.toString()}',
+                      '${widget.singleStudentModel.student!.firstName.toString()}  ${(widget.singleStudentModel.student?.lastName != '-' ? widget.singleStudentModel.student!.lastName : '')}',
                       style: PayNestTheme.title_3_16blackbold.copyWith(
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.lightBlack,
@@ -196,29 +196,35 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       color: PayNestTheme.lineColor,
                     ),
                     verticalSpacer(8),
-                    Text(
-                      studentclass,
-                      style: PayNestTheme.h2_14textGrey.copyWith(
-                        color: PayNestTheme.primaryColor,
-                        fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio * 12,
-                      ),
-                    ),
-                    verticalSpacer(4),
-                    Text(
-                      'Grade ${widget.singleStudentModel.student!.grade}',
-                      style: PayNestTheme.title_3_16blackbold.copyWith(
-                        fontSize: sizes.fontRatio * 16,
-                        color: PayNestTheme.lightBlack,
-                        fontFamily: 'montserratSemiBold',
-                      ),
-                    ),
+                    widget.singleStudentModel.student!.grade != '-'
+                        ? Text(
+                            studentclass,
+                            style: PayNestTheme.h2_14textGrey.copyWith(
+                              color: PayNestTheme.primaryColor,
+                              fontFamily: 'montserratBold',
+                              fontSize: sizes.fontRatio * 12,
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    widget.singleStudentModel.student!.grade != '-' ? verticalSpacer(4): const SizedBox.shrink(),
+                    widget.singleStudentModel.student!.grade != '-'
+                        ? Text(
+                            'Grade ${widget.singleStudentModel.student!.grade}',
+                            style: PayNestTheme.title_3_16blackbold.copyWith(
+                              fontSize: sizes.fontRatio * 16,
+                              color: PayNestTheme.lightBlack,
+                              fontFamily: 'montserratSemiBold',
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                     verticalSpacer(8),
-                    Container(
-                      width: 1.sw,
-                      height: 1.h,
-                      color: PayNestTheme.lineColor,
-                    ),
+                    widget.singleStudentModel.student!.grade != '-'
+                        ? Container(
+                            width: 1.sw,
+                            height: 1.h,
+                            color: PayNestTheme.lineColor,
+                          )
+                        : const SizedBox.shrink(),
                     verticalSpacer(8),
                     Text(
                       studentID,

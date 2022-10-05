@@ -162,8 +162,10 @@ class _PayNowTransactionDetailsPageState
                     ),
                     verticalSpacer(4),
                     Text(
-                      widget.pntdm.student!.firstName +
-                          widget.pntdm.student!.lastName,
+                      (widget.pntdm.student?.firstName ?? '') +
+                          (widget.pntdm.student?.lastName != '-'
+                              ? widget.pntdm.student!.lastName
+                              : ''),
                       style: PayNestTheme.title_3_16blackbold.copyWith(
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.lightBlack,
@@ -176,30 +178,38 @@ class _PayNowTransactionDetailsPageState
                       height: 1.h,
                       color: PayNestTheme.lineColor,
                     ),
-                    verticalSpacer(16),
-                    Text(
-                      studentclass,
-                      style: PayNestTheme.h2_14textGrey.copyWith(
-                        color: PayNestTheme.primaryColor,
-                        fontFamily: 'montserratBold',
-                        fontSize: sizes.fontRatio * 12,
-                      ),
-                    ),
+                    widget.pntdm.student!.grade != '-' ? verticalSpacer(16): const SizedBox.shrink(),
+                    widget.pntdm.student!.grade != '-'
+                        ? Text(
+                            studentclass,
+                            style: PayNestTheme.h2_14textGrey.copyWith(
+                              color: PayNestTheme.primaryColor,
+                              fontFamily: 'montserratBold',
+                              fontSize: sizes.fontRatio * 12,
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    widget.pntdm.student!.grade != '-'
+                        ? verticalSpacer(4)
+                        : const SizedBox.shrink(),
+                    widget.pntdm.student!.grade != '-'
+                        ? Text(
+                            "Grade " + widget.pntdm.student!.grade.toString(),
+                            style: PayNestTheme.title_3_16blackbold.copyWith(
+                              fontSize: sizes.fontRatio * 16,
+                              color: PayNestTheme.lightBlack,
+                              fontFamily: 'montserratSemiBold',
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                     verticalSpacer(4),
-                    Text(
-                      "Grade " + widget.pntdm.student!.grade.toString(),
-                      style: PayNestTheme.title_3_16blackbold.copyWith(
-                        fontSize: sizes.fontRatio * 16,
-                        color: PayNestTheme.lightBlack,
-                        fontFamily: 'montserratSemiBold',
-                      ),
-                    ),
-                    verticalSpacer(4),
-                    Container(
-                      width: 1.sw,
-                      height: 1.h,
-                      color: PayNestTheme.lineColor,
-                    ),
+                    widget.pntdm.student!.grade != '-'
+                        ? Container(
+                            width: 1.sw,
+                            height: 1.h,
+                            color: PayNestTheme.lineColor,
+                          )
+                        : const SizedBox.shrink(),
                     verticalSpacer(16),
                     Text(
                       studentID,
@@ -299,9 +309,8 @@ class _PayNowTransactionDetailsPageState
               ),
             ),
           ),
-
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: horizontalValue(30)),
+            padding: EdgeInsets.symmetric(horizontal: horizontalValue(30)),
             child: Container(
               width: double.infinity,
               child: ElevatedButton(
@@ -324,7 +333,7 @@ class _PayNowTransactionDetailsPageState
                 onPressed: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     '/DashboardPage',
-                        (Route<dynamic> route) => false,
+                    (Route<dynamic> route) => false,
                   );
                 },
                 child: Center(

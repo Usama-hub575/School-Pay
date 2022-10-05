@@ -344,9 +344,10 @@ class _NewPasswordState extends State<NewPassword> {
                                 message: "Password Updated Successfully",
                                 showCrossIcon: false,
                                 buttonAction: () {
-                                  Navigator.of(context).pushNamedAndRemoveUntil(
-                                    '/SignInPage',
-                                    (Route<dynamic> route) => false,
+                                  Navigator.popUntil(
+                                    context,
+                                    ModalRoute.withName('/SignInPage'),
+
                                   );
                                 },
                               );

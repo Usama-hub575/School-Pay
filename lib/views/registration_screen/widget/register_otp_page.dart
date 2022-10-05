@@ -226,7 +226,7 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
   );
 
   void startTimer() {
-    sendOTPController.hitSendOTP(widget.phoneCode + widget.phoneNumber);
+    sendOTPController.hitSendOTP(widget.phoneCode + widget.phoneNumber, widget.email);
     setState(() {
       timeUpFlag = false;
       _start = 60;

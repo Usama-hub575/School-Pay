@@ -80,8 +80,9 @@ class _StudentCardState extends State<StudentCard> {
                   ),
                 ),
                 verticalSpacer(6),
+
                 Text(
-                  '${studentElement.student?.firstName} \n ${studentElement.student?.lastName} ',
+                  '${studentElement.student?.firstName ?? '' + studentElement.student!.lastName != '-'}',
                   textAlign: TextAlign.center,
                   style: PayNestTheme.title_2_16primaryColor.copyWith(
                     fontSize: sizes.fontRatio * 13,

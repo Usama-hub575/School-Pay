@@ -38,7 +38,7 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController passwordController = TextEditingController();
   bool isObscure = true;
   GlobalKey<ScaffoldState> _scaffoldKey =
-  GlobalKey<ScaffoldState>(debugLabel: 'signIn');
+      GlobalKey<ScaffoldState>(debugLabel: 'signIn');
 
   isBioMatricEnable() {
     isBioMatric = _preferences.getBoolValue(SharedPrefKeys.isBioMatric);
@@ -216,9 +216,7 @@ class _SignInPageState extends State<SignInPage> {
                               return 'Please enter password';
                             }
                             // Check if the entered email has the right format
-                            if (value
-                                .trim()
-                                .length < 5) {
+                            if (value.trim().length < 5) {
                               return 'Password must not be less than 5';
                             }
                             // Return null if the entered email is valid
@@ -248,186 +246,187 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   isBioMatric
                       ? Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 28.52.h),
-                      child: InkWellWidget(
-                        onTap: () async {
-                          if (!isLoading) {
-                            bool isAuthenticated = await LocalAuthApi
-                                .authenticateWithBiometrics();
-                            if (isAuthenticated) {
-                              setState(() {
-                                isLoading = true;
-                              });
-                              String email = _preferences.getStringValue(
-                                SharedPrefKeys.userEmail,
-                              );
-                              String password =
-                              _preferences.getStringValue(
-                                SharedPrefKeys.userPassword,
-                              );
-                              await userController.hitLogin(
-                                email,
-                                password,
-                                storage.read(
-                                  'fcmToken',
-                                ),
-                              );
-                              if (userController
-                                  .userResData.value.status) {
-                                storage.write(
-                                  SharedPrefKeys.accessToken,
-                                  userController.userResData.value.token,
-                                );
-                                storage.write(
-                                  SharedPrefKeys.userEmail,
-                                  userController
-                                      .userResData.value.parent!.email,
-                                );
-                                Navigator.pushNamedAndRemoveUntil(
-                                  context,
-                                  '/DashboardPage',
-                                      (Route<dynamic> route) => false,
-                                );
-                              } else if (userController
-                                  .userResData.value.status ==
-                                  "" ||
-                                  !userController
-                                      .userResData.value.status) {
-
-                                showToast(messege: 'Something Went wrong', context: context, color: PayNestTheme.red);
-                              }
-                            }
-                          }
-                        },
-                        child: Column(
-                          children: [
-                            Lottie.asset(
-                              AppAssets.faceId,
-                              height: 109,
-                              width: 81,
-                              repeat: true,
-                            ),
-                            SizedBox(
-                              child: Text(
-                                'Login with Touch ID',
-                                style:
-                                PayNestTheme.h2_12blueAccent.copyWith(
-                                  fontSize: sizes.fontRatio * 18,
-                                  color: PayNestTheme.black,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-                      : const SizedBox.shrink(),
-                  verticalSpacer(60),
-                  Obx(
-                        () =>
-                        Container(
-                          width: double.infinity,
-                          height: sizes.heightRatio * 46,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: PayNestTheme.primaryColor,
-                              elevation: 0,
-                              // side: BorderSide(width:1, color:Colors.white),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  12,
-                                ),
-                              ),
-                            ),
-                            onPressed: () async {
-                              if (Utils.loginFormKey.currentState!.validate()) {
-                                if (storage.read('email').toString() ==
-                                    emailController.text.toString()) {
-                                  await userController.hitLogin(
-                                    emailController.text.trim(),
-                                    passwordController.text.trim(),
-                                    storage.read('fcmToken'),
-                                  );
-                                }
-                                else {
-                                  _preferences.removeAll();
-                                  storage.write('isBioMatric', false);
-                                  await userController.hitLogin(
-                                    emailController.text.trim(),
-                                    passwordController.text.trim(),
-                                    storage.read('fcmToken'),
-                                  );
-                                }
-                                if (userController.userResData.value.status) {
-                                  storage.write(
-                                    'accessToken',
-                                    userController.userResData.value.token,
-                                  );
-                                  storage.write(
-                                      'email',
-                                      userController
-                                          .userResData.value.parent!.email);
-                                  Navigator.pushNamedAndRemoveUntil(
-                                    context,
-                                    '/DashboardPage',
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 28.52.h),
+                            child: InkWellWidget(
+                              onTap: () async {
+                                if (!isLoading) {
+                                  bool isAuthenticated = await LocalAuthApi
+                                      .authenticateWithBiometrics();
+                                  if (isAuthenticated) {
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    String email = _preferences.getStringValue(
+                                      SharedPrefKeys.userEmail,
+                                    );
+                                    String password =
+                                        _preferences.getStringValue(
+                                      SharedPrefKeys.userPassword,
+                                    );
+                                    await userController.hitLogin(
+                                      email,
+                                      password,
+                                      storage.read(
+                                        'fcmToken',
+                                      ),
+                                    );
+                                    if (userController
+                                        .userResData.value.status) {
+                                      storage.write(
+                                        SharedPrefKeys.accessToken,
+                                        userController.userResData.value.token,
+                                      );
+                                      storage.write(
+                                        SharedPrefKeys.userEmail,
+                                        userController
+                                            .userResData.value.parent!.email,
+                                      );
+                                      Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        '/DashboardPage',
                                         (Route<dynamic> route) => false,
-                                  );
-                                } else if (!userController
-                                    .userResData.value.status) {
-                                  showToast(messege: userController.userResData.value.message
-                                      .toString(),
-                                      context: context,
-                                      color: PayNestTheme.red);
-
-                                } else if (!userController
-                                    .userResData.value.status) {
-                                  passwordController.clear();
-                                  userController.isLoading.value = false;
-                                  if (userController.retriesTime.value != '') {
-                                    showToast(messege: "Please retry after " +
-                                        userController.retriesTime.value
-                                            .toString() +
-                                        " min",
-                                        context: context,
-                                        color: PayNestTheme.red);
-                                  } else
-                                  if (userController.attemptsRemain.value !=
-                                      '') {
-                                    showToast(
-                                        messege: userController.attemptsRemain
-                                            .value
-                                            .toString() +
-                                            " attempts remaining",
-                                        context: context,
-                                        color: PayNestTheme.red);
-                                  } else {
-                                    showToast(
-                                        messege: "Entered email or password does not match",
-                                        context: context,
-                                        color: PayNestTheme.red);
+                                      );
+                                    } else if (userController
+                                                .userResData.value.status ==
+                                            "" ||
+                                        !userController
+                                            .userResData.value.status) {
+                                      showToast(
+                                          messege: 'Something Went wrong',
+                                          context: context,
+                                          color: PayNestTheme.red);
+                                    }
                                   }
-                                } else {
-                                  showToast(
-                                      messege: "Something went wrong. Try again !!",
-                                      context: context,
-                                      color: PayNestTheme.red);
                                 }
-                              }
-                            },
-                            child: !userController.isLoading.value
-                                ? Text(signIn,
-                                style: PayNestTheme.subtitle16white
-                                    .copyWith(fontSize: sizes.fontRatio * 14))
-                                : Center(
-                              child: CircularProgressIndicator(
-                                backgroundColor: PayNestTheme.colorWhite,
-                                color: PayNestTheme.blueAccent,
+                              },
+                              child: Column(
+                                children: [
+                                  Lottie.asset(
+                                    AppAssets.faceId,
+                                    height: 109,
+                                    width: 81,
+                                    repeat: true,
+                                  ),
+                                  SizedBox(
+                                    child: Text(
+                                      'Login with Touch ID',
+                                      style:
+                                          PayNestTheme.h2_12blueAccent.copyWith(
+                                        fontSize: sizes.fontRatio * 18,
+                                        color: PayNestTheme.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
+                        )
+                      : const SizedBox.shrink(),
+                  verticalSpacer(60),
+                  Obx(
+                    () => Container(
+                      width: double.infinity,
+                      height: sizes.heightRatio * 46,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: PayNestTheme.primaryColor,
+                          elevation: 0,
+                          // side: BorderSide(width:1, color:Colors.white),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              12,
+                            ),
+                          ),
                         ),
+                        onPressed: () async {
+                          if (Utils.loginFormKey.currentState!.validate()) {
+                            if (storage.read('email').toString() ==
+                                emailController.text.toString()) {
+                              await userController.hitLogin(
+                                emailController.text.trim(),
+                                passwordController.text.trim(),
+                                storage.read('fcmToken'),
+                              );
+                            } else {
+                              _preferences.removeAll();
+                              storage.write('isBioMatric', false);
+                              await userController.hitLogin(
+                                emailController.text.trim(),
+                                passwordController.text.trim(),
+                                storage.read('fcmToken'),
+                              );
+                            }
+                            if (userController.userResData.value.status) {
+                              storage.write(
+                                'accessToken',
+                                userController.userResData.value.token,
+                              );
+                              storage.write(
+                                  'email',
+                                  userController
+                                      .userResData.value.parent!.email);
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                '/DashboardPage',
+                                (Route<dynamic> route) => false,
+                              );
+                            } else if (!userController
+                                .userResData.value.status) {
+                              showToast(
+                                  messege: userController
+                                          .userResData.value.message ??
+                                      userController.errorMessage.toString(),
+                                  context: context,
+                                  color: PayNestTheme.red);
+                            } else if (!userController
+                                .userResData.value.status) {
+                              passwordController.clear();
+                              userController.isLoading.value = false;
+                              if (userController.retriesTime.value != '') {
+                                showToast(
+                                    messege: "Please retry after " +
+                                        userController.retriesTime.value
+                                            .toString() +
+                                        " min",
+                                    context: context,
+                                    color: PayNestTheme.red);
+                              } else if (userController.attemptsRemain.value !=
+                                  '') {
+                                showToast(
+                                    messege: userController.attemptsRemain.value
+                                            .toString() +
+                                        " attempts remaining",
+                                    context: context,
+                                    color: PayNestTheme.red);
+                              } else {
+                                showToast(
+                                    messege:
+                                        "Entered email or password does not match",
+                                    context: context,
+                                    color: PayNestTheme.red);
+                              }
+                            } else {
+                              showToast(
+                                  messege: "Something went wrong. Try again !!",
+                                  context: context,
+                                  color: PayNestTheme.red);
+                            }
+                          }
+                        },
+                        child: !userController.isLoading.value
+                            ? Text(signIn,
+                                style: PayNestTheme.subtitle16white
+                                    .copyWith(fontSize: sizes.fontRatio * 14))
+                            : Center(
+                                child: CircularProgressIndicator(
+                                  backgroundColor: PayNestTheme.colorWhite,
+                                  color: PayNestTheme.blueAccent,
+                                ),
+                              ),
+                      ),
+                    ),
                   ),
                   verticalSpacer(20),
                   // Row(

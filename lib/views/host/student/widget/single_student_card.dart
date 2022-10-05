@@ -24,23 +24,21 @@ class SingleStudentCard extends StatefulWidget {
 }
 
 class _SingleStudentCardState extends State<SingleStudentCard> {
-
   bool isListEmpty = false;
 
   @override
   void initState() {
     super.initState();
-    if(widget.students != null && widget.students!.isNotEmpty){
+    if (widget.students != null && widget.students!.isNotEmpty) {
       isListEmpty = true;
-    }else{
+    } else {
       isListEmpty = false;
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-    if(isListEmpty){
+    if (isListEmpty) {
       return ListView.separated(
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
@@ -53,14 +51,14 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
         },
         itemCount: widget.students!.length,
       );
-    }else{
+    } else {
       return const SizedBox.shrink();
     }
   }
 
   Widget _singleCard({required StudentElement student}) {
     return InkWellWidget(
-      onTap: ()=> widget.onTap(student),
+      onTap: () => widget.onTap(student),
       child: Container(
         margin: EdgeInsets.symmetric(
           horizontal: horizontalValue(24),
@@ -107,11 +105,15 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
             horizontalSpacer(12),
             Flexible(
               fit: FlexFit.loose,
+              flex: 16,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${student.student!.firstName}  ${student.student!.lastName}',
+                    student.student!.firstName +
+                        (student.student?.lastName != '-'
+                            ? student.student!.lastName
+                            : ''),
                     softWrap: true,
                     style: PayNestTheme.h2_12blueAccent.copyWith(
                       fontSize: sizes.fontRatio * 14,

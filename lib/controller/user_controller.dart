@@ -23,6 +23,7 @@ class UserController extends GetxController {
   var retriesTime = ''.obs;
   var attemptsRemain = ''.obs;
   final storage = GetStorage();
+  var errorMessage = "Something went wrong on server side!";
   final userResData =
       RegisterRespModel(status: false, message: null, token: null, parent: null)
           .obs;
@@ -39,6 +40,7 @@ class UserController extends GetxController {
     password,
     email,
     countryCode,
+    dialCode,
     phone,
     emiratesId,
     gender,
@@ -54,6 +56,7 @@ class UserController extends GetxController {
         firstName: firstName,
         lastName: lastName,
         countryCode: countryCode,
+        dialCode: dialCode,
         emiratesId: emiratesId,
         passport: emiratesId,
         gender: gender,
@@ -69,6 +72,8 @@ class UserController extends GetxController {
           SharedPrefKeys.accessToken,
           lrm.token.toString(),
         );
+        preferences.setStringValue(SharedPrefKeys.userEmail, email);
+        preferences.setStringValue(SharedPrefKeys.userPassword, password);
         userResData.refresh();
       } else if (decoded['status'] == false) {
         isFailed.value = decoded['message'];
@@ -101,35 +106,38 @@ class UserController extends GetxController {
 
       var res = await APIService().apiLogin(loginModelToJson(loginData));
       isLoading(false);
-      if(res!= ""){
-        var decoded = jsonDecode(res);
-        RegisterRespModel lrm = registerRespModelFromJson(res);
-        if (decoded['status'] == true) {
-          userResData.value = lrm;
-          userResData.refresh();
-          print(lrm.message);
-          preferences.setStringValue(SharedPrefKeys.userEmail, email);
-          preferences.setStringValue(SharedPrefKeys.userPassword, password);
-          preferences.setStringValue(SharedPrefKeys.fcmToken, fcmToken);
-        } else if (decoded['status'] == false) {
-          userResData.value = lrm;
-          userResData.refresh();
-          if (decoded['retryInMins'] != null) {
-            retriesTime.value = decoded['retryInMins'].toString();
-            retriesTime.refresh();
-          } else if (decoded['remainingAttempts'] != null) {
-            attemptsRemain.value = decoded['remainingAttempts'].toString();
-            attemptsRemain.refresh();
-          } else {
-            retriesTime.value = '';
-            retriesTime.refresh();
-            attemptsRemain.value = '';
-            attemptsRemain.refresh();
+      if(res != null){
+        if(res!= ""){
+          var decoded = jsonDecode(res);
+          RegisterRespModel lrm = registerRespModelFromJson(res);
+          if (decoded['status'] == true) {
+            userResData.value = lrm;
+            userResData.refresh();
+            print(lrm.message);
+            preferences.setStringValue(SharedPrefKeys.userEmail, email);
+            preferences.setStringValue(SharedPrefKeys.userPassword, password);
+            preferences.setStringValue(SharedPrefKeys.fcmToken, fcmToken);
+          } else if (decoded['status'] == false) {
+            userResData.value = lrm;
+            userResData.refresh();
+            if (decoded['retryInMins'] != null) {
+              retriesTime.value = decoded['retryInMins'].toString();
+              retriesTime.refresh();
+            } else if (decoded['remainingAttempts'] != null) {
+              attemptsRemain.value = decoded['remainingAttempts'].toString();
+              attemptsRemain.refresh();
+            } else {
+              retriesTime.value = '';
+              retriesTime.refresh();
+              attemptsRemain.value = '';
+              attemptsRemain.refresh();
+            }
+            userResData.refresh();
           }
-          userResData.refresh();
         }
-      }else{
-        userResData.value.status == "";
+      }
+      else{
+        userResData.value.status == "false";
         retriesTime.value = '';
         retriesTime.refresh();
         attemptsRemain.value = '';

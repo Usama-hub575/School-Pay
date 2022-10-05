@@ -472,7 +472,9 @@ class _PayNowPageState extends State<PayNowPage> {
                                               onTap: () {
                                                 showToast(
                                                     context: context,
-                                                    messege: 'Coming Soon!',color: PayNestTheme.primaryColor);
+                                                    messege: 'Coming Soon!',
+                                                    color: PayNestTheme
+                                                        .primaryColor);
                                               },
                                               child: Container(
                                                 width: double.infinity,
@@ -543,7 +545,9 @@ class _PayNowPageState extends State<PayNowPage> {
                                               onTap: () {
                                                 showToast(
                                                     messege: 'Coming Soon!',
-                                                    context: context,color: PayNestTheme.primaryColor);
+                                                    context: context,
+                                                    color: PayNestTheme
+                                                        .primaryColor);
                                               },
                                               child: Container(
                                                 width: double.infinity,
@@ -808,12 +812,12 @@ class _PayNowPageState extends State<PayNowPage> {
             },
           );
         }
-      }else if(result == null) {
+      } else if (result == null) {
         isLoading = false;
         setState(() {});
         Future.delayed(
           Duration(seconds: 1),
-              () {
+          () {
             showToast(
               context: context,
               messege: 'Something went wrong',
@@ -823,11 +827,13 @@ class _PayNowPageState extends State<PayNowPage> {
         );
       }
     } else if (int.parse(payAbleAmount) < 0) {
+      isLoading = false;
       showToast(
           context: context,
           messege: 'Amount is not correct',
           color: PayNestTheme.red);
     } else if (int.parse(payAbleAmount) == 0) {
+      isLoading = false;
       showToast(
           context: context,
           messege: 'Fees already paid',
@@ -895,16 +901,21 @@ class _PayNowPageState extends State<PayNowPage> {
               ),
               child: Column(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      'https://cdn.dribbble.com/users/1973964/screenshots/8807446/admissions_4x.jpg',
+                  Container(
+                    height: sizes.heightRatio * 50,
+                    width: sizes.widthRatio * 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
                     ),
-                    minRadius: 16,
-                    maxRadius: 24,
+                    child: SvgPicture.asset(
+                      studentElement.student?.gender == "male"
+                          ? icMale
+                          : icFemale,
+                    ),
                   ),
                   verticalSpacer(8),
                   Text(
-                    '${studentElement.student?.firstName} \n ${studentElement.student?.lastName} ',
+                    '${studentElement.student?.firstName} \n  ${(studentElement.student?.lastName != '-' ? studentElement.student?.lastName : '')}',
                     textAlign: TextAlign.center,
                     style: PayNestTheme.title_2_16primaryColor.copyWith(
                       fontSize: sizes.fontRatio * 13,

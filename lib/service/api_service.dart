@@ -19,7 +19,7 @@ class APIService {
   static var baseurl1 = "discoveritech.com";
 
   static var login = "/api/parent/auth/login";
-  static var sendOTP = "/api/parent/sendOtp";
+  static var sendOTP = "/api/parent/sendOtpOnRegister";
   static var verifyOTP = "/api/parent/verifyotp";
   static var register = "/api/parent/auth/signup";
   static var myStudents = "/api/parent/students";
@@ -75,7 +75,10 @@ class APIService {
     print(response.body);
     if (response.statusCode == 200) {
       return response.body;
-    } else {
+    }else if(response.statusCode == 503){
+      return null;
+    }
+    else {
       return response.body;
     }
   }
@@ -109,7 +112,10 @@ class APIService {
     print(response.body);
     if (response.statusCode == 200) {
       return response.body;
-    } else {
+    } else if(response.statusCode == 503){
+      return null;
+    }
+    else {
       return response.body;
     }
   }
@@ -423,6 +429,7 @@ class APIService {
       endPoint,
       headers: {
         "Content-Type": "application/json",
+        "Authorization": "Bearer " + storage.read('accessToken'),
       },
       body: data,
     );
