@@ -4,17 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../constants/constants.dart';
 import '../../../controller/sendOTP_controller.dart';
-import '../../../model/datamodel/reg1_to_otp.dart';
 import '../../../res/assets.dart';
 import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
-import '../../../widgets/blue_back_button.dart';
 import '../../../widgets/toast.dart';
 import '../../custom_phone_number_field/country_code_picker.dart';
 
@@ -49,9 +46,12 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
   TextEditingController confirmPasswordController = TextEditingController();
   SendOTPController sendOTPController = Get.put(SendOTPController());
 
+  final GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: key,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -345,30 +345,52 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           vertical: verticalValue(16),
                         ),
                       ),
-                      onPressed: () {
+                      onPressed: () async{
                         if (Utils.reg1FormKey.currentState!.validate() &&
                             terms == true &&
                             phoneController.text.isNotEmpty) {
                           setState(() {
                             loading = !loading;
                           });
-                          //hit otp
-                          Future.delayed(Duration(seconds: 2)).then(
-                            (value) => {
-                              sendOTPController.hitSendOTP(
-                                phCodeController.text + phoneController.text,
-                              ),
-                              setState(() {
-                                loading = !loading;
-                              }),
-                              widget.onNextTap(
-                                emailController.text,
-                                createPasswordController.text,
-                                phCodeController.text,
-                                phoneController.text,
-                              ),
-                            },
+                          await sendOTPController.hitSendOTP(
+                            emailController.text,
+                            phCodeController.text + phoneController.text,
                           );
+                          setState(() {
+                            loading = !loading;
+                          });
+                          if(sendOTPController.status.value){
+                            //hit otp
+                            Future.delayed(Duration(seconds: 2)).then(
+                                  (value) => {
+                                widget.onNextTap(
+                                  emailController.text,
+                                  createPasswordController.text,
+                                  phCodeController.text,
+                                  phoneController.text,
+                                ),
+                              },
+                            );
+                          }
+                          else if(!sendOTPController.status.value){
+                            ScaffoldMessenger.of(key.currentState!.context).showSnackBar(
+                              SnackBar(
+                                duration: Duration(seconds: 1),
+                                backgroundColor: Colors.red,
+                                padding: EdgeInsets.symmetric(
+                                  vertical: verticalValue(16),
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                content: Text(
+                                  sendOTPController.errorMessage.value,
+                                  textAlign: TextAlign.center,
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          }
                         } else {
                           showToast(
                               messege: 'Phone Field Cannot Be Empty !!',
