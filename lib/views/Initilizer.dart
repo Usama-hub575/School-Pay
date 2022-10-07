@@ -2,14 +2,20 @@ import 'dart:io';
 
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/utils/sharedPrefKeys.dart';
+import 'package:paynest_flutter_app/views/host/host_page.dart';
 import 'package:paynest_flutter_app/views/welcome_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:store_redirect/store_redirect.dart';
 import '../Utils/sharedpref.dart';
 import '../constants/constants.dart';
+import '../controller/user_controller.dart';
 import '../res/res.dart';
 import '../widgets/custom_alert_dialog.dart';
 import 'package:video_player/video_player.dart';
@@ -23,6 +29,8 @@ class InitializerScreen extends StatefulWidget {
 
 class _InitializerScreenState extends State<InitializerScreen> {
   MySharedPreferences storage = MySharedPreferences.instance;
+  final getStorage = GetStorage();
+  UserController userController = Get.put(UserController());
   FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
   String minAppVersion = '';
   String maxAppVersion = '';
@@ -38,7 +46,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
     setUpRemoteConfig();
     // getCountries();
     videoPlayerController = VideoPlayerController.asset(welcomeVideo);
-    videoPlayerController.initialize().then((value){
+    videoPlayerController.initialize().then((value) {
       videoPlayerController.play();
       videoPlayerController.setVolume(0);
       videoPlayerController.setLooping(true);
@@ -52,7 +60,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
     initializeResources(context: context);
     return Scaffold(
       backgroundColor: PayNestTheme.primaryColor,
-      body:Stack(
+      body: Stack(
         children: [
           SizedBox.expand(
             child: FittedBox(
@@ -165,18 +173,62 @@ class _InitializerScreenState extends State<InitializerScreen> {
 
   Future<void> getCountries() async {
     try {
-      Future.delayed(
-        const Duration(seconds: 2),
-        () {
-          videoPlayerController.pause();
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const WelcomePage(),
-            ),
+      if (storage.getStringValue(SharedPrefKeys.userEmail).isNotEmpty &&
+          storage.getStringValue(SharedPrefKeys.userPassword).isNotEmpty) {
+        String userEmail = storage.getStringValue(SharedPrefKeys.userEmail);
+        String userPassword =
+            storage.getStringValue(SharedPrefKeys.userPassword);
+        String fcm = storage.getStringValue(SharedPrefKeys.fcmToken);
+        await userController.hitLogin(
+          userEmail,
+          userPassword,
+          fcm,
+        );
+        if (userController.userResData.value.status) {
+          getStorage.write(
+            'accessToken',
+            userController.userResData.value.token,
           );
-        },
-      );
+          getStorage.write(
+              'email',
+              userController
+                  .userResData.value.parent!.email);
+          videoPlayerController.pause();
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            '/DashboardPage',
+                (Route<dynamic> route) => false,
+          );
+        }
+        else{
+          Future.delayed(
+            const Duration(seconds: 2),
+                () {
+              videoPlayerController.pause();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const WelcomePage(),
+                ),
+              );
+            },
+          );
+        }
+      }
+      else{
+        Future.delayed(
+          const Duration(seconds: 2),
+              () {
+            videoPlayerController.pause();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const WelcomePage(),
+              ),
+            );
+          },
+        );
+      }
     } catch (e) {
       setState(() {
         print(e);
@@ -221,7 +273,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
         ),
       ),
     );
-    try{
+    try {
       await remoteConfig.fetchAndActivate();
       APIService.baseUrl = Uri.parse(remoteConfig.getString(baseUrl));
       APIService.paymentGatewayUrl =
@@ -242,14 +294,14 @@ class _InitializerScreenState extends State<InitializerScreen> {
 
       isVersionGreaterThan(maxAppVersion, localAppVersion) == true
           ? Future.delayed(const Duration(seconds: 1)).then(
-            (value) =>
-        isVersionGreaterThan(minAppVersion, localAppVersion) == true
-            ? getForcefulAppUpdateDialog()
-            : getOptionalAppUpdateDialog(),
-      )
+              (value) =>
+                  isVersionGreaterThan(minAppVersion, localAppVersion) == true
+                      ? getForcefulAppUpdateDialog()
+                      : getOptionalAppUpdateDialog(),
+            )
           : Future.delayed(const Duration(seconds: 2))
-          .then((value) => getCountries());
-    }catch(e){
+              .then((value) => getCountries());
+    } catch (e) {
       getCountries();
     }
   }

@@ -81,14 +81,18 @@ class _StudentCardState extends State<StudentCard> {
                 ),
                 verticalSpacer(6),
 
-                Text(
-                  '${studentElement.student?.firstName ?? '' + studentElement.student!.lastName != '-'}',
-                  textAlign: TextAlign.center,
-                  style: PayNestTheme.title_2_16primaryColor.copyWith(
-                    fontSize: sizes.fontRatio * 13,
-                    color: index % 2 == 0
-                        ? PayNestTheme.colorWhite
-                        : PayNestTheme.black,
+                Container(
+                  width: sizes.widthRatio * 60,
+                  child: Text(
+                    '${studentElement.student?.firstName ?? '' + studentElement.student!.lastName != '-'}',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: PayNestTheme.title_2_16primaryColor.copyWith(
+                      fontSize: sizes.fontRatio * 13,
+                      color: index % 2 == 0
+                          ? PayNestTheme.colorWhite
+                          : PayNestTheme.black,
+                    ),
                   ),
                 ),
                 verticalSpacer(6),

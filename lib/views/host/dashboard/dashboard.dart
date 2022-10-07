@@ -23,7 +23,9 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../controller/transactionlist_controller.dart';
 import '../../../model/datamodel/transactiondetail_model.dart';
 import '../../../model/mystudents_resp_model.dart' as studentElement;
+import '../../../model/mystudents_resp_model.dart';
 import '../../../model/transactionlist_resp_model.dart';
+import '../../../staging_main.dart';
 import '../../../widgets/inkwell_widget.dart';
 import '../school/select_school.dart';
 import '../transactiondetails/transactiondetails_page.dart';
@@ -40,17 +42,28 @@ class DashboardPage extends StatefulWidget {
   final Function onTap;
   final Function onRecentTransactionTap;
 
+  static void onNotificationClick(
+    context,
+    String id,
+  ) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SingleStudentPage(
+          studentId: id,
+        ),
+      ),
+    );
+  }
+
   @override
   State<DashboardPage> createState() => _DashboardPageState();
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  final UserController lc = Get.put(UserController());
   final MyStudentController myStudentController =
       Get.put(MyStudentController());
   final TransactionListController transactionListController =
       Get.put(TransactionListController());
-  final UserController userController = Get.find<UserController>();
   bool isLoading = true;
 
   @override
@@ -63,11 +76,14 @@ class _DashboardPageState extends State<DashboardPage> {
         fetchTransactions();
       },
     );
+    userController.init(
+      context: context,
+    );
   }
 
   fetchStudents() async {
     await myStudentController.hitMyStudents(
-      lc.userResData.value.parent!.id,
+      userController.userResData.value.parent!.id,
     );
   }
 
@@ -91,9 +107,10 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       );
     } else {
-      String fullName = lc.userResData.value.parent!.firstName.toString() +
-          ' ' +
-          lc.userResData.value.parent!.lastName.toString();
+      String fullName =
+          userController.userResData.value.parent!.firstName.toString() +
+              ' ' +
+              userController.userResData.value.parent!.lastName.toString();
       return Scaffold(
         body: Column(
           children: [
@@ -128,7 +145,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Welcome Back",
+                                "WeuserControllerome Back",
                                 style: PayNestTheme.small_2_12black.copyWith(
                                   fontSize: sizes.fontRatio * 14,
                                   fontFamily: 'montserratRegular',
@@ -258,9 +275,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => SingleStudentPage(
-                                        singleStudentModel: getStudentModel(
-                                          studentElement: student,
-                                        ),
+                                        studentId: student.studentId.toString(),
                                       ),
                                     ),
                                   );
@@ -359,41 +374,44 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                       verticalSpacer(10),
                       Obx(
-                        () => lc.userResData.value.parent!.pin == null
-                            ? SizedBox(
-                                height: 48.h,
-                                width: 326.w,
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => ChangePIN(),
+                        () =>
+                            userController.userResData.value.parent!.pin == null
+                                ? SizedBox(
+                                    height: 48.h,
+                                    width: 326.w,
+                                    child: OutlinedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) => ChangePIN(),
+                                          ),
+                                        );
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            setPIN,
+                                            style: PayNestTheme.title_3_16black,
+                                          ),
+                                          SvgPicture.asset(
+                                            arrowNext,
+                                            height: 20.sp,
+                                          )
+                                        ],
                                       ),
-                                    );
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        setPIN,
-                                        style: PayNestTheme.title_3_16black,
-                                      ),
-                                      SvgPicture.asset(
-                                        arrowNext,
-                                        height: 20.sp,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              )
-                            : SizedBox.shrink(),
+                                    ),
+                                  )
+                                : SizedBox.shrink(),
                       ),
                       verticalSpacer(10),
                       Obx(
-                        () => lc.userResData.value.parent!.paymentConfigured ==
+                        () => userController.userResData.value.parent!
+                                        .paymentConfigured ==
                                     null ||
-                                lc.userResData.value.parent!.paymentConfigured
+                                userController
+                                    .userResData.value.parent!.paymentConfigured
                                     .toString()
                                     .isEmpty
                             ? InkWellWidget(
@@ -644,6 +662,16 @@ class _DashboardPageState extends State<DashboardPage> {
       MaterialPageRoute(
         builder: (context) => TransactionDetailsPage(
           tdm: tdm,
+        ),
+      ),
+    );
+  }
+
+  void navigateToSingleStudentScreen({required String id}) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SingleStudentPage(
+          studentId: id,
         ),
       ),
     );

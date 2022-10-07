@@ -65,7 +65,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
   bool isEmiratesSelected = true;
   bool isPassportSelected = false;
   String selectedCountry = "Select Country";
-  String countryCode = "";
+  String countryCode = "AE";
   String flag = '';
 
   @override

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:paynest_flutter_app/model/get_countries_response.dart';
@@ -10,14 +11,15 @@ import 'package:paynest_flutter_app/model/register_resp_model.dart';
 import 'package:paynest_flutter_app/model/reset_password_by_otp.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
-
-import '../constants/constants.dart';
+import 'package:paynest_flutter_app/views/host/dashboard/dashboard.dart';
 import '../model/forgot_password_resp_model.dart';
+import '../model/parent_student_response_model.dart';
 import '../utils/sharedPrefKeys.dart';
 
 MySharedPreferences preferences = MySharedPreferences.instance;
 
 class UserController extends GetxController {
+  late BuildContext context;
   var isLoading = false.obs;
   final isFailed = ''.obs;
   var retriesTime = ''.obs;
@@ -33,6 +35,11 @@ class UserController extends GetxController {
   ).obs;
   var forgotPasswordResData =
       ForgotPasswordRespModel(status: false, message: null).obs;
+  ParentStudentResponse parentStudentResponse = ParentStudentResponse();
+
+  void init({required BuildContext context}) {
+    this.context = context;
+  }
 
   hitRegister(
     firstName,
@@ -106,8 +113,8 @@ class UserController extends GetxController {
 
       var res = await APIService().apiLogin(loginModelToJson(loginData));
       isLoading(false);
-      if(res != null){
-        if(res!= ""){
+      if (res != null) {
+        if (res != "") {
           var decoded = jsonDecode(res);
           RegisterRespModel lrm = registerRespModelFromJson(res);
           if (decoded['status'] == true) {
@@ -135,8 +142,7 @@ class UserController extends GetxController {
             userResData.refresh();
           }
         }
-      }
-      else{
+      } else {
         userResData.value.status == "false";
         retriesTime.value = '';
         retriesTime.refresh();
@@ -194,6 +200,36 @@ class UserController extends GetxController {
       forgotPasswordResData.refresh();
     } finally {
       isLoading(false);
+    }
+  }
+
+  getStudentById(
+    id,
+  ) async {
+    try {
+      isLoading(true);
+      var res = await APIService().getStudentByStudentId(
+        id,
+      );
+      var decoded = jsonDecode(res);
+      if (decoded['status'] == true) {
+        parentStudentResponse =
+            ParentStudentResponse.fromJson(jsonDecode(res.toString()));
+        print(decoded['message']);
+      } else if (decoded['status'] == false) {
+        isLoading(false);
+      } else {}
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  void onNotificationTap({required String id}) {
+    if (id != '') {
+      DashboardPage.onNotificationClick(
+        this.context,
+        id,
+      );
     }
   }
 }
