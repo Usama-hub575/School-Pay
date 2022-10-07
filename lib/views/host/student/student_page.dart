@@ -201,10 +201,8 @@ class _StudentPageState extends State<StudentPage> {
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 SingleStudentPage(
-                                              singleStudentModel:
-                                                  getStudentModel(
-                                                studentElement: student,
-                                              ),
+                                              studentId:
+                                                  student.studentId.toString(),
                                             ),
                                           ),
                                         );

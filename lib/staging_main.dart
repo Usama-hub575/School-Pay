@@ -1,19 +1,46 @@
+import 'dart:convert';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:paynest_flutter_app/constants/constants.dart';
+import 'package:paynest_flutter_app/controller/user_controller.dart';
+import 'package:paynest_flutter_app/views/host/dashboard/dashboard.dart';
 
 import 'Utils/sharedpref.dart';
 import 'main.dart';
 
 //flutter build apk --flavor staging -t lib/staging_main.dart
 
+String notificationStudentID = '';
+late UserController userController;
+
 Future<void> backgroundHandler(RemoteMessage message) async {
+  String payload = message.data['studentId'];
   print('Handling a background message ${message.messageId}');
   print(message.data.toString());
   print(message.notification!.title.toString());
+  flutterLocalNotificationsPlugin.show(
+    message.hashCode,
+    message.notification?.title,
+    message.notification?.body,
+    NotificationDetails(
+      android: AndroidNotificationDetails(
+        channel.id,
+        channel.name,
+        channelDescription: channel.description,
+        importance: Importance.high,
+        priority: Priority.high,
+        // other properties...
+      ),
+    ),
+    payload: payload,
+  );
 }
 
 AndroidNotificationChannel channel = const AndroidNotificationChannel(
@@ -24,8 +51,8 @@ AndroidNotificationChannel channel = const AndroidNotificationChannel(
 );
 
 /// Initialize the [FlutterLocalNotificationsPlugin] package.
-FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,21 +61,24 @@ void main() async {
   initializeLocalNotifications();
   getFCMToken();
   MySharedPreferences.instance;
+  userController = Get.put(
+    UserController(),
+  );
   runApp(MyApp());
 }
 
 void initializeLocalNotifications() async {
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
-      AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
   const AndroidInitializationSettings initializationSettingsAndroid =
-  AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('@mipmap/ic_launcher');
   const IOSInitializationSettings initializationSettingsIOS =
-  IOSInitializationSettings(
-    requestAlertPermission: false,
-    requestBadgePermission: false,
-    requestSoundPermission: false,
+      IOSInitializationSettings(
+    requestAlertPermission: true,
+    requestBadgePermission: true,
+    requestSoundPermission: true,
   );
   const InitializationSettings initializationSettings = InitializationSettings(
     android: initializationSettingsAndroid,
@@ -56,15 +86,17 @@ void initializeLocalNotifications() async {
   );
   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onSelectNotification: (String? payload) async {
-        if (payload != null) {
-          debugPrint('notification payload: $payload');
-        }
-        onMessageOpened(payload);
-      });
+    if (payload != null) {
+      debugPrint('notification payload: $payload');
+    }
+    onMessageOpened(payload);
+  });
 }
 
 void onMessageOpened(payload) {
-  print(payload);
+  userController.onNotificationTap(
+    id: payload,
+  );
 }
 
 class FCM {
@@ -97,19 +129,21 @@ class FCM {
             android: AndroidNotificationDetails(
               channel.id,
               channel.name,
-              icon: '@mipmap/ic_launcher',
               priority: Priority.high,
               importance: Importance.high,
               channelDescription: channel.description,
             ),
           ),
+          payload: message.data['studentId'],
         );
       }
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen(
       (RemoteMessage remoteMessage) {
-        print('${remoteMessage.notification?.title}');
+        userController.onNotificationTap(
+          id: remoteMessage.data['studentId'],
+        );
       },
     );
 

@@ -31,6 +31,8 @@ class APIService {
   static var pinUpdate = "/api/parent/update";
   static var resetPassword = "/api/parent/resetpassword";
   static var resetPasswordByOTP = "/api/parent/resetPasswordByOtp";
+  static var studentById =
+      "/api/parent/studentById?studentId={student_id}";
   static var forgotPassword = "/api/parent/forgotPassword";
   static var updateProfile = "/api/parent/updateProfile";
   static var getCountries = "/api/countries";
@@ -75,10 +77,9 @@ class APIService {
     print(response.body);
     if (response.statusCode == 200) {
       return response.body;
-    }else if(response.statusCode == 503){
+    } else if (response.statusCode == 503) {
       return null;
-    }
-    else {
+    } else {
       return response.body;
     }
   }
@@ -112,10 +113,9 @@ class APIService {
     print(response.body);
     if (response.statusCode == 200) {
       return response.body;
-    } else if(response.statusCode == 503){
+    } else if (response.statusCode == 503) {
       return null;
-    }
-    else {
+    } else {
       return response.body;
     }
   }
@@ -163,6 +163,26 @@ class APIService {
         "Authorization": "Bearer " + storage.read('accessToken'),
       },
       body: data,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  /// * Fetch Student By Student ID already added students * ///
+  Future getStudentByStudentId(data) async {
+    var endPoint = Uri.parse(
+      "$baseUrl${studentById.replaceAll('{student_id}', data)}",
+    );
+    var response = await client.get(
+      endPoint,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
     );
     print(response.body);
     if (response.statusCode == 200) {
