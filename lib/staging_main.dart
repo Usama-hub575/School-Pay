@@ -22,6 +22,7 @@ late UserController userController;
 
 Future<void> backgroundHandler(RemoteMessage message) async {
   String payload = message.data['studentId'];
+  notificationStudentID = payload;
   print('Handling a background message ${message.messageId}');
   print(message.data.toString());
   print(message.notification!.title.toString());
@@ -116,41 +117,41 @@ class FCM {
       sound: true,
     );
 
-    FirebaseMessaging.instance.getInitialMessage();
+    FirebaseMessaging.instance.getInitialMessage().then(
+      (RemoteMessage? remoteMessage) {
+        notificationStudentID = remoteMessage?.data['studentId'];
+      },
+    );
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-      if (notification != null && android != null && !kIsWeb) {
-        flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
-            android: AndroidNotificationDetails(
-              channel.id,
-              channel.name,
-              priority: Priority.high,
-              importance: Importance.high,
-              channelDescription: channel.description,
+      if (message.data.isNotEmpty) {
+        notificationStudentID = message.data['studentId'];
+        RemoteNotification? notification = message.notification;
+        AndroidNotification? android = message.notification?.android;
+        if (notification != null && android != null && !kIsWeb) {
+          flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                priority: Priority.high,
+                importance: Importance.high,
+                channelDescription: channel.description,
+              ),
             ),
-          ),
-          payload: message.data['studentId'],
-        );
+            payload: message.data['studentId'],
+          );
+        }
       }
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen(
       (RemoteMessage remoteMessage) {
+        notificationStudentID = remoteMessage.data['studentId'];
         userController.onNotificationTap(
           id: remoteMessage.data['studentId'],
-        );
-      },
-    );
-
-    FirebaseMessaging.instance.getInitialMessage().then(
-      (RemoteMessage? remoteMessage) {
-        userController.onNotificationTap(
-          id: remoteMessage?.data['studentId'],
         );
       },
     );

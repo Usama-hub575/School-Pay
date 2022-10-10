@@ -27,6 +27,7 @@ import '../../../model/mystudents_resp_model.dart';
 import '../../../model/transactionlist_resp_model.dart';
 import '../../../staging_main.dart';
 import '../../../widgets/inkwell_widget.dart';
+import '../../../widgets/toast.dart';
 import '../school/select_school.dart';
 import '../transactiondetails/transactiondetails_page.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart'
@@ -46,13 +47,15 @@ class DashboardPage extends StatefulWidget {
     context,
     String id,
   ) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => SingleStudentPage(
-          studentId: id,
+    if (id != '') {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => SingleStudentPage(
+            studentId: id,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   @override
@@ -107,6 +110,25 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       );
     } else {
+      Future.delayed(
+        Duration(seconds: 2),
+            () {
+          showToast(
+            messege: notificationStudentID,
+            context: context,
+            color: PayNestTheme.red,
+          );
+        },
+      );
+      if (notificationStudentID != '') {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => SingleStudentPage(
+              studentId: notificationStudentID,
+            ),
+          ),
+        );
+      }
       String fullName =
           userController.userResData.value.parent!.firstName.toString() +
               ' ' +

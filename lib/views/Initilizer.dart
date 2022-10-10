@@ -185,25 +185,28 @@ class _InitializerScreenState extends State<InitializerScreen> {
           fcm,
         );
         if (userController.userResData.value.status) {
+          print(
+            'Token : ${getStorage.write(
+              'fcmToken',
+              userController.userResData.value.token,
+            )}',
+          );
           getStorage.write(
             'accessToken',
             userController.userResData.value.token,
           );
           getStorage.write(
-              'email',
-              userController
-                  .userResData.value.parent!.email);
+              'email', userController.userResData.value.parent!.email);
           videoPlayerController.pause();
           Navigator.pushNamedAndRemoveUntil(
             context,
             '/DashboardPage',
-                (Route<dynamic> route) => false,
+            (Route<dynamic> route) => false,
           );
-        }
-        else{
+        } else {
           Future.delayed(
             const Duration(seconds: 2),
-                () {
+            () {
               videoPlayerController.pause();
               Navigator.pushReplacement(
                 context,
@@ -214,11 +217,10 @@ class _InitializerScreenState extends State<InitializerScreen> {
             },
           );
         }
-      }
-      else{
+      } else {
         Future.delayed(
           const Duration(seconds: 2),
-              () {
+          () {
             videoPlayerController.pause();
             Navigator.pushReplacement(
               context,
