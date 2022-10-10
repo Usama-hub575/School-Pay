@@ -147,6 +147,14 @@ class FCM {
       },
     );
 
+    FirebaseMessaging.instance.getInitialMessage().then(
+      (RemoteMessage? remoteMessage) {
+        userController.onNotificationTap(
+          id: remoteMessage?.data['studentId'],
+        );
+      },
+    );
+
     FirebaseMessaging.onBackgroundMessage(backgroundHandler);
 
     channel = const AndroidNotificationChannel(

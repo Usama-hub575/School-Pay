@@ -145,7 +145,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "WeuserControllerome Back",
+                                "Welcome Back",
                                 style: PayNestTheme.small_2_12black.copyWith(
                                   fontSize: sizes.fontRatio * 14,
                                   fontFamily: 'montserratRegular',
