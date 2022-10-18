@@ -72,6 +72,9 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     super.initState();
+    userController = Get.put(
+      UserController(),
+    );
     Future.delayed(
       Duration.zero,
       () {
@@ -110,16 +113,6 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       );
     } else {
-      Future.delayed(
-        Duration(seconds: 2),
-            () {
-          showToast(
-            messege: notificationStudentID,
-            context: context,
-            color: PayNestTheme.red,
-          );
-        },
-      );
       if (notificationStudentID != '') {
         Navigator.of(context).push(
           MaterialPageRoute(

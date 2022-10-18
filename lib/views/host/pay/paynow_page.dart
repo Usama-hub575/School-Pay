@@ -96,12 +96,10 @@ class _PayNowPageState extends State<PayNowPage> {
           ),
           color: Colors.white,
         ),
-        child: SafeArea(
-          child: Stack().fullScreenLoader(
-            state: isLoading,
-            loadingWidget: fullScreenLoader(),
-            child: getBody(),
-          ),
+        child: Stack().fullScreenLoader(
+          state: isLoading,
+          loadingWidget: fullScreenLoader(),
+          child: getBody(),
         ),
       ),
     );
