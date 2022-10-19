@@ -26,6 +26,7 @@ import '../../../model/mystudents_resp_model.dart' as studentElement;
 import '../../../model/mystudents_resp_model.dart';
 import '../../../model/transactionlist_resp_model.dart';
 import '../../../staging_main.dart';
+import '../../../widgets/get_student_model.dart';
 import '../../../widgets/inkwell_widget.dart';
 import '../../../widgets/toast.dart';
 import '../school/select_school.dart';
@@ -52,6 +53,7 @@ class DashboardPage extends StatefulWidget {
         MaterialPageRoute(
           builder: (context) => SingleStudentPage(
             studentId: id,
+            myStudentsRespModel: MyStudentsRespModel.empty(),
           ),
         ),
       );
@@ -118,6 +120,7 @@ class _DashboardPageState extends State<DashboardPage> {
           MaterialPageRoute(
             builder: (context) => SingleStudentPage(
               studentId: notificationStudentID,
+              myStudentsRespModel: MyStudentsRespModel.empty(),
             ),
           ),
         );
@@ -291,6 +294,9 @@ class _DashboardPageState extends State<DashboardPage> {
                                     MaterialPageRoute(
                                       builder: (context) => SingleStudentPage(
                                         studentId: student.studentId.toString(),
+                                        myStudentsRespModel: getMyStudentModel(
+                                          element: student,
+                                        ),
                                       ),
                                     ),
                                   );
@@ -687,6 +693,7 @@ class _DashboardPageState extends State<DashboardPage> {
       MaterialPageRoute(
         builder: (context) => SingleStudentPage(
           studentId: id,
+          myStudentsRespModel: MyStudentsRespModel.empty(),
         ),
       ),
     );

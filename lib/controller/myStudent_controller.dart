@@ -7,7 +7,9 @@ import 'package:paynest_flutter_app/service/api_service.dart';
 
 class MyStudentController extends GetxController {
   var isLoading = false.obs;
-  final myStudentData = MyStudentsRespModel(status: false, students: null).obs;
+  var myStudentData = MyStudentsRespModel(status: false, students: null).obs;
+
+
 
   hitMyStudents(parentID) async {
     try {

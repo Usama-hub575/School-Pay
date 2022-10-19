@@ -22,6 +22,13 @@ class MyStudentsRespModel {
   bool status;
   List<StudentElement>? students;
 
+  static MyStudentsRespModel empty() {
+    return MyStudentsRespModel(
+      status: false,
+      students: [],
+    );
+  }
+
   factory MyStudentsRespModel.fromJson(Map<String, dynamic> json) =>
       MyStudentsRespModel(
         status: json["status"],
