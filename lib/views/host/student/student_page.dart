@@ -8,6 +8,7 @@ import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/school/select_school.dart';
+import 'package:paynest_flutter_app/widgets/get_student_model.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../model/datamodel/singlestudent_model.dart';
 import '../../../widgets/inkwell_widget.dart';
@@ -203,6 +204,10 @@ class _StudentPageState extends State<StudentPage> {
                                                 SingleStudentPage(
                                               studentId:
                                                   student.studentId.toString(),
+                                              myStudentsRespModel:
+                                                  getMyStudentModel(
+                                                element: student,
+                                              ),
                                             ),
                                           ),
                                         );

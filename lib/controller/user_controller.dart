@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:paynest_flutter_app/model/get_countries_response.dart';
 import 'package:paynest_flutter_app/model/login_model.dart';
 import 'package:paynest_flutter_app/model/login_response_model.dart';
+import 'package:paynest_flutter_app/model/mystudents_resp_model.dart';
 import 'package:paynest_flutter_app/model/register_model.dart';
 import 'package:paynest_flutter_app/model/register_resp_model.dart';
 import 'package:paynest_flutter_app/model/reset_password_by_otp.dart';
@@ -33,6 +34,8 @@ class UserController extends GetxController {
     status: false,
     countries: [],
   ).obs;
+  var singleStudentResponse =
+      MyStudentsRespModel(status: false, students: null).obs;
   var forgotPasswordResData =
       ForgotPasswordRespModel(status: false, message: null).obs;
   ParentStudentResponse parentStudentResponse = ParentStudentResponse();
@@ -213,8 +216,12 @@ class UserController extends GetxController {
       );
       var decoded = jsonDecode(res);
       if (decoded['status'] == true) {
-        parentStudentResponse =
-            ParentStudentResponse.fromJson(jsonDecode(res.toString()));
+        singleStudentResponse.value = MyStudentsRespModel.fromJson(
+          jsonDecode(
+            res.toString(),
+          ),
+        );
+        singleStudentResponse.refresh();
         print(decoded['message']);
       } else if (decoded['status'] == false) {
         isLoading(false);

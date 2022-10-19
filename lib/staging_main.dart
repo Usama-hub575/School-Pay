@@ -119,7 +119,9 @@ class FCM {
 
     FirebaseMessaging.instance.getInitialMessage().then(
       (RemoteMessage? remoteMessage) {
-        notificationStudentID = remoteMessage?.data['studentId'];
+        if(remoteMessage != null){
+          notificationStudentID = remoteMessage.data['studentId'];
+        }
       },
     );
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {

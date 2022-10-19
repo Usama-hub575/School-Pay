@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/extension/stack_extension.dart';
-import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
+import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart' as SingleSchoolModel ;
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
 import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
+import '../../../model/mystudents_resp_model.dart';
 import '../../../res/res.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/full_screen_loader.dart';
@@ -21,8 +21,10 @@ class SingleStudentPage extends StatefulWidget {
   SingleStudentPage({
     Key? key,
     required this.studentId,
+    required this.myStudentsRespModel,
   }) : super(key: key);
 
+  final MyStudentsRespModel myStudentsRespModel;
   final String studentId;
 
   @override
@@ -32,19 +34,20 @@ class SingleStudentPage extends StatefulWidget {
 class _SingleStudentPageState extends State<SingleStudentPage> {
   final UserController userController = Get.find<UserController>();
 
-  bool isLoading = true;
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
+    userController.singleStudentResponse.value = widget.myStudentsRespModel;
     getStudentByStudentId();
   }
 
   void getStudentByStudentId() async {
+    print('${widget.myStudentsRespModel}');
     await userController.getStudentById(
       widget.studentId.toString(),
     );
-    isLoading = false;
     if (mounted) {
       setState(() {});
     }
@@ -143,23 +146,29 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                 ),
                               ),
                               Spacer(),
-                              userController.parentStudentResponse.parentStudent != null ?Text(
-                                'AED ${amountFormater(
-                                  double.parse(
-                                    userController
-                                        .parentStudentResponse
-                                        .parentStudent!
-                                        .student!
-                                        .totalBalanceAmount!
-                                        .toString(),
-                                  ),
-                                )}',
-                                style: PayNestTheme.h2_12blueAccent.copyWith(
-                                  fontSize: sizes.fontRatio * 16,
-                                  fontFamily: 'montserratExtraBold',
-                                  color: PayNestTheme.primaryColor,
-                                ),
-                              ): const SizedBox.shrink(),
+                              userController.singleStudentResponse.value
+                                          .students !=
+                                      null
+                                  ? Text(
+                                      'AED ${amountFormater(
+                                        double.parse(
+                                          userController
+                                              .singleStudentResponse
+                                              .value
+                                              .students![0]
+                                              .student!
+                                              .totalBalanceAmount
+                                              .toString(),
+                                        ),
+                                      )}',
+                                      style:
+                                          PayNestTheme.h2_12blueAccent.copyWith(
+                                        fontSize: sizes.fontRatio * 16,
+                                        fontFamily: 'montserratExtraBold',
+                                        color: PayNestTheme.primaryColor,
+                                      ),
+                                    )
+                                  : const SizedBox.shrink(),
                             ],
                           ),
                         ),
@@ -207,14 +216,14 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                               ),
                             ),
                             onPressed: () {
-                              // Navigator.of(context).push(
-                              //   MaterialPageRoute(
-                              //     builder: (context) => InvoicePaymentPage(
-                              //       singleStudentModel:
-                              //           widget.singleStudentModel,
-                              //     ),
-                              //   ),
-                              // );
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => InvoicePaymentPage(
+                                    singleStudentModel:
+                                        getStudentModel(),
+                                  ),
+                                ),
+                              );
                             },
                             child: Center(
                               child: Text(
@@ -263,7 +272,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                 ),
                 child: Column(
                   children: [
-                    userController.parentStudentResponse.parentStudent != null
+                    userController.singleStudentResponse.value.students != null
                         ? Container(
                             height: sizes.heightRatio * 50,
                             width: sizes.widthRatio * 50,
@@ -271,8 +280,8 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                               shape: BoxShape.circle,
                             ),
                             child: SvgPicture.asset(
-                              userController.parentStudentResponse
-                                          .parentStudent!.student?.gender ==
+                              userController.singleStudentResponse.value
+                                          .students![0].student?.gender ==
                                       "male"
                                   ? icMale
                                   : icFemale,
@@ -280,22 +289,24 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                           )
                         : const SizedBox.shrink(),
                     verticalSpacer(8),
-                    userController.parentStudentResponse.parentStudent != null ? Text(
-                      '${userController.parentStudentResponse.parentStudent!.student?.firstName ?? '' + (userController.parentStudentResponse.parentStudent?.student?.lastName != null ? userController.parentStudentResponse.parentStudent!.student!.lastName ?? '' : '')}',
-                      textAlign: TextAlign.center,
-                      style: PayNestTheme.h2_12blueAccent.copyWith(
-                        fontSize: sizes.fontRatio * 22,
-                        color: PayNestTheme.primaryColor,
-                      ),
-                    ): const SizedBox.shrink(),
+                    userController.singleStudentResponse.value.students != null
+                        ? Text(
+                            '${userController.singleStudentResponse.value.students![0].student?.firstName ?? '' + (userController.singleStudentResponse.value.students![0].student?.lastName != null ? userController.parentStudentResponse.parentStudent!.student!.lastName ?? '' : '')}',
+                            textAlign: TextAlign.center,
+                            style: PayNestTheme.h2_12blueAccent.copyWith(
+                              fontSize: sizes.fontRatio * 22,
+                              color: PayNestTheme.primaryColor,
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                     verticalSpacer(4),
-                    userController.parentStudentResponse.parentStudent !=
+                    userController.singleStudentResponse.value.students !=
                                 null &&
-                            userController.parentStudentResponse.parentStudent!
-                                    .student !=
+                            userController.singleStudentResponse.value
+                                    .students![0].student !=
                                 null
                         ? Text(
-                            'Grade ${userController.parentStudentResponse.parentStudent!.student!.grade}',
+                            'Grade ${userController.singleStudentResponse.value.students![0].student!.grade}',
                             textAlign: TextAlign.center,
                             style: PayNestTheme.h2_12blueAccent.copyWith(
                               fontSize: sizes.fontRatio * 16,
@@ -304,9 +315,9 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                           )
                         : const SizedBox.shrink(),
                     verticalSpacer(8),
-                    userController.parentStudentResponse.parentStudent != null
+                    userController.singleStudentResponse.value.students != null
                         ? Text(
-                            '${userController.parentStudentResponse.parentStudent!.student!.school!.name}',
+                            '${userController.singleStudentResponse.value.students![0].student!.school!.name}',
                             textAlign: TextAlign.center,
                             style: PayNestTheme.h2_12blueAccent.copyWith(
                               fontSize: sizes.fontRatio * 16,
@@ -315,9 +326,9 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                           )
                         : const SizedBox.shrink(),
                     verticalSpacer(4),
-                    userController.parentStudentResponse.parentStudent != null
+                    userController.singleStudentResponse.value.students != null
                         ? Text(
-                            '${userController.parentStudentResponse.parentStudent!.student!.school!.address}',
+                            '${userController.singleStudentResponse.value.students![0].student!.school!.address}',
                             textAlign: TextAlign.center,
                             style: PayNestTheme.small_2_10textGrey.copyWith(
                               fontSize: sizes.fontRatio * 16,
@@ -330,6 +341,69 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  SingleSchoolModel.SingleStudentModel getStudentModel() {
+    return SingleSchoolModel.SingleStudentModel(
+      id: userController.singleStudentResponse.value.students![0].id,
+      parentId: userController.singleStudentResponse.value.students![0].parentId,
+      studentId: userController.singleStudentResponse.value.students![0].studentId,
+      deletedAt: userController.singleStudentResponse.value.students![0].deletedAt,
+      createdAt: userController.singleStudentResponse.value.students![0].createdAt,
+      updatedAt: userController.singleStudentResponse.value.students![0].updatedAt,
+      student: SingleSchoolModel.Student(
+        dob: userController.singleStudentResponse.value.students![0].student!.dob,
+        admissionDate: userController.singleStudentResponse.value.students![0].student!.admissionDate,
+        id: userController.singleStudentResponse.value.students![0].student!.id,
+        studentRegNo: userController.singleStudentResponse.value.students![0].student!.studentRegNo,
+        firstName: userController.singleStudentResponse.value.students![0].student!.firstName,
+        lastName: userController.singleStudentResponse.value.students![0].student!.lastName,
+        grade: userController.singleStudentResponse.value.students![0].student!.grade,
+        parentEmiratesId: userController.singleStudentResponse.value.students![0].student!.parentEmiratesId,
+        parentPhoneNumber: userController.singleStudentResponse.value.students![0].student!.parentPhoneNumber,
+        deletedAt: userController.singleStudentResponse.value.students![0].student!.deletedAt,
+        schoolId: userController.singleStudentResponse.value.students![0].student!.schoolId,
+        totalBalanceAmount:
+        double.parse(userController.singleStudentResponse.value.students![0].student!.totalBalanceAmount.toString()),
+        guardianFirstName: userController.singleStudentResponse.value.students![0].student!.guardianFirstName,
+        guardianLastName: userController.singleStudentResponse.value.students![0].student!.guardianLastName,
+        guardianGender: userController.singleStudentResponse.value.students![0].student!.guardianGender,
+        guardianEmiratesId: userController.singleStudentResponse.value.students![0].student!.guardianEmiratesId,
+        guardianNationality: userController.singleStudentResponse.value.students![0].student!.guardianNationality,
+        guardianReligion: userController.singleStudentResponse.value.students![0].student!.guardianReligion,
+        area: userController.singleStudentResponse.value.students![0].student!.area,
+        region: userController.singleStudentResponse.value.students![0].student!.region,
+        streetAddress: userController.singleStudentResponse.value.students![0].student!.streetAddress,
+        email: userController.singleStudentResponse.value.students![0].student!.email,
+        phoneNumber: userController.singleStudentResponse.value.students![0].student!.phoneNumber,
+        otherNumber: userController.singleStudentResponse.value.students![0].student!.otherNumber,
+        profile: userController.singleStudentResponse.value.students![0].student!.profile,
+        religion: userController.singleStudentResponse.value.students![0].student!.religion,
+        nationality: userController.singleStudentResponse.value.students![0].student!.nationality,
+        gender: userController.singleStudentResponse.value.students![0].student!.gender,
+        dueDate: userController.singleStudentResponse.value.students![0].student!.dueDate,
+        file: userController.singleStudentResponse.value.students![0].student!.file,
+        privacy: userController.singleStudentResponse.value.students![0].student!.privacy,
+        createdAt: userController.singleStudentResponse.value.students![0].student!.createdAt,
+        updatedAt: userController.singleStudentResponse.value.students![0].student!.updatedAt,
+        school: SingleSchoolModel.School(
+          id: userController.singleStudentResponse.value.students![0].student!.school!.id,
+          name: userController.singleStudentResponse.value.students![0].student!.school!.name,
+          deletedAt: userController.singleStudentResponse.value.students![0].student!.school!.deletedAt,
+          addedBy: userController.singleStudentResponse.value.students![0].student!.school!.addedBy,
+          address: userController.singleStudentResponse.value.students![0].student!.school!.address,
+          description: userController.singleStudentResponse.value.students![0].student!.school!.description,
+          vat: userController.singleStudentResponse.value.students![0].student!.school!.vat,
+          paynestFee: userController.singleStudentResponse.value.students![0].student!.school!.paynestFee,
+          apiKey: userController.singleStudentResponse.value.students![0].student!.school!.apiKey,
+          merchantId: userController.singleStudentResponse.value.students![0].student!.school!.merchantId,
+          file: userController.singleStudentResponse.value.students![0].student!.school!.file,
+          privacy: userController.singleStudentResponse.value.students![0].student!.school!.privacy,
+          createdAt: userController.singleStudentResponse.value.students![0].student!.school!.createdAt,
+          updatedAt: userController.singleStudentResponse.value.students![0].student!.school!.updatedAt,
         ),
       ),
     );
