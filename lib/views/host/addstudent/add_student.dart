@@ -570,7 +570,7 @@ class _AddStudentState extends State<AddStudent> {
                                                       if (_selectedFilter ==
                                                           'Student ID') {
                                                         final model = {
-                                                          "studentRegisterNo":
+                                                          "studentRegNo":
                                                               searchController
                                                                   .text
                                                                   .toString(),
