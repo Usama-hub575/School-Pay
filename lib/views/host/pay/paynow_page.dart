@@ -753,7 +753,7 @@ class _PayNowPageState extends State<PayNowPage> {
       );
       isLoading = true;
       setState(() {});
-      if (result != null) {
+      if (result != null && result['ResponseMsg'] == 'success'){
         var amount = payAbleAmount;
         bool status = await ctrcController.hitCreateTransaction(
           schoolIDController.text,
