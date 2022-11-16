@@ -56,7 +56,7 @@ class _SignInPageState extends State<SignInPage> {
       key: _scaffoldKey,
       body: Container(
         margin: EdgeInsets.symmetric(
-          horizontal: horizontalValue(16),
+          horizontal: horizontalValue(25),
         ),
         child: Column(
           children: [
@@ -75,6 +75,7 @@ class _SignInPageState extends State<SignInPage> {
                 Spacer(),
               ],
             ),
+            verticalSpacer(22),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.zero,
@@ -88,21 +89,19 @@ class _SignInPageState extends State<SignInPage> {
                         verticalSpacer(16),
                         Text(
                           'Sign In',
-                          style: PayNestTheme.h2_12blueAccent.copyWith(
-                            fontSize: sizes.fontRatio * 22,
-                            color: PayNestTheme.black,
+                          style: PayNestTheme.title22black.copyWith(
                           ),
+
                         ),
                         verticalSpacer(16),
                         Text(
                           'Please Enter Your Registered Email ID and Password',
-                          style: PayNestTheme.h2_12blueAccent.copyWith(
+                          style: PayNestTheme.title20primaryColor.copyWith(
                             fontSize: sizes.fontRatio * 12,
                             color: PayNestTheme.black,
-                            fontWeight: FontWeight.w300,
                           ),
                         ),
-                        verticalSpacer(16),
+                        verticalSpacer(34),
                         TextFormField(
                           style: TextStyle(fontSize: sizes.fontRatio * 16),
                           controller: emailController,
@@ -120,10 +119,7 @@ class _SignInPageState extends State<SignInPage> {
                               ),
                             ),
                             labelText: email,
-                            labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                              fontSize: sizes.fontRatio * 12,
-                              color: PayNestTheme.primaryColor,
-                            ),
+                            labelStyle: PayNestTheme.floating_12primaryColor,
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: PayNestTheme.textGrey.withOpacity(0.5),
@@ -143,10 +139,10 @@ class _SignInPageState extends State<SignInPage> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
                             if (value!.trim().isEmpty) {
-                              return 'Please enter email';
+                              return 'Please Enter Email';
                             }
                             if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                              return 'Invalid email';
+                              return 'Invalid Email';
                             }
                             return null;
                           },
@@ -168,10 +164,7 @@ class _SignInPageState extends State<SignInPage> {
                               ),
                             ),
                             labelText: password,
-                            labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                              fontSize: sizes.fontRatio * 12,
-                              color: PayNestTheme.primaryColor,
-                            ),
+                            labelStyle: PayNestTheme.floating_12primaryColor,
                             suffixIcon: IconButton(
                               icon: SvgPicture.asset(
                                 AppAssets.passwordEye,
@@ -213,11 +206,11 @@ class _SignInPageState extends State<SignInPage> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
                             if (value!.trim().isEmpty) {
-                              return 'Please enter password';
+                              return 'Please Enter Password';
                             }
                             // Check if the entered email has the right format
                             if (value.trim().length < 5) {
-                              return 'Password must not be less than 5';
+                              return 'Password Must Not Be Less Than 5';
                             }
                             // Return null if the entered email is valid
                             return null;

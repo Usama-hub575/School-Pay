@@ -38,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
         height: sizes.height,
         width: sizes.width,
         margin: EdgeInsets.symmetric(
-          horizontal: horizontalValue(16),
+          horizontal: horizontalValue(25),
         ),
         child: Column(
           children: [

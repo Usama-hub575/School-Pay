@@ -25,11 +25,7 @@ class _CustomSliderState extends State<CustomSlider> {
         children: [
           Text(
             'STEP ${widget.currentIndex+1}',
-            style: PayNestTheme.h2_12blueAccent.copyWith(
-              fontSize: sizes.fontRatio * 16,
-              color: PayNestTheme.black,
-              fontFamily: 'montserratBold',
-            ),
+            style: PayNestTheme.title_3_16blackbold,
           ),
           horizontalSpacer(8),
           widget.currentIndex == 0
