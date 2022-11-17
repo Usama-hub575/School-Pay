@@ -87,6 +87,7 @@ class _HostPageState extends State<HostPage> {
     initializePages();
   }
 
+
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
