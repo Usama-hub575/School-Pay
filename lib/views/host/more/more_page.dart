@@ -87,6 +87,7 @@ class _MorePageState extends State<MorePage> {
                   child: Container(
                     margin: EdgeInsets.symmetric(
                       horizontal: horizontalValue(30),
+                      vertical: verticalValue(10),
                     ),
                     padding: EdgeInsets.symmetric(
                       horizontal: horizontalValue(12),
@@ -129,6 +130,16 @@ class _MorePageState extends State<MorePage> {
                                   width: sizes.widthRatio * 60,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 5,
+                                        offset: Offset(
+                                          0.5, // Move to right 10  horizontally
+                                          0.5, // Move to bottom 10 Vertically
+                                        ),
+                                      )
+                                    ]
                                   ),
                                   child: SvgPicture.asset(
                                     icMale,
@@ -340,15 +351,15 @@ class _MorePageState extends State<MorePage> {
                       },
                     ),
                     verticalSpacer(16),
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                        horizontal: horizontalValue(16),
-                      ),
-                      width: 1.sw,
-                      height: 1.h,
-                      color: PayNestTheme.lineColor,
-                    ),
-                    verticalSpacer(16),
+                    // Container(
+                    //   margin: EdgeInsets.symmetric(
+                    //     horizontal: horizontalValue(16),
+                    //   ),
+                    //   width: 1.sw,
+                    //   height: 1.h,
+                    //   color: PayNestTheme.lineColor,
+                    // ),
+                    verticalSpacer(5),
                     Container(
                       width: double.infinity,
                       child: OutlinedButton(
