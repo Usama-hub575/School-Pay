@@ -56,7 +56,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 23.h, bottom: 12.h),
+            padding: EdgeInsets.only(top: 23.h, bottom: 18.h),
             child: Text(
               pleaseEnterYourPhoneNumberAndEmailId,
               style: PayNestTheme.h2_12blueAccent.copyWith(
@@ -97,10 +97,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           ),
                         ),
                         labelText: email,
-                        labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                          fontSize: sizes.fontRatio * 12,
-                          color: PayNestTheme.primaryColor,
-                        ),
+                        labelStyle: PayNestTheme.floating_12primaryColor,
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(0.5),
@@ -124,7 +121,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         }
                         // Check if the entered email has the right format
                         if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                          return 'Correct email required';
+                          return 'Correct Email Required';
                         }
                         // Return null if the entered email is valid
                         return null;
@@ -169,10 +166,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           ),
                         ),
                         labelText: createPassword,
-                        labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                          fontSize: sizes.fontRatio * 12,
-                          color: PayNestTheme.primaryColor,
-                        ),
+                        labelStyle: PayNestTheme.floating_12primaryColor,
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(0.5),
@@ -196,7 +190,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         }
                         // Check if the entered email has the right format
                         if (value.trim().length < 5) {
-                          return 'Password must not be less than 5';
+                          return 'Password Must Not Be Less Than 5';
                         }
                         // Return null if the entered email is valid
                         return null;
@@ -241,10 +235,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           ),
                         ),
                         labelText: confirmPassword,
-                        labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                          fontSize: sizes.fontRatio * 12,
-                          color: PayNestTheme.primaryColor,
-                        ),
+                        labelStyle: PayNestTheme.floating_12primaryColor,
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(0.5),
@@ -267,11 +258,11 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           return 'Required';
                         }
                         if (value.trim().length < 5) {
-                          return 'Password must not be less than 5';
+                          return 'Password Must Not Be Less Than 5';
                         }
                         if (createPasswordController.text !=
                             confirmPasswordController.text) {
-                          return 'Password not matched';
+                          return 'Password Not Matched';
                         }
                         return null;
                       },
@@ -298,11 +289,9 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: 'I accept',
-                              style: PayNestTheme.h2_12blueAccent.copyWith(
-                                fontSize: sizes.fontRatio * 14,
+                              text: 'I Accept',
+                              style: PayNestTheme.floating_14primaryColor.copyWith(
                                 color: PayNestTheme.black,
-                                fontFamily: 'montserratBold',
                               ),
                             ),
                             const TextSpan(
@@ -317,11 +306,8 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                                   );
                                   setState(() {});
                                 },
-                              style: PayNestTheme.h2_12blueAccent.copyWith(
-                                fontSize: sizes.fontRatio * 14,
-                                color: PayNestTheme.primaryColor,
+                              style: PayNestTheme.floating_14primaryColor.copyWith(
                                 decoration: TextDecoration.underline,
-                                fontFamily: 'montserratBold',
                               ),
                             ),
                           ],
@@ -541,16 +527,12 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
               shape: BoxShape.circle,
             ),
             flagWidth: sizes.fontRatio * 50,
-            textStyle: PayNestTheme.title_2_16primaryColor.copyWith(
-              fontSize: sizes.fontRatio * 14,
-              color: PayNestTheme.primaryColor,
-            ),
+            textStyle: PayNestTheme.title_3_16black,
           ),
           Expanded(
             child: TextFormField(
               keyboardType: TextInputType.phone,
-              style: PayNestTheme.title_2_16primaryColor.copyWith(
-                fontSize: sizes.fontRatio * 14,
+              style: PayNestTheme.floating_14primaryColor.copyWith(
                 color: PayNestTheme.textGrey,
               ),
               controller: phoneController,
