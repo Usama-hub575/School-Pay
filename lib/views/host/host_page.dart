@@ -134,6 +134,7 @@ class _HostPageState extends State<HostPage> {
                     : unSelectedIcons[index],
               ),
               verticalSpacer(8),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
