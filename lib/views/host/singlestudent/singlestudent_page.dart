@@ -70,6 +70,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
           ),
           color: Colors.white,
         ),
+
         child: Stack().fullScreenLoader(
           state: isLoading,
           loadingWidget: fullScreenLoader(),
