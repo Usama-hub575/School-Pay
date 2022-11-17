@@ -1,4 +1,4 @@
-import 'dart:io';
+ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,6 +46,16 @@ class _GetAssistanceState extends State<GetAssistance> {
                             height: 44.h,
                             width: 44.w,
                             decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 2.0,
+                                  offset: Offset(
+                                    3.0, // Move to right 10  horizontally
+                                    3.0, // Move to bottom 10 Vertically
+                                  ),
+                                ),
+                              ],
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(12.r),
                             ),

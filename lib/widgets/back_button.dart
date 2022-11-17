@@ -21,6 +21,16 @@ class _AppBarBackButtonState extends State<AppBarBackButton> {
         height: 44.h,
         width: 44.w,
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              blurRadius: 1.0,
+              offset: Offset(
+                1.3, // Move to right 10  horizontally
+                1.3, // Move to bottom 10 Vertically
+              ),
+            ),
+          ],
           color: widget.buttonColor,
           borderRadius: BorderRadius.circular(
             12.r,

@@ -133,7 +133,7 @@ class _DashboardPageState extends State<DashboardPage> {
         body: Column(
           children: [
             Container(
-              height: sizes.heightRatio * 150,
+              height: sizes.heightRatio * 154,
               decoration: BoxDecoration(
                 color: PayNestTheme.primaryColor,
                 borderRadius: BorderRadius.vertical(
@@ -145,102 +145,84 @@ class _DashboardPageState extends State<DashboardPage> {
               child: SafeArea(
                 child: Padding(
                   padding: EdgeInsets.only(left: 25.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      verticalSpacer(24),
-                      Image.asset(
-                        welcomeRegisterLogo,
-                        width: sizes.widthRatio * 70,
-                        color: PayNestTheme.colorWhite,
-                      ),
-                      verticalSpacer(8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Welcome Back",
-                                style: PayNestTheme.small_2_12black.copyWith(
-                                  fontSize: sizes.fontRatio * 14,
-                                  fontFamily: 'montserratRegular',
-                                  color: PayNestTheme.colorWhite,
-                                ),
-                              ),
-                              Text(
-                                fullName,
-                                style: PayNestTheme.subtitle16white.copyWith(
-                                  fontSize: sizes.fontRatio * 18,
-                                  fontFamily: 'montserratSemiBold',
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              // Container(
-                              //   height: 44.h,
-                              //   width: 44.w,
-                              //   decoration: BoxDecoration(
-                              //     color: Colors.white,
-                              //     borderRadius: BorderRadius.circular(
-                              //       12,
-                              //     ),
-                              //   ),
-                              //   child: IconButton(
-                              //     onPressed: () {
-                              //       Navigator.of(context).push(
-                              //         MaterialPageRoute(
-                              //           builder: (context) =>
-                              //               NotificationPage(),
-                              //         ),
-                              //       );
-                              //     },
-                              //     icon: Lottie.asset(
-                              //       notificationAnimation,
-                              //       repeat: true,
-                              //     ),
-                              //   ),
-                              // ),
-                              SizedBox(
-                                width: 12.w,
-                              ),
-                              Container(
-                                height: 44.h,
-                                width: 44.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(12.r),
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            verticalSpacer(24),
+                            Image.asset(
+                              welcomeRegisterLogo,
+                              width: sizes.widthRatio * 70,
+                              color: PayNestTheme.colorWhite,
+                            ),
+                            verticalSpacer(0.5),
+                            Container(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Welcome Back",
+                                    style:
+                                        PayNestTheme.small_2_12black.copyWith(
+                                      fontSize: sizes.fontRatio * 14,
+                                      fontFamily: 'montserratRegular',
+                                      color: PayNestTheme.colorWhite,
+                                    ),
                                   ),
-                                ),
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => GetAssistance(),
-                                      ),
-                                    );
-                                  },
-                                  icon: Lottie.asset(
-                                    supportAnimation,
-                                    repeat: true,
+                                  Text(
+                                    fullName,
+                                    style:
+                                        PayNestTheme.subtitle16white.copyWith(
+                                      fontSize: sizes.fontRatio * 18,
+                                      fontFamily: 'montserratSemiBold',
+                                    ),
                                   ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            verticalSpacer(36),
+                            Container(
+                              height: 46.h,
+                              width: 62.w,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.horizontal(
+                                  left: Radius.circular(12.r),
                                 ),
                               ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => GetAssistance(),
+                                    ),
+                                  );
+                                },
+                                icon: Lottie.asset(
+                                  supportAnimation,
+                                  repeat: true,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-            verticalSpacer(12),
+            verticalSpacer(9),
             Container(
               padding: EdgeInsets.symmetric(
                 horizontal: horizontalValue(16),

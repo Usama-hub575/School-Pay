@@ -80,7 +80,6 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
   void getCountries() {
     registerController.hitGetCountriesAPI();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
