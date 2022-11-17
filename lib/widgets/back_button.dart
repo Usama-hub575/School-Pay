@@ -18,8 +18,8 @@ class _AppBarBackButtonState extends State<AppBarBackButton> {
         right: 25.w,
       ),
       child: Container(
-        height: 44.h,
-        width: 44.w,
+        height: 46.h,
+        width: 46.w,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(

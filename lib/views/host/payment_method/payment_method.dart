@@ -67,12 +67,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
           ),
           color: Colors.white,
         ),
-        child: SafeArea(
-          child: Stack().fullScreenLoader(
-            state: isLoading,
-            loadingWidget: fullScreenLoader(),
-            child: getBody(),
-          ),
+        child: Stack().fullScreenLoader(
+          state: isLoading,
+          loadingWidget: fullScreenLoader(),
+          child: getBody(),
         ),
       ),
     );
@@ -104,7 +102,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         iconColor: PayNestTheme.primaryColor,
                         buttonColor: PayNestTheme.colorWhite,
                       ),
-                      Spacer(),
+                      horizontalSpacer(40),
                       Text(
                         paymentsMethod,
                         style: PayNestTheme.title20white.copyWith(

@@ -75,7 +75,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                         iconColor: PayNestTheme.primaryColor,
                         buttonColor: PayNestTheme.colorWhite,
                       ),
-                      Spacer(),
+                      horizontalSpacer(65),
                       Text(
                         payments,
                         style: PayNestTheme.title20white.copyWith(
