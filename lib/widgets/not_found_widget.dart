@@ -28,6 +28,16 @@ class NoDataFound extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black54,
+                      blurRadius: 1.0,
+                      offset: Offset(
+                        1.2, // Move to right 10  horizontally
+                        1.2, // Move to bottom 10 Vertically
+                      ),
+                    ),
+                  ],
                   color: PayNestTheme.primaryColor,
                   borderRadius: BorderRadius.circular(15.r),
                 ),

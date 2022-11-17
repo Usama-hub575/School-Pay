@@ -46,8 +46,8 @@ class _RegisterPageState extends State<RegisterPage> {
             Row(
               children: [
                 AppBarBackButton(
-                  iconColor: PayNestTheme.colorWhite, buttonColor: PayNestTheme.primaryColor,
-
+                  iconColor: PayNestTheme.colorWhite,
+                  buttonColor: PayNestTheme.primaryColor,
                 ),
                 Spacer(),
                 Image.asset(
@@ -121,7 +121,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                       '/DashboardPage',
                                       (Route<dynamic> route) => false);
                                 } else {
-                                  showToast(messege: userController.isFailed.toString(), context: context, color: PayNestTheme.red);
+                                  showToast(
+                                      messege:
+                                          userController.isFailed.toString(),
+                                      context: context,
+                                      color: PayNestTheme.red);
                                 }
                               },
                             );
