@@ -133,20 +133,15 @@ class _HostPageState extends State<HostPage> {
                     ? selectedIcons[index]
                     : unSelectedIcons[index],
               ),
-              const SizedBox(
-                height: 8,
-              ),
+              verticalSpacer(8),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
                   "${names[index]}",
                   maxLines: 1,
-                  style: TextStyle(
-                    color: Colors.white,
+                  style: PayNestTheme.navbar12.copyWith(
                     fontSize: sizes.fontRatio * 8,
-                    fontFamily: 'montserratMedium',
-
-                  ),
+                  )
                 ),
               )
             ],
