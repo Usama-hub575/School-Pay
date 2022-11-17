@@ -92,6 +92,7 @@ class _HostPageState extends State<HostPage> {
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
+      extendBody: true,
       key: _scaffoldKey,
       body: WillPopScope(
         onWillPop: () async => false,
