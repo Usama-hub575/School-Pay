@@ -35,16 +35,19 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
   var sorted = [];
   late DateFormat dateFormat;
   late int loaderValue;
-  bool isLoading = true;
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
+    getValue();
+    fetchTransactions();
+
 
     Future.delayed(Duration.zero, () {
       initializeDateFormatting();
       dateFormat = DateFormat.yMMMMd('en_GB');
-      fetchTransactions();
+
     });
   }
 
@@ -52,20 +55,27 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
     await transactionListController.hitTransaction(
       userController.userResData.value.parent!.id.toString(),
     );
+    isLoading = false;
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  getValue() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    loaderValue = (preferences.getInt('showLoader'))!;
-    if (loaderValue == 0) {
+    loaderValue = (preferences.getInt('showLoader'))?? 0;
+    if (loaderValue != 1) {
       isLoading = true;
       if (mounted) {
         setState(() {});
       }
-    } else if(loaderValue==1){
-      if (mounted) {
-        setState(() {
-          isLoading = false;
-        });
+  }
+      else {
+        // isLoading = false;
+        // if (mounted) {
+        //   setState(() {});
+        // }
       }
-    }
   }
 
   void storeLoaderVal() async {
@@ -75,12 +85,15 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
 
   @override
   Widget build(BuildContext context) {
+    // storeLoaderVal();
     if (isLoading) {
       storeLoaderVal();
+      fetchTransactions();
       return Center(
         child: CircularProgressIndicator(),
       );
     }
+
     return Scaffold(
       body: Column(
         children: [
