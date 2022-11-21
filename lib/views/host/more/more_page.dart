@@ -336,6 +336,7 @@ class _MorePageState extends State<MorePage> {
                         launch(
                           'https://paynest.ae/privacy-policy.html',
                         );
+
                         setState(() {});
                       },
                     ),
