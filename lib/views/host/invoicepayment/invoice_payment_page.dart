@@ -308,14 +308,14 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                     ),
                     verticalSpacer(4),
                     Text(
-                      'AED ${DateFormat("yyyy-MM-dd").format(widget.singleStudentModel.student!.dueDate)}',
+                      '${DateFormat("yyyy-MM-dd").format(widget.singleStudentModel.student!.dueDate)}',
                       style: PayNestTheme.title_3_16blackbold.copyWith(
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.lightBlack,
                         fontFamily: 'montserratSemiBold',
                       ),
                     ),
-                    verticalSpacer(16),
+                    verticalSpacer(8),
                     Container(
                       width: 1.sw,
                       height: 1.h,

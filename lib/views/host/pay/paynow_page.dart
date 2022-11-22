@@ -1358,17 +1358,19 @@ class _PayNowPageState extends State<PayNowPage> {
                           : icFemale,
                     ),
                   ),
-
                   verticalSpacer(8),
-
-                  Text(
-                    '${studentElement.student?.firstName} \n  ${(studentElement.student?.lastName != '-' ? studentElement.student?.lastName : '')}',
-                    textAlign: TextAlign.center,
-                    style: PayNestTheme.title_2_16primaryColor.copyWith(
-                      fontSize: sizes.fontRatio * 13,
-                      color: index % 2 == 0
-                          ? PayNestTheme.colorWhite
-                          : PayNestTheme.black,
+                  Container(
+                    width: sizes.widthRatio * 60,
+                    child: Text(
+                      '${studentElement.student?.firstName} \n  ${(studentElement.student?.lastName != '-' ? studentElement.student?.lastName : '')}',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: PayNestTheme.title_2_16primaryColor.copyWith(
+                        fontSize: sizes.fontRatio * 13,
+                        color: index % 2 == 0
+                            ? PayNestTheme.colorWhite
+                            : PayNestTheme.black,
+                      ),
                     ),
                   ),
                   Spacer(),
