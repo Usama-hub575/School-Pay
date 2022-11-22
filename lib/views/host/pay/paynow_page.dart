@@ -41,7 +41,7 @@ class PayNowPage extends StatefulWidget {
 class _PayNowPageState extends State<PayNowPage> {
   final MyStudentController studentController = Get.find<MyStudentController>();
   final PayNowController payNowController = Get.put(PayNowController());
-  final CreateTransactionRespController ctrcController =
+  final CreateTransactionRespController ctrController =
       Get.put(CreateTransactionRespController());
   final SetBankResponseController sbrController =
       Get.put(SetBankResponseController());
@@ -59,7 +59,7 @@ class _PayNowPageState extends State<PayNowPage> {
   @override
   void initState() {
     super.initState();
-    studentController.hitMyStudents(null);
+    //studentController.hitMyStudents(null);
     studentElement = StudentElement.empty();
     studentController.resetStudentCard();
     if (studentController.myStudentData.value.status &&
@@ -88,17 +88,17 @@ class _PayNowPageState extends State<PayNowPage> {
       return;
     }
 
-    studentController.studentData.value.getStudent?.rows?.forEach((student) {
-      if (student.firstName!.toUpperCase().contains(text.toUpperCase()) ||
-          student.lastName!.toUpperCase().contains(text.toUpperCase())) {
-        _searchResult.add(student);
+    studentController.myStudentData.value.students!.forEach((studentElement) {
+      if (studentElement.student!.firstName.toUpperCase().contains(text.toUpperCase()) ||
+          studentElement.student!.lastName.toUpperCase().contains(text.toUpperCase())) {
+        _searchResult.add(studentElement);
       }
     });
 
     setState(() {});
   }
 
-  List<StudentListRowData> _searchResult = [];
+  List<StudentElement> _searchResult = [];
 
   @override
   Widget build(BuildContext context) {
@@ -1202,7 +1202,7 @@ class _PayNowPageState extends State<PayNowPage> {
       setState(() {});
       if (result != null && result['ResponseMsg'] == 'success') {
         var amount = payAbleAmount;
-        bool status = await ctrcController.hitCreateTransaction(
+        bool status = await ctrController.hitCreateTransaction(
           schoolIDController.text,
           parentIDController.text,
           studentIDController.text,

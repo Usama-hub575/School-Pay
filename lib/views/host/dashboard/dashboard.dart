@@ -196,6 +196,17 @@ class _DashboardPageState extends State<DashboardPage> {
                               width: 62.w,
                               decoration: BoxDecoration(
                                 color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black54.withOpacity(0.3),
+                                    spreadRadius: 0,
+                                    blurRadius: 8,
+                                    offset: Offset(
+                                      1.3, // Move to right 10  horizontally
+                                      1.3, // Move to bottom 10 Vertically
+                                    ),
+                                  ),
+                                ],
                                 borderRadius: BorderRadius.horizontal(
                                   left: Radius.circular(12.r),
                                 ),
