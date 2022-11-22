@@ -189,10 +189,11 @@ class _ViewProfileState extends State<ViewProfile> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.3),
-                                    blurRadius: 16,
+                                    spreadRadius: 0,
+                                    blurRadius: 18,
                                     offset: Offset(
-                                      0,
-                                      0,
+                                      1,
+                                      1,
                                     ),
                                   ),
                                 ],

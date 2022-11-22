@@ -14,6 +14,7 @@ import 'package:paynest_flutter_app/views/host/transaction/widgets/single_transa
 import 'package:paynest_flutter_app/views/host/transactiondetails/transactiondetails_page.dart';
 import 'package:paynest_flutter_app/widgets/not_found_widget.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../model/transactionlist_resp_model.dart';
 import '../../../production_main.dart';
@@ -33,23 +34,60 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
   final UserController userController = Get.find<UserController>();
   var sorted = [];
   late DateFormat dateFormat;
+  late int loaderValue;
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    initializeDateFormatting();
-    dateFormat = DateFormat.yMMMMd('en_GB');
+    getValue();
     fetchTransactions();
+
+
+    Future.delayed(Duration.zero, () {
+      initializeDateFormatting();
+      dateFormat = DateFormat.yMMMMd('en_GB');
+
+    });
   }
 
   fetchTransactions() async {
     await transactionListController.hitTransaction(
       userController.userResData.value.parent!.id.toString(),
     );
+
+    isLoading = false;
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  getValue() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    loaderValue = (preferences.getInt('showLoader'))?? 0;
+    if (loaderValue != 1) {
+      isLoading = true;
+      if (mounted) {
+        setState(() {});
+      }
+  }
+  }
+
+  void storeLoaderVal() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setInt('showLoader', 1);
   }
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      storeLoaderVal();
+      fetchTransactions();
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
     return Scaffold(
       body: Column(
         children: [
@@ -105,10 +143,9 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                           transactions,
                           textAlign: TextAlign.center,
                           style: PayNestTheme.title20white.copyWith(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'montserratBold',
-                            fontSize: sizes.fontRatio * 18
-                          ),
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'montserratBold',
+                              fontSize: sizes.fontRatio * 18),
                         ),
                       ),
                     ],
@@ -119,7 +156,8 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
           ),
           Obx(
             () => !transactionListController.isLoading.value
-                ? transactionListController.transactionListData.value.transactions!.rows!.isNotEmpty
+                ? transactionListController.transactionListData.value
+                        .transactions!.rows!.isNotEmpty
                     ? Expanded(
                         child: ListView.builder(
                           shrinkWrap: true,
@@ -173,7 +211,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                         ),
                       )
                     : Expanded(
-                      child: Container(
+                        child: Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: horizontalValue(16),
                           ),
@@ -227,7 +265,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                             ],
                           ),
                         ),
-                    )
+                      )
                 : SizedBox(),
           ),
         ],
