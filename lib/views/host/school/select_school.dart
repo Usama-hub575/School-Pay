@@ -133,9 +133,9 @@ class _SelectSchoolState extends State<SelectSchool> {
                           color: PayNestTheme.primaryColor,
                         ),
                         hintText: searchSchool,
-                        hintStyle: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 18.sp,
+                        hintStyle: PayNestTheme.small_2_12textGrey.copyWith(
+                          fontSize: sizes.fontRatio * 13,
+                          color: PayNestTheme.textGrey.withOpacity(0.3),
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
