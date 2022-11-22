@@ -183,8 +183,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.3),
-                                    spreadRadius: 2,
-                                    blurRadius: 3,
+                                    spreadRadius: 0,
+                                    blurRadius: 20,
                                     offset: Offset(
                                       1,
                                       1,
