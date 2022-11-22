@@ -1358,7 +1358,9 @@ class _PayNowPageState extends State<PayNowPage> {
                           : icFemale,
                     ),
                   ),
+
                   verticalSpacer(8),
+
                   Text(
                     '${studentElement.student?.firstName} \n  ${(studentElement.student?.lastName != '-' ? studentElement.student?.lastName : '')}',
                     textAlign: TextAlign.center,

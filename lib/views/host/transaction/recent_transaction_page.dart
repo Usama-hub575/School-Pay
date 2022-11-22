@@ -70,12 +70,6 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
         setState(() {});
       }
   }
-      else {
-        // isLoading = false;
-        // if (mounted) {
-        //   setState(() {});
-        // }
-      }
   }
 
   void storeLoaderVal() async {
@@ -85,7 +79,6 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
 
   @override
   Widget build(BuildContext context) {
-    // storeLoaderVal();
     if (isLoading) {
       storeLoaderVal();
       fetchTransactions();
