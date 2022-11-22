@@ -55,6 +55,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
     await transactionListController.hitTransaction(
       userController.userResData.value.parent!.id.toString(),
     );
+
     isLoading = false;
     if (mounted) {
       setState(() {});
