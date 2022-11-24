@@ -13,7 +13,6 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/assistance/get_assistance.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/recent_transaction.dart';
-import 'package:paynest_flutter_app/views/host/dashboard/widgets/shimmer_card.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/student_card.dart';
 import 'package:paynest_flutter_app/views/host/pendingtask/pending_task.dart';
 import 'package:paynest_flutter_app/views/host/singlestudent/singlestudent_page.dart';
