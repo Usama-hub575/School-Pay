@@ -14,6 +14,7 @@ import 'package:paynest_flutter_app/views/host/assistance/get_assistance.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/recent_transaction.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/student_card.dart';
+import 'package:paynest_flutter_app/views/host/dashboard/widgets/student_card_shimmer.dart';
 import 'package:paynest_flutter_app/views/host/pendingtask/pending_task.dart';
 import 'package:paynest_flutter_app/views/host/singlestudent/singlestudent_page.dart';
 import 'package:paynest_flutter_app/views/host/student/student_page.dart';
@@ -240,16 +241,16 @@ class _DashboardPageState extends State<DashboardPage> {
                       Row(
                         children: [
                           FadeShimmer(
-                            width: horizontalValue(55),
-                            height: verticalValue(20),
+                            width: sizes.widthRatio * 55,
+                            height: sizes.heightRatio * 20,
                             baseColor: Color(0xFFEBEBF4),
                             highlightColor: Color(0xFFF4F4F4),
                             radius: 10,
                           ),
                           Spacer(),
                           FadeShimmer(
-                            width: horizontalValue(55),
-                            height: verticalValue(20),
+                            width: sizes.widthRatio * 55,
+                            height: sizes.heightRatio * 20,
                             baseColor: Color(0xFFEBEBF4),
                             highlightColor: Color(0xFFF4F4F4),
                             radius: 10,
@@ -301,12 +302,14 @@ class _DashboardPageState extends State<DashboardPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     isLoading
-                        ? FadeShimmer(
-                            width: sizes.widthRatio * 100,
-                            height: sizes.heightRatio * 150,
-                            baseColor: Color(0xFFEBEBF4),
-                            highlightColor: Color(0xFFF4F4F4),
-                            radius: 18,
+                        ? Row(
+                            children: [
+                              StudentCardShimmer(),
+                              horizontalSpacer(10),
+                              StudentCardShimmer(),
+                              horizontalSpacer(10),
+                              StudentCardShimmer(),
+                            ],
                           )
                         : Obx(
                             () => myStudentController
@@ -408,8 +411,8 @@ class _DashboardPageState extends State<DashboardPage> {
                       children: [
                         isLoading
                             ? FadeShimmer(
-                                width: horizontalValue(55),
-                                height: verticalValue(20),
+                                width: sizes.widthRatio * 55,
+                                height: sizes.heightRatio * 20,
                                 baseColor: Color(0xFFEBEBF4),
                                 highlightColor: Color(0xFFF4F4F4),
                                 radius: 10,
@@ -423,8 +426,8 @@ class _DashboardPageState extends State<DashboardPage> {
                               ),
                         isLoading
                             ? FadeShimmer(
-                                width: horizontalValue(55),
-                                height: verticalValue(20),
+                                width: sizes.widthRatio * 55,
+                                height: sizes.heightRatio * 20,
                                 baseColor: Color(0xFFEBEBF4),
                                 highlightColor: Color(0xFFF4F4F4),
                                 radius: 10,
@@ -562,8 +565,8 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: [
                           isLoading
                               ? FadeShimmer(
-                                  width: horizontalValue(150),
-                                  height: verticalValue(20),
+                                  width: sizes.widthRatio * 150,
+                                  height: sizes.heightRatio * 20,
                                   baseColor: Color(0xFFEBEBF4),
                                   highlightColor: Color(0xFFF4F4F4),
                                   radius: 10,
@@ -577,8 +580,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ),
                           isLoading
                               ? FadeShimmer(
-                                  width: horizontalValue(55),
-                                  height: verticalValue(20),
+                                  width: sizes.widthRatio * 55,
+                                  height: sizes.heightRatio * 20,
                                   baseColor: Color(0xFFEBEBF4),
                                   highlightColor: Color(0xFFF4F4F4),
                                   radius: 10,
@@ -600,13 +603,13 @@ class _DashboardPageState extends State<DashboardPage> {
                     verticalSpacer(8),
                     isLoading
                         ? FadeShimmer(
-                      width: double.infinity,
-                      height: sizes.heightRatio * 150,
-                      baseColor: Color(0xFFEBEBF4),
-                      highlightColor: Color(0xFFF4F4F4),
-                      radius: 18,
-                    ) :
-                    transactionListController
+                            width: double.infinity,
+                            height: sizes.heightRatio * 150,
+                            baseColor: Color(0xFFEBEBF4),
+                            highlightColor: Color(0xFFF4F4F4),
+                            radius: 18,
+                          )
+                        : transactionListController
                                     .transactionListData.value.transactions !=
                                 null
                             ? RecentTransactions(
@@ -616,7 +619,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   onTap(row: transactionRow);
                                 },
                               )
-                        : const SizedBox.shrink(),
+                            : const SizedBox.shrink(),
                   ],
                 ),
               ),
