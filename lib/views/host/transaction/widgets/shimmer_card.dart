@@ -4,7 +4,7 @@ import '../../../../res/res.dart';
 import '../../../../widgets/spacer.dart';
 
 class TransactionShimmerCard extends StatelessWidget {
-  const TransactionShimmerCard({Key? key}) : super(key: key);
+  const   TransactionShimmerCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

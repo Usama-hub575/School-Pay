@@ -1,3 +1,4 @@
+import 'package:fade_shimmer/fade_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -54,183 +55,260 @@ class _SelectSchoolState extends State<SelectSchool> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(
-        () => !schoolController.isLoading.value
-            ? Column(
+        body: Column(
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(
+            vertical: verticalValue(16),
+          ),
+          decoration: BoxDecoration(
+            color: PayNestTheme.primaryColor,
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(24.r),
+            ),
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontalValue(16),
+                vertical: verticalValue(16),
+              ),
+              child: Column(
                 children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      vertical: verticalValue(16),
-                    ),
-                    decoration: BoxDecoration(
-                      color: PayNestTheme.primaryColor,
-                      borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(24.r),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      AppBarBackButton(
+                        iconColor: PayNestTheme.primaryColor,
+                        buttonColor: PayNestTheme.colorWhite,
+                      ),
+                      Text(
+                        selectSchool,
+                        style: PayNestTheme.title20white.copyWith(
+                          fontSize: sizes.fontRatio * 18,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 44.h,
+                        width: 44.w,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Obx(() => !schoolController.isLoading.value
+            ? Expanded(
+                child: Column(
+                  children: [
+                    verticalSpacer(16),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(16),
+                      ),
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 10,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: TextFormField(
+                        onTap: () {
+                          onSearchTextChanged('');
+                        },
+                        controller: ssController,
+                        onChanged: onSearchTextChanged,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: horizontalValue(16),
+                            vertical: verticalValue(16),
+                          ),
+                          filled: true,
+                          fillColor: PayNestTheme.colorWhite,
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: PayNestTheme.primaryColor,
+                          ),
+                          hintText: searchSchool,
+                          hintStyle: PayNestTheme.small_2_12textGrey.copyWith(
+                            fontSize: sizes.fontRatio * 13,
+                            color: PayNestTheme.textGrey.withOpacity(0.3),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                            borderSide: BorderSide(
+                              color: PayNestTheme.primaryColor,
+                              width: 1.w,
+                            ),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                            borderSide: BorderSide(
+                              color: PayNestTheme.primaryColor,
+                              width: 1.w,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                            borderSide: BorderSide(
+                              color: PayNestTheme.primaryColor,
+                              width: 1.w,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                            borderSide: BorderSide(
+                              color: PayNestTheme.primaryColor,
+                              width: 1.w,
+                            ),
+                          ),
+                        ),
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                    child: SafeArea(
-                      child: Padding(
+                    _searchResult.isNotEmpty || ssController.text.isNotEmpty
+                        ? Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: _searchResult.length,
+                              physics: BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    _singleCard(
+                                      log: schoolController
+                                          .schoolResList.value.log![index],
+                                    ),
+                                    verticalSpacer(8),
+                                    Container(
+                                      margin: EdgeInsets.symmetric(
+                                        horizontal: horizontalValue(20),
+                                      ),
+                                      width: 1.sw,
+                                      height: 1,
+                                      color: PayNestTheme.textGrey,
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          )
+                        : Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: schoolController
+                                  .schoolResList.value.log!.length,
+                              physics: BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    _singleCard(
+                                      log: schoolController
+                                          .schoolResList.value.log![index],
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.symmetric(
+                                        horizontal: horizontalValue(20),
+                                      ),
+                                      width: 1.sw,
+                                      height: 1,
+                                      color: PayNestTheme.textGrey,
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                  ],
+                ),
+              )
+            : Expanded(
+                child: Column(
+                  children: [
+                    verticalSpacer(16),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(16),
+                      ),
+                      child: FadeShimmer(
+                        width: double.infinity,
+                        height: sizes.heightRatio * 50,
+                        // fadeTheme: FadeTheme.dark,
+                        baseColor: Color(0xFFEBEBF4),
+                        highlightColor: Color(0xFFF4F4F4),
+                        radius: 16,
+                      ),
+                    ),
+                    verticalSpacer(12),
+                    Expanded(
+                      child: ListView.separated(
+                        shrinkWrap: true,
                         padding: EdgeInsets.symmetric(
                           horizontal: horizontalValue(16),
-                          vertical: verticalValue(16),
+                          vertical: verticalValue(12),
                         ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                AppBarBackButton(
-                                  iconColor: PayNestTheme.primaryColor,
-                                  buttonColor: PayNestTheme.colorWhite,
-                                ),
-                                Text(
-                                  selectSchool,
-                                  style: PayNestTheme.title20white.copyWith(
-                                    fontSize: sizes.fontRatio * 18,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 44.h,
-                                  width: 44.w,
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  verticalSpacer(16),
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: horizontalValue(16),
-                    ),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 10,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: TextFormField(
-                      onTap: () {
-                        onSearchTextChanged('');
-                      },
-                      controller: ssController,
-                      onChanged: onSearchTextChanged,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: horizontalValue(16),
-                          vertical: verticalValue(16),
-                        ),
-                        filled: true,
-                        fillColor: PayNestTheme.colorWhite,
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: PayNestTheme.primaryColor,
-                        ),
-                        hintText: searchSchool,
-                        hintStyle: PayNestTheme.small_2_12textGrey.copyWith(
-                          fontSize: sizes.fontRatio * 13,
-                          color: PayNestTheme.textGrey.withOpacity(0.3),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                          borderSide: BorderSide(
-                            color: PayNestTheme.primaryColor,
-                            width: 1.w,
-                          ),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                          borderSide: BorderSide(
-                            color: PayNestTheme.primaryColor,
-                            width: 1.w,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                          borderSide: BorderSide(
-                            color: PayNestTheme.primaryColor,
-                            width: 1.w,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.r),
-                          borderSide: BorderSide(
-                            color: PayNestTheme.primaryColor,
-                            width: 1.w,
-                          ),
-                        ),
-                      ),
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  _searchResult.isNotEmpty || ssController.text.isNotEmpty
-                      ? Expanded(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: _searchResult.length,
-                            physics: BouncingScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return Column(
+                        scrollDirection: Axis.vertical,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: 8,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              FadeShimmer.round(
+                                size: sizes.heightRatio * 50,
+                                baseColor: Color(0xFFEBEBF4),
+                                highlightColor: Color(0xFFF4F4F4),
+                              ),
+                              horizontalSpacer(10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  _singleCard(
-                                    log: schoolController
-                                        .schoolResList.value.log![index],
+                                  verticalSpacer(10),
+                                  FadeShimmer(
+                                    width: sizes.widthRatio * 250,
+                                    height: sizes.heightRatio * 20,
+                                    baseColor: Color(0xFFEBEBF4),
+                                    highlightColor: Color(0xFFF4F4F4),
+                                    radius: 8,
                                   ),
                                   verticalSpacer(8),
-                                  Container(
-                                    margin: EdgeInsets.symmetric(
-                                      horizontal: horizontalValue(20),
-                                    ),
-                                    width: 1.sw,
-                                    height: 1,
-                                    color: PayNestTheme.textGrey,
+                                  FadeShimmer(
+                                    width: sizes.widthRatio * 70,
+                                    height: sizes.heightRatio * 20,
+                                    baseColor: Color(0xFFEBEBF4),
+                                    highlightColor: Color(0xFFF4F4F4),
+                                    radius: 10,
                                   ),
+                                  verticalSpacer(6),
                                 ],
-                              );
-                            },
-                          ),
-                        )
-                      : Expanded(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: schoolController
-                                .schoolResList.value.log!.length,
-                            physics: BouncingScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  _singleCard(
-                                    log: schoolController
-                                        .schoolResList.value.log![index],
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.symmetric(
-                                      horizontal: horizontalValue(20),
-                                    ),
-                                    width: 1.sw,
-                                    height: 1,
-                                    color: PayNestTheme.textGrey,
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                ],
-              )
-            : Center(
-                child: CircularProgressIndicator(),
-              ),
-      ),
-    );
+                              )
+                            ],
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return FadeShimmer(
+                            height: 1,
+                            width: sizes.widthRatio * 250,
+                            baseColor: Color(0xFFEBEBF4),
+                            highlightColor: Color(0xFFF4F4F4),
+                            // radius: 10,
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              )),
+      ],
+    ));
   }
 
   Widget _singleCard({required Log log}) {
