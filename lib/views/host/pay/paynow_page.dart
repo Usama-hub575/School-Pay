@@ -1252,7 +1252,7 @@ class _PayNowPageState extends State<PayNowPage> {
             () {
               showToast(
                   context: context,
-                  messege: 'Something went wrong with the transaction',
+                  messege: 'Something Went Wrong With The Transaction',
                   color: PayNestTheme.red);
             },
           );
@@ -1265,7 +1265,7 @@ class _PayNowPageState extends State<PayNowPage> {
           () {
             showToast(
               context: context,
-              messege: 'Something went wrong',
+              messege: 'Something Went Wrong',
               color: PayNestTheme.red,
             );
           },
