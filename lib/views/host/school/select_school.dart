@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
+import 'package:get/get.dart';  
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/school_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/selectedschool_to_addstudent.dart';
@@ -40,7 +39,7 @@ class _SelectSchoolState extends State<SelectSchool> {
     }
 
     schoolController.schoolResList.value.log!.forEach((schoolDetail) {
-      if (schoolDetail.name.toUpperCase().contains(text.toUpperCase()) ||
+      if (schoolDetail.name.toUpperCase().contains(text.toUpperCase())||
           schoolDetail.address.toUpperCase().contains(text.toUpperCase())) {
         _searchResult.add(schoolDetail);
       }
@@ -121,6 +120,12 @@ class _SelectSchoolState extends State<SelectSchool> {
                       },
                       controller: ssController,
                       onChanged: onSearchTextChanged,
+                      style: PayNestTheme
+                          .title_2_16primaryColor
+                          .copyWith(
+                        fontSize: sizes.fontRatio * 14,
+                        color: PayNestTheme.black,
+                      ),
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(
                           horizontal: horizontalValue(16),
@@ -166,9 +171,6 @@ class _SelectSchoolState extends State<SelectSchool> {
                           ),
                         ),
                       ),
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
                     ),
                   ),
                   _searchResult.isNotEmpty || ssController.text.isNotEmpty
@@ -181,8 +183,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                               return Column(
                                 children: [
                                   _singleCard(
-                                    log: schoolController
-                                        .schoolResList.value.log![index],
+                                    log:_searchResult[index],
                                   ),
                                   verticalSpacer(8),
                                   Container(
