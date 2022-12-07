@@ -9,6 +9,7 @@ import 'package:paynest_flutter_app/views/host/host_page.dart';
 import 'package:paynest_flutter_app/views/registration_screen/register_page.dart';
 import 'package:paynest_flutter_app/views/signin_page.dart';
 import 'package:paynest_flutter_app/views/welcome_page.dart';
+
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -22,12 +23,11 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(375, 812),
-      builder: (BuildContext context, child)=> MaterialApp(
+      builder: (BuildContext context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -39,9 +39,10 @@ class _MyAppState extends State<MyApp> {
               page = InitializerScreen();
               break;
             case '/Welcome':
-              break;case '/Welcome':
-            page = WelcomePage();
-            break;
+              break;
+            case '/Welcome':
+              page = WelcomePage();
+              break;
             case '/SignInPage':
               page = SignInPage();
               break;

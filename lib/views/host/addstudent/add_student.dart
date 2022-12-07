@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -182,7 +181,17 @@ class _AddStudentState extends State<AddStudent> {
                                   height: 44.h,
                                   width: 44.w,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black54,
+                                        blurRadius: 1.0,
+                                        offset: Offset(
+                                          1.3, // Move to right 10  horizontally
+                                          1.3, // Move to bottom 10 Vertically
+                                        ),
+                                      ),
+                                    ],
+                                    color: PayNestTheme.colorWhite,
                                     borderRadius: BorderRadius.circular(
                                       12.r,
                                     ),
@@ -400,6 +409,10 @@ class _AddStudentState extends State<AddStudent> {
                                       color: PayNestTheme.primaryColor,
                                     ),
                                     hintText: searchStudent,
+                                    hintStyle: PayNestTheme.small_2_12textGrey.copyWith(
+                                  fontSize: sizes.fontRatio * 13,
+                                    color: PayNestTheme.textGrey.withOpacity(0.3),
+                                  ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12.r),
                                     ),
@@ -805,7 +818,7 @@ class _AddStudentState extends State<AddStudent> {
 
                             showToast(
                                 context: context,
-                                messege:  'Search can not be empty!',
+                                messege:  'Search Can Not Be Empty!',
                                 color: PayNestTheme.red);
                           }
                           if (searchController.text.isNotEmpty) {

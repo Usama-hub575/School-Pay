@@ -1,3 +1,4 @@
+import 'package:fade_shimmer/fade_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -227,11 +228,85 @@ class _SelectSchoolState extends State<SelectSchool> {
                         ),
                 ],
               )
-            : Center(
-                child: CircularProgressIndicator(),
-              ),
-      ),
-    );
+            : Expanded(
+                child: Column(
+                  children: [
+                    verticalSpacer(16),
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: horizontalValue(16),
+                      ),
+                      child: FadeShimmer(
+                        width: double.infinity,
+                        height: sizes.heightRatio * 50,
+                        // fadeTheme: FadeTheme.dark,
+                        baseColor: Color(0xFFEBEBF4),
+                        highlightColor: Color(0xFFF4F4F4),
+                        radius: 16,
+                      ),
+                    ),
+                    verticalSpacer(12),
+                    Expanded(
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: horizontalValue(16),
+                          vertical: verticalValue(12),
+                        ),
+                        scrollDirection: Axis.vertical,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: 8,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              FadeShimmer.round(
+                                size: sizes.heightRatio * 50,
+                                baseColor: Color(0xFFEBEBF4),
+                                highlightColor: Color(0xFFF4F4F4),
+                              ),
+                              horizontalSpacer(10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  verticalSpacer(10),
+                                  FadeShimmer(
+                                    width: sizes.widthRatio * 250,
+                                    height: sizes.heightRatio * 20,
+                                    baseColor: Color(0xFFEBEBF4),
+                                    highlightColor: Color(0xFFF4F4F4),
+                                    radius: 8,
+                                  ),
+                                  verticalSpacer(8),
+                                  FadeShimmer(
+                                    width: sizes.widthRatio * 70,
+                                    height: sizes.heightRatio * 20,
+                                    baseColor: Color(0xFFEBEBF4),
+                                    highlightColor: Color(0xFFF4F4F4),
+                                    radius: 10,
+                                  ),
+                                  verticalSpacer(6),
+                                ],
+                              )
+                            ],
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return FadeShimmer(
+                            height: 1,
+                            width: sizes.widthRatio * 250,
+                            baseColor: Color(0xFFEBEBF4),
+                            highlightColor: Color(0xFFF4F4F4),
+                            // radius: 10,
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              )),
+      ],
+    ));
   }
 
   Widget _singleCard({required Log log}) {

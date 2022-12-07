@@ -92,8 +92,8 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 7,
+                    spreadRadius: 0,
+                    blurRadius: 9,
                     offset: Offset(0, 2),
                   ),
                 ],

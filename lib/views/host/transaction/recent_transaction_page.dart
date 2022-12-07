@@ -1,3 +1,4 @@
+import 'package:fade_shimmer/fade_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,12 +13,11 @@ import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/transaction/widgets/single_transaction_card.dart';
 import 'package:paynest_flutter_app/views/host/transactiondetails/transactiondetails_page.dart';
-import 'package:paynest_flutter_app/widgets/not_found_widget.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../model/transactionlist_resp_model.dart';
 import '../../../production_main.dart';
+import 'widgets/shimmer_card.dart';
 
 class RecentTransactionPage extends StatefulWidget {
   final String whichStack;
@@ -35,7 +35,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
   var sorted = [];
   late DateFormat dateFormat;
   late int loaderValue;
-  bool isLoading = false;
+  bool shimmerValue = true;
 
   @override
   void initState() {
@@ -43,20 +43,22 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
     getValue();
     fetchTransactions();
 
-
     Future.delayed(Duration.zero, () {
       initializeDateFormatting();
       dateFormat = DateFormat.yMMMMd('en_GB');
-
     });
   }
 
   fetchTransactions() async {
+    shimmerValue = true;
+    if (mounted) {
+      setState(() {});
+    }
     await transactionListController.hitTransaction(
       userController.userResData.value.parent!.id.toString(),
     );
 
-    isLoading = false;
+    shimmerValue = false;
     if (mounted) {
       setState(() {});
     }
@@ -64,13 +66,13 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
 
   getValue() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    loaderValue = (preferences.getInt('showLoader'))?? 0;
+    loaderValue = (preferences.getInt('showLoader')) ?? 0;
     if (loaderValue != 1) {
-      isLoading = true;
+      shimmerValue = true;
       if (mounted) {
         setState(() {});
       }
-  }
+    }
   }
 
   void storeLoaderVal() async {
@@ -80,14 +82,6 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      storeLoaderVal();
-      fetchTransactions();
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
     return Scaffold(
       body: Column(
         children: [
@@ -154,120 +148,167 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
               ),
             ),
           ),
-          Obx(
-            () => !transactionListController.isLoading.value
-                ? transactionListController.transactionListData.value
-                        .transactions!.rows!.isNotEmpty
-                    ? Expanded(
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                          itemCount:
-                              transactionListController.list.value.length,
-                          itemBuilder: (context, index) {
-                            String key = transactionListController
-                                .list.value.keys
-                                .elementAt(index);
-                            return Column(
+          shimmerValue ||
+                  transactionListController
+                      .transactionListData.value.transactions!.rows!.isNotEmpty
+              ? Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                              horizontal: horizontalValue(32),
+                            ),
+                            child: Row(
                               children: [
-                                Container(
-                                  margin: EdgeInsets.symmetric(
-                                    horizontal: horizontalValue(20),
+                                FadeShimmer(
+                                  width: sizes.widthRatio * 120,
+                                  height: sizes.heightRatio * 20,
+                                  baseColor: Color(0xFFEBEBF4),
+                                  highlightColor: Color(0xFFF4F4F4),
+                                  radius: 10,
+                                ),
+                                horizontalSpacer(8),
+                                Expanded(
+                                  child: FadeShimmer(
+                                    height: 1,
+                                    width: double.infinity,
+                                    baseColor: Color(0xFFEBEBF4),
+                                    highlightColor: Color(0xFFF4F4F4),
+                                    // radius: 10,
                                   ),
-                                  child: Row(
+                                ),
+                              ],
+                            ),
+                          ),
+                          verticalSpacer(12),
+                          TransactionShimmerCard(),
+                          verticalSpacer(12),
+                        ],
+                      );
+                    },
+                  ),
+                )
+              : Obx(
+                  () => !transactionListController.isLoading.value
+                      ? transactionListController.transactionListData.value
+                              .transactions!.rows!.isNotEmpty
+                          ? Expanded(
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
+                                itemCount:
+                                    transactionListController.list.value.length,
+                                itemBuilder: (context, index) {
+                                  String key = transactionListController
+                                      .list.value.keys
+                                      .elementAt(index);
+                                  return Column(
                                     children: [
-                                      Text(
-                                        '${dateFormat.format(DateTime.parse(key))}',
-                                        style: PayNestTheme.h2_12blueAccent
+                                      Container(
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal: horizontalValue(20),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              '${dateFormat.format(DateTime.parse(key))}',
+                                              style: PayNestTheme
+                                                  .h2_12blueAccent
+                                                  .copyWith(
+                                                fontSize: sizes.fontRatio * 16,
+                                                color: PayNestTheme.black,
+                                                fontFamily: 'montserratBold',
+                                              ),
+                                            ),
+                                            horizontalSpacer(8),
+                                            Expanded(
+                                              child: Container(
+                                                height: 1,
+                                                color: PayNestTheme.textGrey
+                                                    .withOpacity(0.5),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      verticalSpacer(12),
+                                      SingleTransaction(
+                                        transactionList:
+                                            transactionListController
+                                                .list.value[key],
+                                        onTap: (transactionRow) {
+                                          onTap(row: transactionRow);
+                                        },
+                                      ),
+                                      verticalSpacer(12),
+                                    ],
+                                  );
+                                },
+                              ),
+                            )
+                          : Expanded(
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: horizontalValue(16),
+                                ),
+                                child: Column(
+                                  children: [
+                                    verticalSpacer(100),
+                                    Container(
+                                      width: sizes.widthRatio * 150,
+                                      height: sizes.heightRatio * 150,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            noData,
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    verticalSpacer(20),
+                                    Container(
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        noDataText,
+                                        style: PayNestTheme.title_3_16blackbold
                                             .copyWith(
-                                          fontSize: sizes.fontRatio * 16,
-                                          color: PayNestTheme.black,
+                                          fontSize: sizes.fontRatio * 22,
+                                          color: PayNestTheme.primaryColor,
                                           fontFamily: 'montserratBold',
                                         ),
                                       ),
-                                      horizontalSpacer(8),
-                                      Expanded(
-                                        child: Container(
-                                          height: 1,
-                                          color: PayNestTheme.textGrey
-                                              .withOpacity(0.5),
+                                    ),
+                                    verticalSpacer(10),
+                                    Container(
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        sorryWeCant,
+                                        textAlign: TextAlign.center,
+                                        style: PayNestTheme.title_3_16blackbold
+                                            .copyWith(
+                                          fontSize: sizes.fontRatio * 16,
+                                          color: PayNestTheme.lightBlack,
+                                          fontFamily: 'montserratBold',
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                verticalSpacer(12),
-                                SingleTransaction(
-                                  transactionList:
-                                      transactionListController.list.value[key],
-                                  onTap: (transactionRow) {
-                                    onTap(row: transactionRow);
-                                  },
-                                ),
-                                verticalSpacer(12),
-                              ],
-                            );
-                          },
-                        ),
-                      )
-                    : Expanded(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: horizontalValue(16),
-                          ),
-                          child: Column(
-                            children: [
-                              verticalSpacer(100),
-                              Container(
-                                width: sizes.widthRatio * 150,
-                                height: sizes.heightRatio * 150,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      noData,
                                     ),
-                                    fit: BoxFit.cover,
-                                  ),
+                                    const Spacer(),
+                                    verticalSpacer(16),
+                                  ],
                                 ),
                               ),
-                              verticalSpacer(20),
-                              Container(
-                                width: double.infinity,
-                                alignment: Alignment.center,
-                                child: Text(
-                                  noDataText,
-                                  style:
-                                      PayNestTheme.title_3_16blackbold.copyWith(
-                                    fontSize: sizes.fontRatio * 22,
-                                    color: PayNestTheme.primaryColor,
-                                    fontFamily: 'montserratBold',
-                                  ),
-                                ),
-                              ),
-                              verticalSpacer(10),
-                              Container(
-                                width: double.infinity,
-                                alignment: Alignment.center,
-                                child: Text(
-                                  sorryWeCant,
-                                  textAlign: TextAlign.center,
-                                  style:
-                                      PayNestTheme.title_3_16blackbold.copyWith(
-                                    fontSize: sizes.fontRatio * 16,
-                                    color: PayNestTheme.lightBlack,
-                                    fontFamily: 'montserratBold',
-                                  ),
-                                ),
-                              ),
-                              const Spacer(),
-                              verticalSpacer(16),
-                            ],
-                          ),
-                        ),
-                      )
-                : SizedBox(),
-          ),
+                            )
+                      : SizedBox(),
+                ),
         ],
       ),
     );
