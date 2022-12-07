@@ -741,6 +741,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         student.id,
                                                       );
                                                       studentElement = student;
+
                                                       if(tap%2==0){
                                                         studentElement.isSelected=true;
                                                       }
