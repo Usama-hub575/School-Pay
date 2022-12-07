@@ -310,8 +310,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                               const BouncingScrollPhysics(),
                                           children: [
                                             _searchResult.isNotEmpty &&
-                                                searchController.text.isNotEmpty ?
-                                            Container(
+                                                searchController.text.isNotEmpty
+                                                ? Container(
                                               height: sizes.heightRatio * 156,
                                               child: ListView.separated(
                                                 itemCount: _searchResult.length,
@@ -709,7 +709,6 @@ class _PayNowPageState extends State<PayNowPage> {
                                           ],
                                         ),
                                       )
-                                    // ? Container()
                                 : Expanded(
                                         child: ListView(
                                           physics:
