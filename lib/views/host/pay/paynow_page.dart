@@ -267,8 +267,9 @@ class _PayNowPageState extends State<PayNowPage> {
                                       Expanded(
                                         child: TextFormField(
                                           onTap: () {
-                                            onSearchTextChanged('');
+                                            onSearchTextChanged;
                                           },
+
                                           controller: searchController,
                                           onChanged: onSearchTextChanged,
                                           style: PayNestTheme
