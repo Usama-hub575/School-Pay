@@ -305,8 +305,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                   ],
                 ),
               )),
-      ],
-    ));
+    );
   }
 
   Widget _singleCard({required Log log}) {
