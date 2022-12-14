@@ -50,6 +50,10 @@ class APIService {
   static var partialPay = "/api/parent/updateFeeBalance";
   static var payNow = "/schoolpay-transactions/PaymentInitiator.php";
 
+
+  ///Lean Payment
+  static var leanPaymentEndPoint = "/api/parent/getLeanData";
+
   /// To set payment data to server
   // static var createTransaction = "/api/transaction";
   static var createTransaction = "/api/transaction/mobile";
@@ -125,6 +129,23 @@ class APIService {
     var endPoint = Uri.parse("$baseUrl$getCountries");
     var response = await client.get(
       endPoint,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+  /// * Lean Payment * ///
+  Future leanPayment() async {
+    var endPoint = Uri.parse("$baseUrl$leanPaymentEndPoint");
+    var response = await client.get(
+      endPoint,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
     );
     print(response.body);
     if (response.statusCode == 200) {

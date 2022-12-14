@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:encrypt/encrypt.dart' as encryption;
@@ -15,6 +16,7 @@ import 'package:paynest_flutter_app/extension/stack_extension.dart';
 import 'package:paynest_flutter_app/model/datamodel/paynowtransaction_detail_model.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/model/studentlist_res_model.dart';
+import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
 import 'package:paynest_flutter_app/views/host/transactiondetails/paynowltransactiondetails_page.dart';
@@ -937,12 +939,13 @@ class _PayNowPageState extends State<PayNowPage> {
                                             payAbleAmount != '0'
                                                 ? InkWellWidget(
                                                     onTap: () {
-                                                      showToast(
-                                                          context: context,
-                                                          messege:
-                                                              'Coming Soon!',
-                                                          color: PayNestTheme
-                                                              .primaryColor);
+                                                      onLeanPaymentTap();
+                                                      // showToast(
+                                                      //     context: context,
+                                                      //     messege:
+                                                      //         'Coming Soon!',
+                                                      //     color: PayNestTheme
+                                                      //         .primaryColor);
                                                     },
                                                     child: Container(
                                                       width: double.infinity,
@@ -1219,6 +1222,12 @@ class _PayNowPageState extends State<PayNowPage> {
         ),
       ),
     );
+  }
+
+  Future  onLeanPaymentTap()async{
+    var res = await APIService().leanPayment();
+    var decoded = jsonDecode(res);
+
   }
 
   void onPress() async {
