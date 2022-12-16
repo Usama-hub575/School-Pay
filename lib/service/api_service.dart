@@ -53,6 +53,7 @@ class APIService {
 
   ///Lean Payment
   static var leanPaymentEndPoint = "/api/parent/getLeanData";
+  static var createLeanPaymentIntentEndPoint = "/api/parent/createLeanPaymentIntent";
 
   /// To set payment data to server
   // static var createTransaction = "/api/transaction";
@@ -152,6 +153,26 @@ class APIService {
       return response.body;
     } else {
       return response.body;
+    }
+  }
+
+  /// * Create Payment Intent * ///
+  Future createPaymentIntent(data) async {
+    var endPoint = Uri.parse("$baseUrl$createLeanPaymentIntentEndPoint");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+      body: data,
+    );
+    // print("Login Data");
+    print(response.body);
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body)['status'];
+    } else {
+      return jsonDecode(response.body)['status'];
     }
   }
 
