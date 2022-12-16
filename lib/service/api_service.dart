@@ -170,9 +170,9 @@ class APIService {
     // print("Login Data");
     print(response.body);
     if (response.statusCode == 200) {
-      return jsonDecode(response.body)['status'];
+      return response.body;
     } else {
-      return jsonDecode(response.body)['status'];
+      return response.body;
     }
   }
 
