@@ -15,6 +15,7 @@ import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/paynow_controller.dart';
 import 'package:paynest_flutter_app/controller/updatebank_response_controller.dart';
 import 'package:paynest_flutter_app/extension/stack_extension.dart';
+import 'package:paynest_flutter_app/model/create_payment_intent_model.dart';
 import 'package:paynest_flutter_app/model/datamodel/paynowtransaction_detail_model.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/model/lean_payment_model.dart';
@@ -100,6 +101,54 @@ class _PayNowPageState extends State<PayNowPage> {
         );
       },
     );
+  }
+
+  Future<void> createPaymentSource() async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => Center(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.8,
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: Lean.createPaymentSource(
+                  appToken: appToken,
+                  customerId: customerId,
+                  isSandbox: isSandbox,
+                  callback: (resp) {
+                    if (kDebugMode) {
+                      print("Callback: $resp");
+                    }
+                    Navigator.pop(context);
+                  },
+                  actionCancelled: () => Navigator.pop(context),
+                ),
+              ),
+            ));
+  }
+
+  _pay() {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.red,
+        context: context,
+        builder: (context) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: Lean.pay(
+              appToken: appToken,
+              paymentIntentId: paymentIntentId,
+              country: Country.uae,
+              isSandbox: isSandbox,
+              callback: (resp) {
+                if (kDebugMode) {
+                  print("Callback: $resp");
+                }
+                Navigator.pop(context);
+              },
+              actionCancelled: () => Navigator.pop(context),
+            ),
+          );
+        });
   }
 
   @override
@@ -1318,13 +1367,19 @@ class _PayNowPageState extends State<PayNowPage> {
         "amount": amountController.text,
         "studentId": studentIDController.text,
       };
+      createPaymentSource();
       // _connect();
-      var createPaymentIntent =
-          await APIService().createPaymentIntent(jsonEncode(data));
+      // var createPaymentIntent =
+      //     await APIService().createPaymentIntent(jsonEncode(data));
       // var leanPaymentDecoded = jsonDecode(createPaymentIntent);
-      if (!createPaymentIntent) {
-        // _connect();
-      }
+      // CreatePaymentIntentModel createPaymentIntentModel =
+      //     CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+      // if (createPaymentIntentModel.status!) {
+      //   appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+      //   paymentIntentId =
+      //       createPaymentIntentModel.data!.paymentIntentId.toString();
+      //   _pay();
+      // }
     }
   }
 
