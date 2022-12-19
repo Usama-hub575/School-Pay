@@ -40,8 +40,6 @@ class _MorePageState extends State<MorePage> {
     super.initState();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,18 +127,17 @@ class _MorePageState extends State<MorePage> {
                                   height: sizes.heightRatio * 60,
                                   width: sizes.widthRatio * 60,
                                   decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        blurRadius: 5,
-                                        offset: Offset(
-                                          0.5, // Move to right 10  horizontally
-                                          0.5, // Move to bottom 10 Vertically
-                                        ),
-                                      )
-                                    ]
-                                  ),
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black12,
+                                          blurRadius: 5,
+                                          offset: Offset(
+                                            0.5, // Move to right 10  horizontally
+                                            0.5, // Move to bottom 10 Vertically
+                                          ),
+                                        )
+                                      ]),
                                   child: SvgPicture.asset(
                                     icMale,
                                   ),
@@ -151,7 +148,6 @@ class _MorePageState extends State<MorePage> {
                           () => Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              verticalSpacer(8),
                               Text(
                                 '${userController.userResData.value.parent!.firstName} ${userController.userResData.value.parent!.lastName}',
                                 style: PayNestTheme.title18black.copyWith(

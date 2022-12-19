@@ -65,6 +65,7 @@ class _PayNowPageState extends State<PayNowPage> {
   String payAbleAmount = '0';
   bool isLoading = false;
   bool isLoadingOnLeanButton = false;
+  bool _isConnect = true;
 
   var appToken = "";
   var customerId = "";
@@ -79,7 +80,7 @@ class _PayNowPageState extends State<PayNowPage> {
   ];
   var isSandbox = true;
 
-  _connect() {
+  Future<void> _connect() async {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -93,12 +94,12 @@ class _PayNowPageState extends State<PayNowPage> {
             country: Country.uae,
             isSandbox: isSandbox,
             callback: (resp) async {
-              await createPaymentSource();
+              var response = jsonDecode(resp.toString());
+              if (response['status']) {}
               if (kDebugMode) {
-                isLoadingOnLeanButton = false;
                 print("Callback: $resp");
               }
-              // Navigator.pop(context);
+              Navigator.pop(context);
             },
             actionCancelled: () => Navigator.pop(context),
           ),
@@ -1046,13 +1047,18 @@ class _PayNowPageState extends State<PayNowPage> {
                                             payAbleAmount != '0'
                                                 ? InkWellWidget(
                                                     onTap: () {
-                                                      onLeanPaymentTap();
-                                                      // showToast(
-                                                      //     context: context,
-                                                      //     messege:
-                                                      //         'Coming Soon!',
-                                                      //     color: PayNestTheme
-                                                      //         .primaryColor);
+                                                      if (int.parse(
+                                                              amountController
+                                                                  .text) <=
+                                                          0) {
+                                                        showToast(
+                                                            messege:
+                                                                "Amount Should Be Grater Then 0!",
+                                                            context: context,
+                                                            color: Colors.red);
+                                                      } else {
+                                                        onLeanPaymentTap();
+                                                      }
                                                     },
                                                     child: Container(
                                                       width: double.infinity,
@@ -1348,26 +1354,29 @@ class _PayNowPageState extends State<PayNowPage> {
     if (!leanPaymentModel.status!) {
       await _connect();
     }
-    var data = {
-      "schoolId": int.parse(
-        schoolIDController.text,
-      ),
-      "amount": '450',
-      "studentId": studentIDController.text,
-    };
-    var createPaymentIntent =
-    await APIService().createPaymentIntent(jsonEncode(data));
-    var leanPaymentDecoded = jsonDecode(createPaymentIntent);
-    CreatePaymentIntentModel createPaymentIntentModel =
-    CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
-    if (createPaymentIntentModel.status!) {
-      appToken = createPaymentIntentModel.data!.leanAppToken.toString();
-      paymentIntentId =
-          createPaymentIntentModel.data!.paymentIntentId.toString();
-      await _pay(
-        model: createPaymentIntentModel,
+    Future.delayed(const Duration(seconds: 1), () async {
+      var data = {
+        "schoolId": int.parse(
+          schoolIDController.text,
+        ),
+        "amount": '450',
+        "studentId": studentIDController.text,
+      };
+      var createPaymentIntent = await APIService().createPaymentIntent(
+        jsonEncode(data),
       );
-    }
+      var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+      CreatePaymentIntentModel createPaymentIntentModel =
+          CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+      if (createPaymentIntentModel.status!) {
+        appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+        paymentIntentId =
+            createPaymentIntentModel.data!.paymentIntentId.toString();
+        await _pay(
+          model: createPaymentIntentModel,
+        );
+      }
+    });
   }
 
   Future<void> _pay({
@@ -1375,7 +1384,6 @@ class _PayNowPageState extends State<PayNowPage> {
   }) async {
     showModalBottomSheet(
       isScrollControlled: true,
-      backgroundColor: Colors.red,
       context: context,
       builder: (context) {
         return SizedBox(
