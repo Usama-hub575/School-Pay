@@ -394,7 +394,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
       if (mounted) {
         setState(() {});
       }
-      if (result != null) {
+      if (result != null && result['ResponseMsg'] == 'success') {
         var amount = widget.payment;
         bool status = await ctrcController.hitCreateTransaction(
           widget.singleStudentModel.student!.schoolId.toString(),

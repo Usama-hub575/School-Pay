@@ -92,12 +92,13 @@ class _PayNowPageState extends State<PayNowPage> {
             permissions: permissions,
             country: Country.uae,
             isSandbox: isSandbox,
-            callback: (resp) {
+            callback: (resp) async {
+              await createPaymentSource();
               if (kDebugMode) {
                 isLoadingOnLeanButton = false;
                 print("Callback: $resp");
               }
-              Navigator.pop(context);
+              // Navigator.pop(context);
             },
             actionCancelled: () => Navigator.pop(context),
           ),
@@ -117,52 +118,15 @@ class _PayNowPageState extends State<PayNowPage> {
                   appToken: appToken,
                   customerId: customerId,
                   isSandbox: isSandbox,
-                  callback: (resp) {
+                  callback: (resp) async {
                     if (kDebugMode) {
                       print("Callback: $resp");
                     }
-                    Navigator.pop(context);
                   },
                   actionCancelled: () => Navigator.pop(context),
                 ),
               ),
             ));
-  }
-
-  _pay() {
-    showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: Colors.red,
-        context: context,
-        builder: (context) {
-          return SizedBox(
-            height: MediaQuery.of(context).size.height * 0.8,
-            child: Lean.pay(
-              appToken: appToken,
-              paymentIntentId: paymentIntentId,
-              country: Country.uae,
-              isSandbox: isSandbox,
-              callback: (resp) {
-                if (kDebugMode) {
-                  isLoadingOnLeanButton = false;
-                  jsonDecode(resp.toString());
-                  LeanServerResponse leanResponse = LeanServerResponse.fromJson(
-                    jsonDecode(resp.toString()),
-                  );
-                  showToast(
-                    messege: leanResponse.message ?? '',
-                    context: context,
-                    color: leanResponse.status == 'SUCCESS'
-                        ? Colors.green
-                        : Colors.redAccent,
-                  );
-                }
-                Navigator.pop(context);
-              },
-              actionCancelled: () => Navigator.pop(context),
-            ),
-          );
-        });
   }
 
   @override
@@ -1124,43 +1088,47 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             BorderRadius
                                                                 .circular(16),
                                                       ),
-                                                      child: isLoadingOnLeanButton ? Center(
-                                                        child: CircularProgressIndicator(
-                                                        ),
-                                                      ) :Row(
-                                                        children: [
-                                                          horizontalSpacer(32),
-                                                          _otherImage(
-                                                            imagePath: icLean,
-                                                          ),
-                                                          horizontalSpacer(16),
-                                                          Expanded(
-                                                            child: Center(
-                                                              child: Text(
-                                                                payByBankTransfer,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style: PayNestTheme
-                                                                    .title_2_16primaryColor
-                                                                    .copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontSize:
-                                                                      sizes.fontRatio *
-                                                                          14,
-                                                                  color: PayNestTheme
-                                                                      .primaryColor
-                                                                      .withOpacity(
-                                                                          0.5),
+                                                      child:
+                                                          isLoadingOnLeanButton
+                                                              ? Center(
+                                                                  child:
+                                                                      CircularProgressIndicator(),
+                                                                )
+                                                              : Row(
+                                                                  children: [
+                                                                    horizontalSpacer(
+                                                                        32),
+                                                                    _otherImage(
+                                                                      imagePath:
+                                                                          icLean,
+                                                                    ),
+                                                                    horizontalSpacer(
+                                                                        16),
+                                                                    Expanded(
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          payByBankTransfer,
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                          style: PayNestTheme
+                                                                              .title_2_16primaryColor
+                                                                              .copyWith(
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            fontSize:
+                                                                                sizes.fontRatio * 14,
+                                                                            color:
+                                                                                PayNestTheme.primaryColor.withOpacity(0.5),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                    horizontalSpacer(
+                                                                        16),
+                                                                  ],
                                                                 ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          horizontalSpacer(16),
-                                                        ],
-                                                      ),
                                                     ),
                                                   )
                                                 : const SizedBox.shrink(),
@@ -1375,30 +1343,70 @@ class _PayNowPageState extends State<PayNowPage> {
     var res = await APIService().leanPayment();
     var decoded = jsonDecode(res);
     LeanPaymentModel leanPaymentModel = LeanPaymentModel.fromJson(decoded);
-    if (leanPaymentModel.status!) {
-      appToken = leanPaymentModel.response!.leanAppToken.toString();
-      customerId = leanPaymentModel.response!.leanCustomerId.toString();
-      var data = {
-        "schoolId": int.parse(
-          schoolIDController.text,
-        ),
-        "amount": amountController.text,
-        "studentId": studentIDController.text,
-      };
-      var createPaymentIntent =
-          await APIService().createPaymentIntent(jsonEncode(data));
-      var leanPaymentDecoded = jsonDecode(createPaymentIntent);
-      CreatePaymentIntentModel createPaymentIntentModel =
-          CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
-      if (createPaymentIntentModel.status!) {
-        appToken = createPaymentIntentModel.data!.leanAppToken.toString();
-        paymentIntentId =
-            createPaymentIntentModel.data!.paymentIntentId.toString();
-        await _pay();
-      }else{
-        await _connect();
-      }
+    appToken = leanPaymentModel.response!.leanAppToken.toString();
+    customerId = leanPaymentModel.response!.leanCustomerId.toString();
+    if (!leanPaymentModel.status!) {
+      await _connect();
     }
+    var data = {
+      "schoolId": int.parse(
+        schoolIDController.text,
+      ),
+      "amount": '450',
+      "studentId": studentIDController.text,
+    };
+    var createPaymentIntent =
+    await APIService().createPaymentIntent(jsonEncode(data));
+    var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+    CreatePaymentIntentModel createPaymentIntentModel =
+    CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+    if (createPaymentIntentModel.status!) {
+      appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+      paymentIntentId =
+          createPaymentIntentModel.data!.paymentIntentId.toString();
+      await _pay(
+        model: createPaymentIntentModel,
+      );
+    }
+  }
+
+  Future<void> _pay({
+    required CreatePaymentIntentModel model,
+  }) async {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.red,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.8,
+          child: Lean.pay(
+            appToken: model.data!.leanAppToken!,
+            paymentIntentId: model.data!.paymentIntentId!,
+            country: Country.uae,
+            isSandbox: isSandbox,
+            callback: (resp) {
+              if (kDebugMode) {
+                isLoadingOnLeanButton = false;
+                jsonDecode(resp.toString());
+                LeanServerResponse leanResponse = LeanServerResponse.fromJson(
+                  jsonDecode(resp.toString()),
+                );
+                showToast(
+                  messege: leanResponse.message ?? '',
+                  context: context,
+                  color: leanResponse.status == 'SUCCESS'
+                      ? Colors.green
+                      : Colors.redAccent,
+                );
+              }
+              Navigator.pop(context);
+            },
+            actionCancelled: () => Navigator.pop(context),
+          ),
+        );
+      },
+    );
   }
 
   void onPress() async {
