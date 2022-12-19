@@ -291,7 +291,6 @@ class _DashboardPageState extends State<DashboardPage> {
           verticalSpacer(8),
           Expanded(
             child: SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
               child: Padding(
                 padding: EdgeInsets.only(
                   left: 20.w,

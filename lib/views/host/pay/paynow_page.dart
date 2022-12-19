@@ -27,6 +27,7 @@ import 'package:paynest_flutter_app/views/host/transactiondetails/paynowltransac
 import 'package:paynest_flutter_app/views/webview/webview.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../constants/constants.dart';
+import '../../../model/lean_response.dart';
 import '../../../model/mystudents_resp_model.dart';
 import '../../../res/assets.dart';
 import '../../../res/res.dart';
@@ -63,6 +64,7 @@ class _PayNowPageState extends State<PayNowPage> {
   TextEditingController searchController = TextEditingController();
   String payAbleAmount = '0';
   bool isLoading = false;
+  bool isLoadingOnLeanButton = false;
 
   var appToken = "";
   var customerId = "";
@@ -92,6 +94,7 @@ class _PayNowPageState extends State<PayNowPage> {
             isSandbox: isSandbox,
             callback: (resp) {
               if (kDebugMode) {
+                isLoadingOnLeanButton = false;
                 print("Callback: $resp");
               }
               Navigator.pop(context);
@@ -141,7 +144,18 @@ class _PayNowPageState extends State<PayNowPage> {
               isSandbox: isSandbox,
               callback: (resp) {
                 if (kDebugMode) {
-                  print("Callback: $resp");
+                  isLoadingOnLeanButton = false;
+                  jsonDecode(resp.toString());
+                  LeanServerResponse leanResponse = LeanServerResponse.fromJson(
+                    jsonDecode(resp.toString()),
+                  );
+                  showToast(
+                    messege: leanResponse.message ?? '',
+                    context: context,
+                    color: leanResponse.status == 'SUCCESS'
+                        ? Colors.green
+                        : Colors.redAccent,
+                  );
                 }
                 Navigator.pop(context);
               },
@@ -1110,7 +1124,10 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             BorderRadius
                                                                 .circular(16),
                                                       ),
-                                                      child: Row(
+                                                      child: isLoadingOnLeanButton ? Center(
+                                                        child: CircularProgressIndicator(
+                                                        ),
+                                                      ) :Row(
                                                         children: [
                                                           horizontalSpacer(32),
                                                           _otherImage(
@@ -1354,6 +1371,7 @@ class _PayNowPageState extends State<PayNowPage> {
   }
 
   Future onLeanPaymentTap() async {
+    isLoadingOnLeanButton = true;
     var res = await APIService().leanPayment();
     var decoded = jsonDecode(res);
     LeanPaymentModel leanPaymentModel = LeanPaymentModel.fromJson(decoded);
@@ -1367,19 +1385,19 @@ class _PayNowPageState extends State<PayNowPage> {
         "amount": amountController.text,
         "studentId": studentIDController.text,
       };
-      createPaymentSource();
-      // _connect();
-      // var createPaymentIntent =
-      //     await APIService().createPaymentIntent(jsonEncode(data));
-      // var leanPaymentDecoded = jsonDecode(createPaymentIntent);
-      // CreatePaymentIntentModel createPaymentIntentModel =
-      //     CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
-      // if (createPaymentIntentModel.status!) {
-      //   appToken = createPaymentIntentModel.data!.leanAppToken.toString();
-      //   paymentIntentId =
-      //       createPaymentIntentModel.data!.paymentIntentId.toString();
-      //   _pay();
-      // }
+      var createPaymentIntent =
+          await APIService().createPaymentIntent(jsonEncode(data));
+      var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+      CreatePaymentIntentModel createPaymentIntentModel =
+          CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+      if (createPaymentIntentModel.status!) {
+        appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+        paymentIntentId =
+            createPaymentIntentModel.data!.paymentIntentId.toString();
+        await _pay();
+      }else{
+        await _connect();
+      }
     }
   }
 
