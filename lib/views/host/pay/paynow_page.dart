@@ -95,11 +95,35 @@ class _PayNowPageState extends State<PayNowPage> {
             isSandbox: isSandbox,
             callback: (resp) async {
               var response = jsonDecode(resp.toString());
-              if (response['status']) {}
+              if (response['status'] == 'SUCCESS') {
+                Navigator.pop(context);
+                Future.delayed(const Duration(seconds: 2), () async {
+                  var data = {
+                    "schoolId": int.parse(
+                      schoolIDController.text,
+                    ),
+                    "amount": '450',
+                    "studentId": studentIDController.text,
+                  };
+                  var createPaymentIntent = await APIService().createPaymentIntent(
+                    jsonEncode(data),
+                  );
+                  var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+                  CreatePaymentIntentModel createPaymentIntentModel =
+                  CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+                  if (createPaymentIntentModel.status!) {
+                    appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+                    paymentIntentId =
+                        createPaymentIntentModel.data!.paymentIntentId.toString();
+                    await _pay(
+                      model: createPaymentIntentModel,
+                    );
+                  }
+                });
+              }
               if (kDebugMode) {
                 print("Callback: $resp");
               }
-              Navigator.pop(context);
             },
             actionCancelled: () => Navigator.pop(context),
           ),
@@ -1353,30 +1377,31 @@ class _PayNowPageState extends State<PayNowPage> {
     customerId = leanPaymentModel.response!.leanCustomerId.toString();
     if (!leanPaymentModel.status!) {
       await _connect();
-    }
-    Future.delayed(const Duration(seconds: 1), () async {
-      var data = {
-        "schoolId": int.parse(
-          schoolIDController.text,
-        ),
-        "amount": '450',
-        "studentId": studentIDController.text,
-      };
-      var createPaymentIntent = await APIService().createPaymentIntent(
-        jsonEncode(data),
-      );
-      var leanPaymentDecoded = jsonDecode(createPaymentIntent);
-      CreatePaymentIntentModel createPaymentIntentModel =
-          CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
-      if (createPaymentIntentModel.status!) {
-        appToken = createPaymentIntentModel.data!.leanAppToken.toString();
-        paymentIntentId =
-            createPaymentIntentModel.data!.paymentIntentId.toString();
-        await _pay(
-          model: createPaymentIntentModel,
+    }else{
+      Future.delayed(const Duration(seconds: 2), () async {
+        var data = {
+          "schoolId": int.parse(
+            schoolIDController.text,
+          ),
+          "amount": '450',
+          "studentId": studentIDController.text,
+        };
+        var createPaymentIntent = await APIService().createPaymentIntent(
+          jsonEncode(data),
         );
-      }
-    });
+        var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+        CreatePaymentIntentModel createPaymentIntentModel =
+        CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+        if (createPaymentIntentModel.status!) {
+          appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+          paymentIntentId =
+              createPaymentIntentModel.data!.paymentIntentId.toString();
+          await _pay(
+            model: createPaymentIntentModel,
+          );
+        }
+      });
+    }
   }
 
   Future<void> _pay({
