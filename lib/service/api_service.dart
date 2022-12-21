@@ -53,6 +53,7 @@ class APIService {
 
   ///Lean Payment
   static var leanPaymentEndPoint = "/api/parent/getLeanData";
+  static var postBankSourceEndPoint = "/api/parent/postBankSource";
   static var createLeanPaymentIntentEndPoint = "/api/parent/createLeanPaymentIntent";
 
   /// To set payment data to server
@@ -147,6 +148,24 @@ class APIService {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + storage.read('accessToken'),
       },
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  Future postBankSource(data) async {
+    var endPoint = Uri.parse("https://fed4-154-192-36-44.ap.ngrok.io$postBankSourceEndPoint");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+      body: data,
     );
     print(response.body);
     if (response.statusCode == 200) {

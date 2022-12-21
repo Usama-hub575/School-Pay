@@ -19,6 +19,8 @@ import 'package:paynest_flutter_app/model/create_payment_intent_model.dart';
 import 'package:paynest_flutter_app/model/datamodel/paynowtransaction_detail_model.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/model/lean_payment_model.dart';
+import 'package:paynest_flutter_app/model/lean_success_response.dart';
+import 'package:paynest_flutter_app/model/post_bank_source_payload.dart';
 import 'package:paynest_flutter_app/model/studentlist_res_model.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
@@ -84,6 +86,12 @@ class _PayNowPageState extends State<PayNowPage> {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
+      backgroundColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+        topRight: Radius.circular(16),
+        topLeft: Radius.circular(16),
+      )),
       builder: (context) {
         return SizedBox(
           height: MediaQuery.of(context).size.height * 0.8,
@@ -94,10 +102,38 @@ class _PayNowPageState extends State<PayNowPage> {
             country: Country.uae,
             isSandbox: isSandbox,
             callback: (resp) async {
-              var response = jsonDecode(resp.toString());
-              if (response['status'] == 'SUCCESS') {
-                Navigator.pop(context);
-                Future.delayed(const Duration(seconds: 2), () async {
+              final temp = jsonDecode(resp.toString());
+              var res;
+              if(temp['secondary_status'] == 'ENTITY_ALREADY_CONNECTED' || temp['secondary_status'] == 'OK'){
+                LeanSuccessResponse leanSuccessResponse =
+                LeanSuccessResponse.fromJson(jsonDecode(resp.toString()));
+                PostBankSourcePayload bankSourcePayload =
+                PostBankSourcePayload.empty();
+                bankSourcePayload.data!.status = leanSuccessResponse.status;
+                bankSourcePayload.data!.message = leanSuccessResponse.message;
+                bankSourcePayload.data!.secondaryStatus =
+                    leanSuccessResponse.secondaryStatus;
+                bankSourcePayload.data!.lastApiResponse =
+                    leanSuccessResponse.lastApiResponse;
+                bankSourcePayload.data!.bank!.bankIdentifier =
+                    leanSuccessResponse.bank!.bankIdentifier;
+                bankSourcePayload.data!.bank!.isSupported =
+                    leanSuccessResponse.bank!.isSupported;
+                bankSourcePayload.data!.method = leanSuccessResponse.method;
+                bankSourcePayload.customerId = customerId;
+
+                res = await APIService().postBankSource(
+                  json.encode(
+                    PostBankSourcePayload.toJson(
+                      payload: bankSourcePayload,
+                    ),
+                  ),
+                );
+              }
+              if (temp['status'] == 'SUCCESS') {
+                var finalResponse = jsonDecode(res.toString());
+                if (finalResponse['status']) {
+                  Navigator.pop(context);
                   var data = {
                     "schoolId": int.parse(
                       schoolIDController.text,
@@ -105,24 +141,26 @@ class _PayNowPageState extends State<PayNowPage> {
                     "amount": '450',
                     "studentId": studentIDController.text,
                   };
-                  var createPaymentIntent = await APIService().createPaymentIntent(
+                  var createPaymentIntent =
+                      await APIService().createPaymentIntent(
                     jsonEncode(data),
                   );
                   var leanPaymentDecoded = jsonDecode(createPaymentIntent);
                   CreatePaymentIntentModel createPaymentIntentModel =
-                  CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+                      CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
                   if (createPaymentIntentModel.status!) {
-                    appToken = createPaymentIntentModel.data!.leanAppToken.toString();
-                    paymentIntentId =
-                        createPaymentIntentModel.data!.paymentIntentId.toString();
+                    appToken =
+                        createPaymentIntentModel.data!.leanAppToken.toString();
+                    paymentIntentId = createPaymentIntentModel
+                        .data!.paymentIntentId
+                        .toString();
                     await _pay(
                       model: createPaymentIntentModel,
                     );
                   }
-                });
-              }
-              if (kDebugMode) {
-                print("Callback: $resp");
+                }
+              } else {
+                Navigator.pop(context);
               }
             },
             actionCancelled: () => Navigator.pop(context),
@@ -1377,30 +1415,28 @@ class _PayNowPageState extends State<PayNowPage> {
     customerId = leanPaymentModel.response!.leanCustomerId.toString();
     if (!leanPaymentModel.status!) {
       await _connect();
-    }else{
-      Future.delayed(const Duration(seconds: 2), () async {
-        var data = {
-          "schoolId": int.parse(
-            schoolIDController.text,
-          ),
-          "amount": '450',
-          "studentId": studentIDController.text,
-        };
-        var createPaymentIntent = await APIService().createPaymentIntent(
-          jsonEncode(data),
+    } else {
+      var data = {
+        "schoolId": int.parse(
+          schoolIDController.text,
+        ),
+        "amount": '450',
+        "studentId": studentIDController.text,
+      };
+      var createPaymentIntent = await APIService().createPaymentIntent(
+        jsonEncode(data),
+      );
+      var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+      CreatePaymentIntentModel createPaymentIntentModel =
+          CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+      if (createPaymentIntentModel.status!) {
+        appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+        paymentIntentId =
+            createPaymentIntentModel.data!.paymentIntentId.toString();
+        await _pay(
+          model: createPaymentIntentModel,
         );
-        var leanPaymentDecoded = jsonDecode(createPaymentIntent);
-        CreatePaymentIntentModel createPaymentIntentModel =
-        CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
-        if (createPaymentIntentModel.status!) {
-          appToken = createPaymentIntentModel.data!.leanAppToken.toString();
-          paymentIntentId =
-              createPaymentIntentModel.data!.paymentIntentId.toString();
-          await _pay(
-            model: createPaymentIntentModel,
-          );
-        }
-      });
+      }
     }
   }
 

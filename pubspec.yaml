@@ -24,7 +24,6 @@ dependencies:
   intl:
   flutter_local_notifications: ^9.3.2
   webview_flutter:
-  flutter_inappwebview:
   url_launcher:
   xml2json:
   encrypt: ^5.0.1
@@ -41,10 +40,9 @@ dependencies:
   store_redirect:
 
   modal_bottom_sheet:
-  fade_shimmer:
   collection:
   universal_platform:
-
+  fade_shimmer:
 
   #Firebase Packages
   firebase_remote_config:
