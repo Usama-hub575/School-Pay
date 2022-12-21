@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:encrypt/encrypt.dart' as encryption;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -81,6 +82,18 @@ class _PayNowPageState extends State<PayNowPage> {
     Permission.accounts
   ];
   var isSandbox = true;
+  var responseFromNativeLeanConnection;
+
+  static const platform = MethodChannel('com.paynest.schoolpay.lean');
+
+  Future<Map<String, dynamic>> getLeanPaymentConnectionFromNative() async {
+    try {
+      responseFromNativeLeanConnection = await platform.invokeListMethod(
+          "getLeanConnectResponse",
+          {"appToken": appToken, "customerID": customerId});
+    } catch (e) {}
+    return;
+  }
 
   Future<void> _connect() async {
     showModalBottomSheet(
@@ -104,11 +117,12 @@ class _PayNowPageState extends State<PayNowPage> {
             callback: (resp) async {
               final temp = jsonDecode(resp.toString());
               var res;
-              if(temp['secondary_status'] == 'ENTITY_ALREADY_CONNECTED' || temp['secondary_status'] == 'OK'){
+              if (temp['secondary_status'] == 'ENTITY_ALREADY_CONNECTED' ||
+                  temp['secondary_status'] == 'OK') {
                 LeanSuccessResponse leanSuccessResponse =
-                LeanSuccessResponse.fromJson(jsonDecode(resp.toString()));
+                    LeanSuccessResponse.fromJson(jsonDecode(resp.toString()));
                 PostBankSourcePayload bankSourcePayload =
-                PostBankSourcePayload.empty();
+                    PostBankSourcePayload.empty();
                 bankSourcePayload.data!.status = leanSuccessResponse.status;
                 bankSourcePayload.data!.message = leanSuccessResponse.message;
                 bankSourcePayload.data!.secondaryStatus =
