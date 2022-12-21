@@ -21,6 +21,7 @@ dependencies:
   http:
   get:
   get_storage:
+  dart_jsonwebtoken: ^2.6.2
   intl:
   flutter_local_notifications: ^9.3.2
   webview_flutter:

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:encrypt/encrypt.dart' as encryption;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
 import 'package:paynest_flutter_app/views/host/transactiondetails/paynowltransactiondetails_page.dart';
+import 'package:paynest_flutter_app/views/webview/lean_web_view.dart';
 import 'package:paynest_flutter_app/views/webview/webview.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../constants/constants.dart';
@@ -82,22 +84,6 @@ class _PayNowPageState extends State<PayNowPage> {
     Permission.accounts
   ];
   var isSandbox = true;
-  var responseFromNativeLeanConnection;
-
-  static const platform = MethodChannel('com.paynest.schoolpay.lean');
-
-  Future<Map<String, dynamic>> getLeanPaymentConnectionFromNative() async {
-    try {
-      responseFromNativeLeanConnection = await platform.invokeListMethod(
-        "getLeanConnectResponse",
-        {
-          "appToken": appToken,
-          "customerID": customerId,
-        },
-      );
-    } catch (e) {}
-    return {};
-  }
 
   Future<void> _connect() async {
     showModalBottomSheet(
@@ -1431,10 +1417,31 @@ class _PayNowPageState extends State<PayNowPage> {
     LeanPaymentModel leanPaymentModel = LeanPaymentModel.fromJson(decoded);
     appToken = leanPaymentModel.response!.leanAppToken.toString();
     customerId = leanPaymentModel.response!.leanCustomerId.toString();
+    final jwt = JWT(
+      {
+        "app_token": appToken,
+        "customer_id": customerId,
+      },
+    );
+    final token = jwt.sign(
+      SecretKey('connection_token'),
+      algorithm: JWTAlgorithm.HS256,
+      expiresIn: Duration(minutes: 5),
+    );
+    print(jwt);
     if (!leanPaymentModel.status!) {
-      getLeanPaymentConnectionFromNative();
-      await _connect();
-    } else {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => LeanWebView(
+            title: "LEAN PAYMENT",
+            leanUrl:
+                "https://cd80-154-192-36-44.ap.ngrok.io/leanTest/leanConnect",
+            jwt: token,
+          ),
+        ),
+      );
+    }
+    else {
       var data = {
         "schoolId": int.parse(
           schoolIDController.text,
