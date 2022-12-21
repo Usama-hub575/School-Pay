@@ -75,7 +75,7 @@ class _PayNowPageState extends State<PayNowPage> {
   var reconnectId = "";
   var paymentDestinationId = "";
   var paymentIntentId = "";
-  var permissions = [
+  List<Permission> permissions = [
     Permission.identity,
     Permission.transactions,
     Permission.balance,
@@ -89,10 +89,14 @@ class _PayNowPageState extends State<PayNowPage> {
   Future<Map<String, dynamic>> getLeanPaymentConnectionFromNative() async {
     try {
       responseFromNativeLeanConnection = await platform.invokeListMethod(
-          "getLeanConnectResponse",
-          {"appToken": appToken, "customerID": customerId});
+        "getLeanConnectResponse",
+        {
+          "appToken": appToken,
+          "customerID": customerId,
+        },
+      );
     } catch (e) {}
-    return;
+    return {};
   }
 
   Future<void> _connect() async {
@@ -1428,6 +1432,7 @@ class _PayNowPageState extends State<PayNowPage> {
     appToken = leanPaymentModel.response!.leanAppToken.toString();
     customerId = leanPaymentModel.response!.leanCustomerId.toString();
     if (!leanPaymentModel.status!) {
+      getLeanPaymentConnectionFromNative();
       await _connect();
     } else {
       var data = {
