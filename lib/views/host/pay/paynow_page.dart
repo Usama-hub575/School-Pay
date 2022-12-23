@@ -70,7 +70,6 @@ class _PayNowPageState extends State<PayNowPage> {
   TextEditingController searchController = TextEditingController();
   String payAbleAmount = '0';
   bool isLoading = false;
-  bool isLoadingOnLeanButton = false;
   bool _isConnect = true;
 
   var appToken = "";
@@ -86,116 +85,6 @@ class _PayNowPageState extends State<PayNowPage> {
   ];
   var isSandbox = true;
 
-  Future<void> _connect() async {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      context: context,
-      backgroundColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-        topRight: Radius.circular(16),
-        topLeft: Radius.circular(16),
-      )),
-      builder: (context) {
-        return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.8,
-          child: Lean.connect(
-            appToken: appToken,
-            customerId: customerId,
-            permissions: permissions,
-            country: Country.uae,
-            isSandbox: isSandbox,
-            callback: (resp) async {
-              final temp = jsonDecode(resp.toString());
-              var res;
-              if (temp['secondary_status'] == 'ENTITY_ALREADY_CONNECTED' ||
-                  temp['secondary_status'] == 'OK') {
-                LeanSuccessResponse leanSuccessResponse =
-                    LeanSuccessResponse.fromJson(jsonDecode(resp.toString()));
-                PostBankSourcePayload bankSourcePayload =
-                    PostBankSourcePayload.empty();
-                bankSourcePayload.data!.status = leanSuccessResponse.status;
-                bankSourcePayload.data!.message = leanSuccessResponse.message;
-                bankSourcePayload.data!.secondaryStatus =
-                    leanSuccessResponse.secondaryStatus;
-                bankSourcePayload.data!.lastApiResponse =
-                    leanSuccessResponse.lastApiResponse;
-                bankSourcePayload.data!.bank!.bankIdentifier =
-                    leanSuccessResponse.bank!.bankIdentifier;
-                bankSourcePayload.data!.bank!.isSupported =
-                    leanSuccessResponse.bank!.isSupported;
-                bankSourcePayload.data!.method = leanSuccessResponse.method;
-                bankSourcePayload.customerId = customerId;
-
-                res = await APIService().postBankSource(
-                  json.encode(
-                    PostBankSourcePayload.toJson(
-                      payload: bankSourcePayload,
-                    ),
-                  ),
-                );
-              }
-              if (temp['status'] == 'SUCCESS') {
-                var finalResponse = jsonDecode(res.toString());
-                if (finalResponse['status']) {
-                  Navigator.pop(context);
-                  var data = {
-                    "schoolId": int.parse(
-                      schoolIDController.text,
-                    ),
-                    "amount": '450',
-                    "studentId": studentIDController.text,
-                  };
-                  var createPaymentIntent =
-                      await APIService().createPaymentIntent(
-                    jsonEncode(data),
-                  );
-                  var leanPaymentDecoded = jsonDecode(createPaymentIntent);
-                  CreatePaymentIntentModel createPaymentIntentModel =
-                      CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
-                  if (createPaymentIntentModel.status!) {
-                    appToken =
-                        createPaymentIntentModel.data!.leanAppToken.toString();
-                    paymentIntentId = createPaymentIntentModel
-                        .data!.paymentIntentId
-                        .toString();
-                    await _pay(
-                      model: createPaymentIntentModel,
-                    );
-                  }
-                }
-              } else {
-                Navigator.pop(context);
-              }
-            },
-            actionCancelled: () => Navigator.pop(context),
-          ),
-        );
-      },
-    );
-  }
-
-  Future<void> createPaymentSource() async {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) => Center(
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.8,
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: Lean.createPaymentSource(
-                  appToken: appToken,
-                  customerId: customerId,
-                  isSandbox: isSandbox,
-                  callback: (resp) async {
-                    if (kDebugMode) {
-                      print("Callback: $resp");
-                    }
-                  },
-                  actionCancelled: () => Navigator.pop(context),
-                ),
-              ),
-            ));
-  }
 
   @override
   void initState() {
@@ -759,6 +648,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         children: [
                                                           horizontalSpacer(32),
                                                           _otherImage(
+                                                            opacity: 1,
                                                             imagePath: icLean,
                                                           ),
                                                           horizontalSpacer(16),
@@ -844,6 +734,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         children: [
                                                           horizontalSpacer(32),
                                                           _otherImage(
+                                                            opacity: 0.5,
                                                             imagePath:
                                                                 icPostPay,
                                                           ),
@@ -1161,17 +1052,12 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             BorderRadius
                                                                 .circular(16),
                                                       ),
-                                                      child:
-                                                          isLoadingOnLeanButton
-                                                              ? Center(
-                                                                  child:
-                                                                      CircularProgressIndicator(),
-                                                                )
-                                                              : Row(
+                                                      child: Row(
                                                                   children: [
                                                                     horizontalSpacer(
                                                                         32),
                                                                     _otherImage(
+                                                                      opacity: 1,
                                                                       imagePath:
                                                                           icLean,
                                                                     ),
@@ -1193,7 +1079,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                             fontSize:
                                                                                 sizes.fontRatio * 14,
                                                                             color:
-                                                                                PayNestTheme.primaryColor.withOpacity(0.5),
+                                                                                PayNestTheme.primaryColor,
                                                                           ),
                                                                         ),
                                                                       ),
@@ -1254,6 +1140,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         children: [
                                                           horizontalSpacer(32),
                                                           _otherImage(
+                                                            opacity: 0.5,
                                                             imagePath:
                                                                 icPostPay,
                                                           ),
@@ -1412,7 +1299,6 @@ class _PayNowPageState extends State<PayNowPage> {
   }
 
   Future onLeanPaymentTap() async {
-    isLoadingOnLeanButton = true;
     var res = await APIService().leanPayment();
     var decoded = jsonDecode(res);
     LeanPaymentModel leanPaymentModel = LeanPaymentModel.fromJson(decoded);
@@ -1441,12 +1327,12 @@ class _PayNowPageState extends State<PayNowPage> {
           ),
         ),
       );
-      if (value as bool) {
+      if (value != null && value as bool) {
         var data = {
           "schoolId": int.parse(
             schoolIDController.text,
           ),
-          "amount": '10',
+          "amount": amountController.text,
           "studentId": studentIDController.text,
         };
         var createPaymentIntent = await APIService().createPaymentIntent(
@@ -1475,7 +1361,7 @@ class _PayNowPageState extends State<PayNowPage> {
         "schoolId": int.parse(
           schoolIDController.text,
         ),
-        "amount": '450',
+        "amount": amountController.text,
         "studentId": studentIDController.text,
       };
       var createPaymentIntent = await APIService().createPaymentIntent(
@@ -1511,7 +1397,6 @@ class _PayNowPageState extends State<PayNowPage> {
             isSandbox: isSandbox,
             callback: (resp) {
               if (kDebugMode) {
-                isLoadingOnLeanButton = false;
                 jsonDecode(resp.toString());
                 LeanServerResponse leanResponse = LeanServerResponse.fromJson(
                   jsonDecode(resp.toString()),
@@ -1526,7 +1411,9 @@ class _PayNowPageState extends State<PayNowPage> {
               }
               Navigator.pop(context);
             },
-            actionCancelled: () => Navigator.pop(context),
+            actionCancelled: (){
+              Navigator.pop(context);
+            } ,
           ),
         );
       },
@@ -1652,9 +1539,9 @@ class _PayNowPageState extends State<PayNowPage> {
     );
   }
 
-  Widget _otherImage({required String imagePath}) {
+  Widget _otherImage({required String imagePath, required double opacity}) {
     return Opacity(
-      opacity: 0.5,
+      opacity: opacity,
       child: Container(
         height: sizes.heightRatio * 26,
         width: sizes.widthRatio * 70,

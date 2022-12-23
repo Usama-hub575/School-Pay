@@ -1,9 +1,18 @@
+import 'dart:convert';
 import 'dart:math';
 
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
+import 'package:paynest_flutter_app/model/create_payment_intent_model.dart';
+import 'package:paynest_flutter_app/model/lean_payment_model.dart';
+import 'package:paynest_flutter_app/model/lean_response.dart';
+import 'package:paynest_flutter_app/service/api_service.dart';
+import 'package:paynest_flutter_app/views/webview/lean_web_view.dart';
 import '../../../constants/constants.dart';
 import '../../../controller/createtransaction_resp_controller.dart';
 import '../../../controller/myStudent_controller.dart';
@@ -43,6 +52,18 @@ class _PaymentMethodState extends State<PaymentMethod> {
       Get.put(SetBankResponseController());
 
   bool isLoading = false;
+  var appToken = "";
+  var customerId = "";
+  var reconnectId = "";
+  var paymentDestinationId = "";
+  var paymentIntentId = "";
+  List<Permission> permissions = [
+    Permission.identity,
+    Permission.transactions,
+    Permission.balance,
+    Permission.accounts
+  ];
+  var isSandbox = true;
 
   @override
   void initState() {
@@ -250,12 +271,18 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     ),
                     verticalSpacer(8),
                     InkWellWidget(
-                      onTap: () {
-                        showToast(
-                            context: context,
-                            messege: 'Coming Soon!',
-                            color: PayNestTheme.primaryColor);
-                      },
+                        onTap: () {
+                          if (widget.payment <=
+                              0) {
+                            showToast(
+                                messege:
+                                "Amount Should Be Grater Then 0!",
+                                context: context,
+                                color: Colors.red);
+                          } else {
+                            onLeanPaymentTap();
+                          }
+                        },
                       child: Container(
                         width: double.infinity,
                         margin: EdgeInsets.symmetric(
@@ -283,6 +310,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           children: [
                             horizontalSpacer(32),
                             _otherImage(
+                              opacity: 1,
                               imagePath: icLean,
                             ),
                             horizontalSpacer(16),
@@ -295,8 +323,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                       .copyWith(
                                     fontWeight: FontWeight.w500,
                                     fontSize: sizes.fontRatio * 14,
-                                    color: PayNestTheme.primaryColor
-                                        .withOpacity(0.5),
+                                    color: PayNestTheme.primaryColor,
                                   ),
                                 ),
                               ),
@@ -341,6 +368,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           children: [
                             horizontalSpacer(32),
                             _otherImage(
+                              opacity: 0.5,
                               imagePath: icPostPay,
                             ),
                             horizontalSpacer(16),
@@ -372,6 +400,125 @@ class _PaymentMethodState extends State<PaymentMethod> {
           ),
         ],
       ),
+    );
+  }
+
+
+  Future onLeanPaymentTap() async {
+    var res = await APIService().leanPayment();
+    var decoded = jsonDecode(res);
+    LeanPaymentModel leanPaymentModel = LeanPaymentModel.fromJson(decoded);
+    appToken = leanPaymentModel.response!.leanAppToken.toString();
+    customerId = leanPaymentModel.response!.leanCustomerId.toString();
+    if (!leanPaymentModel.status!) {
+      final jwt = JWT(
+        {
+          "app_token": appToken,
+          "customer_id": customerId,
+        },
+      );
+      final token = jwt.sign(
+        SecretKey('connection_token'),
+        algorithm: JWTAlgorithm.HS256,
+        expiresIn: Duration(minutes: 5),
+      );
+
+      final value = await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => LeanWebView(
+            title: "LEAN PAYMENT",
+            leanUrl:
+            "https://staging.paynestschools.ae/leanTest/leanConnect",
+            jwt: token,
+          ),
+        ),
+      );
+      if (value != null && value as bool) {
+        var data = {
+          "schoolId": widget.singleStudentModel.student!.schoolId,
+          "amount": widget.payment,
+          "studentId": widget.singleStudentModel.studentId,
+        };
+        var createPaymentIntent = await APIService().createPaymentIntent(
+          jsonEncode(data),
+        );
+        var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+        CreatePaymentIntentModel createPaymentIntentModel =
+        CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+        if (createPaymentIntentModel.status!) {
+          appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+          paymentIntentId =
+              createPaymentIntentModel.data!.paymentIntentId.toString();
+          await _pay(
+            model: createPaymentIntentModel,
+          );
+        }
+      } else {
+        showToast(
+          messege: 'Something went wrong !!',
+          context: context,
+          color: Colors.redAccent,
+        );
+      }
+    } else {
+      var data = {
+        "schoolId": widget.singleStudentModel.student!.schoolId,
+        "amount": widget.payment,
+        "studentId": widget.singleStudentModel.studentId,
+      };
+      var createPaymentIntent = await APIService().createPaymentIntent(
+        jsonEncode(data),
+      );
+      var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+      CreatePaymentIntentModel createPaymentIntentModel =
+      CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+      if (createPaymentIntentModel.status!) {
+        appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+        paymentIntentId =
+            createPaymentIntentModel.data!.paymentIntentId.toString();
+        await _pay(
+          model: createPaymentIntentModel,
+        );
+      }
+    }
+  }
+
+  Future<void> _pay({
+    required CreatePaymentIntentModel model,
+  }) async {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.8,
+          child: Lean.pay(
+            appToken: model.data!.leanAppToken!,
+            paymentIntentId: model.data!.paymentIntentId!,
+            country: Country.uae,
+            isSandbox: isSandbox,
+            callback: (resp) {
+              if (kDebugMode) {
+                jsonDecode(resp.toString());
+                LeanServerResponse leanResponse = LeanServerResponse.fromJson(
+                  jsonDecode(resp.toString()),
+                );
+                showToast(
+                  messege: leanResponse.message ?? '',
+                  context: context,
+                  color: leanResponse.status == 'SUCCESS'
+                      ? Colors.green
+                      : Colors.redAccent,
+                );
+              }
+              Navigator.pop(context);
+            },
+            actionCancelled: (){
+              Navigator.pop(context);
+            } ,
+          ),
+        );
+      },
     );
   }
 
@@ -558,9 +705,9 @@ class _PaymentMethodState extends State<PaymentMethod> {
     );
   }
 
-  Widget _otherImage({required String imagePath}) {
+  Widget _otherImage({required String imagePath, required double opacity}) {
     return Opacity(
-      opacity: 0.5,
+      opacity: opacity,
       child: Container(
         height: sizes.heightRatio * 26,
         width: sizes.widthRatio * 70,
