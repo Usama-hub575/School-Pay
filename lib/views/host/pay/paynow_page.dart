@@ -85,7 +85,6 @@ class _PayNowPageState extends State<PayNowPage> {
   ];
   var isSandbox = true;
 
-
   @override
   void initState() {
     super.initState();
@@ -426,7 +425,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                           'AED ${payAbleAmount != '0' ? amountFormater(
                                                               double.parse(
                                                                   payAbleAmount),
-                                                            ) : ''}',
+                                                            ) : '0.0'}',
                                                           style: PayNestTheme
                                                               .h2_12blueAccent
                                                               .copyWith(
@@ -831,44 +830,48 @@ class _PayNowPageState extends State<PayNowPage> {
                                               ),
                                             ),
                                             verticalSpacer(30),
-                                            Container(
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    'Current Payable Amount',
-                                                    style: PayNestTheme
-                                                        .h2_12blueAccentLight
-                                                        .copyWith(
-                                                      fontSize:
-                                                          sizes.fontRatio * 14,
-                                                      color: PayNestTheme
-                                                          .primaryColor,
-                                                      fontFamily:
-                                                          'montserratSemiBold',
+                                            tap % 2 == 1
+                                                ? Container(
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          'Current Payable Amount',
+                                                          style: PayNestTheme
+                                                              .h2_12blueAccentLight
+                                                              .copyWith(
+                                                            fontSize: sizes
+                                                                    .fontRatio *
+                                                                14,
+                                                            color: PayNestTheme
+                                                                .primaryColor,
+                                                            fontFamily:
+                                                                'montserratSemiBold',
+                                                          ),
+                                                        ),
+                                                        Spacer(),
+                                                        Text(
+                                                          payAbleAmount != '0'
+                                                              ? 'AED ' +
+                                                                  amountFormater(
+                                                                    double.parse(
+                                                                        payAbleAmount),
+                                                                  )
+                                                              : "0.0",
+                                                          style: PayNestTheme
+                                                              .h2_12blueAccent
+                                                              .copyWith(
+                                                            fontSize: sizes
+                                                                    .fontRatio *
+                                                                16,
+                                                            color: PayNestTheme
+                                                                .primaryColor,
+                                                          ),
+                                                        ),
+                                                        horizontalSpacer(16),
+                                                      ],
                                                     ),
-                                                  ),
-                                                  Spacer(),
-                                                  Text(
-                                                    payAbleAmount != '0'
-                                                        ? 'AED ' +
-                                                            amountFormater(
-                                                              double.parse(
-                                                                  payAbleAmount),
-                                                            )
-                                                        : '',
-                                                    style: PayNestTheme
-                                                        .h2_12blueAccent
-                                                        .copyWith(
-                                                      fontSize:
-                                                          sizes.fontRatio * 16,
-                                                      color: PayNestTheme
-                                                          .primaryColor,
-                                                    ),
-                                                  ),
-                                                  horizontalSpacer(16),
-                                                ],
-                                              ),
-                                            ),
+                                                  )
+                                                : SizedBox.shrink(),
                                             verticalSpacer(8),
                                             Container(
                                               width: double.infinity,
@@ -1053,41 +1056,38 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                 .circular(16),
                                                       ),
                                                       child: Row(
-                                                                  children: [
-                                                                    horizontalSpacer(
-                                                                        32),
-                                                                    _otherImage(
-                                                                      opacity: 1,
-                                                                      imagePath:
-                                                                          icLean,
-                                                                    ),
-                                                                    horizontalSpacer(
-                                                                        16),
-                                                                    Expanded(
-                                                                      child:
-                                                                          Center(
-                                                                        child:
-                                                                            Text(
-                                                                          payByBankTransfer,
-                                                                          textAlign:
-                                                                              TextAlign.center,
-                                                                          style: PayNestTheme
-                                                                              .title_2_16primaryColor
-                                                                              .copyWith(
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                            fontSize:
-                                                                                sizes.fontRatio * 14,
-                                                                            color:
-                                                                                PayNestTheme.primaryColor,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    horizontalSpacer(
-                                                                        16),
-                                                                  ],
+                                                        children: [
+                                                          horizontalSpacer(32),
+                                                          _otherImage(
+                                                            opacity: 1,
+                                                            imagePath: icLean,
+                                                          ),
+                                                          horizontalSpacer(16),
+                                                          Expanded(
+                                                            child: Center(
+                                                              child: Text(
+                                                                payByBankTransfer,
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style: PayNestTheme
+                                                                    .title_2_16primaryColor
+                                                                    .copyWith(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize:
+                                                                      sizes.fontRatio *
+                                                                          14,
+                                                                  color: PayNestTheme
+                                                                      .primaryColor,
                                                                 ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          horizontalSpacer(16),
+                                                        ],
+                                                      ),
                                                     ),
                                                   )
                                                 : const SizedBox.shrink(),
@@ -1321,8 +1321,7 @@ class _PayNowPageState extends State<PayNowPage> {
         MaterialPageRoute(
           builder: (context) => LeanWebView(
             title: "LEAN PAYMENT",
-            leanUrl:
-                "https://staging.paynestschools.ae/leanTest/leanConnect",
+            leanUrl: "https://staging.paynestschools.ae/leanTest/leanConnect",
             jwt: token,
           ),
         ),
@@ -1396,24 +1395,29 @@ class _PayNowPageState extends State<PayNowPage> {
             country: Country.uae,
             isSandbox: isSandbox,
             callback: (resp) {
-              if (kDebugMode) {
-                jsonDecode(resp.toString());
-                LeanServerResponse leanResponse = LeanServerResponse.fromJson(
-                  jsonDecode(resp.toString()),
-                );
-                showToast(
-                  messege: leanResponse.message ?? '',
-                  context: context,
-                  color: leanResponse.status == 'SUCCESS'
-                      ? Colors.green
-                      : Colors.redAccent,
+              jsonDecode(resp.toString());
+              LeanServerResponse leanResponse = LeanServerResponse.fromJson(
+                jsonDecode(resp.toString()),
+              );
+              showToast(
+                messege: leanResponse.message ?? '',
+                context: context,
+                color: leanResponse.status == 'SUCCESS'
+                    ? Colors.green
+                    : Colors.redAccent,
+              );
+              Navigator.pop(context);
+              if (leanResponse.status == 'SUCCESS') {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/DashboardPage',
+                  (Route<dynamic> route) => false,
                 );
               }
+            },
+            actionCancelled: () {
               Navigator.pop(context);
             },
-            actionCancelled: (){
-              Navigator.pop(context);
-            } ,
           ),
         );
       },

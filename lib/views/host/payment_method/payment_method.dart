@@ -498,7 +498,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
             country: Country.uae,
             isSandbox: isSandbox,
             callback: (resp) {
-              if (kDebugMode) {
                 jsonDecode(resp.toString());
                 LeanServerResponse leanResponse = LeanServerResponse.fromJson(
                   jsonDecode(resp.toString()),
@@ -510,8 +509,14 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       ? Colors.green
                       : Colors.redAccent,
                 );
-              }
               Navigator.pop(context);
+              if(leanResponse.status == 'SUCCESS'){
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/DashboardPage',
+                      (Route<dynamic> route) => false,
+                );
+              }
             },
             actionCancelled: (){
               Navigator.pop(context);

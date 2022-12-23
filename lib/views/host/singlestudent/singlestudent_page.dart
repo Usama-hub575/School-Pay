@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/extension/stack_extension.dart';
-import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart' as SingleSchoolModel ;
+import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart'
+    as SingleSchoolModel;
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
 import 'package:paynest_flutter_app/widgets/amount_formater.dart';
@@ -70,7 +71,6 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
           ),
           color: Colors.white,
         ),
-
         child: Stack().fullScreenLoader(
           state: isLoading,
           loadingWidget: fullScreenLoader(),
@@ -194,52 +194,55 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                           ),
                         ),
                         verticalSpacer(16),
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: horizontalValue(16),
-                          ),
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: PayNestTheme.colorWhite,
-                              elevation: 0,
-                              side: BorderSide(
-                                width: 1,
-                                color: PayNestTheme.primaryColor,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  14,
+                        userController.singleStudentResponse.value.students![0]
+                                    .student!.totalBalanceAmount ==
+                                0
+                            ?SizedBox.shrink() : Container(
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: horizontalValue(16),
                                 ),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                vertical: verticalValue(14),
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => InvoicePaymentPage(
-                                    singleStudentModel:
-                                        getStudentModel(),
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: PayNestTheme.colorWhite,
+                                    elevation: 0,
+                                    side: BorderSide(
+                                      width: 1,
+                                      color: PayNestTheme.primaryColor,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        14,
+                                      ),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: verticalValue(14),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            InvoicePaymentPage(
+                                          singleStudentModel: getStudentModel(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      continueToPayment,
+                                      style: PayNestTheme.title_2_16primaryColor
+                                          .copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: sizes.fontRatio * 14,
+                                        color: PayNestTheme.primaryColor,
+                                        fontFamily: 'montserratBold',
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              );
-                            },
-                            child: Center(
-                              child: Text(
-                                continueToPayment,
-                                style: PayNestTheme.title_2_16primaryColor
-                                    .copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: sizes.fontRatio * 14,
-                                  color: PayNestTheme.primaryColor,
-                                  fontFamily: 'montserratBold',
-                                ),
                               ),
-                            ),
-                          ),
-                        ),
                         verticalSpacer(24),
                       ],
                     ),
@@ -350,61 +353,112 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
   SingleSchoolModel.SingleStudentModel getStudentModel() {
     return SingleSchoolModel.SingleStudentModel(
       id: userController.singleStudentResponse.value.students![0].id,
-      parentId: userController.singleStudentResponse.value.students![0].parentId,
-      studentId: userController.singleStudentResponse.value.students![0].studentId,
-      deletedAt: userController.singleStudentResponse.value.students![0].deletedAt,
-      createdAt: userController.singleStudentResponse.value.students![0].createdAt,
-      updatedAt: userController.singleStudentResponse.value.students![0].updatedAt,
+      parentId:
+          userController.singleStudentResponse.value.students![0].parentId,
+      studentId:
+          userController.singleStudentResponse.value.students![0].studentId,
+      deletedAt:
+          userController.singleStudentResponse.value.students![0].deletedAt,
+      createdAt:
+          userController.singleStudentResponse.value.students![0].createdAt,
+      updatedAt:
+          userController.singleStudentResponse.value.students![0].updatedAt,
       student: SingleSchoolModel.Student(
-        dob: userController.singleStudentResponse.value.students![0].student!.dob,
-        admissionDate: userController.singleStudentResponse.value.students![0].student!.admissionDate,
+        dob: userController
+            .singleStudentResponse.value.students![0].student!.dob,
+        admissionDate: userController
+            .singleStudentResponse.value.students![0].student!.admissionDate,
         id: userController.singleStudentResponse.value.students![0].student!.id,
-        studentRegNo: userController.singleStudentResponse.value.students![0].student!.studentRegNo,
-        firstName: userController.singleStudentResponse.value.students![0].student!.firstName,
-        lastName: userController.singleStudentResponse.value.students![0].student!.lastName,
-        grade: userController.singleStudentResponse.value.students![0].student!.grade,
-        parentEmiratesId: userController.singleStudentResponse.value.students![0].student!.parentEmiratesId,
-        parentPhoneNumber: userController.singleStudentResponse.value.students![0].student!.parentPhoneNumber,
-        deletedAt: userController.singleStudentResponse.value.students![0].student!.deletedAt,
-        schoolId: userController.singleStudentResponse.value.students![0].student!.schoolId,
-        totalBalanceAmount:
-        double.parse(userController.singleStudentResponse.value.students![0].student!.totalBalanceAmount.toString()),
-        guardianFirstName: userController.singleStudentResponse.value.students![0].student!.guardianFirstName,
-        guardianLastName: userController.singleStudentResponse.value.students![0].student!.guardianLastName,
-        guardianGender: userController.singleStudentResponse.value.students![0].student!.guardianGender,
-        guardianEmiratesId: userController.singleStudentResponse.value.students![0].student!.guardianEmiratesId,
-        guardianNationality: userController.singleStudentResponse.value.students![0].student!.guardianNationality,
-        guardianReligion: userController.singleStudentResponse.value.students![0].student!.guardianReligion,
-        area: userController.singleStudentResponse.value.students![0].student!.area,
-        region: userController.singleStudentResponse.value.students![0].student!.region,
-        streetAddress: userController.singleStudentResponse.value.students![0].student!.streetAddress,
-        email: userController.singleStudentResponse.value.students![0].student!.email,
-        phoneNumber: userController.singleStudentResponse.value.students![0].student!.phoneNumber,
-        otherNumber: userController.singleStudentResponse.value.students![0].student!.otherNumber,
-        profile: userController.singleStudentResponse.value.students![0].student!.profile,
-        religion: userController.singleStudentResponse.value.students![0].student!.religion,
-        nationality: userController.singleStudentResponse.value.students![0].student!.nationality,
-        gender: userController.singleStudentResponse.value.students![0].student!.gender,
-        dueDate: userController.singleStudentResponse.value.students![0].student!.dueDate,
-        file: userController.singleStudentResponse.value.students![0].student!.file,
-        privacy: userController.singleStudentResponse.value.students![0].student!.privacy,
-        createdAt: userController.singleStudentResponse.value.students![0].student!.createdAt,
-        updatedAt: userController.singleStudentResponse.value.students![0].student!.updatedAt,
+        studentRegNo: userController
+            .singleStudentResponse.value.students![0].student!.studentRegNo,
+        firstName: userController
+            .singleStudentResponse.value.students![0].student!.firstName,
+        lastName: userController
+            .singleStudentResponse.value.students![0].student!.lastName,
+        grade: userController
+            .singleStudentResponse.value.students![0].student!.grade,
+        parentEmiratesId: userController
+            .singleStudentResponse.value.students![0].student!.parentEmiratesId,
+        parentPhoneNumber: userController.singleStudentResponse.value
+            .students![0].student!.parentPhoneNumber,
+        deletedAt: userController
+            .singleStudentResponse.value.students![0].student!.deletedAt,
+        schoolId: userController
+            .singleStudentResponse.value.students![0].student!.schoolId,
+        totalBalanceAmount: double.parse(userController.singleStudentResponse
+            .value.students![0].student!.totalBalanceAmount
+            .toString()),
+        guardianFirstName: userController.singleStudentResponse.value
+            .students![0].student!.guardianFirstName,
+        guardianLastName: userController
+            .singleStudentResponse.value.students![0].student!.guardianLastName,
+        guardianGender: userController
+            .singleStudentResponse.value.students![0].student!.guardianGender,
+        guardianEmiratesId: userController.singleStudentResponse.value
+            .students![0].student!.guardianEmiratesId,
+        guardianNationality: userController.singleStudentResponse.value
+            .students![0].student!.guardianNationality,
+        guardianReligion: userController
+            .singleStudentResponse.value.students![0].student!.guardianReligion,
+        area: userController
+            .singleStudentResponse.value.students![0].student!.area,
+        region: userController
+            .singleStudentResponse.value.students![0].student!.region,
+        streetAddress: userController
+            .singleStudentResponse.value.students![0].student!.streetAddress,
+        email: userController
+            .singleStudentResponse.value.students![0].student!.email,
+        phoneNumber: userController
+            .singleStudentResponse.value.students![0].student!.phoneNumber,
+        otherNumber: userController
+            .singleStudentResponse.value.students![0].student!.otherNumber,
+        profile: userController
+            .singleStudentResponse.value.students![0].student!.profile,
+        religion: userController
+            .singleStudentResponse.value.students![0].student!.religion,
+        nationality: userController
+            .singleStudentResponse.value.students![0].student!.nationality,
+        gender: userController
+            .singleStudentResponse.value.students![0].student!.gender,
+        dueDate: userController
+            .singleStudentResponse.value.students![0].student!.dueDate,
+        file: userController
+            .singleStudentResponse.value.students![0].student!.file,
+        privacy: userController
+            .singleStudentResponse.value.students![0].student!.privacy,
+        createdAt: userController
+            .singleStudentResponse.value.students![0].student!.createdAt,
+        updatedAt: userController
+            .singleStudentResponse.value.students![0].student!.updatedAt,
         school: SingleSchoolModel.School(
-          id: userController.singleStudentResponse.value.students![0].student!.school!.id,
-          name: userController.singleStudentResponse.value.students![0].student!.school!.name,
-          deletedAt: userController.singleStudentResponse.value.students![0].student!.school!.deletedAt,
-          addedBy: userController.singleStudentResponse.value.students![0].student!.school!.addedBy,
-          address: userController.singleStudentResponse.value.students![0].student!.school!.address,
-          description: userController.singleStudentResponse.value.students![0].student!.school!.description,
-          vat: userController.singleStudentResponse.value.students![0].student!.school!.vat,
-          paynestFee: userController.singleStudentResponse.value.students![0].student!.school!.paynestFee,
-          apiKey: userController.singleStudentResponse.value.students![0].student!.school!.apiKey,
-          merchantId: userController.singleStudentResponse.value.students![0].student!.school!.merchantId,
-          file: userController.singleStudentResponse.value.students![0].student!.school!.file,
-          privacy: userController.singleStudentResponse.value.students![0].student!.school!.privacy,
-          createdAt: userController.singleStudentResponse.value.students![0].student!.school!.createdAt,
-          updatedAt: userController.singleStudentResponse.value.students![0].student!.school!.updatedAt,
+          id: userController
+              .singleStudentResponse.value.students![0].student!.school!.id,
+          name: userController
+              .singleStudentResponse.value.students![0].student!.school!.name,
+          deletedAt: userController.singleStudentResponse.value.students![0]
+              .student!.school!.deletedAt,
+          addedBy: userController.singleStudentResponse.value.students![0]
+              .student!.school!.addedBy,
+          address: userController.singleStudentResponse.value.students![0]
+              .student!.school!.address,
+          description: userController.singleStudentResponse.value.students![0]
+              .student!.school!.description,
+          vat: userController
+              .singleStudentResponse.value.students![0].student!.school!.vat,
+          paynestFee: userController.singleStudentResponse.value.students![0]
+              .student!.school!.paynestFee,
+          apiKey: userController
+              .singleStudentResponse.value.students![0].student!.school!.apiKey,
+          merchantId: userController.singleStudentResponse.value.students![0]
+              .student!.school!.merchantId,
+          file: userController
+              .singleStudentResponse.value.students![0].student!.school!.file,
+          privacy: userController.singleStudentResponse.value.students![0]
+              .student!.school!.privacy,
+          createdAt: userController.singleStudentResponse.value.students![0]
+              .student!.school!.createdAt,
+          updatedAt: userController.singleStudentResponse.value.students![0]
+              .student!.school!.updatedAt,
         ),
       ),
     );
