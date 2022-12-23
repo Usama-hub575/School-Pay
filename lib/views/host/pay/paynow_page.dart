@@ -1,10 +1,16 @@
+import 'dart:convert';
 import 'dart:math';
 
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:encrypt/encrypt.dart' as encryption;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/createtransaction_resp_controller.dart';
@@ -12,15 +18,22 @@ import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/paynow_controller.dart';
 import 'package:paynest_flutter_app/controller/updatebank_response_controller.dart';
 import 'package:paynest_flutter_app/extension/stack_extension.dart';
+import 'package:paynest_flutter_app/model/create_payment_intent_model.dart';
 import 'package:paynest_flutter_app/model/datamodel/paynowtransaction_detail_model.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
+import 'package:paynest_flutter_app/model/lean_payment_model.dart';
+import 'package:paynest_flutter_app/model/lean_success_response.dart';
+import 'package:paynest_flutter_app/model/post_bank_source_payload.dart';
 import 'package:paynest_flutter_app/model/studentlist_res_model.dart';
+import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
 import 'package:paynest_flutter_app/views/host/transactiondetails/paynowltransactiondetails_page.dart';
+import 'package:paynest_flutter_app/views/webview/lean_web_view.dart';
 import 'package:paynest_flutter_app/views/webview/webview.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import '../../../constants/constants.dart';
+import '../../../model/lean_response.dart';
 import '../../../model/mystudents_resp_model.dart';
 import '../../../res/assets.dart';
 import '../../../res/res.dart';
@@ -28,6 +41,7 @@ import '../../../widgets/amount_formater.dart';
 import '../../../widgets/full_screen_loader.dart';
 import '../../../widgets/inkwell_widget.dart';
 import '../../../widgets/toast.dart';
+import 'lean_payment_screen.dart';
 
 class PayNowPage extends StatefulWidget {
   final String whichStack;
@@ -46,7 +60,7 @@ class _PayNowPageState extends State<PayNowPage> {
   final SetBankResponseController sbrController =
       Get.put(SetBankResponseController());
   late StudentElement studentElement;
-  int tap=0;
+  int tap = 0;
 
   int idx = 0;
   TextEditingController amountController = TextEditingController();
@@ -56,6 +70,21 @@ class _PayNowPageState extends State<PayNowPage> {
   TextEditingController searchController = TextEditingController();
   String payAbleAmount = '0';
   bool isLoading = false;
+  bool _isConnect = true;
+
+  var appToken = "";
+  var customerId = "";
+  var reconnectId = "";
+  var paymentDestinationId = "";
+  var paymentIntentId = "";
+  List<Permission> permissions = [
+    Permission.identity,
+    Permission.transactions,
+    Permission.balance,
+    Permission.accounts
+  ];
+  var isSandbox = true;
+
 
   @override
   void initState() {
@@ -269,7 +298,6 @@ class _PayNowPageState extends State<PayNowPage> {
                                           onTap: () {
                                             onSearchTextChanged;
                                           },
-
                                           controller: searchController,
                                           onChanged: onSearchTextChanged,
                                           style: PayNestTheme
@@ -303,130 +331,158 @@ class _PayNowPageState extends State<PayNowPage> {
                                 ),
                                 _searchResult.isNotEmpty ||
                                         searchController.text.isNotEmpty
-
                                     ? Expanded(
                                         child: ListView(
                                           physics:
                                               const BouncingScrollPhysics(),
                                           children: [
                                             _searchResult.isNotEmpty &&
-                                                searchController.text.isNotEmpty
+                                                    searchController
+                                                        .text.isNotEmpty
                                                 ? Container(
-                                              height: sizes.heightRatio * 156,
-                                              child: ListView.separated(
-                                                itemCount: _searchResult.length,
-                                                shrinkWrap: true,
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemBuilder: (context, index) {
-                                                  return _singleCard(
-                                                    _searchResult[index],
-                                                    (StudentElement student) {
-                                                      payAbleAmount = student
-                                                          .student!
-                                                          .totalBalanceAmount
-                                                          .toString();
-                                                      studentController
-                                                          .updateSelectedCard(
-                                                        student.id,
-                                                      );
-                                                      studentElement = student;
-                                                      amountController.text =
-                                                          student.student!
-                                                              .totalBalanceAmount
-                                                              .toString();
-                                                      setState(() {});
-                                                    },
-                                                    index,
-                                                  );
-                                                },
-                                                separatorBuilder:
-                                                    (context, index) {
-                                                  return horizontalSpacer(16);
-                                                },
-                                              ),
-                                            )
-                                             : Container(
-                                              width: double.infinity,
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                noDataText,
-                                                style: PayNestTheme.title_3_16blackbold
-                                                    .copyWith(
-                                                  fontSize: sizes.fontRatio * 22,
-                                                  color: PayNestTheme.primaryColor,
-                                                  fontFamily: 'montserratBold',
-                                                ),
-                                              ),
-                                            ),
+                                                    height:
+                                                        sizes.heightRatio * 156,
+                                                    child: ListView.separated(
+                                                      itemCount:
+                                                          _searchResult.length,
+                                                      shrinkWrap: true,
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        return _singleCard(
+                                                          _searchResult[index],
+                                                          (StudentElement
+                                                              student) {
+                                                            payAbleAmount = student
+                                                                .student!
+                                                                .totalBalanceAmount
+                                                                .toString();
+                                                            studentController
+                                                                .updateSelectedCard(
+                                                              student.id,
+                                                            );
+                                                            studentElement =
+                                                                student;
+                                                            amountController
+                                                                    .text =
+                                                                student.student!
+                                                                    .totalBalanceAmount
+                                                                    .toString();
+                                                            setState(() {});
+                                                          },
+                                                          index,
+                                                        );
+                                                      },
+                                                      separatorBuilder:
+                                                          (context, index) {
+                                                        return horizontalSpacer(
+                                                            16);
+                                                      },
+                                                    ),
+                                                  )
+                                                : Container(
+                                                    width: double.infinity,
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      noDataText,
+                                                      style: PayNestTheme
+                                                          .title_3_16blackbold
+                                                          .copyWith(
+                                                        fontSize:
+                                                            sizes.fontRatio *
+                                                                22,
+                                                        color: PayNestTheme
+                                                            .primaryColor,
+                                                        fontFamily:
+                                                            'montserratBold',
+                                                      ),
+                                                    ),
+                                                  ),
                                             verticalSpacer(30),
-                                            payAbleAmount != '0' && _searchResult.isNotEmpty &&
-                                                searchController.text.isNotEmpty ?
-                                            Container(
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    'Current Payable Amount',
-                                                    style: PayNestTheme
-                                                        .h2_12blueAccentLight
-                                                        .copyWith(
-                                                      fontSize:
-                                                          sizes.fontRatio * 14,
-                                                      color: PayNestTheme
-                                                          .primaryColor,
-                                                      fontFamily:
-                                                          'montserratSemiBold',
+                                            payAbleAmount != '0' &&
+                                                    _searchResult.isNotEmpty &&
+                                                    searchController
+                                                        .text.isNotEmpty
+                                                ? Container(
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          'Current Payable Amount',
+                                                          style: PayNestTheme
+                                                              .h2_12blueAccentLight
+                                                              .copyWith(
+                                                            fontSize: sizes
+                                                                    .fontRatio *
+                                                                14,
+                                                            color: PayNestTheme
+                                                                .primaryColor,
+                                                            fontFamily:
+                                                                'montserratSemiBold',
+                                                          ),
+                                                        ),
+                                                        Spacer(),
+                                                        Text(
+                                                          'AED ${payAbleAmount != '0' ? amountFormater(
+                                                              double.parse(
+                                                                  payAbleAmount),
+                                                            ) : ''}',
+                                                          style: PayNestTheme
+                                                              .h2_12blueAccent
+                                                              .copyWith(
+                                                            fontSize: sizes
+                                                                    .fontRatio *
+                                                                16,
+                                                            color: PayNestTheme
+                                                                .primaryColor,
+                                                          ),
+                                                        ),
+                                                        horizontalSpacer(16),
+                                                      ],
                                                     ),
-                                                  ),
-                                                  Spacer(),
-                                                  Text(
-                                                    'AED ${payAbleAmount != '0' ? amountFormater(
-                                                        double.parse(
-                                                            payAbleAmount),
-                                                      ) : ''}',
-                                                    style: PayNestTheme
-                                                        .h2_12blueAccent
-                                                        .copyWith(
-                                                      fontSize:
-                                                          sizes.fontRatio * 16,
-                                                      color: PayNestTheme
-                                                          .primaryColor,
-                                                    ),
-                                                  ),
-                                                  horizontalSpacer(16),
-                                                ],
-                                              ),
-                                            )
-                                            : const SizedBox.shrink(),
+                                                  )
+                                                : const SizedBox.shrink(),
                                             verticalSpacer(8),
-                                            payAbleAmount != '0' && _searchResult.isNotEmpty &&
-                                                searchController.text.isNotEmpty ?
-                                            Container(
-                                              width: double.infinity,
-                                              height: 1,
-                                              color: PayNestTheme.textGrey
-                                                  .withOpacity(0.5),
-                                            )
-                                            : const SizedBox.shrink(),
-                                            payAbleAmount != '0' && _searchResult.isNotEmpty &&
-                                                searchController.text.isNotEmpty ?
-                                            Container(
-                                              alignment: Alignment.center,
-                                              child: Lottie.asset(
-                                                singleStudentJson,
-                                                repeat: true,
-                                                height: payAbleAmount == '0'
-                                                    ? sizes.heightRatio * 327
-                                                    : sizes.heightRatio * 114,
-                                                width: payAbleAmount == '0'
-                                                    ? sizes.widthRatio * 327
-                                                    : sizes.widthRatio * 114,
-                                              ),
-                                            )
-                                            : const SizedBox.shrink(),
+                                            payAbleAmount != '0' &&
+                                                    _searchResult.isNotEmpty &&
+                                                    searchController
+                                                        .text.isNotEmpty
+                                                ? Container(
+                                                    width: double.infinity,
+                                                    height: 1,
+                                                    color: PayNestTheme.textGrey
+                                                        .withOpacity(0.5),
+                                                  )
+                                                : const SizedBox.shrink(),
+                                            payAbleAmount != '0' &&
+                                                    _searchResult.isNotEmpty &&
+                                                    searchController
+                                                        .text.isNotEmpty
+                                                ? Container(
+                                                    alignment: Alignment.center,
+                                                    child: Lottie.asset(
+                                                      singleStudentJson,
+                                                      repeat: true,
+                                                      height: payAbleAmount ==
+                                                              '0'
+                                                          ? sizes.heightRatio *
+                                                              327
+                                                          : sizes.heightRatio *
+                                                              114,
+                                                      width: payAbleAmount ==
+                                                              '0'
+                                                          ? sizes.widthRatio *
+                                                              327
+                                                          : sizes.widthRatio *
+                                                              114,
+                                                    ),
+                                                  )
+                                                : const SizedBox.shrink(),
                                             verticalSpacer(16),
-                                            payAbleAmount != '0' && _searchResult.isNotEmpty &&
-                                                searchController.text.isNotEmpty
+                                            payAbleAmount != '0' &&
+                                                    _searchResult.isNotEmpty &&
+                                                    searchController
+                                                        .text.isNotEmpty
                                                 ? InkWellWidget(
                                                     onTap: () {
                                                       onPress();
@@ -501,8 +557,10 @@ class _PayNowPageState extends State<PayNowPage> {
                                                   )
                                                 : const SizedBox.shrink(),
                                             verticalSpacer(8),
-                                            payAbleAmount != '0' && _searchResult.isNotEmpty &&
-                                                searchController.text.isNotEmpty
+                                            payAbleAmount != '0' &&
+                                                    _searchResult.isNotEmpty &&
+                                                    searchController
+                                                        .text.isNotEmpty
                                                 ? Row(
                                                     children: [
                                                       Expanded(
@@ -539,8 +597,10 @@ class _PayNowPageState extends State<PayNowPage> {
                                                   )
                                                 : const SizedBox.shrink(),
                                             verticalSpacer(8),
-                                            payAbleAmount != '0' && _searchResult.isNotEmpty &&
-                                                searchController.text.isNotEmpty
+                                            payAbleAmount != '0' &&
+                                                    _searchResult.isNotEmpty &&
+                                                    searchController
+                                                        .text.isNotEmpty
                                                 ? InkWellWidget(
                                                     onTap: () {
                                                       showToast(
@@ -588,6 +648,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         children: [
                                                           horizontalSpacer(32),
                                                           _otherImage(
+                                                            opacity: 1,
                                                             imagePath: icLean,
                                                           ),
                                                           horizontalSpacer(16),
@@ -622,8 +683,10 @@ class _PayNowPageState extends State<PayNowPage> {
                                                   )
                                                 : const SizedBox.shrink(),
                                             verticalSpacer(8),
-                                            payAbleAmount != '0' && _searchResult.isNotEmpty &&
-                                                searchController.text.isNotEmpty
+                                            payAbleAmount != '0' &&
+                                                    _searchResult.isNotEmpty &&
+                                                    searchController
+                                                        .text.isNotEmpty
                                                 ? InkWellWidget(
                                                     onTap: () {
                                                       showToast(
@@ -671,6 +734,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         children: [
                                                           horizontalSpacer(32),
                                                           _otherImage(
+                                                            opacity: 0.5,
                                                             imagePath:
                                                                 icPostPay,
                                                           ),
@@ -709,7 +773,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                           ],
                                         ),
                                       )
-                                : Expanded(
+                                    : Expanded(
                                         child: ListView(
                                           physics:
                                               const BouncingScrollPhysics(),
@@ -742,12 +806,13 @@ class _PayNowPageState extends State<PayNowPage> {
                                                       );
                                                       studentElement = student;
 
-                                                      if(tap%2==0){
-                                                        studentElement.isSelected=true;
-                                                      }
-                                                      else{
-                                                        studentElement.isSelected=false;
-                                                        payAbleAmount='0';
+                                                      if (tap % 2 == 0) {
+                                                        studentElement
+                                                            .isSelected = true;
+                                                      } else {
+                                                        studentElement
+                                                            .isSelected = false;
+                                                        payAbleAmount = '0';
                                                       }
                                                       tap++;
                                                       amountController.text =
@@ -784,10 +849,13 @@ class _PayNowPageState extends State<PayNowPage> {
                                                   ),
                                                   Spacer(),
                                                   Text(
-                                                    payAbleAmount != '0' ? 'AED ' + amountFormater(
-                                                        double.parse(
-                                                            payAbleAmount),
-                                                      ) : '',
+                                                    payAbleAmount != '0'
+                                                        ? 'AED ' +
+                                                            amountFormater(
+                                                              double.parse(
+                                                                  payAbleAmount),
+                                                            )
+                                                        : '',
                                                     style: PayNestTheme
                                                         .h2_12blueAccent
                                                         .copyWith(
@@ -937,12 +1005,18 @@ class _PayNowPageState extends State<PayNowPage> {
                                             payAbleAmount != '0'
                                                 ? InkWellWidget(
                                                     onTap: () {
-                                                      showToast(
-                                                          context: context,
-                                                          messege:
-                                                              'Coming Soon!',
-                                                          color: PayNestTheme
-                                                              .primaryColor);
+                                                      if (int.parse(
+                                                              amountController
+                                                                  .text) <=
+                                                          0) {
+                                                        showToast(
+                                                            messege:
+                                                                "Amount Should Be Grater Then 0!",
+                                                            context: context,
+                                                            color: Colors.red);
+                                                      } else {
+                                                        onLeanPaymentTap();
+                                                      }
                                                     },
                                                     child: Container(
                                                       width: double.infinity,
@@ -979,39 +1053,41 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                 .circular(16),
                                                       ),
                                                       child: Row(
-                                                        children: [
-                                                          horizontalSpacer(32),
-                                                          _otherImage(
-                                                            imagePath: icLean,
-                                                          ),
-                                                          horizontalSpacer(16),
-                                                          Expanded(
-                                                            child: Center(
-                                                              child: Text(
-                                                                payByBankTransfer,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style: PayNestTheme
-                                                                    .title_2_16primaryColor
-                                                                    .copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontSize:
-                                                                      sizes.fontRatio *
-                                                                          14,
-                                                                  color: PayNestTheme
-                                                                      .primaryColor
-                                                                      .withOpacity(
-                                                                          0.5),
+                                                                  children: [
+                                                                    horizontalSpacer(
+                                                                        32),
+                                                                    _otherImage(
+                                                                      opacity: 1,
+                                                                      imagePath:
+                                                                          icLean,
+                                                                    ),
+                                                                    horizontalSpacer(
+                                                                        16),
+                                                                    Expanded(
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          payByBankTransfer,
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                          style: PayNestTheme
+                                                                              .title_2_16primaryColor
+                                                                              .copyWith(
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            fontSize:
+                                                                                sizes.fontRatio * 14,
+                                                                            color:
+                                                                                PayNestTheme.primaryColor,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                    horizontalSpacer(
+                                                                        16),
+                                                                  ],
                                                                 ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          horizontalSpacer(16),
-                                                        ],
-                                                      ),
                                                     ),
                                                   )
                                                 : const SizedBox.shrink(),
@@ -1064,6 +1140,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         children: [
                                                           horizontalSpacer(32),
                                                           _otherImage(
+                                                            opacity: 0.5,
                                                             imagePath:
                                                                 icPostPay,
                                                           ),
@@ -1221,6 +1298,128 @@ class _PayNowPageState extends State<PayNowPage> {
     );
   }
 
+  Future onLeanPaymentTap() async {
+    var res = await APIService().leanPayment();
+    var decoded = jsonDecode(res);
+    LeanPaymentModel leanPaymentModel = LeanPaymentModel.fromJson(decoded);
+    appToken = leanPaymentModel.response!.leanAppToken.toString();
+    customerId = leanPaymentModel.response!.leanCustomerId.toString();
+    if (!leanPaymentModel.status!) {
+      final jwt = JWT(
+        {
+          "app_token": appToken,
+          "customer_id": customerId,
+        },
+      );
+      final token = jwt.sign(
+        SecretKey('connection_token'),
+        algorithm: JWTAlgorithm.HS256,
+        expiresIn: Duration(minutes: 5),
+      );
+
+      final value = await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => LeanWebView(
+            title: "LEAN PAYMENT",
+            leanUrl:
+                "https://staging.paynestschools.ae/leanTest/leanConnect",
+            jwt: token,
+          ),
+        ),
+      );
+      if (value != null && value as bool) {
+        var data = {
+          "schoolId": int.parse(
+            schoolIDController.text,
+          ),
+          "amount": amountController.text,
+          "studentId": studentIDController.text,
+        };
+        var createPaymentIntent = await APIService().createPaymentIntent(
+          jsonEncode(data),
+        );
+        var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+        CreatePaymentIntentModel createPaymentIntentModel =
+            CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+        if (createPaymentIntentModel.status!) {
+          appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+          paymentIntentId =
+              createPaymentIntentModel.data!.paymentIntentId.toString();
+          await _pay(
+            model: createPaymentIntentModel,
+          );
+        }
+      } else {
+        showToast(
+          messege: 'Something went wrong !!',
+          context: context,
+          color: Colors.redAccent,
+        );
+      }
+    } else {
+      var data = {
+        "schoolId": int.parse(
+          schoolIDController.text,
+        ),
+        "amount": amountController.text,
+        "studentId": studentIDController.text,
+      };
+      var createPaymentIntent = await APIService().createPaymentIntent(
+        jsonEncode(data),
+      );
+      var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+      CreatePaymentIntentModel createPaymentIntentModel =
+          CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+      if (createPaymentIntentModel.status!) {
+        appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+        paymentIntentId =
+            createPaymentIntentModel.data!.paymentIntentId.toString();
+        await _pay(
+          model: createPaymentIntentModel,
+        );
+      }
+    }
+  }
+
+  Future<void> _pay({
+    required CreatePaymentIntentModel model,
+  }) async {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.8,
+          child: Lean.pay(
+            appToken: model.data!.leanAppToken!,
+            paymentIntentId: model.data!.paymentIntentId!,
+            country: Country.uae,
+            isSandbox: isSandbox,
+            callback: (resp) {
+              if (kDebugMode) {
+                jsonDecode(resp.toString());
+                LeanServerResponse leanResponse = LeanServerResponse.fromJson(
+                  jsonDecode(resp.toString()),
+                );
+                showToast(
+                  messege: leanResponse.message ?? '',
+                  context: context,
+                  color: leanResponse.status == 'SUCCESS'
+                      ? Colors.green
+                      : Colors.redAccent,
+                );
+              }
+              Navigator.pop(context);
+            },
+            actionCancelled: (){
+              Navigator.pop(context);
+            } ,
+          ),
+        );
+      },
+    );
+  }
+
   void onPress() async {
     if (studentController.myStudentData.value.status &&
         int.parse(amountController.text) > 0) {
@@ -1340,9 +1539,9 @@ class _PayNowPageState extends State<PayNowPage> {
     );
   }
 
-  Widget _otherImage({required String imagePath}) {
+  Widget _otherImage({required String imagePath, required double opacity}) {
     return Opacity(
-      opacity: 0.5,
+      opacity: opacity,
       child: Container(
         height: sizes.heightRatio * 26,
         width: sizes.widthRatio * 70,

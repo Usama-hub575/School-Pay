@@ -50,6 +50,12 @@ class APIService {
   static var partialPay = "/api/parent/updateFeeBalance";
   static var payNow = "/schoolpay-transactions/PaymentInitiator.php";
 
+
+  ///Lean Payment
+  static var leanPaymentEndPoint = "/api/parent/getLeanData";
+  static var postBankSourceEndPoint = "/api/parent/postBankSource";
+  static var createLeanPaymentIntentEndPoint = "/api/parent/createLeanPaymentIntent";
+
   /// To set payment data to server
   // static var createTransaction = "/api/transaction";
   static var createTransaction = "/api/transaction/mobile";
@@ -126,6 +132,61 @@ class APIService {
     var response = await client.get(
       endPoint,
     );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+  /// * Lean Payment * ///
+  Future leanPayment() async {
+    var endPoint = Uri.parse("$baseUrl$leanPaymentEndPoint");
+    var response = await client.get(
+      endPoint,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  Future postBankSource(data) async {
+    var endPoint = Uri.parse("https://fed4-154-192-36-44.ap.ngrok.io$postBankSourceEndPoint");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+      body: data,
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  /// * Create Payment Intent * ///
+  Future createPaymentIntent(data) async {
+    var endPoint = Uri.parse("$baseUrl$createLeanPaymentIntentEndPoint");
+    var response = await client.post(
+      endPoint,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+      body: data,
+    );
+    // print("Login Data");
     print(response.body);
     if (response.statusCode == 200) {
       return response.body;

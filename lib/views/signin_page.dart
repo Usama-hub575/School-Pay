@@ -209,9 +209,9 @@ class _SignInPageState extends State<SignInPage> {
                               return 'Please Enter Password';
                             }
                             // Check if the entered email has the right format
-                            if (value.trim().length < 5) {
-                              return 'Password Must Not Be Less Than 5';
-                            }
+                            // if (value.trim().length < 4) {
+                            //   return 'Password Must Not Be Less Than 5';
+                            // }
                             // Return null if the entered email is valid
                             return null;
                           },

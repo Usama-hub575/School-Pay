@@ -142,33 +142,34 @@ class _InitializerScreenState extends State<InitializerScreen> {
 
   void getForcefulAppUpdateDialog() {
     CustomAlertDialog.forcefulAppUpdateDialog(
-        context: context,
-        title: "Update!",
-        message:
-            "For More Features And Better User Experience, You Need To Update This App",
-        showCrossIcon: false,
-        updateButtonAction: () {
-          if (Platform.isIOS) {
+      context: context,
+      title: "Update!",
+      message:
+          "For More Features And Better User Experience, You Need To Update This App",
+      showCrossIcon: false,
+      updateButtonAction: () {
+        if (Platform.isIOS) {
+          setState(() {
+            StoreRedirect.redirect(iOSAppId: iosAppId);
+          });
+        } else if (Platform.isAndroid) {
+          if (appPackage == huaweiPackageName) {
             setState(() {
-              StoreRedirect.redirect(iOSAppId: iosAppId);
+              StoreRedirect.redirect(
+                androidAppId: appPackage,
+              );
             });
-          } else if (Platform.isAndroid) {
-            if (appPackage == huaweiPackageName) {
-              setState(() {
-                StoreRedirect.redirect(
-                  androidAppId: appPackage,
-                );
-              });
-            } else if (appPackage == googlePlayPackageName) {
-              setState(() {
-                StoreRedirect.redirect(
-                  androidAppId: appPackage,
-                );
-              });
-            }
+          } else if (appPackage == googlePlayPackageName) {
+            setState(() {
+              StoreRedirect.redirect(
+                androidAppId: appPackage,
+              );
+            });
           }
-        },
-        locale: languageIndex);
+        }
+      },
+      locale: languageIndex,
+    );
   }
 
   Future<void> getCountries() async {
