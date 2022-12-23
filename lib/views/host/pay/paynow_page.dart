@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
@@ -1417,31 +1418,59 @@ class _PayNowPageState extends State<PayNowPage> {
     LeanPaymentModel leanPaymentModel = LeanPaymentModel.fromJson(decoded);
     appToken = leanPaymentModel.response!.leanAppToken.toString();
     customerId = leanPaymentModel.response!.leanCustomerId.toString();
-    final jwt = JWT(
-      {
-        "app_token": appToken,
-        "customer_id": customerId,
-      },
-    );
-    final token = jwt.sign(
-      SecretKey('connection_token'),
-      algorithm: JWTAlgorithm.HS256,
-      expiresIn: Duration(minutes: 5),
-    );
-    print(jwt);
     if (!leanPaymentModel.status!) {
-      Navigator.of(context).push(
+      final jwt = JWT(
+        {
+          "app_token": appToken,
+          "customer_id": customerId,
+        },
+      );
+      final token = jwt.sign(
+        SecretKey('connection_token'),
+        algorithm: JWTAlgorithm.HS256,
+        expiresIn: Duration(minutes: 5),
+      );
+
+      final value = await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => LeanWebView(
             title: "LEAN PAYMENT",
             leanUrl:
-                "https://cd80-154-192-36-44.ap.ngrok.io/leanTest/leanConnect",
+                "https://staging.paynestschools.ae/leanTest/leanConnect",
             jwt: token,
           ),
         ),
       );
-    }
-    else {
+      if (value as bool) {
+        var data = {
+          "schoolId": int.parse(
+            schoolIDController.text,
+          ),
+          "amount": '10',
+          "studentId": studentIDController.text,
+        };
+        var createPaymentIntent = await APIService().createPaymentIntent(
+          jsonEncode(data),
+        );
+        var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+        CreatePaymentIntentModel createPaymentIntentModel =
+            CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+        if (createPaymentIntentModel.status!) {
+          appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+          paymentIntentId =
+              createPaymentIntentModel.data!.paymentIntentId.toString();
+          await _pay(
+            model: createPaymentIntentModel,
+          );
+        }
+      } else {
+        showToast(
+          messege: 'Something went wrong !!',
+          context: context,
+          color: Colors.redAccent,
+        );
+      }
+    } else {
       var data = {
         "schoolId": int.parse(
           schoolIDController.text,

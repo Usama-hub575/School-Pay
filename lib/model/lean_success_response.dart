@@ -16,6 +16,18 @@ class LeanSuccessResponse {
         this.bank,
         this.method});
 
+  static LeanSuccessResponse empty(){
+    return LeanSuccessResponse(
+      secondaryStatus: '',
+      status: '',
+      method: '',
+      lastApiResponse: '',
+      exitPoint: '',
+      message: '',
+      bank: Bank.empty(),
+    );
+  }
+
   LeanSuccessResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     secondaryStatus = json['secondary_status'];
@@ -46,6 +58,13 @@ class Bank {
   bool? isSupported;
 
   Bank({this.bankIdentifier, this.isSupported});
+
+  static Bank empty(){
+    return Bank(
+      isSupported: false,
+      bankIdentifier: '',
+    );
+  }
 
   Bank.fromJson(Map<String, dynamic> json) {
     bankIdentifier = json['bank_identifier'];
