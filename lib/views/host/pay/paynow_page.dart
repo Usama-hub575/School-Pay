@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:encrypt/encrypt.dart' as encryption;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
@@ -20,28 +18,19 @@ import 'package:paynest_flutter_app/controller/updatebank_response_controller.da
 import 'package:paynest_flutter_app/extension/stack_extension.dart';
 import 'package:paynest_flutter_app/model/create_payment_intent_model.dart';
 import 'package:paynest_flutter_app/model/datamodel/paynowtransaction_detail_model.dart';
-import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/model/lean_payment_model.dart';
-import 'package:paynest_flutter_app/model/lean_success_response.dart';
-import 'package:paynest_flutter_app/model/post_bank_source_payload.dart';
-import 'package:paynest_flutter_app/model/studentlist_res_model.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
 import 'package:paynest_flutter_app/views/host/transactiondetails/paynowltransactiondetails_page.dart';
-import 'package:paynest_flutter_app/views/webview/lean_web_view.dart';
 import 'package:paynest_flutter_app/views/webview/webview.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
-import '../../../constants/constants.dart';
 import '../../../model/lean_response.dart';
 import '../../../model/mystudents_resp_model.dart';
-import '../../../res/assets.dart';
 import '../../../res/res.dart';
 import '../../../widgets/amount_formater.dart';
 import '../../../widgets/full_screen_loader.dart';
 import '../../../widgets/inkwell_widget.dart';
 import '../../../widgets/toast.dart';
-import 'lean_payment_screen.dart';
 
 class PayNowPage extends StatefulWidget {
   final String whichStack;
@@ -129,6 +118,52 @@ class _PayNowPageState extends State<PayNowPage> {
     });
 
     setState(() {});
+  }
+
+  _connect() {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.red,
+        context: context,
+        builder: (context) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: Lean.connect(
+              appToken: appToken,
+              customerId: customerId,
+              permissions: permissions,
+              isSandbox: isSandbox,
+              callback: (resp) async{
+                var results = jsonDecode(resp);
+                if (results['status'] == 'SUCCESS') {
+                  var data = {
+                    "schoolId": int.parse(
+                      schoolIDController.text,
+                    ),
+                    "amount": amountController.text,
+                    "studentId": studentIDController.text,
+                  };
+                  var createPaymentIntent = await APIService().createPaymentIntent(
+                    jsonEncode(data),
+                  );
+                  var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+                  CreatePaymentIntentModel createPaymentIntentModel =
+                  CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+                  if (createPaymentIntentModel.status!) {
+                    appToken = createPaymentIntentModel.data!.leanAppToken.toString();
+                    paymentIntentId =
+                        createPaymentIntentModel.data!.paymentIntentId.toString();
+                    await _pay(
+                      model: createPaymentIntentModel,
+                    );
+                  }
+                }
+                Navigator.pop(context);
+              },
+              actionCancelled: () => Navigator.pop(context),
+            ),
+          );
+        });
   }
 
   List<StudentElement> _searchResult = [];
@@ -1305,56 +1340,7 @@ class _PayNowPageState extends State<PayNowPage> {
     appToken = leanPaymentModel.response!.leanAppToken.toString();
     customerId = leanPaymentModel.response!.leanCustomerId.toString();
     if (!leanPaymentModel.status!) {
-      final jwt = JWT(
-        {
-          "app_token": appToken,
-          "customer_id": customerId,
-        },
-      );
-      final token = jwt.sign(
-        SecretKey('connection_token'),
-        algorithm: JWTAlgorithm.HS256,
-        expiresIn: Duration(minutes: 5),
-      );
-
-      final value = await Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => LeanWebView(
-            title: "LEAN PAYMENT",
-            leanUrl: "https://staging.paynestschools.ae/leanTest/leanConnect",
-            jwt: token,
-          ),
-        ),
-      );
-      if (value != null && value as bool) {
-        var data = {
-          "schoolId": int.parse(
-            schoolIDController.text,
-          ),
-          "amount": amountController.text,
-          "studentId": studentIDController.text,
-        };
-        var createPaymentIntent = await APIService().createPaymentIntent(
-          jsonEncode(data),
-        );
-        var leanPaymentDecoded = jsonDecode(createPaymentIntent);
-        CreatePaymentIntentModel createPaymentIntentModel =
-            CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
-        if (createPaymentIntentModel.status!) {
-          appToken = createPaymentIntentModel.data!.leanAppToken.toString();
-          paymentIntentId =
-              createPaymentIntentModel.data!.paymentIntentId.toString();
-          await _pay(
-            model: createPaymentIntentModel,
-          );
-        }
-      } else {
-        showToast(
-          messege: 'Something went wrong !!',
-          context: context,
-          color: Colors.redAccent,
-        );
-      }
+      _connect();
     } else {
       var data = {
         "schoolId": int.parse(

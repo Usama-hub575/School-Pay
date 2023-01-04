@@ -19,6 +19,7 @@ import '../../../controller/myStudent_controller.dart';
 import '../../../controller/updatebank_response_controller.dart';
 import '../../../model/datamodel/paynowtransaction_detail_model.dart';
 import '../../../model/datamodel/singlestudent_model.dart';
+import '../../../model/lean_success_response.dart';
 import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/back_button.dart';
@@ -61,7 +62,8 @@ class _PaymentMethodState extends State<PaymentMethod> {
     Permission.identity,
     Permission.transactions,
     Permission.balance,
-    Permission.accounts
+    Permission.accounts,
+    Permission.payments
   ];
   var isSandbox = true;
 
@@ -271,18 +273,16 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     ),
                     verticalSpacer(8),
                     InkWellWidget(
-                        onTap: () {
-                          if (widget.payment <=
-                              0) {
-                            showToast(
-                                messege:
-                                "Amount Should Be Grater Then 0!",
-                                context: context,
-                                color: Colors.red);
-                          } else {
-                            onLeanPaymentTap();
-                          }
-                        },
+                      onTap: () {
+                        if (widget.payment <= 0) {
+                          showToast(
+                              messege: "Amount Should Be Grater Then 0!",
+                              context: context,
+                              color: Colors.red);
+                        } else {
+                          onLeanPaymentTap();
+                        }
+                      },
                       child: Container(
                         width: double.infinity,
                         margin: EdgeInsets.symmetric(
@@ -403,6 +403,52 @@ class _PaymentMethodState extends State<PaymentMethod> {
     );
   }
 
+  _connect() {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.red,
+        context: context,
+        builder: (context) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: Lean.connect(
+              appToken: appToken,
+              customerId: customerId,
+              permissions: permissions,
+              isSandbox: isSandbox,
+              callback: (resp) async {
+                var results = jsonDecode(resp);
+                if (results['status'] == 'SUCCESS') {
+                  var data = {
+                    "schoolId": widget.singleStudentModel.student!.schoolId,
+                    "amount": widget.payment,
+                    "studentId": widget.singleStudentModel.studentId,
+                  };
+                  var createPaymentIntent =
+                  await APIService().createPaymentIntent(
+                    jsonEncode(data),
+                  );
+                  var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+                  CreatePaymentIntentModel createPaymentIntentModel =
+                  CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+                  if (createPaymentIntentModel.status!) {
+                    appToken =
+                        createPaymentIntentModel.data!.leanAppToken.toString();
+                    paymentIntentId = createPaymentIntentModel
+                        .data!.paymentIntentId
+                        .toString();
+                    await _pay(
+                      model: createPaymentIntentModel,
+                    );
+                  }
+                }
+                Navigator.pop(context);
+              },
+              actionCancelled: () => Navigator.pop(context),
+            ),
+          );
+        });
+  }
 
   Future onLeanPaymentTap() async {
     var res = await APIService().leanPayment();
@@ -411,55 +457,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
     appToken = leanPaymentModel.response!.leanAppToken.toString();
     customerId = leanPaymentModel.response!.leanCustomerId.toString();
     if (!leanPaymentModel.status!) {
-      final jwt = JWT(
-        {
-          "app_token": appToken,
-          "customer_id": customerId,
-        },
-      );
-      final token = jwt.sign(
-        SecretKey('connection_token'),
-        algorithm: JWTAlgorithm.HS256,
-        expiresIn: Duration(minutes: 5),
-      );
-
-      final value = await Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => LeanWebView(
-            title: "LEAN PAYMENT",
-            leanUrl:
-            "https://staging.paynestschools.ae/leanTest/leanConnect",
-            jwt: token,
-          ),
-        ),
-      );
-      if (value != null && value as bool) {
-        var data = {
-          "schoolId": widget.singleStudentModel.student!.schoolId,
-          "amount": widget.payment,
-          "studentId": widget.singleStudentModel.studentId,
-        };
-        var createPaymentIntent = await APIService().createPaymentIntent(
-          jsonEncode(data),
-        );
-        var leanPaymentDecoded = jsonDecode(createPaymentIntent);
-        CreatePaymentIntentModel createPaymentIntentModel =
-        CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
-        if (createPaymentIntentModel.status!) {
-          appToken = createPaymentIntentModel.data!.leanAppToken.toString();
-          paymentIntentId =
-              createPaymentIntentModel.data!.paymentIntentId.toString();
-          await _pay(
-            model: createPaymentIntentModel,
-          );
-        }
-      } else {
-        showToast(
-          messege: 'Something went wrong !!',
-          context: context,
-          color: Colors.redAccent,
-        );
-      }
+      _connect();
     } else {
       var data = {
         "schoolId": widget.singleStudentModel.student!.schoolId,
@@ -471,7 +469,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
       );
       var leanPaymentDecoded = jsonDecode(createPaymentIntent);
       CreatePaymentIntentModel createPaymentIntentModel =
-      CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+          CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
       if (createPaymentIntentModel.status!) {
         appToken = createPaymentIntentModel.data!.leanAppToken.toString();
         paymentIntentId =
@@ -498,29 +496,29 @@ class _PaymentMethodState extends State<PaymentMethod> {
             country: Country.uae,
             isSandbox: isSandbox,
             callback: (resp) {
-                jsonDecode(resp.toString());
-                LeanServerResponse leanResponse = LeanServerResponse.fromJson(
-                  jsonDecode(resp.toString()),
-                );
-                showToast(
-                  messege: leanResponse.message ?? '',
-                  context: context,
-                  color: leanResponse.status == 'SUCCESS'
-                      ? Colors.green
-                      : Colors.redAccent,
-                );
+              jsonDecode(resp.toString());
+              LeanServerResponse leanResponse = LeanServerResponse.fromJson(
+                jsonDecode(resp.toString()),
+              );
+              showToast(
+                messege: leanResponse.message ?? '',
+                context: context,
+                color: leanResponse.status == 'SUCCESS'
+                    ? Colors.green
+                    : Colors.redAccent,
+              );
               Navigator.pop(context);
-              if(leanResponse.status == 'SUCCESS'){
+              if (leanResponse.status == 'SUCCESS') {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   '/DashboardPage',
-                      (Route<dynamic> route) => false,
+                  (Route<dynamic> route) => false,
                 );
               }
             },
-            actionCancelled: (){
+            actionCancelled: () {
               Navigator.pop(context);
-            } ,
+            },
           ),
         );
       },
@@ -605,12 +603,12 @@ class _PaymentMethodState extends State<PaymentMethod> {
             );
           }
         }
-      } else if(result == null) {
+      } else if (result == null) {
         isLoading = false;
         setState(() {});
         Future.delayed(
           Duration(seconds: 1),
-              () {
+          () {
             showToast(
               context: context,
               messege: 'Something went wrong',
