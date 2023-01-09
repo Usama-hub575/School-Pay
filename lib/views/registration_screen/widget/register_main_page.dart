@@ -340,7 +340,8 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           });
                           await sendOTPController.hitSendOTP(
                             emailController.text,
-                            phCodeController.text + phoneController.text,
+                            phoneController.text,
+                            phCodeController.text,
                           );
                           setState(() {
                             loading = !loading;
