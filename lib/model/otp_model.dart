@@ -14,18 +14,22 @@ class OtpModel {
   OtpModel({
     required this.email,
     required this.phone,
+    required this.dailCode,
   });
   String email;
   String phone;
+  String dailCode;
 
   factory OtpModel.fromJson(Map<String, dynamic> json) => OtpModel(
     email: json["email"],
     phone: json["phone"],
+    dailCode: '',
   );
 
   Map<String, dynamic> toJson() => {
     "email": email,
     "phone": phone,
+    'dailCode': dailCode
 
   };
 }

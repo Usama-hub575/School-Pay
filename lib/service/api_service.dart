@@ -31,8 +31,7 @@ class APIService {
   static var pinUpdate = "/api/parent/update";
   static var resetPassword = "/api/parent/resetpassword";
   static var resetPasswordByOTP = "/api/parent/resetPasswordByOtp";
-  static var studentById =
-      "/api/parent/studentById?studentId={student_id}";
+  static var studentById = "/api/parent/studentById?studentId={student_id}";
   static var forgotPassword = "/api/parent/forgotPassword";
   static var updateProfile = "/api/parent/updateProfile";
   static var getCountries = "/api/countries";
@@ -50,11 +49,11 @@ class APIService {
   static var partialPay = "/api/parent/updateFeeBalance";
   static var payNow = "/schoolpay-transactions/PaymentInitiator.php";
 
-
   ///Lean Payment
   static var leanPaymentEndPoint = "/api/parent/getLeanData";
   static var postBankSourceEndPoint = "/api/parent/postBankSource";
-  static var createLeanPaymentIntentEndPoint = "/api/parent/createLeanPaymentIntent";
+  static var createLeanPaymentIntentEndPoint =
+      "/api/parent/createLeanPaymentIntent";
 
   /// To set payment data to server
   // static var createTransaction = "/api/transaction";
@@ -139,6 +138,7 @@ class APIService {
       return response.body;
     }
   }
+
   /// * Lean Payment * ///
   Future leanPayment() async {
     var endPoint = Uri.parse("$baseUrl$leanPaymentEndPoint");
@@ -158,7 +158,8 @@ class APIService {
   }
 
   Future postBankSource(data) async {
-    var endPoint = Uri.parse("https://fed4-154-192-36-44.ap.ngrok.io$postBankSourceEndPoint");
+    var endPoint = Uri.parse(
+        "https://fed4-154-192-36-44.ap.ngrok.io$postBankSourceEndPoint");
     var response = await client.post(
       endPoint,
       headers: {

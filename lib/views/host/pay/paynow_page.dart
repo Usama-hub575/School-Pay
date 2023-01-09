@@ -122,48 +122,51 @@ class _PayNowPageState extends State<PayNowPage> {
 
   _connect() {
     showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: Colors.red,
-        context: context,
-        builder: (context) {
-          return SizedBox(
-            height: MediaQuery.of(context).size.height * 0.8,
-            child: Lean.connect(
-              appToken: appToken,
-              customerId: customerId,
-              permissions: permissions,
-              isSandbox: isSandbox,
-              callback: (resp) async{
-                var results = jsonDecode(resp);
-                if (results['status'] == 'SUCCESS') {
-                  var data = {
-                    "schoolId": int.parse(
-                      schoolIDController.text,
-                    ),
-                    "amount": amountController.text,
-                    "studentId": studentIDController.text,
-                  };
-                  var createPaymentIntent = await APIService().createPaymentIntent(
-                    jsonEncode(data),
+      isScrollControlled: true,
+      backgroundColor: Colors.red,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.8,
+          child: Lean.connect(
+            appToken: appToken,
+            customerId: customerId,
+            permissions: permissions,
+            isSandbox: isSandbox,
+            callback: (resp) async {
+              var results = jsonDecode(resp);
+              if (results['status'] == 'SUCCESS') {
+                var data = {
+                  "schoolId": int.parse(
+                    schoolIDController.text,
+                  ),
+                  "amount": amountController.text,
+                  "studentId": studentIDController.text,
+                };
+                var createPaymentIntent =
+                    await APIService().createPaymentIntent(
+                  jsonEncode(data),
+                );
+                var leanPaymentDecoded = jsonDecode(createPaymentIntent);
+                CreatePaymentIntentModel createPaymentIntentModel =
+                    CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
+                if (createPaymentIntentModel.status!) {
+                  appToken =
+                      createPaymentIntentModel.data!.leanAppToken.toString();
+                  paymentIntentId =
+                      createPaymentIntentModel.data!.paymentIntentId.toString();
+                  await _pay(
+                    model: createPaymentIntentModel,
                   );
-                  var leanPaymentDecoded = jsonDecode(createPaymentIntent);
-                  CreatePaymentIntentModel createPaymentIntentModel =
-                  CreatePaymentIntentModel.fromJson(leanPaymentDecoded);
-                  if (createPaymentIntentModel.status!) {
-                    appToken = createPaymentIntentModel.data!.leanAppToken.toString();
-                    paymentIntentId =
-                        createPaymentIntentModel.data!.paymentIntentId.toString();
-                    await _pay(
-                      model: createPaymentIntentModel,
-                    );
-                  }
                 }
-                Navigator.pop(context);
-              },
-              actionCancelled: () => Navigator.pop(context),
-            ),
-          );
-        });
+              }
+              Navigator.pop(context);
+            },
+            actionCancelled: () => Navigator.pop(context),
+          ),
+        );
+      },
+    );
   }
 
   List<StudentElement> _searchResult = [];
