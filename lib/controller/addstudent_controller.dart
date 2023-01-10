@@ -95,28 +95,6 @@ class AddStudentController extends GetxController{
     }
   }
 
-  hitAddStudentByStudentFirstName(data) async {
-    try{
-      isStudentAdded = false;
-      isLoading(true);
-      var res = await APIService().apiAddStudentByFirstName(data);
-      var decoded = jsonDecode(res);
-      AddStudentRespModel addStudentRespModel = addStudentRespModelFromJson(res);
-      addStudentData.value = addStudentRespModel;
-      if(decoded['status'] == true){
-        isStudentAdded = true;
-      }else if(decoded['status'] == false){
-        isStudentAdded = false;
-        isLoading(false);
-      }
-      addStudentData.refresh();
-    }
-    finally{
-      isLoading(false);
-    }
-  }
-
-
   addStudentWithPaynestNumber(data) async {
     try{
       isStudentAdded = false;

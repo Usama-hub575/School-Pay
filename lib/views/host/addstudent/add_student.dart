@@ -47,7 +47,7 @@ class _AddStudentState extends State<AddStudent> {
   void initState() {
     isExpanded = false;
     isLoading = false;
-    filters = widget.schoolData.payeeType == 'STUDENT' ? ['First Name', 'Last Name', 'Account Number', 'Student ID'] : ['Account Number'];
+    filters = widget.schoolData.payeeType == 'STUDENT' ? ['Name', 'Account Number', 'Student ID'] : ['Account Number'];
     super.initState();
   }
 
@@ -58,34 +58,14 @@ class _AddStudentState extends State<AddStudent> {
       return;
     }
     switch (_selectedFilter) {
-      case 'First Name':
+      case 'Name':
         if (studentListController.studentList.value.getStudent != null &&
             studentListController.studentList.value.getStudent!.rows!.length >
                 0) {
           studentListController.studentList.value.getStudent!.rows!.clear();
         }
         await studentListController.search(
-          searchBy: 'first',
-          queryParam: searchController.text,
-          schoolId: widget.schoolData.id,
-        );
-        isLoading = false;
-        if (studentListController.studentList.value.getStudent != null) {
-          studentListController.studentList.value.getStudent!.rows!
-              .forEach((studentDetails) {
-            _searchResult.add(studentDetails);
-          });
-        }
-        setState(() {});
-        break;
-      case 'Last Name':
-        if (studentListController.studentList.value.getStudent != null &&
-            studentListController.studentList.value.getStudent!.rows!.length >
-                0) {
-          studentListController.studentList.value.getStudent!.rows!.clear();
-        }
-        await studentListController.search(
-          searchBy: 'last',
+          searchBy: 'name',
           queryParam: searchController.text,
           schoolId: widget.schoolData.id,
         );

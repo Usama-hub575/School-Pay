@@ -29,7 +29,7 @@ class OtpModel {
   Map<String, dynamic> toJson() => {
     "email": email,
     "phone": phone,
-    'dailCode': dailCode
+    'dialCode': dailCode
 
   };
 }

@@ -63,6 +63,8 @@ class APIService {
       "/api/student/getByLName?LName={last_name}&schoolId={school_id}";
   static var searchByFirstName =
       "/api/student/getByFName?FName={first_name}&schoolId={school_id}";
+  static var searchByName =
+      "/api/student/getByName?Name={name}&schoolId={school_id}";
   static var searchByPID =
       "/api/student/getByPID?PID={pid}&schoolId={school_id}";
   static var searchBySID =
@@ -279,15 +281,9 @@ class APIService {
   }) async {
     var endPoint;
     String query;
-    if (searchBy == 'first') {
+    if (searchBy == 'name') {
       query =
-          searchByFirstName.replaceAll('{first_name}', queryParam).replaceAll(
-                '{school_id}',
-                schoolId.toString(),
-              );
-      endPoint = Uri.parse("$baseUrl$query");
-    } else if (searchBy == 'last') {
-      query = searchByLastName.replaceAll('{last_name}', queryParam).replaceAll(
+          searchByName.replaceAll('{name}', queryParam).replaceAll(
             '{school_id}',
             schoolId.toString(),
           );
