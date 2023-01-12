@@ -148,9 +148,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
               ),
             ),
           ),
-          shimmerValue ||
-                  transactionListController
-                      .transactionListData.value.transactions!.rows!.isEmpty
+          shimmerValue
               ? Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,

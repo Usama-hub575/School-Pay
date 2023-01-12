@@ -68,9 +68,14 @@ android {
     flavorDimensions "app"
     productFlavors {
 
-        staging {
+        dev {
             dimension "app"
             applicationId "com.paynest.schoolpay.staging"
+        }
+
+        staging {
+            dimension "app"
+            applicationId "com.paynest.schoolpay.beta"
         }
 
         production {

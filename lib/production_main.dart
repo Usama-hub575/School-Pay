@@ -4,6 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:paynest_flutter_app/constants/constants.dart';
 
 import 'Utils/sharedpref.dart';
 import 'main.dart';
@@ -28,6 +31,15 @@ late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  Future.wait([
+    precachePicture(
+      ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder,
+        icSchoolBuilding,
+      ),
+      null,
+    ),
+  ]);
   getFCMToken();
   MySharedPreferences.instance;
   FirebaseMessaging.instance.getInitialMessage();

@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
@@ -60,6 +62,15 @@ void main() async {
   await Firebase.initializeApp();
   FCM().init();
   initializeLocalNotifications();
+  Future.wait([
+    precachePicture(
+      ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder,
+        icSchoolBuilding,
+      ),
+      null,
+    ),
+  ]);
   getFCMToken();
   MySharedPreferences.instance;
   userController = Get.put(

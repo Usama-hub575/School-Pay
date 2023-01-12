@@ -67,7 +67,7 @@ class SingleTransaction extends StatelessWidget {
         child: Row(
           children: [
             Flexible(
-              fit: FlexFit.loose,
+              fit: FlexFit.tight,
               flex: 12,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +91,7 @@ class SingleTransaction extends StatelessWidget {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Text(
               'AED ${transactionsRow.amount}',
               style: PayNestTheme.h2_12blueAccent.copyWith(

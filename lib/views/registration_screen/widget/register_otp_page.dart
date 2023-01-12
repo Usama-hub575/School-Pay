@@ -175,7 +175,10 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
                       });
                       widget.onSuccess();
                     } else {
-                      showToast(messege: 'Entered OTP is wrong', context: context, color: PayNestTheme.red);
+                      showToast(
+                          messege: 'Entered OTP is wrong',
+                          context: context,
+                          color: PayNestTheme.red);
                       // otpController.clear();
                     }
                   }
@@ -185,9 +188,8 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
                     const Spacer(),
                     Text(
                       next,
-                      style: PayNestTheme.subtitle16white.copyWith(
-                        fontSize: sizes.fontRatio * 14
-                      ),
+                      style: PayNestTheme.subtitle16white
+                          .copyWith(fontSize: sizes.fontRatio * 14),
                     ),
                     const Spacer(),
                     !verifyOTPController.isLoading.value
