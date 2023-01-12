@@ -16,6 +16,7 @@ import 'package:store_redirect/store_redirect.dart';
 import '../Utils/sharedpref.dart';
 import '../constants/constants.dart';
 import '../controller/user_controller.dart';
+import '../main.dart';
 import '../res/res.dart';
 import '../widgets/custom_alert_dialog.dart';
 import 'package:video_player/video_player.dart';
@@ -278,6 +279,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
     );
     try {
       await remoteConfig.fetchAndActivate();
+      isLeanEnable = remoteConfig.getBool('is_lean_enable');
       APIService.baseUrl = Uri.parse(remoteConfig.getString(baseUrl));
       APIService.paymentGatewayUrl =
           Uri.parse(remoteConfig.getString(paymentGatewayUrl));

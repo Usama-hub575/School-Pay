@@ -16,6 +16,7 @@ import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/paynow_controller.dart';
 import 'package:paynest_flutter_app/controller/updatebank_response_controller.dart';
 import 'package:paynest_flutter_app/extension/stack_extension.dart';
+import 'package:paynest_flutter_app/main.dart';
 import 'package:paynest_flutter_app/model/create_payment_intent_model.dart';
 import 'package:paynest_flutter_app/model/datamodel/paynowtransaction_detail_model.dart';
 import 'package:paynest_flutter_app/model/lean_payment_model.dart';
@@ -640,12 +641,29 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         .text.isNotEmpty
                                                 ? InkWellWidget(
                                                     onTap: () {
-                                                      showToast(
+                                                      if (isLeanEnable) {
+                                                        if (int.parse(
+                                                                amountController
+                                                                    .text) <=
+                                                            0) {
+                                                          showToast(
+                                                              messege:
+                                                                  "Amount Should Be Grater Then 0!",
+                                                              context: context,
+                                                              color:
+                                                                  Colors.red);
+                                                        } else {
+                                                          onLeanPaymentTap();
+                                                        }
+                                                      } else {
+                                                        showToast(
                                                           context: context,
                                                           messege:
-                                                              'Coming Soon!',
+                                                              'Service Unavailable !!',
                                                           color: PayNestTheme
-                                                              .primaryColor);
+                                                              .primaryColor,
+                                                        );
+                                                      }
                                                     },
                                                     child: Container(
                                                       width: double.infinity,
@@ -659,33 +677,66 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         vertical:
                                                             verticalValue(12),
                                                       ),
-                                                      decoration: BoxDecoration(
-                                                        color: PayNestTheme
-                                                            .colorWhite,
-                                                        border: Border.all(
-                                                          color: PayNestTheme
-                                                              .primaryColor,
-                                                        ),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: Colors.grey
-                                                                .withOpacity(
-                                                                    0.5),
-                                                            spreadRadius: 0.5,
-                                                            blurRadius: 5,
-                                                            offset:
-                                                                Offset(1, 3),
-                                                          ),
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
+                                                      decoration: isLeanEnable
+                                                          ? BoxDecoration(
+                                                              color: PayNestTheme
+                                                                  .colorWhite,
+                                                              border:
+                                                                  Border.all(
+                                                                color: PayNestTheme
+                                                                    .primaryColor,
+                                                              ),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .withOpacity(
+                                                                          0.5),
+                                                                  spreadRadius:
+                                                                      0.5,
+                                                                  blurRadius: 5,
+                                                                  offset:
+                                                                      Offset(
+                                                                          1, 3),
+                                                                ),
+                                                              ],
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          16),
+                                                            )
+                                                          : BoxDecoration(
+                                                              color: PayNestTheme
+                                                                  .colorWhite,
+                                                              border:
+                                                                  Border.all(
+                                                                color: PayNestTheme
+                                                                    .primaryColor,
+                                                              ),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .withOpacity(
+                                                                          0.5),
+                                                                  spreadRadius:
+                                                                      0.5,
+                                                                  blurRadius: 5,
+                                                                  offset:
+                                                                      Offset(
+                                                                          1, 3),
+                                                                ),
+                                                              ],
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          16),
+                                                            ),
                                                       child: Row(
                                                         children: [
                                                           horizontalSpacer(32),
                                                           _otherImage(
-                                                            opacity: 1,
+                                                            opacity: isLeanEnable ? 1 : 0.5,
                                                             imagePath: icLean,
                                                           ),
                                                           horizontalSpacer(16),
@@ -696,19 +747,21 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
-                                                                style: PayNestTheme
-                                                                    .title_2_16primaryColor
+                                                                style: isLeanEnable
+                                                                    ? PayNestTheme.title_2_16primaryColor
                                                                     .copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontSize:
-                                                                      sizes.fontRatio *
-                                                                          14,
-                                                                  color: PayNestTheme
-                                                                      .primaryColor
+                                                                  fontWeight: FontWeight.w500,
+                                                                  fontSize: sizes.fontRatio * 14,
+                                                                  color: PayNestTheme.primaryColor,
+                                                                )
+                                                                    : PayNestTheme.title_2_16primaryColor
+                                                                    .copyWith(
+                                                                  fontWeight: FontWeight.w500,
+                                                                  fontSize: sizes.fontRatio * 14,
+                                                                  color: PayNestTheme.primaryColor
                                                                       .withOpacity(
-                                                                          0.5),
+                                                                    0.5,
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
@@ -727,11 +780,11 @@ class _PayNowPageState extends State<PayNowPage> {
                                                 ? InkWellWidget(
                                                     onTap: () {
                                                       showToast(
-                                                          messege:
-                                                              'Coming Soon!',
-                                                          context: context,
-                                                          color: PayNestTheme
-                                                              .primaryColor);
+                                                        messege: 'Coming Soon!',
+                                                        context: context,
+                                                        color: PayNestTheme
+                                                            .primaryColor,
+                                                      );
                                                     },
                                                     child: Container(
                                                       width: double.infinity,
@@ -795,7 +848,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                   color: PayNestTheme
                                                                       .primaryColor
                                                                       .withOpacity(
-                                                                          0.5),
+                                                                    0.5,
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
@@ -1046,17 +1100,28 @@ class _PayNowPageState extends State<PayNowPage> {
                                             payAbleAmount != '0'
                                                 ? InkWellWidget(
                                                     onTap: () {
-                                                      if (int.parse(
-                                                              amountController
-                                                                  .text) <=
-                                                          0) {
-                                                        showToast(
-                                                            messege:
-                                                                "Amount Should Be Grater Then 0!",
-                                                            context: context,
-                                                            color: Colors.red);
+                                                      if (isLeanEnable) {
+                                                        if (int.parse(
+                                                                amountController
+                                                                    .text) <=
+                                                            0) {
+                                                          showToast(
+                                                              messege:
+                                                                  "Amount Should Be Grater Then 0!",
+                                                              context: context,
+                                                              color:
+                                                                  Colors.red);
+                                                        } else {
+                                                          onLeanPaymentTap();
+                                                        }
                                                       } else {
-                                                        onLeanPaymentTap();
+                                                        showToast(
+                                                          messege:
+                                                              'Service Unavailable !!',
+                                                          context: context,
+                                                          color: PayNestTheme
+                                                              .primaryColor,
+                                                        );
                                                       }
                                                     },
                                                     child: Container(
@@ -1097,7 +1162,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         children: [
                                                           horizontalSpacer(32),
                                                           _otherImage(
-                                                            opacity: 1,
+                                                            opacity: isLeanEnable ? 1 : 0.5,
                                                             imagePath: icLean,
                                                           ),
                                                           horizontalSpacer(16),
@@ -1108,17 +1173,21 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
-                                                                style: PayNestTheme
-                                                                    .title_2_16primaryColor
+                                                                style: isLeanEnable
+                                                                    ? PayNestTheme.title_2_16primaryColor
                                                                     .copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontSize:
-                                                                      sizes.fontRatio *
-                                                                          14,
-                                                                  color: PayNestTheme
-                                                                      .primaryColor,
+                                                                  fontWeight: FontWeight.w500,
+                                                                  fontSize: sizes.fontRatio * 14,
+                                                                  color: PayNestTheme.primaryColor,
+                                                                )
+                                                                    : PayNestTheme.title_2_16primaryColor
+                                                                    .copyWith(
+                                                                  fontWeight: FontWeight.w500,
+                                                                  fontSize: sizes.fontRatio * 14,
+                                                                  color: PayNestTheme.primaryColor
+                                                                      .withOpacity(
+                                                                    0.5,
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),

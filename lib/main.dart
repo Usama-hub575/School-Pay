@@ -10,6 +10,7 @@ import 'package:paynest_flutter_app/views/registration_screen/register_page.dart
 import 'package:paynest_flutter_app/views/signin_page.dart';
 import 'package:paynest_flutter_app/views/welcome_page.dart';
 
+bool isLeanEnable = false;
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 

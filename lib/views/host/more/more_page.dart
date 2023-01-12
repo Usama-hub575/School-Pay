@@ -371,12 +371,7 @@ class _MorePageState extends State<MorePage> {
                               vertical: verticalValue(16),
                             )),
                         onPressed: () {
-                          storage.removeAll();
-                          // storage.removeValue(SharedPrefKeys.userEmail);
-                          // storage.removeValue(SharedPrefKeys.userPassword);
-                          // storage.removeValue(SharedPrefKeys.fcmToken);
                           Navigator.of(context).pushAndRemoveUntil(
-                            // the new route
                             MaterialPageRoute(
                               builder: (BuildContext context) => WelcomePage(),
                             ),
