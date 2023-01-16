@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -12,7 +13,9 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
+import 'package:paynest_flutter_app/res/constants.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/dashboard.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'Utils/sharedpref.dart';
 import 'main.dart';
@@ -60,6 +63,11 @@ FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await SentryFlutter.init((options) {
+    options.dsn = AppConstants.DSN;
+    options.environment = AppConstants.sentryEnvironment;
+    options.attachScreenshot = true;
+  });
   FCM().init();
   initializeLocalNotifications();
   Future.wait([
@@ -76,7 +84,17 @@ void main() async {
   userController = Get.put(
     UserController(),
   );
-  runApp(MyApp());
+  runZonedGuarded(
+        () {
+      runApp(MyApp());
+    },
+        (error, stack) async {
+      await Sentry.captureException(
+        error,
+        stackTrace: stack,
+      );
+    },
+  );
 }
 
 void initializeLocalNotifications() async {

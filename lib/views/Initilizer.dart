@@ -45,7 +45,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
   void initState() {
     getLocalPackageInfo();
     setUpRemoteConfig();
-    // getCountries();
+    getCountries();
     videoPlayerController = VideoPlayerController.asset(welcomeVideo);
     videoPlayerController.initialize().then((value) {
       videoPlayerController.play();
@@ -174,6 +174,12 @@ class _InitializerScreenState extends State<InitializerScreen> {
   }
 
   Future<void> getCountries() async {
+    APIService.baseUrl = Uri.parse(
+      remoteConfig.getString(baseUrl),
+    );
+    APIService.paymentGatewayUrl = Uri.parse(
+      remoteConfig.getString(paymentGatewayUrl),
+    );
     try {
       if (storage.getStringValue(SharedPrefKeys.userEmail).isNotEmpty &&
           storage.getStringValue(SharedPrefKeys.userPassword).isNotEmpty) {

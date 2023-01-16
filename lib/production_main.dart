@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +9,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
+import 'package:paynest_flutter_app/res/constants.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'Utils/sharedpref.dart';
 import 'main.dart';
@@ -31,6 +35,11 @@ late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await SentryFlutter.init((options) {
+    options.dsn = AppConstants.DSN;
+    options.environment = AppConstants.sentryEnvironment;
+    options.attachScreenshot = true;
+  });
   Future.wait([
     precachePicture(
       ExactAssetPicture(
@@ -103,7 +112,15 @@ void main() async {
     sound: true,
   );
 
-  runApp(MyApp());
+  runZonedGuarded(
+    () {
+      runApp(MyApp());
+    },
+    (error, stack) async {
+      await Sentry.captureException(
+        error,
+        stackTrace: stack,
+      );
+    },
+  );
 }
-
-
