@@ -11,7 +11,6 @@ import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
-import 'package:paynest_flutter_app/widgets/blue_back_button.dart';
 import 'package:paynest_flutter_app/widgets/inkwell_widget.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:paynest_flutter_app/widgets/toast.dart';

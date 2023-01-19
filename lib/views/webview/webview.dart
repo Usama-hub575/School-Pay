@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
-import 'package:paynest_flutter_app/controller/updatebank_response_controller.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/toast.dart';
@@ -31,11 +30,8 @@ class MyWebView extends StatefulWidget {
 }
 
 class _MyWebViewState extends State<MyWebView> {
-  final SetBankResponseController sbrController =
-      Get.find<SetBankResponseController>();
   final MyStudentController studentController = Get.find<MyStudentController>();
 
-  // final Completer<WebViewController> _controller = Completer<WebViewController>();
   WebViewController? _controller = null;
 
   String url = "";
@@ -62,7 +58,11 @@ class _MyWebViewState extends State<MyWebView> {
         backgroundColor: PayNestTheme.primaryColor,
         title: Text(widget.title, style: PayNestTheme.title20white),
         centerTitle: true,
-        leading: BackButton(),
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(context).pop(false);
+          },
+        ),
         automaticallyImplyLeading: false,
       ),
       body: WebView(
@@ -71,30 +71,29 @@ class _MyWebViewState extends State<MyWebView> {
         onWebViewCreated: (WebViewController webViewController) =>
             _controller = webViewController,
         onProgress: (value) {},
-        onPageStarted: (url) {
-          print('on page start allowing navigation to $url');
-          if (url ==
-              "https://discoveritech.com/BorderPay_Payment_Api/ReceiveResult.php") {
-            Navigator.pop(context);
-          }
-        },
+        onPageStarted: (url) {},
         onPageFinished: (url) async {
           print('on page finish allowing navigation to $url');
-          // 'https://discoveritech.com/schoolpay-transactions/PaymentInitiator.php'
           String comparedGatewayUrl = gateway.toString() + "-receive?";
           if (url.contains(comparedGatewayUrl)) {
             print('got it');
             isCodeReceived = true;
-            var CBDReferenceNo =
-                getResponse(Uri.parse(url).queryParameters['string'] ?? '');
-            print("This is Parsed");
-            print(Uri.parse(url).queryParameters['string']);
-            if (CBDReferenceNo != null) {
-              Navigator.of(context).pop(CBDReferenceNo);
+            // var CBDReferenceNo =
+            //     getResponse(Uri.parse(url).queryParameters['string'] ?? '');
+            if (Uri.parse(url).queryParameters['status'] != null) {
+              Navigator.of(context).pop(
+                Uri.parse(url).queryParameters['status'] == 'true'
+                    ? true
+                    : false,
+              );
             } else {
-              var decoded = jsonDecode(CBDReferenceNo);
-              !sbrController.isLoading.value ? Navigator.pop(context) : null;
-              showToast(messege: decoded['Response']['Header']['ResponseMsg'], context: context, color: PayNestTheme.red);
+              Navigator.of(context).pop(false);
+              // var decoded = jsonDecode(CBDReferenceNo);
+              // showToast(
+              //   messege: decoded['Response']['Header']['ResponseMsg'],
+              //   context: context,
+              //   color: PayNestTheme.red,
+              // );
             }
           }
         },

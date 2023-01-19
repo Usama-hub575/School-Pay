@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:encrypt/encrypt.dart' as encryption;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +13,6 @@ import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/createtransaction_resp_controller.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/paynow_controller.dart';
-import 'package:paynest_flutter_app/controller/updatebank_response_controller.dart';
 import 'package:paynest_flutter_app/extension/stack_extension.dart';
 import 'package:paynest_flutter_app/main.dart';
 import 'package:paynest_flutter_app/model/create_payment_intent_model.dart';
@@ -25,6 +23,7 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/transactiondetails/paynowltransactiondetails_page.dart';
 import 'package:paynest_flutter_app/views/webview/webview.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+
 import '../../../model/lean_response.dart';
 import '../../../model/mystudents_resp_model.dart';
 import '../../../res/res.dart';
@@ -47,8 +46,6 @@ class _PayNowPageState extends State<PayNowPage> {
   final PayNowController payNowController = Get.put(PayNowController());
   final CreateTransactionRespController ctrController =
       Get.put(CreateTransactionRespController());
-  final SetBankResponseController sbrController =
-      Get.put(SetBankResponseController());
   late StudentElement studentElement;
   int tap = 0;
 
@@ -1483,108 +1480,145 @@ class _PayNowPageState extends State<PayNowPage> {
   }
 
   void onPress() async {
-    if (studentController.myStudentData.value.status &&
-        int.parse(amountController.text) > 0) {
-      final result = await Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (BuildContext context) => MyWebView(
-            title: "CBD",
-            amount: amountController.text,
-            indx: idx,
-            orderId: Random().nextInt(
-              1000000000,
-            ),
-            schoolId: int.parse(
-              schoolIDController.text,
-            ),
-          ),
-        ),
-      );
-      isLoading = true;
-      setState(() {});
-      if (result != null && result['ResponseMsg'] == 'success') {
-        var amount = payAbleAmount;
-        bool status = await ctrController.hitCreateTransaction(
+    if (studentController.myStudentData.value.status) {
+      if(int.parse(amountController.text) > 0) {
+        int orderId = Random().nextInt(
+          1000000000,
+        );
+        isLoading = true;
+        if (mounted) {
+          setState(() {});
+        }
+        final response = await ctrController.hitCreateTransaction(
           schoolIDController.text,
           parentIDController.text,
           studentIDController.text,
           amountController.text,
-          result,
+          orderId.toString(),
         );
-        if (status) {
-          studentController.myStudentData.update(
-            (val) {
-              String? schoolName;
-              for (int i = 0; i < val!.students!.length; i++) {
-                if (val.students![i].student!.totalBalanceAmount ==
-                    payAbleAmount) {
-                  schoolName = val.students![i].student!.school?.name ?? '';
-                  break;
+        if (response) {
+          final result = await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => MyWebView(
+                title: "CBD",
+                amount: amountController.text,
+                indx: 0,
+                orderId: orderId,
+                schoolId: int.parse(
+                  schoolIDController.text,
+                ),
+              ),
+            ),
+          );
+          if (result != null && result) {
+            studentController.myStudentData.update(
+                  (val) {
+                String? schoolName;
+                for (int i = 0; i < val!.students!.length; i++) {
+                  if (val.students![i].student!.totalBalanceAmount ==
+                      payAbleAmount) {
+                    schoolName = val.students![i].student!.school?.name ?? '';
+                    break;
+                  }
                 }
-              }
-              PayNowTransactionDetailModel model;
-              model = _getModel(
-                studentElement,
-                schoolName,
-                amount,
-              );
+                PayNowTransactionDetailModel model;
+                model = _getModel(
+                  studentElement,
+                  schoolName,
+                  amountController.text,
+                );
+                isLoading = false;
+                setState(() {});
+                Future.delayed(
+                  Duration(
+                    seconds: 1,
+                  ),
+                      () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PayNowTransactionDetailsPage(
+                          pntdm: model,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          } else {
+            if (mounted) {
               isLoading = false;
               setState(() {});
               Future.delayed(
-                Duration(
-                  seconds: 1,
-                ),
-                () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => PayNowTransactionDetailsPage(
-                        pntdm: model,
-                      ),
-                    ),
+                Duration.zero,
+                    () {
+                  showToast(
+                    context: context,
+                    messege: 'Something went wrong with the transaction',
+                    color: PayNestTheme.red,
                   );
                 },
               );
-            },
-          );
-        } else {
-          isLoading = false;
-          setState(() {});
-          Future.delayed(
-            Duration(seconds: 1),
-            () {
-              showToast(
+            }
+          }
+        }else {
+          if (mounted) {
+            isLoading = false;
+            setState(() {});
+            Future.delayed(
+              Duration.zero,
+                  () {
+                showToast(
                   context: context,
-                  messege: 'Something Went Wrong With The Transaction',
-                  color: PayNestTheme.red);
-            },
-          );
+                  messege: 'Something went wrong with the transaction',
+                  color: PayNestTheme.red,
+                );
+              },
+            );
+          }
         }
-      } else if (result == null) {
+      }else if (int.parse(amountController.text) < 0) {
         isLoading = false;
         setState(() {});
         Future.delayed(
-          Duration(seconds: 1),
-          () {
+          Duration.zero,
+              () {
             showToast(
               context: context,
-              messege: 'Something Went Wrong',
+              messege: 'Amount is not correct',
+              color: PayNestTheme.red,
+            );
+          },
+        );
+      } else if (int.parse(amountController.text) == 0) {
+        isLoading = false;
+        setState(() {});
+        Future.delayed(
+          Duration.zero,
+              () {
+            showToast(
+              context: context,
+              messege: 'Fees already paid',
+              color: Colors.green,
+            );
+          },
+        );
+      }
+    } else {
+      if (mounted) {
+        isLoading = false;
+        setState(() {});
+        Future.delayed(
+          Duration.zero,
+              () {
+            showToast(
+              context: context,
+              messege: 'Something went wrong with the transaction',
               color: PayNestTheme.red,
             );
           },
         );
       }
-    } else if (int.parse(payAbleAmount) < 0) {
-      isLoading = false;
-      showToast(
-          context: context,
-          messege: 'Amount is not correct',
-          color: PayNestTheme.red);
-    } else if (int.parse(payAbleAmount) == 0) {
-      isLoading = false;
-      showToast(
-          context: context,
-          messege: 'Fees already paid',
-          color: PayNestTheme.paidGreen);
     }
   }
 

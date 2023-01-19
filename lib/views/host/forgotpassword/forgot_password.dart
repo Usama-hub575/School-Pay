@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:paynest_flutter_app/controller/register_controller.dart';
+
 import '../../../constants/constants.dart';
 import '../../../controller/user_controller.dart';
 import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/back_button.dart';
-import '../../../widgets/custom_alert_dialog.dart';
 import '../../../widgets/spacer.dart';
 import '../../../widgets/toast.dart';
 

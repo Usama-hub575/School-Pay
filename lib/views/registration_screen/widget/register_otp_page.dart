@@ -11,7 +11,6 @@ import 'package:pinput/pinput.dart';
 import '../../../constants/constants.dart';
 import '../../../controller/sendOTP_controller.dart';
 import '../../../controller/verifyOTP_controller.dart';
-import '../../../model/datamodel/reg1_to_otp.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/spacer.dart';
 import '../../../widgets/toast.dart';

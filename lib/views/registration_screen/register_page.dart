@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
@@ -8,6 +7,7 @@ import 'package:paynest_flutter_app/views/registration_screen/widget/register_de
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_main_page.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_otp_page.dart';
 import 'package:paynest_flutter_app/widgets/toast.dart';
+
 import '../../constants/constants.dart';
 import '../../controller/user_controller.dart';
 import '../../res/res.dart';

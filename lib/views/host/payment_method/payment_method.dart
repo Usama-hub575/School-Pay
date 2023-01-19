@@ -1,26 +1,24 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
+import 'package:paynest_flutter_app/extension/stack_extension.dart';
 import 'package:paynest_flutter_app/main.dart';
 import 'package:paynest_flutter_app/model/create_payment_intent_model.dart';
 import 'package:paynest_flutter_app/model/lean_payment_model.dart';
 import 'package:paynest_flutter_app/model/lean_response.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
-import 'package:paynest_flutter_app/views/webview/lean_web_view.dart';
+
 import '../../../constants/constants.dart';
 import '../../../controller/createtransaction_resp_controller.dart';
 import '../../../controller/myStudent_controller.dart';
-import '../../../controller/updatebank_response_controller.dart';
 import '../../../model/datamodel/paynowtransaction_detail_model.dart';
 import '../../../model/datamodel/singlestudent_model.dart';
-import '../../../model/lean_success_response.dart';
 import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/back_button.dart';
@@ -30,13 +28,12 @@ import '../../../widgets/spacer.dart';
 import '../../../widgets/toast.dart';
 import '../../webview/webview.dart';
 import '../transactiondetails/paynowltransactiondetails_page.dart';
-import 'package:paynest_flutter_app/extension/stack_extension.dart';
 
 class PaymentMethod extends StatefulWidget {
   final SingleStudentModel singleStudentModel;
-  final int payment;
+  int payment;
 
-  const PaymentMethod({
+  PaymentMethod({
     Key? key,
     required this.singleStudentModel,
     required this.payment,
@@ -50,8 +47,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
   final MyStudentController studentController = Get.find<MyStudentController>();
   final CreateTransactionRespController ctrcController =
       Get.put(CreateTransactionRespController());
-  final SetBankResponseController sbrController =
-      Get.put(SetBankResponseController());
 
   bool isLoading = false;
   var appToken = "";
@@ -106,7 +101,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
       body: Column(
         children: [
           Container(
-            height: 129.h,
             padding: EdgeInsets.symmetric(
               horizontal: horizontalValue(16),
             ),
@@ -159,7 +153,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    verticalSpacer(36),
+                    verticalSpacer(24),
                     Container(
                       child: Text(
                         selectPaymentsMethod,
@@ -554,200 +548,206 @@ class _PaymentMethodState extends State<PaymentMethod> {
 
   Future onPaymentPress() async {
     if (studentController.myStudentData.value.status) {
-      final result = await Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (BuildContext context) => MyWebView(
-            title: "CBD",
-            amount: widget.payment.toString(),
-            indx: 0,
-            orderId: Random().nextInt(
-              1000000000,
-            ),
-            schoolId: widget.singleStudentModel.student!.schoolId,
-          ),
-        ),
-      );
-      isLoading = true;
-      if (mounted) {
-        setState(() {});
-      }
-      if (result != null && result['ResponseMsg'] == 'success') {
-        var amount = widget.payment;
-        bool status = await ctrcController.hitCreateTransaction(
+      if(widget.payment > 0){
+        int orderId = Random().nextInt(
+          1000000000,
+        );
+        isLoading = true;
+        if (mounted) {
+          setState(() {});
+        }
+        final response = await ctrcController.hitCreateTransaction(
           widget.singleStudentModel.student!.schoolId.toString(),
           widget.singleStudentModel.parentId.toString(),
           widget.singleStudentModel.student!.id.toString(),
           widget.payment.toString(),
-          result,
+          orderId.toString(),
         );
-        if (status) {
-          studentController.myStudentData.update(
-            (val) {
-              String? schoolName;
-              for (int i = 0; i < val!.students!.length; i++) {
-                if (val.students![i].student!.school!.id ==
-                    widget.singleStudentModel.student!.schoolId) {
-                  schoolName = val.students![i].student!.school?.name ?? '';
-                  break;
+        if (response) {
+          final result = await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => MyWebView(
+                title: "CBD",
+                amount: widget.payment.toString(),
+                indx: 0,
+                orderId: orderId,
+                schoolId: widget.singleStudentModel.student!.schoolId,
+              ),
+            ),
+          );
+          if (result != null && result) {
+            studentController.myStudentData.update(
+                  (val) {
+                String? schoolName;
+                for (int i = 0; i < val!.students!.length; i++) {
+                  if (val.students![i].student!.school!.id ==
+                      widget.singleStudentModel.student!.schoolId) {
+                    schoolName = val.students![i].student!.school?.name ?? '';
+                    break;
+                  }
                 }
-              }
-              PayNowTransactionDetailModel model;
-              model = _getModel(
-                widget.singleStudentModel,
-                schoolName ?? '',
-                amount.toString(),
-              );
+                PayNowTransactionDetailModel model;
+                model = _getModel(
+                  widget.singleStudentModel,
+                  schoolName ?? '',
+                  widget.payment.toString(),
+                );
+                isLoading = false;
+                if (mounted) {
+                  setState(() {});
+                }
+                Future.delayed(
+                  Duration.zero,
+                      () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PayNowTransactionDetailsPage(
+                          pntdm: model,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          } else {
+            if (mounted) {
               isLoading = false;
-              if (mounted) {
-                setState(() {});
-              }
+              setState(() {});
               Future.delayed(
                 Duration.zero,
-                () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => PayNowTransactionDetailsPage(
-                        pntdm: model,
-                      ),
-                    ),
+                    () {
+                  showToast(
+                    context: context,
+                    messege: 'Something went wrong with the transaction',
+                    color: PayNestTheme.red,
                   );
                 },
               );
-            },
-          );
-        } else {
-          if (mounted) {
-            isLoading = false;
-            setState(() {});
-            Future.delayed(
-              Duration.zero,
-              () {
-                showToast(
-                    context: context,
-                    messege: 'Something went wrong with the transaction',
-                    color: PayNestTheme.red);
-              },
-            );
+            }
           }
         }
-      } else if (result == null) {
+      }else if (widget.payment < 0) {
         isLoading = false;
         setState(() {});
         Future.delayed(
-          Duration(seconds: 1),
+          Duration.zero,
+              () {
+            showToast(
+              context: context,
+              messege: 'Amount is not correct',
+              color: PayNestTheme.red,
+            );
+          },
+        );
+      } else if (widget.payment == 0) {
+        isLoading = false;
+        setState(() {});
+        Future.delayed(
+          Duration.zero,
+              () {
+            showToast(
+              context: context,
+              messege: 'Fees already paid',
+              color: Colors.green,
+            );
+          },
+        );
+      }
+    } else {
+      if (mounted) {
+        isLoading = false;
+        setState(() {});
+        Future.delayed(
+          Duration.zero,
           () {
             showToast(
               context: context,
-              messege: 'Something went wrong',
+              messege: 'Something went wrong with the transaction',
               color: PayNestTheme.red,
             );
           },
         );
       }
-    } else if (widget.payment < 0) {
-      isLoading = false;
-      setState(() {});
-      Future.delayed(
-        Duration(seconds: 1),
-        () {
-          showToast(
-              context: context,
-              messege: 'Amount is not correct',
-              color: PayNestTheme.red);
-        },
-      );
-    } else if (widget.payment == 0) {
-      isLoading = false;
-      setState(() {});
-      Future.delayed(
-        Duration(seconds: 1),
-        () {
-          showToast(
-            context: context,
-            messege: 'Fees already paid',
-            color: PayNestTheme.paidGreen,
-          );
-        },
-      );
     }
   }
+}
 
-  PayNowTransactionDetailModel _getModel(
-    SingleStudentModel singleStudentModel,
-    String? schoolName,
-    String amount,
-  ) {
-    return PayNowTransactionDetailModel(
-      schoolName: schoolName,
-      student: PayNowTransactionDetailStudent(
-        id: singleStudentModel.student?.id ?? 0,
-        studentRegNo: singleStudentModel.student?.studentRegNo ?? '-',
-        firstName: singleStudentModel.student?.firstName ?? '-',
-        lastName: singleStudentModel.student?.lastName ?? '-',
-        grade: singleStudentModel.student?.grade ?? '-',
-        parentEmiratesId: singleStudentModel.student?.parentEmiratesId ?? '-',
-        parentPhoneNumber: singleStudentModel.student?.parentPhoneNumber ?? '-',
-        dob: singleStudentModel.student?.dob ?? DateTime.now(),
-        admissionDate:
-            singleStudentModel.student?.admissionDate ?? DateTime.now(),
-        deletedAt: singleStudentModel.student?.deletedAt ?? '-',
-        schoolId: singleStudentModel.student?.schoolId ?? 0,
-        totalBalanceAmount:
-            singleStudentModel.student?.totalBalanceAmount.toString() ?? '-',
-        guardianFirstName: singleStudentModel.student?.guardianFirstName,
-        guardianLastName: singleStudentModel.student?.guardianLastName!,
-        guardianGender: singleStudentModel.student?.guardianGender!,
-        guardianEmiratesId: singleStudentModel.student?.guardianEmiratesId!,
-        guardianNationality: singleStudentModel.student?.guardianNationality!,
-        guardianReligion: singleStudentModel.student?.guardianReligion!,
-        area: singleStudentModel.student?.area,
-        region: singleStudentModel.student?.region,
-        streetAddress: singleStudentModel.student?.streetAddress,
-        email: singleStudentModel.student?.email,
-        phoneNumber: singleStudentModel.student?.phoneNumber ?? '-',
-        otherNumber: singleStudentModel.student?.otherNumber,
-        profile: singleStudentModel.student?.profile,
-        religion: singleStudentModel.student?.religion,
-        nationality: singleStudentModel.student?.nationality,
-        gender: singleStudentModel.student?.gender,
-        dueDate: singleStudentModel.student?.dueDate,
-        file: singleStudentModel.student?.file,
-        privacy: singleStudentModel.student?.privacy ?? '-',
-        createdAt: singleStudentModel.student?.createdAt ?? DateTime.now(),
-        updatedAt: singleStudentModel.student?.updatedAt ?? DateTime.now(),
+PayNowTransactionDetailModel _getModel(
+  SingleStudentModel singleStudentModel,
+  String? schoolName,
+  String amount,
+) {
+  return PayNowTransactionDetailModel(
+    schoolName: schoolName,
+    student: PayNowTransactionDetailStudent(
+      id: singleStudentModel.student?.id ?? 0,
+      studentRegNo: singleStudentModel.student?.studentRegNo ?? '-',
+      firstName: singleStudentModel.student?.firstName ?? '-',
+      lastName: singleStudentModel.student?.lastName ?? '-',
+      grade: singleStudentModel.student?.grade ?? '-',
+      parentEmiratesId: singleStudentModel.student?.parentEmiratesId ?? '-',
+      parentPhoneNumber: singleStudentModel.student?.parentPhoneNumber ?? '-',
+      dob: singleStudentModel.student?.dob ?? DateTime.now(),
+      admissionDate:
+          singleStudentModel.student?.admissionDate ?? DateTime.now(),
+      deletedAt: singleStudentModel.student?.deletedAt ?? '-',
+      schoolId: singleStudentModel.student?.schoolId ?? 0,
+      totalBalanceAmount:
+          singleStudentModel.student?.totalBalanceAmount.toString() ?? '-',
+      guardianFirstName: singleStudentModel.student?.guardianFirstName,
+      guardianLastName: singleStudentModel.student?.guardianLastName!,
+      guardianGender: singleStudentModel.student?.guardianGender!,
+      guardianEmiratesId: singleStudentModel.student?.guardianEmiratesId!,
+      guardianNationality: singleStudentModel.student?.guardianNationality!,
+      guardianReligion: singleStudentModel.student?.guardianReligion!,
+      area: singleStudentModel.student?.area,
+      region: singleStudentModel.student?.region,
+      streetAddress: singleStudentModel.student?.streetAddress,
+      email: singleStudentModel.student?.email,
+      phoneNumber: singleStudentModel.student?.phoneNumber ?? '-',
+      otherNumber: singleStudentModel.student?.otherNumber,
+      profile: singleStudentModel.student?.profile,
+      religion: singleStudentModel.student?.religion,
+      nationality: singleStudentModel.student?.nationality,
+      gender: singleStudentModel.student?.gender,
+      dueDate: singleStudentModel.student?.dueDate,
+      file: singleStudentModel.student?.file,
+      privacy: singleStudentModel.student?.privacy ?? '-',
+      createdAt: singleStudentModel.student?.createdAt ?? DateTime.now(),
+      updatedAt: singleStudentModel.student?.updatedAt ?? DateTime.now(),
+    ),
+    referenceNo: '',
+    paidOn: DateTime.now(),
+    amountPaid: amount,
+  );
+}
+
+Widget _commercial_image({required String imagePath}) {
+  return Container(
+    height: sizes.heightRatio * 41,
+    width: sizes.widthRatio * 41,
+    decoration: BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage(imagePath),
+        fit: BoxFit.fill,
       ),
-      referenceNo: '',
-      paidOn: DateTime.now(),
-      amountPaid: amount,
-    );
-  }
+    ),
+  );
+}
 
-  Widget _commercial_image({required String imagePath}) {
-    return Container(
-      height: sizes.heightRatio * 41,
-      width: sizes.widthRatio * 41,
+Widget _otherImage({required String imagePath, required double opacity}) {
+  return Opacity(
+    opacity: opacity,
+    child: Container(
+      height: sizes.heightRatio * 26,
+      width: sizes.widthRatio * 70,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(imagePath),
           fit: BoxFit.fill,
         ),
       ),
-    );
-  }
-
-  Widget _otherImage({required String imagePath, required double opacity}) {
-    return Opacity(
-      opacity: opacity,
-      child: Container(
-        height: sizes.heightRatio * 26,
-        width: sizes.widthRatio * 70,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(imagePath),
-            fit: BoxFit.fill,
-          ),
-        ),
-      ),
-    );
-  }
+    ),
+  );
 }

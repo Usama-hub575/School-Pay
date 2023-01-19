@@ -1,5 +1,5 @@
 
-import '../mystudents_resp_model.dart';
+
 
 class PayNowTransactionDetailModel {
   PayNowTransactionDetailModel({

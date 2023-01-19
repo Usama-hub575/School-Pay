@@ -5,21 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/sharedPrefKeys.dart';
-import 'package:paynest_flutter_app/views/host/host_page.dart';
 import 'package:paynest_flutter_app/views/welcome_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:store_redirect/store_redirect.dart';
+import 'package:video_player/video_player.dart';
+
 import '../Utils/sharedpref.dart';
 import '../constants/constants.dart';
 import '../controller/user_controller.dart';
 import '../main.dart';
 import '../res/res.dart';
 import '../widgets/custom_alert_dialog.dart';
-import 'package:video_player/video_player.dart';
 
 class InitializerScreen extends StatefulWidget {
   const InitializerScreen({Key? key}) : super(key: key);

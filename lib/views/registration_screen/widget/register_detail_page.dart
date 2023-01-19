@@ -2,19 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_country_code_picker.dart';
 import 'package:paynest_flutter_app/widgets/inkwell_widget.dart';
+
 import '../../../constants/constants.dart';
 import '../../../controller/user_controller.dart';
 import '../../../res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/spacer.dart';
-import '../../custom_phone_number_field/country_code_picker.dart';
 
 class RegisterDetailPage extends StatefulWidget {
   const RegisterDetailPage({

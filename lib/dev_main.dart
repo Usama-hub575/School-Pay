@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -14,7 +13,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/res/constants.dart';
-import 'package:paynest_flutter_app/views/host/dashboard/dashboard.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'Utils/sharedpref.dart';

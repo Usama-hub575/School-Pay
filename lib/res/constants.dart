@@ -1,6 +1,6 @@
 class AppConstants {
   static const String DSN =
-      'https://429eef5254a34463a26e90f20095ba8d@o441203.ingest.sentry.io/5459779';
+      'https://53bd5ffab31e4da58870bff1cd54a5b5@o4504473514016768.ingest.sentry.io/4504513820688384';
 
   static const String supportEmail = 'wecare@walaplus.com';
   static const String walaplus = 'Walaplus';

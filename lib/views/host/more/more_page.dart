@@ -7,8 +7,6 @@ import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
-import 'package:paynest_flutter_app/views/host/more/widget/language_card.dart';
 import 'package:paynest_flutter_app/views/host/more/widget/single_card.dart';
 import 'package:paynest_flutter_app/views/host/more/widget/single_card_with_radio_button.dart';
 import 'package:paynest_flutter_app/views/host/transaction/recent_transaction_page.dart';

@@ -56,13 +56,9 @@ class APIService {
       "/api/parent/createLeanPaymentIntent";
 
   /// To set payment data to server
-  // static var createTransaction = "/api/transaction";
-  static var createTransaction = "/api/transaction/mobile";
-  static var updateBankResponse = "/api/transaction/setBankResponse";
-  static var searchByLastName =
-      "/api/student/getByLName?LName={last_name}&schoolId={school_id}";
-  static var searchByFirstName =
-      "/api/student/getByFName?FName={first_name}&schoolId={school_id}";
+  static var createTransaction = "/api/transaction/create";
+  static var transactionMobile = "/api/transaction/mobile";
+
   static var searchByName =
       "/api/student/getByName?Name={name}&schoolId={school_id}";
   static var searchByPID =
@@ -631,9 +627,32 @@ class APIService {
     }
   }
 
-  /// Sending Data of student to server for which payment is made
+  //Create Transaction
   Future apiCreateTransaction(queryParams) async {
     var endPoint = Uri.parse("$baseUrl$createTransaction");
+    print(endPoint);
+    var response = await client.post(
+      endPoint,
+      body: queryParams,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer " + storage.read('accessToken'),
+      },
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      print("CreateTrans Response ***");
+      print(response.body);
+      log(response.body);
+      return response.body;
+    } else {
+      return response.body;
+    }
+  }
+
+  /// Sending Data of student to server for which payment is made
+  Future apiTransactionMobile(queryParams) async {
+    var endPoint = Uri.parse("$baseUrl$transactionMobile");
     print(endPoint);
     var response = await client.post(
       endPoint,
@@ -685,26 +704,6 @@ class APIService {
       print("CreateTrans Response ***");
       print(response.body);
       log(response.body);
-      return response.body;
-    } else {
-      return response.body;
-    }
-  }
-
-  /// * Update Bank Response * ///
-  Future apiUpdateBankResponse(data) async {
-    var endPoint = Uri.parse("$baseUrl$updateBankResponse");
-    var response = await client.post(
-      endPoint,
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + storage.read('accessToken'),
-      },
-      body: data,
-    );
-    print("Bank Response");
-    print(response.body);
-    if (response.statusCode == 200) {
       return response.body;
     } else {
       return response.body;

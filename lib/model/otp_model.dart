@@ -4,8 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:paynest_flutter_app/constants/constants.dart';
-
 OtpModel otpModelFromJson(String str) => OtpModel.fromJson(json.decode(str));
 
 String otpModelToJson(OtpModel data) => json.encode(data.toJson());

@@ -17,6 +17,7 @@ import '../../../model/mystudents_resp_model.dart';
 import '../../../res/res.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/full_screen_loader.dart';
+import '../../../widgets/toast.dart';
 
 class SingleStudentPage extends StatefulWidget {
   SingleStudentPage({
@@ -224,8 +225,8 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             InvoicePaymentPage(
-                                          singleStudentModel: getStudentModel(),
-                                        ),
+                                              singleStudentModel: getStudentModel(),
+                                            ),
                                       ),
                                     );
                                   },

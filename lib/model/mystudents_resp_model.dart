@@ -4,9 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:flutter/scheduler.dart';
-import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
-
 MyStudentsRespModel myStudentsRespModelFromJson(String str) =>
     MyStudentsRespModel.fromJson(json.decode(str));
 

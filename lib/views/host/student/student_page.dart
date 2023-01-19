@@ -10,11 +10,12 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/school/select_school.dart';
 import 'package:paynest_flutter_app/widgets/get_student_model.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+
 import '../../../model/datamodel/singlestudent_model.dart';
+import '../../../model/mystudents_resp_model.dart' as studentElement;
 import '../../../widgets/inkwell_widget.dart';
 import '../singlestudent/singlestudent_page.dart';
 import 'widget/single_student_card.dart';
-import '../../../model/mystudents_resp_model.dart' as studentElement;
 
 class StudentPage extends StatefulWidget {
   final String whichStack;

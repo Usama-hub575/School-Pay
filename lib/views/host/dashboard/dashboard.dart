@@ -8,6 +8,8 @@ import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
+import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart'
+    as student;
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/assistance/get_assistance.dart';
@@ -19,6 +21,7 @@ import 'package:paynest_flutter_app/views/host/pendingtask/pending_task.dart';
 import 'package:paynest_flutter_app/views/host/singlestudent/singlestudent_page.dart';
 import 'package:paynest_flutter_app/views/host/student/student_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+
 import '../../../controller/transactionlist_controller.dart';
 import '../../../model/datamodel/transactiondetail_model.dart';
 import '../../../model/mystudents_resp_model.dart' as studentElement;
@@ -29,8 +32,6 @@ import '../../../widgets/get_student_model.dart';
 import '../../../widgets/inkwell_widget.dart';
 import '../school/select_school.dart';
 import '../transactiondetails/transactiondetails_page.dart';
-import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart'
-    as student;
 
 class DashboardPage extends StatefulWidget {
   DashboardPage({

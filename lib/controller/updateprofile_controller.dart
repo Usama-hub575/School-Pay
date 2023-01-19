@@ -6,7 +6,6 @@ import 'package:paynest_flutter_app/model/updateprofile_model.dart';
 import 'package:paynest_flutter_app/model/updateprofile_resp_model.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 
-import '../model/login_response_model.dart';
 import '../model/register_resp_model.dart';
 
 class UpdateProfileController extends GetxController {

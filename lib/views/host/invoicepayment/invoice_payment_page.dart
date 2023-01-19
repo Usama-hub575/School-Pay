@@ -12,14 +12,12 @@ import 'package:paynest_flutter_app/controller/verifypin_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/widget/amount_bottom_sheet.dart';
 import 'package:paynest_flutter_app/views/host/payment_method/payment_method.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
-import 'package:pinput/pinput.dart';
 
-import '../../../widgets/back_button.dart';
 import '../../../widgets/amount_formater.dart';
+import '../../../widgets/back_button.dart';
 import '../../../widgets/toast.dart';
 import '../../download_pdf/download_pdf.dart';
 
@@ -55,7 +53,6 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
       body: Column(
         children: [
           Container(
-            height: 129.h,
             padding: EdgeInsets.symmetric(
               horizontal: horizontalValue(16),
             ),

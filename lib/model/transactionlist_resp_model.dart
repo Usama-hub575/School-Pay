@@ -4,8 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:paynest_flutter_app/constants/constants.dart';
-
 TransactionListRespModel transactionListRespModelFromJson(String str) => TransactionListRespModel.fromJson(json.decode(str));
 
 String transactionListRespModelToJson(TransactionListRespModel data) => json.encode(data.toJson());
