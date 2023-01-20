@@ -106,24 +106,6 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    // if (isLoading) {
-    //   return Scaffold(
-    //     backgroundColor: PayNestTheme.colorWhite,
-    //     body: Center(
-    //       child: CircularProgressIndicator(),
-    //     ),
-    //   );
-    // }
-    // if (notificationStudentID != '') {
-    //   Navigator.of(context).push(
-    //     MaterialPageRoute(
-    //       builder: (context) => SingleStudentPage(
-    //         studentId: notificationStudentID,
-    //         myStudentsRespModel: MyStudentsRespModel.empty(),
-    //       ),
-    //     ),
-    //   );
-    // }
     String fullName =
         userController.userResData.value.parent!.firstName.toString() +
             ' ' +
@@ -292,6 +274,7 @@ class _DashboardPageState extends State<DashboardPage> {
           verticalSpacer(8),
           Expanded(
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Padding(
                 padding: EdgeInsets.only(
                   left: 20.w,

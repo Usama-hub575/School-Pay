@@ -73,13 +73,9 @@ class _MyWebViewState extends State<MyWebView> {
         onProgress: (value) {},
         onPageStarted: (url) {},
         onPageFinished: (url) async {
-          print('on page finish allowing navigation to $url');
           String comparedGatewayUrl = gateway.toString() + "-receive?";
           if (url.contains(comparedGatewayUrl)) {
-            print('got it');
             isCodeReceived = true;
-            // var CBDReferenceNo =
-            //     getResponse(Uri.parse(url).queryParameters['string'] ?? '');
             if (Uri.parse(url).queryParameters['status'] != null) {
               Navigator.of(context).pop(
                 Uri.parse(url).queryParameters['status'] == 'true'
@@ -88,12 +84,6 @@ class _MyWebViewState extends State<MyWebView> {
               );
             } else {
               Navigator.of(context).pop(false);
-              // var decoded = jsonDecode(CBDReferenceNo);
-              // showToast(
-              //   messege: decoded['Response']['Header']['ResponseMsg'],
-              //   context: context,
-              //   color: PayNestTheme.red,
-              // );
             }
           }
         },

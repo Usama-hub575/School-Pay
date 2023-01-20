@@ -20,28 +20,20 @@ class CreateTransactionRespController extends GetxController {
     parentId,
     studentId,
     amount,
-    bankResponse,
+    orderId,
   ) async {
     try {
-      final bankRes = Xml2Json();
-      bankRes.parse(bankResponse);
       isLoading(true);
       final data = {
         "schoolId": schoolId,
         "parentId": parentId,
-        "invoiceId": "0",
         "studentId": studentId,
-        "payedOn": DateFormat("yyyy-MM-dd").format(DateTime.now()).toString(),
         "amount": amount,
-        "bankResponse": bankRes.toParker(),
+        "orderId": orderId,
       };
       var res = await APIService().apiCreateTransaction(data);
       var decoded = jsonDecode(res);
       if (decoded['status'] == true) {
-        CreateTransactionResModel transactionResModel =
-            createTransactionResModelFromJson(res);
-        createTransData.value = transactionResModel;
-        createTransData.refresh();
       } else if (decoded['status'] == false) {
         isLoading(false);
       }

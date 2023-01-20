@@ -88,6 +88,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
               ),
             ),
           ),
+          verticalSpacer(16),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
@@ -104,62 +105,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    verticalSpacer(32),
-                    // Text(
-                    //   downloadPaymentInvoice,
-                    //   style: PayNestTheme.h2_12blueAccent.copyWith(
-                    //     fontSize: sizes.fontRatio * 16,
-                    //     color: PayNestTheme.primaryColor,
-                    //     fontFamily: 'montserratExtraBold',
-                    //   ),
-                    // ),
-                    // verticalSpacer(16),
-                    // Container(
-                    //   width: double.infinity,
-                    //   child: ElevatedButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       primary: PayNestTheme.colorWhite,
-                    //       elevation: 0,
-                    //       side: BorderSide(
-                    //         width: 1,
-                    //         color: PayNestTheme.primaryColor,
-                    //       ),
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(
-                    //           14,
-                    //         ),
-                    //       ),
-                    //       padding: EdgeInsets.symmetric(
-                    //         vertical: verticalValue(14),
-                    //       ),
-                    //     ),
-                    //     onPressed: () {
-                    //       setState(() {
-                    //         generateScreenshotImages(
-                    //             'L${widget.singleStudentModel.id.toString()}');
-                    //       });
-                    //     },
-                    //     child: Row(
-                    //       children: [
-                    //         Spacer(),
-                    //         _getArrowDown(),
-                    //         horizontalSpacer(8),
-                    //         Center(
-                    //           child: Text(
-                    //             downloadInvoice,
-                    //             style: PayNestTheme.title_2_16primaryColor
-                    //                 .copyWith(
-                    //                     fontWeight: FontWeight.w500,
-                    //                     fontSize: sizes.fontRatio * 13,
-                    //                     color: PayNestTheme.black),
-                    //           ),
-                    //         ),
-                    //         Spacer(),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                    verticalSpacer(16),
+                    verticalSpacer(50),
                     Text(
                       invoiceDetails,
                       style: PayNestTheme.h2_12blueAccent.copyWith(
