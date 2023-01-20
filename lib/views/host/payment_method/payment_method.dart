@@ -136,6 +136,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
               ),
             ),
           ),
+          verticalSpacer(16),
           Expanded(
             child: Container(
               width: double.infinity,
@@ -153,7 +154,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    verticalSpacer(24),
+                    verticalSpacer(50),
                     Container(
                       child: Text(
                         selectPaymentsMethod,
@@ -548,7 +549,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
 
   Future onPaymentPress() async {
     if (studentController.myStudentData.value.status) {
-      if(widget.payment > 0){
+      if (widget.payment > 0) {
         int orderId = Random().nextInt(
           1000000000,
         );
@@ -577,7 +578,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           );
           if (result != null && result) {
             studentController.myStudentData.update(
-                  (val) {
+              (val) {
                 String? schoolName;
                 for (int i = 0; i < val!.students!.length; i++) {
                   if (val.students![i].student!.school!.id ==
@@ -598,7 +599,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 }
                 Future.delayed(
                   Duration.zero,
-                      () {
+                  () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => PayNowTransactionDetailsPage(
@@ -616,7 +617,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
               setState(() {});
               Future.delayed(
                 Duration.zero,
-                    () {
+                () {
                   showToast(
                     context: context,
                     messege: 'Something went wrong with the transaction',
@@ -627,12 +628,12 @@ class _PaymentMethodState extends State<PaymentMethod> {
             }
           }
         }
-      }else if (widget.payment < 0) {
+      } else if (widget.payment < 0) {
         isLoading = false;
         setState(() {});
         Future.delayed(
           Duration.zero,
-              () {
+          () {
             showToast(
               context: context,
               messege: 'Amount is not correct',
@@ -645,7 +646,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
         setState(() {});
         Future.delayed(
           Duration.zero,
-              () {
+          () {
             showToast(
               context: context,
               messege: 'Fees already paid',
@@ -663,7 +664,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           () {
             showToast(
               context: context,
-              messege: 'Something went wrong with the transaction',
+              messege: 'Something went wrong',
               color: PayNestTheme.red,
             );
           },
