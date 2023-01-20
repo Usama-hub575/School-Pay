@@ -45,7 +45,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
   void initState() {
     getLocalPackageInfo();
     setUpRemoteConfig();
-    getCountries();
+    // getCountries();
     videoPlayerController = VideoPlayerController.asset(welcomeVideo);
     videoPlayerController.initialize().then((value) {
       videoPlayerController.play();
