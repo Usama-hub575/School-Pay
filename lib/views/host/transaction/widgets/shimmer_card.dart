@@ -1,7 +1,7 @@
 import 'package:fade_shimmer/fade_shimmer.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../../res/res.dart';
+import '../../../../presentation/res/res.dart';
 import '../../../../widgets/spacer.dart';
 
 class TransactionShimmerCard extends StatelessWidget {

@@ -308,5 +308,5 @@ String maxIosAppVersion = "max_iOS_app_version";
 
 const String googlePlayPackageName = "com.paynest.schoolpay";
 const String huaweiPackageName = "com.paynest.fintech.borderpay";
-const String iosAppId = "1629376846";
+const String iosAppId = "1629406783";
 

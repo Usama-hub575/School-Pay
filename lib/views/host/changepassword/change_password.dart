@@ -9,8 +9,8 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../res/assets.dart';
-import '../../../res/res.dart';
+import '../../../presentation/res/assets.dart';
+import '../../../presentation/res/res.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/toast.dart';
 
@@ -166,19 +166,19 @@ class _ChangePasswordState extends State<ChangePassword> {
                           fontSize: sizes.fontRatio * 12,
                           color: PayNestTheme.primaryColor,
                         ),
-                        suffixIcon: IconButton(
-                          icon: SvgPicture.asset(
-                            AppAssets.passwordEye,
-                            color: PayNestTheme.primaryColor,
-                          ),
-                          onPressed: () {
-                            setState(
-                              () {
-                                isObscure = !isObscure;
-                              },
-                            );
-                          },
-                        ),
+                        // suffixIcon: IconButton(
+                        //   icon: SvgPicture.asset(
+                        //     AppAssets.passwordEye,
+                        //     color: PayNestTheme.primaryColor,
+                        //   ),
+                        //   onPressed: () {
+                        //     setState(
+                        //       () {
+                        //         isObscure = !isObscure;
+                        //       },
+                        //     );
+                        //   },
+                        // ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(
@@ -247,19 +247,19 @@ class _ChangePasswordState extends State<ChangePassword> {
                           fontSize: sizes.fontRatio * 12,
                           color: PayNestTheme.red,
                         ),
-                        suffixIcon: IconButton(
-                          icon: SvgPicture.asset(
-                            AppAssets.passwordEye,
-                            color: PayNestTheme.primaryColor,
-                          ),
-                          onPressed: () {
-                            setState(
-                              () {
-                                isObscure = !isObscure;
-                              },
-                            );
-                          },
-                        ),
+                        // suffixIcon: IconButton(
+                        //   icon: SvgPicture.asset(
+                        //     AppAssets.passwordEye,
+                        //     color: PayNestTheme.primaryColor,
+                        //   ),
+                        //   onPressed: () {
+                        //     setState(
+                        //       () {
+                        //         isObscure = !isObscure;
+                        //       },
+                        //     );
+                        //   },
+                        // ),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: PayNestTheme.textGrey.withOpacity(

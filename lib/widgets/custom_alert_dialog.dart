@@ -6,7 +6,7 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../constants/constants.dart';
-import '../res/res.dart';
+import '../presentation/res/res.dart';
 
 class CustomAlertDialog {
   static baseDialog({

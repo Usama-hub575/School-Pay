@@ -10,7 +10,7 @@ import 'package:paynest_flutter_app/widgets/inkwell_widget.dart';
 
 import '../../../constants/constants.dart';
 import '../../../controller/user_controller.dart';
-import '../../../res/res.dart';
+import '../../../presentation/res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/spacer.dart';

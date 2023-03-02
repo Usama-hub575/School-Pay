@@ -4,12 +4,12 @@ import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/custom_phone_number_field/selection_dialog.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
+import '../../../presentation/res/res.dart';
 import '../../custom_phone_number_field/country_code.dart';
 import '../../custom_phone_number_field/country_code_picker.dart';
 import '../../custom_phone_number_field/country_codes.dart';

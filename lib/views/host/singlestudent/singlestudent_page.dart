@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/extension/stack_extension.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart'
     as SingleSchoolModel;
+import 'package:paynest_flutter_app/presentation/export.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
 import 'package:paynest_flutter_app/widgets/amount_formater.dart';
@@ -14,7 +14,6 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
 import '../../../model/mystudents_resp_model.dart';
-import '../../../res/res.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/full_screen_loader.dart';
 import '../../../widgets/toast.dart';
@@ -198,7 +197,8 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                         userController.singleStudentResponse.value.students![0]
                                     .student!.totalBalanceAmount ==
                                 0
-                            ?SizedBox.shrink() : Container(
+                            ? SizedBox.shrink()
+                            : Container(
                                 margin: EdgeInsets.symmetric(
                                   horizontal: horizontalValue(16),
                                 ),
@@ -225,8 +225,8 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             InvoicePaymentPage(
-                                              singleStudentModel: getStudentModel(),
-                                            ),
+                                          singleStudentModel: getStudentModel(),
+                                        ),
                                       ),
                                     );
                                   },

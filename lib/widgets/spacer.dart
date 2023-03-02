@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 
-import '../res/res.dart';
+import '../presentation/res/res.dart';
 
 Widget verticalSpacer(double value) => SizedBox(
       height: sizes.heightRatio * value,
@@ -13,4 +12,4 @@ Widget horizontalSpacer(double value) => SizedBox(
 
 double verticalValue(double value) => sizes.heightRatio * value;
 
-double horizontalValue(double value) =>  sizes.widthRatio * value;
+double horizontalValue(double value) => sizes.widthRatio * value;

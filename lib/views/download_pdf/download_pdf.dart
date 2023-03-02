@@ -8,8 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
-
-import '../../res/res.dart';
+import '../../presentation/res/res.dart';
 import '../../widgets/spacer.dart';
 
 class PdfApi {

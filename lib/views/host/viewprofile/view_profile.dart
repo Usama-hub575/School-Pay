@@ -12,8 +12,7 @@ import 'package:paynest_flutter_app/views/host/editprofile/edit_profile.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
-import '../../../res/assets.dart';
-import '../../../res/res.dart';
+import '../../../presentation/res/res.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/emirates_id_add_dash_function.dart';
 
@@ -536,10 +535,10 @@ class _ViewProfileState extends State<ViewProfile> {
                             fontFamily: 'montserratSemiBold',
                           ),
                         ),
-                        SvgPicture.asset(
-                          AppAssets.passwordEye,
-                          color: PayNestTheme.primaryColor,
-                        ),
+                        // SvgPicture.asset(
+                        //   AppAssets.passwordEye,
+                        //   color: PayNestTheme.primaryColor,
+                        // ),
                       ],
                     ),
                     verticalSpacer(8),

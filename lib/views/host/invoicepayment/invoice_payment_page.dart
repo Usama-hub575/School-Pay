@@ -10,12 +10,12 @@ import 'package:paynest_flutter_app/controller/partialpay_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/controller/verifypin_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
-import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/widget/amount_bottom_sheet.dart';
 import 'package:paynest_flutter_app/views/host/payment_method/payment_method.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
+import '../../../presentation/res/res.dart';
 import '../../../widgets/amount_formater.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/toast.dart';

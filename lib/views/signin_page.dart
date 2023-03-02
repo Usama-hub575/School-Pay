@@ -6,8 +6,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/res/assets.dart';
-import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
@@ -16,6 +14,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:paynest_flutter_app/widgets/toast.dart';
 
 import '../auth/local_auth_api.dart';
+import '../presentation/res/res.dart';
 import '../utils/sharedPrefKeys.dart';
 import '../widgets/back_button.dart';
 
@@ -88,9 +87,7 @@ class _SignInPageState extends State<SignInPage> {
                         verticalSpacer(16),
                         Text(
                           'Sign In',
-                          style: PayNestTheme.title22black.copyWith(
-                          ),
-
+                          style: PayNestTheme.title22black.copyWith(),
                         ),
                         verticalSpacer(16),
                         Text(
@@ -164,17 +161,17 @@ class _SignInPageState extends State<SignInPage> {
                             ),
                             labelText: password,
                             labelStyle: PayNestTheme.floating_12primaryColor,
-                            suffixIcon: IconButton(
-                              icon: SvgPicture.asset(
-                                AppAssets.passwordEye,
-                                color: PayNestTheme.primaryColor,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  isObscure = !isObscure;
-                                });
-                              },
-                            ),
+                            // suffixIcon: IconButton(
+                            //   icon: SvgPicture.asset(
+                            //     AppAssets.passwordEye,
+                            //     color: PayNestTheme.primaryColor,
+                            //   ),
+                            //   onPressed: () {
+                            //     setState(() {
+                            //       isObscure = !isObscure;
+                            //     });
+                            //   },
+                            // ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: PayNestTheme.textGrey.withOpacity(
@@ -294,12 +291,12 @@ class _SignInPageState extends State<SignInPage> {
                               },
                               child: Column(
                                 children: [
-                                  Lottie.asset(
-                                    AppAssets.faceId,
-                                    height: 109,
-                                    width: 81,
-                                    repeat: true,
-                                  ),
+                                  // Lottie.asset(
+                                  //   AppAssets.faceId,
+                                  //   height: 109,
+                                  //   width: 81,
+                                  //   repeat: true,
+                                  // ),
                                   SizedBox(
                                     child: Text(
                                       'Login with Touch ID',

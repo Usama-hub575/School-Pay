@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
-import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/school/select_school.dart';
 import 'package:paynest_flutter_app/widgets/get_student_model.dart';
@@ -13,6 +12,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../model/datamodel/singlestudent_model.dart';
 import '../../../model/mystudents_resp_model.dart' as studentElement;
+import '../../../presentation/res/res.dart';
 import '../../../widgets/inkwell_widget.dart';
 import '../singlestudent/singlestudent_page.dart';
 import 'widget/single_student_card.dart';

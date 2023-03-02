@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 
-import '../res/res.dart';
+import '../presentation/res/res.dart';
+
 
 Widget fullScreenLoader() => Material(
   color: PayNestTheme.primaryColor.withOpacity(0.05),

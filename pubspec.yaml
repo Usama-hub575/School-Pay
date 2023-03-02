@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.10+18
+version: 1.0.10+19
 
 environment:
   sdk: ">=2.18.0 <3.0.0"
@@ -11,6 +11,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+
+  #network
+  http:
+  dio:
+  dartz:
+
+  #state_managment
+  flutter_bloc:
+  equatable: 
+  get:
+  get_it:
+
+
+  #localization
+  flutter_localization:
 
   cupertino_icons:
   sentry_flutter:
@@ -19,8 +37,6 @@ dependencies:
   pinput:
   lean_sdk_flutter: ^0.5.0
   carousel_slider:
-  http:
-  get:
   get_storage:
   dart_jsonwebtoken: ^2.6.2
   intl:

@@ -18,7 +18,7 @@ import '../Utils/sharedpref.dart';
 import '../constants/constants.dart';
 import '../controller/user_controller.dart';
 import '../main.dart';
-import '../res/res.dart';
+import '../presentation/res/res.dart';
 import '../widgets/custom_alert_dialog.dart';
 
 class InitializerScreen extends StatefulWidget {

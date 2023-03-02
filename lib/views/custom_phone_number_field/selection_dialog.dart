@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../res/res.dart';
+import '../../presentation/res/res.dart';
 import 'country_code.dart';
 import 'country_localizations.dart';
 

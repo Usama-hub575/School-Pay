@@ -5,7 +5,7 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 
 import '../../../../constants/constants.dart';
-import '../../../../res/res.dart';
+import '../../../../presentation/res/res.dart';
 import '../../../../widgets/spacer.dart';
 
 class AmountBottomSheet {

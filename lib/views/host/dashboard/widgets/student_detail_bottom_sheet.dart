@@ -8,7 +8,7 @@ import 'package:paynest_flutter_app/views/host/dashboard/widgets/succes_bottom_s
 import '../../../../constants/constants.dart';
 import '../../../../controller/addstudent_controller.dart';
 import '../../../../controller/user_controller.dart';
-import '../../../../res/res.dart';
+import '../../../../presentation/res/res.dart';
 import '../../../../widgets/spacer.dart';
 import '../../../../widgets/toast.dart';
 

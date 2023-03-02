@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/widgets/inkwell_widget.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../constants/constants.dart';
 import '../../../controller/sendOTP_controller.dart';
 import '../../../controller/verifyOTP_controller.dart';
+import '../../../presentation/res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/spacer.dart';
 import '../../../widgets/toast.dart';

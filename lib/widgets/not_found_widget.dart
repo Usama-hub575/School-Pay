@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../constants/constants.dart';
+import '../presentation/res/res.dart';
 import '../theme/theme.dart';
 
 class NoDataFound extends StatelessWidget {

@@ -9,7 +9,7 @@ import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
-import '../../../res/res.dart';
+import '../../../presentation/res/res.dart';
 import '../../../widgets/back_button.dart';
 
 class TransactionDetailsPage extends StatefulWidget {

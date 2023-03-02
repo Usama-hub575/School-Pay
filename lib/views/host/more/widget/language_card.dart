@@ -4,7 +4,7 @@ import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 
 import '../../../../constants/constants.dart';
-import '../../../../res/res.dart';
+import '../../../../presentation/res/res.dart';
 import '../../../../widgets/inkwell_widget.dart';
 import '../../../../widgets/spacer.dart';
 

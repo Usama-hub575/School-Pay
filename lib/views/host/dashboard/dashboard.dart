@@ -10,7 +10,6 @@ import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart'
     as student;
-import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/assistance/get_assistance.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
@@ -27,6 +26,7 @@ import '../../../model/datamodel/transactiondetail_model.dart';
 import '../../../model/mystudents_resp_model.dart' as studentElement;
 import '../../../model/mystudents_resp_model.dart';
 import '../../../model/transactionlist_resp_model.dart';
+import '../../../presentation/res/res.dart';
 import '../../../staging_main.dart';
 import '../../../widgets/get_student_model.dart';
 import '../../../widgets/inkwell_widget.dart';

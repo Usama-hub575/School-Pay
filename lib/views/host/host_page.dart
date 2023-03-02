@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
-import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/dashboard.dart';
 import 'package:paynest_flutter_app/views/host/more/more_page.dart';
@@ -11,6 +10,8 @@ import 'package:paynest_flutter_app/views/host/pay/paynow_page.dart';
 import 'package:paynest_flutter_app/views/host/student/student_page.dart';
 import 'package:paynest_flutter_app/views/host/transaction/recent_transaction_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+
+import '../../presentation/res/res.dart';
 
 class HostPage extends StatefulWidget {
   const HostPage({Key? key}) : super(key: key);

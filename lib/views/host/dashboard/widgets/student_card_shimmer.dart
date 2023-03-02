@@ -1,7 +1,8 @@
 import 'package:fade_shimmer/fade_shimmer.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../../res/res.dart';
+import '../../../../presentation/res/res.dart';
+
 
 class StudentCardShimmer extends StatelessWidget {
   const StudentCardShimmer({

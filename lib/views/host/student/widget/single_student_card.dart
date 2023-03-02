@@ -5,7 +5,7 @@ import 'package:paynest_flutter_app/model/mystudents_resp_model.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../../constants/constants.dart';
-import '../../../../res/res.dart';
+import '../../../../presentation/res/res.dart';
 import '../../../../theme/theme.dart';
 import '../../../../widgets/inkwell_widget.dart';
 

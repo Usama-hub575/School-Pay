@@ -9,8 +9,7 @@ import 'package:pinput/pinput.dart';
 
 import '../../../constants/constants.dart';
 import '../../../controller/user_controller.dart';
-import '../../../res/assets.dart';
-import '../../../res/res.dart';
+import '../../../presentation/res/res.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/custom_alert_dialog.dart';
@@ -140,19 +139,19 @@ class _NewPasswordState extends State<NewPassword> {
                                   ),
                                 ),
                               ),
-                              suffixIcon: IconButton(
-                                icon: SvgPicture.asset(
-                                  AppAssets.passwordEye,
-                                  color: PayNestTheme.primaryColor,
-                                ),
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      isObscure = !isObscure;
-                                    },
-                                  );
-                                },
-                              ),
+                              // suffixIcon: IconButton(
+                              //   icon: SvgPicture.asset(
+                              //     AppAssets.passwordEye,
+                              //     color: PayNestTheme.primaryColor,
+                              //   ),
+                              //   onPressed: () {
+                              //     setState(
+                              //       () {
+                              //         isObscure = !isObscure;
+                              //       },
+                              //     );
+                              //   },
+                              // ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: PayNestTheme.textGrey.withOpacity(0.5),
@@ -212,19 +211,19 @@ class _NewPasswordState extends State<NewPassword> {
                                   ),
                                 ),
                               ),
-                              suffixIcon: IconButton(
-                                icon: SvgPicture.asset(
-                                  AppAssets.passwordEye,
-                                  color: PayNestTheme.primaryColor,
-                                ),
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      cPassword = !cPassword;
-                                    },
-                                  );
-                                },
-                              ),
+                              // suffixIcon: IconButton(
+                              //   icon: SvgPicture.asset(
+                              //     AppAssets.passwordEye,
+                              //     color: PayNestTheme.primaryColor,
+                              //   ),
+                              //   onPressed: () {
+                              //     setState(
+                              //       () {
+                              //         cPassword = !cPassword;
+                              //       },
+                              //     );
+                              //   },
+                              // ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: PayNestTheme.textGrey.withOpacity(0.5),

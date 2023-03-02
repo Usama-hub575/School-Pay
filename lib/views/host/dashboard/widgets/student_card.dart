@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:paynest_flutter_app/res/res.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../model/mystudents_resp_model.dart';
+import '../../../../presentation/res/res.dart';
 
 class StudentCard extends StatefulWidget {
   const StudentCard({
