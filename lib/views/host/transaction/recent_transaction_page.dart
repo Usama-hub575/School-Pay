@@ -7,14 +7,13 @@ import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/transactionlist_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/model/datamodel/transactiondetail_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/transaction/widgets/single_transaction_card.dart';
 import 'package:paynest_flutter_app/views/host/transactiondetails/transactiondetails_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../model/transactionlist_resp_model.dart';
+import '../../../data/model/datamodel/transactiondetail_model.dart';
+import '../../../data/model/transactionlist_resp_model.dart';
 import '../../../presentation/res/res.dart';
 import 'widgets/shimmer_card.dart';
 

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../../model/transactionlist_resp_model.dart';
+import '../../../../data/model/transactionlist_resp_model.dart';
 import '../../../../presentation/res/res.dart';
 import '../../../../widgets/amount_formater.dart';
 

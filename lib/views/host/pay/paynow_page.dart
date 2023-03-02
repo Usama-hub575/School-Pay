@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:encrypt/encrypt.dart' as encryption;
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -14,9 +12,6 @@ import 'package:paynest_flutter_app/controller/createtransaction_resp_controller
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/paynow_controller.dart';
 import 'package:paynest_flutter_app/main.dart';
-import 'package:paynest_flutter_app/model/create_payment_intent_model.dart';
-import 'package:paynest_flutter_app/model/datamodel/paynowtransaction_detail_model.dart';
-import 'package:paynest_flutter_app/model/lean_payment_model.dart';
 import 'package:paynest_flutter_app/presentation/export.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
@@ -24,8 +19,11 @@ import 'package:paynest_flutter_app/views/host/transactiondetails/paynowltransac
 import 'package:paynest_flutter_app/views/webview/webview.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../model/lean_response.dart';
-import '../../../model/mystudents_resp_model.dart';
+import '../../../data/model/create_payment_intent_model.dart';
+import '../../../data/model/datamodel/paynowtransaction_detail_model.dart';
+import '../../../data/model/lean_payment_model.dart';
+import '../../../data/model/lean_response.dart';
+import '../../../data/model/mystudents_resp_model.dart';
 import '../../../widgets/amount_formater.dart';
 import '../../../widgets/full_screen_loader.dart';
 import '../../../widgets/inkwell_widget.dart';

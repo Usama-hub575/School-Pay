@@ -5,13 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/school_controller.dart';
-import 'package:paynest_flutter_app/model/datamodel/selectedschool_to_addstudent.dart';
-import 'package:paynest_flutter_app/model/schoollist_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/addstudent/add_student.dart'
     as add_student;
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
+import '../../../data/model/datamodel/selectedschool_to_addstudent.dart';
+import '../../../data/model/schoollist_model.dart';
 import '../../../presentation/res/res.dart';
 import '../../../widgets/back_button.dart';
 

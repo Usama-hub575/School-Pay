@@ -1,4 +1,5 @@
 import '../export.dart';
+import 'export.dart';
 
 class AppRoutes {
   static const initializer = '/';

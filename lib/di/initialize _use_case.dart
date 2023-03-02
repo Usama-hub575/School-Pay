@@ -1,5 +1,7 @@
 import 'package:paynest_flutter_app/data/export.dart';
 import 'package:paynest_flutter_app/domain/export.dart';
+
+import '../data/repo/initializer_repo/initializer_repo.dart';
 import 'di.dart';
 
 Future initializeUseCaseDependencies() async {
@@ -17,6 +19,7 @@ Future initializeInitializerUseCase() async {
   it.registerLazySingleton<InitializerUseCase>(
     () => InitializerUseCase(
       firebaseRepo: it<FirebaseRepo>(),
+      initializerRepo: it<InitializerRepo>(),
     ),
   );
 }

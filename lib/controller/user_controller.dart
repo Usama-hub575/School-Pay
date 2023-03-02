@@ -3,19 +3,18 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:paynest_flutter_app/model/get_countries_response.dart';
-import 'package:paynest_flutter_app/model/login_model.dart';
-import 'package:paynest_flutter_app/model/login_response_model.dart';
-import 'package:paynest_flutter_app/model/mystudents_resp_model.dart';
-import 'package:paynest_flutter_app/model/register_model.dart';
-import 'package:paynest_flutter_app/model/register_resp_model.dart';
-import 'package:paynest_flutter_app/model/reset_password_by_otp.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/dashboard.dart';
-
-import '../model/forgot_password_resp_model.dart';
-import '../model/parent_student_response_model.dart';
+import '../data/model/forgot_password_resp_model.dart';
+import '../data/model/get_countries_response.dart';
+import '../data/model/login_model.dart';
+import '../data/model/login_response_model.dart';
+import '../data/model/mystudents_resp_model.dart';
+import '../data/model/parent_student_response_model.dart';
+import '../data/model/register_model.dart';
+import '../data/model/register_resp_model.dart';
+import '../data/model/reset_password_by_otp.dart';
 import '../utils/sharedPrefKeys.dart';
 
 MySharedPreferences preferences = MySharedPreferences.instance;

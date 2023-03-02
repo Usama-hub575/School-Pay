@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:paynest_flutter_app/model/forgot_password_resp_model.dart';
-import 'package:paynest_flutter_app/model/register_model.dart';
-import 'package:paynest_flutter_app/model/register_resp_model.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 
-import '../model/forgot_password_model.dart';
+import '../data/model/forgot_password_model.dart';
+import '../data/model/forgot_password_resp_model.dart';
+import '../data/model/register_model.dart';
+import '../data/model/register_resp_model.dart';
 
 class RegisterController extends GetxController {
   var isLoading = false.obs;

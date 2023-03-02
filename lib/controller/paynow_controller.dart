@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:paynest_flutter_app/model/paynowres_model.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
+
+import '../data/model/paynowres_model.dart';
 
 class PayNowController extends GetxController{
   var isLoading = false.obs;

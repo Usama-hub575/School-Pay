@@ -1,24 +1,20 @@
 import 'dart:convert';
 import 'dart:math';
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
 import 'package:paynest_flutter_app/main.dart';
-import 'package:paynest_flutter_app/model/create_payment_intent_model.dart';
-import 'package:paynest_flutter_app/model/lean_payment_model.dart';
-import 'package:paynest_flutter_app/model/lean_response.dart';
 import 'package:paynest_flutter_app/presentation/export.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 
 import '../../../constants/constants.dart';
 import '../../../controller/createtransaction_resp_controller.dart';
 import '../../../controller/myStudent_controller.dart';
-import '../../../model/datamodel/paynowtransaction_detail_model.dart';
-import '../../../model/datamodel/singlestudent_model.dart';
+import '../../../data/model/create_payment_intent_model.dart';
+import '../../../data/model/datamodel/paynowtransaction_detail_model.dart';
+import '../../../data/model/datamodel/singlestudent_model.dart';
+import '../../../data/model/lean_payment_model.dart';
+import '../../../data/model/lean_response.dart';
 import '../../../theme/theme.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/full_screen_loader.dart';

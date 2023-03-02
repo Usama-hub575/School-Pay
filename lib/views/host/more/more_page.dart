@@ -14,7 +14,7 @@ import 'package:paynest_flutter_app/views/welcome_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../auth/local_auth_api.dart';
+import '../../../data/auth/local_auth_api.dart';
 import '../../../presentation/res/res.dart';
 import '../../../utils/sharedPrefKeys.dart';
 import '../../../utils/sharedpref.dart';

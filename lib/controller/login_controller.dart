@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:paynest_flutter_app/model/login_model.dart';
-import 'package:paynest_flutter_app/model/login_response_model.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
+
+import '../data/model/login_model.dart';
+import '../data/model/login_response_model.dart';
 
 class LoginController extends GetxController{
 

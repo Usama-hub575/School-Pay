@@ -1,13 +1,10 @@
 import 'dart:io';
-import 'dart:typed_data';
-
-// import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart' as date;
 import 'package:path_provider/path_provider.dart';
-import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
+import '../../data/model/datamodel/singlestudent_model.dart';
 import '../../presentation/res/res.dart';
 import '../../widgets/spacer.dart';
 

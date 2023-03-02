@@ -3,15 +3,14 @@ import 'dart:io';
 
 import 'package:local_auth/local_auth.dart';
 
-
-
 class LocalAuthApi {
   static Future<bool> authenticateWithBiometrics() async {
     LocalAuthentication localAuthentication = LocalAuthentication();
     bool isBiometricSupported = await localAuthentication.isDeviceSupported();
     bool canCheckBiometrics = await localAuthentication.canCheckBiometrics;
     List<BiometricType> biometricTypes =
-        (await localAuthentication.getAvailableBiometrics()).cast<BiometricType>();
+        (await localAuthentication.getAvailableBiometrics())
+            .cast<BiometricType>();
     bool isAuthenticated = false;
     if (Platform.isIOS) {
       if (biometricTypes.contains(BiometricType.face)) {

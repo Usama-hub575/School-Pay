@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:paynest_flutter_app/model/partialpay_model.dart';
-import 'package:paynest_flutter_app/model/partialpay_res_model.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
+
+import '../data/model/partialpay_model.dart';
+import '../data/model/partialpay_res_model.dart';
 
 class PartialPayController extends GetxController{
   var isLoading = false.obs;

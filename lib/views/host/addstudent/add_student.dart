@@ -8,13 +8,13 @@ import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/addstudent_controller.dart';
 import 'package:paynest_flutter_app/controller/all_studentslist_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/model/datamodel/selectedschool_to_addstudent.dart';
-import 'package:paynest_flutter_app/model/studentlist_res_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/addstudent/widget/student_bottom_sheet.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/succes_bottom_sheet.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
+import '../../../data/model/datamodel/selectedschool_to_addstudent.dart';
+import '../../../data/model/studentlist_res_model.dart';
 import '../../../presentation/res/res.dart';
 import '../../../widgets/inkwell_widget.dart';
 import '../../../widgets/toast.dart';

@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/model/datamodel/transactiondetail_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
+import '../../../data/model/datamodel/transactiondetail_model.dart';
 import '../../../presentation/res/res.dart';
 import '../../../widgets/back_button.dart';
 

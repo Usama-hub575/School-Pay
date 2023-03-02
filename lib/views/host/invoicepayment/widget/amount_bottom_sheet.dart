@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 
 import '../../../../constants/constants.dart';
+import '../../../../data/model/datamodel/singlestudent_model.dart';
 import '../../../../presentation/res/res.dart';
 import '../../../../widgets/spacer.dart';
 
