@@ -9,10 +9,12 @@ import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/updateprofile_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/widgets/emirates_id_add_dash_function.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+
 import '../../../presentation/res/res.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/editing_text_emirates_id_formater.dart';
@@ -197,7 +199,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   shape: BoxShape.circle,
                                 ),
                                 child: SvgPicture.asset(
-                                  icMale,
+                                  AppAssets().icMale,
                                 ),
                               ),
                             ),
@@ -610,11 +612,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 Navigator.pop(context);
                                 showToast(
                                     context: context,
-                                    messege:updateProfileController.message.value
+                                    messege: updateProfileController
+                                        .message.value
                                         .toString(),
                                     color: PayNestTheme.primaryColor);
                               } else {
-
                                 showToast(
                                     context: context,
                                     messege: updateProfileController

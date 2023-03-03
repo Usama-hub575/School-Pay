@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/student_detail_bottom_sheet.dart';
@@ -61,7 +60,7 @@ class StudentWidget extends StatelessWidget {
                     ),
                     verticalSpacer(22.0),
                     Lottie.asset(
-                      studentJumpingAnimation,
+                      AppAssets().studentJumpingAnimation,
                       repeat: true,
                     ),
                     verticalSpacer(22.0),

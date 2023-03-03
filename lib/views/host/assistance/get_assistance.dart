@@ -1,9 +1,10 @@
- import 'dart:io';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
+import 'package:paynest_flutter_app/presentation/export.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -114,10 +115,10 @@ class _GetAssistanceState extends State<GetAssistance> {
               child: Row(
                 children: [
                   Container(
-                    height: sizes.heightRatio*80,
-                    width: sizes.widthRatio*80,
+                    height: sizes.heightRatio * 80,
+                    width: sizes.widthRatio * 80,
                     child: Lottie.asset(
-                      customerSupportAnimation,
+                      AppAssets().customerSupportAnimation,
                     ),
                   ),
                   Flexible(
@@ -175,10 +176,10 @@ class _GetAssistanceState extends State<GetAssistance> {
               child: Row(
                 children: [
                   Container(
-                    height: sizes.heightRatio*80,
-                    width: sizes.widthRatio*80,
+                    height: sizes.heightRatio * 80,
+                    width: sizes.widthRatio * 80,
                     child: Lottie.asset(
-                      faqAnimation,
+                      AppAssets().faqAnimation,
                     ),
                   ),
                   Flexible(
@@ -230,13 +231,12 @@ class _GetAssistanceState extends State<GetAssistance> {
                 ),
               ),
               child: Row(
-
                 children: [
                   Container(
-                    height: sizes.heightRatio*56,
-                    width: sizes.widthRatio*56,
+                    height: sizes.heightRatio * 56,
+                    width: sizes.widthRatio * 56,
                     child: Lottie.asset(
-                      commentAnimation,
+                      AppAssets().commentAnimation,
                     ),
                   ),
                   Flexible(
@@ -283,11 +283,10 @@ class _GetAssistanceState extends State<GetAssistance> {
       if (await canLaunch(whatAppUrlIOS)) {
         await launch(whatAppUrlIOS, forceSafariVC: false);
       } else {
-
-            showToast(
-                context: context,
-                messege:  'Whatsapp not installed',
-                color: PayNestTheme.red);
+        showToast(
+            context: context,
+            messege: 'Whatsapp not installed',
+            color: PayNestTheme.red);
       }
     } else {
       await launch(whatsappUrlAndroid);

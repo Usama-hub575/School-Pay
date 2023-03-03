@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../../constants/constants.dart';
 import '../../../../data/model/transactionlist_resp_model.dart';
 import '../../../../presentation/res/res.dart';
 import '../../../../theme/theme.dart';
@@ -35,12 +35,12 @@ class SingleTransaction extends StatelessWidget {
     );
   }
 
-  Widget _singleContainer({required TransactionsRow transactionsRow}){
+  Widget _singleContainer({required TransactionsRow transactionsRow}) {
     late DateFormat dateFormat;
     initializeDateFormatting();
     dateFormat = DateFormat.yMMMMd('en_GB');
     return InkWellWidget(
-      onTap: ()=> onTap(transactionsRow),
+      onTap: () => onTap(transactionsRow),
       child: Container(
         margin: EdgeInsets.symmetric(
           horizontal: horizontalValue(16),
@@ -75,7 +75,7 @@ class SingleTransaction extends StatelessWidget {
                   Text(
                     '${transactionsRow.school?.name}',
                     style: PayNestTheme.h2_12blueAccent.copyWith(
-                      fontSize: sizes.fontRatio*13,
+                      fontSize: sizes.fontRatio * 13,
                       color: PayNestTheme.black,
                     ),
                   ),
@@ -83,7 +83,7 @@ class SingleTransaction extends StatelessWidget {
                   Text(
                     '${dateFormat.format(DateTime.parse(transactionsRow.payedOn.toString().substring(0, 10)))}',
                     style: PayNestTheme.h2_12blueAccent.copyWith(
-                      fontSize: sizes.fontRatio*10,
+                      fontSize: sizes.fontRatio * 10,
                       color: PayNestTheme.textGrey.withOpacity(0.5),
                       fontWeight: FontWeight.w300,
                     ),
@@ -95,13 +95,13 @@ class SingleTransaction extends StatelessWidget {
             Text(
               'AED ${transactionsRow.amount}',
               style: PayNestTheme.h2_12blueAccent.copyWith(
-                fontSize: sizes.fontRatio*13,
+                fontSize: sizes.fontRatio * 13,
                 color: PayNestTheme.primaryColor,
               ),
             ),
             horizontalSpacer(16),
             Lottie.asset(
-              arrowForwardAnimation,
+              AppAssets().arrowForwardAnimation,
               repeat: true,
               width: sizes.widthRatio * 18,
               height: sizes.heightRatio * 18,

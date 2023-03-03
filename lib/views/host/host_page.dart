@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/dashboard.dart';
 import 'package:paynest_flutter_app/views/host/more/more_page.dart';
@@ -33,17 +34,17 @@ class _HostPageState extends State<HostPage> {
   ];
 
   final selectedIcons = <String>[
-    ic_dashboard,
-    ic_student,
-    ic_transaction,
-    ic_menu,
+    AppAssets().ic_dashboard,
+    AppAssets().ic_student,
+    AppAssets().ic_transaction,
+    AppAssets().ic_menu,
   ];
 
   final unSelectedIcons = <String>[
-    ic_dashboard_non,
-    ic_student_non,
-    ic_transaction_non,
-    ic_menu_non,
+    AppAssets().ic_dashboard_non,
+    AppAssets().ic_student_non,
+    AppAssets().ic_transaction_non,
+    AppAssets().ic_menu_non,
   ];
 
   final names = <String>[
@@ -135,16 +136,13 @@ class _HostPageState extends State<HostPage> {
                     : unSelectedIcons[index],
               ),
               verticalSpacer(8),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(
-                  "${names[index]}",
-                  maxLines: 1,
-                  style: PayNestTheme.navbar12.copyWith(
-                    fontSize: sizes.fontRatio * 8,
-                  )
-                ),
+                child: Text("${names[index]}",
+                    maxLines: 1,
+                    style: PayNestTheme.navbar12.copyWith(
+                      fontSize: sizes.fontRatio * 8,
+                    )),
               )
             ],
           );

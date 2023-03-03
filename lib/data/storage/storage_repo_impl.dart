@@ -1,5 +1,3 @@
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'export.dart';
 
 class StorageRepoImpl implements StorageRepo {
@@ -8,6 +6,12 @@ class StorageRepoImpl implements StorageRepo {
   StorageRepoImpl({
     required this.sharedPreferences,
   });
+
+  @override
+  Future<bool> remove(String key) => sharedPreferences.remove(key);
+
+  @override
+  bool contains(String key) => sharedPreferences.containsKey(key);
 
   @override
   double getDouble({required String key}) =>

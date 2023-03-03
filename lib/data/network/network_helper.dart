@@ -1,7 +1,6 @@
-import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 
-import '../../core/export.dart';
+import 'export.dart';
 
 abstract class NetworkHelper {
   Future<Either<String, Failure>> get(

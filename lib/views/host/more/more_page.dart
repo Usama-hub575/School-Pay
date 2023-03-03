@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/more/widget/single_card.dart';
 import 'package:paynest_flutter_app/views/host/more/widget/single_card_with_radio_button.dart';
@@ -137,7 +137,7 @@ class _MorePageState extends State<MorePage> {
                                         )
                                       ]),
                                   child: SvgPicture.asset(
-                                    icMale,
+                                    AppAssets().icMale,
                                   ),
                                 ),
                         ),
@@ -207,7 +207,7 @@ class _MorePageState extends State<MorePage> {
                     ),
                     verticalSpacer(12),
                     SingleCard(
-                      icon: icPaymentHistory,
+                      icon: AppAssets().icPaymentHistory,
                       value: paymentHistory,
                       onTap: () {
                         Navigator.of(context).push(
@@ -245,7 +245,7 @@ class _MorePageState extends State<MorePage> {
                     verticalSpacer(16),
                     SingleCardWithRadioButton(
                       value: biometricAuth,
-                      icon: icFingerPrint,
+                      icon: AppAssets().icFingerPrint,
                       isEnable: storage.getBoolValue(
                         SharedPrefKeys.isBioMatric,
                       ),
@@ -302,7 +302,7 @@ class _MorePageState extends State<MorePage> {
                     ),
                     verticalSpacer(12),
                     SingleCard(
-                      icon: icFaq,
+                      icon: AppAssets().icFaq,
                       value: FAQs,
                       onTap: () {
                         launch(
@@ -313,7 +313,7 @@ class _MorePageState extends State<MorePage> {
                     ),
                     verticalSpacer(16),
                     SingleCard(
-                      icon: icContactUs,
+                      icon: AppAssets().icContactUs,
                       value: contactUs,
                       onTap: () {
                         launch(
@@ -324,7 +324,7 @@ class _MorePageState extends State<MorePage> {
                     ),
                     verticalSpacer(16),
                     SingleCard(
-                      icon: icPrivacyPolicy,
+                      icon: AppAssets().icPrivacyPolicy,
                       value: privacyPolicy,
                       onTap: () {
                         launch(
@@ -336,7 +336,7 @@ class _MorePageState extends State<MorePage> {
                     ),
                     verticalSpacer(16),
                     SingleCard(
-                      icon: icTermsAndCondition,
+                      icon: AppAssets().icTermsAndCondition,
                       value: termConditions,
                       onTap: () {
                         launch(

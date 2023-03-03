@@ -1,9 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
-
-import 'locale_constants.dart';
+import 'export.dart';
 
 class AppLocalizations {
   AppLocalizations(this.locale);
@@ -37,7 +32,7 @@ class AppLocalizations {
   }
 
   static AppLocalizations? of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations) ;
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
   static const LocalizationsDelegate<AppLocalizations> delegate =

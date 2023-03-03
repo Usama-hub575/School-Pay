@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../constants/constants.dart';
@@ -54,7 +55,7 @@ class NoDataFound extends StatelessWidget {
               ),
               Spacer(),
               Image.asset(
-                welcomeRegisterLogo,
+                AppAssets().welcomeRegisterLogo,
                 width: sizes.widthRatio * 120,
               ),
               Spacer(),
@@ -69,7 +70,7 @@ class NoDataFound extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                  noData,
+                  AppAssets().noData,
                 ),
                 fit: BoxFit.cover,
               ),

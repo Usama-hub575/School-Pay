@@ -1,13 +1,17 @@
+import 'package:paynest_flutter_app/domain/use_cases/firebase_use_case/firebase_use_case.dart';
+
 import 'export.dart';
 
 part 'initializer_event.dart';
 part 'initializer_state.dart';
 
 class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
+  final FirebaseUseCase firebaseUseCase;
   final InitializerUseCase initializerUseCase;
   late StorageRepo storage;
 
   InitializerBloc({
+    required this.firebaseUseCase,
     required this.initializerUseCase,
   }) : super(InitializerState()) {
     on<UpdateButtonAction>(_updateButtonAction);
@@ -20,21 +24,21 @@ class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
   _initialize(Initialize event, emit) async {
     String minAppVersion = '';
     String maxAppVersion = '';
-    await initializerUseCase.initializeRemoteConfig();
-    if (initializerUseCase.getModel() != FirebaseRemoteConfigModel.defaults()) {
+    await firebaseUseCase.initializeRemoteConfig();
+    if (firebaseUseCase.getModel() != FirebaseRemoteConfigModel.defaults()) {
       if (Platform.isAndroid) {
-        minAppVersion = initializerUseCase.getModel().minAndroidVersion;
-        maxAppVersion = initializerUseCase.getModel().maxAndroidVersion;
+        minAppVersion = firebaseUseCase.getModel().minAndroidVersion;
+        maxAppVersion = firebaseUseCase.getModel().maxAndroidVersion;
       }
       if (Platform.isIOS) {
-        minAppVersion = initializerUseCase.getModel().minIosVersion;
-        maxAppVersion = initializerUseCase.getModel().maxIosVersion;
+        minAppVersion = firebaseUseCase.getModel().minIosVersion;
+        maxAppVersion = firebaseUseCase.getModel().maxIosVersion;
       }
       if (_isVersionGreaterThan(
-          maxAppVersion, initializerUseCase.getModel().currentVersion)) {
+          maxAppVersion, firebaseUseCase.getModel().currentVersion)) {
         () {
           if (_isVersionGreaterThan(
-              minAppVersion, initializerUseCase.getModel().currentVersion)) {
+              minAppVersion, firebaseUseCase.getModel().currentVersion)) {
             emit(
               state.copyWith(
                 status: InitializerStatus.forcefulDialogue,
@@ -75,10 +79,10 @@ class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
     if (Platform.isIOS) {
       StoreRedirect.redirect(iOSAppId: AppConstants().iosAppId);
     } else if (Platform.isAndroid) {
-      if (initializerUseCase.getModel().appPackage ==
+      if (firebaseUseCase.getModel().appPackage ==
           AppConstants().googlePlayPackageName) {
         StoreRedirect.redirect(
-          androidAppId: initializerUseCase.getModel().appPackage,
+          androidAppId: firebaseUseCase.getModel().appPackage,
         );
       }
     }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_country_code_picker.dart';
 import 'package:paynest_flutter_app/widgets/inkwell_widget.dart';
@@ -79,6 +78,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
   void getCountries() {
     registerController.hitGetCountriesAPI();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +87,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
         children: [
           verticalSpacer(32),
           Text(
-            pleaseenterdetailbelow,
+            pleaseEnterDetailBelow,
             style: PayNestTheme.title_2_16primaryColor.copyWith(
               fontSize: sizes.fontRatio * 18,
               fontFamily: 'montserratExtraBold',

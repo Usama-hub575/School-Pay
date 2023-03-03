@@ -1,7 +1,4 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:local_auth/local_auth.dart';
+import 'export.dart';
 
 class LocalAuthApi {
   static Future<bool> authenticateWithBiometrics() async {

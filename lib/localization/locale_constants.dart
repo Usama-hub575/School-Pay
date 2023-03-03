@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../Utils/sharedpref.dart';
-import '../utils/sharedPrefKeys.dart';
-import 'app_localization.dart';
+import 'export.dart';
 
 const Iterable<LocalizationsDelegate<dynamic>> localizationDelegates = [
   AppLocalizations.delegate,

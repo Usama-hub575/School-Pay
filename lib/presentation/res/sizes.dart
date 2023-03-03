@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'export.dart';
 
 class AppSizes {
   late Size _screenSize;

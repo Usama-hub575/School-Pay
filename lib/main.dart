@@ -1,16 +1,13 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:paynest_flutter_app/views/Initilizer.dart';
-import 'package:paynest_flutter_app/views/host/forgotpassword/forgot_password.dart';
-import 'package:paynest_flutter_app/views/host/forgotpassword/new_password.dart';
-import 'package:paynest_flutter_app/views/host/host_page.dart';
-import 'package:paynest_flutter_app/views/registration_screen/register_page.dart';
-import 'package:paynest_flutter_app/views/signin_page.dart';
-import 'package:paynest_flutter_app/views/welcome_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:paynest_flutter_app/presentation/app_routes/app_routes.dart';
+import 'package:paynest_flutter_app/presentation/bloc/firebase_bloc/firebase_bloc.dart';
+import 'package:paynest_flutter_app/presentation/bloc/initializer_bloc/initializer_bloc.dart';
+
+import 'di/di.dart';
+import 'export.dart';
 
 bool isLeanEnable = false;
+
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -19,6 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final router = AppRoutes();
   @override
   void initState() {
     super.initState();
@@ -26,58 +24,35 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: Size(375, 812),
-      builder: (BuildContext context, child) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => FirebaseBloc(
+            firebaseUseCase: it(),
+          )..add(
+              InitializeFirebaseRemoteConfiguration(),
+            ),
         ),
-        onGenerateRoute: (routes) {
-          Widget page = InitializerScreen();
-          switch (routes.name) {
-            case '/':
-              page = InitializerScreen();
-              break;
-            case '/Welcome':
-              break;
-            case '/Welcome':
-              page = WelcomePage();
-              break;
-            case '/SignInPage':
-              page = SignInPage();
-              break;
-            case '/ForgotPassword':
-              page = ForgotPassword();
-              break;
-            case '/NewPassword':
-              final args = routes.arguments;
-              page = NewPassword(
-                email: args as String,
-              );
-              break;
-            case '/RegisterPage':
-              page = RegisterPage();
-              break;
-            case '/DashboardPage':
-              page = HostPage();
-              break;
-          }
-          return PageRouteBuilder(
-            settings: routes,
-            pageBuilder: (_, __, ___) => page,
-          );
-        },
+        BlocProvider(
+          create: (_) => InitializerBloc(
+            initializerUseCase: it(),
+            firebaseUseCase: it(),
+          ),
+        ),
+      ],
+      child: MaterialApp(
+        onGenerateRoute: AppRoutes.generateRoute,
+        initialRoute: AppRoutes.initializer,
       ),
     );
   }
 }
 
-getFCMToken() async {
-  var messaging = FirebaseMessaging.instance;
-  final fcmToken = GetStorage();
-  messaging.getToken().then((value) {
-    fcmToken.write('fcmToken', value);
-    print(fcmToken.read('fcmToken'));
-  });
-}
+// getFCMToken() async {
+//   var messaging = FirebaseMessaging.instance;
+//   final fcmToken = GetStorage();
+//   messaging.getToken().then((value) {
+//     fcmToken.write('fcmToken', value);
+//     print(fcmToken.read('fcmToken'));
+//   });
+// }

@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/sharedPrefKeys.dart';
@@ -46,7 +46,8 @@ class _InitializerScreenState extends State<InitializerScreen> {
     getLocalPackageInfo();
     setUpRemoteConfig();
     // getCountries();
-    videoPlayerController = VideoPlayerController.asset(welcomeVideo);
+    videoPlayerController =
+        VideoPlayerController.asset(AppAssets().welcomeVideo);
     videoPlayerController.initialize().then((value) {
       videoPlayerController.play();
       videoPlayerController.setVolume(0);
@@ -84,7 +85,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      paynestLogoNew,
+                      AppAssets().paynestLogoNew,
                       width: sizes.widthRatio * 180,
                       fit: BoxFit.fill,
                     ),
@@ -107,42 +108,44 @@ class _InitializerScreenState extends State<InitializerScreen> {
   }
 
   void getOptionalAppUpdateDialog() {
-    CustomAlertDialog.optionalAppUpdateDialog(
-        context: context,
-        title: "Update Available",
-        message: "Go to store",
-        showCrossIcon: false,
-        updateButtonAction: () {
-          if (Platform.isIOS) {
-            setState(() {
-              StoreRedirect.redirect(iOSAppId: iosAppId);
-            });
-          } else if (Platform.isAndroid) {
-            if (appPackage == huaweiPackageName) {
-              setState(() {
-                StoreRedirect.redirect(
-                  androidAppId: appPackage,
-                );
-              });
-            } else if (appPackage == googlePlayPackageName) {
-              setState(() {
-                StoreRedirect.redirect(
-                  androidAppId: appPackage,
-                );
-              });
-            }
-          }
-        },
-        cancelButtonAction: () {
+    CustomAlertDialog.appUpdateDialog(
+      context: context,
+      title: "Update Available",
+      message: "Go to store",
+      showCrossIcon: false,
+      updateButtonAction: () {
+        if (Platform.isIOS) {
           setState(() {
-            getCountries();
+            StoreRedirect.redirect(iOSAppId: iosAppId);
           });
-        },
-        locale: languageIndex);
+        } else if (Platform.isAndroid) {
+          if (appPackage == huaweiPackageName) {
+            setState(() {
+              StoreRedirect.redirect(
+                androidAppId: appPackage,
+              );
+            });
+          } else if (appPackage == googlePlayPackageName) {
+            setState(() {
+              StoreRedirect.redirect(
+                androidAppId: appPackage,
+              );
+            });
+          }
+        }
+      },
+      cancelButtonAction: () {
+        setState(() {
+          getCountries();
+        });
+      },
+      locale: languageIndex,
+      showCancelButton: true,
+    );
   }
 
   void getForcefulAppUpdateDialog() {
-    CustomAlertDialog.forcefulAppUpdateDialog(
+    CustomAlertDialog.appUpdateDialog(
       context: context,
       title: "Update!",
       message:
@@ -170,6 +173,7 @@ class _InitializerScreenState extends State<InitializerScreen> {
         }
       },
       locale: languageIndex,
+      showCancelButton: false,
     );
   }
 

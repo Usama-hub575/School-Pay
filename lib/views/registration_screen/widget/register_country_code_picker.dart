@@ -4,11 +4,11 @@ import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/custom_phone_number_field/selection_dialog.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../constants/constants.dart';
 import '../../../presentation/res/res.dart';
 import '../../custom_phone_number_field/country_code.dart';
 import '../../custom_phone_number_field/country_code_picker.dart';
@@ -132,7 +132,7 @@ class RegisterCountryCodePicker extends StatefulWidget {
     List<Map<String, String>> jsonList = countryList;
 
     List<CountryCode> elements =
-    jsonList.map((json) => CountryCode.fromJson(json)).toList();
+        jsonList.map((json) => CountryCode.fromJson(json)).toList();
 
     if (comparator != null) {
       elements.sort(comparator);
@@ -140,12 +140,12 @@ class RegisterCountryCodePicker extends StatefulWidget {
 
     if (countryFilter != null && countryFilter!.isNotEmpty) {
       final uppercaseCustomList =
-      countryFilter!.map((c) => c.toUpperCase()).toList();
+          countryFilter!.map((c) => c.toUpperCase()).toList();
       elements = elements
           .where((c) =>
-      uppercaseCustomList.contains(c.code) ||
-          uppercaseCustomList.contains(c.name) ||
-          uppercaseCustomList.contains(c.dialCode))
+              uppercaseCustomList.contains(c.code) ||
+              uppercaseCustomList.contains(c.name) ||
+              uppercaseCustomList.contains(c.dialCode))
           .toList();
     }
 
@@ -162,7 +162,6 @@ class CountryCodePickerState extends State<RegisterCountryCodePicker> {
 
   @override
   Widget build(BuildContext context) {
-
     Widget _widget;
     if (widget.builder != null)
       _widget = InkWell(
@@ -171,9 +170,9 @@ class CountryCodePickerState extends State<RegisterCountryCodePicker> {
       );
     else {
       _widget = InkWell(
-        onTap: ()=> widget.enabled ? showCountryCodePickerDialog() : null,
+        onTap: () => widget.enabled ? showCountryCodePickerDialog() : null,
         child: Row(
-          children:[
+          children: [
             if (widget.showFlagMain != null
                 ? widget.showFlagMain!
                 : widget.showFlag)
@@ -205,7 +204,7 @@ class CountryCodePickerState extends State<RegisterCountryCodePicker> {
             const Spacer(),
             if (widget.showDropDownButton)
               SvgPicture.asset(
-                icArrowDown,
+                AppAssets().icArrowDown,
               ),
           ],
         ),
@@ -229,9 +228,9 @@ class CountryCodePickerState extends State<RegisterCountryCodePicker> {
     if (oldWidget.initialSelection != widget.initialSelection) {
       if (widget.initialSelection != null) {
         selectedItem = elements.firstWhere(
-                (e) =>
-            (e.code!.toUpperCase() ==
-                widget.initialSelection!.toUpperCase()) ||
+            (e) =>
+                (e.code!.toUpperCase() ==
+                    widget.initialSelection!.toUpperCase()) ||
                 (e.dialCode == widget.initialSelection) ||
                 (e.name!.toUpperCase() ==
                     widget.initialSelection!.toUpperCase()),
@@ -249,9 +248,9 @@ class CountryCodePickerState extends State<RegisterCountryCodePicker> {
 
     if (widget.initialSelection != null) {
       selectedItem = elements.firstWhere(
-              (e) =>
-          (e.code!.toUpperCase() ==
-              widget.initialSelection!.toUpperCase()) ||
+          (e) =>
+              (e.code!.toUpperCase() ==
+                  widget.initialSelection!.toUpperCase()) ||
               (e.dialCode == widget.initialSelection) ||
               (e.name!.toUpperCase() == widget.initialSelection!.toUpperCase()),
           orElse: () => elements[0]);
@@ -261,11 +260,11 @@ class CountryCodePickerState extends State<RegisterCountryCodePicker> {
 
     favoriteElements = elements
         .where((e) =>
-    widget.favorite.firstWhereOrNull((f) =>
-    e.code!.toUpperCase() == f.toUpperCase() ||
-        e.dialCode == f ||
-        e.name!.toUpperCase() == f.toUpperCase()) !=
-        null)
+            widget.favorite.firstWhereOrNull((f) =>
+                e.code!.toUpperCase() == f.toUpperCase() ||
+                e.dialCode == f ||
+                e.name!.toUpperCase() == f.toUpperCase()) !=
+            null)
         .toList();
   }
 
@@ -297,7 +296,7 @@ class CountryCodePickerState extends State<RegisterCountryCodePicker> {
         ),
       ),
     ).then(
-          (e) {
+      (e) {
         if (e != null) {
           setState(() {
             selectedItem = e;

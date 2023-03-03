@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 
 import '../../../../constants/constants.dart';
@@ -18,7 +19,6 @@ class LanguageCard extends StatefulWidget {
 }
 
 class _LanguageCardState extends State<LanguageCard> {
-
   int selectedIndex = 0;
 
   @override
@@ -26,6 +26,7 @@ class _LanguageCardState extends State<LanguageCard> {
     selectedIndex = 0;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return InkWellWidget(
@@ -37,7 +38,7 @@ class _LanguageCardState extends State<LanguageCard> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SvgPicture.asset(icLanguage),
+            SvgPicture.asset(AppAssets().icLanguage),
             horizontalSpacer(12),
             Text(
               language,
@@ -58,8 +59,7 @@ class _LanguageCardState extends State<LanguageCard> {
               unSelectedBackgroundColors: [
                 PayNestTheme.primaryColor,
               ],
-              selectedTextStyle:
-                  PayNestTheme.title_3_16white.copyWith(
+              selectedTextStyle: PayNestTheme.title_3_16white.copyWith(
                 fontSize: sizes.fontRatio * 14,
                 fontWeight: FontWeight.w700,
                 color: PayNestTheme.primaryColor,
@@ -69,10 +69,7 @@ class _LanguageCardState extends State<LanguageCard> {
                 fontWeight: FontWeight.w700,
                 color: PayNestTheme.colorWhite,
               ),
-              labels: [
-                'En',
-                'Ar'
-              ],
+              labels: ['En', 'Ar'],
               selectedLabelIndex: (index) {
                 selectedIndex = index;
                 setState(() {});

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:encrypt/encrypt.dart' as encryption;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,7 +17,6 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/transactiondetails/paynowltransactiondetails_page.dart';
 import 'package:paynest_flutter_app/views/webview/webview.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
-
 import '../../../data/model/create_payment_intent_model.dart';
 import '../../../data/model/datamodel/paynowtransaction_detail_model.dart';
 import '../../../data/model/lean_payment_model.dart';
@@ -493,7 +491,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                 ? Container(
                                                     alignment: Alignment.center,
                                                     child: Lottie.asset(
-                                                      singleStudentJson,
+                                                      AppAssets().singleStudentJson,
                                                       repeat: true,
                                                       height: payAbleAmount ==
                                                               '0'
@@ -558,7 +556,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                           horizontalSpacer(16),
                                                           _commercial_image(
                                                             imagePath:
-                                                                icCommercialBank,
+                                                            AppAssets().icCommercialBank,
                                                           ),
                                                           Expanded(
                                                             child: Center(
@@ -731,7 +729,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                           horizontalSpacer(32),
                                                           _otherImage(
                                                             opacity: isLeanEnable ? 1 : 0.5,
-                                                            imagePath: icLean,
+                                                            imagePath: AppAssets().icLean,
                                                           ),
                                                           horizontalSpacer(16),
                                                           Expanded(
@@ -820,7 +818,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                           _otherImage(
                                                             opacity: 0.5,
                                                             imagePath:
-                                                                icPostPay,
+                                                            AppAssets().icPostPay,
                                                           ),
                                                           horizontalSpacer(16),
                                                           Expanded(
@@ -968,7 +966,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                             Container(
                                               alignment: Alignment.center,
                                               child: Lottie.asset(
-                                                singleStudentJson,
+                                                AppAssets().singleStudentJson,
                                                 repeat: true,
                                                 height: payAbleAmount == '0'
                                                     ? sizes.heightRatio * 327
@@ -1023,7 +1021,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                           horizontalSpacer(16),
                                                           _commercial_image(
                                                             imagePath:
-                                                                icCommercialBank,
+                                                            AppAssets().icCommercialBank,
                                                           ),
                                                           Expanded(
                                                             child: Center(
@@ -1157,7 +1155,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                           horizontalSpacer(32),
                                                           _otherImage(
                                                             opacity: isLeanEnable ? 1 : 0.5,
-                                                            imagePath: icLean,
+                                                            imagePath: AppAssets().icLean,
                                                           ),
                                                           horizontalSpacer(16),
                                                           Expanded(
@@ -1243,7 +1241,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                           _otherImage(
                                                             opacity: 0.5,
                                                             imagePath:
-                                                                icPostPay,
+                                                            AppAssets().icPostPay,
                                                           ),
                                                           horizontalSpacer(16),
                                                           Expanded(
@@ -1296,7 +1294,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
-                                          noData,
+                                          AppAssets().noData,
                                         ),
                                         fit: BoxFit.cover,
                                       ),
@@ -1350,7 +1348,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage(
-                                      warning,
+                                      AppAssets().warning,
                                     ),
                                     fit: BoxFit.cover,
                                   ),
@@ -1687,8 +1685,8 @@ class _PayNowPageState extends State<PayNowPage> {
                     ),
                     child: SvgPicture.asset(
                       studentElement.student?.gender == "male"
-                          ? icMale
-                          : icFemale,
+                          ? AppAssets().icMale
+                          : AppAssets().icFemale,
                     ),
                   ),
                   verticalSpacer(8),
@@ -1731,7 +1729,7 @@ class _PayNowPageState extends State<PayNowPage> {
               left: 0,
               right: 0,
               child: SvgPicture.asset(
-                icAdd,
+                AppAssets().icAdd,
               ),
             ),
           ],

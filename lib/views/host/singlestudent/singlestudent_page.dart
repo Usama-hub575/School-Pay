@@ -3,8 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
-import '../../../data/model/datamodel/singlestudent_model.dart'
-    as SingleSchoolModel;
 import 'package:paynest_flutter_app/presentation/export.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
@@ -12,6 +10,8 @@ import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
+import '../../../data/model/datamodel/singlestudent_model.dart'
+    as SingleSchoolModel;
 import '../../../data/model/mystudents_resp_model.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/full_screen_loader.dart';
@@ -186,7 +186,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                             horizontal: horizontalValue(16),
                           ),
                           child: Lottie.asset(
-                            singleStudentJson,
+                            AppAssets().singleStudentJson,
                             repeat: true,
                             height: sizes.heightRatio * 250,
                           ),
@@ -286,8 +286,8 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                               userController.singleStudentResponse.value
                                           .students![0].student?.gender ==
                                       "male"
-                                  ? icMale
-                                  : icFemale,
+                                  ? AppAssets().icMale
+                                  : AppAssets().icFemale,
                             ),
                           )
                         : const SizedBox.shrink(),

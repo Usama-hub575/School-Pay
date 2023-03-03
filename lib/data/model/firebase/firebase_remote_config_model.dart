@@ -1,4 +1,3 @@
-
 class FirebaseRemoteConfigModel {
   String appPackage = '';
   String currentVersion = '';

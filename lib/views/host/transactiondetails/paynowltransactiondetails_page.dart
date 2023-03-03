@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
@@ -105,7 +106,7 @@ class _PayNowTransactionDetailsPageState
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Lottie.asset(
-                                  successCheckAnimation,
+                                  AppAssets().successCheckAnimation,
                                   height: sizes.heightRatio * 104,
                                   width: sizes.widthRatio * 104,
                                 ),
@@ -177,7 +178,9 @@ class _PayNowTransactionDetailsPageState
                       height: 1.h,
                       color: PayNestTheme.lineColor,
                     ),
-                    widget.pntdm.student!.grade != '-' ? verticalSpacer(16): const SizedBox.shrink(),
+                    widget.pntdm.student!.grade != '-'
+                        ? verticalSpacer(16)
+                        : const SizedBox.shrink(),
                     widget.pntdm.student!.grade != '-'
                         ? Text(
                             studentclass,

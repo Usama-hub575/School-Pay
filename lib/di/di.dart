@@ -1,7 +1,4 @@
-
-
-import 'package:get_it/get_it.dart';
-import 'package:paynest_flutter_app/di/export.dart';
+import 'export.dart';
 
 GetIt it = GetIt.instance;
 

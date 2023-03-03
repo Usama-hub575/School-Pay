@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import '../parent/parent.dart';
+import 'export.dart';
 
 AuthenticationModel registerResponseModelFromJson(String str) =>
     AuthenticationModel.fromJson(json.decode(str));

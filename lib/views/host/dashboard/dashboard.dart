@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/assistance/get_assistance.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
@@ -17,6 +18,7 @@ import 'package:paynest_flutter_app/views/host/pendingtask/pending_task.dart';
 import 'package:paynest_flutter_app/views/host/singlestudent/singlestudent_page.dart';
 import 'package:paynest_flutter_app/views/host/student/student_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
+
 import '../../../controller/transactionlist_controller.dart';
 import '../../../data/model/datamodel/singlestudent_model.dart';
 import '../../../data/model/datamodel/singlestudent_model.dart' as student;
@@ -133,7 +135,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: [
                           verticalSpacer(24),
                           Image.asset(
-                            welcomeRegisterLogo,
+                            AppAssets().welcomeRegisterLogo,
                             width: sizes.widthRatio * 70,
                             color: PayNestTheme.colorWhite,
                           ),
@@ -197,7 +199,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 );
                               },
                               icon: Lottie.asset(
-                                supportAnimation,
+                                AppAssets().supportAnimation,
                                 repeat: true,
                               ),
                             ),
@@ -454,7 +456,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                       style: PayNestTheme.title_3_16black,
                                     ),
                                     SvgPicture.asset(
-                                      arrowNext,
+                                      AppAssets().arrowNext,
                                       height: 20.sp,
                                     )
                                   ],
@@ -526,7 +528,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                             ),
                                           ),
                                           Lottie.asset(
-                                            arrowForwardAnimation,
+                                            AppAssets().arrowForwardAnimation,
                                             repeat: true,
                                             width: sizes.widthRatio * 22,
                                             height: sizes.heightRatio * 22,

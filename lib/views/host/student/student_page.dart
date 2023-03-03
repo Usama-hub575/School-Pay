@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/school/select_school.dart';
 import 'package:paynest_flutter_app/widgets/get_student_model.dart';
@@ -113,7 +114,7 @@ class _StudentPageState extends State<StudentPage> {
                         ),
                       ),
                       child: Lottie.asset(
-                        addStudentAnimation,
+                        AppAssets().addStudentAnimation,
                       ),
                     ),
                   ),
@@ -149,7 +150,7 @@ class _StudentPageState extends State<StudentPage> {
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: AssetImage(
-                                              noData,
+                                              AppAssets().noData,
                                             ),
                                             fit: BoxFit.cover,
                                           ),
@@ -247,7 +248,7 @@ class _StudentPageState extends State<StudentPage> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
-                                          warning,
+                                          AppAssets().warning,
                                         ),
                                         fit: BoxFit.cover,
                                       ),

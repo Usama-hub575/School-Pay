@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../../constants/constants.dart';
 import '../../../../presentation/res/res.dart';
 import '../../../../theme/theme.dart';
 import '../../../../widgets/inkwell_widget.dart';
@@ -23,7 +23,7 @@ class SingleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWellWidget(
-      onTap: ()=>onTap(),
+      onTap: () => onTap(),
       child: Container(
         margin: EdgeInsets.symmetric(
           horizontal: horizontalValue(16),
@@ -42,10 +42,10 @@ class SingleCard extends StatelessWidget {
             ),
             Spacer(),
             Lottie.asset(
-              arrowForwardAnimation,
+              AppAssets().arrowForwardAnimation,
               repeat: true,
-              width: sizes.widthRatio*22,
-              height: sizes.heightRatio*22,
+              width: sizes.widthRatio * 22,
+              height: sizes.heightRatio * 22,
             ),
           ],
         ),

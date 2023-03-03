@@ -1,4 +1,4 @@
-import '../get_countries_data/get_countries_data.dart';
+import 'export.dart';
 
 class CountriesResponse {
   bool? status;

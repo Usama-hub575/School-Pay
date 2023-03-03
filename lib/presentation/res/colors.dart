@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'export.dart';
 
 Map<int, Color> color = {
   50: Color.fromRGBO(136, 14, 79, .1),
@@ -53,4 +53,5 @@ class AppColors {
   Color orangeDark1 = Color.fromRGBO(252, 176, 5, 1);
   Color greyDark = Color.fromRGBO(165, 165, 165, 1);
   Color labelColor = Color.fromRGBO(12, 63, 88, 1);
+  Color primaryColor = Color(0xFF006E7D);
 }

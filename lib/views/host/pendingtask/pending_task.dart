@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
 
@@ -114,9 +115,9 @@ class _PendingTaskState extends State<PendingTask> {
                             setPIN,
                             style: PayNestTheme.title_3_16black,
                           ),
-                          trailing: SvgPicture.asset(arrowNext),
+                          trailing: SvgPicture.asset(AppAssets().arrowNext),
                           subtitle: Text(
-                            youneedtosetuppin,
+                            youNeedToSetUpPin,
                             style: PayNestTheme.small_2_12textGrey,
                           ),
                         ),

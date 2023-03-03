@@ -17,5 +17,9 @@ mixin StorageRepo {
 
   bool getBool({required String key});
 
+  bool contains(String key);
+
+  Future<bool> remove(String key);
+
   List<String> getStringList({required String key});
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
@@ -178,7 +179,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       decoration: BoxDecoration(
                           image: DecorationImage(
                         image: AssetImage(
-                          icPaymentMethod,
+                          AppAssets().icPaymentMethod,
                         ),
                         fit: BoxFit.cover,
                       )),
@@ -214,7 +215,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           children: [
                             horizontalSpacer(16),
                             _commercial_image(
-                              imagePath: icCommercialBank,
+                              imagePath: AppAssets().icCommercialBank,
                             ),
                             Expanded(
                               child: Center(
@@ -311,7 +312,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             horizontalSpacer(32),
                             _otherImage(
                               opacity: isLeanEnable ? 1 : 0.5,
-                              imagePath: icLean,
+                              imagePath: AppAssets().icLean,
                             ),
                             horizontalSpacer(16),
                             Expanded(
@@ -379,7 +380,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             horizontalSpacer(32),
                             _otherImage(
                               opacity: 0.5,
-                              imagePath: icPostPay,
+                              imagePath: AppAssets().icPostPay,
                             ),
                             horizontalSpacer(16),
                             Expanded(

@@ -6,6 +6,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/changepassword/change_password.dart';
 import 'package:paynest_flutter_app/views/host/editprofile/edit_profile.dart';
@@ -110,7 +111,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                     },
                                     padding: EdgeInsets.zero,
                                     icon: Lottie.asset(
-                                      editAnimation,
+                                      AppAssets().editAnimation,
                                       repeat: true,
                                     ),
                                   ),
@@ -215,7 +216,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                         shape: BoxShape.circle,
                                       ),
                                       child: SvgPicture.asset(
-                                        icMale,
+                                        AppAssets().icMale,
                                       ),
                                     ),
                             ),

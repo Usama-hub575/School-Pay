@@ -1,5 +1,4 @@
 import '../export.dart';
-import 'export.dart';
 
 class AppRoutes {
   static const initializer = '/';
@@ -11,7 +10,7 @@ class AppRoutes {
     switch (settings.name) {
       case initializer:
         return MaterialPageRoute(
-          builder: (_) => const InitializerScreen(),
+          builder: (_) => const InitializerPage(),
         );
       default:
         return _errorRoute();

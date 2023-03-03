@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../../constants/constants.dart';
 import '../../../../data/model/mystudents_resp_model.dart';
 import '../../../../presentation/res/res.dart';
 import '../../../../theme/theme.dart';
@@ -99,7 +99,9 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
                 ],
               ),
               child: SvgPicture.asset(
-                student.student?.gender == 'male' ? icMale : icFemale,
+                student.student?.gender == 'male'
+                    ? AppAssets().icMale
+                    : AppAssets().icFemale,
               ),
             ),
             horizontalSpacer(12),
@@ -136,7 +138,7 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
             ),
             const Spacer(),
             Lottie.asset(
-              arrowForwardAnimation,
+              AppAssets().arrowForwardAnimation,
               repeat: true,
               width: sizes.widthRatio * 26,
               height: sizes.heightRatio * 26,

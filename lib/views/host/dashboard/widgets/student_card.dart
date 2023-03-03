@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../../constants/constants.dart';
 import '../../../../data/model/mystudents_resp_model.dart';
 import '../../../../presentation/res/res.dart';
 
@@ -76,11 +76,12 @@ class _StudentCardState extends State<StudentCard> {
                     shape: BoxShape.circle,
                   ),
                   child: SvgPicture.asset(
-                    studentElement.student?.gender == "male" ? icMale : icFemale,
+                    studentElement.student?.gender == "male"
+                        ? AppAssets().icMale
+                        : AppAssets().icFemale,
                   ),
                 ),
                 verticalSpacer(6),
-
                 Container(
                   width: sizes.widthRatio * 60,
                   child: Text(
@@ -120,7 +121,7 @@ class _StudentCardState extends State<StudentCard> {
             left: 0,
             right: 0,
             child: SvgPicture.asset(
-              icAdd,
+              AppAssets().icAdd,
             ),
           ),
         ],
