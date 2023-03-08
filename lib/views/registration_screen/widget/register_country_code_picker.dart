@@ -1,7 +1,6 @@
 library country_code_picker;
 
 import 'package:collection/collection.dart' show IterableExtension;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paynest_flutter_app/presentation/res/assets.dart';

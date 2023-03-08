@@ -1,21 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
-import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/presentation/res/assets.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/utils/sharedpref.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
-import 'package:paynest_flutter_app/widgets/inkwell_widget.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
-import 'package:paynest_flutter_app/widgets/toast.dart';
-
-import '../data/auth/local_auth_api.dart';
-import '../presentation/res/res.dart';
-import '../utils/sharedPrefKeys.dart';
-import '../widgets/back_button.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -319,7 +304,7 @@ class _SignInPageState extends State<SignInPage> {
                       height: sizes.heightRatio * 46,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
+                          backgroundColor: PayNestTheme.primaryColor,
                           elevation: 0,
                           // side: BorderSide(width:1, color:Colors.white),
                           shape: RoundedRectangleBorder(

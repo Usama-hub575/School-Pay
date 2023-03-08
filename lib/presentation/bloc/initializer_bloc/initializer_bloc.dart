@@ -1,6 +1,4 @@
-import 'package:paynest_flutter_app/domain/use_cases/firebase_use_case/firebase_use_case.dart';
-
-import 'export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 part 'initializer_event.dart';
 part 'initializer_state.dart';
@@ -19,6 +17,7 @@ class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
     on<Initialize>(_initialize);
     // on<Login>(_login);
   }
+
   late PackageInfo packageInfo;
 
   _initialize(Initialize event, emit) async {
@@ -36,31 +35,29 @@ class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
       }
       if (_isVersionGreaterThan(
           maxAppVersion, firebaseUseCase.getModel().currentVersion)) {
-        () {
-          if (_isVersionGreaterThan(
-              minAppVersion, firebaseUseCase.getModel().currentVersion)) {
-            emit(
-              state.copyWith(
-                status: InitializerStatus.forcefulDialogue,
-                showCancelButton: false,
-              ),
-            );
-          } else {
-            emit(
-              state.copyWith(
-                status: InitializerStatus.optionalDialogue,
-                showCancelButton: true,
-              ),
-            );
-          }
-        };
+        if (_isVersionGreaterThan(
+            minAppVersion, firebaseUseCase.getModel().currentVersion)) {
+          emit(
+            state.copyWith(
+              status: InitializerStatus.forcefulDialogue,
+              showCancelButton: false,
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(
+              status: InitializerStatus.optionalDialogue,
+              showCancelButton: true,
+            ),
+          );
+        }
+      } else {
+        emit(
+          state.copyWith(
+            status: InitializerStatus.welcomePage,
+          ),
+        );
       }
-    } else {
-      emit(
-        state.copyWith(
-          status: InitializerStatus.welcomePage,
-        ),
-      );
     }
   }
 
@@ -92,29 +89,29 @@ class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
     initializerUseCase.getCountries();
   }
 
-  // _login(Login event, emit) async {
-  //   if (storage.getString(key:StorageKeys.email) != null &&
-  //       storage.getString(key:StorageKeys.password) != null) {
-  //     bool value = await initializerUseCase.login();
-  //     if (value) {
-  //       emit(
-  //         state.copyWith(
-  //           status: InitializerStatus.home,
-  //         ),
-  //       );
-  //     } else {
-  //       emit(
-  //         state.copyWith(
-  //           status: InitializerStatus.welcomePage,
-  //         ),
-  //       );
-  //     }
-  //   } else {
-  //     emit(
-  //       state.copyWith(
-  //         status: InitializerStatus.welcomePage,
-  //       ),
-  //     );
-  //   }
-  // }
+// _login(Login event, emit) async {
+//   if (storage.getString(key:StorageKeys.email) != null &&
+//       storage.getString(key:StorageKeys.password) != null) {
+//     bool value = await initializerUseCase.login();
+//     if (value) {
+//       emit(
+//         state.copyWith(
+//           status: InitializerStatus.home,
+//         ),
+//       );
+//     } else {
+//       emit(
+//         state.copyWith(
+//           status: InitializerStatus.welcomePage,
+//         ),
+//       );
+//     }
+//   } else {
+//     emit(
+//       state.copyWith(
+//         status: InitializerStatus.welcomePage,
+//       ),
+//     );
+//   }
+// }
 }

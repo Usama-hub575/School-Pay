@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:paynest_flutter_app/widgets/inkwell_widget.dart';
 import 'package:pinput/pinput.dart';
 
@@ -227,7 +226,8 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
   );
 
   void startTimer() {
-    sendOTPController.hitSendOTP(widget.phoneCode , widget.phoneNumber, widget.email);
+    sendOTPController.hitSendOTP(
+        widget.phoneCode, widget.phoneNumber, widget.email);
     setState(() {
       timeUpFlag = false;
       _start = 60;

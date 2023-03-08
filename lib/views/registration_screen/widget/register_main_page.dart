@@ -1,9 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -290,7 +288,8 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           children: [
                             TextSpan(
                               text: 'I Accept',
-                              style: PayNestTheme.floating_14primaryColor.copyWith(
+                              style:
+                                  PayNestTheme.floating_14primaryColor.copyWith(
                                 color: PayNestTheme.black,
                               ),
                             ),
@@ -301,12 +300,13 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                               text: ' Terms & Conditions',
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  launch(
+                                  launchUrl(Uri.parse(
                                     'https://paynest.ae/terms.html',
-                                  );
+                                  ));
                                   setState(() {});
                                 },
-                              style: PayNestTheme.floating_14primaryColor.copyWith(
+                              style:
+                                  PayNestTheme.floating_14primaryColor.copyWith(
                                 decoration: TextDecoration.underline,
                               ),
                             ),
@@ -320,7 +320,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: PayNestTheme.primaryColor,
+                        backgroundColor: PayNestTheme.primaryColor,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
@@ -331,7 +331,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           vertical: verticalValue(16),
                         ),
                       ),
-                      onPressed: () async{
+                      onPressed: () async {
                         if (Utils.reg1FormKey.currentState!.validate() &&
                             terms == true &&
                             phoneController.text.isNotEmpty) {
@@ -346,10 +346,10 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           setState(() {
                             loading = !loading;
                           });
-                          if(sendOTPController.status.value){
+                          if (sendOTPController.status.value) {
                             //hit otp
                             Future.delayed(Duration(seconds: 2)).then(
-                                  (value) => {
+                              (value) => {
                                 widget.onNextTap(
                                   emailController.text,
                                   createPasswordController.text,
@@ -358,9 +358,9 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                                 ),
                               },
                             );
-                          }
-                          else if(!sendOTPController.status.value){
-                            ScaffoldMessenger.of(key.currentState!.context).showSnackBar(
+                          } else if (!sendOTPController.status.value) {
+                            ScaffoldMessenger.of(key.currentState!.context)
+                                .showSnackBar(
                               SnackBar(
                                 duration: Duration(seconds: 1),
                                 backgroundColor: Colors.red,

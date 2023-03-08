@@ -1,4 +1,4 @@
-class Country {
+class CountryDetails {
   int? id;
   String? flag;
   String? iso;
@@ -10,7 +10,7 @@ class Country {
   String? createdAt;
   String? updatedAt;
 
-  Country({
+  CountryDetails({
     this.id,
     this.flag,
     this.iso,
@@ -23,7 +23,7 @@ class Country {
     this.updatedAt,
   });
 
-  Country.fromJson(Map<String, dynamic> json) {
+  CountryDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? -1;
     flag = json['flag'] ?? '';
     iso = json['iso'] ?? '';

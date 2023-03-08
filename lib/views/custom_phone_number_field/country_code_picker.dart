@@ -1,12 +1,9 @@
 library country_code_picker;
 
 import 'package:collection/collection.dart' show IterableExtension;
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/custom_phone_number_field/selection_dialog.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../presentation/export.dart';
 import 'country_code.dart';
 import 'country_codes.dart';
 

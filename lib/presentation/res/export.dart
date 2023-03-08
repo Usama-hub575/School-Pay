@@ -1,5 +1,3 @@
-export 'package:flutter/material.dart';
-
 export 'assets.dart';
 export 'colors.dart';
 export 'constants.dart';

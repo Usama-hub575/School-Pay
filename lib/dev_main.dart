@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 import 'export.dart';
 
 //flutter build apk --flavor staging -t lib/staging_main.dart
@@ -50,15 +52,18 @@ void main() async {
   });
   FCM().init();
   initializeLocalNotifications();
-  Future.wait([
-    precachePicture(
-      ExactAssetPicture(
-        SvgPicture.svgStringDecoderBuilder,
-        AppAssets().icSchoolBuilding,
+  await initializeDependencies();
+  Future.wait(
+    [
+      precachePicture(
+        ExactAssetPicture(
+          SvgPicture.svgStringDecoderBuilder,
+          AppAssets().icSchoolBuilding,
+        ),
+        null,
       ),
-      null,
-    ),
-  ]);
+    ],
+  );
   // getFCMToken();
   MySharedPreferences.instance;
   userController = Get.put(
@@ -66,7 +71,26 @@ void main() async {
   );
   runZonedGuarded(
     () {
-      runApp(MyApp());
+      runApp(
+        MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) => FirebaseBloc(
+                firebaseUseCase: it<FirebaseUseCase>(),
+              )..add(
+                  InitializeFirebaseRemoteConfiguration(),
+                ),
+            ),
+            BlocProvider(
+              create: (_) => InitializerBloc(
+                firebaseUseCase: it<FirebaseUseCase>(),
+                initializerUseCase: it<InitializerUseCase>(),
+              ),
+            ),
+          ],
+          child: MyApp(),
+        ),
+      );
     },
     (error, stack) async {
       await Sentry.captureException(

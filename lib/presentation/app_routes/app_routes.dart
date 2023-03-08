@@ -1,4 +1,4 @@
-import '../export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class AppRoutes {
   static const initializer = '/';
@@ -10,7 +10,7 @@ class AppRoutes {
     switch (settings.name) {
       case initializer:
         return MaterialPageRoute(
-          builder: (_) => const InitializerPage(),
+          builder: (_) => InitializerPage(),
         );
       default:
         return _errorRoute();

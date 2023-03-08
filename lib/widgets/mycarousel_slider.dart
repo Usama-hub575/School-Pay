@@ -1,6 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class CarouselSliderPage extends StatefulWidget {
   const CarouselSliderPage({Key? key}) : super(key: key);
@@ -22,18 +20,20 @@ class _CarouselSliderPageState extends State<CarouselSliderPage> {
     'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
     'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
   ];
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> imageSliders = imgList
         .map((item) => Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w,vertical: 5.h),
-          child:  SizedBox(
-            width: 1.sw,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(20.r),
-                child: Image.network(item, fit: BoxFit.fill)),
-          ),
-        )).toList();
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
+              child: SizedBox(
+                width: 1.sw,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.r),
+                    child: Image.network(item, fit: BoxFit.fill)),
+              ),
+            ))
+        .toList();
     return Column(
       children: [
         Row(
@@ -57,21 +57,23 @@ class _CarouselSliderPageState extends State<CarouselSliderPage> {
             ),
           ],
         ),
-        SizedBox(height: 5.h,),
+        SizedBox(
+          height: 5.h,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: imgList.asMap().entries.map((entry) {
             return GestureDetector(
               onTap: () => _controller.animateToPage(entry.key),
               child: Container(
-                width: _current == entry.key ? 8.0.w: 4.w,
-                height: _current == entry.key ? 8.0.w: 4.w,
+                width: _current == entry.key ? 8.0.w : 4.w,
+                height: _current == entry.key ? 8.0.w : 4.w,
                 margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: (Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white
-                        : Colors.blueAccent)
+                            ? Colors.white
+                            : Colors.blueAccent)
                         .withOpacity(_current == entry.key ? 0.9 : 0.4)),
               ),
             );

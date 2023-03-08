@@ -305,8 +305,10 @@ class _MorePageState extends State<MorePage> {
                       icon: AppAssets().icFaq,
                       value: FAQs,
                       onTap: () {
-                        launch(
-                          'https://paynest.ae/#faq',
+                        launchUrl(
+                          Uri.parse(
+                            'https://paynest.ae/#faq',
+                          ),
                         );
                         setState(() {});
                       },
@@ -316,8 +318,10 @@ class _MorePageState extends State<MorePage> {
                       icon: AppAssets().icContactUs,
                       value: contactUs,
                       onTap: () {
-                        launch(
-                          'https://paynest.ae/#faq',
+                        launchUrl(
+                          Uri.parse(
+                            'https://paynest.ae/#faq',
+                          ),
                         );
                         setState(() {});
                       },
@@ -327,8 +331,10 @@ class _MorePageState extends State<MorePage> {
                       icon: AppAssets().icPrivacyPolicy,
                       value: privacyPolicy,
                       onTap: () {
-                        launch(
-                          'https://paynest.ae/privacy-policy.html',
+                        launchUrl(
+                          Uri.parse(
+                            'https://paynest.ae/privacy-policy.html',
+                          ),
                         );
 
                         setState(() {});
@@ -339,8 +345,10 @@ class _MorePageState extends State<MorePage> {
                       icon: AppAssets().icTermsAndCondition,
                       value: termConditions,
                       onTap: () {
-                        launch(
-                          'https://paynest.ae/terms.html',
+                        launchUrl(
+                          Uri.parse(
+                            'https://paynest.ae/terms.html',
+                          ),
                         );
                         setState(() {});
                       },

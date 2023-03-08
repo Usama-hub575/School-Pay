@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class AppBarBackButton extends StatefulWidget {
   Color buttonColor;
   Color iconColor;
-  AppBarBackButton({Key? key, required this.buttonColor, required this.iconColor}) : super(key: key);
+
+  AppBarBackButton(
+      {Key? key, required this.buttonColor, required this.iconColor})
+      : super(key: key);
 
   @override
   State<AppBarBackButton> createState() => _AppBarBackButtonState();

@@ -1,14 +1,6 @@
 import 'package:fade_shimmer/fade_shimmer.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
-import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
-import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/presentation/res/assets.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/assistance/get_assistance.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/recent_transaction.dart';
@@ -17,8 +9,8 @@ import 'package:paynest_flutter_app/views/host/dashboard/widgets/student_card_sh
 import 'package:paynest_flutter_app/views/host/pendingtask/pending_task.dart';
 import 'package:paynest_flutter_app/views/host/singlestudent/singlestudent_page.dart';
 import 'package:paynest_flutter_app/views/host/student/student_page.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
 
+import '../../../controller/myStudent_controller.dart';
 import '../../../controller/transactionlist_controller.dart';
 import '../../../data/model/datamodel/singlestudent_model.dart';
 import '../../../data/model/datamodel/singlestudent_model.dart' as student;
@@ -26,10 +18,6 @@ import '../../../data/model/datamodel/transactiondetail_model.dart';
 import '../../../data/model/mystudents_resp_model.dart';
 import '../../../data/model/mystudents_resp_model.dart' as studentElement;
 import '../../../data/model/transactionlist_resp_model.dart';
-import '../../../presentation/res/res.dart';
-import '../../../staging_main.dart';
-import '../../../widgets/get_student_model.dart';
-import '../../../widgets/inkwell_widget.dart';
 import '../school/select_school.dart';
 import '../transactiondetails/transactiondetails_page.dart';
 

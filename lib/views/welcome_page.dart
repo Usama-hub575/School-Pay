@@ -124,7 +124,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: PayNestTheme.primaryColor,
+                      backgroundColor: PayNestTheme.primaryColor,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -157,7 +157,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: PayNestTheme.colorWhite,
+                      backgroundColor: PayNestTheme.colorWhite,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -182,8 +182,8 @@ class _WelcomePageState extends State<WelcomePage> {
                 verticalSpacer(16),
                 GestureDetector(
                   onTap: () {
-                    launch(
-                      'https://paynest.ae/privacy-policy.html',
+                    launchUrl(
+                      Uri.parse('https://paynest.ae/privacy-policy.html'),
                     );
                   },
                   child: Text(

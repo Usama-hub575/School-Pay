@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
+import 'package:paynest_flutter_app/export.dart';
 
-void showToast({required String messege, required BuildContext context,required Color color}) {
+void showToast(
+    {required String messege,
+    required BuildContext context,
+    required Color color}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       duration: Duration(seconds: 1),

@@ -1,4 +1,5 @@
-import 'export.dart';
+import 'package:get/get.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 //flutter build apk --flavor staging -t lib/staging_main.dart
 
@@ -50,6 +51,7 @@ void main() async {
   });
   FCM().init();
   initializeLocalNotifications();
+  initializeDependencies();
   Future.wait([
     precachePicture(
       ExactAssetPicture(
@@ -66,7 +68,22 @@ void main() async {
   );
   runZonedGuarded(
     () {
-      runApp(MyApp());
+      runApp(
+        MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: it<FirebaseBloc>()
+                ..add(
+                  InitializeFirebaseRemoteConfiguration(),
+                ),
+            ),
+            BlocProvider.value(
+              value: it<InitializerBloc>(),
+            ),
+          ],
+          child: MyApp(),
+        ),
+      );
     },
     (error, stack) async {
       await Sentry.captureException(

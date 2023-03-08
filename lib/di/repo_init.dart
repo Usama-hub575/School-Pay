@@ -1,11 +1,12 @@
-import '../data/export.dart';
-import 'export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 late StorageRepo storage;
 
 Future initializeRepoDependencies() async {
-  MySharedPreferences sharedPreferences = MySharedPreferences.instance;
-
+  // MySharedPreferences sharedPreferences = MySharedPreferences.instance;
+  storage = StorageRepoImpl(
+    sharedPreferences: await SharedPreferences.getInstance(),
+  );
   it.registerLazySingleton<FirebaseRepo>(
     () => FirebaseRepoImpl(),
   );

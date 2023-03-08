@@ -1,4 +1,5 @@
-import 'export.dart';
+import 'package:dartz/dartz.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class InitializerRepoImpl implements InitializerRepo {
   final StorageRepo storage;
@@ -12,7 +13,7 @@ class InitializerRepoImpl implements InitializerRepo {
 
   @override
   String getString(String key) {
-    return storage.getString(key: key) ?? '';
+    return storage.getString(key: key);
   }
 
   @override

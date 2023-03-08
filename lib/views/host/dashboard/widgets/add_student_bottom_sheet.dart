@@ -1,10 +1,6 @@
-import 'package:lottie/lottie.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/student_detail_bottom_sheet.dart';
 
-import '../../../../constants/constants.dart';
-import '../../../../presentation/export.dart';
-import '../../../../widgets/spacer.dart';
 import '../../school/select_school.dart';
 
 class AddStudentBottomSheet {

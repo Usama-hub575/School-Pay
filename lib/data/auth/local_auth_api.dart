@@ -1,10 +1,10 @@
-import 'export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class LocalAuthApi {
   static Future<bool> authenticateWithBiometrics() async {
     LocalAuthentication localAuthentication = LocalAuthentication();
-    bool isBiometricSupported = await localAuthentication.isDeviceSupported();
-    bool canCheckBiometrics = await localAuthentication.canCheckBiometrics;
+    // bool isBiometricSupported = await localAuthentication.isDeviceSupported();
+    // bool canCheckBiometrics = await localAuthentication.canCheckBiometrics;
     List<BiometricType> biometricTypes =
         (await localAuthentication.getAvailableBiometrics())
             .cast<BiometricType>();

@@ -1,4 +1,4 @@
-import 'export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 Map<int, Color> color = {
   50: Color.fromRGBO(136, 14, 79, .1),
@@ -14,6 +14,8 @@ Map<int, Color> color = {
 };
 
 class AppColors {
+  Color textGreyWhiteShade = Color(0xFFB8C1C5);
+  Color dropShadow = Color(0xFF7A7A7A);
   Color appColor = Color.fromRGBO(0, 206, 139, 1);
   Color lightAppColor = Color.fromRGBO(0, 195, 135, 0.1);
   Color appColorShade = Color.fromRGBO(0, 206, 139, .16);

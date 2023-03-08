@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
-import 'package:paynest_flutter_app/presentation/res/assets.dart';
-import 'package:paynest_flutter_app/presentation/res/colors.dart';
-import 'package:paynest_flutter_app/presentation/res/res.dart';
-import 'package:paynest_flutter_app/presentation/res/text_styles.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class CustomAlertDialog {
   static baseDialog({

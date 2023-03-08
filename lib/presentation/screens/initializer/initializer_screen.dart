@@ -1,16 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
-import 'package:paynest_flutter_app/presentation/bloc/firebase_bloc/firebase_bloc.dart';
-import 'package:paynest_flutter_app/presentation/res/assets.dart';
-import 'package:paynest_flutter_app/presentation/res/colors.dart';
-import 'package:paynest_flutter_app/presentation/res/res.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
-import 'package:video_player/video_player.dart';
-
-import '../../../widgets/custom_alert_dialog.dart';
-import '../../bloc/initializer_bloc/initializer_bloc.dart';
-import '../../bloc/initializer_bloc/initializer_status.dart';
-import 'export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class InitializerPage extends StatefulWidget {
   const InitializerPage({Key? key}) : super(key: key);
@@ -48,9 +36,9 @@ class _InitializerPageState extends State<InitializerPage> {
     context.read<InitializerBloc>().add(
           Initialize(),
         );
-    context.read<InitializerBloc>().add(
-          Login(),
-        );
+    // context.read<InitializerBloc>().add(
+    //       Login(),
+    //     );
   }
 
   @override

@@ -1,4 +1,4 @@
-import 'export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 LoginModel loginModelFromJson(String str) =>
     LoginModel.fromJson(json.decode(str));

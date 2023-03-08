@@ -1,24 +1,12 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/partialpay_controller.dart';
-import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/controller/verifypin_controller.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/widget/amount_bottom_sheet.dart';
 import 'package:paynest_flutter_app/views/host/payment_method/payment_method.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../data/model/datamodel/singlestudent_model.dart';
-import '../../../presentation/res/res.dart';
-import '../../../widgets/amount_formater.dart';
-import '../../../widgets/back_button.dart';
-import '../../../widgets/toast.dart';
 import '../../download_pdf/download_pdf.dart';
 
 class InvoicePaymentPage extends StatefulWidget {
@@ -149,7 +137,9 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                             ),
                           )
                         : const SizedBox.shrink(),
-                    widget.singleStudentModel.student!.grade != '-' ? verticalSpacer(4): const SizedBox.shrink(),
+                    widget.singleStudentModel.student!.grade != '-'
+                        ? verticalSpacer(4)
+                        : const SizedBox.shrink(),
                     widget.singleStudentModel.student!.grade != '-'
                         ? Text(
                             'Grade ${widget.singleStudentModel.student!.grade}',

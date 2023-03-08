@@ -1,8 +1,8 @@
-import 'export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class CountriesResponse {
   bool? status;
-  List<Country>? country;
+  List<CountryDetails>? country;
 
   CountriesResponse({
     this.status,
@@ -12,10 +12,10 @@ class CountriesResponse {
   CountriesResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['countries'] != null) {
-      country = <Country>[];
+      country = <CountryDetails>[];
       json['countries'].forEach(
         (v) {
-          country!.add(Country.fromJson(v));
+          country!.add(CountryDetails.fromJson(v));
         },
       );
     }

@@ -1,4 +1,4 @@
-import 'export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 const Iterable<LocalizationsDelegate<dynamic>> localizationDelegates = [
   AppLocalizations.delegate,

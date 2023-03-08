@@ -853,10 +853,7 @@ class EmiratesIdFormatter extends TextInputFormatter {
   EmiratesIdFormatter({
     required this.mask,
     required this.separator,
-  }) {
-    assert(mask != null);
-    assert(separator != null);
-  }
+  }) {}
 
   @override
   TextEditingValue formatEditUpdate(

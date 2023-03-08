@@ -1,10 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paynest_flutter_app/presentation/app_routes/app_routes.dart';
-import 'package:paynest_flutter_app/presentation/bloc/firebase_bloc/firebase_bloc.dart';
-import 'package:paynest_flutter_app/presentation/bloc/initializer_bloc/initializer_bloc.dart';
-
-import 'di/di.dart';
-import 'export.dart';
+import "package:paynest_flutter_app/export.dart";
 
 bool isLeanEnable = false;
 
@@ -16,7 +10,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final router = AppRoutes();
   @override
   void initState() {
     super.initState();
@@ -24,26 +17,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => FirebaseBloc(
-            firebaseUseCase: it(),
-          )..add(
-              InitializeFirebaseRemoteConfiguration(),
-            ),
-        ),
-        BlocProvider(
-          create: (_) => InitializerBloc(
-            initializerUseCase: it(),
-            firebaseUseCase: it(),
-          ),
-        ),
-      ],
-      child: MaterialApp(
-        onGenerateRoute: AppRoutes.generateRoute,
-        initialRoute: AppRoutes.initializer,
-      ),
+    return MaterialApp(
+      onGenerateRoute: AppRoutes.generateRoute,
+      initialRoute: AppRoutes.initializer,
     );
   }
 }

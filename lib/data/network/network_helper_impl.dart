@@ -1,7 +1,6 @@
+import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
-
-import '../../presentation/export.dart';
-import 'export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class NetworkHelperImpl extends NetworkHelper {
   NetworkHelperImpl();
@@ -88,7 +87,7 @@ class NetworkHelperImpl extends NetworkHelper {
       final int statusCode = response.statusCode;
 
       if (statusCode >= 400) {
-        Map<String, String> errorJson = jsonDecode(responseText);
+        //Map<String, String> errorJson = jsonDecode(responseText);
         return Right(
           Failure(
             status: false,
@@ -147,7 +146,7 @@ class NetworkHelperImpl extends NetworkHelper {
     final int statusCode = response!.statusCode;
 
     if (statusCode >= 400) {
-      Map<String, dynamic> errorJson = jsonDecode(response.body.toString());
+      //Map<String, dynamic> errorJson = jsonDecode(response.body.toString());
       return Right(
         Failure(
           status: false,

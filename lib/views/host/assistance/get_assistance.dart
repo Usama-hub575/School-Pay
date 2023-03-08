@@ -1,16 +1,5 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
-import 'package:paynest_flutter_app/presentation/export.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../presentation/res/res.dart';
-import '../../../widgets/toast.dart';
 
 class GetAssistance extends StatefulWidget {
   const GetAssistance({Key? key}) : super(key: key);
@@ -94,8 +83,10 @@ class _GetAssistanceState extends State<GetAssistance> {
           verticalSpacer(24),
           InkWell(
             onTap: () {
-              launch(
-                'https://paynest.ae/#contact',
+              launchUrl(
+                Uri.parse(
+                  'https://paynest.ae/#contact',
+                ),
               );
             },
             child: Container(
@@ -155,8 +146,10 @@ class _GetAssistanceState extends State<GetAssistance> {
           verticalSpacer(24),
           InkWell(
             onTap: () {
-              launch(
-                'https://paynest.ae/#faq',
+              launchUrl(
+                Uri.parse(
+                  'https://paynest.ae/#faq',
+                ),
               );
             },
             child: Container(
@@ -280,16 +273,21 @@ class _GetAssistanceState extends State<GetAssistance> {
     var whatAppUrlIOS = "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
     if (Platform.isIOS) {
       // for iOS phone only
-      if (await canLaunch(whatAppUrlIOS)) {
+      if (await canLaunchUrl(
+        Uri.parse(whatAppUrlIOS),
+      )) {
         await launch(whatAppUrlIOS, forceSafariVC: false);
       } else {
         showToast(
-            context: context,
-            messege: 'Whatsapp not installed',
-            color: PayNestTheme.red);
+          context: context,
+          messege: 'Whatsapp not installed',
+          color: PayNestTheme.red,
+        );
       }
     } else {
-      await launch(whatsappUrlAndroid);
+      await launchUrl(
+        Uri.parse(whatsappUrlAndroid),
+      );
     }
   }
 }
