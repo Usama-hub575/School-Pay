@@ -3,7 +3,6 @@ import 'package:paynest_flutter_app/export.dart';
 late StorageRepo storage;
 
 Future initializeRepoDependencies() async {
-  // MySharedPreferences sharedPreferences = MySharedPreferences.instance;
   storage = StorageRepoImpl(
     sharedPreferences: await SharedPreferences.getInstance(),
   );
@@ -13,6 +12,13 @@ Future initializeRepoDependencies() async {
 
   it.registerLazySingleton<InitializerRepo>(
     () => InitializerRepoImpl(
+      storage: storage,
+      networkHelper: it(),
+    ),
+  );
+
+  it.registerLazySingleton<SignInRepo>(
+    () => SignInRepoImpl(
       storage: storage,
       networkHelper: it(),
     ),

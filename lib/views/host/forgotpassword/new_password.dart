@@ -360,14 +360,14 @@ class _NewPasswordState extends State<NewPassword> {
                             } else {
                               showToast(
                                   context: context,
-                                  messege:
+                                  message:
                                       userController.isFailed.value.toString(),
                                   color: PayNestTheme.primaryColor);
                             }
                           } else {
                             showToast(
                                 context: context,
-                                messege: 'Fields can not be empty!',
+                                message: 'Fields can not be empty!',
                                 color: PayNestTheme.primaryColor);
                           }
                         },

@@ -13,4 +13,10 @@ Future initializeBlocs() async {
       initializerUseCase: it<InitializerUseCase>(),
     ),
   );
+
+  it.registerLazySingleton(
+    () => SignInBloc(
+      signInUseCase: it<SignInUseCase>(),
+    ),
+  );
 }

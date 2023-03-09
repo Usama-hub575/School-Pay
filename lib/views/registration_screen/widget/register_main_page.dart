@@ -380,7 +380,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           }
                         } else {
                           showToast(
-                              messege: 'Phone Field Cannot Be Empty !!',
+                              message: 'Phone Field Cannot Be Empty !!',
                               context: context,
                               color: PayNestTheme.red);
                         }

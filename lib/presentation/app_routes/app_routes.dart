@@ -2,6 +2,8 @@ import 'package:paynest_flutter_app/export.dart';
 
 class AppRoutes {
   static const initializer = '/';
+  static const navigateToWelcome = '/welcome';
+  static const navigateToSignIn = '/signIn';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     _currentRoute = settings.name;
@@ -11,6 +13,14 @@ class AppRoutes {
       case initializer:
         return MaterialPageRoute(
           builder: (_) => InitializerPage(),
+        );
+      case navigateToWelcome:
+        return MaterialPageRoute(
+          builder: (_) => WelcomePage(),
+        );
+      case navigateToSignIn:
+        return MaterialPageRoute(
+          builder: (_) => SignInPage(),
         );
       default:
         return _errorRoute();

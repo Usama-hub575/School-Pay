@@ -340,13 +340,13 @@ class _ChangePasswordState extends State<ChangePassword> {
 
                         showToast(
                             context: context,
-                            messege: "Password Reset Successfully",
+                            message: "Password Reset Successfully",
                             color: PayNestTheme.paidGreen);
                         Navigator.pop(context);
                       } else {
                         showToast(
                             context: context,
-                            messege: resetController.resetPassData.value.message
+                            message: resetController.resetPassData.value.message
                                 .toString(),
                             color: PayNestTheme.red);
                       }

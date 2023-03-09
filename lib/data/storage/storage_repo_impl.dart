@@ -21,8 +21,7 @@ class StorageRepoImpl implements StorageRepo {
   int getInt({required String key}) => sharedPreferences.getInt(key) ?? 0;
 
   @override
-  String getString({required String key}) =>
-      sharedPreferences.getString(key) ?? '';
+  String? getString({required String key}) => sharedPreferences.getString(key);
 
   @override
   List<String> getStringList({required String key}) =>

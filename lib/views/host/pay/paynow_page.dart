@@ -630,7 +630,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                     .text) <=
                                                             0) {
                                                           showToast(
-                                                              messege:
+                                                              message:
                                                                   "Amount Should Be Grater Then 0!",
                                                               context: context,
                                                               color:
@@ -641,7 +641,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                       } else {
                                                         showToast(
                                                           context: context,
-                                                          messege:
+                                                          message:
                                                               'Service Unavailable !!',
                                                           color: PayNestTheme
                                                               .primaryColor,
@@ -776,7 +776,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                 ? InkWellWidget(
                                                     onTap: () {
                                                       showToast(
-                                                        messege: 'Coming Soon!',
+                                                        message: 'Coming Soon!',
                                                         context: context,
                                                         color: PayNestTheme
                                                             .primaryColor,
@@ -1103,7 +1103,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                     .text) <=
                                                             0) {
                                                           showToast(
-                                                              messege:
+                                                              message:
                                                                   "Amount Should Be Grater Then 0!",
                                                               context: context,
                                                               color:
@@ -1113,7 +1113,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         }
                                                       } else {
                                                         showToast(
-                                                          messege:
+                                                          message:
                                                               'Service Unavailable !!',
                                                           context: context,
                                                           color: PayNestTheme
@@ -1213,7 +1213,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                 ? InkWellWidget(
                                                     onTap: () {
                                                       showToast(
-                                                          messege:
+                                                          message:
                                                               'Coming Soon!',
                                                           context: context,
                                                           color: PayNestTheme
@@ -1469,7 +1469,7 @@ class _PayNowPageState extends State<PayNowPage> {
                 jsonDecode(resp.toString()),
               );
               showToast(
-                messege: leanResponse.message ?? '',
+                message: leanResponse.message ?? '',
                 context: context,
                 color: leanResponse.status == 'SUCCESS'
                     ? Colors.green
@@ -1568,7 +1568,7 @@ class _PayNowPageState extends State<PayNowPage> {
                 () {
                   showToast(
                     context: context,
-                    messege: 'Something went wrong with the transaction',
+                    message: 'Something went wrong with the transaction',
                     color: PayNestTheme.red,
                   );
                 },
@@ -1584,7 +1584,7 @@ class _PayNowPageState extends State<PayNowPage> {
               () {
                 showToast(
                   context: context,
-                  messege: 'Something went wrong with the transaction',
+                  message: 'Something went wrong with the transaction',
                   color: PayNestTheme.red,
                 );
               },
@@ -1599,7 +1599,7 @@ class _PayNowPageState extends State<PayNowPage> {
           () {
             showToast(
               context: context,
-              messege: 'Amount is not correct',
+              message: 'Amount is not correct',
               color: PayNestTheme.red,
             );
           },
@@ -1612,7 +1612,7 @@ class _PayNowPageState extends State<PayNowPage> {
           () {
             showToast(
               context: context,
-              messege: 'Fees already paid',
+              message: 'Fees already paid',
               color: Colors.green,
             );
           },
@@ -1627,7 +1627,7 @@ class _PayNowPageState extends State<PayNowPage> {
           () {
             showToast(
               context: context,
-              messege: 'Something went wrong with the transaction',
+              message: 'Something went wrong with the transaction',
               color: PayNestTheme.red,
             );
           },

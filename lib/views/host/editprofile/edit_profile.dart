@@ -612,14 +612,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 Navigator.pop(context);
                                 showToast(
                                     context: context,
-                                    messege: updateProfileController
+                                    message: updateProfileController
                                         .message.value
                                         .toString(),
                                     color: PayNestTheme.primaryColor);
                               } else {
                                 showToast(
                                     context: context,
-                                    messege: updateProfileController
+                                    message: updateProfileController
                                         .isFailed.value
                                         .toString(),
                                     color: PayNestTheme.primaryColor);
@@ -627,7 +627,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             } else {
                               showToast(
                                   context: context,
-                                  messege: 'Email field is empty!',
+                                  message: 'Email field is empty!',
                                   color: PayNestTheme.red);
                             }
                           },

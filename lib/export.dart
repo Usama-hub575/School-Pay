@@ -19,6 +19,7 @@ export 'package:flutter_svg/flutter_svg.dart';
 export 'package:get/get_core/src/get_main.dart';
 export 'package:get_it/get_it.dart';
 export 'package:get_storage/get_storage.dart';
+export 'package:intl/date_symbol_data_local.dart';
 export 'package:local_auth/local_auth.dart';
 export 'package:lottie/lottie.dart';
 export 'package:package_info_plus/package_info_plus.dart';
@@ -36,6 +37,7 @@ export 'package:paynest_flutter_app/widgets/spacer.dart';
 export 'package:sentry_flutter/sentry_flutter.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:store_redirect/store_redirect.dart';
+export 'package:url_launcher/url_launcher.dart';
 export 'package:video_player/video_player.dart';
 
 export 'Utils/sharedpref.dart';

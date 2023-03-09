@@ -359,11 +359,11 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
     if (partialPayController.partialPayData.value.status == true) {
       showToast(
           context: context,
-          messege: 'Payment Successful',
+          message: 'Payment Successful',
           color: PayNestTheme.primaryColor);
     } else {
       showToast(
-          context: context, messege: 'Payment Failed', color: PayNestTheme.red);
+          context: context, message: 'Payment Failed', color: PayNestTheme.red);
     }
   }
 
@@ -383,7 +383,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
 
     showToast(
         context: context,
-        messege: 'Successful!',
+        message: 'Successful!',
         color: PayNestTheme.primaryColor);
   }
 }

@@ -150,14 +150,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             } else {
                               showToast(
                                   context: context,
-                                  messege: registerController.isFailed.value
+                                  message: registerController.isFailed.value
                                       .toString(),
                                   color: PayNestTheme.red);
                             }
                           } else {
                             showToast(
                                 context: context,
-                                messege: 'Email field is empty',
+                                message: 'Email field is empty',
                                 color: PayNestTheme.red);
                           }
                           // setState(() {

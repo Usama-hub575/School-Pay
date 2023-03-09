@@ -347,7 +347,7 @@ class _AddStudentState extends State<AddStudent> {
                                     } else {
                                       showToast(
                                           context: context,
-                                          messege:
+                                          message:
                                               "Please Select Search By Field First",
                                           color: PayNestTheme.primaryColor);
                                     }
@@ -539,7 +539,7 @@ class _AddStudentState extends State<AddStudent> {
                                                         } else {
                                                           showToast(
                                                               context: context,
-                                                              messege: addStudentController
+                                                              message: addStudentController
                                                                       .addStudentData
                                                                       .value
                                                                       .message ??
@@ -602,7 +602,7 @@ class _AddStudentState extends State<AddStudent> {
                                                         } else {
                                                           showToast(
                                                               context: context,
-                                                              messege: addStudentController
+                                                              message: addStudentController
                                                                       .addStudentData
                                                                       .value
                                                                       .message ??
@@ -692,7 +692,7 @@ class _AddStudentState extends State<AddStudent> {
                                                                 showToast(
                                                                     context:
                                                                         context,
-                                                                    messege: addStudentController
+                                                                    message: addStudentController
                                                                             .addStudentData
                                                                             .value
                                                                             .message ??
@@ -727,7 +727,7 @@ class _AddStudentState extends State<AddStudent> {
                                                               showToast(
                                                                   context:
                                                                       context,
-                                                                  messege:
+                                                                  message:
                                                                       'Fields can not be empty',
                                                                   color:
                                                                       PayNestTheme
@@ -817,7 +817,7 @@ class _AddStudentState extends State<AddStudent> {
                           if (searchController.text.isEmpty) {
                             showToast(
                                 context: context,
-                                messege: 'Search Can Not Be Empty!',
+                                message: 'Search Can Not Be Empty!',
                                 color: PayNestTheme.red);
                           }
                           if (searchController.text.isNotEmpty) {

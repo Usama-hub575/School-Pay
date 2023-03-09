@@ -17,13 +17,13 @@ class _AppBarBackButtonState extends State<AppBarBackButton> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        right: 25.w,
+        right: horizontalValue(25),
       ),
       child: Container(
-        height: 46.h,
-        width: 46.w,
+        height: verticalValue(46),
+        width: horizontalValue(46),
         decoration: BoxDecoration(
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black54,
               blurRadius: 1.0,
@@ -35,7 +35,7 @@ class _AppBarBackButtonState extends State<AppBarBackButton> {
           ],
           color: widget.buttonColor,
           borderRadius: BorderRadius.circular(
-            12.r,
+            12,
           ),
         ),
         child: IconButton(
@@ -44,7 +44,7 @@ class _AppBarBackButtonState extends State<AppBarBackButton> {
           },
           icon: Icon(
             Icons.arrow_back,
-            size: 20.sp,
+            size: 20,
             color: widget.iconColor,
           ),
         ),

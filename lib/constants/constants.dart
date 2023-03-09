@@ -64,13 +64,19 @@ const selectPaymentsMethodSecure =
 const setting = "Setting";
 const about = "About";
 const paid = "Paid";
-const paidon = "Paid On";
+const paidOn = "Paid On";
 const dues = "Dues";
 const backToHome = "Back To Home";
 const takeToHome = "Take To Home";
 const view = "View";
 const searchSchool = "Search School";
-
+const forgotPassword = "Forgot Password?";
+const pleaseEnterPassword = "Please Enter Password";
+const pleaseEnterEmail = "Please Enter Email";
+const pleaseEnterYourRegisteredEmailIdAndPassword =
+    "Please Enter Your Registered Email ID and Password";
+const loginWithTouchID = "Login with Touch ID";
+const home = "Home";
 const accountDetails = "Account Detail";
 const name = "Name";
 const referenceNumber = "Reference Number";
@@ -117,7 +123,8 @@ const confirm = "Confirm";
 const congratulations = "Congratulations!";
 const youHaveSuccessfully = "You Have Successfully Transferred The Amount.";
 const language = "Language";
-
+const invalidEmail = 'Invalid Email';
+const passwordMustNotBeLessThan5 = 'Password Must Not Be Less Than 5';
 const pendingTask = "Pending Tasks";
 const showAll = "Show All";
 const cfgPayment = "Configure payment methods";
@@ -221,14 +228,14 @@ const commonQuestion = "Get the query to your most common questions here.";
 const startLChat =
     "Immediately start live chat with one of our customer care representative.";
 
-String baseUrl = "base_url";
-String paymentGatewayUrl = "payment_gateway_url";
-String minAndroidAppVersion = "min_android_app_version";
-String maxAndroidAppVersion = "max_android_app_version";
-
-String minIosAppVersion = "min_iOS_app_version";
-String maxIosAppVersion = "max_iOS_app_version";
-
-const String googlePlayPackageName = "com.paynest.schoolpay";
-const String huaweiPackageName = "com.paynest.fintech.borderpay";
-const String iosAppId = "1629406783";
+// String baseUrl = "base_url";
+// String paymentGatewayUrl = "payment_gateway_url";
+// String minAndroidAppVersion = "min_android_app_version";
+// String maxAndroidAppVersion = "max_android_app_version";
+//
+// String minIosAppVersion = "min_iOS_app_version";
+// String maxIosAppVersion = "max_iOS_app_version";
+//
+// const String googlePlayPackageName = "com.paynest.schoolpay";
+// const String huaweiPackageName = "com.paynest.fintech.borderpay";
+// const String iosAppId = "1629406783";

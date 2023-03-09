@@ -1,6 +1,7 @@
 class AppAssets {
   /// svg
 
+  final String icEyeCrossed = 'assets/svg/ic_eye_crossed.svg';
   final String appLogo = 'assets/svg/logo.svg';
   final String icContactUs = "assets/svg/ic_contact_us.svg";
   final String icFaq = "assets/svg/ic_faq.svg";
@@ -39,6 +40,8 @@ class AppAssets {
 
   ///png
 
+  final String icFacebook = 'assets/png/ic_facebook.png';
+  final String icGoogle = 'assets/png/ic_google.png';
   final String ic_bell = "assets/dashboard/ic_bell.png";
   final String icTick = "assets/png/ic_tick.png";
   final String icBackground = "assets/png/ic_background.png";
@@ -82,6 +85,7 @@ class AppAssets {
       'assets/json/customer_support_animation.json';
   final String faqAnimation = 'assets/json/faq _animation.json';
   final String commentAnimation = 'assets/json/comment_animation.json';
+  final String faceId = 'assets/lottie/face_id.json';
 
   ///mp4
 

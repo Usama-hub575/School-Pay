@@ -87,6 +87,11 @@ void main() async {
                 initializerUseCase: it<InitializerUseCase>(),
               ),
             ),
+            BlocProvider(
+              create: (_) => SignInBloc(
+                signInUseCase: it<SignInUseCase>(),
+              ),
+            ),
           ],
           child: MyApp(),
         ),

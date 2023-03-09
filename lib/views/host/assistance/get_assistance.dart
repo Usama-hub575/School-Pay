@@ -1,5 +1,4 @@
 import 'package:paynest_flutter_app/export.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class GetAssistance extends StatefulWidget {
   const GetAssistance({Key? key}) : super(key: key);
@@ -280,7 +279,7 @@ class _GetAssistanceState extends State<GetAssistance> {
       } else {
         showToast(
           context: context,
-          messege: 'Whatsapp not installed',
+          message: 'Whatsapp not installed',
           color: PayNestTheme.red,
         );
       }

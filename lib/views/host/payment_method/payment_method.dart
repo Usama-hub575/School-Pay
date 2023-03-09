@@ -259,7 +259,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         if (isLeanEnable) {
                           if (widget.payment <= 0) {
                             showToast(
-                              messege: "Amount Should Be Grater Then 0!",
+                              message: "Amount Should Be Grater Then 0!",
                               context: context,
                               color: Colors.red,
                             );
@@ -268,7 +268,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           }
                         } else {
                           showToast(
-                            messege: 'Service Unavailable',
+                            message: 'Service Unavailable',
                             context: context,
                             color: PayNestTheme.primaryColor,
                           );
@@ -339,7 +339,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       onTap: () {
                         showToast(
                             context: context,
-                            messege: 'Coming Soon!',
+                            message: 'Coming Soon!',
                             color: PayNestTheme.primaryColor);
                       },
                       child: Container(
@@ -446,7 +446,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 } else {
                   showToast(
                     context: context,
-                    messege: results['message'],
+                    message: results['message'],
                     color: PayNestTheme.red,
                   );
                   Navigator.pop(context);
@@ -509,7 +509,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 jsonDecode(resp.toString()),
               );
               showToast(
-                messege: leanResponse.message ?? '',
+                message: leanResponse.message ?? '',
                 context: context,
                 color: leanResponse.status == 'SUCCESS'
                     ? Colors.green
@@ -606,7 +606,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 () {
                   showToast(
                     context: context,
-                    messege: 'Something went wrong with the transaction',
+                    message: 'Something went wrong with the transaction',
                     color: PayNestTheme.red,
                   );
                 },
@@ -622,7 +622,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           () {
             showToast(
               context: context,
-              messege: 'Amount is not correct',
+              message: 'Amount is not correct',
               color: PayNestTheme.red,
             );
           },
@@ -635,7 +635,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           () {
             showToast(
               context: context,
-              messege: 'Fees already paid',
+              message: 'Fees already paid',
               color: Colors.green,
             );
           },
@@ -650,7 +650,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           () {
             showToast(
               context: context,
-              messege: 'Something went wrong',
+              message: 'Something went wrong',
               color: PayNestTheme.red,
             );
           },

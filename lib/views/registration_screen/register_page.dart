@@ -121,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       (Route<dynamic> route) => false);
                                 } else {
                                   showToast(
-                                      messege:
+                                      message:
                                           userController.isFailed.toString(),
                                       context: context,
                                       color: PayNestTheme.red);

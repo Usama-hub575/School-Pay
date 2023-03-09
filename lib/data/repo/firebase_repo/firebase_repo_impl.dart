@@ -66,11 +66,11 @@ class FirebaseRepoImpl implements FirebaseRepo {
     try {
       await remoteConfig.fetchAndActivate();
       return const Left(true);
-    } catch (e) {
+    } catch (error) {
       return Right(
         Failure(
           status: false,
-          message: e.toString(),
+          message: error.toString(),
         ),
       );
     }

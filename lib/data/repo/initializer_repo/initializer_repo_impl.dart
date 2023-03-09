@@ -13,7 +13,7 @@ class InitializerRepoImpl implements InitializerRepo {
 
   @override
   String getString(String key) {
-    return storage.getString(key: key);
+    return storage.getString(key: key) ?? '';
   }
 
   @override
@@ -34,7 +34,7 @@ class InitializerRepoImpl implements InitializerRepo {
         return Right(
           Failure(
             message: error.message,
-            status: false,
+            status: error.status,
           ),
         );
       },

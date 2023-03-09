@@ -133,7 +133,7 @@ class _InitializerPageState extends State<InitializerPage> {
               // Navigator.of(context).push(navigateToWelcome);
               break;
             case InitializerStatus.welcomePage:
-              // Navigator.of(context).push(navigateToWelcome);
+              Navigator.pushNamed(context, AppRoutes.navigateToWelcome);
               break;
           }
         },

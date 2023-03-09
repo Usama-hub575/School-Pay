@@ -266,7 +266,7 @@ class _SignInPageState extends State<SignInPage> {
                                         !userController
                                             .userResData.value.status) {
                                       showToast(
-                                          messege: 'Something Went wrong',
+                                          message: 'Something Went wrong',
                                           context: context,
                                           color: PayNestTheme.red);
                                     }
@@ -348,7 +348,7 @@ class _SignInPageState extends State<SignInPage> {
                             } else if (!userController
                                 .userResData.value.status) {
                               showToast(
-                                  messege: userController
+                                  message: userController
                                           .userResData.value.message ??
                                       userController.errorMessage.toString(),
                                   context: context,
@@ -359,7 +359,7 @@ class _SignInPageState extends State<SignInPage> {
                               userController.isLoading.value = false;
                               if (userController.retriesTime.value != '') {
                                 showToast(
-                                    messege: "Please retry after " +
+                                    message: "Please retry after " +
                                         userController.retriesTime.value
                                             .toString() +
                                         " min",
@@ -368,21 +368,21 @@ class _SignInPageState extends State<SignInPage> {
                               } else if (userController.attemptsRemain.value !=
                                   '') {
                                 showToast(
-                                    messege: userController.attemptsRemain.value
+                                    message: userController.attemptsRemain.value
                                             .toString() +
                                         " attempts remaining",
                                     context: context,
                                     color: PayNestTheme.red);
                               } else {
                                 showToast(
-                                    messege:
+                                    message:
                                         "Entered email or password does not match",
                                     context: context,
                                     color: PayNestTheme.red);
                               }
                             } else {
                               showToast(
-                                  messege: "Something went wrong. Try again !!",
+                                  message: "Something went wrong. Try again !!",
                                   context: context,
                                   color: PayNestTheme.red);
                             }

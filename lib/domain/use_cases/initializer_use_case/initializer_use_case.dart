@@ -3,13 +3,13 @@ import 'package:paynest_flutter_app/export.dart';
 
 class InitializerUseCase {
   InitializerUseCase({
-    // required this.signInRepo,
+    required this.signInRepo,
     required this.initializerRepo,
   });
 
   InitializerRepo initializerRepo;
 
-  // SignInRepo signInRepo;
+  SignInRepo signInRepo;
 
   CountriesResponse _countriesModel = CountriesResponse.empty();
   AuthenticationModel _authResponseModel = AuthenticationModel.empty();
@@ -34,28 +34,29 @@ class InitializerUseCase {
     );
   }
 
-  // Future<Either<AuthenticationModel, Failure>> login({
-  //   String email = '',
-  //   String password = '',
-  //   String fcmToken = '',
-  // }) async {
-  //   final response = await signInRepo.apiLogin();
-  //   return response.fold(
-  //         (responseModel) {
-  //       _authResponseModel = responseModel;
-  //       return Left(
-  //         responseModel,
-  //       );
-  //     },
-  //         (error) {
-  //       return Right(
-  //         Failure(
-  //           message: error.message,
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+  Future<Either<AuthenticationModel, Failure>> login({
+    String email = '',
+    String password = '',
+    String fcmToken = '',
+  }) async {
+    final response = await signInRepo.apiLogin();
+    return response.fold(
+      (responseModel) {
+        _authResponseModel = responseModel;
+        return Left(
+          responseModel,
+        );
+      },
+      (error) {
+        return Right(
+          Failure(
+            message: error.message,
+            status: error.status,
+          ),
+        );
+      },
+    );
+  }
 
   CountriesResponse getCountriesModel() => _countriesModel;
 

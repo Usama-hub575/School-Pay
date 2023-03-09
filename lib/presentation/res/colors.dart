@@ -14,6 +14,8 @@ Map<int, Color> color = {
 };
 
 class AppColors {
+  Color textGrey = Color(0xFF8C8C8C);
+  Color blueAccent = Color(0xFF04ACDD);
   Color textGreyWhiteShade = Color(0xFFB8C1C5);
   Color dropShadow = Color(0xFF7A7A7A);
   Color appColor = Color.fromRGBO(0, 206, 139, 1);

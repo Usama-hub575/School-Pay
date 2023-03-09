@@ -34,7 +34,7 @@ dependencies:
   sentry_flutter:
   flutter_screenutil:
   flutter_svg:
-  pinput:
+  pinput: 2.2.31
   lean_sdk_flutter: ^0.5.0
   carousel_slider:
   get_storage:

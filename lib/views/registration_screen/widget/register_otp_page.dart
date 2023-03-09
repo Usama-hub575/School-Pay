@@ -174,7 +174,7 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
                       widget.onSuccess();
                     } else {
                       showToast(
-                          messege: 'Entered OTP is wrong',
+                          message: 'Entered OTP is wrong',
                           context: context,
                           color: PayNestTheme.red);
                       // otpController.clear();

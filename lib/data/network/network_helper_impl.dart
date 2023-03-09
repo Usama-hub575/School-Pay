@@ -39,7 +39,7 @@ class NetworkHelperImpl extends NetworkHelper {
       final response = await http.post(
         Uri.parse(url),
         body: encodeBody ? json.encode(body) : body,
-        headers: modifyHeader ? appendHeader(headers: headers!) : headers!,
+        headers: modifyHeader ? appendHeader(headers: headers) : headers,
         encoding: encoding,
       );
 
@@ -165,6 +165,8 @@ class NetworkHelperImpl extends NetworkHelper {
   }) {
     try {
       headers ??= <String, String>{};
+      headers["Authorization"] = 'Bearer${storage.getString(key: 'fcmToken')}';
+      headers["Content-Type"] = "application/json";
     } catch (e) {
       debugPrint(e.toString());
     }

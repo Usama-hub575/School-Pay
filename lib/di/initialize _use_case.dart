@@ -4,6 +4,7 @@ Future initializeUseCaseDependencies() async {
   await initializeFirebaseUseCase();
   await initializeLocaleUseCase();
   await initializeInitializerUseCase();
+  await initializeSignInUseCase();
 }
 
 Future initializeLocaleUseCase() async {
@@ -15,8 +16,8 @@ Future initializeLocaleUseCase() async {
 Future initializeInitializerUseCase() async {
   it.registerLazySingleton<InitializerUseCase>(
     () => InitializerUseCase(
-      //firebaseRepo: it<FirebaseRepo>(),
       initializerRepo: it<InitializerRepo>(),
+      signInRepo: it<SignInRepo>(),
     ),
   );
 }
@@ -25,6 +26,14 @@ Future initializeFirebaseUseCase() async {
   it.registerLazySingleton<FirebaseUseCase>(
     () => FirebaseUseCase(
       firebaseRepo: it<FirebaseRepo>(),
+    ),
+  );
+}
+
+Future initializeSignInUseCase() async {
+  it.registerLazySingleton(
+    () => SignInUseCase(
+      signInRepo: it<SignInRepo>(),
     ),
   );
 }
