@@ -3,6 +3,7 @@ import 'package:paynest_flutter_app/export.dart';
 class CommonTextField extends StatefulWidget {
   const CommonTextField({
     Key? key,
+    required this.onChange,
     required this.controller,
     required this.labelText,
     required this.validatorText,
@@ -10,6 +11,7 @@ class CommonTextField extends StatefulWidget {
     required this.icon,
   }) : super(key: key);
 
+  final Function(String value) onChange;
   final TextEditingController controller;
   final String labelText;
   final String validatorText;
@@ -64,6 +66,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
         ),
       ),
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      onChanged: (value) {},
       validator: (value) {
         if (value!.trim().isEmpty) {
           return widget.validatorText;
@@ -79,7 +82,13 @@ class _CommonTextFieldState extends State<CommonTextField> {
             return passwordMustNotBeLessThan5;
           }
         }
-        return null;
+        return widget.onChange(value);
+        // return null;
+        // if (widget.labelText == confirmPassword) {
+        //   if (widget.passwordController?.text !=
+        //       widget.confirmPasswordController?.text) {
+        //     return passwordNotMatched;
+        //   }
       },
     );
   }

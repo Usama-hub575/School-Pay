@@ -135,6 +135,24 @@ class _InitializerPageState extends State<InitializerPage> {
             case InitializerStatus.welcomePage:
               Navigator.pushNamed(context, AppRoutes.navigateToWelcome);
               break;
+            case InitializerStatus.init:
+              // TODO: Handle this case.
+              break;
+            case InitializerStatus.loading:
+              // TODO: Handle this case.
+              break;
+            case InitializerStatus.loaded:
+              // TODO: Handle this case.
+              break;
+            case InitializerStatus.success:
+              // TODO: Handle this case.
+              break;
+            case InitializerStatus.failure:
+              // TODO: Handle this case.
+              break;
+            case InitializerStatus.dashboardPage:
+              // TODO: Handle this case.
+              break;
           }
         },
       ),

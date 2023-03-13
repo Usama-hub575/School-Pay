@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:get_storage/get_storage.dart';
@@ -278,8 +277,7 @@ class APIService {
     var endPoint;
     String query;
     if (searchBy == 'name') {
-      query =
-          searchByName.replaceAll('{name}', queryParam).replaceAll(
+      query = searchByName.replaceAll('{name}', queryParam).replaceAll(
             '{school_id}',
             schoolId.toString(),
           );
@@ -680,9 +678,9 @@ class APIService {
     final request = http.MultipartRequest('POST', Uri.parse(url));
     request.fields.addAll(formData);
     request.headers.addAll(header);
-    final response = await request.send();
-    final streamString = await response.stream.bytesToString();
-    var encoded = json.decode(streamString);
+    // final response = await request.send();
+    // final streamString = await response.stream.bytesToString();
+    // var encoded = json.decode(streamString);
   }
 
   Future apiTransactionEnquery(queryParams) async {

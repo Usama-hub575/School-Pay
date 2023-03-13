@@ -10,7 +10,7 @@ import '../../../data/model/datamodel/selectedschool_to_addstudent.dart';
 import '../../../data/model/studentlist_res_model.dart';
 
 class AddStudent extends StatefulWidget {
-  SelectedSchoolData schoolData;
+  final SelectedSchoolData schoolData;
 
   AddStudent({Key? key, required this.schoolData}) : super(key: key);
 

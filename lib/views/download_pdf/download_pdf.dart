@@ -428,7 +428,7 @@ class PdfApi {
     final bytes = await pdfD.save();
 
     // here a beautiful pakage  path provider helps us and take dircotory and name of the file  and made a proper file in internal storage
-    final dir = await getApplicationDocumentsDirectory();
+    // final dir = await getApplicationDocumentsDirectory();
     final file = File('/storage/emulated/0/Download/$name');
 
     await file.writeAsBytes(bytes).then((value) {
@@ -483,7 +483,7 @@ class PDFDocument {
   }
 
   static Future openFile(File file) async {
-    final url = file.path;
+    // final url = file.path;
 
     //await OpenFile.open(url);
   }

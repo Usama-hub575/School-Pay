@@ -17,7 +17,7 @@ import '../transactiondetails/paynowltransactiondetails_page.dart';
 
 class PaymentMethod extends StatefulWidget {
   final SingleStudentModel singleStudentModel;
-  int payment;
+  final int payment;
 
   PaymentMethod({
     Key? key,

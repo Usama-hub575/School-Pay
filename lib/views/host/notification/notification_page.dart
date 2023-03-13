@@ -628,7 +628,7 @@ Widget configurePaymentWithButton(
                     ),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: PayNestTheme.primaryColor,
+                        backgroundColor: PayNestTheme.primaryColor,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),

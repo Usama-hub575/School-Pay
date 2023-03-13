@@ -581,7 +581,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: PayNestTheme.primaryColor,
+                            backgroundColor: PayNestTheme.primaryColor,
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(

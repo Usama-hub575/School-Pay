@@ -151,7 +151,7 @@ class TransactionsRow {
         "parentId": parentId,
         "invoiceId": invoiceId,
         "studentId": studentId,
-        "payedOn": payedOn == null ? null : payedOn.toIso8601String(),
+        "payedOn": payedOn.toIso8601String(),
         "amount": amount,
         "deletedAt": deletedAt,
         "refNo": refNo == null ? null : refNo,

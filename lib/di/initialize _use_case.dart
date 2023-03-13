@@ -5,6 +5,9 @@ Future initializeUseCaseDependencies() async {
   await initializeLocaleUseCase();
   await initializeInitializerUseCase();
   await initializeSignInUseCase();
+  await initializeRegisterDetailPageUseCase();
+  await initializeRegisterMainPageUseCase();
+  await initializerRegisterOTPPageUseCase();
 }
 
 Future initializeLocaleUseCase() async {
@@ -34,6 +37,30 @@ Future initializeSignInUseCase() async {
   it.registerLazySingleton(
     () => SignInUseCase(
       signInRepo: it<SignInRepo>(),
+    ),
+  );
+}
+
+Future initializeRegisterMainPageUseCase() async {
+  it.registerLazySingleton(
+    () => RegisterMainPageUseCase(
+      registerMainPageRepo: it<RegisterMainPageRepo>(),
+    ),
+  );
+}
+
+Future initializeRegisterDetailPageUseCase() async {
+  it.registerLazySingleton(
+    () => RegisterDetailPageUseCase(
+      registerDetailPageUseCase: it<RegisterDetailPageRepo>(),
+    ),
+  );
+}
+
+Future initializerRegisterOTPPageUseCase() async {
+  it.registerLazySingleton(
+    () => RegisterOTPPageUseCase(
+      registerOTPPageRep: it<RegisterOTPPageRepo>(),
     ),
   );
 }

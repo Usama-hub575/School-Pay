@@ -1,9 +1,9 @@
 part of 'initializer_bloc.dart';
 
 class InitializerState extends Equatable {
-  InitializerStatus status;
-  int languageIndex = 0;
-  bool showCancelButton = false;
+  final InitializerStatus status;
+  final int languageIndex;
+  final bool showCancelButton;
 
   InitializerState({
     this.status = InitializerStatus.loading,

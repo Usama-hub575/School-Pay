@@ -45,6 +45,7 @@ class _MainUIState extends State<MainUI> {
                     ),
                     verticalSpacer(34),
                     CommonTextField(
+                      onChange: (value) {},
                       controller: emailController,
                       labelText: email,
                       validatorText: pleaseEnterEmail,
@@ -53,6 +54,7 @@ class _MainUIState extends State<MainUI> {
                     ),
                     verticalSpacer(16),
                     CommonTextField(
+                      onChange: (value) {},
                       controller: passwordController,
                       obscureText: state.isObscure,
                       labelText: password,
@@ -64,7 +66,7 @@ class _MainUIState extends State<MainUI> {
                         ),
                         onPressed: () {
                           context.read<SignInBloc>().add(
-                                Toggle(),
+                                SignInToggle(),
                               );
                         },
                       ),
@@ -211,6 +213,18 @@ class _MainUIState extends State<MainUI> {
               context: context,
               color: AppColors().redShade2,
             );
+            break;
+          case SignInStatus.init:
+            // TODO: Handle this case.
+            break;
+          case SignInStatus.loading:
+            // TODO: Handle this case.
+            break;
+          case SignInStatus.loaded:
+            // TODO: Handle this case.
+            break;
+          case SignInStatus.toggle:
+            // TODO: Handle this case.
             break;
         }
       },

@@ -10,7 +10,7 @@ import '../../../data/model/datamodel/singlestudent_model.dart';
 import '../../download_pdf/download_pdf.dart';
 
 class InvoicePaymentPage extends StatefulWidget {
-  SingleStudentModel singleStudentModel;
+  final SingleStudentModel singleStudentModel;
 
   InvoicePaymentPage({Key? key, required this.singleStudentModel})
       : super(key: key);
@@ -129,7 +129,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                     verticalSpacer(8),
                     widget.singleStudentModel.student!.grade != '-'
                         ? Text(
-                            studentclass,
+                            studentClass,
                             style: PayNestTheme.h2_14textGrey.copyWith(
                               color: PayNestTheme.primaryColor,
                               fontFamily: 'montserratBold',
@@ -281,7 +281,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.colorWhite,
+                          backgroundColor: PayNestTheme.colorWhite,
                           elevation: 0,
                           side: BorderSide(
                             width: 1,

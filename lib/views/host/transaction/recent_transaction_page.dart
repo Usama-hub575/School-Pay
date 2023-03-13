@@ -200,10 +200,10 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                 shrinkWrap: true,
                                 physics: BouncingScrollPhysics(),
                                 itemCount:
-                                    transactionListController.list.value.length,
+                                    transactionListController.list.length,
                                 itemBuilder: (context, index) {
                                   String key = transactionListController
-                                      .list.value.keys
+                                      .list.keys
                                       .elementAt(index);
                                   return Column(
                                     children: [
@@ -237,8 +237,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                       verticalSpacer(12),
                                       SingleTransaction(
                                         transactionList:
-                                            transactionListController
-                                                .list.value[key],
+                                            transactionListController.list[key],
                                         onTap: (transactionRow) {
                                           onTap(row: transactionRow);
                                         },

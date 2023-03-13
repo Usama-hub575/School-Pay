@@ -29,7 +29,7 @@ class MyWebView extends StatefulWidget {
 class _MyWebViewState extends State<MyWebView> {
   final MyStudentController studentController = Get.find<MyStudentController>();
 
-  WebViewController? _controller = null;
+  //WebViewController? _controller = null;
 
   String url = "";
 
@@ -65,8 +65,8 @@ class _MyWebViewState extends State<MyWebView> {
       body: WebView(
         initialUrl: paymentGateWay,
         javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController) =>
-            _controller = webViewController,
+        // onWebViewCreated: (WebViewController webViewController) =>
+        //     _controller = webViewController,
         onProgress: (value) {},
         onPageStarted: (url) {},
         onPageFinished: (url) async {

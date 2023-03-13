@@ -209,7 +209,7 @@ class _SignInPageState extends State<SignInPage> {
                     child: Container(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        forgotpassword,
+                        forgotPassword,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           fontSize: sizes.fontRatio * 14,
                           color: PayNestTheme.primaryColor,

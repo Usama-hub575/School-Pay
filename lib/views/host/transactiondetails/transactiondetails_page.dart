@@ -13,7 +13,7 @@ import '../../../presentation/res/res.dart';
 import '../../../widgets/back_button.dart';
 
 class TransactionDetailsPage extends StatefulWidget {
-  TransactionDetailModel tdm;
+  final TransactionDetailModel tdm;
 
   TransactionDetailsPage({Key? key, required this.tdm}) : super(key: key);
 
@@ -213,7 +213,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     ),
                     widget.tdm.student!.grade != '-'
                         ? Text(
-                            studentclass,
+                            studentClass,
                             style: PayNestTheme.title_2_16primaryColor.copyWith(
                               fontSize: sizes.fontRatio * 12,
                             ),

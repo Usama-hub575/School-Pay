@@ -42,7 +42,6 @@ class _PayNowPageState extends State<PayNowPage> {
   TextEditingController searchController = TextEditingController();
   String payAbleAmount = '0';
   bool isLoading = false;
-  bool _isConnect = true;
 
   var appToken = "";
   var customerId = "";

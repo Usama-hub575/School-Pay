@@ -1,12 +1,12 @@
 part of 'signin_bloc.dart';
 
 class SignInState extends Equatable {
-  SignInStatus status;
-  bool isObscure;
-  bool isBioMetric;
-  String password;
-  String email;
-  String message;
+  final SignInStatus status;
+  final bool isObscure;
+  final bool isBioMetric;
+  final String password;
+  final String email;
+  late final String message;
 
   SignInState({
     this.status = SignInStatus.init,

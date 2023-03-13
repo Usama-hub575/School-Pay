@@ -2,10 +2,6 @@ library country_code_picker;
 
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:paynest_flutter_app/export.dart';
-import 'package:paynest_flutter_app/views/custom_phone_number_field/selection_dialog.dart';
-
-import 'country_code.dart';
-import 'country_codes.dart';
 
 export 'country_code.dart';
 
@@ -82,7 +78,7 @@ class CountryCodePicker extends StatefulWidget {
   /// with customized codes.
   final List<Map<String, String>> countryList;
 
-  Color borderColor;
+  final Color borderColor;
 
   CountryCodePicker({
     this.onChanged,

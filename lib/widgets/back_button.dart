@@ -1,8 +1,8 @@
 import 'package:paynest_flutter_app/export.dart';
 
 class AppBarBackButton extends StatefulWidget {
-  Color buttonColor;
-  Color iconColor;
+  final Color buttonColor;
+  final Color iconColor;
 
   AppBarBackButton(
       {Key? key, required this.buttonColor, required this.iconColor})

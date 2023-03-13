@@ -41,6 +41,6 @@ class AuthenticationModel {
         "status": status,
         "message": message,
         "token": token,
-        "parent": parent!.toJson(),
+        "parent": parent.toJson(),
       };
 }

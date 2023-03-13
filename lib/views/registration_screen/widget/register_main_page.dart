@@ -38,7 +38,9 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
   var flag, countryCode;
 
   TextEditingController phoneController = TextEditingController();
-  TextEditingController phCodeController = TextEditingController(text: "+971");
+  TextEditingController phCodeController = TextEditingController(
+    text: "+971",
+  );
   TextEditingController emailController = TextEditingController();
   TextEditingController createPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -380,9 +382,10 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           }
                         } else {
                           showToast(
-                              message: 'Phone Field Cannot Be Empty !!',
-                              context: context,
-                              color: PayNestTheme.red);
+                            message: 'Phone Field Cannot Be Empty !!',
+                            context: context,
+                            color: PayNestTheme.red,
+                          );
                         }
                       },
                       child: Center(

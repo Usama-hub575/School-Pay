@@ -38,7 +38,6 @@ class CreateTransactionRespController extends GetxController {
       }
       return decoded['status'];
     } catch (e) {
-      print(e);
       isLoading(false);
       return false;
     }

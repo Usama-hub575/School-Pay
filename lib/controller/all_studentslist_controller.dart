@@ -9,11 +9,6 @@ class StudentListController extends GetxController {
   var isLoading = false.obs;
   final studentList = StudentListRespModel(status: false, getStudent: null).obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   search({
     required String searchBy,
     required String queryParam,

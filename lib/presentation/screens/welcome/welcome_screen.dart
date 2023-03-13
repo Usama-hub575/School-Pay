@@ -132,9 +132,12 @@ class _WelcomePageState extends State<WelcomePage> {
                     isLoading: false,
                     text: register,
                     onPressed: () async {
-                      // videoPlayerController.pause();
-                      // await Navigator.of(context).pushNamed(navigateToRegister);
-                      // videoPlayerController.play();
+                      videoPlayerController.pause();
+                      await Navigator.pushNamed(
+                        context,
+                        AppRoutes.navigateToRegister,
+                      );
+                      videoPlayerController.play();
                     },
                   ),
                 ),

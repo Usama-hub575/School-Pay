@@ -5,15 +5,14 @@ import 'package:paynest_flutter_app/service/api_service.dart';
 
 import '../data/model/paynowres_model.dart';
 
-class PayNowController extends GetxController{
+class PayNowController extends GetxController {
   var isLoading = false.obs;
-  final payNowData =  PayNowResModel(url: "", hiddendata: null).obs;
+  final payNowData = PayNowResModel(url: "", hiddendata: null).obs;
 
-
-  hitPayNow(amount,parentID,studentID) async {
-    try{
+  hitPayNow(amount, parentID, studentID) async {
+    try {
       isLoading(true);
-      final payNowMap= {
+      final payNowMap = {
         "amount": amount,
         // "parentID": parentID,
         // "studentID": studentID,
@@ -34,14 +33,11 @@ class PayNowController extends GetxController{
         mimeType: 'text/html',
         encoding: Encoding.getByName('utf-8'),
       ).toString();
-      if(data != null){
-        payNowData.update((val) {
-          val!.url= data;
-          payNowData.refresh();
-        });
-      }
-    }
-    finally{
+      payNowData.update((val) {
+        val!.url = data;
+        payNowData.refresh();
+      });
+    } finally {
       isLoading(false);
     }
   }

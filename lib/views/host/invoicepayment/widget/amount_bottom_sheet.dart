@@ -199,7 +199,7 @@ class _AmountWidgetState extends State<AmountWidget> {
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: PayNestTheme.colorWhite,
+                            backgroundColor: PayNestTheme.colorWhite,
                             elevation: 0,
                             side: BorderSide(
                               width: 1,

@@ -128,7 +128,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       height: sizes.heightRatio * 46,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
+                          backgroundColor: PayNestTheme.primaryColor,
                           elevation: 0,
                           // side: BorderSide(width:1, color:Colors.white),
                           shape: RoundedRectangleBorder(

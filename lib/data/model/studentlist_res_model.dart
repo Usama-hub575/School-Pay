@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
-StudentListRespModel studentListRespModelFromJson(String str) => StudentListRespModel.fromJson(json.decode(str));
+StudentListRespModel studentListRespModelFromJson(String str) =>
+    StudentListRespModel.fromJson(json.decode(str));
 
-String studentListRespModelToJson(StudentListRespModel data) => json.encode(data.toJson());
+String studentListRespModelToJson(StudentListRespModel data) =>
+    json.encode(data.toJson());
 
 class StudentListRespModel {
   StudentListRespModel({
@@ -17,15 +19,18 @@ class StudentListRespModel {
   bool status;
   GetStudent? getStudent;
 
-  factory StudentListRespModel.fromJson(Map<String, dynamic> json) => StudentListRespModel(
-    status: json["status"] == null ? null : json["status"],
-    getStudent: json["getStudent"] == null ? null : GetStudent.fromJson(json["getStudent"]),
-  );
+  factory StudentListRespModel.fromJson(Map<String, dynamic> json) =>
+      StudentListRespModel(
+        status: json["status"] == null ? null : json["status"],
+        getStudent: json["getStudent"] == null
+            ? null
+            : GetStudent.fromJson(json["getStudent"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "status": status == null ? null : status,
-    "getStudent": getStudent == null ? null : getStudent!.toJson(),
-  };
+        "status": status,
+        "getStudent": getStudent == null ? null : getStudent!.toJson(),
+      };
 }
 
 class GetStudent {
@@ -38,14 +43,19 @@ class GetStudent {
   List<StudentListRowData>? rows;
 
   factory GetStudent.fromJson(Map<String, dynamic> json) => GetStudent(
-    count: json["count"] == null ? 0 : json["count"],
-    rows: json["rows"] == null ? [] : List<StudentListRowData>.from(json["rows"].map((x) => StudentListRowData.fromJson(x))),
-  );
+        count: json["count"] == null ? 0 : json["count"],
+        rows: json["rows"] == null
+            ? []
+            : List<StudentListRowData>.from(
+                json["rows"].map((x) => StudentListRowData.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "count": count == null ? null : count,
-    "rows": rows == null ? null : List<dynamic>.from(rows!.map((x) => x.toJson())),
-  };
+        "count": count,
+        "rows": rows == null
+            ? null
+            : List<dynamic>.from(rows!.map((x) => x.toJson())),
+      };
 }
 
 class StudentListRowData {
@@ -119,75 +129,95 @@ class StudentListRowData {
   DateTime? updatedAt;
   List<dynamic>? parentStudents;
 
-  factory StudentListRowData.fromJson(Map<String, dynamic> json) => StudentListRowData(
-    dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
-    admissionDate: json["admissionDate"] == null ? null : DateTime.parse(json["admissionDate"]),
-    id: json["id"] == null ? null : json["id"],
-    studentRegNo: json["studentRegNo"] == null ? null : json["studentRegNo"],
-    firstName: json["firstName"] == null ? null : json["firstName"],
-    lastName: json["lastName"] == null ? null : json["lastName"],
-    grade: json["grade"] == null ? null : json["grade"],
-    parentEmiratesId: json["parentEmiratesId"] == null ? null : json["parentEmiratesId"],
-    parentPhoneNumber: json["parentPhoneNumber"],
-    deletedAt: json["deletedAt"],
-    schoolId: json["schoolId"] == null ? null : json["schoolId"],
-    totalBalanceAmount: json["total_balance_amount"] == null ? null : json["total_balance_amount"],
-    guardianFirstName: json["guardianFirstName"],
-    guardianLastName: json["guardianLastName"],
-    guardianGender: json["guardianGender"],
-    guardianEmiratesId: json["guardianEmiratesId"],
-    guardianNationality: json["guardianNationality"],
-    guardianReligion: json["guardianReligion"],
-    area: json["area"],
-    region: json["region"],
-    streetAddress: json["streetAddress"],
-    email: json["email"],
-    phoneNumber: json["phoneNumber"] == null ? null : json["phoneNumber"],
-    otherNumber: json["otherNumber"],
-    profile: json["profile"],
-    religion: json["religion"],
-    nationality: json["nationality"],
-    gender: json["gender"],
-    file: json["file"],
-    privacy: json["privacy"] == null ? null : json["privacy"],
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
-    parentStudents: json["parentStudents"] == null ? null : List<dynamic>.from(json["parentStudents"].map((x) => x)),
-  );
+  factory StudentListRowData.fromJson(Map<String, dynamic> json) =>
+      StudentListRowData(
+        dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
+        admissionDate: json["admissionDate"] == null
+            ? null
+            : DateTime.parse(json["admissionDate"]),
+        id: json["id"] == null ? null : json["id"],
+        studentRegNo:
+            json["studentRegNo"] == null ? null : json["studentRegNo"],
+        firstName: json["firstName"] == null ? null : json["firstName"],
+        lastName: json["lastName"] == null ? null : json["lastName"],
+        grade: json["grade"] == null ? null : json["grade"],
+        parentEmiratesId:
+            json["parentEmiratesId"] == null ? null : json["parentEmiratesId"],
+        parentPhoneNumber: json["parentPhoneNumber"],
+        deletedAt: json["deletedAt"],
+        schoolId: json["schoolId"] == null ? null : json["schoolId"],
+        totalBalanceAmount: json["total_balance_amount"] == null
+            ? null
+            : json["total_balance_amount"],
+        guardianFirstName: json["guardianFirstName"],
+        guardianLastName: json["guardianLastName"],
+        guardianGender: json["guardianGender"],
+        guardianEmiratesId: json["guardianEmiratesId"],
+        guardianNationality: json["guardianNationality"],
+        guardianReligion: json["guardianReligion"],
+        area: json["area"],
+        region: json["region"],
+        streetAddress: json["streetAddress"],
+        email: json["email"],
+        phoneNumber: json["phoneNumber"] == null ? null : json["phoneNumber"],
+        otherNumber: json["otherNumber"],
+        profile: json["profile"],
+        religion: json["religion"],
+        nationality: json["nationality"],
+        gender: json["gender"],
+        file: json["file"],
+        privacy: json["privacy"] == null ? null : json["privacy"],
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
+        parentStudents: json["parentStudents"] == null
+            ? null
+            : List<dynamic>.from(json["parentStudents"].map((x) => x)),
+      );
 
   Map<String, dynamic> toJson() => {
-    "dob": dob == null ? null : "${dob!.year.toString().padLeft(4, '0')}-${dob!.month.toString().padLeft(2, '0')}-${dob!.day.toString().padLeft(2, '0')}",
-    "admissionDate": admissionDate == null ? null : "${admissionDate!.year.toString().padLeft(4, '0')}-${admissionDate!.month.toString().padLeft(2, '0')}-${admissionDate!.day.toString().padLeft(2, '0')}",
-    "id": id == null ? null : id,
-    "studentRegNo": studentRegNo == null ? null : studentRegNo,
-    "firstName": firstName == null ? null : firstName,
-    "lastName": lastName == null ? null : lastName,
-    "grade": grade == null ? null : grade,
-    "parentEmiratesId": parentEmiratesId == null ? null : parentEmiratesId,
-    "parentPhoneNumber": parentPhoneNumber,
-    "deletedAt": deletedAt,
-    "schoolId": schoolId == null ? null : schoolId,
-    "total_balance_amount": totalBalanceAmount == null ? null : totalBalanceAmount,
-    "guardianFirstName": guardianFirstName,
-    "guardianLastName": guardianLastName,
-    "guardianGender": guardianGender,
-    "guardianEmiratesId": guardianEmiratesId,
-    "guardianNationality": guardianNationality,
-    "guardianReligion": guardianReligion,
-    "area": area,
-    "region": region,
-    "streetAddress": streetAddress,
-    "email": email,
-    "phoneNumber": phoneNumber == null ? null : phoneNumber,
-    "otherNumber": otherNumber,
-    "profile": profile,
-    "religion": religion,
-    "nationality": nationality,
-    "gender": gender,
-    "file": file,
-    "privacy": privacy == null ? null : privacy,
-    "createdAt": createdAt == null ? null : createdAt!.toIso8601String(),
-    "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),
-    "parentStudents": parentStudents == null ? null : List<dynamic>.from(parentStudents!.map((x) => x)),
-  };
+        "dob": dob == null
+            ? null
+            : "${dob!.year.toString().padLeft(4, '0')}-${dob!.month.toString().padLeft(2, '0')}-${dob!.day.toString().padLeft(2, '0')}",
+        "admissionDate": admissionDate == null
+            ? null
+            : "${admissionDate!.year.toString().padLeft(4, '0')}-${admissionDate!.month.toString().padLeft(2, '0')}-${admissionDate!.day.toString().padLeft(2, '0')}",
+        "id": id,
+        "studentRegNo": studentRegNo == null ? null : studentRegNo,
+        "firstName": firstName == null ? null : firstName,
+        "lastName": lastName == null ? null : lastName,
+        "grade": grade == null ? null : grade,
+        "parentEmiratesId": parentEmiratesId == null ? null : parentEmiratesId,
+        "parentPhoneNumber": parentPhoneNumber,
+        "deletedAt": deletedAt,
+        "schoolId": schoolId,
+        "total_balance_amount":
+            totalBalanceAmount == null ? null : totalBalanceAmount,
+        "guardianFirstName": guardianFirstName,
+        "guardianLastName": guardianLastName,
+        "guardianGender": guardianGender,
+        "guardianEmiratesId": guardianEmiratesId,
+        "guardianNationality": guardianNationality,
+        "guardianReligion": guardianReligion,
+        "area": area,
+        "region": region,
+        "streetAddress": streetAddress,
+        "email": email,
+        "phoneNumber": phoneNumber == null ? null : phoneNumber,
+        "otherNumber": otherNumber,
+        "profile": profile,
+        "religion": religion,
+        "nationality": nationality,
+        "gender": gender,
+        "file": file,
+        "privacy": privacy,
+        "createdAt": createdAt == null ? null : createdAt!.toIso8601String(),
+        "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),
+        "parentStudents": parentStudents == null
+            ? null
+            : List<dynamic>.from(parentStudents!.map((x) => x)),
+      };
 }

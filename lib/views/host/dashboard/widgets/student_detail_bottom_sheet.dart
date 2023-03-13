@@ -148,7 +148,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                           height: sizes.heightRatio * 50,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: PayNestTheme.primaryColor,
+                              backgroundColor: PayNestTheme.primaryColor,
                               elevation: 0,
                               // side: BorderSide(width:1, color:Colors.white),
                               shape: RoundedRectangleBorder(

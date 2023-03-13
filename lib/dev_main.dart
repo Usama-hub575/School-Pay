@@ -92,6 +92,11 @@ void main() async {
                 signInUseCase: it<SignInUseCase>(),
               ),
             ),
+            BlocProvider(
+              create: (_) => RegisterMainPageBloc(
+                registerMainPageUseCase: it<RegisterMainPageUseCase>(),
+              ),
+            ),
           ],
           child: MyApp(),
         ),

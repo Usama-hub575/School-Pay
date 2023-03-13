@@ -13,7 +13,7 @@ import '../../../presentation/res/res.dart';
 import '../../../widgets/amount_formater.dart';
 
 class PayNowTransactionDetailsPage extends StatefulWidget {
-  PayNowTransactionDetailModel pntdm;
+  final PayNowTransactionDetailModel pntdm;
 
   PayNowTransactionDetailsPage({required this.pntdm});
 
@@ -183,7 +183,7 @@ class _PayNowTransactionDetailsPageState
                         : const SizedBox.shrink(),
                     widget.pntdm.student!.grade != '-'
                         ? Text(
-                            studentclass,
+                            studentClass,
                             style: PayNestTheme.h2_14textGrey.copyWith(
                               color: PayNestTheme.primaryColor,
                               fontFamily: 'montserratBold',
@@ -317,7 +317,7 @@ class _PayNowTransactionDetailsPageState
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: PayNestTheme.primaryColor,
+                  backgroundColor: PayNestTheme.primaryColor,
                   elevation: 0,
                   side: BorderSide(
                     width: 1,

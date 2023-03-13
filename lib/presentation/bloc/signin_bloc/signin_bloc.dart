@@ -12,7 +12,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<OnPressed>(_onPressed);
     on<BioMetric>(_bioMetric);
     on<Initializer>(_initialize);
-    on<Toggle>(_toggle);
+    on<SignInToggle>(_toggle);
     on<Loading>(_loading);
     on<ForgotPassword>(_forgotPassword);
   }
@@ -60,7 +60,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     }
   }
 
-  _toggle(Toggle event, emit) {
+  _toggle(SignInToggle event, emit) {
     emit(
       state.copyWith(
         isObscure: !state.isObscure,

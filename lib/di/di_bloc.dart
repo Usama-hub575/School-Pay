@@ -19,4 +19,22 @@ Future initializeBlocs() async {
       signInUseCase: it<SignInUseCase>(),
     ),
   );
+
+  it.registerLazySingleton(
+    () => RegisterMainPageBloc(
+      registerMainPageUseCase: it<RegisterMainPageUseCase>(),
+    ),
+  );
+
+  it.registerLazySingleton(
+    () => RegisterDetailPageBloc(
+      registerDetailPageUseCase: it<RegisterDetailPageUseCase>(),
+    ),
+  );
+
+  it.registerLazySingleton(
+    () => RegisterOTPPageBloc(
+      registerOTPPageUseCase: it<RegisterOTPPageUseCase>(),
+    ),
+  );
 }

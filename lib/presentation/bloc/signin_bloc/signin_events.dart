@@ -21,7 +21,7 @@ class BioMetric extends SignInEvent {}
 
 class Initializer extends SignInEvent {}
 
-class Toggle extends SignInEvent {}
+class SignInToggle extends SignInEvent {}
 
 class Loading extends SignInEvent {}
 

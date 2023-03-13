@@ -79,6 +79,8 @@ class AppAssets {
       'assets/json/school_campus_animation.json';
   final String successCheckAnimation =
       'assets/json/success_check_animation.json';
+  final String sliderCircleAnimation =
+      'assets/json/slider_circle_animation.json';
   final String studentJumpingAnimation = 'assets/json/student_jumping.json';
   final String addStudentAnimation = 'assets/json/add_student_animation.json';
   final String customerSupportAnimation =

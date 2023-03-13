@@ -14,6 +14,7 @@ Map<int, Color> color = {
 };
 
 class AppColors {
+  Color lightBlack = const Color(0xff707070);
   Color textGrey = Color(0xFF8C8C8C);
   Color blueAccent = Color(0xFF04ACDD);
   Color textGreyWhiteShade = Color(0xFFB8C1C5);

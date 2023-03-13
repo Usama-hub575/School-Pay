@@ -86,7 +86,7 @@ class RegisterCountryCodePicker extends StatefulWidget {
   /// with customized codes.
   final List<Map<String, String>> countryList;
 
-  Color borderColor;
+  final Color borderColor;
 
   RegisterCountryCodePicker({
     this.onChanged,

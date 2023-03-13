@@ -23,4 +23,25 @@ Future initializeRepoDependencies() async {
       networkHelper: it(),
     ),
   );
+
+  it.registerLazySingleton<RegisterMainPageRepo>(
+    () => RegisterMainPageRepoImpl(
+      storage: storage,
+      networkHelper: it(),
+    ),
+  );
+
+  it.registerLazySingleton<RegisterDetailPageRepo>(
+    () => RegisterDetailPageRepoImpl(
+      storage: storage,
+      networkHelper: it(),
+    ),
+  );
+
+  it.registerLazySingleton(
+    () => RegisterOTPPageRepoImpl(
+      storage: storage,
+      networkHelper: it(),
+    ),
+  );
 }
