@@ -69,18 +69,18 @@ class Log {
   bool isSelected;
 
   factory Log.fromJson(Map<String, dynamic> json) => Log(
-        id: json["id"] != null ? json["id"] : -1,
-        name: json["name"] != null ? json["name"] : "",
-        deletedAt: json["deletedAt"] != null ? json["deletedAt"] : "",
-        addedBy: json["addedBy"] != null ? json["addedBy"] : "",
-        address: json["address"] != null ? json["address"] : "",
-        description: json["description"] != null ? json["description"] : "",
+        id: json["id"] ?? -1,
+        name: json["name"] ?? "",
+        deletedAt: json["deletedAt"] ?? "",
+        addedBy: json["addedBy"] ?? "",
+        address: json["address"] ?? "",
+        description: json["description"] ?? "",
         vat: json["vat"] != null ? double.parse(json["vat"]) : -0.0,
-        paynestFee: json["paynestFee"] != null ? json["paynestFee"] : 0,
-        apiKey: json["APIKey"] != null ? json["APIKey"] : "",
-        merchantId: json["merchantId"] != null ? json["merchantId"] : "",
-        file: json["file"] == null ? "" : json["file"],
-        privacy: json["privacy"] != null ? json["privacy"] : "",
+        paynestFee: json["paynestFee"] ?? 0,
+        apiKey: json["APIKey"] ?? "",
+        merchantId: json["merchantId"] ?? "",
+        file: json["file"] ?? "",
+        privacy: json["privacy"] ?? "",
         createdAt: json["createdAt"] != null
             ? DateTime.parse(json["createdAt"])
             : DateTime.now(),
@@ -102,7 +102,7 @@ class Log {
         "paynestFee": paynestFee,
         "APIKey": apiKey,
         "merchantId": merchantId,
-        "file": file == null ? null : file,
+        "file": file,
         "privacy": privacy,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),

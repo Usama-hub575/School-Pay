@@ -40,7 +40,7 @@ class SingleCard extends StatelessWidget {
                 fontFamily: 'montserratBold',
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Lottie.asset(
               AppAssets().arrowForwardAnimation,
               repeat: true,

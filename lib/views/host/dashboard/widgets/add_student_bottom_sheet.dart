@@ -11,14 +11,14 @@ class AddStudentBottomSheet {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) {
-        return StudentWidget();
+        return const StudentWidget();
       },
     );
   }
 }
 
 class StudentWidget extends StatelessWidget {
-  StudentWidget();
+  const StudentWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class StudentWidget extends StatelessWidget {
                 horizontal: horizontalValue(16),
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16.0),
                   topRight: Radius.circular(16.0),
                 ),
@@ -60,7 +60,7 @@ class StudentWidget extends StatelessWidget {
                       repeat: true,
                     ),
                     verticalSpacer(22.0),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: sizes.heightRatio * 50,
                       child: ElevatedButton(
@@ -93,7 +93,7 @@ class StudentWidget extends StatelessWidget {
                       ),
                     ),
                     verticalSpacer(22.0),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: sizes.heightRatio * 50,
                       child: ElevatedButton(
@@ -111,7 +111,7 @@ class StudentWidget extends StatelessWidget {
                           Navigator.of(context).pop();
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => SelectSchool(),
+                              builder: (context) => const SelectSchool(),
                             ),
                           );
                         },

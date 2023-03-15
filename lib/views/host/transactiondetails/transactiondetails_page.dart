@@ -30,7 +30,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             height: 300.h,
             child: Stack(
               children: [
@@ -102,7 +102,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                                     color: PayNestTheme.dropShadow,
                                     spreadRadius: 0,
                                     blurRadius: 1,
-                                    offset: Offset(
+                                    offset: const Offset(
                                         0, 1), // changes position of shadow
                                   ),
                                 ],
@@ -164,7 +164,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
           ),
           Expanded(
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32.w),
                 child: Column(
@@ -315,7 +315,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
 
                     verticalSpacer(30),
 
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: sizes.heightRatio * 46,
                       child: ElevatedButton(

@@ -49,12 +49,12 @@ class _SignInPageState extends State<SignInPage> {
                   iconColor: PayNestTheme.colorWhite,
                   buttonColor: PayNestTheme.primaryColor,
                 ),
-                Spacer(),
+                const Spacer(),
                 Image.asset(
                   AppAssets().welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
             verticalSpacer(22),
@@ -359,18 +359,15 @@ class _SignInPageState extends State<SignInPage> {
                               userController.isLoading.value = false;
                               if (userController.retriesTime.value != '') {
                                 showToast(
-                                    message: "Please retry after " +
-                                        userController.retriesTime.value
-                                            .toString() +
-                                        " min",
+                                    message:
+                                        "Please retry after ${userController.retriesTime.value} min",
                                     context: context,
                                     color: PayNestTheme.red);
                               } else if (userController.attemptsRemain.value !=
                                   '') {
                                 showToast(
-                                    message: userController.attemptsRemain.value
-                                            .toString() +
-                                        " attempts remaining",
+                                    message:
+                                        "${userController.attemptsRemain.value} attempts remaining",
                                     context: context,
                                     color: PayNestTheme.red);
                               } else {

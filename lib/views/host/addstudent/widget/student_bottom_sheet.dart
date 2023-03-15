@@ -86,7 +86,7 @@ class _StudentWidgetState extends State<StudentWidget> {
               ),
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(24.0),
                   topRight: Radius.circular(24.0),
                 ),
@@ -142,7 +142,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                                   width: 1.w,
                                 ),
                                 color: Colors.white,
-                                borderRadius: BorderRadius.all(
+                                borderRadius: const BorderRadius.all(
                                   Radius.circular(
                                     10,
                                   ),
@@ -160,7 +160,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                                     fontFamily: 'montserratRegular',
                                   ),
                                   dropdownDecoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                       bottomLeft: Radius.circular(16),
                                       bottomRight: Radius.circular(16),
                                     ),
@@ -222,7 +222,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                                   width: 1.w,
                                 ),
                                 color: Colors.white,
-                                borderRadius: BorderRadius.all(
+                                borderRadius: const BorderRadius.all(
                                   Radius.circular(
                                     10,
                                   ),
@@ -308,7 +308,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                                     width: 1.w,
                                   ),
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.all(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(
                                       10,
                                     ),
@@ -364,7 +364,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                             )
                           : const SizedBox.shrink(),
                       verticalSpacer(12),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -410,7 +410,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                         ),
                       ),
                       verticalSpacer(12),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(

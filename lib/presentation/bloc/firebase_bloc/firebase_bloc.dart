@@ -6,7 +6,7 @@ part 'firebase_state.dart';
 class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
   FirebaseBloc({
     required this.firebaseUseCase,
-  }) : super(const FirebaseState()) {
+  }) : super(FirebaseState()) {
     on<InitializeFirebaseRemoteConfiguration>(_initializeFirebaseRemoteConfig);
   }
 

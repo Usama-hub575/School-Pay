@@ -3,6 +3,7 @@ import 'package:paynest_flutter_app/export.dart';
 Widget NumberField({
   required TextEditingController phoneCodeController,
   required TextEditingController textController,
+  required GlobalKey<FormState> formKey,
 }) {
   return Container(
     padding: EdgeInsets.zero,
@@ -28,7 +29,7 @@ Widget NumberField({
           showCountryOnly: false,
           showOnlyCountryWhenClosed: false,
           alignLeft: false,
-          flagDecoration: BoxDecoration(
+          flagDecoration: const BoxDecoration(
             shape: BoxShape.circle,
           ),
           flagWidth: sizes.fontRatio * 50,
@@ -56,6 +57,9 @@ Widget NumberField({
             ),
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) {
+              if (value != null && value.trim().isEmpty) {
+                return 'phone not be empty';
+              }
               return null;
             },
           ),

@@ -75,58 +75,56 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                 children: [
                   _numberField(),
                   verticalSpacer(12),
-                  Container(
-                    child: TextFormField(
-                      controller: emailController,
-                      textInputAction: TextInputAction.next,
-                      style: PayNestTheme.title_2_16primaryColor.copyWith(
-                        fontSize: sizes.fontRatio * 14,
-                        color: PayNestTheme.textGrey,
-                      ),
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
-                            ),
-                          ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
-                          ),
-                        ),
-                        labelText: email,
-                        labelStyle: PayNestTheme.floating_12primaryColor,
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
-                          ),
-                        ),
-                        errorBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
-                          ),
-                        ),
-                        disabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.trim().isEmpty) {
-                          return 'Required';
-                        }
-                        // Check if the entered email has the right format
-                        if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                          return 'Correct Email Required';
-                        }
-                        // Return null if the entered email is valid
-                        return null;
-                      },
+                  TextFormField(
+                    controller: emailController,
+                    textInputAction: TextInputAction.next,
+                    style: PayNestTheme.title_2_16primaryColor.copyWith(
+                      fontSize: sizes.fontRatio * 14,
+                      color: PayNestTheme.textGrey,
                     ),
+                    decoration: InputDecoration(
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: PayNestTheme.textGrey.withOpacity(
+                            0.5,
+                          ),
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: PayNestTheme.textGrey.withOpacity(0.5),
+                        ),
+                      ),
+                      labelText: email,
+                      labelStyle: PayNestTheme.floating_12primaryColor,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: PayNestTheme.textGrey.withOpacity(0.5),
+                        ),
+                      ),
+                      errorBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: PayNestTheme.textGrey.withOpacity(0.5),
+                        ),
+                      ),
+                      disabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: PayNestTheme.textGrey.withOpacity(0.5),
+                        ),
+                      ),
+                    ),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value!.trim().isEmpty) {
+                        return 'Required';
+                      }
+                      // Check if the entered email has the right format
+                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                        return 'Correct Email Required';
+                      }
+                      // Return null if the entered email is valid
+                      return null;
+                    },
                   ),
                   verticalSpacer(12),
                   Container(
@@ -350,7 +348,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           });
                           if (sendOTPController.status.value) {
                             //hit otp
-                            Future.delayed(Duration(seconds: 2)).then(
+                            Future.delayed(const Duration(seconds: 2)).then(
                               (value) => {
                                 widget.onNextTap(
                                   emailController.text,
@@ -364,7 +362,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                             ScaffoldMessenger.of(key.currentState!.context)
                                 .showSnackBar(
                               SnackBar(
-                                duration: Duration(seconds: 1),
+                                duration: const Duration(seconds: 1),
                                 backgroundColor: Colors.red,
                                 padding: EdgeInsets.symmetric(
                                   vertical: verticalValue(16),

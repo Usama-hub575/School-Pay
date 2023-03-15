@@ -3,20 +3,22 @@ import 'package:paynest_flutter_app/export.dart';
 class CommonTextField extends StatefulWidget {
   const CommonTextField({
     Key? key,
-    required this.onChange,
+    required this.onValidate,
     required this.controller,
     required this.labelText,
-    required this.validatorText,
+    this.validatorText,
     required this.obscureText,
-    required this.icon,
+    this.inputFormatters,
+    this.icon,
   }) : super(key: key);
 
-  final Function(String value) onChange;
+  final Function(String value) onValidate;
   final TextEditingController controller;
   final String labelText;
-  final String validatorText;
+  final String? validatorText;
   final bool obscureText;
-  final IconButton? icon;
+  final Widget? icon;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   State<CommonTextField> createState() => _CommonTextFieldState();
@@ -26,6 +28,8 @@ class _CommonTextFieldState extends State<CommonTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction: TextInputAction.next,
+      inputFormatters: widget.inputFormatters,
       style: TextStyle(
         fontSize: sizes.fontRatio * 16,
       ),
@@ -59,6 +63,10 @@ class _CommonTextFieldState extends State<CommonTextField> {
             color: AppColors().textGrey.withOpacity(0.5),
           ),
         ),
+        errorStyle: TextStyles().bold.copyWith(
+              fontSize: sizes.fontRatio * 12,
+              color: AppColors().redShade2,
+            ),
         disabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: AppColors().textGrey.withOpacity(0.5),
@@ -78,17 +86,11 @@ class _CommonTextFieldState extends State<CommonTextField> {
         }
         if (widget.labelText == password ||
             widget.labelText == createPassword) {
-          if (value.trim().length < 4) {
+          if (value.trim().length < 5) {
             return passwordMustNotBeLessThan5;
           }
         }
-        return widget.onChange(value);
-        // return null;
-        // if (widget.labelText == confirmPassword) {
-        //   if (widget.passwordController?.text !=
-        //       widget.confirmPasswordController?.text) {
-        //     return passwordNotMatched;
-        //   }
+        return widget.onValidate(value);
       },
     );
   }

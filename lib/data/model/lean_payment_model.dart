@@ -8,17 +8,16 @@ class LeanPaymentModel {
   LeanPaymentModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     statusMsg = json['statusMsg'];
-    response = json['response'] != null
-        ? new Response.fromJson(json['response'])
-        : null;
+    response =
+        json['response'] != null ? Response.fromJson(json['response']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['statusMsg'] = this.statusMsg;
-    if (this.response != null) {
-      data['response'] = this.response!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['statusMsg'] = statusMsg;
+    if (response != null) {
+      data['response'] = response!.toJson();
     }
     return data;
   }
@@ -32,9 +31,9 @@ class Response {
 
   Response(
       {this.leanCustomerId,
-        this.leanAppToken,
-        this.leanPermissionsRequired,
-        this.leanCustomerBankAccounts});
+      this.leanAppToken,
+      this.leanPermissionsRequired,
+      this.leanCustomerBankAccounts});
 
   Response.fromJson(Map<String, dynamic> json) {
     leanCustomerId = json['leanCustomerId'];
@@ -43,19 +42,19 @@ class Response {
     if (json['leanCustomerBankAccounts'] != null) {
       leanCustomerBankAccounts = <LeanCustomerBankAccounts>[];
       json['leanCustomerBankAccounts'].forEach((v) {
-        leanCustomerBankAccounts!.add(new LeanCustomerBankAccounts.fromJson(v));
+        leanCustomerBankAccounts!.add(LeanCustomerBankAccounts.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['leanCustomerId'] = this.leanCustomerId;
-    data['leanAppToken'] = this.leanAppToken;
-    data['leanPermissionsRequired'] = this.leanPermissionsRequired;
-    if (this.leanCustomerBankAccounts != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['leanCustomerId'] = leanCustomerId;
+    data['leanAppToken'] = leanAppToken;
+    data['leanPermissionsRequired'] = leanPermissionsRequired;
+    if (leanCustomerBankAccounts != null) {
       data['leanCustomerBankAccounts'] =
-          this.leanCustomerBankAccounts!.map((v) => v.toJson()).toList();
+          leanCustomerBankAccounts!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -78,18 +77,18 @@ class LeanCustomerBankAccounts {
 
   LeanCustomerBankAccounts(
       {this.id,
-        this.banksLeanId,
-        this.type,
-        this.userId,
-        this.sourceDestinationId,
-        this.bankSwiftCode,
-        this.bankAddress,
-        this.accountIban,
-        this.accountNumber,
-        this.accountTitle,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt});
+      this.banksLeanId,
+      this.type,
+      this.userId,
+      this.sourceDestinationId,
+      this.bankSwiftCode,
+      this.bankAddress,
+      this.accountIban,
+      this.accountNumber,
+      this.accountTitle,
+      this.createdAt,
+      this.updatedAt,
+      this.deletedAt});
 
   LeanCustomerBankAccounts.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -108,20 +107,20 @@ class LeanCustomerBankAccounts {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['banksLeanId'] = this.banksLeanId;
-    data['type'] = this.type;
-    data['userId'] = this.userId;
-    data['sourceDestinationId'] = this.sourceDestinationId;
-    data['bankSwiftCode'] = this.bankSwiftCode;
-    data['bankAddress'] = this.bankAddress;
-    data['accountIban'] = this.accountIban;
-    data['accountNumber'] = this.accountNumber;
-    data['accountTitle'] = this.accountTitle;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['deletedAt'] = this.deletedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['banksLeanId'] = banksLeanId;
+    data['type'] = type;
+    data['userId'] = userId;
+    data['sourceDestinationId'] = sourceDestinationId;
+    data['bankSwiftCode'] = bankSwiftCode;
+    data['bankAddress'] = bankAddress;
+    data['accountIban'] = accountIban;
+    data['accountNumber'] = accountNumber;
+    data['accountTitle'] = accountTitle;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['deletedAt'] = deletedAt;
     return data;
   }
 }

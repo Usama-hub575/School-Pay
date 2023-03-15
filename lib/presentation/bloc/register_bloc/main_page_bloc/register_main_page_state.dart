@@ -1,36 +1,38 @@
 part of 'register_main_page_bloc.dart';
 
-class RegisterMainPageBaseState extends Equatable {
-  final RegisterMainPageStatus status;
-  final bool terms;
-  final bool isObscure;
-  final bool loading;
+// ignore: must_be_immutable
+class RegisterMainPageState extends Equatable {
+  RegisterMainPageStatus status = RegisterMainPageStatus.init;
+  bool terms = false;
+  bool obscurePassword = true;
+  bool obscureConfirmPassword = true;
 
-  RegisterMainPageBaseState({
+  RegisterMainPageState({
     this.status = RegisterMainPageStatus.init,
     this.terms = false,
-    this.isObscure = true,
-    this.loading = false,
+    this.obscureConfirmPassword = true,
+    this.obscurePassword = true,
   });
 
-  RegisterMainPageBaseState copyWith({
+  RegisterMainPageState copyWith({
     RegisterMainPageStatus? status,
     bool? terms,
-    bool? isObscure,
-    bool? loading,
+    bool? obscurePassword,
+    bool? obscureConfirmPassword,
   }) {
-    return RegisterMainPageBaseState(
+    return RegisterMainPageState(
       status: status ?? this.status,
       terms: terms ?? this.terms,
-      isObscure: isObscure ?? this.isObscure,
-      loading: loading ?? this.loading,
+      obscureConfirmPassword:
+          obscureConfirmPassword ?? this.obscureConfirmPassword,
+      obscurePassword: obscurePassword ?? this.obscurePassword,
     );
   }
 
   @override
   List<Object?> get props => [
-        loading,
-        isObscure,
+        obscurePassword,
+        obscureConfirmPassword,
         terms,
         status,
       ];

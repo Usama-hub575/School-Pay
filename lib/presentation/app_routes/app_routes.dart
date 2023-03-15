@@ -13,19 +13,19 @@ class AppRoutes {
     switch (settings.name) {
       case initializer:
         return MaterialPageRoute(
-          builder: (_) => InitializerPage(),
+          builder: (_) => const InitializerPage(),
         );
       case navigateToWelcome:
         return MaterialPageRoute(
-          builder: (_) => WelcomePage(),
+          builder: (_) => const WelcomePage(),
         );
       case navigateToSignIn:
         return MaterialPageRoute(
-          builder: (_) => SignInPage(),
+          builder: (_) => const SignInPage(),
         );
       case navigateToRegister:
         return MaterialPageRoute(
-          builder: (_) => RegisterPage(),
+          builder: (_) => const RegisterPage(),
         );
       default:
         return _errorRoute();

@@ -21,7 +21,7 @@ class StudentListRespModel {
 
   factory StudentListRespModel.fromJson(Map<String, dynamic> json) =>
       StudentListRespModel(
-        status: json["status"] == null ? null : json["status"],
+        status: json["status"],
         getStudent: json["getStudent"] == null
             ? null
             : GetStudent.fromJson(json["getStudent"]),
@@ -43,7 +43,7 @@ class GetStudent {
   List<StudentListRowData>? rows;
 
   factory GetStudent.fromJson(Map<String, dynamic> json) => GetStudent(
-        count: json["count"] == null ? 0 : json["count"],
+        count: json["count"] ?? 0,
         rows: json["rows"] == null
             ? []
             : List<StudentListRowData>.from(
@@ -135,20 +135,16 @@ class StudentListRowData {
         admissionDate: json["admissionDate"] == null
             ? null
             : DateTime.parse(json["admissionDate"]),
-        id: json["id"] == null ? null : json["id"],
-        studentRegNo:
-            json["studentRegNo"] == null ? null : json["studentRegNo"],
-        firstName: json["firstName"] == null ? null : json["firstName"],
-        lastName: json["lastName"] == null ? null : json["lastName"],
-        grade: json["grade"] == null ? null : json["grade"],
-        parentEmiratesId:
-            json["parentEmiratesId"] == null ? null : json["parentEmiratesId"],
+        id: json["id"],
+        studentRegNo: json["studentRegNo"],
+        firstName: json["firstName"],
+        lastName: json["lastName"],
+        grade: json["grade"],
+        parentEmiratesId: json["parentEmiratesId"],
         parentPhoneNumber: json["parentPhoneNumber"],
         deletedAt: json["deletedAt"],
-        schoolId: json["schoolId"] == null ? null : json["schoolId"],
-        totalBalanceAmount: json["total_balance_amount"] == null
-            ? null
-            : json["total_balance_amount"],
+        schoolId: json["schoolId"],
+        totalBalanceAmount: json["total_balance_amount"],
         guardianFirstName: json["guardianFirstName"],
         guardianLastName: json["guardianLastName"],
         guardianGender: json["guardianGender"],
@@ -159,14 +155,14 @@ class StudentListRowData {
         region: json["region"],
         streetAddress: json["streetAddress"],
         email: json["email"],
-        phoneNumber: json["phoneNumber"] == null ? null : json["phoneNumber"],
+        phoneNumber: json["phoneNumber"],
         otherNumber: json["otherNumber"],
         profile: json["profile"],
         religion: json["religion"],
         nationality: json["nationality"],
         gender: json["gender"],
         file: json["file"],
-        privacy: json["privacy"] == null ? null : json["privacy"],
+        privacy: json["privacy"],
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -186,16 +182,15 @@ class StudentListRowData {
             ? null
             : "${admissionDate!.year.toString().padLeft(4, '0')}-${admissionDate!.month.toString().padLeft(2, '0')}-${admissionDate!.day.toString().padLeft(2, '0')}",
         "id": id,
-        "studentRegNo": studentRegNo == null ? null : studentRegNo,
-        "firstName": firstName == null ? null : firstName,
-        "lastName": lastName == null ? null : lastName,
-        "grade": grade == null ? null : grade,
-        "parentEmiratesId": parentEmiratesId == null ? null : parentEmiratesId,
+        "studentRegNo": studentRegNo,
+        "firstName": firstName,
+        "lastName": lastName,
+        "grade": grade,
+        "parentEmiratesId": parentEmiratesId,
         "parentPhoneNumber": parentPhoneNumber,
         "deletedAt": deletedAt,
         "schoolId": schoolId,
-        "total_balance_amount":
-            totalBalanceAmount == null ? null : totalBalanceAmount,
+        "total_balance_amount": totalBalanceAmount,
         "guardianFirstName": guardianFirstName,
         "guardianLastName": guardianLastName,
         "guardianGender": guardianGender,
@@ -206,7 +201,7 @@ class StudentListRowData {
         "region": region,
         "streetAddress": streetAddress,
         "email": email,
-        "phoneNumber": phoneNumber == null ? null : phoneNumber,
+        "phoneNumber": phoneNumber,
         "otherNumber": otherNumber,
         "profile": profile,
         "religion": religion,

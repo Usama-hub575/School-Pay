@@ -58,7 +58,7 @@ class _StudentPageState extends State<StudentPage> {
                           width: 44.w,
                           decoration: BoxDecoration(
                               boxShadow: [
-                                BoxShadow(
+                                const BoxShadow(
                                   color: Colors.black26,
                                   blurRadius: 2.0,
                                   offset: Offset(
@@ -81,8 +81,8 @@ class _StudentPageState extends State<StudentPage> {
                             // child: Text(""),
                           ),
                         )
-                      : SizedBox(),
-                  Spacer(),
+                      : const SizedBox(),
+                  const Spacer(),
                   Text(
                     student,
                     textAlign: TextAlign.center,
@@ -100,7 +100,7 @@ class _StudentPageState extends State<StudentPage> {
                       // );
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => SelectSchool(),
+                          builder: (context) => const SelectSchool(),
                         ),
                       );
                     },
@@ -124,7 +124,7 @@ class _StudentPageState extends State<StudentPage> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
                   ),
@@ -300,8 +300,8 @@ class _StudentPageState extends State<StudentPage> {
                               FadeShimmer(
                                 width: sizes.widthRatio * 85,
                                 height: sizes.heightRatio * 20,
-                                baseColor: Color(0xFFEBEBF4),
-                                highlightColor: Color(0xFFF4F4F4),
+                                baseColor: const Color(0xFFEBEBF4),
+                                highlightColor: const Color(0xFFF4F4F4),
                                 radius: 10,
                               ),
                               Expanded(
@@ -321,8 +321,8 @@ class _StudentPageState extends State<StudentPage> {
                                         width: sizes.widthRatio * 10,
                                         height: sizes.heightRatio * 70,
                                         // fadeTheme: FadeTheme.dark,
-                                        baseColor: Color(0xFFEBEBF4),
-                                        highlightColor: Color(0xFFF4F4F4),
+                                        baseColor: const Color(0xFFEBEBF4),
+                                        highlightColor: const Color(0xFFF4F4F4),
                                         radius: 16,
                                       ),
                                     );

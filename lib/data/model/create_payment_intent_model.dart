@@ -8,13 +8,15 @@ class CreatePaymentIntentModel {
   CreatePaymentIntentModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     statusMsg = json['statusMsg'];
-    data = json['data'] != null ? new CreatePaymentIntentData.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? CreatePaymentIntentData.fromJson(json['data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['statusMsg'] = this.statusMsg;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['statusMsg'] = statusMsg;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -34,9 +36,9 @@ class CreatePaymentIntentData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['paymentIntentId'] = this.paymentIntentId;
-    data['leanAppToken'] = this.leanAppToken;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['paymentIntentId'] = paymentIntentId;
+    data['leanAppToken'] = leanAppToken;
     return data;
   }
 }

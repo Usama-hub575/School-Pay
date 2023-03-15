@@ -53,7 +53,7 @@ class _MorePageState extends State<MorePage> {
                   width: 1.sw,
                   decoration: BoxDecoration(
                     color: PayNestTheme.primaryColor,
-                    borderRadius: BorderRadius.vertical(
+                    borderRadius: const BorderRadius.vertical(
                       bottom: Radius.circular(32),
                     ),
                     boxShadow: [
@@ -61,7 +61,7 @@ class _MorePageState extends State<MorePage> {
                         color: PayNestTheme.dropShadow.withOpacity(.3),
                         spreadRadius: 0,
                         blurRadius: 10,
-                        offset: Offset(
+                        offset: const Offset(
                           0,
                           5,
                         ), // changes position of shadow
@@ -95,7 +95,7 @@ class _MorePageState extends State<MorePage> {
                           color: PayNestTheme.dropShadow.withOpacity(.3),
                           spreadRadius: 0,
                           blurRadius: 10,
-                          offset: Offset(
+                          offset: const Offset(
                             0,
                             5,
                           ), // changes position of shadow
@@ -124,7 +124,7 @@ class _MorePageState extends State<MorePage> {
                               : Container(
                                   height: sizes.heightRatio * 60,
                                   width: sizes.widthRatio * 60,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       boxShadow: [
                                         BoxShadow(
@@ -158,7 +158,7 @@ class _MorePageState extends State<MorePage> {
                                 onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => ViewProfile(),
+                                      builder: (context) => const ViewProfile(),
                                     ),
                                   );
                                 },
@@ -183,7 +183,7 @@ class _MorePageState extends State<MorePage> {
           ),
           Expanded(
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: horizontalValue(16),
@@ -379,7 +379,8 @@ class _MorePageState extends State<MorePage> {
                         onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                              builder: (BuildContext context) => WelcomePage(),
+                              builder: (BuildContext context) =>
+                                  const WelcomePage(),
                             ),
                             (Route route) => false,
                           );

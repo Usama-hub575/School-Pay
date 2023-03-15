@@ -109,7 +109,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                 width: 44.w,
                                 decoration: BoxDecoration(
                                     boxShadow: [
-                                      BoxShadow(
+                                      const BoxShadow(
                                         color: Colors.black26,
                                         blurRadius: 2.0,
                                         offset: Offset(
@@ -131,7 +131,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                 ),
                               ),
                             )
-                          : SizedBox(),
+                          : const SizedBox(),
                       Expanded(
                         child: Text(
                           transactions,
@@ -152,7 +152,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
               ? Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: 3,
                     itemBuilder: (context, index) {
                       return Column(
@@ -166,12 +166,12 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                 FadeShimmer(
                                   width: sizes.widthRatio * 120,
                                   height: sizes.heightRatio * 20,
-                                  baseColor: Color(0xFFEBEBF4),
-                                  highlightColor: Color(0xFFF4F4F4),
+                                  baseColor: const Color(0xFFEBEBF4),
+                                  highlightColor: const Color(0xFFF4F4F4),
                                   radius: 10,
                                 ),
                                 horizontalSpacer(8),
-                                Expanded(
+                                const Expanded(
                                   child: FadeShimmer(
                                     height: 1,
                                     width: double.infinity,
@@ -184,7 +184,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                             ),
                           ),
                           verticalSpacer(12),
-                          TransactionShimmerCard(),
+                          const TransactionShimmerCard(),
                           verticalSpacer(12),
                         ],
                       );
@@ -198,7 +198,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                           ? Expanded(
                               child: ListView.builder(
                                 shrinkWrap: true,
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 itemCount:
                                     transactionListController.list.length,
                                 itemBuilder: (context, index) {
@@ -304,7 +304,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                 ),
                               ),
                             )
-                      : SizedBox(),
+                      : const SizedBox(),
                 ),
         ],
       ),

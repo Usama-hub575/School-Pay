@@ -9,12 +9,12 @@ class LeanServerResponse {
 
   LeanServerResponse(
       {this.status,
-        this.secondaryStatus,
-        this.message,
-        this.lastApiResponse,
-        this.exitPoint,
-        this.bank,
-        this.method});
+      this.secondaryStatus,
+      this.message,
+      this.lastApiResponse,
+      this.exitPoint,
+      this.bank,
+      this.method});
 
   LeanServerResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
@@ -22,21 +22,21 @@ class LeanServerResponse {
     message = json['message'];
     lastApiResponse = json['last_api_response'];
     exitPoint = json['exit_point'];
-    bank = json['bank'] != null ? new Bank.fromJson(json['bank']) : null;
+    bank = json['bank'] != null ? Bank.fromJson(json['bank']) : null;
     method = json['method'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['secondary_status'] = this.secondaryStatus;
-    data['message'] = this.message;
-    data['last_api_response'] = this.lastApiResponse;
-    data['exit_point'] = this.exitPoint;
-    if (this.bank != null) {
-      data['bank'] = this.bank!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['secondary_status'] = secondaryStatus;
+    data['message'] = message;
+    data['last_api_response'] = lastApiResponse;
+    data['exit_point'] = exitPoint;
+    if (bank != null) {
+      data['bank'] = bank!.toJson();
     }
-    data['method'] = this.method;
+    data['method'] = method;
     return data;
   }
 }
@@ -53,9 +53,9 @@ class Bank {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['bank_identifier'] = this.bankIdentifier;
-    data['is_supported'] = this.isSupported;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['bank_identifier'] = bankIdentifier;
+    data['is_supported'] = isSupported;
     return data;
   }
 }

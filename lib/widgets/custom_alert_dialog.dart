@@ -132,7 +132,7 @@ class CustomAlertDialog {
             title: Container(
               decoration: BoxDecoration(
                 color: AppColors().white,
-                borderRadius: BorderRadius.vertical(
+                borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(
                     27,
                   ),

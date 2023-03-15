@@ -37,22 +37,21 @@ class CountryCode {
 
   factory CountryCode.fromCountryCode(String countryCode) {
     final Map<String, String>? jsonCode = codes.firstWhereOrNull(
-          (code) => code['code'] == countryCode,
+      (code) => code['code'] == countryCode,
     );
     return CountryCode.fromJson(jsonCode!);
   }
 
   factory CountryCode.fromDialCode(String dialCode) {
     final Map<String, String>? jsonCode = codes.firstWhereOrNull(
-          (code) => code['dial_code'] == dialCode,
+      (code) => code['dial_code'] == dialCode,
     );
     return CountryCode.fromJson(jsonCode!);
   }
 
   CountryCode localize(BuildContext context) {
     return this
-      ..name =
-          CountryLocalizations.of(context)?.translate(this.code) ?? this.name;
+      ..name = CountryLocalizations.of(context)?.translate(code) ?? name;
   }
 
   factory CountryCode.fromJson(Map<String, dynamic> json) {
@@ -67,7 +66,7 @@ class CountryCode {
   @override
   String toString() => "$dialCode";
 
-  String toLongString() => "${toCountryStringOnly()}";
+  String toLongString() => toCountryStringOnly();
 
   String toCountryStringOnly() {
     return '$_cleanName';

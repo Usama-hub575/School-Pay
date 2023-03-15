@@ -22,7 +22,7 @@ class NoDataFound extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black54,
                       blurRadius: 1.0,
@@ -46,12 +46,12 @@ class NoDataFound extends StatelessWidget {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Image.asset(
                 AppAssets().welcomeRegisterLogo,
                 width: sizes.widthRatio * 120,
               ),
-              Spacer(),
+              const Spacer(),
               horizontalSpacer(24),
             ],
           ),

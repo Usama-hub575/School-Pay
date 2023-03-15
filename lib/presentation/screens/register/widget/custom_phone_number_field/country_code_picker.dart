@@ -221,7 +221,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    this.elements = elements.map((e) => e.localize(context)).toList();
+    elements = elements.map((e) => e.localize(context)).toList();
     _onInit(selectedItem);
   }
 
@@ -287,9 +287,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
           searchStyle: widget.searchStyle,
           textStyle: widget.dialogTextStyle,
           boxDecoration: widget.boxDecoration,
-          showFlag: widget.showFlagDialog != null
-              ? widget.showFlagDialog
-              : widget.showFlag,
+          showFlag: widget.showFlagDialog ?? widget.showFlag,
           flagWidth: widget.flagWidth,
           flagDecoration: widget.flagDecoration,
           size: widget.dialogSize,

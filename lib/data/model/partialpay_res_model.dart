@@ -23,14 +23,14 @@ class PartialPayResModel {
 
   factory PartialPayResModel.fromJson(Map<String, dynamic> json) =>
       PartialPayResModel(
-        status: json["status"] == null ? null : json["status"],
-        message: json["message"] == null ? null : json["message"],
+        status: json["status"],
+        message: json["message"],
         parent: Parent.fromJson(json["parent"]),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
-        "message": message == null ? null : message,
+        "message": message,
         "parent": parent == null ? null : parent!.toJson(),
       };
 }
@@ -111,20 +111,16 @@ class Parent {
         admissionDate: json["admissionDate"] == null
             ? null
             : DateTime.parse(json["admissionDate"]),
-        id: json["id"] == null ? null : json["id"],
-        studentRegNo:
-            json["studentRegNo"] == null ? null : json["studentRegNo"],
-        firstName: json["firstName"] == null ? null : json["firstName"],
-        lastName: json["lastName"] == null ? null : json["lastName"],
-        grade: json["grade"] == null ? null : json["grade"],
-        parentEmiratesId:
-            json["parentEmiratesId"] == null ? null : json["parentEmiratesId"],
+        id: json["id"],
+        studentRegNo: json["studentRegNo"],
+        firstName: json["firstName"],
+        lastName: json["lastName"],
+        grade: json["grade"],
+        parentEmiratesId: json["parentEmiratesId"],
         parentPhoneNumber: json["parentPhoneNumber"],
         deletedAt: json["deletedAt"],
-        schoolId: json["schoolId"] == null ? null : json["schoolId"],
-        totalBalanceAmount: json["total_balance_amount"] == null
-            ? null
-            : json["total_balance_amount"],
+        schoolId: json["schoolId"],
+        totalBalanceAmount: json["total_balance_amount"],
         guardianFirstName: json["guardianFirstName"],
         guardianLastName: json["guardianLastName"],
         guardianGender: json["guardianGender"],
@@ -135,7 +131,7 @@ class Parent {
         region: json["region"],
         streetAddress: json["streetAddress"],
         email: json["email"],
-        phoneNumber: json["phoneNumber"] == null ? null : json["phoneNumber"],
+        phoneNumber: json["phoneNumber"],
         otherNumber: json["otherNumber"],
         profile: json["profile"],
         religion: json["religion"],
@@ -144,7 +140,7 @@ class Parent {
         dueDate:
             json["dueDate"] == null ? null : DateTime.parse(json["dueDate"]),
         file: json["file"],
-        privacy: json["privacy"] == null ? null : json["privacy"],
+        privacy: json["privacy"],
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),

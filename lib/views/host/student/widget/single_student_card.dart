@@ -78,7 +78,7 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
@@ -94,7 +94,7 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 0,
                     blurRadius: 9,
-                    offset: Offset(0, 2),
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),

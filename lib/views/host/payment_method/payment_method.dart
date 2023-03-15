@@ -115,7 +115,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           fontSize: sizes.fontRatio * 18,
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ],
@@ -141,25 +141,21 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     verticalSpacer(50),
-                    Container(
-                      child: Text(
-                        selectPaymentsMethod,
-                        style: PayNestTheme.h2_14blueAccent.copyWith(
-                          color: PayNestTheme.primaryColor,
-                          fontSize: sizes.fontRatio * 16,
-                          fontFamily: 'montserratBold',
-                        ),
+                    Text(
+                      selectPaymentsMethod,
+                      style: PayNestTheme.h2_14blueAccent.copyWith(
+                        color: PayNestTheme.primaryColor,
+                        fontSize: sizes.fontRatio * 16,
+                        fontFamily: 'montserratBold',
                       ),
                     ),
                     verticalSpacer(10),
-                    Container(
-                      child: Text(
-                        selectPaymentsMethodSecure,
-                        style: PayNestTheme.small_2_10textGrey.copyWith(
-                          color: PayNestTheme.lightBlack,
-                          fontSize: sizes.fontRatio * 12,
-                          fontFamily: 'montserratMedium',
-                        ),
+                    Text(
+                      selectPaymentsMethodSecure,
+                      style: PayNestTheme.small_2_10textGrey.copyWith(
+                        color: PayNestTheme.lightBlack,
+                        fontSize: sizes.fontRatio * 12,
+                        fontFamily: 'montserratMedium',
                       ),
                     ),
                     verticalSpacer(10),
@@ -196,7 +192,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 0.5,
                               blurRadius: 5,
-                              offset: Offset(1, 3),
+                              offset: const Offset(1, 3),
                             ),
                           ],
                           borderRadius: BorderRadius.circular(16),
@@ -292,7 +288,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 0.5,
                               blurRadius: 5,
-                              offset: Offset(1, 3),
+                              offset: const Offset(1, 3),
                             ),
                           ],
                           borderRadius: BorderRadius.circular(16),
@@ -360,7 +356,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 0.5,
                               blurRadius: 5,
-                              offset: Offset(1, 3),
+                              offset: const Offset(1, 3),
                             ),
                           ],
                           borderRadius: BorderRadius.circular(16),

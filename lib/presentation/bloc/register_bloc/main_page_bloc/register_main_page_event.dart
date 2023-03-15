@@ -1,17 +1,20 @@
 part of 'register_main_page_bloc.dart';
 
-class RegisterMainPageBaseEvent extends Equatable {
+class RegisterMainPageEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class CheckBox extends RegisterMainPageBaseEvent {}
+class CheckBox extends RegisterMainPageEvent {}
 
-class RegisterLoading extends RegisterMainPageBaseEvent {}
+class RegisterMainPageLoading extends RegisterMainPageEvent {}
 
-class RegisterToggle extends RegisterMainPageBaseEvent {
-  final RegisterMainPageStatus toggleStatus;
+class RegisterToggle extends RegisterMainPageEvent {
+  final String toggleStatus;
+
   RegisterToggle({
     required this.toggleStatus,
   });
 }
+
+class Loaded extends RegisterMainPageEvent {}

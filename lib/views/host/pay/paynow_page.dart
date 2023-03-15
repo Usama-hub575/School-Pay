@@ -231,8 +231,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                     ),
                                   ),
                                 )
-                              : SizedBox(),
-                          Spacer(),
+                              : const SizedBox(),
+                          const Spacer(),
                           Text(
                             pay,
                             style: PayNestTheme.title20white.copyWith(
@@ -241,7 +241,7 @@ class _PayNowPageState extends State<PayNowPage> {
                               fontSize: sizes.fontRatio * 18,
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                         ],
                       ),
                     ],
@@ -295,7 +295,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                             .withOpacity(.3),
                                         spreadRadius: 0,
                                         blurRadius: 10,
-                                        offset: Offset(
+                                        offset: const Offset(
                                           0,
                                           5,
                                         ), // changes position of shadow
@@ -358,7 +358,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                             _searchResult.isNotEmpty &&
                                                     searchController
                                                         .text.isNotEmpty
-                                                ? Container(
+                                                ? SizedBox(
                                                     height:
                                                         sizes.heightRatio * 156,
                                                     child: ListView.separated(
@@ -423,42 +423,40 @@ class _PayNowPageState extends State<PayNowPage> {
                                                     _searchResult.isNotEmpty &&
                                                     searchController
                                                         .text.isNotEmpty
-                                                ? Container(
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          'Current Payable Amount',
-                                                          style: PayNestTheme
-                                                              .h2_12blueAccentLight
-                                                              .copyWith(
-                                                            fontSize: sizes
-                                                                    .fontRatio *
-                                                                14,
-                                                            color: PayNestTheme
-                                                                .primaryColor,
-                                                            fontFamily:
-                                                                'montserratSemiBold',
-                                                          ),
+                                                ? Row(
+                                                    children: [
+                                                      Text(
+                                                        'Current Payable Amount',
+                                                        style: PayNestTheme
+                                                            .h2_12blueAccentLight
+                                                            .copyWith(
+                                                          fontSize:
+                                                              sizes.fontRatio *
+                                                                  14,
+                                                          color: PayNestTheme
+                                                              .primaryColor,
+                                                          fontFamily:
+                                                              'montserratSemiBold',
                                                         ),
-                                                        Spacer(),
-                                                        Text(
-                                                          'AED ${payAbleAmount != '0' ? amountFormater(
-                                                              double.parse(
-                                                                  payAbleAmount),
-                                                            ) : '0.0'}',
-                                                          style: PayNestTheme
-                                                              .h2_12blueAccent
-                                                              .copyWith(
-                                                            fontSize: sizes
-                                                                    .fontRatio *
-                                                                16,
-                                                            color: PayNestTheme
-                                                                .primaryColor,
-                                                          ),
+                                                      ),
+                                                      const Spacer(),
+                                                      Text(
+                                                        'AED ${payAbleAmount != '0' ? amountFormater(
+                                                            double.parse(
+                                                                payAbleAmount),
+                                                          ) : '0.0'}',
+                                                        style: PayNestTheme
+                                                            .h2_12blueAccent
+                                                            .copyWith(
+                                                          fontSize:
+                                                              sizes.fontRatio *
+                                                                  16,
+                                                          color: PayNestTheme
+                                                              .primaryColor,
                                                         ),
-                                                        horizontalSpacer(16),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                      horizontalSpacer(16),
+                                                    ],
                                                   )
                                                 : const SizedBox.shrink(),
                                             verticalSpacer(8),
@@ -534,7 +532,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             spreadRadius: 0.5,
                                                             blurRadius: 5,
                                                             offset:
-                                                                Offset(1, 3),
+                                                                const Offset(
+                                                                    1, 3),
                                                           ),
                                                         ],
                                                         borderRadius:
@@ -678,7 +677,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                       0.5,
                                                                   blurRadius: 5,
                                                                   offset:
-                                                                      Offset(
+                                                                      const Offset(
                                                                           1, 3),
                                                                 ),
                                                               ],
@@ -705,7 +704,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                       0.5,
                                                                   blurRadius: 5,
                                                                   offset:
-                                                                      Offset(
+                                                                      const Offset(
                                                                           1, 3),
                                                                 ),
                                                               ],
@@ -808,7 +807,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             spreadRadius: 0.5,
                                                             blurRadius: 5,
                                                             offset:
-                                                                Offset(1, 3),
+                                                                const Offset(
+                                                                    1, 3),
                                                           ),
                                                         ],
                                                         borderRadius:
@@ -865,7 +865,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                           physics:
                                               const BouncingScrollPhysics(),
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               height: sizes.heightRatio * 156,
                                               child: ListView.separated(
                                                 itemCount: studentController
@@ -919,47 +919,44 @@ class _PayNowPageState extends State<PayNowPage> {
                                             ),
                                             verticalSpacer(30),
                                             tap % 2 == 1
-                                                ? Container(
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          'Current Payable Amount',
-                                                          style: PayNestTheme
-                                                              .h2_12blueAccentLight
-                                                              .copyWith(
-                                                            fontSize: sizes
-                                                                    .fontRatio *
-                                                                14,
-                                                            color: PayNestTheme
-                                                                .primaryColor,
-                                                            fontFamily:
-                                                                'montserratSemiBold',
-                                                          ),
+                                                ? Row(
+                                                    children: [
+                                                      Text(
+                                                        'Current Payable Amount',
+                                                        style: PayNestTheme
+                                                            .h2_12blueAccentLight
+                                                            .copyWith(
+                                                          fontSize:
+                                                              sizes.fontRatio *
+                                                                  14,
+                                                          color: PayNestTheme
+                                                              .primaryColor,
+                                                          fontFamily:
+                                                              'montserratSemiBold',
                                                         ),
-                                                        Spacer(),
-                                                        Text(
-                                                          payAbleAmount != '0'
-                                                              ? 'AED ' +
-                                                                  amountFormater(
-                                                                    double.parse(
-                                                                        payAbleAmount),
-                                                                  )
-                                                              : "0.0",
-                                                          style: PayNestTheme
-                                                              .h2_12blueAccent
-                                                              .copyWith(
-                                                            fontSize: sizes
-                                                                    .fontRatio *
-                                                                16,
-                                                            color: PayNestTheme
-                                                                .primaryColor,
-                                                          ),
+                                                      ),
+                                                      const Spacer(),
+                                                      Text(
+                                                        payAbleAmount != '0'
+                                                            ? 'AED ${amountFormater(
+                                                                double.parse(
+                                                                    payAbleAmount),
+                                                              )}'
+                                                            : "0.0",
+                                                        style: PayNestTheme
+                                                            .h2_12blueAccent
+                                                            .copyWith(
+                                                          fontSize:
+                                                              sizes.fontRatio *
+                                                                  16,
+                                                          color: PayNestTheme
+                                                              .primaryColor,
                                                         ),
-                                                        horizontalSpacer(16),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                      horizontalSpacer(16),
+                                                    ],
                                                   )
-                                                : SizedBox.shrink(),
+                                                : const SizedBox.shrink(),
                                             verticalSpacer(8),
                                             Container(
                                               width: double.infinity,
@@ -1013,7 +1010,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             spreadRadius: 0.5,
                                                             blurRadius: 5,
                                                             offset:
-                                                                Offset(1, 3),
+                                                                const Offset(
+                                                                    1, 3),
                                                           ),
                                                         ],
                                                         borderRadius:
@@ -1147,7 +1145,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             spreadRadius: 0.5,
                                                             blurRadius: 5,
                                                             offset:
-                                                                Offset(1, 3),
+                                                                const Offset(
+                                                                    1, 3),
                                                           ),
                                                         ],
                                                         borderRadius:
@@ -1245,7 +1244,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             spreadRadius: 0.5,
                                                             blurRadius: 5,
                                                             offset:
-                                                                Offset(1, 3),
+                                                                const Offset(
+                                                                    1, 3),
                                                           ),
                                                         ],
                                                         borderRadius:
@@ -1543,7 +1543,7 @@ class _PayNowPageState extends State<PayNowPage> {
                 isLoading = false;
                 setState(() {});
                 Future.delayed(
-                  Duration(
+                  const Duration(
                     seconds: 1,
                   ),
                   () {
@@ -1682,7 +1682,7 @@ class _PayNowPageState extends State<PayNowPage> {
         child: Stack(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 vertical: 8,
               ),
               padding: EdgeInsets.symmetric(
@@ -1698,7 +1698,7 @@ class _PayNowPageState extends State<PayNowPage> {
                   Container(
                     height: sizes.heightRatio * 50,
                     width: sizes.widthRatio * 50,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
                     child: SvgPicture.asset(
@@ -1708,7 +1708,7 @@ class _PayNowPageState extends State<PayNowPage> {
                     ),
                   ),
                   verticalSpacer(8),
-                  Container(
+                  SizedBox(
                     width: sizes.widthRatio * 60,
                     child: Text(
                       '${studentElement.student?.firstName} \n  ${(studentElement.student?.lastName != '-' ? studentElement.student?.lastName : '')}',
@@ -1722,8 +1722,8 @@ class _PayNowPageState extends State<PayNowPage> {
                       ),
                     ),
                   ),
-                  Spacer(),
-                  Container(
+                  const Spacer(),
+                  SizedBox(
                     width: sizes.widthRatio * 80,
                     child: Text(
                       '${studentElement.student?.school!.name}',
@@ -1738,7 +1738,7 @@ class _PayNowPageState extends State<PayNowPage> {
                       ),
                     ),
                   ),
-                  Spacer()
+                  const Spacer()
                 ],
               ),
             ),

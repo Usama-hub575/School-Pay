@@ -72,7 +72,7 @@ class _StudentCardState extends State<StudentCard> {
                 Container(
                   height: sizes.heightRatio * 60,
                   width: sizes.widthRatio * 60,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                   ),
                   child: SvgPicture.asset(
@@ -112,7 +112,7 @@ class _StudentCardState extends State<StudentCard> {
                     ),
                   ),
                 ),
-                Spacer()
+                const Spacer()
               ],
             ),
           ),

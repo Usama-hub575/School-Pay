@@ -32,7 +32,7 @@ class _PayNowTransactionDetailsPageState
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             height: 350.h,
             child: Stack(
               children: [
@@ -54,7 +54,7 @@ class _PayNowTransactionDetailsPageState
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           verticalSpacer(16),
-                          Container(
+                          SizedBox(
                             width: double.infinity,
                             child: Text(
                               'Invoice Details',
@@ -93,7 +93,7 @@ class _PayNowTransactionDetailsPageState
                                   color: PayNestTheme.borderGrey,
                                   spreadRadius: 1,
                                   blurRadius: 7,
-                                  offset: Offset(
+                                  offset: const Offset(
                                     0,
                                     3,
                                   ),
@@ -119,7 +119,7 @@ class _PayNowTransactionDetailsPageState
                                   ),
                                 ),
                                 verticalSpacer(8),
-                                Container(
+                                SizedBox(
                                   width: sizes.width / 1.4,
                                   child: Text(
                                     youHaveSuccessfully,
@@ -146,7 +146,7 @@ class _PayNowTransactionDetailsPageState
           ),
           Expanded(
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 34.h),
                 child: Column(
@@ -313,7 +313,7 @@ class _PayNowTransactionDetailsPageState
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: horizontalValue(30)),
-            child: Container(
+            child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(

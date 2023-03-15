@@ -52,7 +52,7 @@ class _SignInPageState extends State<SignInPage> {
               ],
             ),
             verticalSpacer(22),
-            const MainUI(),
+            const BlocUI(),
           ],
         ),
       ),

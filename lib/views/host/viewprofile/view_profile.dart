@@ -70,7 +70,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                 iconColor: PayNestTheme.primaryColor,
                                 buttonColor: PayNestTheme.colorWhite,
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Text(
                                 myProfile,
                                 style: PayNestTheme.title20white.copyWith(
@@ -78,7 +78,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                     fontFamily: 'montserratBold',
                                     fontSize: sizes.fontRatio * 18),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Padding(
                                 padding: EdgeInsets.only(
                                   right: 25.h,
@@ -86,7 +86,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     boxShadow: [
-                                      BoxShadow(
+                                      const BoxShadow(
                                         color: Colors.black26,
                                         blurRadius: 2.0,
                                         offset: Offset(
@@ -105,7 +105,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              EditProfilePage(),
+                                              const EditProfilePage(),
                                         ),
                                       );
                                     },
@@ -150,7 +150,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                     ),
                                     spreadRadius: 0,
                                     blurRadius: 10,
-                                    offset: Offset(
+                                    offset: const Offset(
                                       0,
                                       5,
                                     ),
@@ -165,11 +165,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                 children: [
                                   verticalSpacer(10),
                                   Text(
-                                    userController.userResData.value.parent!
-                                            .firstName +
-                                        " " +
-                                        userController
-                                            .userResData.value.parent!.lastName,
+                                    "${userController.userResData.value.parent!.firstName} ${userController.userResData.value.parent!.lastName}",
                                     style: PayNestTheme.title18black.copyWith(
                                       fontSize: sizes.fontRatio * 18,
                                       fontFamily: 'montserratBold',
@@ -190,7 +186,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                     color: Colors.black.withOpacity(0.3),
                                     spreadRadius: 0,
                                     blurRadius: 18,
-                                    offset: Offset(
+                                    offset: const Offset(
                                       1,
                                       1,
                                     ),
@@ -212,7 +208,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                   : Container(
                                       height: sizes.heightRatio * 80,
                                       width: sizes.widthRatio * 80,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                       ),
                                       child: SvgPicture.asset(
@@ -231,7 +227,7 @@ class _ViewProfileState extends State<ViewProfile> {
           ),
           Expanded(
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: horizontalValue(16),
@@ -260,9 +256,7 @@ class _ViewProfileState extends State<ViewProfile> {
                     verticalSpacer(4),
                     Obx(
                       () => Text(
-                        userController.userResData.value.parent!.firstName +
-                            " " +
-                            userController.userResData.value.parent!.lastName,
+                        "${userController.userResData.value.parent!.firstName} ${userController.userResData.value.parent!.lastName}",
                         style: PayNestTheme.title_3_16blackbold.copyWith(
                           fontSize: sizes.fontRatio * 16,
                           color: PayNestTheme.lightBlack,
@@ -355,7 +349,7 @@ class _ViewProfileState extends State<ViewProfile> {
                               fontFamily: 'montserratSemiBold',
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Text(
                             optional,
                             style: PayNestTheme.h2_14textGrey.copyWith(
@@ -401,7 +395,7 @@ class _ViewProfileState extends State<ViewProfile> {
                               fontFamily: 'montserratSemiBold',
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Text(
                             optional,
                             style: PayNestTheme.h2_14textGrey.copyWith(
@@ -442,7 +436,7 @@ class _ViewProfileState extends State<ViewProfile> {
                               fontFamily: 'montserratSemiBold',
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Text(
                             optional,
                             style: PayNestTheme.h2_14textGrey.copyWith(
@@ -488,7 +482,7 @@ class _ViewProfileState extends State<ViewProfile> {
                               fontFamily: 'montserratSemiBold',
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Text(
                             optional,
                             style: PayNestTheme.h2_14textGrey.copyWith(
@@ -567,7 +561,7 @@ class _ViewProfileState extends State<ViewProfile> {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => ChangePassword(),
+                              builder: (context) => const ChangePassword(),
                             ),
                           );
                         },

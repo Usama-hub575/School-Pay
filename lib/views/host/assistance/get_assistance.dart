@@ -34,7 +34,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                             height: 44.h,
                             width: 44.w,
                             decoration: BoxDecoration(
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   color: Colors.black26,
                                   blurRadius: 2.0,
@@ -104,7 +104,7 @@ class _GetAssistanceState extends State<GetAssistance> {
               ),
               child: Row(
                 children: [
-                  Container(
+                  SizedBox(
                     height: sizes.heightRatio * 80,
                     width: sizes.widthRatio * 80,
                     child: Lottie.asset(
@@ -167,7 +167,7 @@ class _GetAssistanceState extends State<GetAssistance> {
               ),
               child: Row(
                 children: [
-                  Container(
+                  SizedBox(
                     height: sizes.heightRatio * 80,
                     width: sizes.widthRatio * 80,
                     child: Lottie.asset(
@@ -186,7 +186,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                           ),
                         ),
                         verticalSpacer(8),
-                        Container(
+                        SizedBox(
                           width: sizes.widthRatio * 280,
                           child: Text(
                             goThrough,
@@ -224,7 +224,7 @@ class _GetAssistanceState extends State<GetAssistance> {
               ),
               child: Row(
                 children: [
-                  Container(
+                  SizedBox(
                     height: sizes.heightRatio * 56,
                     width: sizes.widthRatio * 56,
                     child: Lottie.asset(
@@ -243,7 +243,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                           ),
                         ),
                         verticalSpacer(8),
-                        Container(
+                        SizedBox(
                           width: sizes.widthRatio * 280,
                           child: Text(
                             chatWith,

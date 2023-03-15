@@ -113,7 +113,8 @@ class _SelectSchoolState extends State<SelectSchool> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 1,
                             blurRadius: 10,
-                            offset: Offset(0, 3), // changes position of shadow
+                            offset: const Offset(
+                                0, 3), // changes position of shadow
                           ),
                         ],
                       ),
@@ -182,8 +183,8 @@ class _SelectSchoolState extends State<SelectSchool> {
                         width: double.infinity,
                         height: sizes.heightRatio * 50,
                         // fadeTheme: FadeTheme.dark,
-                        baseColor: Color(0xFFEBEBF4),
-                        highlightColor: Color(0xFFF4F4F4),
+                        baseColor: const Color(0xFFEBEBF4),
+                        highlightColor: const Color(0xFFF4F4F4),
                         radius: 16,
                       ),
                     ),
@@ -191,14 +192,14 @@ class _SelectSchoolState extends State<SelectSchool> {
                   ? _searchResult.isNotEmpty || ssController.text.isNotEmpty
                       ? Expanded(
                           child: ListView(
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           children: [
                             _searchResult.isNotEmpty &&
                                     ssController.text.isNotEmpty
                                 ? ListView.builder(
                                     shrinkWrap: true,
                                     itemCount: _searchResult.length,
-                                    physics: BouncingScrollPhysics(),
+                                    physics: const BouncingScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       return Column(
                                         children: [
@@ -238,7 +239,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                             shrinkWrap: true,
                             itemCount: schoolController
                                 .schoolResList.value.log!.length,
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Column(
                                 children: [
@@ -267,7 +268,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                           vertical: verticalValue(12),
                         ),
                         scrollDirection: Axis.vertical,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: 8,
                         itemBuilder: (BuildContext context, int index) {
                           return Row(
@@ -275,8 +276,8 @@ class _SelectSchoolState extends State<SelectSchool> {
                             children: [
                               FadeShimmer.round(
                                 size: sizes.heightRatio * 50,
-                                baseColor: Color(0xFFEBEBF4),
-                                highlightColor: Color(0xFFF4F4F4),
+                                baseColor: const Color(0xFFEBEBF4),
+                                highlightColor: const Color(0xFFF4F4F4),
                               ),
                               horizontalSpacer(10),
                               Column(
@@ -286,16 +287,16 @@ class _SelectSchoolState extends State<SelectSchool> {
                                   FadeShimmer(
                                     width: sizes.widthRatio * 250,
                                     height: sizes.heightRatio * 20,
-                                    baseColor: Color(0xFFEBEBF4),
-                                    highlightColor: Color(0xFFF4F4F4),
+                                    baseColor: const Color(0xFFEBEBF4),
+                                    highlightColor: const Color(0xFFF4F4F4),
                                     radius: 8,
                                   ),
                                   verticalSpacer(8),
                                   FadeShimmer(
                                     width: sizes.widthRatio * 70,
                                     height: sizes.heightRatio * 20,
-                                    baseColor: Color(0xFFEBEBF4),
-                                    highlightColor: Color(0xFFF4F4F4),
+                                    baseColor: const Color(0xFFEBEBF4),
+                                    highlightColor: const Color(0xFFF4F4F4),
                                     radius: 10,
                                   ),
                                   verticalSpacer(6),
@@ -308,8 +309,8 @@ class _SelectSchoolState extends State<SelectSchool> {
                           return FadeShimmer(
                             height: 1,
                             width: sizes.widthRatio * 250,
-                            baseColor: Color(0xFFEBEBF4),
-                            highlightColor: Color(0xFFF4F4F4),
+                            baseColor: const Color(0xFFEBEBF4),
+                            highlightColor: const Color(0xFFF4F4F4),
                             // radius: 10,
                           );
                         },
@@ -355,7 +356,7 @@ class _SelectSchoolState extends State<SelectSchool> {
         child: Row(
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
               ),
               child: SvgPicture.asset(
@@ -368,7 +369,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${log.name}',
+                    log.name,
                     style: PayNestTheme.title_2_16primaryColor.copyWith(
                       fontSize: sizes.fontRatio * 14,
                       fontWeight: FontWeight.bold,
@@ -376,7 +377,7 @@ class _SelectSchoolState extends State<SelectSchool> {
                     ),
                   ),
                   Text(
-                    '${log.address}',
+                    log.address,
                     style: PayNestTheme.title_2_16primaryColor.copyWith(
                       fontSize: sizes.fontRatio * 10,
                       fontWeight: FontWeight.w300,

@@ -262,7 +262,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                                     );
                                   }).toList(),
                                   value: _selectedFilter,
-                                  hint: Text(
+                                  hint: const Text(
                                     "Gender",
                                   ),
                                   // value: selection,
@@ -704,7 +704,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           showCountryOnly: false,
                           showOnlyCountryWhenClosed: false,
                           alignLeft: false,
-                          flagDecoration: BoxDecoration(
+                          flagDecoration: const BoxDecoration(
                             shape: BoxShape.circle,
                           ),
                           flagWidth: sizes.fontRatio * 50,

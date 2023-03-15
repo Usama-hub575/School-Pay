@@ -110,7 +110,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(32),
                         topRight: Radius.circular(32),
                       ),
@@ -134,7 +134,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                   fontFamily: 'montserratSemiBold',
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               userController.singleStudentResponse.value
                                           .students !=
                                       null
@@ -170,7 +170,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                           height: 1,
                           color: PayNestTheme.textGrey.withOpacity(0.5),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Container(
                           margin: EdgeInsets.symmetric(
                             horizontal: horizontalValue(16),
@@ -185,7 +185,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                         userController.singleStudentResponse.value.students![0]
                                     .student!.totalBalanceAmount ==
                                 0
-                            ? SizedBox.shrink()
+                            ? const SizedBox.shrink()
                             : Container(
                                 margin: EdgeInsets.symmetric(
                                   horizontal: horizontalValue(16),
@@ -252,7 +252,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                 ),
@@ -269,7 +269,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                         ? Container(
                             height: sizes.heightRatio * 50,
                             width: sizes.widthRatio * 50,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
                             child: SvgPicture.asset(
@@ -284,7 +284,23 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     verticalSpacer(8),
                     userController.singleStudentResponse.value.students != null
                         ? Text(
-                            '${userController.singleStudentResponse.value.students![0].student?.firstName ?? '' + (userController.singleStudentResponse.value.students![0].student?.lastName != null ? userController.parentStudentResponse.parentStudent!.student!.lastName ?? '' : '')}',
+                            userController.singleStudentResponse.value
+                                    .students![0].student?.firstName ??
+                                '' +
+                                    (userController
+                                                .singleStudentResponse
+                                                .value
+                                                .students![0]
+                                                .student
+                                                ?.lastName !=
+                                            null
+                                        ? userController
+                                                .parentStudentResponse
+                                                .parentStudent!
+                                                .student!
+                                                .lastName ??
+                                            ''
+                                        : ''),
                             textAlign: TextAlign.center,
                             style: PayNestTheme.h2_12blueAccent.copyWith(
                               fontSize: sizes.fontRatio * 22,
@@ -310,7 +326,8 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     verticalSpacer(8),
                     userController.singleStudentResponse.value.students != null
                         ? Text(
-                            '${userController.singleStudentResponse.value.students![0].student!.school!.name}',
+                            userController.singleStudentResponse.value
+                                .students![0].student!.school!.name,
                             textAlign: TextAlign.center,
                             style: PayNestTheme.h2_12blueAccent.copyWith(
                               fontSize: sizes.fontRatio * 16,
@@ -321,7 +338,8 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     verticalSpacer(4),
                     userController.singleStudentResponse.value.students != null
                         ? Text(
-                            '${userController.singleStudentResponse.value.students![0].student!.school!.address}',
+                            userController.singleStudentResponse.value
+                                .students![0].student!.school!.address,
                             textAlign: TextAlign.center,
                             style: PayNestTheme.small_2_10textGrey.copyWith(
                               fontSize: sizes.fontRatio * 16,

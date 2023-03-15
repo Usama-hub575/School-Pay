@@ -16,7 +16,7 @@ class CountryLocalizations {
   }
 
   static const LocalizationsDelegate<CountryLocalizations> delegate =
-  _CountryLocalizationsDelegate();
+      _CountryLocalizationsDelegate();
 
   late Map<String, String> _localizedStrings;
 
@@ -119,6 +119,7 @@ class _CountryLocalizationsDelegate
 
   @override
   Future<CountryLocalizations> load(Locale locale) async {
+    // ignore: unnecessary_new
     CountryLocalizations localizations = new CountryLocalizations(locale);
     await localizations.load();
     return localizations;

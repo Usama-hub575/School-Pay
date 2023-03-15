@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:paynest_flutter_app/export.dart';
 
 class APIService {
   GetStorage storage = GetStorage();
@@ -161,7 +161,7 @@ class APIService {
       endPoint,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + storage.read('accessToken'),
+        "Authorization": "Bearer ${storage.read('accessToken')}",
       },
       body: data,
     );
@@ -634,13 +634,19 @@ class APIService {
       body: queryParams,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Bearer " + storage.read('accessToken'),
+        "Authorization": "Bearer  ${storage.read('accessToken')}",
       },
     );
-    print(response.body);
-    if (response.statusCode == 200) {
-      print("CreateTrans Response ***");
+    if (kDebugMode) {
       print(response.body);
+    }
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print("CreateTrans Response ***");
+      }
+      if (kDebugMode) {
+        print(response.body);
+      }
       log(response.body);
       return response.body;
     } else {
@@ -657,7 +663,7 @@ class APIService {
       body: queryParams,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Bearer " + storage.read('accessToken'),
+        "Authorization": "Bearer ${storage.read('accessToken')}",
       },
     );
     print(response.body);

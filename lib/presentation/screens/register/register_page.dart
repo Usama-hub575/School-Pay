@@ -35,16 +35,18 @@ class _RegisterPageState extends State<RegisterPage> {
                   iconColor: PayNestTheme.colorWhite,
                   buttonColor: PayNestTheme.primaryColor,
                 ),
-                Spacer(),
+                const Spacer(),
                 Image.asset(
                   AppAssets().welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
             verticalSpacer(16),
-            CustomSlider(currentIndex: _currentIndex),
+            CustomSlider(
+              currentIndex: _currentIndex,
+            ),
             Expanded(
               child: PageView.builder(
                 physics: const NeverScrollableScrollPhysics(),
@@ -61,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           },
                         )
                       : _currentIndex == 1
-                          ? RegisterOtpPage(
+                          ? RegisterOTPPage(
                               email: email,
                               password: password,
                               phoneCode: phoneCode,
@@ -108,10 +110,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                       (Route<dynamic> route) => false);
                                 } else {
                                   showToast(
-                                      message:
-                                          userController.isFailed.toString(),
-                                      context: context,
-                                      color: PayNestTheme.red);
+                                    message: userController.isFailed.toString(),
+                                    context: context,
+                                    color: PayNestTheme.red,
+                                  );
                                 }
                               },
                             );

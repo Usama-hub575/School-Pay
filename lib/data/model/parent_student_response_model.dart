@@ -7,15 +7,15 @@ class ParentStudentResponse {
   ParentStudentResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     parentStudent = json['parentStudent'] != null
-        ? new ParentStudent.fromJson(json['parentStudent'])
+        ? ParentStudent.fromJson(json['parentStudent'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    if (this.parentStudent != null) {
-      data['parentStudent'] = this.parentStudent!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    if (parentStudent != null) {
+      data['parentStudent'] = parentStudent!.toJson();
     }
     return data;
   }
@@ -32,12 +32,12 @@ class ParentStudent {
 
   ParentStudent(
       {this.id,
-        this.parentId,
-        this.studentId,
-        this.deletedAt,
-        this.createdAt,
-        this.updatedAt,
-        this.student});
+      this.parentId,
+      this.studentId,
+      this.deletedAt,
+      this.createdAt,
+      this.updatedAt,
+      this.student});
 
   ParentStudent.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -47,19 +47,19 @@ class ParentStudent {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     student =
-    json['student'] != null ? new Student.fromJson(json['student']) : null;
+        json['student'] != null ? Student.fromJson(json['student']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['parentId'] = this.parentId;
-    data['studentId'] = this.studentId;
-    data['deletedAt'] = this.deletedAt;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    if (this.student != null) {
-      data['student'] = this.student!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['parentId'] = parentId;
+    data['studentId'] = studentId;
+    data['deletedAt'] = deletedAt;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    if (student != null) {
+      data['student'] = student!.toJson();
     }
     return data;
   }
@@ -109,45 +109,45 @@ class Student {
 
   Student(
       {this.dob,
-        this.admissionDate,
-        this.id,
-        this.studentRegNo,
-        this.firstName,
-        this.lastName,
-        this.grade,
-        this.parentPassport,
-        this.parentEmiratesId,
-        this.emiratesId,
-        this.parentPhoneNumber,
-        this.deletedAt,
-        this.schoolId,
-        this.parentFirstName,
-        this.parentLastName,
-        this.parentGender,
-        this.parentNationality,
-        this.parentReligion,
-        this.area,
-        this.region,
-        this.streetAddress,
-        this.email,
-        this.phoneNumber,
-        this.otherNumber,
-        this.profile,
-        this.religion,
-        this.nationality,
-        this.gender,
-        this.totalBalanceAmount,
-        this.dueDate,
-        this.file,
-        this.privacy,
-        this.paynestNumber,
-        this.parentRegNo,
-        this.parentEmail,
-        this.section,
-        this.payeeType,
-        this.createdAt,
-        this.updatedAt,
-        this.school});
+      this.admissionDate,
+      this.id,
+      this.studentRegNo,
+      this.firstName,
+      this.lastName,
+      this.grade,
+      this.parentPassport,
+      this.parentEmiratesId,
+      this.emiratesId,
+      this.parentPhoneNumber,
+      this.deletedAt,
+      this.schoolId,
+      this.parentFirstName,
+      this.parentLastName,
+      this.parentGender,
+      this.parentNationality,
+      this.parentReligion,
+      this.area,
+      this.region,
+      this.streetAddress,
+      this.email,
+      this.phoneNumber,
+      this.otherNumber,
+      this.profile,
+      this.religion,
+      this.nationality,
+      this.gender,
+      this.totalBalanceAmount,
+      this.dueDate,
+      this.file,
+      this.privacy,
+      this.paynestNumber,
+      this.parentRegNo,
+      this.parentEmail,
+      this.section,
+      this.payeeType,
+      this.createdAt,
+      this.updatedAt,
+      this.school});
 
   Student.fromJson(Map<String, dynamic> json) {
     dob = json['dob'];
@@ -189,53 +189,52 @@ class Student {
     payeeType = json['payeeType'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    school =
-    json['school'] != null ? new School.fromJson(json['school']) : null;
+    school = json['school'] != null ? School.fromJson(json['school']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['dob'] = this.dob;
-    data['admissionDate'] = this.admissionDate;
-    data['id'] = this.id;
-    data['studentRegNo'] = this.studentRegNo;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['grade'] = this.grade;
-    data['parentPassport'] = this.parentPassport;
-    data['parentEmiratesId'] = this.parentEmiratesId;
-    data['emiratesId'] = this.emiratesId;
-    data['parentPhoneNumber'] = this.parentPhoneNumber;
-    data['deletedAt'] = this.deletedAt;
-    data['schoolId'] = this.schoolId;
-    data['parentFirstName'] = this.parentFirstName;
-    data['parentLastName'] = this.parentLastName;
-    data['parentGender'] = this.parentGender;
-    data['parentNationality'] = this.parentNationality;
-    data['parentReligion'] = this.parentReligion;
-    data['area'] = this.area;
-    data['region'] = this.region;
-    data['streetAddress'] = this.streetAddress;
-    data['email'] = this.email;
-    data['phoneNumber'] = this.phoneNumber;
-    data['otherNumber'] = this.otherNumber;
-    data['profile'] = this.profile;
-    data['religion'] = this.religion;
-    data['nationality'] = this.nationality;
-    data['gender'] = this.gender;
-    data['total_balance_amount'] = this.totalBalanceAmount;
-    data['dueDate'] = this.dueDate;
-    data['file'] = this.file;
-    data['privacy'] = this.privacy;
-    data['paynestNumber'] = this.paynestNumber;
-    data['parentRegNo'] = this.parentRegNo;
-    data['parentEmail'] = this.parentEmail;
-    data['section'] = this.section;
-    data['payeeType'] = this.payeeType;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    if (this.school != null) {
-      data['school'] = this.school!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['dob'] = dob;
+    data['admissionDate'] = admissionDate;
+    data['id'] = id;
+    data['studentRegNo'] = studentRegNo;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['grade'] = grade;
+    data['parentPassport'] = parentPassport;
+    data['parentEmiratesId'] = parentEmiratesId;
+    data['emiratesId'] = emiratesId;
+    data['parentPhoneNumber'] = parentPhoneNumber;
+    data['deletedAt'] = deletedAt;
+    data['schoolId'] = schoolId;
+    data['parentFirstName'] = parentFirstName;
+    data['parentLastName'] = parentLastName;
+    data['parentGender'] = parentGender;
+    data['parentNationality'] = parentNationality;
+    data['parentReligion'] = parentReligion;
+    data['area'] = area;
+    data['region'] = region;
+    data['streetAddress'] = streetAddress;
+    data['email'] = email;
+    data['phoneNumber'] = phoneNumber;
+    data['otherNumber'] = otherNumber;
+    data['profile'] = profile;
+    data['religion'] = religion;
+    data['nationality'] = nationality;
+    data['gender'] = gender;
+    data['total_balance_amount'] = totalBalanceAmount;
+    data['dueDate'] = dueDate;
+    data['file'] = file;
+    data['privacy'] = privacy;
+    data['paynestNumber'] = paynestNumber;
+    data['parentRegNo'] = parentRegNo;
+    data['parentEmail'] = parentEmail;
+    data['section'] = section;
+    data['payeeType'] = payeeType;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    if (school != null) {
+      data['school'] = school!.toJson();
     }
     return data;
   }
@@ -260,20 +259,20 @@ class School {
 
   School(
       {this.id,
-        this.name,
-        this.deletedAt,
-        this.addedBy,
-        this.address,
-        this.description,
-        this.vat,
-        this.paynestFee,
-        this.aPIKey,
-        this.merchantId,
-        this.file,
-        this.privacy,
-        this.payeeType,
-        this.createdAt,
-        this.updatedAt});
+      this.name,
+      this.deletedAt,
+      this.addedBy,
+      this.address,
+      this.description,
+      this.vat,
+      this.paynestFee,
+      this.aPIKey,
+      this.merchantId,
+      this.file,
+      this.privacy,
+      this.payeeType,
+      this.createdAt,
+      this.updatedAt});
 
   School.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -294,22 +293,22 @@ class School {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['deletedAt'] = this.deletedAt;
-    data['addedBy'] = this.addedBy;
-    data['address'] = this.address;
-    data['description'] = this.description;
-    data['vat'] = this.vat;
-    data['paynestFee'] = this.paynestFee;
-    data['APIKey'] = this.aPIKey;
-    data['merchantId'] = this.merchantId;
-    data['file'] = this.file;
-    data['privacy'] = this.privacy;
-    data['payeeType'] = this.payeeType;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['deletedAt'] = deletedAt;
+    data['addedBy'] = addedBy;
+    data['address'] = address;
+    data['description'] = description;
+    data['vat'] = vat;
+    data['paynestFee'] = paynestFee;
+    data['APIKey'] = aPIKey;
+    data['merchantId'] = merchantId;
+    data['file'] = file;
+    data['privacy'] = privacy;
+    data['payeeType'] = payeeType;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
     return data;
   }
 }

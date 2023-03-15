@@ -10,8 +10,16 @@ class RegisterOTPPageBloc
   }) : super(
           RegisterOTPPageState(),
         ) {
-    // on<>();
+    on<CheckCode>(_code);
   }
 
   final RegisterOTPPageUseCase registerOTPPageUseCase;
+
+  _code(CheckCode event, emit) {
+    emit(
+      state.copyWith(
+        code: event.codeValue,
+      ),
+    );
+  }
 }

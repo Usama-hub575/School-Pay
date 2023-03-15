@@ -395,6 +395,7 @@ class _CustomIntlPhoneFieldState extends State<CustomIntlPhoneField> {
         decoration: widget.dropdownDecoration,
         child: InkWell(
           borderRadius: widget.dropdownDecoration.borderRadius as BorderRadius?,
+          onTap: widget.enabled ? _changeCountry : null,
           child: Padding(
             padding: widget.flagsButtonPadding,
             child: Row(
@@ -443,7 +444,6 @@ class _CustomIntlPhoneFieldState extends State<CustomIntlPhoneField> {
               ],
             ),
           ),
-          onTap: widget.enabled ? _changeCountry : null,
         ),
       ),
     );

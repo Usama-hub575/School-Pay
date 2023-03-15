@@ -10,9 +10,15 @@ late UserController userController;
 Future<void> backgroundHandler(RemoteMessage message) async {
   String payload = message.data['studentId'];
   notificationStudentID = payload;
-  print('Handling a background message ${message.messageId}');
-  print(message.data.toString());
-  print(message.notification!.title.toString());
+  if (kDebugMode) {
+    print('Handling a background message ${message.messageId}');
+  }
+  if (kDebugMode) {
+    print(message.data.toString());
+  }
+  if (kDebugMode) {
+    print(message.notification!.title.toString());
+  }
   flutterLocalNotificationsPlugin.show(
     message.hashCode,
     message.notification?.title,
@@ -97,8 +103,18 @@ void main() async {
                 registerMainPageUseCase: it<RegisterMainPageUseCase>(),
               ),
             ),
+            BlocProvider(
+              create: (_) => RegisterOTPPageBloc(
+                registerOTPPageUseCase: it<RegisterOTPPageUseCase>(),
+              ),
+            ),
+            BlocProvider(
+              create: (_) => RegisterDetailPageBloc(
+                registerDetailPageUseCase: it<RegisterDetailPageUseCase>(),
+              ),
+            ),
           ],
-          child: MyApp(),
+          child: const MyApp(),
         ),
       );
     },

@@ -4,15 +4,16 @@ part 'register_main_page_event.dart';
 part 'register_main_page_state.dart';
 
 class RegisterMainPageBloc
-    extends Bloc<RegisterMainPageBaseEvent, RegisterMainPageBaseState> {
+    extends Bloc<RegisterMainPageEvent, RegisterMainPageState> {
   RegisterMainPageBloc({
     required this.registerMainPageUseCase,
   }) : super(
-          RegisterMainPageBaseState(),
+          RegisterMainPageState(),
         ) {
     on<CheckBox>(_checkBox);
-    on<RegisterLoading>(_loading);
+    on<RegisterMainPageLoading>(_loading);
     on<RegisterToggle>(_toggle);
+    on<Loaded>(_loaded);
   }
 
   final RegisterMainPageUseCase registerMainPageUseCase;
@@ -25,25 +26,35 @@ class RegisterMainPageBloc
     );
   }
 
-  _toggle(RegisterToggle event, emit) {
+  _loaded(Loaded event, emit) {
     emit(
       state.copyWith(
-        isObscure: !state.isObscure,
-        status: event.toggleStatus,
+        status: RegisterMainPageStatus.loaded,
       ),
     );
-    // emit(
-    //   state.copyWith(
-    //     isObscure: !state.isObscure,
-    //     status: RegisterMainPageStatus.password,
-    //   ),
-    // );
   }
 
-  _loading(RegisterLoading event, emit) {
+  _toggle(RegisterToggle event, emit) {
+    if(event.toggleStatus == "password"){
+      emit(
+        state.copyWith(
+          obscurePassword: !state.obscurePassword,
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          obscureConfirmPassword: !state.obscureConfirmPassword,
+        ),
+      );
+    }
+
+  }
+
+  _loading(RegisterMainPageLoading event, emit) {
     emit(
       state.copyWith(
-        loading: !state.loading,
+        status: RegisterMainPageStatus.loading,
       ),
     );
   }

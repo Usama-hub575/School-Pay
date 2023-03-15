@@ -1,13 +1,13 @@
 import 'package:paynest_flutter_app/export.dart';
 
-class MainUI extends StatefulWidget {
-  const MainUI({Key? key}) : super(key: key);
+class BlocUI extends StatefulWidget {
+  const BlocUI({Key? key}) : super(key: key);
 
   @override
-  State<MainUI> createState() => _MainUIState();
+  State<BlocUI> createState() => _BlocUIState();
 }
 
-class _MainUIState extends State<MainUI> {
+class _BlocUIState extends State<BlocUI> {
   final userResponseData = AuthenticationModel.empty();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -45,16 +45,15 @@ class _MainUIState extends State<MainUI> {
                     ),
                     verticalSpacer(34),
                     CommonTextField(
-                      onChange: (value) {},
+                      onValidate: (value) {},
                       controller: emailController,
                       labelText: email,
                       validatorText: pleaseEnterEmail,
                       obscureText: false,
-                      icon: null,
                     ),
                     verticalSpacer(16),
                     CommonTextField(
-                      onChange: (value) {},
+                      onValidate: (value) {},
                       controller: passwordController,
                       obscureText: state.isObscure,
                       labelText: password,

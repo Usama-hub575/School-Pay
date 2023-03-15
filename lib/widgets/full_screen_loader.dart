@@ -7,7 +7,7 @@ Widget fullScreenLoader() => Material(
         splashColor: Colors.white.withOpacity(0.0),
         hoverColor: Colors.white.withOpacity(0.0),
         highlightColor: Colors.white.withOpacity(0.0),
-        child: Container(
+        child: SizedBox(
           width: sizes.width,
           height: sizes.height,
           child: Center(

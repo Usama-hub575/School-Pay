@@ -153,7 +153,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                         ],
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -168,7 +168,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   color: Colors.black54.withOpacity(0.3),
                                   spreadRadius: 0,
                                   blurRadius: 8,
-                                  offset: Offset(
+                                  offset: const Offset(
                                     1.3, // Move to right 10  horizontally
                                     1.3, // Move to bottom 10 Vertically
                                   ),
@@ -182,7 +182,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               onPressed: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => GetAssistance(),
+                                    builder: (context) => const GetAssistance(),
                                   ),
                                 );
                               },
@@ -214,16 +214,16 @@ class _DashboardPageState extends State<DashboardPage> {
                           FadeShimmer(
                             width: sizes.widthRatio * 55,
                             height: sizes.heightRatio * 20,
-                            baseColor: Color(0xFFEBEBF4),
-                            highlightColor: Color(0xFFF4F4F4),
+                            baseColor: const Color(0xFFEBEBF4),
+                            highlightColor: const Color(0xFFF4F4F4),
                             radius: 10,
                           ),
-                          Spacer(),
+                          const Spacer(),
                           FadeShimmer(
                             width: sizes.widthRatio * 55,
                             height: sizes.heightRatio * 20,
-                            baseColor: Color(0xFFEBEBF4),
-                            highlightColor: Color(0xFFF4F4F4),
+                            baseColor: const Color(0xFFEBEBF4),
+                            highlightColor: const Color(0xFFF4F4F4),
                             radius: 10,
                           ),
                         ],
@@ -245,7 +245,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           color: PayNestTheme.black,
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       InkWell(
                         onTap: () => widget.onTap(),
                         child: Text(
@@ -275,11 +275,11 @@ class _DashboardPageState extends State<DashboardPage> {
                     isLoading
                         ? Row(
                             children: [
-                              StudentCardShimmer(),
+                              const StudentCardShimmer(),
                               horizontalSpacer(10),
-                              StudentCardShimmer(),
+                              const StudentCardShimmer(),
                               horizontalSpacer(10),
-                              StudentCardShimmer(),
+                              const StudentCardShimmer(),
                             ],
                           )
                         : Obx(
@@ -314,8 +314,8 @@ class _DashboardPageState extends State<DashboardPage> {
                         ? FadeShimmer(
                             width: double.infinity,
                             height: sizes.heightRatio * 50,
-                            baseColor: Color(0xFFEBEBF4),
-                            highlightColor: Color(0xFFF4F4F4),
+                            baseColor: const Color(0xFFEBEBF4),
+                            highlightColor: const Color(0xFFF4F4F4),
                             radius: 18)
                         : Container(
                             width: double.infinity,
@@ -336,7 +336,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               onPressed: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => SelectSchool(),
+                                    builder: (context) => const SelectSchool(),
                                   ),
                                 );
                                 // AddStudentBottomSheet.show(
@@ -384,8 +384,8 @@ class _DashboardPageState extends State<DashboardPage> {
                             ? FadeShimmer(
                                 width: sizes.widthRatio * 55,
                                 height: sizes.heightRatio * 20,
-                                baseColor: Color(0xFFEBEBF4),
-                                highlightColor: Color(0xFFF4F4F4),
+                                baseColor: const Color(0xFFEBEBF4),
+                                highlightColor: const Color(0xFFF4F4F4),
                                 radius: 10,
                               )
                             : Text(
@@ -399,15 +399,15 @@ class _DashboardPageState extends State<DashboardPage> {
                             ? FadeShimmer(
                                 width: sizes.widthRatio * 55,
                                 height: sizes.heightRatio * 20,
-                                baseColor: Color(0xFFEBEBF4),
-                                highlightColor: Color(0xFFF4F4F4),
+                                baseColor: const Color(0xFFEBEBF4),
+                                highlightColor: const Color(0xFFF4F4F4),
                                 radius: 10,
                               )
                             : InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => PendingTask(),
+                                      builder: (context) => const PendingTask(),
                                     ),
                                   );
                                 },
@@ -431,7 +431,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 onPressed: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => ChangePIN(),
+                                      builder: (context) => const ChangePIN(),
                                     ),
                                   );
                                 },
@@ -451,15 +451,15 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ),
                               ),
                             )
-                          : SizedBox.shrink(),
+                          : const SizedBox.shrink(),
                     ),
                     verticalSpacer(10),
                     isLoading
                         ? FadeShimmer(
                             width: double.infinity,
                             height: sizes.heightRatio * 50,
-                            baseColor: Color(0xFFEBEBF4),
-                            highlightColor: Color(0xFFF4F4F4),
+                            baseColor: const Color(0xFFEBEBF4),
+                            highlightColor: const Color(0xFFF4F4F4),
                             radius: 18)
                         : Obx(
                             () => userController.userResData.value.parent!
@@ -494,7 +494,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                             color: Colors.grey.withOpacity(0.3),
                                             spreadRadius: 1,
                                             blurRadius: 2,
-                                            offset: Offset(
+                                            offset: const Offset(
                                               0,
                                               1,
                                             ),
@@ -525,7 +525,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                       ),
                                     ),
                                   )
-                                : SizedBox.shrink(),
+                                : const SizedBox.shrink(),
                           ),
                     verticalSpacer(10),
                     // SizedBox(height: 10.5.h),
@@ -538,8 +538,8 @@ class _DashboardPageState extends State<DashboardPage> {
                               ? FadeShimmer(
                                   width: sizes.widthRatio * 150,
                                   height: sizes.heightRatio * 20,
-                                  baseColor: Color(0xFFEBEBF4),
-                                  highlightColor: Color(0xFFF4F4F4),
+                                  baseColor: const Color(0xFFEBEBF4),
+                                  highlightColor: const Color(0xFFF4F4F4),
                                   radius: 10,
                                 )
                               : Text(
@@ -553,8 +553,8 @@ class _DashboardPageState extends State<DashboardPage> {
                               ? FadeShimmer(
                                   width: sizes.widthRatio * 55,
                                   height: sizes.heightRatio * 20,
-                                  baseColor: Color(0xFFEBEBF4),
-                                  highlightColor: Color(0xFFF4F4F4),
+                                  baseColor: const Color(0xFFEBEBF4),
+                                  highlightColor: const Color(0xFFF4F4F4),
                                   radius: 10,
                                 )
                               : InkWellWidget(
@@ -576,8 +576,8 @@ class _DashboardPageState extends State<DashboardPage> {
                         ? FadeShimmer(
                             width: double.infinity,
                             height: sizes.heightRatio * 150,
-                            baseColor: Color(0xFFEBEBF4),
-                            highlightColor: Color(0xFFF4F4F4),
+                            baseColor: const Color(0xFFEBEBF4),
+                            highlightColor: const Color(0xFFF4F4F4),
                             radius: 18,
                           )
                         : transactionListController

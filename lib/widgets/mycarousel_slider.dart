@@ -68,7 +68,8 @@ class _CarouselSliderPageState extends State<CarouselSliderPage> {
               child: Container(
                 width: _current == entry.key ? 8.0.w : 4.w,
                 height: _current == entry.key ? 8.0.w : 4.w,
-                margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: (Theme.of(context).brightness == Brightness.dark

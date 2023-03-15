@@ -12,7 +12,7 @@ class PostBankSourcePayload {
   }
 
   PostBankSourcePayload.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
     customerId = json['customerId'];
   }
 
@@ -60,7 +60,7 @@ class Data {
     message = json['message'];
     lastApiResponse = json['last_api_response'];
     exitPoint = json['exit_point'];
-    bank = json['bank'] != null ? new PayloadBank.fromJson(json['bank']) : null;
+    bank = json['bank'] != null ? PayloadBank.fromJson(json['bank']) : null;
     method = json['method'];
   }
 

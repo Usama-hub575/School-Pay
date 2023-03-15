@@ -154,7 +154,7 @@ class _AddStudentState extends State<AddStudent> {
                                   width: 44.w,
                                   decoration: BoxDecoration(
                                     boxShadow: [
-                                      BoxShadow(
+                                      const BoxShadow(
                                         color: Colors.black54,
                                         blurRadius: 1.0,
                                         offset: Offset(
@@ -214,7 +214,7 @@ class _AddStudentState extends State<AddStudent> {
                                           width: 1.w,
                                         ),
                                         color: Colors.white,
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                           Radius.circular(
                                             10,
                                           ),
@@ -279,7 +279,8 @@ class _AddStudentState extends State<AddStudent> {
                                             AppAssets().icArrowDropDown,
                                           ),
                                           dropdownDecoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(
+                                            borderRadius:
+                                                const BorderRadius.only(
                                               bottomLeft: Radius.circular(16),
                                               bottomRight: Radius.circular(16),
                                             ),
@@ -366,7 +367,7 @@ class _AddStudentState extends State<AddStudent> {
                                         ?.unfocus();
                                   },
                                   decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(13),
+                                    contentPadding: const EdgeInsets.all(13),
                                     filled: true,
                                     fillColor: Colors.white,
                                     focusedBorder: UnderlineInputBorder(
@@ -391,7 +392,7 @@ class _AddStudentState extends State<AddStudent> {
                                       borderRadius: BorderRadius.circular(12.r),
                                     ),
                                   ),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.black,
                                   ),
                                 ),
@@ -449,7 +450,8 @@ class _AddStudentState extends State<AddStudent> {
                                                         sizes.heightRatio * 50,
                                                     width:
                                                         sizes.widthRatio * 50,
-                                                    decoration: BoxDecoration(
+                                                    decoration:
+                                                        const BoxDecoration(
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: SvgPicture.asset(
@@ -506,7 +508,7 @@ class _AddStudentState extends State<AddStudent> {
                                                               .shrink(),
                                                     ],
                                                   ),
-                                                  Spacer(),
+                                                  const Spacer(),
                                                   _getActionButton(
                                                     onTap: () async {
                                                       if (_selectedFilter ==
@@ -771,11 +773,11 @@ class _AddStudentState extends State<AddStudent> {
                                 ],
                               )
                             : Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                   vertical: 80,
                                   horizontal: 10,
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     'No data found  !!',
                                     style: TextStyle(
@@ -785,7 +787,7 @@ class _AddStudentState extends State<AddStudent> {
                                   ),
                                 ),
                               )
-                        : SizedBox.shrink(),
+                        : const SizedBox.shrink(),
                     _searchResult.isNotEmpty || searchController.text.isNotEmpty
                         ? studentListController.studentList.value.getStudent !=
                                     null &&
@@ -858,7 +860,7 @@ class _AddStudentState extends State<AddStudent> {
                   ],
                 ),
               )
-            : Center(
+            : const Center(
                 child: CircularProgressIndicator(),
               ),
       ),

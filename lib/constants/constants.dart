@@ -102,9 +102,13 @@ const done = "Done";
 const search = "Search";
 
 const personalDetails = "Personal details";
-const firstName = "First name";
+const firstName = "First Name";
+const pleaseEnterFirstName = "Please Enter Your First Name";
+const pleaseEnterLastName = "Please Enter Your Last Name";
 const lastName = "Last name";
 
+const gender = "Gender *";
+const genderHintText = "Gender";
 const oldPassword = "Old password";
 const newPassword = "New password";
 const fullNameSignup = "Full Name *";

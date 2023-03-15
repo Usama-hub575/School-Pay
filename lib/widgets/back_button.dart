@@ -46,6 +46,11 @@ class _AppBarBackButtonState extends State<AppBarBackButton> {
             Icons.arrow_back,
             size: 20,
             color: widget.iconColor,
+            shadows: const [
+              Shadow(
+                color: Colors.transparent,
+              ),
+            ],
           ),
         ),
       ),

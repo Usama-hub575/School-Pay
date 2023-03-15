@@ -1,9 +1,10 @@
 part of 'firebase_bloc.dart';
 
+// ignore: must_be_immutable
 class FirebaseState extends Equatable {
-  final FirebaseStatus firebaseStatus;
+  FirebaseStatus firebaseStatus;
 
-  const FirebaseState({
+  FirebaseState({
     this.firebaseStatus = FirebaseStatus.init,
   });
 

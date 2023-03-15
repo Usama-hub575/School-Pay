@@ -65,7 +65,7 @@ class _AmountWidgetState extends State<AmountWidget> {
               ),
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(24.0),
                   topRight: Radius.circular(24.0),
                 ),
@@ -99,7 +99,7 @@ class _AmountWidgetState extends State<AmountWidget> {
                                 fontFamily: 'montserratSemiBold',
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Text(
                               'AED ${amountFormater(
                                 double.parse(

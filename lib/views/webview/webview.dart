@@ -94,7 +94,7 @@ class _MyWebViewState extends State<MyWebView> {
 
   getResponse(String response) {
     response = response.replaceAll('\\', '');
-    response = response.replaceAll('\"', '');
+    response = response.replaceAll('"', '');
     myTransformer.parse(response);
     var jsonString = myTransformer.toParker();
     print(jsonString);

@@ -49,7 +49,7 @@ class _PendingTaskState extends State<PendingTask> {
                                     height: 44.h,
                                     width: 44.w,
                                     decoration: BoxDecoration(
-                                      boxShadow: [
+                                      boxShadow: const [
                                         BoxShadow(
                                           color: Colors.black26,
                                           blurRadius: 2.0,
@@ -108,7 +108,7 @@ class _PendingTaskState extends State<PendingTask> {
                                   width: 1.w, color: PayNestTheme.lineColor)),
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => ChangePIN()));
+                                builder: (context) => const ChangePIN()));
                             // Navigator.of(context).push(MaterialPageRoute(builder: (context) => RecentTrasactionPage()));
                           },
                           title: Text(

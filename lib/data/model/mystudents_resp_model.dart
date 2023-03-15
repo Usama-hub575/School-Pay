@@ -74,10 +74,10 @@ class StudentElement {
   bool isSelected;
 
   factory StudentElement.fromJson(Map<String, dynamic> json) => StudentElement(
-        id: json["id"] != null ? json["id"] : -1,
-        parentId: json["parentId"] != null ? json["parentId"] : -1,
-        studentId: json["studentId"] != null ? json["studentId"] : -1,
-        deletedAt: json["deletedAt"] != null ? json["deletedAt"] : -1,
+        id: json["id"] ?? -1,
+        parentId: json["parentId"] ?? -1,
+        studentId: json["studentId"] ?? -1,
+        deletedAt: json["deletedAt"] ?? -1,
         createdAt: json["createdAt"] != null
             ? DateTime.parse(json["createdAt"])
             : DateTime.now(),
@@ -221,50 +221,37 @@ class StudentStudent {
         admissionDate: json["admissionDate"] != null
             ? DateTime.parse(json["admissionDate"])
             : DateTime.now(),
-        id: json["id"] != null ? json["id"] : -1,
-        studentRegNo: json["studentRegNo"] != null ? json["studentRegNo"] : "-",
-        firstName: json["firstName"] != null ? json["firstName"] : "-",
-        lastName: json["lastName"] != null ? json["lastName"] : "-",
-        grade: json["grade"] != null ? json["grade"] : "-",
-        parentEmiratesId:
-            json["parentEmiratesId"] != null ? json["parentEmiratesId"] : "-",
-        parentPhoneNumber:
-            json["parentPhoneNumber"] == null ? "-" : json["parentPhoneNumber"],
-        deletedAt: json["deletedAt"] != null ? json["deletedAt"] : "",
-        schoolId: json["schoolId"] != null ? json["schoolId"] : -1,
-        totalBalanceAmount: json["total_balance_amount"] != null
-            ? json["total_balance_amount"]
-            : "-",
-        guardianFirstName:
-            json["guardianFirstName"] == null ? "-" : json["guardianFirstName"],
-        guardianLastName:
-            json["guardianLastName"] == null ? "-" : json["guardianLastName"],
-        guardianGender:
-            json["guardianGender"] == null ? "-" : json["guardianGender"],
-        guardianEmiratesId: json["guardianEmiratesId"] == null
-            ? "-"
-            : json["guardianEmiratesId"],
-        guardianNationality: json["guardianNationality"] == null
-            ? "-"
-            : json["guardianNationality"],
-        guardianReligion:
-            json["guardianReligion"] == null ? "-" : json["guardianReligion"],
-        area: json["area"] == null ? "-" : json["area"],
-        region: json["region"] == null ? "-" : json["region"],
-        streetAddress:
-            json["streetAddress"] == null ? "-" : json["streetAddress"],
-        email: json["email"] == null ? "-" : json["email"],
-        phoneNumber: json["phoneNumber"] != null ? json["phoneNumber"] : "-",
-        otherNumber: json["otherNumber"] == null ? "-" : json["otherNumber"],
-        profile: json["profile"] != null ? json["profile"] : "-",
-        religion: json["religion"] == null ? "-" : json["religion"],
-        nationality: json["nationality"] == null ? "-" : json["nationality"],
-        gender: json["gender"] == null ? "-" : json["gender"],
+        id: json["id"] ?? -1,
+        studentRegNo: json["studentRegNo"] ?? "-",
+        firstName: json["firstName"] ?? "-",
+        lastName: json["lastName"] ?? "-",
+        grade: json["grade"] ?? "-",
+        parentEmiratesId: json["parentEmiratesId"] ?? "-",
+        parentPhoneNumber: json["parentPhoneNumber"] ?? "-",
+        deletedAt: json["deletedAt"] ?? "",
+        schoolId: json["schoolId"] ?? -1,
+        totalBalanceAmount: json["total_balance_amount"] ?? "-",
+        guardianFirstName: json["guardianFirstName"] ?? "-",
+        guardianLastName: json["guardianLastName"] ?? "-",
+        guardianGender: json["guardianGender"] ?? "-",
+        guardianEmiratesId: json["guardianEmiratesId"] ?? "-",
+        guardianNationality: json["guardianNationality"] ?? "-",
+        guardianReligion: json["guardianReligion"] ?? "-",
+        area: json["area"] ?? "-",
+        region: json["region"] ?? "-",
+        streetAddress: json["streetAddress"] ?? "-",
+        email: json["email"] ?? "-",
+        phoneNumber: json["phoneNumber"] ?? "-",
+        otherNumber: json["otherNumber"] ?? "-",
+        profile: json["profile"] ?? "-",
+        religion: json["religion"] ?? "-",
+        nationality: json["nationality"] ?? "-",
+        gender: json["gender"] ?? "-",
         dueDate: json["dueDate"] == null
             ? DateTime.now()
             : DateTime.parse(json["dueDate"]),
-        file: json["file"] == null ? "-" : json["file"],
-        privacy: json["privacy"] != null ? json["privacy"] : "-",
+        file: json["file"] ?? "-",
+        privacy: json["privacy"] ?? "-",
         createdAt: json["createdAt"] != null
             ? DateTime.parse(json["createdAt"])
             : DateTime.now(),
@@ -288,34 +275,30 @@ class StudentStudent {
         "lastName": lastName,
         "grade": grade,
         "parentEmiratesId": parentEmiratesId,
-        "parentPhoneNumber":
-            parentPhoneNumber == null ? null : parentPhoneNumber,
+        "parentPhoneNumber": parentPhoneNumber,
         "deletedAt": deletedAt,
         "schoolId": schoolId,
         "total_balance_amount": totalBalanceAmount,
-        "guardianFirstName":
-            guardianFirstName == null ? null : guardianFirstName,
-        "guardianLastName": guardianLastName == null ? null : guardianLastName,
-        "guardianGender": guardianGender == null ? null : guardianGender,
-        "guardianEmiratesId":
-            guardianEmiratesId == null ? null : guardianEmiratesId,
-        "guardianNationality":
-            guardianNationality == null ? null : guardianNationality,
-        "guardianReligion": guardianReligion == null ? null : guardianReligion,
-        "area": area == null ? null : area,
-        "region": region == null ? null : region,
-        "streetAddress": streetAddress == null ? null : streetAddress,
-        "email": email == null ? null : email,
+        "guardianFirstName": guardianFirstName,
+        "guardianLastName": guardianLastName,
+        "guardianGender": guardianGender,
+        "guardianEmiratesId": guardianEmiratesId,
+        "guardianNationality": guardianNationality,
+        "guardianReligion": guardianReligion,
+        "area": area,
+        "region": region,
+        "streetAddress": streetAddress,
+        "email": email,
         "phoneNumber": phoneNumber,
-        "otherNumber": otherNumber == null ? null : otherNumber,
+        "otherNumber": otherNumber,
         "profile": profile,
-        "religion": religion == null ? null : religion,
-        "nationality": nationality == null ? null : nationality,
-        "gender": gender == null ? null : gender,
+        "religion": religion,
+        "nationality": nationality,
+        "gender": gender,
         "dueDate": dueDate == null
             ? null
             : "${dueDate!.year.toString().padLeft(4, '0')}-${dueDate!.month.toString().padLeft(2, '0')}-${dueDate!.day.toString().padLeft(2, '0')}",
-        "file": file == null ? null : file,
+        "file": file,
         "privacy": privacy,
         "createdAt": createdAt!.toIso8601String(),
         "updatedAt": updatedAt!.toIso8601String(),
@@ -384,9 +367,9 @@ class School {
         description: json["description"] ?? "-",
         vat: double.parse(json["vat"]),
         paynestFee: json["paynestFee"] ?? 0,
-        apiKey: json["APIKey"] == null ? "" : json["APIKey"],
+        apiKey: json["APIKey"] ?? "",
         merchantId: json["merchantId"] ?? "-",
-        file: json["file"] == null ? "-" : json["file"],
+        file: json["file"] ?? "-",
         privacy: json["privacy"] ?? "-",
         createdAt: json["createdAt"] != null
             ? DateTime.parse(json["createdAt"])
@@ -405,9 +388,9 @@ class School {
         "description": description,
         "vat": vat,
         "paynestFee": paynestFee,
-        "APIKey": apiKey == null ? null : apiKey,
+        "APIKey": apiKey,
         "merchantId": merchantId,
-        "file": file == null ? null : file,
+        "file": file,
         "privacy": privacy,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
