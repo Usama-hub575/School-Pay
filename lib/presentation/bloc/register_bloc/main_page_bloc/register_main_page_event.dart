@@ -18,3 +18,15 @@ class RegisterToggle extends RegisterMainPageEvent {
 }
 
 class Loaded extends RegisterMainPageEvent {}
+
+class SendOTP extends RegisterMainPageEvent {
+  final String email;
+  final String userPhoneNumber;
+  final String dialCode;
+
+  SendOTP({
+    required this.userPhoneNumber,
+    required this.dialCode,
+    required this.email,
+  });
+}

@@ -43,7 +43,10 @@ class NetworkHelperImpl extends NetworkHelper {
         encoding: encoding,
       );
 
-      return handleResponse(response: response, requestBody: json.encode(body));
+      return handleResponse(
+        response: response,
+        requestBody: json.encode(body),
+      );
     } catch (e) {
       return Right(
         Failure(
@@ -146,11 +149,12 @@ class NetworkHelperImpl extends NetworkHelper {
     final int statusCode = response!.statusCode;
 
     if (statusCode >= 400) {
-      //Map<String, dynamic> errorJson = jsonDecode(response.body.toString());
+      Map<String, dynamic> errorJson = jsonDecode(response.body.toString());
+      final responseMessage = errorJson['message'] ?? 'Something went Wrong';
       return Right(
         Failure(
           status: false,
-          message: 'Something went Wrong',
+          message: responseMessage,
         ),
       );
     } else {

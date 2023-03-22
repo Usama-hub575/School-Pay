@@ -525,7 +525,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
             showCountryOnly: false,
             showOnlyCountryWhenClosed: false,
             alignLeft: false,
-            flagDecoration: BoxDecoration(
+            flagDecoration: const BoxDecoration(
               shape: BoxShape.circle,
             ),
             flagWidth: sizes.fontRatio * 50,

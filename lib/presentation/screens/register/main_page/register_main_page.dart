@@ -22,9 +22,11 @@ class RegisterMainPage extends StatefulWidget {
 
 class _RegisterMainPageState extends State<RegisterMainPage> {
   TextEditingController phoneController = TextEditingController();
+
   TextEditingController phoneCodeController = TextEditingController(
-    text: "+971",
+    text: '+971',
   );
+
   TextEditingController emailController = TextEditingController();
   TextEditingController createPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -198,52 +200,56 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                               context.read<RegisterMainPageBloc>().add(
                                     RegisterMainPageLoading(),
                                   );
-                              await sendOTPController.hitSendOTP(
-                                emailController.text,
-                                phoneController.text,
-                                phoneCodeController.text,
-                              );
+                              context.read<RegisterMainPageBloc>().add(
+                                    SendOTP(
+                                      userPhoneNumber: phoneController.text,
+                                      dialCode: phoneCodeController.text,
+                                      email: emailController.text,
+                                    ),
+                                  );
+                              // await sendOTPController.hitSendOTP(
+                              //   emailController.text,
+                              //   phoneController.text,
+                              //   phoneCodeController.text,
+                              // );
                               context.read<RegisterMainPageBloc>().add(
                                     RegisterMainPageLoading(),
                                   );
-                              if (sendOTPController.status.value) {
-                                //hit otp
-                                Future.delayed(const Duration(seconds: 2)).then(
-                                  (value) => {
-                                    widget.onNextTap!(
-                                      emailController.text,
-                                      createPasswordController.text,
-                                      phoneCodeController.text,
-                                      phoneController.text,
-                                    ),
-                                  },
-                                );
-                                context.read<RegisterMainPageBloc>().add(
-                                      Loaded(),
-                                    );
-                              } else if (!sendOTPController.status.value) {
-                                context.read<RegisterMainPageBloc>().add(
-                                      Loaded(),
-                                    );
-                                ScaffoldMessenger.of(key.currentState!.context)
-                                    .showSnackBar(
-                                  SnackBar(
-                                    duration: const Duration(seconds: 1),
-                                    backgroundColor: Colors.red,
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: verticalValue(16),
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    content: Text(
-                                      sendOTPController.errorMessage.value,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    behavior: SnackBarBehavior.floating,
-                                  ),
-                                );
-                              }
+                              // if (sendOTPController.status.value) {
+                              //   //hit otp
+                              //   widget.onNextTap!(
+                              //     emailController.text,
+                              //     createPasswordController.text,
+                              //     phoneCodeController.text,
+                              //     phoneController.text,
+                              //   );
+                              //   context.read<RegisterMainPageBloc>().add(
+                              //         Loaded(),
+                              //       );
+                              // }
+                              // else if (!sendOTPController.status.value) {
+                              //   context.read<RegisterMainPageBloc>().add(
+                              //         Loaded(),
+                              //   );
+                              //   ScaffoldMessenger.of(key.currentState!.context)
+                              //       .showSnackBar(
+                              //     SnackBar(
+                              //       duration: const Duration(seconds: 1),
+                              //       backgroundColor: Colors.red,
+                              //       padding: EdgeInsets.symmetric(
+                              //         vertical: verticalValue(16),
+                              //       ),
+                              //       shape: RoundedRectangleBorder(
+                              //         borderRadius: BorderRadius.circular(16),
+                              //       ),
+                              //       content: Text(
+                              //         sendOTPController.errorMessage.value,
+                              //         textAlign: TextAlign.center,
+                              //       ),
+                              //       behavior: SnackBarBehavior.floating,
+                              //     ),
+                              //   );
+                              // }
                             } else {
                               showToast(
                                 message: phoneFieldCannotBeEmpty,
@@ -254,44 +260,50 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           },
                         ),
                       ),
-                      // Padding(
-                      //   padding: EdgeInsets.symmetric(vertical: 29.h),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.center,
-                      //     children: [
-                      //       Container(
-                      //         height: 1.h,
-                      //         width: 129.w,
-                      //         decoration: BoxDecoration(
-                      //           color: AppColors().primaryColor,
-                      //         ),
-                      //       ),
-                      //       Padding(
-                      //         padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      //         child: Text(
-                      //           or,
-                      //           style: TextStyles().bold.copyWith(
-                      //                 color: AppColors().black,
-                      //                 fontWeight: FontWeight.bold,
-                      //               ),
-                      //         ),
-                      //       ),
-                      //       Container(
-                      //         height: 1.h,
-                      //         width: 129.w,
-                      //         decoration: BoxDecoration(
-                      //           color: AppColors().primaryColor,
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: verticalValue(29),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: verticalValue(1),
+                              width: horizontalValue(129),
+                              decoration: BoxDecoration(
+                                color: AppColors().primaryColor,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: horizontalValue(16),
+                              ),
+                              child: Text(
+                                or,
+                                style: TextStyles().bold.copyWith(
+                                      color: AppColors().black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                            ),
+                            Container(
+                              height: verticalValue(1),
+                              width: horizontalValue(129),
+                              decoration: BoxDecoration(
+                                color: AppColors().primaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       SizedBox(
-                        height: 50.h,
-                        width: 326.w,
+                        height: sizes.heightRatio * 50,
+                        width: sizes.widthRatio * 326,
                         child: OutlinedButton.icon(
                           onPressed: () {},
-                          icon: Image.asset(AppAssets().icGoogle),
+                          icon: Image.asset(
+                            AppAssets().icGoogle,
+                          ),
                           label: Text(
                             google,
                             style: TextStyles().bold.copyWith(
@@ -304,7 +316,9 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                             elevation: 0,
                             // side: BorderSide(width:1, color:Colors.white),
                             side: BorderSide(
-                                color: AppColors().primaryColor, width: 1.sp),
+                              color: AppColors().primaryColor,
+                              width: 1,
+                            ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                 15,
@@ -314,11 +328,11 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         ),
                       ),
                       SizedBox(
-                        height: 16.h,
+                        height: verticalValue(16),
                       ),
                       SizedBox(
-                        height: 50.h,
-                        width: 326.w,
+                        height: sizes.heightRatio * 50,
+                        width: sizes.widthRatio * 326,
                         child: OutlinedButton.icon(
                           onPressed: () {},
                           icon: Image.asset(
@@ -336,7 +350,9 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                             elevation: 0,
                             // side: BorderSide(width:1, color:Colors.white),
                             side: BorderSide(
-                                color: AppColors().primaryColor, width: 1.sp),
+                              color: AppColors().primaryColor,
+                              width: 1,
+                            ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
@@ -354,7 +370,16 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                   // TODO: Handle this case.
                   break;
                 case RegisterMainPageStatus.loading:
-                  // TODO: Handle this case.
+                  Center(
+                    child: SizedBox(
+                      width: sizes.heightRatio * 20,
+                      height: sizes.heightRatio * 20,
+                      child: CircularProgressIndicator(
+                        backgroundColor: PayNestTheme.colorWhite,
+                        color: PayNestTheme.blueAccent,
+                      ),
+                    ),
+                  );
                   break;
                 case RegisterMainPageStatus.confirmPassword:
                   // TODO: Handle this case.
@@ -363,7 +388,47 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                   // TODO: Handle this case.
                   break;
                 case RegisterMainPageStatus.loaded:
-                  // TODO: Handle this case.
+                  Text(
+                    next,
+                    style: PayNestTheme.title_2_16primaryColor.copyWith(
+                      fontWeight: FontWeight.w500,
+                      fontSize: sizes.fontRatio * 14,
+                      color: PayNestTheme.colorWhite,
+                    ),
+                  );
+                  break;
+                case RegisterMainPageStatus.navigateToNextPage:
+                  widget.onNextTap!(
+                    emailController.text,
+                    createPasswordController.text,
+                    phoneCodeController.text,
+                    phoneController.text,
+                  );
+                  context.read<RegisterMainPageBloc>().add(
+                        Loaded(),
+                      );
+                  break;
+                case RegisterMainPageStatus.error:
+                  context.read<RegisterMainPageBloc>().add(
+                        Loaded(),
+                      );
+                  ScaffoldMessenger.of(key.currentState!.context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(seconds: 1),
+                      backgroundColor: Colors.red,
+                      padding: EdgeInsets.symmetric(
+                        vertical: verticalValue(16),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      content: Text(
+                        state.errorMessage,
+                        textAlign: TextAlign.center,
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
                   break;
               }
             },

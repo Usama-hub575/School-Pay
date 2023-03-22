@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final otpResponseModel = otpResponseModelFromJson(jsonString);
 import 'package:paynest_flutter_app/export.dart';
 
 OtpResponseModel otpResponseModelFromJson(String str) =>

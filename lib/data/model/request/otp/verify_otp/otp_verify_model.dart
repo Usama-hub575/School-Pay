@@ -1,10 +1,7 @@
-// To parse this JSON data, do
-//
-//     final otpVerifyModel = otpVerifyModelFromJson(jsonString);
+import 'package:paynest_flutter_app/export.dart';
 
-import 'dart:convert';
-
-OtpVerifyModel otpVerifyModelFromJson(String str) => OtpVerifyModel.fromJson(json.decode(str));
+OtpVerifyModel otpVerifyModelFromJson(String str) =>
+    OtpVerifyModel.fromJson(json.decode(str));
 
 String otpVerifyModelToJson(OtpVerifyModel data) => json.encode(data.toJson());
 
@@ -18,12 +15,12 @@ class OtpVerifyModel {
   String otp;
 
   factory OtpVerifyModel.fromJson(Map<String, dynamic> json) => OtpVerifyModel(
-    phone: json["phone"],
-    otp: json["otp"],
-  );
+        phone: json["phone"],
+        otp: json["otp"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "phone": phone,
-    "otp": otp,
-  };
+        "phone": phone,
+        "otp": otp,
+      };
 }

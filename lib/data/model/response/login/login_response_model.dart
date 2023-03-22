@@ -1,8 +1,4 @@
-// To parse this JSON data, do
-//
-//     final loginResponseModel = loginResponseModelFromJson(jsonString);
-
-import 'dart:convert';
+import 'package:paynest_flutter_app/export.dart';
 
 LoginResponseModel loginResponseModelFromJson(String str) =>
     LoginResponseModel.fromJson(json.decode(str));

@@ -86,7 +86,7 @@ class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
   }
 
   Future _getCountries(GetCountries event, emit) async {
-    initializerUseCase.getCountries();
+    await initializerUseCase.getCountries();
   }
 
 // _login(Login event, emit) async {

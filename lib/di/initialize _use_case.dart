@@ -60,7 +60,7 @@ Future initializeRegisterDetailPageUseCase() async {
 Future initializerRegisterOTPPageUseCase() async {
   it.registerLazySingleton(
     () => RegisterOTPPageUseCase(
-        // registerOTPPageRep: it<RegisterOTPPageRepo>(),
-        ),
+      registerOTPPageRepo: it<RegisterOTPPageRepo>(),
+    ),
   );
 }

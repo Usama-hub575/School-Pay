@@ -1,7 +1,7 @@
 //Production Url
 
 class EndPoints {
-  var baseUrl = Uri.parse("https://api.paynestschools.ae");
+  var baseUrl = Uri.parse("https://stage-api.paynestschools.ae");
   var paymentGatewayUrl = Uri.parse('https://paynestschools.ae/pl');
   final String _privacyPolicy = "https://paynest.ae/privacy-policy.html";
   final String _login = "/api/parent/auth/login";
@@ -136,8 +136,6 @@ class EndPoints {
   String getSearchByPIDEndPoint() => baseUrl.toString() + _searchByPID;
 
   String getSearchBySIDEndPoint() => baseUrl.toString() + _searchBySID;
-
-
 
   Map<String, String> headers = {"Content-Type": "application/json"};
 }

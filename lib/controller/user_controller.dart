@@ -8,14 +8,14 @@ import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/dashboard.dart';
 
 import '../data/model/forgot_password_resp_model.dart';
-import '../data/model/get_countries_response.dart';
-import '../data/model/login_model.dart';
-import '../data/model/login_response_model.dart';
 import '../data/model/mystudents_resp_model.dart';
 import '../data/model/parent_student_response_model.dart';
 import '../data/model/register_model.dart';
 import '../data/model/register_resp_model.dart';
+import '../data/model/request/login/login_model.dart';
 import '../data/model/reset_password_by_otp.dart';
+import '../data/model/response/countries/get_countries/get_countries_response.dart';
+import '../data/model/response/login/login_response_model.dart';
 import '../utils/sharedPrefKeys.dart';
 
 MySharedPreferences preferences = MySharedPreferences.instance;
@@ -31,9 +31,9 @@ class UserController extends GetxController {
   final userResData =
       RegisterRespModel(status: false, message: null, token: null, parent: null)
           .obs;
-  final getCountriesResponse = GetCountriesResponse(
+  final getCountriesResponse = CountriesResponse(
     status: false,
-    countries: [],
+    country: [],
   ).obs;
   var singleStudentResponse =
       MyStudentsRespModel(status: false, students: null).obs;
@@ -162,8 +162,7 @@ class UserController extends GetxController {
     var res = await APIService().apiGetCountries();
     var decoded = jsonDecode(res);
     if (decoded['status'] == true) {
-      GetCountriesResponse getCountries =
-          GetCountriesResponse.fromJson(decoded);
+      CountriesResponse getCountries = CountriesResponse.fromJson(decoded);
       getCountriesResponse.value = getCountries;
       getCountriesResponse.refresh();
       isLoading(false);

@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:paynest_flutter_app/export.dart';
 
 part 'register_main_page_event.dart';
@@ -14,9 +15,39 @@ class RegisterMainPageBloc
     on<RegisterMainPageLoading>(_loading);
     on<RegisterToggle>(_toggle);
     on<Loaded>(_loaded);
+    on<SendOTP>(_sendOTP);
   }
 
-  final RegisterMainPageUseCase registerMainPageUseCase;
+  RegisterMainPageUseCase registerMainPageUseCase;
+
+  _sendOTP(SendOTP event, emit) async {
+    final response = await registerMainPageUseCase.hitSendOTP(
+      event.email,
+      event.userPhoneNumber,
+      event.dialCode,
+    );
+    response.fold(
+      (success) {
+        return Left(
+          emit(
+            state.copyWith(
+              status: RegisterMainPageStatus.navigateToNextPage,
+            ),
+          ),
+        );
+      },
+      (r) {
+        return Right(
+          emit(
+            state.copyWith(
+              errorMessage: r.message,
+              status: RegisterMainPageStatus.error,
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   _checkBox(CheckBox event, emit) {
     emit(
@@ -35,7 +66,7 @@ class RegisterMainPageBloc
   }
 
   _toggle(RegisterToggle event, emit) {
-    if(event.toggleStatus == "password"){
+    if (event.toggleStatus == "password") {
       emit(
         state.copyWith(
           obscurePassword: !state.obscurePassword,
@@ -48,7 +79,6 @@ class RegisterMainPageBloc
         ),
       );
     }
-
   }
 
   _loading(RegisterMainPageLoading event, emit) {
