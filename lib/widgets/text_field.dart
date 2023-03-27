@@ -3,6 +3,7 @@ import 'package:paynest_flutter_app/export.dart';
 class CommonTextField extends StatefulWidget {
   const CommonTextField({
     Key? key,
+    required this.readOnly,
     required this.onValidate,
     required this.controller,
     required this.labelText,
@@ -12,6 +13,7 @@ class CommonTextField extends StatefulWidget {
     this.icon,
   }) : super(key: key);
 
+  final bool readOnly;
   final Function(String value) onValidate;
   final TextEditingController controller;
   final String labelText;
@@ -28,7 +30,8 @@ class _CommonTextFieldState extends State<CommonTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      textInputAction: TextInputAction.next,
+      readOnly: widget.readOnly,
+      textInputAction: TextInputAction.done,
       inputFormatters: widget.inputFormatters,
       style: TextStyle(
         fontSize: sizes.fontRatio * 16,
@@ -80,7 +83,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
           return widget.validatorText;
         }
         if (widget.labelText == email) {
-          if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2}').hasMatch(value)) {
             return invalidEmail;
           }
         }

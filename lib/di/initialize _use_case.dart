@@ -52,7 +52,7 @@ Future initializeRegisterMainPageUseCase() async {
 Future initializeRegisterDetailPageUseCase() async {
   it.registerLazySingleton(
     () => RegisterDetailPageUseCase(
-      registerDetailPageUseCase: it<RegisterDetailPageRepo>(),
+      registerDetailPageRepo: it<RegisterDetailPageRepo>(),
     ),
   );
 }

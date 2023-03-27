@@ -44,7 +44,7 @@ class _ViewProfileState extends State<ViewProfile> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             height: 240.h,
             child: Stack(
               children: [
@@ -85,8 +85,8 @@ class _ViewProfileState extends State<ViewProfile> {
                                 ),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    boxShadow: [
-                                      const BoxShadow(
+                                    boxShadow: const [
+                                      BoxShadow(
                                         color: Colors.black26,
                                         blurRadius: 2.0,
                                         offset: Offset(
@@ -202,7 +202,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                   ? CircleAvatar(
                                       backgroundImage: NetworkImage(
                                         userController.userResData.value.parent!
-                                            .profileImage,
+                                            .profileImage!,
                                       ),
                                     )
                                   : Container(
@@ -282,7 +282,7 @@ class _ViewProfileState extends State<ViewProfile> {
                     verticalSpacer(8),
                     Obx(
                       () => Text(
-                        userController.userResData.value.parent!.email,
+                        userController.userResData.value.parent!.email!,
                         style: PayNestTheme.title_3_16blackbold.copyWith(
                           fontSize: sizes.fontRatio * 16,
                           color: PayNestTheme.lightBlack,
@@ -336,13 +336,13 @@ class _ViewProfileState extends State<ViewProfile> {
                       () => Row(
                         children: [
                           Text(
-                            userController.userResData.value.parent!.emiratesId
+                            userController.userResData.value.parent!.emiratesId!
                                         .length >=
                                     14
                                 ? getDashedEmiratesId(userController
-                                    .userResData.value.parent!.emiratesId)
+                                    .userResData.value.parent!.emiratesId!)
                                 : userController
-                                    .userResData.value.parent!.emiratesId,
+                                    .userResData.value.parent!.emiratesId!,
                             style: PayNestTheme.title_3_16blackbold.copyWith(
                               fontSize: sizes.fontRatio * 16,
                               color: PayNestTheme.lightBlack,
@@ -386,9 +386,13 @@ class _ViewProfileState extends State<ViewProfile> {
                                             .expiryDate ==
                                         null ||
                                     userController.userResData.value.parent!
-                                        .expiryDate.isEmpty
+                                        .expiryDate!.isEmpty
                                 ? '-'
-                                : '${dateFormat.format(DateTime.parse(userController.userResData.value.parent!.expiryDate.toString().substring(0, 10)))}',
+                                : dateFormat.format(DateTime.parse(
+                                    userController
+                                        .userResData.value.parent!.expiryDate
+                                        .toString()
+                                        .substring(0, 10))),
                             style: PayNestTheme.title_3_16blackbold.copyWith(
                               fontSize: sizes.fontRatio * 16,
                               color: PayNestTheme.lightBlack,
@@ -473,9 +477,13 @@ class _ViewProfileState extends State<ViewProfile> {
                                             .expiryDate ==
                                         null ||
                                     userController.userResData.value.parent!
-                                        .expiryDate.isEmpty
+                                        .expiryDate!.isEmpty
                                 ? '-'
-                                : '${dateFormat.format(DateTime.parse(userController.userResData.value.parent!.expiryDate.toString().substring(0, 10)))}',
+                                : dateFormat.format(DateTime.parse(
+                                    userController
+                                        .userResData.value.parent!.expiryDate
+                                        .toString()
+                                        .substring(0, 10))),
                             style: PayNestTheme.title_3_16blackbold.copyWith(
                               fontSize: sizes.fontRatio * 16,
                               color: PayNestTheme.lightBlack,
@@ -543,7 +551,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       color: PayNestTheme.lineColor,
                     ),
                     verticalSpacer(16),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -578,7 +586,7 @@ class _ViewProfileState extends State<ViewProfile> {
                       ),
                     ),
                     verticalSpacer(16),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(

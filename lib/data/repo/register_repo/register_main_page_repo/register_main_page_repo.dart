@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:paynest_flutter_app/export.dart';
 
 mixin RegisterMainPageRepo {
-  Future<Either<OtpResponseModel, Failure>> apiSendOTP({
+  Future<Either<OtpResponseModel, Failure>> sendOTP({
     required String email,
     required String phone,
     required String dialCode,

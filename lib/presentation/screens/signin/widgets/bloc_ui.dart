@@ -45,6 +45,8 @@ class _BlocUIState extends State<BlocUI> {
                     ),
                     verticalSpacer(34),
                     CommonTextField(
+                      readOnly:
+                          state.status == SignInStatus.loading ? true : false,
                       onValidate: (value) {},
                       controller: emailController,
                       labelText: email,
@@ -53,6 +55,8 @@ class _BlocUIState extends State<BlocUI> {
                     ),
                     verticalSpacer(16),
                     CommonTextField(
+                      readOnly:
+                          state.status == SignInStatus.loading ? true : false,
                       onValidate: (value) {},
                       controller: passwordController,
                       obscureText: state.isObscure,

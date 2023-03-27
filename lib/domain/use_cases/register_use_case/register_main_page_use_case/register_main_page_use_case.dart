@@ -12,13 +12,13 @@ class RegisterMainPageUseCase {
     type: null,
   );
 
-  Future<Either<Success, Failure>> hitSendOTP(
+  Future<Either<OtpResponseModel, Failure>> hitSendOTP(
     email,
     userPhone,
     dialCode,
   ) async {
     try {
-      final response = await registerMainPageRepo.apiSendOTP(
+      final response = await registerMainPageRepo.sendOTP(
         dialCode: dialCode,
         email: email,
         phone: phone,
@@ -28,7 +28,7 @@ class RegisterMainPageUseCase {
         (success) {
           otpResponseModel = success;
           return Left(
-            Success(),
+            success,
           );
         },
         (r) {

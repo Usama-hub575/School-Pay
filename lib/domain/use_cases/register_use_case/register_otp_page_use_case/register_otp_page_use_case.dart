@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:paynest_flutter_app/export.dart';
 
 class RegisterOTPPageUseCase {
@@ -7,40 +8,37 @@ class RegisterOTPPageUseCase {
 
   RegisterOTPPageRepo registerOTPPageRepo;
 
-  // bool isLoading = false;
-  // bool status = false;
-  // String errorMessage = "";
-  // OtpResponseModel otpResponse = OtpResponseModel(requestId: null, type: null);
-  //
-  // hitSendOTP(email, userPhone, dialCode) async {
-  //   try {
-  //     isLoading = true;
-  //     OtpModel otpData =
-  //         OtpModel(email: email, phone: userPhone, dailCode: dialCode);
-  //
-  //     final response = await registerOTPPageRepo.apiSendOTP(
-  //       otpModelToJson(otpData),
-  //     );
-  //     final decoded = jsonDecode(
-  //       response.toString(),
-  //     );
-  //     if (decoded['status']) {
-  //       status = decoded['status'] ?? false;
-  //       errorMessage = decoded['message'] ?? "";
-  //       OtpResponseModel responseModel = otpResponseModelFromJson(
-  //         response.toString(),
-  //       );
-  //       otpResponse = responseModel;
-  //
-  //       otpResponse;
-  //       // print(lrm.message);
-  //     } else if (!(decoded['status'] as bool)) {
-  //       status = decoded['status'] ?? false;
-  //       errorMessage = decoded['message'] ?? "";
-  //       isLoading = false;
-  //     }
-  //   } finally {
-  //     isLoading = false;
-  //   }
-  // }
+  Future<Either<OTPVerifyResModel, Failure>> verifyOTP(
+    phoneNumber,
+    otpCode,
+  ) async {
+    try {
+      final response = await registerOTPPageRepo.verifyOTP(
+        phoneNumber: phoneNumber,
+        otpCode: otpCode,
+      );
+      return response.fold(
+        (success) {
+          return Left(
+            success,
+          );
+        },
+        (r) {
+          return Right(
+            Failure(
+              status: r.status,
+              message: r.message,
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      return Right(
+        Failure(
+          status: false,
+          message: e.toString(),
+        ),
+      );
+    }
+  }
 }

@@ -2,8 +2,8 @@ enum RegisterMainPageStatus {
   init,
   loading,
   loaded,
-  navigateToNextPage,
-  error,
+  navigateToOTPPage,
+  mainPageError,
   confirmPassword,
   password,
 }

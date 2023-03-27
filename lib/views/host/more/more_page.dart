@@ -117,8 +117,8 @@ class _MorePageState extends State<MorePage> {
                                       ""
                               ? CircleAvatar(
                                   backgroundImage: NetworkImage(
-                                    userController
-                                        .userResData.value.parent!.profileImage,
+                                    userController.userResData.value.parent!
+                                        .profileImage!,
                                   ),
                                 )
                               : Container(

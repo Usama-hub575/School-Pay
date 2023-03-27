@@ -9,6 +9,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  bool buttonEnable = false;
   int _currentIndex = 0;
   String email = '';
   String password = '';
@@ -31,9 +32,45 @@ class _RegisterPageState extends State<RegisterPage> {
             verticalSpacer(40),
             Row(
               children: [
-                AppBarBackButton(
-                  iconColor: PayNestTheme.colorWhite,
-                  buttonColor: PayNestTheme.primaryColor,
+                InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  onTap: buttonEnable
+                      ? null
+                      : () {
+                          if (_currentIndex == 1 || _currentIndex == 2) {
+                            _currentIndex = 0;
+                            setState(() {});
+                          } else {
+                            Navigator.of(context).pop();
+                          }
+                        },
+                  child: Container(
+                    height: sizes.heightRatio * 46,
+                    width: sizes.widthRatio * 46,
+                    decoration: BoxDecoration(
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black54,
+                          blurRadius: 1.0,
+                          offset: Offset(
+                            1.3, // Move to right 10  horizontally
+                            1.3, // Move to bottom 10 Vertically
+                          ),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(
+                        12,
+                      ),
+                      color: PayNestTheme.primaryColor,
+                    ),
+                    child: Icon(
+                      Icons.arrow_back,
+                      size: 20,
+                      color: PayNestTheme.colorWhite,
+                    ),
+                  ),
                 ),
                 const Spacer(),
                 Image.asset(
@@ -53,6 +90,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 itemBuilder: (context, index) {
                   return _currentIndex == 0
                       ? RegisterMainPage(
+                          onButtonTap: (value) => setState(
+                            () => buttonEnable = value,
+                          ),
                           onNextTap: (email, password, phoneCode, phoneNumber) {
                             _currentIndex = 1;
                             this.email = email;

@@ -12,7 +12,7 @@ class RegisterMainPageRepoImpl implements RegisterMainPageRepo {
   });
 
   @override
-  Future<Either<OtpResponseModel, Failure>> apiSendOTP({
+  Future<Either<OtpResponseModel, Failure>> sendOTP({
     required String email,
     required String phone,
     required String dialCode,
@@ -26,7 +26,6 @@ class RegisterMainPageRepoImpl implements RegisterMainPageRepo {
         'dialCode': dialCode,
       },
     );
-    print(response);
     return response.fold(
       (success) {
         return Left(
@@ -36,10 +35,12 @@ class RegisterMainPageRepoImpl implements RegisterMainPageRepo {
         );
       },
       (error) {
-        return Right(Failure(
-          status: error.status,
-          message: error.message,
-        ));
+        return Right(
+          Failure(
+            status: error.status,
+            message: error.message,
+          ),
+        );
       },
     );
   }

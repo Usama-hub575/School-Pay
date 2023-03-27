@@ -11,11 +11,11 @@ import '../data/model/forgot_password_resp_model.dart';
 import '../data/model/mystudents_resp_model.dart';
 import '../data/model/parent_student_response_model.dart';
 import '../data/model/register_model.dart';
-import '../data/model/register_resp_model.dart';
 import '../data/model/request/login/login_model.dart';
 import '../data/model/reset_password_by_otp.dart';
 import '../data/model/response/countries/get_countries/get_countries_response.dart';
 import '../data/model/response/login/login_response_model.dart';
+import '../data/model/response/register/register_resp_model.dart';
 import '../utils/sharedPrefKeys.dart';
 
 MySharedPreferences preferences = MySharedPreferences.instance;

@@ -10,6 +10,7 @@ class RegisterDetailPageState extends Equatable {
   String selectedCountry = "Select Country";
   String countryCode = "AE";
   String flag = '';
+  String errorMessage = '';
 
   RegisterDetailPageState({
     this.status = RegisterDetailPageStatus.init,
@@ -20,6 +21,7 @@ class RegisterDetailPageState extends Equatable {
     this.selectedCountry = "Select Country",
     this.countryCode = "AE",
     this.flag = '',
+    this.errorMessage = '',
   });
 
   RegisterDetailPageState copyWith({
@@ -31,6 +33,7 @@ class RegisterDetailPageState extends Equatable {
     String? selectedCountry,
     String? countryCode,
     String? flag,
+    String? errorMessage,
   }) {
     return RegisterDetailPageState(
       status: status ?? this.status,
@@ -41,11 +44,13 @@ class RegisterDetailPageState extends Equatable {
       isPassportSelected: isPassportSelected ?? this.isPassportSelected,
       selectedCountry: selectedCountry ?? this.selectedCountry,
       selectedFilter: selectedFilter ?? this.selectedFilter,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
   @override
   List<Object?> get props => [
+        errorMessage,
         countryCode,
         flag,
         gender,

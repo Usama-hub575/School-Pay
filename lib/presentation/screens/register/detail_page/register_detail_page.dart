@@ -90,9 +90,17 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             labelText: firstName,
                             validatorText: pleaseEnterFirstName,
                             obscureText: false,
+                            readOnly:
+                                state.status == RegisterDetailPageStatus.loading
+                                    ? true
+                                    : false,
                           ),
                           verticalSpacer(12),
                           CommonTextField(
+                            readOnly:
+                                state.status == RegisterDetailPageStatus.loading
+                                    ? true
+                                    : false,
                             onValidate: (value) {},
                             controller: lastNameController,
                             labelText: lastName,
@@ -195,6 +203,10 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           ),
                           verticalSpacer(12),
                           CommonTextField(
+                            readOnly:
+                                state.status == RegisterDetailPageStatus.loading
+                                    ? true
+                                    : false,
                             onValidate: (value) {},
                             controller: emirateIDController,
                             labelText: state.isEmiratesSelected
@@ -286,6 +298,10 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                                   }
                                 : () {},
                             child: CommonTextField(
+                              readOnly: state.status ==
+                                      RegisterDetailPageStatus.loading
+                                  ? true
+                                  : false,
                               onValidate: (value) {},
                               controller: expiryController,
                               labelText: expiry,
@@ -319,6 +335,10 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           ),
                           verticalSpacer(12),
                           CommonTextField(
+                            readOnly:
+                                state.status == RegisterDetailPageStatus.loading
+                                    ? true
+                                    : false,
                             onValidate: (value) {},
                             controller: addressController,
                             labelText: address,
@@ -338,6 +358,10 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           ),
                           verticalSpacer(12),
                           CommonTextField(
+                            readOnly:
+                                state.status == RegisterDetailPageStatus.loading
+                                    ? true
+                                    : false,
                             onValidate: (value) {},
                             controller: cityController,
                             labelText: city,
@@ -376,7 +400,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                               showDropDownButton: true,
                               onChanged: (value) {
                                 setState(() {
-                                  phoneCodeController.text =
+                                  countryRegionController.text =
                                       value.name.toString();
                                   state.countryCode = value.code.toString();
                                 });
@@ -418,17 +442,19 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                       context.read<RegisterDetailPageBloc>().add(
                             RegisterDetailPageLoading(),
                           );
-                      widget.onTap(
-                        firstNameController.text,
-                        lastNameController.text,
-                        state.selectedFilter!,
-                        emirateIDController.text.replaceAll('-', ''),
-                        expiryController.text,
-                        addressController.text,
-                        cityController.text,
-                        state.countryCode,
-                        countryRegionController.text,
-                      );
+                      context.read<RegisterDetailPageBloc>().add(
+                            Register(
+                              passport: emirateIDController.text,
+                              firstName: firstNameController.text,
+                              dialCode: widget.phoneCode,
+                              password: widget.password,
+                              email: widget.email,
+                              lastName: lastNameController.text,
+                              birth: '',
+                              emiratesID: emirateIDController.text,
+                              phone: widget.phoneNumber,
+                            ),
+                          );
                     }
                   },
                   textColor: AppColors().white,
@@ -449,6 +475,28 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
           case RegisterDetailPageStatus.init:
             break;
           case RegisterDetailPageStatus.loading:
+            break;
+          case RegisterDetailPageStatus.loaded:
+            break;
+          case RegisterDetailPageStatus.detailPageError:
+            showToast(
+              message: state.errorMessage,
+              context: context,
+              color: AppColors().redShade2,
+            );
+            break;
+          case RegisterDetailPageStatus.navigateToDashboard:
+            widget.onTap(
+              firstNameController.text,
+              lastNameController.text,
+              state.selectedFilter!,
+              emirateIDController.text.replaceAll('-', ''),
+              expiryController.text,
+              addressController.text,
+              cityController.text,
+              state.countryCode,
+              countryRegionController.text,
+            );
             break;
         }
       },

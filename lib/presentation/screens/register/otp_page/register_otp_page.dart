@@ -28,14 +28,17 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
   TextEditingController otpController = TextEditingController();
   SendOTPController sendOTPController = Get.put(SendOTPController());
   VerifyOTPController verifyOTPController = Get.put(VerifyOTPController());
-  int _start = 60;
-  bool timeUpFlag = false;
+
+  // int _start = 60;
+  // bool timeUpFlag = false;
 
   @override
   void initState() {
     super.initState();
     if (mounted) {
-      startTimer();
+      context.read<RegisterOTPPageBloc>().add(
+            StartTimer(),
+          );
     }
   }
 
@@ -121,12 +124,23 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                           ),
                         ),
                         verticalSpacer(50),
-                        !timeUpFlag
+                        !state.timeUpFlag
                             ? Text(
-                                "Try it after $_start seconds",
+                                "Try it after ${state.start} seconds",
                               )
                             : InkWellWidget(
-                                onTap: () => startTimer(),
+                                onTap: () {
+                                  context.read<RegisterMainPageBloc>().add(
+                                        SendOTP(
+                                          userPhoneNumber: widget.phoneNumber,
+                                          dialCode: widget.phoneCode,
+                                          email: widget.email,
+                                        ),
+                                      );
+                                  context.read<RegisterOTPPageBloc>().add(
+                                        StartTimer(),
+                                      );
+                                },
                                 child: Text(
                                   resend,
                                   style: TextStyles().bold.copyWith(
@@ -144,10 +158,19 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                             text: next,
                             onPressed: () async {
                               if (otpController.length == 4) {
-                                widget.onSuccess();
-                                await verifyOTPController.hitVerifyOTP(
-                                    widget.phoneCode + widget.phoneNumber,
-                                    otpController.text);
+                                context.read<RegisterOTPPageBloc>().add(
+                                      OTPLoading(),
+                                    );
+                                context.read<RegisterOTPPageBloc>().add(
+                                      VerifyOTP(
+                                        otpCode: otpController.text,
+                                        phoneNumber: widget.phoneCode +
+                                            widget.phoneNumber,
+                                      ),
+                                    );
+                                // await verifyOTPController.hitVerifyOTP(
+                                //     widget.phoneCode + widget.phoneNumber,
+                                //     otpController.text);
                                 // if (verifyOTPController.isSuccess.value) {
                                 //   verifyOTPController.otpVerifyData
                                 //       .update((val) {
@@ -249,6 +272,17 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                   case RegisterOTPPageStatus.loaded:
                     // TODO: Handle this case.
                     break;
+                  case RegisterOTPPageStatus.navigateToDetailPage:
+                    widget.onSuccess();
+                    otpController.clear();
+                    break;
+                  case RegisterOTPPageStatus.otpPageError:
+                    showToast(
+                      message: state.otpErrorMessage ?? 'Entered OTP is wrong',
+                      context: context,
+                      color: AppColors().redShade2,
+                    );
+                    break;
                 }
               },
             ),
@@ -258,33 +292,36 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
     );
   }
 
-  void startTimer() {
-    sendOTPController.hitSendOTP(
-        widget.phoneCode, widget.phoneNumber, widget.email);
-    setState(() {
-      timeUpFlag = false;
-      _start = 60;
-    });
-    const oneSec = Duration(seconds: 1);
-
-    Timer.periodic(
-      oneSec,
-      (Timer timer) {
-        if (_start < 2) {
-          setState(() {
-            timeUpFlag = true;
-            timer.cancel();
-          });
-        } else {
-          if (mounted) {
-            setState(() {
-              _start--;
-            });
-          }
-        }
-      },
-    );
-  }
+  // void startTimer() {
+  //   sendOTPController.hitSendOTP(
+  //     widget.phoneCode,
+  //     widget.phoneNumber,
+  //     widget.email,
+  //   );
+  //   setState(() {
+  //     timeUpFlag = false;
+  //     _start = 60;
+  //   });
+  //   const oneSec = Duration(seconds: 1);
+  //
+  //   Timer.periodic(
+  //     oneSec,
+  //     (Timer timer) {
+  //       if (_start < 2) {
+  //         setState(() {
+  //           timeUpFlag = true;
+  //           timer.cancel();
+  //         });
+  //       } else {
+  //         if (mounted) {
+  //           setState(() {
+  //             _start--;
+  //           });
+  //         }
+  //       }
+  //     },
+  //   );
+  // }
 
   final defaultPinTheme = PinTheme(
     width: horizontalValue(60),

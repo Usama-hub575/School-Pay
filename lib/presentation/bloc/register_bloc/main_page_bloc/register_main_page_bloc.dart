@@ -31,7 +31,7 @@ class RegisterMainPageBloc
         return Left(
           emit(
             state.copyWith(
-              status: RegisterMainPageStatus.navigateToNextPage,
+              status: RegisterMainPageStatus.navigateToOTPPage,
             ),
           ),
         );
@@ -40,8 +40,8 @@ class RegisterMainPageBloc
         return Right(
           emit(
             state.copyWith(
-              errorMessage: r.message,
-              status: RegisterMainPageStatus.error,
+              mainPageErrorMessage: r.message,
+              status: RegisterMainPageStatus.mainPageError,
             ),
           ),
         );

@@ -38,7 +38,7 @@ Future initializeRepoDependencies() async {
     ),
   );
 
-  it.registerLazySingleton(
+  it.registerLazySingleton<RegisterOTPPageRepo>(
     () => RegisterOTPPageRepoImpl(
       storage: storage,
       networkHelper: it(),

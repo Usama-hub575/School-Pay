@@ -6,14 +6,14 @@ class RegisterMainPageState extends Equatable {
   bool terms = false;
   bool obscurePassword = true;
   bool obscureConfirmPassword = true;
-  String errorMessage = '';
+  String mainPageErrorMessage = '';
 
   RegisterMainPageState({
     this.status = RegisterMainPageStatus.init,
     this.terms = false,
     this.obscureConfirmPassword = true,
     this.obscurePassword = true,
-    this.errorMessage = '',
+    this.mainPageErrorMessage = '',
   });
 
   RegisterMainPageState copyWith({
@@ -21,10 +21,10 @@ class RegisterMainPageState extends Equatable {
     bool? terms,
     bool? obscurePassword,
     bool? obscureConfirmPassword,
-    String? errorMessage,
+    String? mainPageErrorMessage,
   }) {
     return RegisterMainPageState(
-      errorMessage: errorMessage ?? this.errorMessage,
+      mainPageErrorMessage: mainPageErrorMessage ?? this.mainPageErrorMessage,
       status: status ?? this.status,
       terms: terms ?? this.terms,
       obscureConfirmPassword:
@@ -35,7 +35,7 @@ class RegisterMainPageState extends Equatable {
 
   @override
   List<Object?> get props => [
-        errorMessage,
+        mainPageErrorMessage,
         obscurePassword,
         obscureConfirmPassword,
         terms,

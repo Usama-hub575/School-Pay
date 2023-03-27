@@ -3,11 +3,13 @@ import 'package:paynest_flutter_app/export.dart';
 class NumberField extends StatefulWidget {
   const NumberField({
     Key? key,
+    required this.enable,
     required this.phoneCodeController,
     required this.textController,
     required this.formKey,
   }) : super(key: key);
 
+  final bool enable;
   final TextEditingController phoneCodeController;
   final TextEditingController textController;
   final GlobalKey<FormState> formKey;
@@ -31,6 +33,7 @@ class _NumberFieldState extends State<NumberField> {
       child: Row(
         children: [
           CountryCodePicker(
+            enabled: !widget.enable,
             borderColor: AppColors().lightBlack,
             padding: EdgeInsets.zero,
             showDropDownButton: true,
@@ -54,6 +57,7 @@ class _NumberFieldState extends State<NumberField> {
           ),
           Expanded(
             child: TextFormField(
+              readOnly: widget.enable,
               keyboardType: TextInputType.phone,
               style: TextStyles().bold.copyWith(
                     fontSize: sizes.fontRatio * 14,
@@ -62,17 +66,20 @@ class _NumberFieldState extends State<NumberField> {
               controller: widget.textController,
               decoration: InputDecoration(
                 hintText: '987 654 321',
-                hintStyle: TextStyle(
-                  fontSize: sizes.fontRatio * 14,
-                  color: AppColors().textGrey,
-                  fontFamily: 'montserratBold',
-                ),
+                hintStyle: TextStyles().bold.copyWith(
+                      fontSize: sizes.fontRatio * 14,
+                      color: AppColors().textGrey,
+                    ),
                 border: InputBorder.none,
+                errorStyle: TextStyles().bold.copyWith(
+                      fontSize: sizes.fontRatio * 12,
+                      color: AppColors().redShade2,
+                    ),
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value != null && value.trim().isEmpty) {
-                  return 'Phone Field Cannot Be Empty';
+                  return phoneFieldCannotBeEmptyValidation;
                 }
                 return null;
               },

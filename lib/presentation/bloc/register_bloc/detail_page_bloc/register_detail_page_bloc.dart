@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:paynest_flutter_app/export.dart';
 
 part 'register_detail_page_event.dart';
@@ -13,6 +14,7 @@ class RegisterDetailPageBloc
     on<SelectedFilter>(_selectedFilter);
     on<RegisterDetailPageLoading>(_loading);
     on<Init>(_init);
+    on<Register>(_register);
   }
 
   final RegisterDetailPageUseCase registerDetailPageUseCase;
@@ -40,6 +42,50 @@ class RegisterDetailPageBloc
         isEmiratesSelected: true,
         isPassportSelected: true,
       ),
+    );
+  }
+
+  _register(Register event, emit) async {
+    final response = await registerDetailPageUseCase.register(
+      firstName: event.firstName,
+      lastName: event.lastName,
+      password: event.password,
+      email: event.email,
+      countryCode: state.countryCode,
+      dialCode: event.dialCode,
+      phone: event.phone,
+      emiratesId: event.emiratesID,
+      birth: event.birth,
+      passport: event.passport,
+      gender: state.selectedFilter,
+    );
+    return response.fold(
+      (success) {
+        return Left(
+          success.status
+              ? emit(
+                  state.copyWith(
+                    status: RegisterDetailPageStatus.navigateToDashboard,
+                  ),
+                )
+              : emit(
+                  state.copyWith(
+                    status: RegisterDetailPageStatus.detailPageError,
+                    errorMessage: success.message,
+                  ),
+                ),
+        );
+      },
+      (r) {
+        return Right(
+          emit(
+            state.copyWith(
+              status: RegisterDetailPageStatus.detailPageError,
+              errorMessage: r.message,
+            ),
+          ),
+        );
+      },
     );
   }
 }

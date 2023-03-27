@@ -225,7 +225,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         },
                       ),
                       verticalSpacer(12),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: Text(
                           'Gender *',
@@ -525,7 +525,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         ),
                       ),
                       verticalSpacer(12),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: Text(
                           'Address Detail',
@@ -673,7 +673,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       verticalSpacer(12),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: Text(
                           countryRegion,
@@ -761,7 +761,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                         const Spacer(),
                         !registerController.isLoading.value
                             ? const SizedBox.shrink()
-                            : Container(
+                            : SizedBox(
                                 height: sizes.heightRatio * 16,
                                 width: sizes.widthRatio * 16,
                                 child: CircularProgressIndicator(
@@ -807,7 +807,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
         child: Column(
           children: [
             Text(
-              '$value',
+              value,
               textAlign: TextAlign.center,
               style: PayNestTheme.title20white.copyWith(
                 fontWeight: FontWeight.bold,
@@ -838,11 +838,12 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
       firstDate: DateTime.now(),
       lastDate: DateTime(2035),
     );
-    if (selected != null)
+    if (selected != null) {
       setState(() {
         expiryController.text =
             '${selected.day}-${selected.month}-${selected.year}';
       });
+    }
   }
 }
 
@@ -853,12 +854,12 @@ class EmiratesIdFormatter extends TextInputFormatter {
   EmiratesIdFormatter({
     required this.mask,
     required this.separator,
-  }) {}
+  });
 
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.length > 0) {
+    if (newValue.text.isNotEmpty) {
       if (newValue.text.length > oldValue.text.length) {
         if (newValue.text.length > mask.length) return oldValue;
         if (newValue.text.length < mask.length &&

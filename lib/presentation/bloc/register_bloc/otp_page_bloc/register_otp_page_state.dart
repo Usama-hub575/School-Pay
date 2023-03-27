@@ -2,16 +2,18 @@ part of 'register_otp_page_bloc.dart';
 
 // ignore: must_be_immutable
 class RegisterOTPPageState extends Equatable {
-  RegisterOTPPageStatus status;
+  RegisterOTPPageStatus status = RegisterOTPPageStatus.init;
   bool loading = false;
-  bool code = false;
+  bool isCodeComplete = false;
   int start = 60;
   bool timeUpFlag = false;
+  String? otpErrorMessage = '';
 
   RegisterOTPPageState({
     this.status = RegisterOTPPageStatus.init,
     this.loading = false,
-    this.code = false,
+    this.otpErrorMessage = '',
+    this.isCodeComplete = false,
     this.start = 60,
     this.timeUpFlag = false,
   });
@@ -19,14 +21,16 @@ class RegisterOTPPageState extends Equatable {
   RegisterOTPPageState copyWith({
     RegisterOTPPageStatus? status,
     bool? loading,
-    bool? code,
+    String? otpErrorMessage,
+    bool? isCodeComplete,
     int? start,
     bool? timeUpFlag,
   }) {
     return RegisterOTPPageState(
+      otpErrorMessage: otpErrorMessage ?? this.otpErrorMessage,
       status: status ?? this.status,
       loading: loading ?? this.loading,
-      code: code ?? this.code,
+      isCodeComplete: isCodeComplete ?? this.isCodeComplete,
       start: start ?? this.start,
       timeUpFlag: timeUpFlag ?? this.timeUpFlag,
     );
@@ -34,10 +38,11 @@ class RegisterOTPPageState extends Equatable {
 
   @override
   List<Object?> get props => [
+        otpErrorMessage,
         timeUpFlag,
         start,
         status,
         loading,
-        code,
+        isCodeComplete,
       ];
 }
