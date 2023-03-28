@@ -80,38 +80,29 @@ void main() async {
       runApp(
         MultiBlocProvider(
           providers: [
-            BlocProvider(
-              create: (_) => FirebaseBloc(
-                firebaseUseCase: it<FirebaseUseCase>(),
-              )..add(
+            BlocProvider.value(
+              value: it<FirebaseBloc>()
+                ..add(
                   InitializeFirebaseRemoteConfiguration(),
                 ),
             ),
-            BlocProvider(
-              create: (_) => InitializerBloc(
-                firebaseUseCase: it<FirebaseUseCase>(),
-                initializerUseCase: it<InitializerUseCase>(),
-              ),
+            BlocProvider.value(
+              value: it<InitializerBloc>(),
             ),
-            BlocProvider(
-              create: (_) => SignInBloc(
-                signInUseCase: it<SignInUseCase>(),
-              ),
+            BlocProvider.value(
+              value: it<SignInBloc>(),
             ),
-            BlocProvider(
-              create: (_) => RegisterMainPageBloc(
-                registerMainPageUseCase: it<RegisterMainPageUseCase>(),
-              ),
+            BlocProvider.value(
+              value: it<RegisterMainPageBloc>(),
             ),
-            BlocProvider(
-              create: (_) => RegisterOTPPageBloc(
-                registerOTPPageUseCase: it<RegisterOTPPageUseCase>(),
-              ),
+            BlocProvider.value(
+              value: it<RegisterOTPPageBloc>(),
             ),
-            BlocProvider(
-              create: (_) => RegisterDetailPageBloc(
-                registerDetailPageUseCase: it<RegisterDetailPageUseCase>(),
-              ),
+            BlocProvider.value(
+              value: it<RegisterDetailPageBloc>(),
+            ),
+            BlocProvider.value(
+              value: it<RegisterPageViewBloc>(),
             ),
           ],
           child: const MyApp(),

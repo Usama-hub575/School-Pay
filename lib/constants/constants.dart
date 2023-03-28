@@ -12,6 +12,7 @@ const enterPaynestStudentCode = "Enter PayNest Payee Code";
 const studentID = "Payee ID";
 const parentId = "Parent ID";
 const dob = "yyyy/mm/dd";
+const enteredOTPIsWrong = "Entered OTP is wrong";
 const password = "Password";
 const searchStudent = "Search Payee";
 const createPassword = "Create Password";
@@ -202,7 +203,7 @@ const welcomeBack = "Welcome Back";
 const recentTransactions = "Recent Transactions";
 const recentTransaction = "Recent Transaction";
 const transactions = "Transactions";
-const PSMore = "Profile, settings and more";
+const psMore = "Profile, settings and more";
 
 const personalInformation = "Personal Information";
 const addressDetails = "Address Details";
@@ -220,7 +221,7 @@ const paymentCategory = "Payment Category";
 const paymentCategories = "Payment Categories";
 const chgPIN = "Change PIN";
 const biometricAuth = "Biometric Authentication";
-const Location = "Location Access";
+const location = "Location Access";
 const contactUs = "Contact Us";
 const privacyPolicy = "Privacy Policy";
 const privacy = "Privacy";
@@ -237,7 +238,7 @@ const appGUIDE =
 const contactCC = "Contact Customer Care";
 const contactAssistance =
     "Still not getting what you are looking for. Contact our customer care for further assistance";
-const FAQs = "FAQs";
+const fAQS = "FAQs";
 const commonQuestion = "Get the query to your most common questions here.";
 const startLChat =
     "Immediately start live chat with one of our customer care representative.";

@@ -69,13 +69,13 @@ class RegisterMainPageBloc
     if (event.toggleStatus == "password") {
       emit(
         state.copyWith(
-          obscurePassword: !state.obscurePassword,
+          obscurePassword: event.obscure,
         ),
       );
     } else {
       emit(
         state.copyWith(
-          obscureConfirmPassword: !state.obscureConfirmPassword,
+          obscureConfirmPassword: event.obscure,
         ),
       );
     }

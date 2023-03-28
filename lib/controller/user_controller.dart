@@ -234,7 +234,7 @@ class UserController extends GetxController {
   void onNotificationTap({required String id}) {
     if (id != '') {
       DashboardPage.onNotificationClick(
-        this.context,
+        context,
         id,
       );
     }

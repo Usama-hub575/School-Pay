@@ -1,8 +1,4 @@
-import 'package:get/get.dart';
 import 'package:paynest_flutter_app/export.dart';
-
-import '../../../../controller/sendOTP_controller.dart';
-import '../../../../controller/verifyOTP_controller.dart';
 
 class RegisterOTPPage extends StatefulWidget {
   const RegisterOTPPage({
@@ -26,11 +22,6 @@ class RegisterOTPPage extends StatefulWidget {
 
 class _RegisterOTPPageState extends State<RegisterOTPPage> {
   TextEditingController otpController = TextEditingController();
-  SendOTPController sendOTPController = Get.put(SendOTPController());
-  VerifyOTPController verifyOTPController = Get.put(VerifyOTPController());
-
-  // int _start = 60;
-  // bool timeUpFlag = false;
 
   @override
   void initState() {
@@ -168,27 +159,6 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                                             widget.phoneNumber,
                                       ),
                                     );
-                                // await verifyOTPController.hitVerifyOTP(
-                                //     widget.phoneCode + widget.phoneNumber,
-                                //     otpController.text);
-                                // if (verifyOTPController.isSuccess.value) {
-                                //   verifyOTPController.otpVerifyData
-                                //       .update((val) {
-                                //     val!.type = null;
-                                //   });
-                                //   otpController.clear();
-                                //   setState(() {
-                                //     completeCode = false;
-                                //   });
-                                //   widget.onSuccess();
-                                // } else {
-                                //   showToast(
-                                //     message: 'Entered OTP is wrong',
-                                //     context: context,
-                                //     color: AppColors().redShade2,
-                                //   );
-                                //   // otpController.clear();
-                                // }
                               }
                             },
                             textColor: AppColors().white,
@@ -202,65 +172,6 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                     ),
                   ),
                 );
-                // TextButton(
-                //   style: TextButton.styleFrom(
-                //       backgroundColor:
-                //           completeCode ? AppColors().primaryColor : Colors.grey,
-                //       elevation: 0,
-                //       shape: RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.circular(12),
-                //       ),
-                //       padding: EdgeInsets.symmetric(
-                //         vertical: verticalValue(16),
-                //       )),
-                //   onPressed: () async {
-                //     if (otpController.length == 4) {
-                //       await verifyOTPController.hitVerifyOTP(
-                //           widget.phoneCode + widget.phoneNumber,
-                //           otpController.text);
-                //       if (verifyOTPController.isSuccess.value) {
-                //         verifyOTPController.otpVerifyData.update((val) {
-                //           val!.type = null;
-                //         });
-                //         otpController.clear();
-                //         setState(() {
-                //           completeCode = false;
-                //         });
-                //         widget.onSuccess();
-                //       } else {
-                //         showToast(
-                //             message: 'Entered OTP is wrong',
-                //             context: context,
-                //             color: AppColors().red);
-                //         // otpController.clear();
-                //       }
-                //     }
-                //   },
-                //   child: Row(
-                //     children: [
-                //       const Spacer(),
-                //       Text(
-                //         next,
-                //         style: TextStyles().semiBold.copyWith(
-                //           fontSize: sizes.fontRatio * 14,
-                //         ),
-                //       ),
-                //       const Spacer(),
-                //       !verifyOTPController.isLoading.value
-                //           ? const SizedBox.shrink()
-                //           : SizedBox(
-                //               height: sizes.heightRatio * 16,
-                //               width: sizes.widthRatio * 16,
-                //               child: CircularProgressIndicator(
-                //                 backgroundColor: AppColors().white,
-                //                 color: AppColors().primaryColor,
-                //                 strokeWidth: 2,
-                //               ),
-                //             ),
-                //       horizontalSpacer(16),
-                //     ],
-                //   ),
-                // ),
               },
               listener: (context, state) {
                 switch (state.status) {
@@ -278,7 +189,7 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                     break;
                   case RegisterOTPPageStatus.otpPageError:
                     showToast(
-                      message: state.otpErrorMessage ?? 'Entered OTP is wrong',
+                      message: state.otpErrorMessage ?? enteredOTPIsWrong,
                       context: context,
                       color: AppColors().redShade2,
                     );

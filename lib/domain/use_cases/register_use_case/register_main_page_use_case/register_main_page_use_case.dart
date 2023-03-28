@@ -21,7 +21,7 @@ class RegisterMainPageUseCase {
       final response = await registerMainPageRepo.sendOTP(
         dialCode: dialCode,
         email: email,
-        phone: phone,
+        phone: userPhone,
       );
 
       return response.fold(
