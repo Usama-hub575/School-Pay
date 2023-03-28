@@ -1,16 +1,31 @@
-import '../export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class AppRoutes {
   static const initializer = '/';
+  static const navigateToWelcome = '/welcome';
+  static const navigateToSignIn = '/signIn';
+  static const navigateToRegister = '/register';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     _currentRoute = settings.name;
-    Map<String, dynamic>? args = settings.arguments as Map<String, dynamic>?;
+    // Map<String, dynamic>? args = settings.arguments as Map<String, dynamic>?;
 
     switch (settings.name) {
       case initializer:
         return MaterialPageRoute(
-          builder: (_) => const InitializerScreen(),
+          builder: (_) => const InitializerPage(),
+        );
+      case navigateToWelcome:
+        return MaterialPageRoute(
+          builder: (_) => const WelcomePage(),
+        );
+      case navigateToSignIn:
+        return MaterialPageRoute(
+          builder: (_) => const SignInPage(),
+        );
+      case navigateToRegister:
+        return MaterialPageRoute(
+          builder: (_) => const RegisterPage(),
         );
       default:
         return _errorRoute();

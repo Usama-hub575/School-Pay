@@ -154,7 +154,7 @@ class _ChangePINState extends State<ChangePIN> {
                         pinController.clear();
                         showToast(
                             context: context,
-                            messege: 'Pin Updated',
+                            message: 'Pin Updated',
                             color: PayNestTheme.paidGreen);
 
                         Navigator.pop(context);
@@ -164,7 +164,7 @@ class _ChangePINState extends State<ChangePIN> {
                       print('Invalidated');
                       showToast(
                           context: context,
-                          messege: 'Some error occurred',
+                          message: 'Some error occurred',
                           color: PayNestTheme.red);
                     }
                   },

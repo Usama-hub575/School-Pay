@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/succes_bottom_sheet.dart';
 
@@ -82,7 +81,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                           fontWeight: FontWeight.bold,
                           color: PayNestTheme.primaryColor,
                           fontFamily: 'montserratBold',
-                          fontSize: sizes.fontRatio*16,
+                          fontSize: sizes.fontRatio * 16,
                         ),
                       ),
                       verticalSpacer(16),
@@ -149,7 +148,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                           height: sizes.heightRatio * 50,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: PayNestTheme.primaryColor,
+                              backgroundColor: PayNestTheme.primaryColor,
                               elevation: 0,
                               // side: BorderSide(width:1, color:Colors.white),
                               shape: RoundedRectangleBorder(
@@ -164,22 +163,21 @@ class _StudentWidgetState extends State<StudentWidget> {
                               };
                               await addStudentController
                                   .addStudentWithPaynestNumber(model);
-                              if(addStudentController.isStudentAdded == true){
+                              if (addStudentController.isStudentAdded == true) {
                                 Navigator.of(context).pop();
                                 addStudentController.isStudentAdded == true
                                     ? SuccessBottomSheet.show(
-                                  context: context,
-                                )
+                                        context: context,
+                                      )
                                     : addStudentController.isLoading.value =
-                                false;
-                              }
-                              else{
-                                addStudentController.isLoading.value =
-                                false;
+                                        false;
+                              } else {
+                                addStudentController.isLoading.value = false;
                                 Navigator.of(context).pop();
                                 showToast(
                                     context: context,
-                                    messege:addStudentController.errorMessage.toString(),
+                                    message: addStudentController.errorMessage
+                                        .toString(),
                                     color: PayNestTheme.red);
                               }
                             },

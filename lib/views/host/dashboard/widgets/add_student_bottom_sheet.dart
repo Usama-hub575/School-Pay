@@ -1,11 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/student_detail_bottom_sheet.dart';
 
-import '../../../../constants/constants.dart';
-import '../../../../presentation/export.dart';
-import '../../../../widgets/spacer.dart';
 import '../../school/select_school.dart';
 
 class AddStudentBottomSheet {
@@ -16,14 +11,14 @@ class AddStudentBottomSheet {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) {
-        return StudentWidget();
+        return const StudentWidget();
       },
     );
   }
 }
 
 class StudentWidget extends StatelessWidget {
-  StudentWidget();
+  const StudentWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +35,7 @@ class StudentWidget extends StatelessWidget {
                 horizontal: horizontalValue(16),
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16.0),
                   topRight: Radius.circular(16.0),
                 ),
@@ -61,16 +56,16 @@ class StudentWidget extends StatelessWidget {
                     ),
                     verticalSpacer(22.0),
                     Lottie.asset(
-                      studentJumpingAnimation,
+                      AppAssets().studentJumpingAnimation,
                       repeat: true,
                     ),
                     verticalSpacer(22.0),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: sizes.heightRatio * 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
+                          backgroundColor: PayNestTheme.primaryColor,
                           elevation: 0,
                           // side: BorderSide(width:1, color:Colors.white),
                           shape: RoundedRectangleBorder(
@@ -98,12 +93,12 @@ class StudentWidget extends StatelessWidget {
                       ),
                     ),
                     verticalSpacer(22.0),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: sizes.heightRatio * 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
+                          backgroundColor: PayNestTheme.primaryColor,
                           elevation: 0,
                           // side: BorderSide(width:1, color:Colors.white),
                           shape: RoundedRectangleBorder(
@@ -116,7 +111,7 @@ class StudentWidget extends StatelessWidget {
                           Navigator.of(context).pop();
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => SelectSchool(),
+                              builder: (context) => const SelectSchool(),
                             ),
                           );
                         },

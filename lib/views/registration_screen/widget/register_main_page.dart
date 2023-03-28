@@ -1,9 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -40,7 +38,9 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
   var flag, countryCode;
 
   TextEditingController phoneController = TextEditingController();
-  TextEditingController phCodeController = TextEditingController(text: "+971");
+  TextEditingController phCodeController = TextEditingController(
+    text: "+971",
+  );
   TextEditingController emailController = TextEditingController();
   TextEditingController createPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -75,58 +75,56 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                 children: [
                   _numberField(),
                   verticalSpacer(12),
-                  Container(
-                    child: TextFormField(
-                      controller: emailController,
-                      textInputAction: TextInputAction.next,
-                      style: PayNestTheme.title_2_16primaryColor.copyWith(
-                        fontSize: sizes.fontRatio * 14,
-                        color: PayNestTheme.textGrey,
-                      ),
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(
-                              0.5,
-                            ),
-                          ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
-                          ),
-                        ),
-                        labelText: email,
-                        labelStyle: PayNestTheme.floating_12primaryColor,
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
-                          ),
-                        ),
-                        errorBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
-                          ),
-                        ),
-                        disabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: PayNestTheme.textGrey.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.trim().isEmpty) {
-                          return 'Required';
-                        }
-                        // Check if the entered email has the right format
-                        if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                          return 'Correct Email Required';
-                        }
-                        // Return null if the entered email is valid
-                        return null;
-                      },
+                  TextFormField(
+                    controller: emailController,
+                    textInputAction: TextInputAction.next,
+                    style: PayNestTheme.title_2_16primaryColor.copyWith(
+                      fontSize: sizes.fontRatio * 14,
+                      color: PayNestTheme.textGrey,
                     ),
+                    decoration: InputDecoration(
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: PayNestTheme.textGrey.withOpacity(
+                            0.5,
+                          ),
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: PayNestTheme.textGrey.withOpacity(0.5),
+                        ),
+                      ),
+                      labelText: email,
+                      labelStyle: PayNestTheme.floating_12primaryColor,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: PayNestTheme.textGrey.withOpacity(0.5),
+                        ),
+                      ),
+                      errorBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: PayNestTheme.textGrey.withOpacity(0.5),
+                        ),
+                      ),
+                      disabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: PayNestTheme.textGrey.withOpacity(0.5),
+                        ),
+                      ),
+                    ),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value!.trim().isEmpty) {
+                        return 'Required';
+                      }
+                      // Check if the entered email has the right format
+                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                        return 'Correct Email Required';
+                      }
+                      // Return null if the entered email is valid
+                      return null;
+                    },
                   ),
                   verticalSpacer(12),
                   Container(
@@ -290,7 +288,8 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           children: [
                             TextSpan(
                               text: 'I Accept',
-                              style: PayNestTheme.floating_14primaryColor.copyWith(
+                              style:
+                                  PayNestTheme.floating_14primaryColor.copyWith(
                                 color: PayNestTheme.black,
                               ),
                             ),
@@ -301,12 +300,13 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                               text: ' Terms & Conditions',
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  launch(
+                                  launchUrl(Uri.parse(
                                     'https://paynest.ae/terms.html',
-                                  );
+                                  ));
                                   setState(() {});
                                 },
-                              style: PayNestTheme.floating_14primaryColor.copyWith(
+                              style:
+                                  PayNestTheme.floating_14primaryColor.copyWith(
                                 decoration: TextDecoration.underline,
                               ),
                             ),
@@ -320,7 +320,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: PayNestTheme.primaryColor,
+                        backgroundColor: PayNestTheme.primaryColor,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
@@ -331,7 +331,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           vertical: verticalValue(16),
                         ),
                       ),
-                      onPressed: () async{
+                      onPressed: () async {
                         if (Utils.reg1FormKey.currentState!.validate() &&
                             terms == true &&
                             phoneController.text.isNotEmpty) {
@@ -346,10 +346,10 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           setState(() {
                             loading = !loading;
                           });
-                          if(sendOTPController.status.value){
+                          if (sendOTPController.status.value) {
                             //hit otp
-                            Future.delayed(Duration(seconds: 2)).then(
-                                  (value) => {
+                            Future.delayed(const Duration(seconds: 2)).then(
+                              (value) => {
                                 widget.onNextTap(
                                   emailController.text,
                                   createPasswordController.text,
@@ -358,11 +358,11 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                                 ),
                               },
                             );
-                          }
-                          else if(!sendOTPController.status.value){
-                            ScaffoldMessenger.of(key.currentState!.context).showSnackBar(
+                          } else if (!sendOTPController.status.value) {
+                            ScaffoldMessenger.of(key.currentState!.context)
+                                .showSnackBar(
                               SnackBar(
-                                duration: Duration(seconds: 1),
+                                duration: const Duration(seconds: 1),
                                 backgroundColor: Colors.red,
                                 padding: EdgeInsets.symmetric(
                                   vertical: verticalValue(16),
@@ -380,9 +380,10 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           }
                         } else {
                           showToast(
-                              messege: 'Phone Field Cannot Be Empty !!',
-                              context: context,
-                              color: PayNestTheme.red);
+                            message: 'Phone Field Cannot Be Empty !!',
+                            context: context,
+                            color: PayNestTheme.red,
+                          );
                         }
                       },
                       child: Center(
@@ -524,7 +525,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
             showCountryOnly: false,
             showOnlyCountryWhenClosed: false,
             alignLeft: false,
-            flagDecoration: BoxDecoration(
+            flagDecoration: const BoxDecoration(
               shape: BoxShape.circle,
             ),
             flagWidth: sizes.fontRatio * 50,

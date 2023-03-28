@@ -1,35 +1,21 @@
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:encrypt/encrypt.dart' as encryption;
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
-import 'package:lottie/lottie.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/createtransaction_resp_controller.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/paynow_controller.dart';
-import 'package:paynest_flutter_app/main.dart';
-import 'package:paynest_flutter_app/model/create_payment_intent_model.dart';
-import 'package:paynest_flutter_app/model/datamodel/paynowtransaction_detail_model.dart';
-import 'package:paynest_flutter_app/model/lean_payment_model.dart';
-import 'package:paynest_flutter_app/presentation/export.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/transactiondetails/paynowltransactiondetails_page.dart';
 import 'package:paynest_flutter_app/views/webview/webview.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../model/lean_response.dart';
-import '../../../model/mystudents_resp_model.dart';
-import '../../../widgets/amount_formater.dart';
-import '../../../widgets/full_screen_loader.dart';
-import '../../../widgets/inkwell_widget.dart';
-import '../../../widgets/toast.dart';
+import '../../../data/model/create_payment_intent_model.dart';
+import '../../../data/model/datamodel/paynowtransaction_detail_model.dart';
+import '../../../data/model/lean_payment_model.dart';
+import '../../../data/model/lean_response.dart';
+import '../../../data/model/mystudents_resp_model.dart';
 
 class PayNowPage extends StatefulWidget {
   final String whichStack;
@@ -56,7 +42,6 @@ class _PayNowPageState extends State<PayNowPage> {
   TextEditingController searchController = TextEditingController();
   String payAbleAmount = '0';
   bool isLoading = false;
-  bool _isConnect = true;
 
   var appToken = "";
   var customerId = "";
@@ -246,8 +231,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                     ),
                                   ),
                                 )
-                              : SizedBox(),
-                          Spacer(),
+                              : const SizedBox(),
+                          const Spacer(),
                           Text(
                             pay,
                             style: PayNestTheme.title20white.copyWith(
@@ -256,7 +241,7 @@ class _PayNowPageState extends State<PayNowPage> {
                               fontSize: sizes.fontRatio * 18,
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                         ],
                       ),
                     ],
@@ -310,7 +295,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                             .withOpacity(.3),
                                         spreadRadius: 0,
                                         blurRadius: 10,
-                                        offset: Offset(
+                                        offset: const Offset(
                                           0,
                                           5,
                                         ), // changes position of shadow
@@ -373,7 +358,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                             _searchResult.isNotEmpty &&
                                                     searchController
                                                         .text.isNotEmpty
-                                                ? Container(
+                                                ? SizedBox(
                                                     height:
                                                         sizes.heightRatio * 156,
                                                     child: ListView.separated(
@@ -438,42 +423,40 @@ class _PayNowPageState extends State<PayNowPage> {
                                                     _searchResult.isNotEmpty &&
                                                     searchController
                                                         .text.isNotEmpty
-                                                ? Container(
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          'Current Payable Amount',
-                                                          style: PayNestTheme
-                                                              .h2_12blueAccentLight
-                                                              .copyWith(
-                                                            fontSize: sizes
-                                                                    .fontRatio *
-                                                                14,
-                                                            color: PayNestTheme
-                                                                .primaryColor,
-                                                            fontFamily:
-                                                                'montserratSemiBold',
-                                                          ),
+                                                ? Row(
+                                                    children: [
+                                                      Text(
+                                                        'Current Payable Amount',
+                                                        style: PayNestTheme
+                                                            .h2_12blueAccentLight
+                                                            .copyWith(
+                                                          fontSize:
+                                                              sizes.fontRatio *
+                                                                  14,
+                                                          color: PayNestTheme
+                                                              .primaryColor,
+                                                          fontFamily:
+                                                              'montserratSemiBold',
                                                         ),
-                                                        Spacer(),
-                                                        Text(
-                                                          'AED ${payAbleAmount != '0' ? amountFormater(
-                                                              double.parse(
-                                                                  payAbleAmount),
-                                                            ) : '0.0'}',
-                                                          style: PayNestTheme
-                                                              .h2_12blueAccent
-                                                              .copyWith(
-                                                            fontSize: sizes
-                                                                    .fontRatio *
-                                                                16,
-                                                            color: PayNestTheme
-                                                                .primaryColor,
-                                                          ),
+                                                      ),
+                                                      const Spacer(),
+                                                      Text(
+                                                        'AED ${payAbleAmount != '0' ? amountFormater(
+                                                            double.parse(
+                                                                payAbleAmount),
+                                                          ) : '0.0'}',
+                                                        style: PayNestTheme
+                                                            .h2_12blueAccent
+                                                            .copyWith(
+                                                          fontSize:
+                                                              sizes.fontRatio *
+                                                                  16,
+                                                          color: PayNestTheme
+                                                              .primaryColor,
                                                         ),
-                                                        horizontalSpacer(16),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                      horizontalSpacer(16),
+                                                    ],
                                                   )
                                                 : const SizedBox.shrink(),
                                             verticalSpacer(8),
@@ -495,7 +478,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                 ? Container(
                                                     alignment: Alignment.center,
                                                     child: Lottie.asset(
-                                                      singleStudentJson,
+                                                      AppAssets()
+                                                          .singleStudentJson,
                                                       repeat: true,
                                                       height: payAbleAmount ==
                                                               '0'
@@ -548,7 +532,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             spreadRadius: 0.5,
                                                             blurRadius: 5,
                                                             offset:
-                                                                Offset(1, 3),
+                                                                const Offset(
+                                                                    1, 3),
                                                           ),
                                                         ],
                                                         borderRadius:
@@ -559,8 +544,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         children: [
                                                           horizontalSpacer(16),
                                                           _commercial_image(
-                                                            imagePath:
-                                                                icCommercialBank,
+                                                            imagePath: AppAssets()
+                                                                .icCommercialBank,
                                                           ),
                                                           Expanded(
                                                             child: Center(
@@ -643,7 +628,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                     .text) <=
                                                             0) {
                                                           showToast(
-                                                              messege:
+                                                              message:
                                                                   "Amount Should Be Grater Then 0!",
                                                               context: context,
                                                               color:
@@ -654,7 +639,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                       } else {
                                                         showToast(
                                                           context: context,
-                                                          messege:
+                                                          message:
                                                               'Service Unavailable !!',
                                                           color: PayNestTheme
                                                               .primaryColor,
@@ -692,7 +677,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                       0.5,
                                                                   blurRadius: 5,
                                                                   offset:
-                                                                      Offset(
+                                                                      const Offset(
                                                                           1, 3),
                                                                 ),
                                                               ],
@@ -719,7 +704,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                       0.5,
                                                                   blurRadius: 5,
                                                                   offset:
-                                                                      Offset(
+                                                                      const Offset(
                                                                           1, 3),
                                                                 ),
                                                               ],
@@ -732,8 +717,13 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         children: [
                                                           horizontalSpacer(32),
                                                           _otherImage(
-                                                            opacity: isLeanEnable ? 1 : 0.5,
-                                                            imagePath: icLean,
+                                                            opacity:
+                                                                isLeanEnable
+                                                                    ? 1
+                                                                    : 0.5,
+                                                            imagePath:
+                                                                AppAssets()
+                                                                    .icLean,
                                                           ),
                                                           horizontalSpacer(16),
                                                           Expanded(
@@ -743,22 +733,30 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
-                                                                style: isLeanEnable
-                                                                    ? PayNestTheme.title_2_16primaryColor
-                                                                    .copyWith(
-                                                                  fontWeight: FontWeight.w500,
-                                                                  fontSize: sizes.fontRatio * 14,
-                                                                  color: PayNestTheme.primaryColor,
-                                                                )
-                                                                    : PayNestTheme.title_2_16primaryColor
-                                                                    .copyWith(
-                                                                  fontWeight: FontWeight.w500,
-                                                                  fontSize: sizes.fontRatio * 14,
-                                                                  color: PayNestTheme.primaryColor
-                                                                      .withOpacity(
-                                                                    0.5,
-                                                                  ),
-                                                                ),
+                                                                style:
+                                                                    isLeanEnable
+                                                                        ? PayNestTheme
+                                                                            .title_2_16primaryColor
+                                                                            .copyWith(
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            fontSize:
+                                                                                sizes.fontRatio * 14,
+                                                                            color:
+                                                                                PayNestTheme.primaryColor,
+                                                                          )
+                                                                        : PayNestTheme
+                                                                            .title_2_16primaryColor
+                                                                            .copyWith(
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            fontSize:
+                                                                                sizes.fontRatio * 14,
+                                                                            color:
+                                                                                PayNestTheme.primaryColor.withOpacity(
+                                                                              0.5,
+                                                                            ),
+                                                                          ),
                                                               ),
                                                             ),
                                                           ),
@@ -776,7 +774,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                 ? InkWellWidget(
                                                     onTap: () {
                                                       showToast(
-                                                        messege: 'Coming Soon!',
+                                                        message: 'Coming Soon!',
                                                         context: context,
                                                         color: PayNestTheme
                                                             .primaryColor,
@@ -809,7 +807,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             spreadRadius: 0.5,
                                                             blurRadius: 5,
                                                             offset:
-                                                                Offset(1, 3),
+                                                                const Offset(
+                                                                    1, 3),
                                                           ),
                                                         ],
                                                         borderRadius:
@@ -822,7 +821,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                           _otherImage(
                                                             opacity: 0.5,
                                                             imagePath:
-                                                                icPostPay,
+                                                                AppAssets()
+                                                                    .icPostPay,
                                                           ),
                                                           horizontalSpacer(16),
                                                           Expanded(
@@ -865,7 +865,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                           physics:
                                               const BouncingScrollPhysics(),
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               height: sizes.heightRatio * 156,
                                               child: ListView.separated(
                                                 itemCount: studentController
@@ -919,47 +919,44 @@ class _PayNowPageState extends State<PayNowPage> {
                                             ),
                                             verticalSpacer(30),
                                             tap % 2 == 1
-                                                ? Container(
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          'Current Payable Amount',
-                                                          style: PayNestTheme
-                                                              .h2_12blueAccentLight
-                                                              .copyWith(
-                                                            fontSize: sizes
-                                                                    .fontRatio *
-                                                                14,
-                                                            color: PayNestTheme
-                                                                .primaryColor,
-                                                            fontFamily:
-                                                                'montserratSemiBold',
-                                                          ),
+                                                ? Row(
+                                                    children: [
+                                                      Text(
+                                                        'Current Payable Amount',
+                                                        style: PayNestTheme
+                                                            .h2_12blueAccentLight
+                                                            .copyWith(
+                                                          fontSize:
+                                                              sizes.fontRatio *
+                                                                  14,
+                                                          color: PayNestTheme
+                                                              .primaryColor,
+                                                          fontFamily:
+                                                              'montserratSemiBold',
                                                         ),
-                                                        Spacer(),
-                                                        Text(
-                                                          payAbleAmount != '0'
-                                                              ? 'AED ' +
-                                                                  amountFormater(
-                                                                    double.parse(
-                                                                        payAbleAmount),
-                                                                  )
-                                                              : "0.0",
-                                                          style: PayNestTheme
-                                                              .h2_12blueAccent
-                                                              .copyWith(
-                                                            fontSize: sizes
-                                                                    .fontRatio *
-                                                                16,
-                                                            color: PayNestTheme
-                                                                .primaryColor,
-                                                          ),
+                                                      ),
+                                                      const Spacer(),
+                                                      Text(
+                                                        payAbleAmount != '0'
+                                                            ? 'AED ${amountFormater(
+                                                                double.parse(
+                                                                    payAbleAmount),
+                                                              )}'
+                                                            : "0.0",
+                                                        style: PayNestTheme
+                                                            .h2_12blueAccent
+                                                            .copyWith(
+                                                          fontSize:
+                                                              sizes.fontRatio *
+                                                                  16,
+                                                          color: PayNestTheme
+                                                              .primaryColor,
                                                         ),
-                                                        horizontalSpacer(16),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                      horizontalSpacer(16),
+                                                    ],
                                                   )
-                                                : SizedBox.shrink(),
+                                                : const SizedBox.shrink(),
                                             verticalSpacer(8),
                                             Container(
                                               width: double.infinity,
@@ -970,7 +967,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                             Container(
                                               alignment: Alignment.center,
                                               child: Lottie.asset(
-                                                singleStudentJson,
+                                                AppAssets().singleStudentJson,
                                                 repeat: true,
                                                 height: payAbleAmount == '0'
                                                     ? sizes.heightRatio * 327
@@ -1013,7 +1010,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             spreadRadius: 0.5,
                                                             blurRadius: 5,
                                                             offset:
-                                                                Offset(1, 3),
+                                                                const Offset(
+                                                                    1, 3),
                                                           ),
                                                         ],
                                                         borderRadius:
@@ -1024,8 +1022,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         children: [
                                                           horizontalSpacer(16),
                                                           _commercial_image(
-                                                            imagePath:
-                                                                icCommercialBank,
+                                                            imagePath: AppAssets()
+                                                                .icCommercialBank,
                                                           ),
                                                           Expanded(
                                                             child: Center(
@@ -1102,7 +1100,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                     .text) <=
                                                             0) {
                                                           showToast(
-                                                              messege:
+                                                              message:
                                                                   "Amount Should Be Grater Then 0!",
                                                               context: context,
                                                               color:
@@ -1112,7 +1110,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         }
                                                       } else {
                                                         showToast(
-                                                          messege:
+                                                          message:
                                                               'Service Unavailable !!',
                                                           context: context,
                                                           color: PayNestTheme
@@ -1147,7 +1145,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             spreadRadius: 0.5,
                                                             blurRadius: 5,
                                                             offset:
-                                                                Offset(1, 3),
+                                                                const Offset(
+                                                                    1, 3),
                                                           ),
                                                         ],
                                                         borderRadius:
@@ -1158,8 +1157,13 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         children: [
                                                           horizontalSpacer(32),
                                                           _otherImage(
-                                                            opacity: isLeanEnable ? 1 : 0.5,
-                                                            imagePath: icLean,
+                                                            opacity:
+                                                                isLeanEnable
+                                                                    ? 1
+                                                                    : 0.5,
+                                                            imagePath:
+                                                                AppAssets()
+                                                                    .icLean,
                                                           ),
                                                           horizontalSpacer(16),
                                                           Expanded(
@@ -1169,22 +1173,30 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
-                                                                style: isLeanEnable
-                                                                    ? PayNestTheme.title_2_16primaryColor
-                                                                    .copyWith(
-                                                                  fontWeight: FontWeight.w500,
-                                                                  fontSize: sizes.fontRatio * 14,
-                                                                  color: PayNestTheme.primaryColor,
-                                                                )
-                                                                    : PayNestTheme.title_2_16primaryColor
-                                                                    .copyWith(
-                                                                  fontWeight: FontWeight.w500,
-                                                                  fontSize: sizes.fontRatio * 14,
-                                                                  color: PayNestTheme.primaryColor
-                                                                      .withOpacity(
-                                                                    0.5,
-                                                                  ),
-                                                                ),
+                                                                style:
+                                                                    isLeanEnable
+                                                                        ? PayNestTheme
+                                                                            .title_2_16primaryColor
+                                                                            .copyWith(
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            fontSize:
+                                                                                sizes.fontRatio * 14,
+                                                                            color:
+                                                                                PayNestTheme.primaryColor,
+                                                                          )
+                                                                        : PayNestTheme
+                                                                            .title_2_16primaryColor
+                                                                            .copyWith(
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            fontSize:
+                                                                                sizes.fontRatio * 14,
+                                                                            color:
+                                                                                PayNestTheme.primaryColor.withOpacity(
+                                                                              0.5,
+                                                                            ),
+                                                                          ),
                                                               ),
                                                             ),
                                                           ),
@@ -1199,7 +1211,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                 ? InkWellWidget(
                                                     onTap: () {
                                                       showToast(
-                                                          messege:
+                                                          message:
                                                               'Coming Soon!',
                                                           context: context,
                                                           color: PayNestTheme
@@ -1232,7 +1244,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                             spreadRadius: 0.5,
                                                             blurRadius: 5,
                                                             offset:
-                                                                Offset(1, 3),
+                                                                const Offset(
+                                                                    1, 3),
                                                           ),
                                                         ],
                                                         borderRadius:
@@ -1245,7 +1258,8 @@ class _PayNowPageState extends State<PayNowPage> {
                                                           _otherImage(
                                                             opacity: 0.5,
                                                             imagePath:
-                                                                icPostPay,
+                                                                AppAssets()
+                                                                    .icPostPay,
                                                           ),
                                                           horizontalSpacer(16),
                                                           Expanded(
@@ -1298,7 +1312,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage(
-                                          noData,
+                                          AppAssets().noData,
                                         ),
                                         fit: BoxFit.cover,
                                       ),
@@ -1352,7 +1366,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage(
-                                      warning,
+                                      AppAssets().warning,
                                     ),
                                     fit: BoxFit.cover,
                                   ),
@@ -1454,7 +1468,7 @@ class _PayNowPageState extends State<PayNowPage> {
                 jsonDecode(resp.toString()),
               );
               showToast(
-                messege: leanResponse.message ?? '',
+                message: leanResponse.message ?? '',
                 context: context,
                 color: leanResponse.status == 'SUCCESS'
                     ? Colors.green
@@ -1480,7 +1494,7 @@ class _PayNowPageState extends State<PayNowPage> {
 
   void onPress() async {
     if (studentController.myStudentData.value.status) {
-      if(int.parse(amountController.text) > 0) {
+      if (int.parse(amountController.text) > 0) {
         int orderId = Random().nextInt(
           1000000000,
         );
@@ -1511,7 +1525,7 @@ class _PayNowPageState extends State<PayNowPage> {
           );
           if (result != null && result) {
             studentController.myStudentData.update(
-                  (val) {
+              (val) {
                 String? schoolName;
                 for (int i = 0; i < val!.students!.length; i++) {
                   if (val.students![i].student!.totalBalanceAmount ==
@@ -1529,10 +1543,10 @@ class _PayNowPageState extends State<PayNowPage> {
                 isLoading = false;
                 setState(() {});
                 Future.delayed(
-                  Duration(
+                  const Duration(
                     seconds: 1,
                   ),
-                      () {
+                  () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => PayNowTransactionDetailsPage(
@@ -1550,41 +1564,41 @@ class _PayNowPageState extends State<PayNowPage> {
               setState(() {});
               Future.delayed(
                 Duration.zero,
-                    () {
+                () {
                   showToast(
                     context: context,
-                    messege: 'Something went wrong with the transaction',
+                    message: 'Something went wrong with the transaction',
                     color: PayNestTheme.red,
                   );
                 },
               );
             }
           }
-        }else {
+        } else {
           if (mounted) {
             isLoading = false;
             setState(() {});
             Future.delayed(
               Duration.zero,
-                  () {
+              () {
                 showToast(
                   context: context,
-                  messege: 'Something went wrong with the transaction',
+                  message: 'Something went wrong with the transaction',
                   color: PayNestTheme.red,
                 );
               },
             );
           }
         }
-      }else if (int.parse(amountController.text) < 0) {
+      } else if (int.parse(amountController.text) < 0) {
         isLoading = false;
         setState(() {});
         Future.delayed(
           Duration.zero,
-              () {
+          () {
             showToast(
               context: context,
-              messege: 'Amount is not correct',
+              message: 'Amount is not correct',
               color: PayNestTheme.red,
             );
           },
@@ -1594,10 +1608,10 @@ class _PayNowPageState extends State<PayNowPage> {
         setState(() {});
         Future.delayed(
           Duration.zero,
-              () {
+          () {
             showToast(
               context: context,
-              messege: 'Fees already paid',
+              message: 'Fees already paid',
               color: Colors.green,
             );
           },
@@ -1609,10 +1623,10 @@ class _PayNowPageState extends State<PayNowPage> {
         setState(() {});
         Future.delayed(
           Duration.zero,
-              () {
+          () {
             showToast(
               context: context,
-              messege: 'Something went wrong with the transaction',
+              message: 'Something went wrong with the transaction',
               color: PayNestTheme.red,
             );
           },
@@ -1668,7 +1682,7 @@ class _PayNowPageState extends State<PayNowPage> {
         child: Stack(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 vertical: 8,
               ),
               padding: EdgeInsets.symmetric(
@@ -1684,17 +1698,17 @@ class _PayNowPageState extends State<PayNowPage> {
                   Container(
                     height: sizes.heightRatio * 50,
                     width: sizes.widthRatio * 50,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
                     child: SvgPicture.asset(
                       studentElement.student?.gender == "male"
-                          ? icMale
-                          : icFemale,
+                          ? AppAssets().icMale
+                          : AppAssets().icFemale,
                     ),
                   ),
                   verticalSpacer(8),
-                  Container(
+                  SizedBox(
                     width: sizes.widthRatio * 60,
                     child: Text(
                       '${studentElement.student?.firstName} \n  ${(studentElement.student?.lastName != '-' ? studentElement.student?.lastName : '')}',
@@ -1708,8 +1722,8 @@ class _PayNowPageState extends State<PayNowPage> {
                       ),
                     ),
                   ),
-                  Spacer(),
-                  Container(
+                  const Spacer(),
+                  SizedBox(
                     width: sizes.widthRatio * 80,
                     child: Text(
                       '${studentElement.student?.school!.name}',
@@ -1724,7 +1738,7 @@ class _PayNowPageState extends State<PayNowPage> {
                       ),
                     ),
                   ),
-                  Spacer()
+                  const Spacer()
                 ],
               ),
             ),
@@ -1733,7 +1747,7 @@ class _PayNowPageState extends State<PayNowPage> {
               left: 0,
               right: 0,
               child: SvgPicture.asset(
-                icAdd,
+                AppAssets().icAdd,
               ),
             ),
           ],

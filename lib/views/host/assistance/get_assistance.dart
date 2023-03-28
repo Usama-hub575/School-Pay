@@ -1,15 +1,4 @@
- import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-import '../../../presentation/res/res.dart';
-import '../../../widgets/toast.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class GetAssistance extends StatefulWidget {
   const GetAssistance({Key? key}) : super(key: key);
@@ -45,7 +34,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                             height: 44.h,
                             width: 44.w,
                             decoration: BoxDecoration(
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   color: Colors.black26,
                                   blurRadius: 2.0,
@@ -93,8 +82,10 @@ class _GetAssistanceState extends State<GetAssistance> {
           verticalSpacer(24),
           InkWell(
             onTap: () {
-              launch(
-                'https://paynest.ae/#contact',
+              launchUrl(
+                Uri.parse(
+                  'https://paynest.ae/#contact',
+                ),
               );
             },
             child: Container(
@@ -113,11 +104,11 @@ class _GetAssistanceState extends State<GetAssistance> {
               ),
               child: Row(
                 children: [
-                  Container(
-                    height: sizes.heightRatio*80,
-                    width: sizes.widthRatio*80,
+                  SizedBox(
+                    height: sizes.heightRatio * 80,
+                    width: sizes.widthRatio * 80,
                     child: Lottie.asset(
-                      customerSupportAnimation,
+                      AppAssets().customerSupportAnimation,
                     ),
                   ),
                   Flexible(
@@ -154,8 +145,10 @@ class _GetAssistanceState extends State<GetAssistance> {
           verticalSpacer(24),
           InkWell(
             onTap: () {
-              launch(
-                'https://paynest.ae/#faq',
+              launchUrl(
+                Uri.parse(
+                  'https://paynest.ae/#faq',
+                ),
               );
             },
             child: Container(
@@ -174,11 +167,11 @@ class _GetAssistanceState extends State<GetAssistance> {
               ),
               child: Row(
                 children: [
-                  Container(
-                    height: sizes.heightRatio*80,
-                    width: sizes.widthRatio*80,
+                  SizedBox(
+                    height: sizes.heightRatio * 80,
+                    width: sizes.widthRatio * 80,
                     child: Lottie.asset(
-                      faqAnimation,
+                      AppAssets().faqAnimation,
                     ),
                   ),
                   Flexible(
@@ -193,7 +186,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                           ),
                         ),
                         verticalSpacer(8),
-                        Container(
+                        SizedBox(
                           width: sizes.widthRatio * 280,
                           child: Text(
                             goThrough,
@@ -230,13 +223,12 @@ class _GetAssistanceState extends State<GetAssistance> {
                 ),
               ),
               child: Row(
-
                 children: [
-                  Container(
-                    height: sizes.heightRatio*56,
-                    width: sizes.widthRatio*56,
+                  SizedBox(
+                    height: sizes.heightRatio * 56,
+                    width: sizes.widthRatio * 56,
                     child: Lottie.asset(
-                      commentAnimation,
+                      AppAssets().commentAnimation,
                     ),
                   ),
                   Flexible(
@@ -251,7 +243,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                           ),
                         ),
                         verticalSpacer(8),
-                        Container(
+                        SizedBox(
                           width: sizes.widthRatio * 280,
                           child: Text(
                             chatWith,
@@ -280,17 +272,21 @@ class _GetAssistanceState extends State<GetAssistance> {
     var whatAppUrlIOS = "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
     if (Platform.isIOS) {
       // for iOS phone only
-      if (await canLaunch(whatAppUrlIOS)) {
+      if (await canLaunchUrl(
+        Uri.parse(whatAppUrlIOS),
+      )) {
         await launch(whatAppUrlIOS, forceSafariVC: false);
       } else {
-
-            showToast(
-                context: context,
-                messege:  'Whatsapp not installed',
-                color: PayNestTheme.red);
+        showToast(
+          context: context,
+          message: 'Whatsapp not installed',
+          color: PayNestTheme.red,
+        );
       }
     } else {
-      await launch(whatsappUrlAndroid);
+      await launchUrl(
+        Uri.parse(whatsappUrlAndroid),
+      );
     }
   }
 }

@@ -1,19 +1,4 @@
-import 'dart:async';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
-import 'package:paynest_flutter_app/presentation/res/constants.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
-
-import 'Utils/sharedpref.dart';
-import 'main.dart';
+import 'export.dart';
 
 //flutter build apk --flavor production -t lib/production_main.dart
 
@@ -40,16 +25,19 @@ void main() async {
     options.environment = AppConstants.sentryEnvironment;
     options.attachScreenshot = true;
   });
+  FCM().init();
+  initializeLocalNotifications();
+  initializeDependencies();
   Future.wait([
     precachePicture(
       ExactAssetPicture(
         SvgPicture.svgStringDecoderBuilder,
-        icSchoolBuilding,
+        AppAssets().icSchoolBuilding,
       ),
       null,
     ),
   ]);
-  getFCMToken();
+  // getFCMToken();
   MySharedPreferences.instance;
   FirebaseMessaging.instance.getInitialMessage();
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -114,7 +102,22 @@ void main() async {
 
   runZonedGuarded(
     () {
-      runApp(MyApp());
+      runApp(
+        MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: it<FirebaseBloc>()
+                ..add(
+                  InitializeFirebaseRemoteConfiguration(),
+                ),
+            ),
+            BlocProvider.value(
+              value: it<InitializerBloc>(),
+            ),
+          ],
+          child: MyApp(),
+        ),
+      );
     },
     (error, stack) async {
       await Sentry.captureException(

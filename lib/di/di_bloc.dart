@@ -1,12 +1,40 @@
-import 'package:paynest_flutter_app/domain/export.dart';
-
-import '../presentation/bloc/export.dart';
-import 'export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 Future initializeBlocs() async {
   it.registerLazySingleton(
+    () => FirebaseBloc(
+      firebaseUseCase: it<FirebaseUseCase>(),
+    ),
+  );
+
+  it.registerLazySingleton(
     () => InitializerBloc(
+      firebaseUseCase: it<FirebaseUseCase>(),
       initializerUseCase: it<InitializerUseCase>(),
+    ),
+  );
+
+  it.registerLazySingleton(
+    () => SignInBloc(
+      signInUseCase: it<SignInUseCase>(),
+    ),
+  );
+
+  it.registerLazySingleton(
+    () => RegisterMainPageBloc(
+      registerMainPageUseCase: it<RegisterMainPageUseCase>(),
+    ),
+  );
+
+  it.registerLazySingleton(
+    () => RegisterDetailPageBloc(
+      registerDetailPageUseCase: it<RegisterDetailPageUseCase>(),
+    ),
+  );
+
+  it.registerLazySingleton(
+    () => RegisterOTPPageBloc(
+      registerOTPPageUseCase: it<RegisterOTPPageUseCase>(),
     ),
   );
 }

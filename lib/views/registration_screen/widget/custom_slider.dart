@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
@@ -25,7 +24,7 @@ class _CustomSliderState extends State<CustomSlider> {
       child: Row(
         children: [
           Text(
-            'STEP ${widget.currentIndex+1}',
+            'STEP ${widget.currentIndex + 1}',
             style: PayNestTheme.title_3_16blackbold,
           ),
           horizontalSpacer(8),
@@ -35,7 +34,7 @@ class _CustomSliderState extends State<CustomSlider> {
                   height: sizes.heightRatio * 26,
                   width: sizes.widthRatio * 26,
                   repeat: true,
-            alignment: Alignment.center,
+                  alignment: Alignment.center,
                 )
               : Container(
                   height: sizes.heightRatio * 16,

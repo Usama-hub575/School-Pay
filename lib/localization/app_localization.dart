@@ -1,9 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
-
-import 'locale_constants.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class AppLocalizations {
   AppLocalizations(this.locale);
@@ -12,9 +7,6 @@ class AppLocalizations {
   Map<String, String> _localizedStrings = Map();
 
   Future<bool> load() async {
-    if (locale == null) {
-      return false;
-    }
     final String data = await rootBundle.loadString(supportedLocaleMap[locale]);
     final Map<String, dynamic> jsonMap = json.decode(data);
 
@@ -37,7 +29,7 @@ class AppLocalizations {
   }
 
   static AppLocalizations? of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations) ;
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
   static const LocalizationsDelegate<AppLocalizations> delegate =

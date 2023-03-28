@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:paynest_flutter_app/model/otp_model.dart';
-import 'package:paynest_flutter_app/model/otp_resp_model.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
+
+import '../data/model/request/otp/send_otp/otp_model.dart';
+import '../data/model/response/otp/send_otp_response/otp_response_model.dart';
 
 class SendOTPController extends GetxController {
   var isLoading = false.obs;
@@ -14,11 +15,8 @@ class SendOTPController extends GetxController {
   hitSendOTP(email, userPhone, dailCode) async {
     try {
       isLoading(true);
-      OtpModel otpData = OtpModel(
-        email: email,
-        phone: userPhone,
-        dailCode: dailCode
-      );
+      OtpModel otpData =
+          OtpModel(email: email, phone: userPhone, dialCode: dailCode);
 
       var res = await APIService().apiSendOTP(otpModelToJson(otpData));
       var decoded = jsonDecode(res);

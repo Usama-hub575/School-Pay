@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/passwordreset_controller.dart';
@@ -9,7 +8,6 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../presentation/res/assets.dart';
 import '../../../presentation/res/res.dart';
 import '../../../widgets/back_button.dart';
 import '../../../widgets/toast.dart';
@@ -128,7 +126,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                             color: PayNestTheme.textGrey.withOpacity(0.5),
                           ),
                         ),
-                        errorStyle: PayNestTheme.title_2_16primaryColor.copyWith(
+                        errorStyle:
+                            PayNestTheme.title_2_16primaryColor.copyWith(
                           fontSize: sizes.fontRatio * 12,
                           color: PayNestTheme.red,
                         ),
@@ -200,7 +199,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                             ),
                           ),
                         ),
-                        errorStyle: PayNestTheme.title_2_16primaryColor.copyWith(
+                        errorStyle:
+                            PayNestTheme.title_2_16primaryColor.copyWith(
                           fontSize: sizes.fontRatio * 12,
                           color: PayNestTheme.red,
                         ),
@@ -243,7 +243,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                           fontSize: sizes.fontRatio * 12,
                           color: PayNestTheme.primaryColor,
                         ),
-                        errorStyle: PayNestTheme.title_2_16primaryColor.copyWith(
+                        errorStyle:
+                            PayNestTheme.title_2_16primaryColor.copyWith(
                           fontSize: sizes.fontRatio * 12,
                           color: PayNestTheme.red,
                         ),
@@ -295,7 +296,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         if (value.trim().length < 5) {
                           return 'Password must not be less than 5';
                         }
-                        if(newPassController.text != rePassController.text){
+                        if (newPassController.text != rePassController.text) {
                           return 'New password and confirm password not matched';
                         }
                         return null;
@@ -314,7 +315,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: PayNestTheme.primaryColor,
+                    backgroundColor: PayNestTheme.primaryColor,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
@@ -339,13 +340,13 @@ class _ChangePasswordState extends State<ChangePassword> {
 
                         showToast(
                             context: context,
-                            messege:  "Password Reset Successfully",
+                            message: "Password Reset Successfully",
                             color: PayNestTheme.paidGreen);
                         Navigator.pop(context);
                       } else {
                         showToast(
                             context: context,
-                            messege:    resetController.resetPassData.value.message
+                            message: resetController.resetPassData.value.message
                                 .toString(),
                             color: PayNestTheme.red);
                       }

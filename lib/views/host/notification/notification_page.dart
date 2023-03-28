@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
@@ -42,7 +43,7 @@ class _NotificationPageState extends State<NotificationPage> {
                             width: 44.w,
                             decoration: BoxDecoration(
                               boxShadow: [
-                                BoxShadow(
+                                const BoxShadow(
                                   color: Colors.black26,
                                   blurRadius: 2.0,
                                   offset: Offset(
@@ -70,11 +71,11 @@ class _NotificationPageState extends State<NotificationPage> {
                         horizontalSpacer(8),
                         Row(
                           children: [
-                            Container(
+                            SizedBox(
                               height: 44.h,
                               width: 44.w,
                               child: Lottie.asset(
-                                notificationAnimation,
+                                AppAssets().notificationAnimation,
                                 repeat: false,
                                 animate: false,
                               ),
@@ -108,7 +109,7 @@ class _NotificationPageState extends State<NotificationPage> {
             child: ListView(
               physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               scrollDirection: Axis.vertical,
               children: [
                 paymentReminder(title: 'PAYMENT REMINDER', date: '9 Jan 2022'),
@@ -195,14 +196,14 @@ Widget paymentReminder({required title, required date}) {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 1),
+              offset: const Offset(0, 1),
             ),
           ],
         ),
         child: Row(
           children: [
             Lottie.asset(
-              notificationAnimation,
+              AppAssets().notificationAnimation,
               repeat: true,
               width: sizes.widthRatio * 37,
               height: sizes.heightRatio * 37,
@@ -229,9 +230,9 @@ Widget paymentReminder({required title, required date}) {
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Lottie.asset(
-              arrowForwardAnimation,
+              AppAssets().arrowForwardAnimation,
               repeat: true,
               width: sizes.widthRatio * 18,
               height: sizes.heightRatio * 18,
@@ -291,14 +292,14 @@ Widget transactionSuccessFull(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 1),
+              offset: const Offset(0, 1),
             ),
           ],
         ),
         child: Row(
           children: [
             Lottie.asset(
-              successCheckAnimation,
+              AppAssets().successCheckAnimation,
               repeat: true,
               width: sizes.widthRatio * 45,
               height: sizes.heightRatio * 45,
@@ -329,7 +330,7 @@ Widget transactionSuccessFull(
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Text(
               amount,
               style: PayNestTheme.h2_12blueAccent.copyWith(
@@ -392,14 +393,14 @@ Widget transactionSuccessFailed(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 1),
+              offset: const Offset(0, 1),
             ),
           ],
         ),
         child: Row(
           children: [
             Lottie.asset(
-              successCheckAnimation,
+              AppAssets().successCheckAnimation,
               repeat: true,
               width: sizes.widthRatio * 45,
               height: sizes.heightRatio * 45,
@@ -430,7 +431,7 @@ Widget transactionSuccessFailed(
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Text(
               amount,
               style: PayNestTheme.h2_12blueAccent.copyWith(
@@ -494,14 +495,14 @@ Widget configurePaymentWithoutButton(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 1),
+              offset: const Offset(0, 1),
             ),
           ],
         ),
         child: Row(
           children: [
             Lottie.asset(
-              supportAnimation,
+              AppAssets().supportAnimation,
               repeat: true,
               width: sizes.widthRatio * 37,
               height: sizes.heightRatio * 37,
@@ -585,14 +586,14 @@ Widget configurePaymentWithButton(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 1),
+              offset: const Offset(0, 1),
             ),
           ],
         ),
         child: Row(
           children: [
             Lottie.asset(
-              supportAnimation,
+              AppAssets().supportAnimation,
               repeat: true,
               width: sizes.widthRatio * 37,
               height: sizes.heightRatio * 37,
@@ -627,7 +628,7 @@ Widget configurePaymentWithButton(
                     ),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: PayNestTheme.primaryColor,
+                        backgroundColor: PayNestTheme.primaryColor,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),

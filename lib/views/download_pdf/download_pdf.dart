@@ -1,13 +1,12 @@
 import 'dart:io';
-import 'dart:typed_data';
 
-// import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart' as date;
 import 'package:path_provider/path_provider.dart';
-import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
+
+import '../../data/model/datamodel/singlestudent_model.dart';
 import '../../presentation/res/res.dart';
 import '../../widgets/spacer.dart';
 
@@ -429,7 +428,7 @@ class PdfApi {
     final bytes = await pdfD.save();
 
     // here a beautiful pakage  path provider helps us and take dircotory and name of the file  and made a proper file in internal storage
-    final dir = await getApplicationDocumentsDirectory();
+    // final dir = await getApplicationDocumentsDirectory();
     final file = File('/storage/emulated/0/Download/$name');
 
     await file.writeAsBytes(bytes).then((value) {
@@ -484,7 +483,7 @@ class PDFDocument {
   }
 
   static Future openFile(File file) async {
-    final url = file.path;
+    // final url = file.path;
 
     //await OpenFile.open(url);
   }

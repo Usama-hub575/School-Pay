@@ -7,14 +7,15 @@ import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/transactionlist_controller.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/model/datamodel/transactiondetail_model.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/transaction/widgets/single_transaction_card.dart';
 import 'package:paynest_flutter_app/views/host/transactiondetails/transactiondetails_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../model/transactionlist_resp_model.dart';
+import '../../../data/model/datamodel/transactiondetail_model.dart';
+import '../../../data/model/transactionlist_resp_model.dart';
 import '../../../presentation/res/res.dart';
 import 'widgets/shimmer_card.dart';
 
@@ -108,7 +109,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                 width: 44.w,
                                 decoration: BoxDecoration(
                                     boxShadow: [
-                                      BoxShadow(
+                                      const BoxShadow(
                                         color: Colors.black26,
                                         blurRadius: 2.0,
                                         offset: Offset(
@@ -130,7 +131,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                 ),
                               ),
                             )
-                          : SizedBox(),
+                          : const SizedBox(),
                       Expanded(
                         child: Text(
                           transactions,
@@ -151,7 +152,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
               ? Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: 3,
                     itemBuilder: (context, index) {
                       return Column(
@@ -165,12 +166,12 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                 FadeShimmer(
                                   width: sizes.widthRatio * 120,
                                   height: sizes.heightRatio * 20,
-                                  baseColor: Color(0xFFEBEBF4),
-                                  highlightColor: Color(0xFFF4F4F4),
+                                  baseColor: const Color(0xFFEBEBF4),
+                                  highlightColor: const Color(0xFFF4F4F4),
                                   radius: 10,
                                 ),
                                 horizontalSpacer(8),
-                                Expanded(
+                                const Expanded(
                                   child: FadeShimmer(
                                     height: 1,
                                     width: double.infinity,
@@ -183,7 +184,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                             ),
                           ),
                           verticalSpacer(12),
-                          TransactionShimmerCard(),
+                          const TransactionShimmerCard(),
                           verticalSpacer(12),
                         ],
                       );
@@ -197,12 +198,12 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                           ? Expanded(
                               child: ListView.builder(
                                 shrinkWrap: true,
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 itemCount:
-                                    transactionListController.list.value.length,
+                                    transactionListController.list.length,
                                 itemBuilder: (context, index) {
                                   String key = transactionListController
-                                      .list.value.keys
+                                      .list.keys
                                       .elementAt(index);
                                   return Column(
                                     children: [
@@ -236,8 +237,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                       verticalSpacer(12),
                                       SingleTransaction(
                                         transactionList:
-                                            transactionListController
-                                                .list.value[key],
+                                            transactionListController.list[key],
                                         onTap: (transactionRow) {
                                           onTap(row: transactionRow);
                                         },
@@ -263,7 +263,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage(
-                                            noData,
+                                            AppAssets().noData,
                                           ),
                                           fit: BoxFit.cover,
                                         ),
@@ -304,7 +304,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                 ),
                               ),
                             )
-                      : SizedBox(),
+                      : const SizedBox(),
                 ),
         ],
       ),

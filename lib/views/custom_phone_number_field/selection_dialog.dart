@@ -49,8 +49,8 @@ class SelectionDialog extends StatefulWidget {
     this.barrierColor,
     this.hideSearch = false,
     this.closeIcon,
-  })  : this.searchDecoration = searchDecoration.prefixIcon == null
-            ? searchDecoration.copyWith(prefixIcon: Icon(Icons.search))
+  })  : searchDecoration = searchDecoration.prefixIcon == null
+            ? searchDecoration.copyWith(prefixIcon: const Icon(Icons.search))
             : searchDecoration,
         super(key: key);
 
@@ -67,7 +67,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
         decoration: widget.boxDecoration ??
             BoxDecoration(
               color: widget.backgroundColor ?? Colors.white,
-              borderRadius: BorderRadius.all(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(
                   8.0,
                 ),
@@ -78,7 +78,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
                       PayNestTheme.lightBlack.withOpacity(0.6),
                   spreadRadius: 5,
                   blurRadius: 7,
-                  offset: Offset(
+                  offset: const Offset(
                     0,
                     3,
                   ), // changes position of shadow

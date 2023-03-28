@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class BlueBackButton extends StatefulWidget {
-  BuildContext context;
+  final BuildContext context;
 
   BlueBackButton({Key? key, required this.context}) : super(key: key);
 

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../../model/transactionlist_resp_model.dart';
+import '../../../../data/model/transactionlist_resp_model.dart';
 import '../../../../presentation/res/res.dart';
 import '../../../../widgets/amount_formater.dart';
 
@@ -42,7 +42,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
   Widget build(BuildContext context) {
     return isListEmpty
         ? Container(
-            padding: EdgeInsets.only(bottom: 20),
+            padding: const EdgeInsets.only(bottom: 20),
             decoration: BoxDecoration(
               color: PayNestTheme.colorDimPrimary,
               borderRadius: BorderRadius.circular(16),
@@ -51,7 +51,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 2,
                   blurRadius: 7,
-                  offset: Offset(0, 1),
+                  offset: const Offset(0, 1),
                 ),
               ],
             ),
@@ -109,7 +109,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${transactionsRow.school!.name}',
+                    transactionsRow.school!.name,
                     textAlign: TextAlign.start,
                     style: PayNestTheme.h2_12blueAccent.copyWith(
                       fontSize: sizes.fontRatio * 13,
@@ -118,7 +118,8 @@ class _RecentTransactionsState extends State<RecentTransactions> {
                     ),
                   ),
                   Text(
-                    '${dateFormat.format(DateTime.parse(transactionsRow.payedOn.toString().substring(0, 10)))}',
+                    dateFormat.format(DateTime.parse(
+                        transactionsRow.payedOn.toString().substring(0, 10))),
                     style: PayNestTheme.h2_12blueAccentLight.copyWith(
                       fontSize: sizes.fontRatio * 10,
                       color: PayNestTheme.textGrey,
@@ -128,7 +129,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Text(
               'AED ${amountFormater(
                 double.parse('${transactionsRow.amount}'),

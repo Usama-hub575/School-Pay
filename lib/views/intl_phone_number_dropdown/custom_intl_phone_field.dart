@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
+
 import '../../presentation/res/res.dart';
 import '../../widgets/spacer.dart';
 import 'country.dart';
@@ -236,7 +237,6 @@ class CustomIntlPhoneField extends StatefulWidget {
   /// If unset, defaults to [EdgeInsets.zero].
   final EdgeInsets flagsButtonMargin;
 
-
   const CustomIntlPhoneField({
     Key? key,
     this.initialCountryCode,
@@ -304,15 +304,16 @@ class _CustomIntlPhoneFieldState extends State<CustomIntlPhoneField> {
     super.initState();
     _countryList = widget.countries == null
         ? enCountries
-                .where((country) => widget.countries!.contains(country.code))
-                .toList() : [];
+            .where((country) => widget.countries!.contains(country.code))
+            .toList()
+        : [];
     filteredCountries = _countryList;
     number = widget.initialValue ?? '';
     if (widget.initialCountryCode == null && number.startsWith('+')) {
       number = number.substring(1);
       // parse initial value
       _selectedCountry = enCountries.firstWhere(
-              (country) => number.startsWith(country.dialCode),
+          (country) => number.startsWith(country.dialCode),
           orElse: () => _countryList.first);
       number = number.substring(_selectedCountry.dialCode.length);
     } else {
@@ -394,6 +395,7 @@ class _CustomIntlPhoneFieldState extends State<CustomIntlPhoneField> {
         decoration: widget.dropdownDecoration,
         child: InkWell(
           borderRadius: widget.dropdownDecoration.borderRadius as BorderRadius?,
+          onTap: widget.enabled ? _changeCountry : null,
           child: Padding(
             padding: widget.flagsButtonPadding,
             child: Row(
@@ -410,19 +412,16 @@ class _CustomIntlPhoneFieldState extends State<CustomIntlPhoneField> {
                 ],
                 if (widget.showCountryFlag) ...[
                   Container(
-                    width: sizes.heightRatio*20,
-                    height: sizes.heightRatio*20,
+                    width: sizes.heightRatio * 20,
+                    height: sizes.heightRatio * 20,
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'assets/flags/${_selectedCountry.code.toLowerCase()}.png',
-                          package: 'intl_phone_field',
-                        ),
-                        fit: BoxFit.fill
-
-                      )
-                    ),
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: AssetImage(
+                              'assets/flags/${_selectedCountry.code.toLowerCase()}.png',
+                              package: 'intl_phone_field',
+                            ),
+                            fit: BoxFit.fill)),
                   ),
                   const SizedBox(
                     width: 3,
@@ -445,7 +444,6 @@ class _CustomIntlPhoneFieldState extends State<CustomIntlPhoneField> {
               ],
             ),
           ),
-          onTap: widget.enabled ? _changeCountry : null,
         ),
       ),
     );
@@ -475,7 +473,7 @@ class _CustomIntlPhoneFieldState extends State<CustomIntlPhoneField> {
             ),
             labelStyle: PayNestTheme.title18black,
             // counterText: !widget.enabled ? '' : null,
-             counterText: '' ,
+            counterText: '',
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class AppSizes {
   late Size _screenSize;

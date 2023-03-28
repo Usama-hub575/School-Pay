@@ -1,36 +1,23 @@
-import 'dart:convert';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
-import 'package:paynest_flutter_app/main.dart';
-import 'package:paynest_flutter_app/model/create_payment_intent_model.dart';
-import 'package:paynest_flutter_app/model/lean_payment_model.dart';
-import 'package:paynest_flutter_app/model/lean_response.dart';
-import 'package:paynest_flutter_app/presentation/export.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 
-import '../../../constants/constants.dart';
 import '../../../controller/createtransaction_resp_controller.dart';
 import '../../../controller/myStudent_controller.dart';
-import '../../../model/datamodel/paynowtransaction_detail_model.dart';
-import '../../../model/datamodel/singlestudent_model.dart';
-import '../../../theme/theme.dart';
-import '../../../widgets/back_button.dart';
-import '../../../widgets/full_screen_loader.dart';
-import '../../../widgets/inkwell_widget.dart';
-import '../../../widgets/spacer.dart';
-import '../../../widgets/toast.dart';
+import '../../../data/model/create_payment_intent_model.dart';
+import '../../../data/model/datamodel/paynowtransaction_detail_model.dart';
+import '../../../data/model/datamodel/singlestudent_model.dart';
+import '../../../data/model/lean_payment_model.dart';
+import '../../../data/model/lean_response.dart';
 import '../../webview/webview.dart';
 import '../transactiondetails/paynowltransactiondetails_page.dart';
 
 class PaymentMethod extends StatefulWidget {
   final SingleStudentModel singleStudentModel;
-  int payment;
+  final int payment;
 
   PaymentMethod({
     Key? key,
@@ -128,7 +115,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           fontSize: sizes.fontRatio * 18,
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ],
@@ -154,25 +141,21 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     verticalSpacer(50),
-                    Container(
-                      child: Text(
-                        selectPaymentsMethod,
-                        style: PayNestTheme.h2_14blueAccent.copyWith(
-                          color: PayNestTheme.primaryColor,
-                          fontSize: sizes.fontRatio * 16,
-                          fontFamily: 'montserratBold',
-                        ),
+                    Text(
+                      selectPaymentsMethod,
+                      style: PayNestTheme.h2_14blueAccent.copyWith(
+                        color: PayNestTheme.primaryColor,
+                        fontSize: sizes.fontRatio * 16,
+                        fontFamily: 'montserratBold',
                       ),
                     ),
                     verticalSpacer(10),
-                    Container(
-                      child: Text(
-                        selectPaymentsMethodSecure,
-                        style: PayNestTheme.small_2_10textGrey.copyWith(
-                          color: PayNestTheme.lightBlack,
-                          fontSize: sizes.fontRatio * 12,
-                          fontFamily: 'montserratMedium',
-                        ),
+                    Text(
+                      selectPaymentsMethodSecure,
+                      style: PayNestTheme.small_2_10textGrey.copyWith(
+                        color: PayNestTheme.lightBlack,
+                        fontSize: sizes.fontRatio * 12,
+                        fontFamily: 'montserratMedium',
                       ),
                     ),
                     verticalSpacer(10),
@@ -182,7 +165,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       decoration: BoxDecoration(
                           image: DecorationImage(
                         image: AssetImage(
-                          icPaymentMethod,
+                          AppAssets().icPaymentMethod,
                         ),
                         fit: BoxFit.cover,
                       )),
@@ -209,7 +192,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 0.5,
                               blurRadius: 5,
-                              offset: Offset(1, 3),
+                              offset: const Offset(1, 3),
                             ),
                           ],
                           borderRadius: BorderRadius.circular(16),
@@ -218,7 +201,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           children: [
                             horizontalSpacer(16),
                             _commercial_image(
-                              imagePath: icCommercialBank,
+                              imagePath: AppAssets().icCommercialBank,
                             ),
                             Expanded(
                               child: Center(
@@ -272,7 +255,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         if (isLeanEnable) {
                           if (widget.payment <= 0) {
                             showToast(
-                              messege: "Amount Should Be Grater Then 0!",
+                              message: "Amount Should Be Grater Then 0!",
                               context: context,
                               color: Colors.red,
                             );
@@ -281,7 +264,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           }
                         } else {
                           showToast(
-                            messege: 'Service Unavailable',
+                            message: 'Service Unavailable',
                             context: context,
                             color: PayNestTheme.primaryColor,
                           );
@@ -305,7 +288,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 0.5,
                               blurRadius: 5,
-                              offset: Offset(1, 3),
+                              offset: const Offset(1, 3),
                             ),
                           ],
                           borderRadius: BorderRadius.circular(16),
@@ -315,7 +298,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             horizontalSpacer(32),
                             _otherImage(
                               opacity: isLeanEnable ? 1 : 0.5,
-                              imagePath: icLean,
+                              imagePath: AppAssets().icLean,
                             ),
                             horizontalSpacer(16),
                             Expanded(
@@ -352,7 +335,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       onTap: () {
                         showToast(
                             context: context,
-                            messege: 'Coming Soon!',
+                            message: 'Coming Soon!',
                             color: PayNestTheme.primaryColor);
                       },
                       child: Container(
@@ -373,7 +356,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 0.5,
                               blurRadius: 5,
-                              offset: Offset(1, 3),
+                              offset: const Offset(1, 3),
                             ),
                           ],
                           borderRadius: BorderRadius.circular(16),
@@ -383,7 +366,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             horizontalSpacer(32),
                             _otherImage(
                               opacity: 0.5,
-                              imagePath: icPostPay,
+                              imagePath: AppAssets().icPostPay,
                             ),
                             horizontalSpacer(16),
                             Expanded(
@@ -459,7 +442,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 } else {
                   showToast(
                     context: context,
-                    messege: results['message'],
+                    message: results['message'],
                     color: PayNestTheme.red,
                   );
                   Navigator.pop(context);
@@ -522,7 +505,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 jsonDecode(resp.toString()),
               );
               showToast(
-                messege: leanResponse.message ?? '',
+                message: leanResponse.message ?? '',
                 context: context,
                 color: leanResponse.status == 'SUCCESS'
                     ? Colors.green
@@ -619,7 +602,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 () {
                   showToast(
                     context: context,
-                    messege: 'Something went wrong with the transaction',
+                    message: 'Something went wrong with the transaction',
                     color: PayNestTheme.red,
                   );
                 },
@@ -635,7 +618,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           () {
             showToast(
               context: context,
-              messege: 'Amount is not correct',
+              message: 'Amount is not correct',
               color: PayNestTheme.red,
             );
           },
@@ -648,7 +631,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           () {
             showToast(
               context: context,
-              messege: 'Fees already paid',
+              message: 'Fees already paid',
               color: Colors.green,
             );
           },
@@ -663,7 +646,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           () {
             showToast(
               context: context,
-              messege: 'Something went wrong',
+              message: 'Something went wrong',
               color: PayNestTheme.red,
             );
           },

@@ -3,17 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/model/datamodel/transactiondetail_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
+import '../../../data/model/datamodel/transactiondetail_model.dart';
 import '../../../presentation/res/res.dart';
 import '../../../widgets/back_button.dart';
 
 class TransactionDetailsPage extends StatefulWidget {
-  TransactionDetailModel tdm;
+  final TransactionDetailModel tdm;
 
   TransactionDetailsPage({Key? key, required this.tdm}) : super(key: key);
 
@@ -30,7 +30,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             height: 300.h,
             child: Stack(
               children: [
@@ -102,7 +102,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                                     color: PayNestTheme.dropShadow,
                                     spreadRadius: 0,
                                     blurRadius: 1,
-                                    offset: Offset(
+                                    offset: const Offset(
                                         0, 1), // changes position of shadow
                                   ),
                                 ],
@@ -164,7 +164,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
           ),
           Expanded(
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32.w),
                 child: Column(
@@ -213,7 +213,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     ),
                     widget.tdm.student!.grade != '-'
                         ? Text(
-                            studentclass,
+                            studentClass,
                             style: PayNestTheme.title_2_16primaryColor.copyWith(
                               fontSize: sizes.fontRatio * 12,
                             ),
@@ -315,12 +315,12 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
 
                     verticalSpacer(30),
 
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: sizes.heightRatio * 46,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: PayNestTheme.primaryColor,
+                            backgroundColor: PayNestTheme.primaryColor,
                             elevation: 0,
                             // side: BorderSide(width:1, color:Colors.white),
                             shape: RoundedRectangleBorder(

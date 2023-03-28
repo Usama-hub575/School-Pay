@@ -5,13 +5,12 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/school/select_school.dart';
 import 'package:paynest_flutter_app/widgets/get_student_model.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../model/datamodel/singlestudent_model.dart';
-import '../../../model/mystudents_resp_model.dart' as studentElement;
 import '../../../presentation/res/res.dart';
 import '../../../widgets/inkwell_widget.dart';
 import '../singlestudent/singlestudent_page.dart';
@@ -59,7 +58,7 @@ class _StudentPageState extends State<StudentPage> {
                           width: 44.w,
                           decoration: BoxDecoration(
                               boxShadow: [
-                                BoxShadow(
+                                const BoxShadow(
                                   color: Colors.black26,
                                   blurRadius: 2.0,
                                   offset: Offset(
@@ -74,14 +73,16 @@ class _StudentPageState extends State<StudentPage> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(Icons.arrow_back,
-                                size: 20.sp, color: PayNestTheme.blueAccent,
+                            icon: Icon(
+                              Icons.arrow_back,
+                              size: 20.sp,
+                              color: PayNestTheme.blueAccent,
                             ),
                             // child: Text(""),
                           ),
                         )
-                      : SizedBox(),
-                  Spacer(),
+                      : const SizedBox(),
+                  const Spacer(),
                   Text(
                     student,
                     textAlign: TextAlign.center,
@@ -99,7 +100,7 @@ class _StudentPageState extends State<StudentPage> {
                       // );
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => SelectSchool(),
+                          builder: (context) => const SelectSchool(),
                         ),
                       );
                     },
@@ -113,7 +114,7 @@ class _StudentPageState extends State<StudentPage> {
                         ),
                       ),
                       child: Lottie.asset(
-                        addStudentAnimation,
+                        AppAssets().addStudentAnimation,
                       ),
                     ),
                   ),
@@ -123,183 +124,187 @@ class _StudentPageState extends State<StudentPage> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
                   ),
                   color: PayNestTheme.colorWhite,
                 ),
-                child: Obx(() => controller.isLoading.value == false
-                    ? controller.myStudentData.value.status == true
-                        ? controller.myStudentData.value.students == null ||
-                                controller.myStudentData.value.students!.isEmpty
-                            ? Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: horizontalValue(16),
-                                ),
-                                child: Column(
-                                  children: [
-                                    verticalSpacer(100),
-                                    Container(
-                                      width: sizes.widthRatio * 150,
-                                      height: sizes.heightRatio * 150,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                            noData,
+                child: Obx(
+                  () => controller.isLoading.value == false
+                      ? controller.myStudentData.value.status == true
+                          ? controller.myStudentData.value.students == null ||
+                                  controller
+                                      .myStudentData.value.students!.isEmpty
+                              ? Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: horizontalValue(16),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      verticalSpacer(100),
+                                      Container(
+                                        width: sizes.widthRatio * 150,
+                                        height: sizes.heightRatio * 150,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                              AppAssets().noData,
+                                            ),
+                                            fit: BoxFit.cover,
                                           ),
-                                          fit: BoxFit.cover,
                                         ),
                                       ),
-                                    ),
-                                    verticalSpacer(20),
-                                    Container(
-                                      width: double.infinity,
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        noDataText,
-                                        style: PayNestTheme.title_3_16blackbold
-                                            .copyWith(
-                                          fontSize: sizes.fontRatio * 22,
-                                          color: PayNestTheme.primaryColor,
-                                          fontFamily: 'montserratBold',
+                                      verticalSpacer(20),
+                                      Container(
+                                        width: double.infinity,
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          noDataText,
+                                          style: PayNestTheme
+                                              .title_3_16blackbold
+                                              .copyWith(
+                                            fontSize: sizes.fontRatio * 22,
+                                            color: PayNestTheme.primaryColor,
+                                            fontFamily: 'montserratBold',
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    verticalSpacer(10),
+                                      verticalSpacer(10),
+                                      Container(
+                                        width: double.infinity,
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          sorryWeCant,
+                                          textAlign: TextAlign.center,
+                                          style: PayNestTheme
+                                              .title_3_16blackbold
+                                              .copyWith(
+                                            fontSize: sizes.fontRatio * 16,
+                                            color: PayNestTheme.lightBlack,
+                                            fontFamily: 'montserratBold',
+                                          ),
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      verticalSpacer(16),
+                                    ],
+                                  ),
+                                )
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    verticalSpacer(16),
                                     Container(
                                       width: double.infinity,
-                                      alignment: Alignment.center,
+                                      margin: EdgeInsets.symmetric(
+                                        horizontal: horizontalValue(24),
+                                      ),
                                       child: Text(
-                                        sorryWeCant,
-                                        textAlign: TextAlign.center,
-                                        style: PayNestTheme.title_3_16blackbold
+                                        selectStudent,
+                                        style: PayNestTheme.h2_12blueAccent
                                             .copyWith(
                                           fontSize: sizes.fontRatio * 16,
-                                          color: PayNestTheme.lightBlack,
-                                          fontFamily: 'montserratBold',
+                                          color: PayNestTheme.primaryColor,
+                                          fontFamily: 'montserratExtraBold',
                                         ),
                                       ),
                                     ),
-                                    const Spacer(),
-                                    verticalSpacer(16),
-                                  ],
-                                ),
-                              )
-                            : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  verticalSpacer(16),
-                                  Container(
-                                    width: double.infinity,
-                                    margin: EdgeInsets.symmetric(
-                                      horizontal: horizontalValue(24),
-                                    ),
-                                    child: Text(
-                                      selectStudent,
-                                      style:
-                                          PayNestTheme.h2_12blueAccent.copyWith(
-                                        fontSize: sizes.fontRatio * 16,
-                                        color: PayNestTheme.primaryColor,
-                                        fontFamily: 'montserratExtraBold',
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: SingleStudentCard(
-                                      onTap: (student) {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                SingleStudentPage(
-                                              studentId:
-                                                  student.studentId.toString(),
-                                              myStudentsRespModel:
-                                                  getMyStudentModel(
-                                                element: student,
+                                    Expanded(
+                                      child: SingleStudentCard(
+                                        onTap: (student) {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SingleStudentPage(
+                                                studentId: student.studentId
+                                                    .toString(),
+                                                myStudentsRespModel:
+                                                    getMyStudentModel(
+                                                  element: student,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        );
-                                      },
-                                      students: controller
-                                          .myStudentData.value.students!,
-                                    ),
-                                  ),
-                                ],
-                              )
-                        : Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: horizontalValue(16),
-                            ),
-                            child: Column(
-                              children: [
-                                verticalSpacer(100),
-                                Container(
-                                  width: sizes.widthRatio * 150,
-                                  height: sizes.heightRatio * 150,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        warning,
+                                          );
+                                        },
+                                        students: controller
+                                            .myStudentData.value.students!,
                                       ),
-                                      fit: BoxFit.cover,
+                                    ),
+                                  ],
+                                )
+                          : Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: horizontalValue(16),
+                              ),
+                              child: Column(
+                                children: [
+                                  verticalSpacer(100),
+                                  Container(
+                                    width: sizes.widthRatio * 150,
+                                    height: sizes.heightRatio * 150,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          AppAssets().warning,
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                verticalSpacer(20),
-                                Container(
-                                  width: double.infinity,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    error,
-                                    style: PayNestTheme.title_3_16blackbold
-                                        .copyWith(
-                                      fontSize: sizes.fontRatio * 22,
-                                      color: PayNestTheme.primaryColor,
-                                      fontFamily: 'montserratBold',
+                                  verticalSpacer(20),
+                                  Container(
+                                    width: double.infinity,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      error,
+                                      style: PayNestTheme.title_3_16blackbold
+                                          .copyWith(
+                                        fontSize: sizes.fontRatio * 22,
+                                        color: PayNestTheme.primaryColor,
+                                        fontFamily: 'montserratBold',
+                                      ),
                                     ),
                                   ),
-                                ),
-                                verticalSpacer(10),
-                                Container(
-                                  width: double.infinity,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    sorryWeCant,
-                                    textAlign: TextAlign.center,
-                                    style: PayNestTheme.title_3_16blackbold
-                                        .copyWith(
-                                      fontSize: sizes.fontRatio * 16,
-                                      color: PayNestTheme.lightBlack,
-                                      fontFamily: 'montserratBold',
+                                  verticalSpacer(10),
+                                  Container(
+                                    width: double.infinity,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      sorryWeCant,
+                                      textAlign: TextAlign.center,
+                                      style: PayNestTheme.title_3_16blackbold
+                                          .copyWith(
+                                        fontSize: sizes.fontRatio * 16,
+                                        color: PayNestTheme.lightBlack,
+                                        fontFamily: 'montserratBold',
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const Spacer(),
-                                verticalSpacer(16),
-                              ],
-                            ),
-                          )
-                    : Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: horizontalValue(16),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            verticalSpacer(16),
-                            FadeShimmer(
-                              width: sizes.widthRatio * 85,
-                              height: sizes.heightRatio * 20,
-                            baseColor: Color(0xFFEBEBF4),
-                            highlightColor: Color(0xFFF4F4F4),
-                            radius: 10,
-                            ),
-                            Expanded(
+                                  const Spacer(),
+                                  verticalSpacer(16),
+                                ],
+                              ),
+                            )
+                      : Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: horizontalValue(16),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              verticalSpacer(16),
+                              FadeShimmer(
+                                width: sizes.widthRatio * 85,
+                                height: sizes.heightRatio * 20,
+                                baseColor: const Color(0xFFEBEBF4),
+                                highlightColor: const Color(0xFFF4F4F4),
+                                radius: 10,
+                              ),
+                              Expanded(
                                 child: ListView.separated(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
@@ -316,8 +321,8 @@ class _StudentPageState extends State<StudentPage> {
                                         width: sizes.widthRatio * 10,
                                         height: sizes.heightRatio * 70,
                                         // fadeTheme: FadeTheme.dark,
-                                        baseColor: Color(0xFFEBEBF4),
-                                        highlightColor: Color(0xFFF4F4F4),
+                                        baseColor: const Color(0xFFEBEBF4),
+                                        highlightColor: const Color(0xFFF4F4F4),
                                         radius: 16,
                                       ),
                                     );
@@ -326,10 +331,11 @@ class _StudentPageState extends State<StudentPage> {
                                     return verticalSpacer(6);
                                   },
                                 ),
-                            ),
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
-                      )),
+                ),
               ),
             ),
           ],
@@ -338,68 +344,68 @@ class _StudentPageState extends State<StudentPage> {
     );
   }
 
-  SingleStudentModel getStudentModel({
-    required studentElement.StudentElement studentElement,
-  }) {
-    return SingleStudentModel(
-      id: studentElement.id,
-      parentId: studentElement.parentId,
-      studentId: studentElement.studentId,
-      deletedAt: studentElement.deletedAt,
-      createdAt: studentElement.createdAt,
-      updatedAt: studentElement.updatedAt,
-      student: Student(
-        dob: studentElement.student!.dob,
-        admissionDate: studentElement.student!.admissionDate,
-        id: studentElement.student!.id,
-        studentRegNo: studentElement.student!.studentRegNo,
-        firstName: studentElement.student!.firstName,
-        lastName: studentElement.student!.lastName,
-        grade: studentElement.student!.grade,
-        parentEmiratesId: studentElement.student!.parentEmiratesId,
-        parentPhoneNumber: studentElement.student!.parentPhoneNumber,
-        deletedAt: studentElement.student!.deletedAt,
-        schoolId: studentElement.student!.schoolId,
-        totalBalanceAmount:
-            double.parse(studentElement.student!.totalBalanceAmount.toString()),
-        guardianFirstName: studentElement.student!.guardianFirstName,
-        guardianLastName: studentElement.student!.guardianLastName,
-        guardianGender: studentElement.student!.guardianGender,
-        guardianEmiratesId: studentElement.student!.guardianEmiratesId,
-        guardianNationality: studentElement.student!.guardianNationality,
-        guardianReligion: studentElement.student!.guardianReligion,
-        area: studentElement.student!.area,
-        region: studentElement.student!.region,
-        streetAddress: studentElement.student!.streetAddress,
-        email: studentElement.student!.email,
-        phoneNumber: studentElement.student!.phoneNumber,
-        otherNumber: studentElement.student!.otherNumber,
-        profile: studentElement.student!.profile,
-        religion: studentElement.student!.religion,
-        nationality: studentElement.student!.nationality,
-        gender: studentElement.student!.gender,
-        dueDate: studentElement.student!.dueDate,
-        file: studentElement.student!.file,
-        privacy: studentElement.student!.privacy,
-        createdAt: studentElement.student!.createdAt,
-        updatedAt: studentElement.student!.updatedAt,
-        school: School(
-          id: studentElement.student!.school!.id,
-          name: studentElement.student!.school!.name,
-          deletedAt: studentElement.student!.school!.deletedAt,
-          addedBy: studentElement.student!.school!.addedBy,
-          address: studentElement.student!.school!.address,
-          description: studentElement.student!.school!.description,
-          vat: studentElement.student!.school!.vat,
-          paynestFee: studentElement.student!.school!.paynestFee,
-          apiKey: studentElement.student!.school!.apiKey,
-          merchantId: studentElement.student!.school!.merchantId,
-          file: studentElement.student!.school!.file,
-          privacy: studentElement.student!.school!.privacy,
-          createdAt: studentElement.student!.school!.createdAt,
-          updatedAt: studentElement.student!.school!.updatedAt,
-        ),
-      ),
-    );
-  }
+  // SingleStudentModel getStudentModel({
+  //   required StudentElement studentElement,
+  // }) {
+  //   return SingleStudentModel(
+  //     id: studentElement.id,
+  //     parentId: studentElement.parentId,
+  //     studentId: studentElement.studentId,
+  //     deletedAt: studentElement.deletedAt,
+  //     createdAt: studentElement.createdAt,
+  //     updatedAt: studentElement.updatedAt,
+  //     student: Student(
+  //       dob: studentElement.student!.dob,
+  //       admissionDate: studentElement.student!.admissionDate,
+  //       id: studentElement.student!.id,
+  //       studentRegNo: studentElement.student!.studentRegNo,
+  //       firstName: studentElement.student!.firstName,
+  //       lastName: studentElement.student!.lastName,
+  //       grade: studentElement.student!.grade,
+  //       parentEmiratesId: studentElement.student!.parentEmiratesId,
+  //       parentPhoneNumber: studentElement.student!.parentPhoneNumber,
+  //       deletedAt: studentElement.student!.deletedAt,
+  //       schoolId: studentElement.student!.schoolId,
+  //       totalBalanceAmount:
+  //       double.parse(studentElement.student!.totalBalanceAmount.toString()),
+  //       guardianFirstName: studentElement.student!.guardianFirstName,
+  //       guardianLastName: studentElement.student!.guardianLastName,
+  //       guardianGender: studentElement.student!.guardianGender,
+  //       guardianEmiratesId: studentElement.student!.guardianEmiratesId,
+  //       guardianNationality: studentElement.student!.guardianNationality,
+  //       guardianReligion: studentElement.student!.guardianReligion,
+  //       area: studentElement.student!.area,
+  //       region: studentElement.student!.region,
+  //       streetAddress: studentElement.student!.streetAddress,
+  //       email: studentElement.student!.email,
+  //       phoneNumber: studentElement.student!.phoneNumber,
+  //       otherNumber: studentElement.student!.otherNumber,
+  //       profile: studentElement.student!.profile,
+  //       religion: studentElement.student!.religion,
+  //       nationality: studentElement.student!.nationality,
+  //       gender: studentElement.student!.gender,
+  //       dueDate: studentElement.student!.dueDate,
+  //       file: studentElement.student!.file,
+  //       privacy: studentElement.student!.privacy,
+  //       createdAt: studentElement.student!.createdAt,
+  //       updatedAt: studentElement.student!.updatedAt,
+  //       school: School(
+  //         id: studentElement.student!.school!.id,
+  //         name: studentElement.student!.school!.name,
+  //         deletedAt: studentElement.student!.school!.deletedAt,
+  //         addedBy: studentElement.student!.school!.addedBy,
+  //         address: studentElement.student!.school!.address,
+  //         description: studentElement.student!.school!.description,
+  //         vat: studentElement.student!.school!.vat,
+  //         paynestFee: studentElement.student!.school!.paynestFee,
+  //         apiKey: studentElement.student!.school!.apiKey,
+  //         merchantId: studentElement.student!.school!.merchantId,
+  //         file: studentElement.student!.school!.file,
+  //         privacy: studentElement.student!.school!.privacy,
+  //         createdAt: studentElement.student!.school!.createdAt,
+  //         updatedAt: studentElement.student!.school!.updatedAt,
+  //       ),
+  //     ),
+  //   );
+  // }
 }

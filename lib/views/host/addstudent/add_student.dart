@@ -1,26 +1,16 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/addstudent_controller.dart';
 import 'package:paynest_flutter_app/controller/all_studentslist_controller.dart';
-import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/model/datamodel/selectedschool_to_addstudent.dart';
-import 'package:paynest_flutter_app/model/studentlist_res_model.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/addstudent/widget/student_bottom_sheet.dart';
 import 'package:paynest_flutter_app/views/host/dashboard/widgets/succes_bottom_sheet.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../presentation/res/res.dart';
-import '../../../widgets/inkwell_widget.dart';
-import '../../../widgets/toast.dart';
+import '../../../data/model/datamodel/selectedschool_to_addstudent.dart';
+import '../../../data/model/studentlist_res_model.dart';
 
 class AddStudent extends StatefulWidget {
-  SelectedSchoolData schoolData;
+  final SelectedSchoolData schoolData;
 
   AddStudent({Key? key, required this.schoolData}) : super(key: key);
 
@@ -47,7 +37,9 @@ class _AddStudentState extends State<AddStudent> {
   void initState() {
     isExpanded = false;
     isLoading = false;
-    filters = widget.schoolData.payeeType == 'STUDENT' ? ['Name', 'Account Number', 'Student ID'] : ['Account Number'];
+    filters = widget.schoolData.payeeType == 'STUDENT'
+        ? ['Name', 'Account Number', 'Student ID']
+        : ['Account Number'];
     super.initState();
   }
 
@@ -162,7 +154,7 @@ class _AddStudentState extends State<AddStudent> {
                                   width: 44.w,
                                   decoration: BoxDecoration(
                                     boxShadow: [
-                                      BoxShadow(
+                                      const BoxShadow(
                                         color: Colors.black54,
                                         blurRadius: 1.0,
                                         offset: Offset(
@@ -196,7 +188,7 @@ class _AddStudentState extends State<AddStudent> {
                                   style: PayNestTheme.title20white.copyWith(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'montserratBold',
-                                    fontSize: sizes.fontRatio*18,
+                                    fontSize: sizes.fontRatio * 18,
                                   ),
                                 ),
                               ),
@@ -222,7 +214,7 @@ class _AddStudentState extends State<AddStudent> {
                                           width: 1.w,
                                         ),
                                         color: Colors.white,
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                           Radius.circular(
                                             10,
                                           ),
@@ -284,10 +276,11 @@ class _AddStudentState extends State<AddStudent> {
                                             fontFamily: 'montserratRegular',
                                           ),
                                           icon: SvgPicture.asset(
-                                            icArrowDropDown,
+                                            AppAssets().icArrowDropDown,
                                           ),
                                           dropdownDecoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(
+                                            borderRadius:
+                                                const BorderRadius.only(
                                               bottomLeft: Radius.circular(16),
                                               bottomRight: Radius.circular(16),
                                             ),
@@ -353,10 +346,10 @@ class _AddStudentState extends State<AddStudent> {
                                     if (isSearchFieldEnable == true) {
                                       onSearchTextChanged('');
                                     } else {
-
                                       showToast(
                                           context: context,
-                                          messege:  "Please Select Search By Field First",
+                                          message:
+                                              "Please Select Search By Field First",
                                           color: PayNestTheme.primaryColor);
                                     }
                                     setState(() {});
@@ -374,7 +367,7 @@ class _AddStudentState extends State<AddStudent> {
                                         ?.unfocus();
                                   },
                                   decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(13),
+                                    contentPadding: const EdgeInsets.all(13),
                                     filled: true,
                                     fillColor: Colors.white,
                                     focusedBorder: UnderlineInputBorder(
@@ -389,15 +382,17 @@ class _AddStudentState extends State<AddStudent> {
                                       color: PayNestTheme.primaryColor,
                                     ),
                                     hintText: searchStudent,
-                                    hintStyle: PayNestTheme.small_2_12textGrey.copyWith(
-                                  fontSize: sizes.fontRatio * 13,
-                                    color: PayNestTheme.textGrey.withOpacity(0.3),
-                                  ),
+                                    hintStyle: PayNestTheme.small_2_12textGrey
+                                        .copyWith(
+                                      fontSize: sizes.fontRatio * 13,
+                                      color: PayNestTheme.textGrey
+                                          .withOpacity(0.3),
+                                    ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12.r),
                                     ),
                                   ),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.black,
                                   ),
                                 ),
@@ -423,10 +418,12 @@ class _AddStudentState extends State<AddStudent> {
                                   ListView.separated(
                                     itemCount: _searchResult.length,
                                     shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       return Column(
-                                        crossAxisAlignment:CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           InkWellWidget(
                                             onTap: () {},
@@ -449,13 +446,21 @@ class _AddStudentState extends State<AddStudent> {
                                               child: Row(
                                                 children: [
                                                   Container(
-                                                    height: sizes.heightRatio * 50,
-                                                    width: sizes.widthRatio * 50,
-                                                    decoration: BoxDecoration(
+                                                    height:
+                                                        sizes.heightRatio * 50,
+                                                    width:
+                                                        sizes.widthRatio * 50,
+                                                    decoration:
+                                                        const BoxDecoration(
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: SvgPicture.asset(
-                                                      _searchResult[index].gender == "male" ? icMale : icFemale,
+                                                      _searchResult[index]
+                                                                  .gender ==
+                                                              "male"
+                                                          ? AppAssets().icMale
+                                                          : AppAssets()
+                                                              .icFemale,
                                                     ),
                                                   ),
                                                   horizontalSpacer(26),
@@ -465,16 +470,17 @@ class _AddStudentState extends State<AddStudent> {
                                                             .start,
                                                     children: [
                                                       Container(
-                                                        width: sizes.widthRatio*100,
+                                                        width:
+                                                            sizes.widthRatio *
+                                                                100,
                                                         child: Text(
-                                                          
                                                           '${_searchResult[index].firstName}\n${_searchResult[index].lastName ?? ''}',
                                                           style: PayNestTheme
                                                               .title20white
                                                               .copyWith(
-                                                            fontSize:
-                                                                sizes.fontRatio *
-                                                                    14,
+                                                            fontSize: sizes
+                                                                    .fontRatio *
+                                                                14,
                                                             fontFamily:
                                                                 'montserratBold',
                                                             color: PayNestTheme
@@ -483,21 +489,26 @@ class _AddStudentState extends State<AddStudent> {
                                                         ),
                                                       ),
                                                       verticalSpacer(4),
-                                                      _searchResult[index].grade != null ?Text(
-                                                        'Grade ${_searchResult[index].grade}',
-                                                        style: PayNestTheme
-                                                            .h2_14textGrey
-                                                            .copyWith(
-                                                          fontSize:
-                                                              sizes.fontRatio *
-                                                                  10,
-                                                          fontFamily:
-                                                              'montserratRegular',
-                                                        ),
-                                                      ): const SizedBox.shrink(),
+                                                      _searchResult[index]
+                                                                  .grade !=
+                                                              null
+                                                          ? Text(
+                                                              'Grade ${_searchResult[index].grade}',
+                                                              style: PayNestTheme
+                                                                  .h2_14textGrey
+                                                                  .copyWith(
+                                                                fontSize: sizes
+                                                                        .fontRatio *
+                                                                    10,
+                                                                fontFamily:
+                                                                    'montserratRegular',
+                                                              ),
+                                                            )
+                                                          : const SizedBox
+                                                              .shrink(),
                                                     ],
                                                   ),
-                                                  Spacer(),
+                                                  const Spacer(),
                                                   _getActionButton(
                                                     onTap: () async {
                                                       if (_selectedFilter ==
@@ -523,34 +534,36 @@ class _AddStudentState extends State<AddStudent> {
                                                         setState(() {});
                                                         if (addStudentController
                                                             .isStudentAdded) {
-                                                          SuccessBottomSheet.show(
+                                                          SuccessBottomSheet
+                                                              .show(
                                                             context: context,
                                                           );
                                                         } else {
-
                                                           showToast(
                                                               context: context,
-                                                              messege:  addStudentController
-                                                                  .addStudentData
-                                                                  .value
-                                                                  .message ??
+                                                              message: addStudentController
+                                                                      .addStudentData
+                                                                      .value
+                                                                      .message ??
                                                                   'Verification Failed',
-                                                              color: PayNestTheme.red);
+                                                              color:
+                                                                  PayNestTheme
+                                                                      .red);
                                                         }
 
                                                         searchController.text =
-                                                        '';
+                                                            '';
                                                         if (studentListController
-                                                            .studentList
-                                                            .value
-                                                            .getStudent !=
-                                                            null &&
+                                                                    .studentList
+                                                                    .value
+                                                                    .getStudent !=
+                                                                null &&
                                                             studentListController
-                                                                .studentList
-                                                                .value
-                                                                .getStudent!
-                                                                .rows!
-                                                                .length >
+                                                                    .studentList
+                                                                    .value
+                                                                    .getStudent!
+                                                                    .rows!
+                                                                    .length >
                                                                 0) {
                                                           studentListController
                                                               .studentList
@@ -584,34 +597,36 @@ class _AddStudentState extends State<AddStudent> {
                                                         setState(() {});
                                                         if (addStudentController
                                                             .isStudentAdded) {
-                                                          SuccessBottomSheet.show(
+                                                          SuccessBottomSheet
+                                                              .show(
                                                             context: context,
                                                           );
-
                                                         } else {
                                                           showToast(
                                                               context: context,
-                                                              messege:   addStudentController
-                                                                  .addStudentData
-                                                                  .value
-                                                                  .message ??
+                                                              message: addStudentController
+                                                                      .addStudentData
+                                                                      .value
+                                                                      .message ??
                                                                   'Verification Failed',
-                                                              color: PayNestTheme.red);
+                                                              color:
+                                                                  PayNestTheme
+                                                                      .red);
                                                         }
 
                                                         searchController.text =
-                                                        '';
+                                                            '';
                                                         if (studentListController
-                                                            .studentList
-                                                            .value
-                                                            .getStudent !=
-                                                            null &&
+                                                                    .studentList
+                                                                    .value
+                                                                    .getStudent !=
+                                                                null &&
                                                             studentListController
-                                                                .studentList
-                                                                .value
-                                                                .getStudent!
-                                                                .rows!
-                                                                .length >
+                                                                    .studentList
+                                                                    .value
+                                                                    .getStudent!
+                                                                    .rows!
+                                                                    .length >
                                                                 0) {
                                                           studentListController
                                                               .studentList
@@ -670,34 +685,38 @@ class _AddStudentState extends State<AddStudent> {
                                                               setState(() {});
                                                               if (addStudentController
                                                                   .isStudentAdded) {
-                                                                SuccessBottomSheet.show(
-                                                                  context: context,
+                                                                SuccessBottomSheet
+                                                                    .show(
+                                                                  context:
+                                                                      context,
                                                                 );
                                                               } else {
-
                                                                 showToast(
-                                                                    context: context,
-                                                                    messege:   addStudentController
-                                                                        .addStudentData
-                                                                        .value
-                                                                        .message ??
+                                                                    context:
+                                                                        context,
+                                                                    message: addStudentController
+                                                                            .addStudentData
+                                                                            .value
+                                                                            .message ??
                                                                         'Verification Failed',
-                                                                    color: PayNestTheme.red);
+                                                                    color:
+                                                                        PayNestTheme
+                                                                            .red);
                                                               }
 
-                                                              searchController.text =
-                                                              '';
+                                                              searchController
+                                                                  .text = '';
                                                               if (studentListController
-                                                                  .studentList
-                                                                  .value
-                                                                  .getStudent !=
-                                                                  null &&
+                                                                          .studentList
+                                                                          .value
+                                                                          .getStudent !=
+                                                                      null &&
                                                                   studentListController
-                                                                      .studentList
-                                                                      .value
-                                                                      .getStudent!
-                                                                      .rows!
-                                                                      .length >
+                                                                          .studentList
+                                                                          .value
+                                                                          .getStudent!
+                                                                          .rows!
+                                                                          .length >
                                                                       0) {
                                                                 studentListController
                                                                     .studentList
@@ -707,11 +726,14 @@ class _AddStudentState extends State<AddStudent> {
                                                                     .clear();
                                                               }
                                                             } else {
-
                                                               showToast(
-                                                                  context: context,
-                                                                  messege:  'Fields can not be empty',
-                                                                  color: PayNestTheme.red);
+                                                                  context:
+                                                                      context,
+                                                                  message:
+                                                                      'Fields can not be empty',
+                                                                  color:
+                                                                      PayNestTheme
+                                                                          .red);
                                                             }
                                                           },
                                                         );
@@ -751,11 +773,11 @@ class _AddStudentState extends State<AddStudent> {
                                 ],
                               )
                             : Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                   vertical: 80,
                                   horizontal: 10,
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     'No data found  !!',
                                     style: TextStyle(
@@ -765,7 +787,7 @@ class _AddStudentState extends State<AddStudent> {
                                   ),
                                 ),
                               )
-                        : SizedBox.shrink(),
+                        : const SizedBox.shrink(),
                     _searchResult.isNotEmpty || searchController.text.isNotEmpty
                         ? studentListController.studentList.value.getStudent !=
                                     null &&
@@ -782,7 +804,7 @@ class _AddStudentState extends State<AddStudent> {
                       ),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
+                          backgroundColor: PayNestTheme.primaryColor,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
@@ -795,10 +817,9 @@ class _AddStudentState extends State<AddStudent> {
                         ),
                         onPressed: () {
                           if (searchController.text.isEmpty) {
-
                             showToast(
                                 context: context,
-                                messege:  'Search Can Not Be Empty!',
+                                message: 'Search Can Not Be Empty!',
                                 color: PayNestTheme.red);
                           }
                           if (searchController.text.isNotEmpty) {
@@ -839,7 +860,7 @@ class _AddStudentState extends State<AddStudent> {
                   ],
                 ),
               )
-            : Center(
+            : const Center(
                 child: CircularProgressIndicator(),
               ),
       ),
@@ -931,7 +952,7 @@ class _AddStudentState extends State<AddStudent> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Lottie.asset(
-            schoolCampusAnimation,
+            AppAssets().schoolCampusAnimation,
             repeat: true,
             width: sizes.widthRatio * 172,
             height: sizes.heightRatio * 96,

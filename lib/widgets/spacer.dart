@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-import '../presentation/res/res.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 Widget verticalSpacer(double value) => SizedBox(
       height: sizes.heightRatio * value,

@@ -1,6 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class StorageRepoImpl implements StorageRepo {
   final SharedPreferences sharedPreferences;
@@ -10,6 +8,12 @@ class StorageRepoImpl implements StorageRepo {
   });
 
   @override
+  Future<bool> remove(String key) => sharedPreferences.remove(key);
+
+  @override
+  bool contains(String key) => sharedPreferences.containsKey(key);
+
+  @override
   double getDouble({required String key}) =>
       sharedPreferences.getDouble(key) ?? 0.0;
 
@@ -17,8 +21,7 @@ class StorageRepoImpl implements StorageRepo {
   int getInt({required String key}) => sharedPreferences.getInt(key) ?? 0;
 
   @override
-  String getString({required String key}) =>
-      sharedPreferences.getString(key) ?? '';
+  String? getString({required String key}) => sharedPreferences.getString(key);
 
   @override
   List<String> getStringList({required String key}) =>

@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class EmiratesIdFormatter extends TextInputFormatter {
   final String mask;
@@ -19,7 +19,7 @@ class EmiratesIdFormatter extends TextInputFormatter {
             mask[newValue.text.length - 1] == separator) {
           return TextEditingValue(
             text:
-            '${oldValue.text}$separator${newValue.text.substring(newValue.text.length - 1)}',
+                '${oldValue.text}$separator${newValue.text.substring(newValue.text.length - 1)}',
             selection: TextSelection.collapsed(
               offset: newValue.selection.end + 1,
             ),

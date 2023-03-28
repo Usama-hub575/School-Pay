@@ -1,22 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:lottie/lottie.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
-import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/utils/sharedpref.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
-import 'package:paynest_flutter_app/widgets/inkwell_widget.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
-import 'package:paynest_flutter_app/widgets/toast.dart';
-
-import '../auth/local_auth_api.dart';
-import '../presentation/res/res.dart';
-import '../utils/sharedPrefKeys.dart';
-import '../widgets/back_button.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -65,12 +49,12 @@ class _SignInPageState extends State<SignInPage> {
                   iconColor: PayNestTheme.colorWhite,
                   buttonColor: PayNestTheme.primaryColor,
                 ),
-                Spacer(),
+                const Spacer(),
                 Image.asset(
-                  welcomeRegisterLogo,
+                  AppAssets().welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
             verticalSpacer(22),
@@ -225,7 +209,7 @@ class _SignInPageState extends State<SignInPage> {
                     child: Container(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        forgotpassword,
+                        forgotPassword,
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                           fontSize: sizes.fontRatio * 14,
                           color: PayNestTheme.primaryColor,
@@ -282,7 +266,7 @@ class _SignInPageState extends State<SignInPage> {
                                         !userController
                                             .userResData.value.status) {
                                       showToast(
-                                          messege: 'Something Went wrong',
+                                          message: 'Something Went wrong',
                                           context: context,
                                           color: PayNestTheme.red);
                                     }
@@ -320,7 +304,7 @@ class _SignInPageState extends State<SignInPage> {
                       height: sizes.heightRatio * 46,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
+                          backgroundColor: PayNestTheme.primaryColor,
                           elevation: 0,
                           // side: BorderSide(width:1, color:Colors.white),
                           shape: RoundedRectangleBorder(
@@ -364,7 +348,7 @@ class _SignInPageState extends State<SignInPage> {
                             } else if (!userController
                                 .userResData.value.status) {
                               showToast(
-                                  messege: userController
+                                  message: userController
                                           .userResData.value.message ??
                                       userController.errorMessage.toString(),
                                   context: context,
@@ -375,30 +359,27 @@ class _SignInPageState extends State<SignInPage> {
                               userController.isLoading.value = false;
                               if (userController.retriesTime.value != '') {
                                 showToast(
-                                    messege: "Please retry after " +
-                                        userController.retriesTime.value
-                                            .toString() +
-                                        " min",
+                                    message:
+                                        "Please retry after ${userController.retriesTime.value} min",
                                     context: context,
                                     color: PayNestTheme.red);
                               } else if (userController.attemptsRemain.value !=
                                   '') {
                                 showToast(
-                                    messege: userController.attemptsRemain.value
-                                            .toString() +
-                                        " attempts remaining",
+                                    message:
+                                        "${userController.attemptsRemain.value} attempts remaining",
                                     context: context,
                                     color: PayNestTheme.red);
                               } else {
                                 showToast(
-                                    messege:
+                                    message:
                                         "Entered email or password does not match",
                                     context: context,
                                     color: PayNestTheme.red);
                               }
                             } else {
                               showToast(
-                                  messege: "Something went wrong. Try again !!",
+                                  message: "Something went wrong. Try again !!",
                                   context: context,
                                   color: PayNestTheme.red);
                             }

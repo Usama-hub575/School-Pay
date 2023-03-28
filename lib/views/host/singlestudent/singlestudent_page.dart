@@ -1,22 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart'
-    as SingleSchoolModel;
-import 'package:paynest_flutter_app/presentation/export.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
-import 'package:paynest_flutter_app/widgets/amount_formater.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../constants/constants.dart';
-import '../../../model/mystudents_resp_model.dart';
-import '../../../widgets/back_button.dart';
-import '../../../widgets/full_screen_loader.dart';
-import '../../../widgets/toast.dart';
+import '../../../data/model/datamodel/singlestudent_model.dart'
+    as SingleSchoolModel;
+import '../../../data/model/mystudents_resp_model.dart';
 
 class SingleStudentPage extends StatefulWidget {
   SingleStudentPage({
@@ -122,7 +110,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(32),
                         topRight: Radius.circular(32),
                       ),
@@ -146,7 +134,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                   fontFamily: 'montserratSemiBold',
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               userController.singleStudentResponse.value
                                           .students !=
                                       null
@@ -182,13 +170,13 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                           height: 1,
                           color: PayNestTheme.textGrey.withOpacity(0.5),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Container(
                           margin: EdgeInsets.symmetric(
                             horizontal: horizontalValue(16),
                           ),
                           child: Lottie.asset(
-                            singleStudentJson,
+                            AppAssets().singleStudentJson,
                             repeat: true,
                             height: sizes.heightRatio * 250,
                           ),
@@ -197,7 +185,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                         userController.singleStudentResponse.value.students![0]
                                     .student!.totalBalanceAmount ==
                                 0
-                            ? SizedBox.shrink()
+                            ? const SizedBox.shrink()
                             : Container(
                                 margin: EdgeInsets.symmetric(
                                   horizontal: horizontalValue(16),
@@ -205,7 +193,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                 width: double.infinity,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary: PayNestTheme.colorWhite,
+                                    backgroundColor: PayNestTheme.colorWhite,
                                     elevation: 0,
                                     side: BorderSide(
                                       width: 1,
@@ -264,7 +252,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                 ),
@@ -281,22 +269,38 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                         ? Container(
                             height: sizes.heightRatio * 50,
                             width: sizes.widthRatio * 50,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
                             child: SvgPicture.asset(
                               userController.singleStudentResponse.value
                                           .students![0].student?.gender ==
                                       "male"
-                                  ? icMale
-                                  : icFemale,
+                                  ? AppAssets().icMale
+                                  : AppAssets().icFemale,
                             ),
                           )
                         : const SizedBox.shrink(),
                     verticalSpacer(8),
                     userController.singleStudentResponse.value.students != null
                         ? Text(
-                            '${userController.singleStudentResponse.value.students![0].student?.firstName ?? '' + (userController.singleStudentResponse.value.students![0].student?.lastName != null ? userController.parentStudentResponse.parentStudent!.student!.lastName ?? '' : '')}',
+                            userController.singleStudentResponse.value
+                                    .students![0].student?.firstName ??
+                                '' +
+                                    (userController
+                                                .singleStudentResponse
+                                                .value
+                                                .students![0]
+                                                .student
+                                                ?.lastName !=
+                                            null
+                                        ? userController
+                                                .parentStudentResponse
+                                                .parentStudent!
+                                                .student!
+                                                .lastName ??
+                                            ''
+                                        : ''),
                             textAlign: TextAlign.center,
                             style: PayNestTheme.h2_12blueAccent.copyWith(
                               fontSize: sizes.fontRatio * 22,
@@ -322,7 +326,8 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     verticalSpacer(8),
                     userController.singleStudentResponse.value.students != null
                         ? Text(
-                            '${userController.singleStudentResponse.value.students![0].student!.school!.name}',
+                            userController.singleStudentResponse.value
+                                .students![0].student!.school!.name,
                             textAlign: TextAlign.center,
                             style: PayNestTheme.h2_12blueAccent.copyWith(
                               fontSize: sizes.fontRatio * 16,
@@ -333,7 +338,8 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                     verticalSpacer(4),
                     userController.singleStudentResponse.value.students != null
                         ? Text(
-                            '${userController.singleStudentResponse.value.students![0].student!.school!.address}',
+                            userController.singleStudentResponse.value
+                                .students![0].student!.school!.address,
                             textAlign: TextAlign.center,
                             style: PayNestTheme.small_2_10textGrey.copyWith(
                               fontSize: sizes.fontRatio * 16,

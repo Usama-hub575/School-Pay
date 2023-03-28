@@ -1,6 +1,4 @@
-
-
-import '../export.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class TextStyles {
   final regular = TextStyle(

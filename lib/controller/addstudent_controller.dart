@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:paynest_flutter_app/model/addstudent_resp_model.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
+
+import '../data/model/addstudent_resp_model.dart';
 
 
 class AddStudentController extends GetxController{

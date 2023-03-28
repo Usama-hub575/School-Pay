@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
@@ -32,7 +33,8 @@ class _WelcomePageState extends State<WelcomePage> {
     initializeDateFormatting();
     dateFormat = DateFormat.yMMMMd('en_GB');
     getFCMToken();
-    videoPlayerController = VideoPlayerController.asset(welcomeVideo);
+    videoPlayerController =
+        VideoPlayerController.asset(AppAssets().welcomeVideo);
     videoPlayerController.initialize().then((value) {
       videoPlayerController.play();
       videoPlayerController.setVolume(0);
@@ -78,7 +80,7 @@ class _WelcomePageState extends State<WelcomePage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Image.asset(
-                  paynestLogoNew,
+                  AppAssets().paynestLogoNew,
                   width: sizes.widthRatio * 230,
                 ),
                 verticalSpacer(220),
@@ -122,7 +124,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: PayNestTheme.primaryColor,
+                      backgroundColor: PayNestTheme.primaryColor,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -140,8 +142,9 @@ class _WelcomePageState extends State<WelcomePage> {
                       child: Text(
                         signIn,
                         style: PayNestTheme.subtitle16white.copyWith(
-                            fontSize: sizes.fontRatio * 14,
-                            fontFamily: 'montserratBold'),
+                          fontSize: sizes.fontRatio * 14,
+                          fontFamily: 'montserratBold',
+                        ),
                       ),
                     ),
                   ),
@@ -155,7 +158,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: PayNestTheme.colorWhite,
+                      backgroundColor: PayNestTheme.colorWhite,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -180,8 +183,8 @@ class _WelcomePageState extends State<WelcomePage> {
                 verticalSpacer(16),
                 GestureDetector(
                   onTap: () {
-                    launch(
-                      'https://paynest.ae/privacy-policy.html',
+                    launchUrl(
+                      Uri.parse('https://paynest.ae/privacy-policy.html'),
                     );
                   },
                   child: Text(

@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class InkWellWidget extends StatefulWidget {
-  Function onTap;
-  Widget child;
+  final Function onTap;
+  final Widget child;
+
   InkWellWidget({Key? key, required this.onTap, required this.child})
       : super(key: key);
 

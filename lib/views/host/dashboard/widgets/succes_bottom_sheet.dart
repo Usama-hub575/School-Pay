@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 
 import '../../../../constants/constants.dart';
@@ -72,7 +73,7 @@ class SuccessWidget extends StatelessWidget {
                       ),
                       verticalSpacer(16),
                       Lottie.asset(
-                        checkAnimation,
+                        AppAssets().checkAnimation,
                         repeat: true,
                         height: sizes.heightRatio * 100,
                         width: sizes.widthRatio * 100,
@@ -99,7 +100,7 @@ class SuccessWidget extends StatelessWidget {
                         height: sizes.heightRatio * 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: PayNestTheme.primaryColor,
+                            backgroundColor: PayNestTheme.primaryColor,
                             elevation: 0,
                             // side: BorderSide(width:1, color:Colors.white),
                             shape: RoundedRectangleBorder(

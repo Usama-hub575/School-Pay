@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
-import 'package:paynest_flutter_app/model/mystudents_resp_model.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../../constants/constants.dart';
+import '../../../../data/model/mystudents_resp_model.dart';
 import '../../../../presentation/res/res.dart';
 import '../../../../theme/theme.dart';
 import '../../../../widgets/inkwell_widget.dart';
@@ -78,7 +78,7 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
@@ -94,12 +94,14 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 0,
                     blurRadius: 9,
-                    offset: Offset(0, 2),
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),
               child: SvgPicture.asset(
-                student.student?.gender == 'male' ? icMale : icFemale,
+                student.student?.gender == 'male'
+                    ? AppAssets().icMale
+                    : AppAssets().icFemale,
               ),
             ),
             horizontalSpacer(12),
@@ -136,7 +138,7 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
             ),
             const Spacer(),
             Lottie.asset(
-              arrowForwardAnimation,
+              AppAssets().arrowForwardAnimation,
               repeat: true,
               width: sizes.widthRatio * 26,
               height: sizes.heightRatio * 26,

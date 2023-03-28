@@ -3,16 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/model/datamodel/paynowtransaction_detail_model.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
+import '../../../data/model/datamodel/paynowtransaction_detail_model.dart';
 import '../../../presentation/res/res.dart';
 import '../../../widgets/amount_formater.dart';
 
 class PayNowTransactionDetailsPage extends StatefulWidget {
-  PayNowTransactionDetailModel pntdm;
+  final PayNowTransactionDetailModel pntdm;
 
   PayNowTransactionDetailsPage({required this.pntdm});
 
@@ -31,7 +32,7 @@ class _PayNowTransactionDetailsPageState
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             height: 350.h,
             child: Stack(
               children: [
@@ -53,7 +54,7 @@ class _PayNowTransactionDetailsPageState
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           verticalSpacer(16),
-                          Container(
+                          SizedBox(
                             width: double.infinity,
                             child: Text(
                               'Invoice Details',
@@ -92,7 +93,7 @@ class _PayNowTransactionDetailsPageState
                                   color: PayNestTheme.borderGrey,
                                   spreadRadius: 1,
                                   blurRadius: 7,
-                                  offset: Offset(
+                                  offset: const Offset(
                                     0,
                                     3,
                                   ),
@@ -105,7 +106,7 @@ class _PayNowTransactionDetailsPageState
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Lottie.asset(
-                                  successCheckAnimation,
+                                  AppAssets().successCheckAnimation,
                                   height: sizes.heightRatio * 104,
                                   width: sizes.widthRatio * 104,
                                 ),
@@ -118,7 +119,7 @@ class _PayNowTransactionDetailsPageState
                                   ),
                                 ),
                                 verticalSpacer(8),
-                                Container(
+                                SizedBox(
                                   width: sizes.width / 1.4,
                                   child: Text(
                                     youHaveSuccessfully,
@@ -145,7 +146,7 @@ class _PayNowTransactionDetailsPageState
           ),
           Expanded(
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 34.h),
                 child: Column(
@@ -177,10 +178,12 @@ class _PayNowTransactionDetailsPageState
                       height: 1.h,
                       color: PayNestTheme.lineColor,
                     ),
-                    widget.pntdm.student!.grade != '-' ? verticalSpacer(16): const SizedBox.shrink(),
+                    widget.pntdm.student!.grade != '-'
+                        ? verticalSpacer(16)
+                        : const SizedBox.shrink(),
                     widget.pntdm.student!.grade != '-'
                         ? Text(
-                            studentclass,
+                            studentClass,
                             style: PayNestTheme.h2_14textGrey.copyWith(
                               color: PayNestTheme.primaryColor,
                               fontFamily: 'montserratBold',
@@ -310,11 +313,11 @@ class _PayNowTransactionDetailsPageState
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: horizontalValue(30)),
-            child: Container(
+            child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: PayNestTheme.primaryColor,
+                  backgroundColor: PayNestTheme.primaryColor,
                   elevation: 0,
                   side: BorderSide(
                     width: 1,

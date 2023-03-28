@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:paynest_flutter_app/controller/register_controller.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../constants/constants.dart';
@@ -97,7 +95,7 @@ class _NewPasswordState extends State<NewPassword> {
                 ),
                 Spacer(),
                 Image.asset(
-                  welcomeRegisterLogo,
+                  AppAssets().welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,
                 ),
                 Spacer(),
@@ -328,7 +326,7 @@ class _NewPasswordState extends State<NewPassword> {
                       height: sizes.heightRatio * 46,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
+                          backgroundColor: PayNestTheme.primaryColor,
                           elevation: 0,
                           // side: BorderSide(width:1, color:Colors.white),
                           shape: RoundedRectangleBorder(
@@ -356,21 +354,20 @@ class _NewPasswordState extends State<NewPassword> {
                                   Navigator.popUntil(
                                     context,
                                     ModalRoute.withName('/SignInPage'),
-
                                   );
                                 },
                               );
                             } else {
                               showToast(
                                   context: context,
-                                  messege:
+                                  message:
                                       userController.isFailed.value.toString(),
                                   color: PayNestTheme.primaryColor);
                             }
                           } else {
                             showToast(
                                 context: context,
-                                messege: 'Fields can not be empty!',
+                                message: 'Fields can not be empty!',
                                 color: PayNestTheme.primaryColor);
                           }
                         },

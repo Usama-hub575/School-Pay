@@ -1,22 +1,6 @@
-import 'dart:async';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
-import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/presentation/res/constants.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
-import 'Utils/sharedpref.dart';
-import 'main.dart';
+import 'export.dart';
 
 //flutter build apk --flavor staging -t lib/staging_main.dart
 
@@ -26,9 +10,15 @@ late UserController userController;
 Future<void> backgroundHandler(RemoteMessage message) async {
   String payload = message.data['studentId'];
   notificationStudentID = payload;
-  print('Handling a background message ${message.messageId}');
-  print(message.data.toString());
-  print(message.notification!.title.toString());
+  if (kDebugMode) {
+    print('Handling a background message ${message.messageId}');
+  }
+  if (kDebugMode) {
+    print(message.data.toString());
+  }
+  if (kDebugMode) {
+    print(message.notification!.title.toString());
+  }
   flutterLocalNotificationsPlugin.show(
     message.hashCode,
     message.notification?.title,
@@ -68,25 +58,67 @@ void main() async {
   });
   FCM().init();
   initializeLocalNotifications();
-  Future.wait([
-    precachePicture(
-      ExactAssetPicture(
-        SvgPicture.svgStringDecoderBuilder,
-        icSchoolBuilding,
+  await initializeDependencies();
+  Future.wait(
+    [
+      precachePicture(
+        ExactAssetPicture(
+          SvgPicture.svgStringDecoderBuilder,
+          AppAssets().icSchoolBuilding,
+        ),
+        null,
       ),
-      null,
-    ),
-  ]);
-  getFCMToken();
+    ],
+  );
+  // getFCMToken();
   MySharedPreferences.instance;
   userController = Get.put(
     UserController(),
   );
   runZonedGuarded(
-        () {
-      runApp(MyApp());
+    () {
+      runApp(
+        MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) => FirebaseBloc(
+                firebaseUseCase: it<FirebaseUseCase>(),
+              )..add(
+                  InitializeFirebaseRemoteConfiguration(),
+                ),
+            ),
+            BlocProvider(
+              create: (_) => InitializerBloc(
+                firebaseUseCase: it<FirebaseUseCase>(),
+                initializerUseCase: it<InitializerUseCase>(),
+              ),
+            ),
+            BlocProvider(
+              create: (_) => SignInBloc(
+                signInUseCase: it<SignInUseCase>(),
+              ),
+            ),
+            BlocProvider(
+              create: (_) => RegisterMainPageBloc(
+                registerMainPageUseCase: it<RegisterMainPageUseCase>(),
+              ),
+            ),
+            BlocProvider(
+              create: (_) => RegisterOTPPageBloc(
+                registerOTPPageUseCase: it<RegisterOTPPageUseCase>(),
+              ),
+            ),
+            BlocProvider(
+              create: (_) => RegisterDetailPageBloc(
+                registerDetailPageUseCase: it<RegisterDetailPageUseCase>(),
+              ),
+            ),
+          ],
+          child: const MyApp(),
+        ),
+      );
     },
-        (error, stack) async {
+    (error, stack) async {
       await Sentry.captureException(
         error,
         stackTrace: stack,
@@ -146,7 +178,7 @@ class FCM {
 
     FirebaseMessaging.instance.getInitialMessage().then(
       (RemoteMessage? remoteMessage) {
-        if(remoteMessage != null){
+        if (remoteMessage != null) {
           notificationStudentID = remoteMessage.data['studentId'];
         }
       },

@@ -26,12 +26,10 @@ class SingleCardWithRadioButton extends StatefulWidget {
 }
 
 class _SingleCardWithRadioButtonState extends State<SingleCardWithRadioButton> {
-
   @override
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +42,14 @@ class _SingleCardWithRadioButtonState extends State<SingleCardWithRadioButton> {
           SvgPicture.asset(widget.icon),
           horizontalSpacer(12),
           Text(
-            '${widget.value}',
+            widget.value,
             style: PayNestTheme.h2_12blueAccent.copyWith(
               fontSize: sizes.fontRatio * 16,
               color: PayNestTheme.lightBlack,
               fontFamily: 'montserratBold',
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Container(
             height: sizes.heightRatio * 22,
             decoration: BoxDecoration(
@@ -59,14 +57,13 @@ class _SingleCardWithRadioButtonState extends State<SingleCardWithRadioButton> {
             ),
             child: FittedBox(
               child: CupertinoSwitch(
-                thumbColor: PayNestTheme.colorWhite,
-                activeColor: Colors.green,
-                trackColor: PayNestTheme.colorWhite,
-                value: widget.isEnable,
-                onChanged: (value){
-                  widget.onTap(value);
-                }
-              ),
+                  thumbColor: PayNestTheme.colorWhite,
+                  activeColor: Colors.green,
+                  trackColor: PayNestTheme.colorWhite,
+                  value: widget.isEnable,
+                  onChanged: (value) {
+                    widget.onTap(value);
+                  }),
             ),
           )
         ],

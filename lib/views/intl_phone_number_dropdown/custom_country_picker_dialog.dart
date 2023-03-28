@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'country.dart';
 import 'custom_halper.dart';
 
-
 class CustomPickerDialogStyle {
   final Color? backgroundColor;
 
@@ -58,7 +57,8 @@ class CustomCountryPickerDialog extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CustomCountryPickerDialogState createState() => _CustomCountryPickerDialogState();
+  _CustomCountryPickerDialogState createState() =>
+      _CustomCountryPickerDialogState();
 }
 
 class _CustomCountryPickerDialogState extends State<CustomCountryPickerDialog> {
@@ -77,8 +77,8 @@ class _CustomCountryPickerDialogState extends State<CustomCountryPickerDialog> {
   Widget build(BuildContext context) {
     final mediaWidth = MediaQuery.of(context).size.width;
     final width = widget.style?.width ?? mediaWidth;
-    final defaultHorizontalPadding = 40.0;
-    final defaultVerticalPadding = 24.0;
+    const defaultHorizontalPadding = 40.0;
+    const defaultVerticalPadding = 24.0;
     return Dialog(
       insetPadding: EdgeInsets.symmetric(
           vertical: defaultVerticalPadding,
@@ -91,7 +91,8 @@ class _CustomCountryPickerDialogState extends State<CustomCountryPickerDialog> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: widget.style?.searchFieldPadding ?? const EdgeInsets.all(0),
+              padding:
+                  widget.style?.searchFieldPadding ?? const EdgeInsets.all(0),
               child: TextField(
                 cursorColor: widget.style?.searchFieldCursorColor,
                 decoration: widget.style?.searchFieldInputDecoration ??
@@ -102,13 +103,13 @@ class _CustomCountryPickerDialogState extends State<CustomCountryPickerDialog> {
                 onChanged: (value) {
                   _filteredCountries = isNumeric(value)
                       ? widget.countryList
-                      .where((country) => country.dialCode.contains(value))
-                      .toList()
+                          .where((country) => country.dialCode.contains(value))
+                          .toList()
                       : widget.countryList
-                      .where((country) => country.name
-                      .toLowerCase()
-                      .contains(value.toLowerCase()))
-                      .toList();
+                          .where((country) => country.name
+                              .toLowerCase()
+                              .contains(value.toLowerCase()))
+                          .toList();
                   if (mounted) setState(() {});
                 },
               ),
@@ -128,14 +129,14 @@ class _CustomCountryPickerDialogState extends State<CustomCountryPickerDialog> {
                       ),
                       contentPadding: widget.style?.listTilePadding,
                       title: Text(
-                          _filteredCountries[index].name,
+                        _filteredCountries[index].name,
                         style: widget.style?.countryNameStyle ??
-                           const TextStyle(fontWeight: FontWeight.w700),
+                            const TextStyle(fontWeight: FontWeight.w700),
                       ),
                       trailing: Text(
                         '+${_filteredCountries[index].dialCode}',
                         style: widget.style?.countryCodeStyle ??
-                           const TextStyle(fontWeight: FontWeight.w700),
+                            const TextStyle(fontWeight: FontWeight.w700),
                       ),
                       onTap: () {
                         _selectedCountry = _filteredCountries[index];
@@ -143,7 +144,8 @@ class _CustomCountryPickerDialogState extends State<CustomCountryPickerDialog> {
                         Navigator.of(context).pop();
                       },
                     ),
-                    widget.style?.listTileDivider ?? const Divider(thickness: 1),
+                    widget.style?.listTileDivider ??
+                        const Divider(thickness: 1),
                   ],
                 ),
               ),
@@ -153,5 +155,4 @@ class _CustomCountryPickerDialogState extends State<CustomCountryPickerDialog> {
       ),
     );
   }
-
 }

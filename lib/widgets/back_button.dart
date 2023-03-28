@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class AppBarBackButton extends StatefulWidget {
-  Color buttonColor;
-  Color iconColor;
-  AppBarBackButton({Key? key, required this.buttonColor, required this.iconColor}) : super(key: key);
+  final Color buttonColor;
+  final Color iconColor;
+
+  AppBarBackButton(
+      {Key? key, required this.buttonColor, required this.iconColor})
+      : super(key: key);
 
   @override
   State<AppBarBackButton> createState() => _AppBarBackButtonState();
@@ -15,13 +17,13 @@ class _AppBarBackButtonState extends State<AppBarBackButton> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        right: 25.w,
+        right: horizontalValue(25),
       ),
       child: Container(
-        height: 46.h,
-        width: 46.w,
+        height: verticalValue(46),
+        width: horizontalValue(46),
         decoration: BoxDecoration(
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black54,
               blurRadius: 1.0,
@@ -33,7 +35,7 @@ class _AppBarBackButtonState extends State<AppBarBackButton> {
           ],
           color: widget.buttonColor,
           borderRadius: BorderRadius.circular(
-            12.r,
+            12,
           ),
         ),
         child: IconButton(
@@ -42,8 +44,13 @@ class _AppBarBackButtonState extends State<AppBarBackButton> {
           },
           icon: Icon(
             Icons.arrow_back,
-            size: 20.sp,
+            size: 20,
             color: widget.iconColor,
+            shadows: const [
+              Shadow(
+                color: Colors.transparent,
+              ),
+            ],
           ),
         ),
       ),

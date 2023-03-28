@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
-
-import '../constants/constants.dart';
-import '../presentation/res/res.dart';
-import '../theme/theme.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class NoDataFound extends StatelessWidget {
   const NoDataFound({
@@ -28,7 +22,7 @@ class NoDataFound extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black54,
                       blurRadius: 1.0,
@@ -52,12 +46,12 @@ class NoDataFound extends StatelessWidget {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Image.asset(
-                welcomeRegisterLogo,
+                AppAssets().welcomeRegisterLogo,
                 width: sizes.widthRatio * 120,
               ),
-              Spacer(),
+              const Spacer(),
               horizontalSpacer(24),
             ],
           ),
@@ -69,7 +63,7 @@ class NoDataFound extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                  noData,
+                  AppAssets().noData,
                 ),
                 fit: BoxFit.cover,
               ),
@@ -107,7 +101,7 @@ class NoDataFound extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: PayNestTheme.primaryColor,
+                backgroundColor: PayNestTheme.primaryColor,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(

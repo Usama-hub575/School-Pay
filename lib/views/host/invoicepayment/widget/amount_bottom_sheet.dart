@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 
 import '../../../../constants/constants.dart';
+import '../../../../data/model/datamodel/singlestudent_model.dart';
 import '../../../../presentation/res/res.dart';
 import '../../../../widgets/spacer.dart';
 
@@ -66,7 +65,7 @@ class _AmountWidgetState extends State<AmountWidget> {
               ),
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(24.0),
                   topRight: Radius.circular(24.0),
                 ),
@@ -100,7 +99,7 @@ class _AmountWidgetState extends State<AmountWidget> {
                                 fontFamily: 'montserratSemiBold',
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Text(
                               'AED ${amountFormater(
                                 double.parse(
@@ -200,7 +199,7 @@ class _AmountWidgetState extends State<AmountWidget> {
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: PayNestTheme.colorWhite,
+                            backgroundColor: PayNestTheme.colorWhite,
                             elevation: 0,
                             side: BorderSide(
                               width: 1,

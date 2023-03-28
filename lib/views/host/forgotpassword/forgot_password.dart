@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:paynest_flutter_app/controller/register_controller.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 
 import '../../../constants/constants.dart';
 import '../../../controller/user_controller.dart';
@@ -39,7 +38,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         child: Column(
           children: [
             verticalSpacer(40),
-
             Row(
               children: [
                 AppBarBackButton(
@@ -48,7 +46,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
                 Spacer(),
                 Image.asset(
-                  welcomeRegisterLogo,
+                  AppAssets().welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,
                 ),
                 Spacer(),
@@ -130,7 +128,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       height: sizes.heightRatio * 46,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.primaryColor,
+                          backgroundColor: PayNestTheme.primaryColor,
                           elevation: 0,
                           // side: BorderSide(width:1, color:Colors.white),
                           shape: RoundedRectangleBorder(
@@ -152,14 +150,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             } else {
                               showToast(
                                   context: context,
-                                  messege: registerController.isFailed.value
+                                  message: registerController.isFailed.value
                                       .toString(),
                                   color: PayNestTheme.red);
                             }
                           } else {
                             showToast(
                                 context: context,
-                                messege: 'Email field is empty',
+                                message: 'Email field is empty',
                                 color: PayNestTheme.red);
                           }
                           // setState(() {

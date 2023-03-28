@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/widgets/toast.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:xml2json/xml2json.dart';
 
@@ -32,7 +29,7 @@ class MyWebView extends StatefulWidget {
 class _MyWebViewState extends State<MyWebView> {
   final MyStudentController studentController = Get.find<MyStudentController>();
 
-  WebViewController? _controller = null;
+  //WebViewController? _controller = null;
 
   String url = "";
 
@@ -68,8 +65,8 @@ class _MyWebViewState extends State<MyWebView> {
       body: WebView(
         initialUrl: paymentGateWay,
         javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController) =>
-            _controller = webViewController,
+        // onWebViewCreated: (WebViewController webViewController) =>
+        //     _controller = webViewController,
         onProgress: (value) {},
         onPageStarted: (url) {},
         onPageFinished: (url) async {
@@ -97,7 +94,7 @@ class _MyWebViewState extends State<MyWebView> {
 
   getResponse(String response) {
     response = response.replaceAll('\\', '');
-    response = response.replaceAll('\"', '');
+    response = response.replaceAll('"', '');
     myTransformer.parse(response);
     var jsonString = myTransformer.toParker();
     print(jsonString);

@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/more/widget/single_card.dart';
 import 'package:paynest_flutter_app/views/host/more/widget/single_card_with_radio_button.dart';
@@ -14,7 +14,7 @@ import 'package:paynest_flutter_app/views/welcome_page.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../auth/local_auth_api.dart';
+import '../../../data/auth/local_auth_api.dart';
 import '../../../presentation/res/res.dart';
 import '../../../utils/sharedPrefKeys.dart';
 import '../../../utils/sharedpref.dart';
@@ -53,7 +53,7 @@ class _MorePageState extends State<MorePage> {
                   width: 1.sw,
                   decoration: BoxDecoration(
                     color: PayNestTheme.primaryColor,
-                    borderRadius: BorderRadius.vertical(
+                    borderRadius: const BorderRadius.vertical(
                       bottom: Radius.circular(32),
                     ),
                     boxShadow: [
@@ -61,7 +61,7 @@ class _MorePageState extends State<MorePage> {
                         color: PayNestTheme.dropShadow.withOpacity(.3),
                         spreadRadius: 0,
                         blurRadius: 10,
-                        offset: Offset(
+                        offset: const Offset(
                           0,
                           5,
                         ), // changes position of shadow
@@ -95,7 +95,7 @@ class _MorePageState extends State<MorePage> {
                           color: PayNestTheme.dropShadow.withOpacity(.3),
                           spreadRadius: 0,
                           blurRadius: 10,
-                          offset: Offset(
+                          offset: const Offset(
                             0,
                             5,
                           ), // changes position of shadow
@@ -117,14 +117,14 @@ class _MorePageState extends State<MorePage> {
                                       ""
                               ? CircleAvatar(
                                   backgroundImage: NetworkImage(
-                                    userController
-                                        .userResData.value.parent!.profileImage,
+                                    userController.userResData.value.parent!
+                                        .profileImage!,
                                   ),
                                 )
                               : Container(
                                   height: sizes.heightRatio * 60,
                                   width: sizes.widthRatio * 60,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       boxShadow: [
                                         BoxShadow(
@@ -137,7 +137,7 @@ class _MorePageState extends State<MorePage> {
                                         )
                                       ]),
                                   child: SvgPicture.asset(
-                                    icMale,
+                                    AppAssets().icMale,
                                   ),
                                 ),
                         ),
@@ -158,7 +158,7 @@ class _MorePageState extends State<MorePage> {
                                 onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => ViewProfile(),
+                                      builder: (context) => const ViewProfile(),
                                     ),
                                   );
                                 },
@@ -183,7 +183,7 @@ class _MorePageState extends State<MorePage> {
           ),
           Expanded(
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: horizontalValue(16),
@@ -207,7 +207,7 @@ class _MorePageState extends State<MorePage> {
                     ),
                     verticalSpacer(12),
                     SingleCard(
-                      icon: icPaymentHistory,
+                      icon: AppAssets().icPaymentHistory,
                       value: paymentHistory,
                       onTap: () {
                         Navigator.of(context).push(
@@ -245,7 +245,7 @@ class _MorePageState extends State<MorePage> {
                     verticalSpacer(16),
                     SingleCardWithRadioButton(
                       value: biometricAuth,
-                      icon: icFingerPrint,
+                      icon: AppAssets().icFingerPrint,
                       isEnable: storage.getBoolValue(
                         SharedPrefKeys.isBioMatric,
                       ),
@@ -302,33 +302,39 @@ class _MorePageState extends State<MorePage> {
                     ),
                     verticalSpacer(12),
                     SingleCard(
-                      icon: icFaq,
+                      icon: AppAssets().icFaq,
                       value: FAQs,
                       onTap: () {
-                        launch(
-                          'https://paynest.ae/#faq',
+                        launchUrl(
+                          Uri.parse(
+                            'https://paynest.ae/#faq',
+                          ),
                         );
                         setState(() {});
                       },
                     ),
                     verticalSpacer(16),
                     SingleCard(
-                      icon: icContactUs,
+                      icon: AppAssets().icContactUs,
                       value: contactUs,
                       onTap: () {
-                        launch(
-                          'https://paynest.ae/#faq',
+                        launchUrl(
+                          Uri.parse(
+                            'https://paynest.ae/#faq',
+                          ),
                         );
                         setState(() {});
                       },
                     ),
                     verticalSpacer(16),
                     SingleCard(
-                      icon: icPrivacyPolicy,
+                      icon: AppAssets().icPrivacyPolicy,
                       value: privacyPolicy,
                       onTap: () {
-                        launch(
-                          'https://paynest.ae/privacy-policy.html',
+                        launchUrl(
+                          Uri.parse(
+                            'https://paynest.ae/privacy-policy.html',
+                          ),
                         );
 
                         setState(() {});
@@ -336,11 +342,13 @@ class _MorePageState extends State<MorePage> {
                     ),
                     verticalSpacer(16),
                     SingleCard(
-                      icon: icTermsAndCondition,
+                      icon: AppAssets().icTermsAndCondition,
                       value: termConditions,
                       onTap: () {
-                        launch(
-                          'https://paynest.ae/terms.html',
+                        launchUrl(
+                          Uri.parse(
+                            'https://paynest.ae/terms.html',
+                          ),
                         );
                         setState(() {});
                       },
@@ -371,7 +379,8 @@ class _MorePageState extends State<MorePage> {
                         onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                              builder: (BuildContext context) => WelcomePage(),
+                              builder: (BuildContext context) =>
+                                  const WelcomePage(),
                             ),
                             (Route route) => false,
                           );

@@ -1,23 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/updateprofile_controller.dart';
-import 'package:paynest_flutter_app/controller/user_controller.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
-import 'package:paynest_flutter_app/widgets/emirates_id_add_dash_function.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
-import '../../../presentation/res/res.dart';
-import '../../../widgets/back_button.dart';
-import '../../../widgets/editing_text_emirates_id_formater.dart';
-import '../../../widgets/inkwell_widget.dart';
-import '../../../widgets/toast.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -58,12 +44,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   .toString()
                   .isEmpty
           ? '-'
-          : '${dateFormat.format(DateTime.parse(userController.userResData.value.parent!.expiryDate.toString().substring(0, 10)))}',
+          : dateFormat.format(DateTime.parse(userController
+              .userResData.value.parent!.expiryDate
+              .toString()
+              .substring(0, 10))),
     );
     emiratesIdController = TextEditingController(
-      text: userController.userResData.value.parent!.emiratesId.length >= 14
+      text: userController.userResData.value.parent!.emiratesId!.length >= 14
           ? getDashedEmiratesId(
-              userController.userResData.value.parent!.emiratesId)
+              userController.userResData.value.parent!.emiratesId!)
           : userController.userResData.value.parent!.emiratesId,
     );
   }
@@ -158,11 +147,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    userController.userResData.value.parent!
-                                            .firstName +
-                                        " " +
-                                        userController
-                                            .userResData.value.parent!.lastName,
+                                    "${userController.userResData.value.parent!.firstName!} ${userController.userResData.value.parent!.lastName!}",
                                     style: PayNestTheme.title18black.copyWith(
                                       fontSize: sizes.fontRatio * 18,
                                       fontFamily: 'montserratBold',
@@ -197,7 +182,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   shape: BoxShape.circle,
                                 ),
                                 child: SvgPicture.asset(
-                                  icMale,
+                                  AppAssets().icMale,
                                 ),
                               ),
                             ),
@@ -579,7 +564,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: PayNestTheme.primaryColor,
+                            backgroundColor: PayNestTheme.primaryColor,
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
@@ -610,14 +595,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 Navigator.pop(context);
                                 showToast(
                                     context: context,
-                                    messege:updateProfileController.message.value
+                                    message: updateProfileController
+                                        .message.value
                                         .toString(),
                                     color: PayNestTheme.primaryColor);
                               } else {
-
                                 showToast(
                                     context: context,
-                                    messege: updateProfileController
+                                    message: updateProfileController
                                         .isFailed.value
                                         .toString(),
                                     color: PayNestTheme.primaryColor);
@@ -625,7 +610,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             } else {
                               showToast(
                                   context: context,
-                                  messege: 'Email field is empty!',
+                                  message: 'Email field is empty!',
                                   color: PayNestTheme.red);
                             }
                           },

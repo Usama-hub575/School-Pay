@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/custom_slider.dart';
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_detail_page.dart';
@@ -8,7 +8,6 @@ import 'package:paynest_flutter_app/views/registration_screen/widget/register_ma
 import 'package:paynest_flutter_app/views/registration_screen/widget/register_otp_page.dart';
 import 'package:paynest_flutter_app/widgets/toast.dart';
 
-import '../../constants/constants.dart';
 import '../../controller/user_controller.dart';
 import '../../presentation/res/res.dart';
 import '../../theme/theme.dart';
@@ -49,12 +48,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   iconColor: PayNestTheme.colorWhite,
                   buttonColor: PayNestTheme.primaryColor,
                 ),
-                Spacer(),
+                const Spacer(),
                 Image.asset(
-                  welcomeRegisterLogo,
+                  AppAssets().welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
             verticalSpacer(16),
@@ -122,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       (Route<dynamic> route) => false);
                                 } else {
                                   showToast(
-                                      messege:
+                                      message:
                                           userController.isFailed.toString(),
                                       context: context,
                                       color: PayNestTheme.red);

@@ -1,11 +1,5 @@
-/// Package Export
-
-export 'package:equatable/equatable.dart';
-export 'package:flutter/material.dart';
-export 'package:bloc/bloc.dart';
-
-/// modules export
-export 'screens/export.dart';
-export 'extension/export.dart';
+export 'app_routes/export.dart';
 export 'bloc/export.dart';
+export 'extension/export.dart';
 export 'res/export.dart';
+export 'screens/export.dart';

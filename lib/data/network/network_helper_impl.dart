@@ -1,11 +1,6 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-
-import '../../core/generic_response/failure.dart';
-import 'network_helper.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 class NetworkHelperImpl extends NetworkHelper {
   NetworkHelperImpl();
@@ -44,11 +39,14 @@ class NetworkHelperImpl extends NetworkHelper {
       final response = await http.post(
         Uri.parse(url),
         body: encodeBody ? json.encode(body) : body,
-        headers: modifyHeader ? appendHeader(headers: headers!) : headers!,
+        headers: modifyHeader ? appendHeader(headers: headers) : headers,
         encoding: encoding,
       );
 
-      return handleResponse(response: response, requestBody: json.encode(body));
+      return handleResponse(
+        response: response,
+        requestBody: json.encode(body),
+      );
     } catch (e) {
       return Right(
         Failure(
@@ -92,7 +90,7 @@ class NetworkHelperImpl extends NetworkHelper {
       final int statusCode = response.statusCode;
 
       if (statusCode >= 400) {
-        Map<String, String> errorJson = jsonDecode(responseText);
+        //Map<String, String> errorJson = jsonDecode(responseText);
         return Right(
           Failure(
             status: false,
@@ -152,10 +150,11 @@ class NetworkHelperImpl extends NetworkHelper {
 
     if (statusCode >= 400) {
       Map<String, dynamic> errorJson = jsonDecode(response.body.toString());
+      final responseMessage = errorJson['message'] ?? 'Something went Wrong';
       return Right(
         Failure(
           status: false,
-          message: 'Something went Wrong',
+          message: responseMessage,
         ),
       );
     } else {
@@ -170,6 +169,8 @@ class NetworkHelperImpl extends NetworkHelper {
   }) {
     try {
       headers ??= <String, String>{};
+      headers["Authorization"] = 'Bearer${storage.getString(key: 'fcmToken')}';
+      headers["Content-Type"] = "application/json";
     } catch (e) {
       debugPrint(e.toString());
     }

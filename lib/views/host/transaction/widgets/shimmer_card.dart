@@ -5,7 +5,7 @@ import '../../../../presentation/res/res.dart';
 import '../../../../widgets/spacer.dart';
 
 class TransactionShimmerCard extends StatelessWidget {
-  const   TransactionShimmerCard({Key? key}) : super(key: key);
+  const TransactionShimmerCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class TransactionShimmerCard extends StatelessWidget {
             width: sizes.widthRatio * 150,
             height: sizes.heightRatio * 50,
             // fadeTheme: FadeTheme.dark,
-            baseColor: Color(0xFFEBEBF4),
-            highlightColor: Color(0xFFF4F4F4),
+            baseColor: const Color(0xFFEBEBF4),
+            highlightColor: const Color(0xFFF4F4F4),
             radius: 16,
           ),
         );

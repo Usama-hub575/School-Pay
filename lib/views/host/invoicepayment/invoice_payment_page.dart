@@ -1,28 +1,16 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/controller/partialpay_controller.dart';
-import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/controller/verifypin_controller.dart';
-import 'package:paynest_flutter_app/model/datamodel/singlestudent_model.dart';
-import 'package:paynest_flutter_app/theme/theme.dart';
+import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/widget/amount_bottom_sheet.dart';
 import 'package:paynest_flutter_app/views/host/payment_method/payment_method.dart';
-import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../presentation/res/res.dart';
-import '../../../widgets/amount_formater.dart';
-import '../../../widgets/back_button.dart';
-import '../../../widgets/toast.dart';
+import '../../../data/model/datamodel/singlestudent_model.dart';
 import '../../download_pdf/download_pdf.dart';
 
 class InvoicePaymentPage extends StatefulWidget {
-  SingleStudentModel singleStudentModel;
+  final SingleStudentModel singleStudentModel;
 
   InvoicePaymentPage({Key? key, required this.singleStudentModel})
       : super(key: key);
@@ -141,7 +129,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                     verticalSpacer(8),
                     widget.singleStudentModel.student!.grade != '-'
                         ? Text(
-                            studentclass,
+                            studentClass,
                             style: PayNestTheme.h2_14textGrey.copyWith(
                               color: PayNestTheme.primaryColor,
                               fontFamily: 'montserratBold',
@@ -149,7 +137,9 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                             ),
                           )
                         : const SizedBox.shrink(),
-                    widget.singleStudentModel.student!.grade != '-' ? verticalSpacer(4): const SizedBox.shrink(),
+                    widget.singleStudentModel.student!.grade != '-'
+                        ? verticalSpacer(4)
+                        : const SizedBox.shrink(),
                     widget.singleStudentModel.student!.grade != '-'
                         ? Text(
                             'Grade ${widget.singleStudentModel.student!.grade}',
@@ -291,7 +281,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: PayNestTheme.colorWhite,
+                          backgroundColor: PayNestTheme.colorWhite,
                           elevation: 0,
                           side: BorderSide(
                             width: 1,
@@ -369,11 +359,11 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
     if (partialPayController.partialPayData.value.status == true) {
       showToast(
           context: context,
-          messege: 'Payment Successful',
+          message: 'Payment Successful',
           color: PayNestTheme.primaryColor);
     } else {
       showToast(
-          context: context, messege: 'Payment Failed', color: PayNestTheme.red);
+          context: context, message: 'Payment Failed', color: PayNestTheme.red);
     }
   }
 
@@ -393,7 +383,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
 
     showToast(
         context: context,
-        messege: 'Successful!',
+        message: 'Successful!',
         color: PayNestTheme.primaryColor);
   }
 }
