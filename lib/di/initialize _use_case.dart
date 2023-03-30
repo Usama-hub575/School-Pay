@@ -8,6 +8,7 @@ Future initializeUseCaseDependencies() async {
   await initializeRegisterDetailPageUseCase();
   await initializeRegisterMainPageUseCase();
   await initializerRegisterOTPPageUseCase();
+  await initializeDashboardUseCase();
 }
 
 Future initializeLocaleUseCase() async {
@@ -61,6 +62,14 @@ Future initializerRegisterOTPPageUseCase() async {
   it.registerLazySingleton(
     () => RegisterOTPPageUseCase(
       registerOTPPageRepo: it<RegisterOTPPageRepo>(),
+    ),
+  );
+}
+
+Future initializeDashboardUseCase() async {
+  it.registerLazySingleton(
+    () => DashboardUseCase(
+      dashboardRepo: it<DashboardRepo>(),
     ),
   );
 }

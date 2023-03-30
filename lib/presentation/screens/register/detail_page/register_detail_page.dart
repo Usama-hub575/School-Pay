@@ -7,24 +7,24 @@ class RegisterDetailPage extends StatefulWidget {
     required this.password,
     required this.phoneNumber,
     required this.email,
-    required this.onTap,
   }) : super(key: key);
 
   final String phoneCode;
   final String phoneNumber;
   final String email;
   final String password;
-  final Function(
-    String firstName,
-    String lastName,
-    String gender,
-    String emiratesId,
-    String expiryDate,
-    String address,
-    String city,
-    String countryCode,
-    String country,
-  ) onTap;
+
+  // final Function(
+  //   String firstName,
+  //   String lastName,
+  //   String gender,
+  //   String emiratesId,
+  //   String expiryDate,
+  //   String address,
+  //   String city,
+  //   String countryCode,
+  //   String country,
+  // ) onTap;
 
   @override
   State<RegisterDetailPage> createState() => _RegisterDetailPageState();
@@ -42,8 +42,6 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
     text: "+971",
   );
   static final registrationFormKey = GlobalKey<FormState>();
-
-  // UserController registerController = Get.put(UserController());
   DateTime tempPickedDate = DateTime.now();
 
   @override
@@ -52,11 +50,6 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
     context.read<RegisterDetailPageBloc>().add(
           Init(),
         );
-    getCountries();
-  }
-
-  void getCountries() {
-    //registerController.hitGetCountriesAPI();
   }
 
   @override
@@ -486,17 +479,17 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
             );
             break;
           case RegisterDetailPageStatus.navigateToDashboard:
-            widget.onTap(
-              firstNameController.text,
-              lastNameController.text,
-              state.selectedFilter!,
-              emirateIDController.text.replaceAll('-', ''),
-              expiryController.text,
-              addressController.text,
-              cityController.text,
-              state.countryCode,
-              countryRegionController.text,
-            );
+            // widget.onTap(
+            //   firstNameController.text,
+            //   lastNameController.text,
+            //   state.selectedFilter!,
+            //   emirateIDController.text.replaceAll('-', ''),
+            //   expiryController.text,
+            //   addressController.text,
+            //   cityController.text,
+            //   state.countryCode,
+            //   countryRegionController.text,
+            // );
             break;
         }
       },
@@ -511,10 +504,12 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
       lastDate: DateTime(2035),
     );
     if (selected != null) {
-      setState(() {
-        expiryController.text =
-            '${selected.day}-${selected.month}-${selected.year}';
-      });
+      setState(
+        () {
+          expiryController.text =
+              '${selected.day}-${selected.month}-${selected.year}';
+        },
+      );
     }
   }
 }

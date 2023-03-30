@@ -1,6 +1,6 @@
 part of 'register_main_page_bloc.dart';
 
-class RegisterMainPageEvent extends Equatable {
+abstract class RegisterMainPageEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
@@ -11,9 +11,11 @@ class RegisterMainPageLoading extends RegisterMainPageEvent {}
 
 class RegisterToggle extends RegisterMainPageEvent {
   final String toggleStatus;
+  final bool obscure;
 
   RegisterToggle({
     required this.toggleStatus,
+    required this.obscure,
   });
 }
 

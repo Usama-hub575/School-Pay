@@ -74,7 +74,7 @@ class RegisterOTPPageBloc
                 )
               : emit(
                   state.copyWith(
-                    status: RegisterOTPPageStatus.otpPageError,
+                    status: RegisterOTPPageStatus.navigateToDetailPage,
                     isCodeComplete: false,
                     otpErrorMessage: success.message,
                   ),

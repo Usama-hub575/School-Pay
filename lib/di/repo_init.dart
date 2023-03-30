@@ -44,4 +44,11 @@ Future initializeRepoDependencies() async {
       networkHelper: it(),
     ),
   );
+
+  it.registerLazySingleton<DashboardRepo>(
+    () => DashboardRepoImpl(
+      storage: storage,
+      networkHelper: it(),
+    ),
+  );
 }

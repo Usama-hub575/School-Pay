@@ -179,7 +179,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          FAQs,
+                          fAQS,
                           style: PayNestTheme.h2_12blueAccent.copyWith(
                             fontSize: sizes.fontRatio * 16,
                             color: PayNestTheme.primaryColor,

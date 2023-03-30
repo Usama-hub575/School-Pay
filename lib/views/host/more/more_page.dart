@@ -303,7 +303,7 @@ class _MorePageState extends State<MorePage> {
                     verticalSpacer(12),
                     SingleCard(
                       icon: AppAssets().icFaq,
-                      value: FAQs,
+                      value: fAQS,
                       onTap: () {
                         launchUrl(
                           Uri.parse(

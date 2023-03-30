@@ -108,6 +108,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                               context.read<RegisterMainPageBloc>().add(
                                     RegisterToggle(
                                       toggleStatus: "password",
+                                      obscure: !state.obscurePassword,
                                     ),
                                   );
                             },
@@ -140,6 +141,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                               context.read<RegisterMainPageBloc>().add(
                                     RegisterToggle(
                                       toggleStatus: "confirmPassword",
+                                      obscure: !state.obscureConfirmPassword,
                                     ),
                                   );
                             },
