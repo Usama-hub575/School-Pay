@@ -205,10 +205,16 @@ class _BlocUIState extends State<BlocUI> {
       listener: (context, state) {
         switch (state.status) {
           case SignInStatus.forgotPassword:
-            //GoRouter.of(context).push(forgotPassword);
+            // Navigator.pushNamed(
+            //   context,
+            //   AppRoutes.navigateToForgotPassword,
+            // );
             break;
           case SignInStatus.home:
-            //GoRouter.of(context).push(dashBoard);
+            Navigator.pushNamed(
+              context,
+              AppRoutes.navigateToDashboard,
+            );
             break;
           case SignInStatus.showToast:
             showToast(
@@ -218,16 +224,12 @@ class _BlocUIState extends State<BlocUI> {
             );
             break;
           case SignInStatus.init:
-            // TODO: Handle this case.
             break;
           case SignInStatus.loading:
-            // TODO: Handle this case.
             break;
           case SignInStatus.loaded:
-            // TODO: Handle this case.
             break;
           case SignInStatus.toggle:
-            // TODO: Handle this case.
             break;
         }
       },

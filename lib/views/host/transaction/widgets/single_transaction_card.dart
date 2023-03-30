@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../../data/model/transactionlist_resp_model.dart';
+import '../../../../data/model/response/dashboard/transactions_list/transaction_list_response_model.dart';
 import '../../../../presentation/res/res.dart';
 import '../../../../theme/theme.dart';
 import '../../../../widgets/inkwell_widget.dart';
@@ -81,7 +81,8 @@ class SingleTransaction extends StatelessWidget {
                   ),
                   verticalSpacer(4),
                   Text(
-                    '${dateFormat.format(DateTime.parse(transactionsRow.payedOn.toString().substring(0, 10)))}',
+                    dateFormat.format(DateTime.parse(
+                        transactionsRow.payedOn.toString().substring(0, 10))),
                     style: PayNestTheme.h2_12blueAccent.copyWith(
                       fontSize: sizes.fontRatio * 10,
                       color: PayNestTheme.textGrey.withOpacity(0.5),

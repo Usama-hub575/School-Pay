@@ -4,14 +4,14 @@
 
 import 'package:paynest_flutter_app/export.dart';
 
-RegisterRespModel registerRespModelFromJson(String str) =>
-    RegisterRespModel.fromJson(json.decode(str));
+RegisterResponseModel registerResponseModelFromJson(String str) =>
+    RegisterResponseModel.fromJson(json.decode(str));
 
-String registerRespModelToJson(RegisterRespModel data) =>
+String registerResponseModelToJson(RegisterResponseModel data) =>
     json.encode(data.toJson());
 
-class RegisterRespModel {
-  RegisterRespModel({
+class RegisterResponseModel {
+  RegisterResponseModel({
     required this.status,
     required this.message,
     required this.token,
@@ -23,8 +23,17 @@ class RegisterRespModel {
   String? token;
   Parent? parent;
 
-  factory RegisterRespModel.fromJson(Map<String, dynamic> json) =>
-      RegisterRespModel(
+  static RegisterResponseModel empty() {
+    return RegisterResponseModel(
+      status: false,
+      message: '',
+      token: '',
+      parent: Parent.empty(),
+    );
+  }
+
+  factory RegisterResponseModel.fromJson(Map<String, dynamic> json) =>
+      RegisterResponseModel(
           status: json["status"] ?? '',
           message: json["message"] ?? '',
           token: json["token"] ?? '',

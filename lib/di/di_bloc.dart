@@ -1,5 +1,4 @@
 import 'package:paynest_flutter_app/export.dart';
-import 'package:paynest_flutter_app/presentation/bloc/dashboard_bloc/export.dart';
 
 Future initializeBlocs() async {
   it.registerLazySingleton(
@@ -47,5 +46,9 @@ Future initializeBlocs() async {
     () => DashboardBloc(
       dashboardUseCase: it<DashboardUseCase>(),
     ),
+  );
+
+  it.registerLazySingleton(
+    () => HostPageBloc(),
   );
 }

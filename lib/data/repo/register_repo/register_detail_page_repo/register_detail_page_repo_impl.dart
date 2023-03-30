@@ -7,12 +7,12 @@ class RegisterDetailPageRepoImpl implements RegisterDetailPageRepo {
   EndPoints endPoints = EndPoints();
 
   RegisterDetailPageRepoImpl({
-    required this.storage,
     required this.networkHelper,
+    required this.storage,
   });
 
   @override
-  Future<Either<RegisterRespModel, Failure>> register({
+  Future<Either<RegisterResponseModel, Failure>> register({
     required String firstName,
     required String lastName,
     required String password,
@@ -45,7 +45,7 @@ class RegisterDetailPageRepoImpl implements RegisterDetailPageRepo {
     return response.fold(
       (success) {
         return Left(
-          registerRespModelFromJson(success),
+          registerResponseModelFromJson(success),
         );
       },
       (r) {
@@ -56,6 +56,22 @@ class RegisterDetailPageRepoImpl implements RegisterDetailPageRepo {
           ),
         );
       },
+    );
+  }
+
+  @override
+  Future? setInt({required String key, int? value}) {
+    return storage.saveInt(
+      key: key,
+      value: value,
+    );
+  }
+
+  @override
+  Future? setString({required String key, String? value}) {
+    return storage.saveString(
+      key: key,
+      value: value,
     );
   }
 }

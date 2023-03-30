@@ -33,8 +33,8 @@ Future initializeRepoDependencies() async {
 
   it.registerLazySingleton<RegisterDetailPageRepo>(
     () => RegisterDetailPageRepoImpl(
-      storage: storage,
       networkHelper: it(),
+      storage: storage,
     ),
   );
 

@@ -10,7 +10,6 @@ export 'forgot_password_model.dart';
 export 'forgot_password_resp_model.dart';
 export 'lean_response.dart';
 export 'mystudents_model.dart';
-export 'mystudents_resp_model.dart';
 export 'partialpay_model.dart';
 export 'passwordreset_model.dart';
 export 'passwordreset_resp_model.dart';

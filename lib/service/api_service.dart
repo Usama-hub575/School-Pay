@@ -219,7 +219,7 @@ class APIService {
       endPoint,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + storage.read('accessToken'),
+        "Authorization": "Bearer " + storage.read("F"),
       },
       body: data,
     );

@@ -104,6 +104,12 @@ void main() async {
             BlocProvider.value(
               value: it<RegisterPageViewBloc>(),
             ),
+            BlocProvider.value(
+              value: it<DashboardBloc>(),
+            ),
+            BlocProvider.value(
+              value: it<HostPageBloc>(),
+            ),
           ],
           child: const MyApp(),
         ),

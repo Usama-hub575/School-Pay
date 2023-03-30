@@ -1,19 +1,19 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
 
 import '../../../data/model/datamodel/singlestudent_model.dart'
     as SingleSchoolModel;
-import '../../../data/model/mystudents_resp_model.dart';
 
 class SingleStudentPage extends StatefulWidget {
-  SingleStudentPage({
+  const SingleStudentPage({
     Key? key,
     required this.studentId,
     required this.myStudentsRespModel,
   }) : super(key: key);
 
-  final MyStudentsRespModel myStudentsRespModel;
+  final MyStudentsResponseModel myStudentsRespModel;
   final String studentId;
 
   @override

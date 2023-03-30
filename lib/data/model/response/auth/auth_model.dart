@@ -1,11 +1,5 @@
 import 'package:paynest_flutter_app/export.dart';
 
-AuthenticationModel registerResponseModelFromJson(String str) =>
-    AuthenticationModel.fromJson(json.decode(str));
-
-String registerResponseModelToJson(AuthenticationModel data) =>
-    json.encode(data.toJson());
-
 class AuthenticationModel {
   AuthenticationModel({
     required this.status,

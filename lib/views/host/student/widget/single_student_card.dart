@@ -4,7 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../../data/model/mystudents_resp_model.dart';
+import '../../../../data/model/response/dashboard/students/students_response_model.dart';
 import '../../../../presentation/res/res.dart';
 import '../../../../theme/theme.dart';
 import '../../../../widgets/inkwell_widget.dart';
@@ -16,8 +16,8 @@ class SingleStudentCard extends StatefulWidget {
     required this.onTap,
   }) : super(key: key);
 
-  final List<StudentElement>? students;
-  final Function(StudentElement element) onTap;
+  final List<StudentData>? students;
+  final Function(StudentData element) onTap;
 
   @override
   State<SingleStudentCard> createState() => _SingleStudentCardState();
@@ -56,7 +56,7 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
     }
   }
 
-  Widget _singleCard({required StudentElement student}) {
+  Widget _singleCard({required StudentData student}) {
     return InkWellWidget(
       onTap: () => widget.onTap(student),
       child: Container(

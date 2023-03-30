@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:encrypt/encrypt.dart' as encryption;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
 import 'package:paynest_flutter_app/controller/createtransaction_resp_controller.dart';
@@ -11,11 +12,8 @@ import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/views/host/transactiondetails/paynowltransactiondetails_page.dart';
 import 'package:paynest_flutter_app/views/webview/webview.dart';
 
-import '../../../data/model/create_payment_intent_model.dart';
 import '../../../data/model/datamodel/paynowtransaction_detail_model.dart';
 import '../../../data/model/lean_payment_model.dart';
-import '../../../data/model/lean_response.dart';
-import '../../../data/model/mystudents_resp_model.dart';
 
 class PayNowPage extends StatefulWidget {
   final String whichStack;
@@ -31,7 +29,7 @@ class _PayNowPageState extends State<PayNowPage> {
   final PayNowController payNowController = Get.put(PayNowController());
   final CreateTransactionRespController ctrController =
       Get.put(CreateTransactionRespController());
-  late StudentElement studentElement;
+  late StudentData studentElement;
   int tap = 0;
 
   int idx = 0;
@@ -60,7 +58,7 @@ class _PayNowPageState extends State<PayNowPage> {
   void initState() {
     super.initState();
     //studentController.hitMyStudents(null);
-    studentElement = StudentElement.empty();
+    studentElement = StudentData.empty();
     studentController.resetStudentCard();
     if (studentController.myStudentData.value.status &&
         studentController.myStudentData.value.students != null &&
@@ -151,7 +149,7 @@ class _PayNowPageState extends State<PayNowPage> {
     );
   }
 
-  List<StudentElement> _searchResult = [];
+  final List<StudentData> _searchResult = [];
 
   @override
   Widget build(BuildContext context) {
@@ -371,7 +369,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                           (context, index) {
                                                         return _singleCard(
                                                           _searchResult[index],
-                                                          (StudentElement
+                                                          (StudentData
                                                               student) {
                                                             payAbleAmount = student
                                                                 .student!
@@ -882,7 +880,7 @@ class _PayNowPageState extends State<PayNowPage> {
                                                         .myStudentData
                                                         .value
                                                         .students![index],
-                                                    (StudentElement student) {
+                                                    (StudentData student) {
                                                       payAbleAmount = student
                                                           .student!
                                                           .totalBalanceAmount
@@ -1674,7 +1672,7 @@ class _PayNowPageState extends State<PayNowPage> {
     return encrypted.base64;
   }
 
-  _singleCard(StudentElement studentElement, Function onTap, int index) {
+  _singleCard(StudentData studentElement, Function onTap, int index) {
     return InkWellWidget(
       onTap: () => onTap(studentElement),
       child: Opacity(
@@ -1757,7 +1755,7 @@ class _PayNowPageState extends State<PayNowPage> {
   }
 
   PayNowTransactionDetailModel _getModel(
-    StudentElement studentElement,
+    StudentData studentElement,
     String? schoolName,
     String amount,
   ) {

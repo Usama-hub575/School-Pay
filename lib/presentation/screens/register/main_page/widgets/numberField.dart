@@ -34,7 +34,7 @@ class _NumberFieldState extends State<NumberField> {
         children: [
           CountryCodePicker(
             enabled: !widget.enable,
-            borderColor: AppColors().lightBlack,
+            borderColor: AppColors().lightGreyShade,
             padding: EdgeInsets.zero,
             showDropDownButton: true,
             onChanged: (value) {
