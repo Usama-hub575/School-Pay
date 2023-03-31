@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 
 import '../data/model/mystudents_model.dart';
-import '../data/model/response/dashboard/students/students_response_model.dart';
+import '../data/model/response/dashboard/student/students_response_model.dart';
 
 class MyStudentController extends GetxController {
   var isLoading = false.obs;

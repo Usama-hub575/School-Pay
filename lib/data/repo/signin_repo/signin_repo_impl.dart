@@ -37,9 +37,9 @@ class SignInRepoImpl implements SignInRepo {
     String? savedFcm = storage.getString(key: StorageKeys.fcmToken);
 
     final body = {
-      'email': email,
-      'password': password,
-      'fcm': fcm,
+      'email': savedEmail ?? email,
+      'password': savedPassword ?? password,
+      'fcm': savedFcm ?? fcm,
     };
 
     final response = await networkHelper.post(

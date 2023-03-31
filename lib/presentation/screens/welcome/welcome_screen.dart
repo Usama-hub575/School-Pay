@@ -63,7 +63,7 @@ class _WelcomePageState extends State<WelcomePage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Image.asset(
-                  AppAssets().paynestLogoNew,
+                  AppAssets().payNestLogoNew,
                   width: sizes.widthRatio * 180,
                   fit: BoxFit.fill,
                 ),
@@ -75,25 +75,25 @@ class _WelcomePageState extends State<WelcomePage> {
                       onPressed: () {},
                       child: Text(
                         english,
-                        style: TextStyles().bold.copyWith(
-                              fontSize: sizes.fontRatio * 18,
-                              color: AppColors().white,
-                            ),
+                        style: textStyles.bold.copyWith(
+                          fontSize: sizes.fontRatio * 18,
+                          color: colors.white,
+                        ),
                       ),
                     ),
                     Container(
                       width: horizontalValue(2),
                       height: verticalValue(18),
-                      color: AppColors().white,
+                      color: colors.white,
                     ),
                     TextButton(
                       onPressed: () {},
                       child: Text(
                         arabic,
-                        style: TextStyles().bold.copyWith(
-                              fontSize: sizes.fontRatio * 18,
-                              color: AppColors().dropShadow,
-                            ),
+                        style: textStyles.bold.copyWith(
+                          fontSize: sizes.fontRatio * 18,
+                          color: colors.dropShadow,
+                        ),
                       ),
                     ),
                   ],
@@ -105,8 +105,8 @@ class _WelcomePageState extends State<WelcomePage> {
                     horizontal: horizontalValue(16),
                   ),
                   child: ElevatedButtons(
-                    color: AppColors().primaryColor,
-                    textColor: AppColors().white,
+                    color: colors.primaryColor,
+                    textColor: colors.white,
                     isLoading: false,
                     text: signIn,
                     onPressed: () async {
@@ -127,8 +127,8 @@ class _WelcomePageState extends State<WelcomePage> {
                     horizontal: horizontalValue(16),
                   ),
                   child: ElevatedButtons(
-                    color: AppColors().white,
-                    textColor: AppColors().primaryColor,
+                    color: colors.white,
+                    textColor: colors.primaryColor,
                     isLoading: false,
                     text: register,
                     onPressed: () async {
@@ -152,10 +152,10 @@ class _WelcomePageState extends State<WelcomePage> {
                   },
                   child: Text(
                     privacyPolicy,
-                    style: TextStyles().bold.copyWith(
-                          color: AppColors().textGreyWhiteShade,
-                          fontSize: sizes.fontRatio * 12,
-                        ),
+                    style: textStyles.bold.copyWith(
+                      color: colors.textGreyWhiteShade,
+                      fontSize: sizes.fontRatio * 12,
+                    ),
                   ),
                 ),
                 verticalSpacer(16),

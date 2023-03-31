@@ -12,7 +12,7 @@ import '../data/model/register_model.dart';
 import '../data/model/request/login/login_model.dart';
 import '../data/model/reset_password_by_otp.dart';
 import '../data/model/response/countries/get_countries/get_countries_response.dart';
-import '../data/model/response/dashboard/students/students_response_model.dart';
+import '../data/model/response/dashboard/student/students_response_model.dart';
 import '../data/model/response/login/login_response_model.dart';
 import '../data/model/response/register/register_response_model.dart';
 import '../presentation/screens/dashboard/dashboard.dart';

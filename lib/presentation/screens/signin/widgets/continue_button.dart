@@ -19,7 +19,7 @@ class ContinueButton extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         border: Border.all(
-          color: AppColors().primaryColor,
+          color: colors.primaryColor,
           width: 1,
         ),
         borderRadius: BorderRadius.circular(12),
@@ -31,10 +31,10 @@ class ContinueButton extends StatelessWidget {
           horizontalSpacer(8),
           Text(
             text,
-            style: TextStyles().bold.copyWith(
-                  fontSize: sizes.fontRatio * 16,
-                  color: AppColors().black,
-                ),
+            style: textStyles.bold.copyWith(
+              fontSize: sizes.fontRatio * 16,
+              color: colors.black,
+            ),
           ),
         ],
       ),

@@ -10,3 +10,5 @@ class UpdateButtonAction extends InitializerEvent {}
 class GetCountries extends InitializerEvent {}
 
 class Initialize extends InitializerEvent {}
+
+class Login extends InitializerEvent {}

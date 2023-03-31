@@ -14,6 +14,10 @@ class InitializerUseCase {
   CountriesResponse _countriesModel = CountriesResponse.empty();
   AuthenticationModel _authResponseModel = AuthenticationModel.empty();
 
+  String? getString({required String key}) {
+    return initializerRepo.getString(key: key);
+  }
+
   Future<Either<Success, Failure>> getCountries() async {
     final response = await initializerRepo.getCountries();
     return response.fold(

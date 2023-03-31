@@ -33,17 +33,17 @@ class _HostPageState extends State<HostPage> {
   ];
 
   final selectedIcons = <String>[
-    AppAssets().ic_dashboard,
-    AppAssets().ic_student,
-    AppAssets().ic_transaction,
-    AppAssets().ic_menu,
+    AppAssets().icDashboardSelected,
+    AppAssets().icStudent,
+    AppAssets().icTransaction,
+    AppAssets().icMenu,
   ];
 
   final unSelectedIcons = <String>[
-    AppAssets().ic_dashboard_non,
-    AppAssets().ic_student_non,
-    AppAssets().ic_transaction_non,
-    AppAssets().ic_menu_non,
+    AppAssets().icDashboardNon,
+    AppAssets().icStudentNon,
+    AppAssets().icTransactionNon,
+    AppAssets().icMenuNon,
   ];
 
   final names = <String>[

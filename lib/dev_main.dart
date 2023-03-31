@@ -110,6 +110,9 @@ void main() async {
             BlocProvider.value(
               value: it<HostPageBloc>(),
             ),
+            BlocProvider.value(
+              value: it<GetAssistanceBloc>(),
+            ),
           ],
           child: const MyApp(),
         ),

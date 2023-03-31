@@ -80,7 +80,7 @@ class _WelcomePageState extends State<WelcomePage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Image.asset(
-                  AppAssets().paynestLogoNew,
+                  AppAssets().payNestLogoNew,
                   width: sizes.widthRatio * 230,
                 ),
                 verticalSpacer(220),

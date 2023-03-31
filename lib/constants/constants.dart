@@ -30,6 +30,7 @@ const shareYourQuery =
     "Share your queries with us, and we will reach back to you in 1-2 business days";
 const goThrough = "Go through our list of frequently asked questions";
 const phone = "Phone number";
+const whatsAppNotInstalled = "Whatsapp not installed";
 const fname = "First name";
 const lname = "Last name";
 const emiratesID = "Emirates ID number";

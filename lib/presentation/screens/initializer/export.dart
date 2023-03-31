@@ -1,2 +1,2 @@
-export 'initializer_screen.dart';
+export 'initializer_page.dart';
 export 'widgets/export.dart';

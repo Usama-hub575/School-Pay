@@ -37,8 +37,8 @@ class _SignInPageState extends State<SignInPage> {
             Row(
               children: [
                 AppBarBackButton(
-                  iconColor: AppColors().white,
-                  buttonColor: AppColors().primaryColor,
+                  iconColor: colors.white,
+                  buttonColor: colors.primaryColor,
                 ),
                 const Spacer(),
                 Image.asset(

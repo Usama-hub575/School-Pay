@@ -12,11 +12,6 @@ class InitializerRepoImpl implements InitializerRepo {
   });
 
   @override
-  String getString(String key) {
-    return storage.getString(key: key) ?? '';
-  }
-
-  @override
   Future<Either<CountriesResponse, Failure>> getCountries() async {
     final response = await networkHelper.get(
       EndPoints().getCountriesEndPoint(),
@@ -39,5 +34,10 @@ class InitializerRepoImpl implements InitializerRepo {
         );
       },
     );
+  }
+
+  @override
+  String? getString({required String key}) {
+    return storage.getString(key: key);
   }
 }

@@ -30,18 +30,18 @@ class _BlocUIState extends State<BlocUI> {
                     verticalSpacer(16),
                     Text(
                       signIn,
-                      style: TextStyles().bold.copyWith(
-                            color: AppColors().black,
-                            fontSize: sizes.fontRatio * 22,
-                          ),
+                      style: textStyles.bold.copyWith(
+                        color: colors.black,
+                        fontSize: sizes.fontRatio * 22,
+                      ),
                     ),
                     verticalSpacer(16),
                     Text(
                       pleaseEnterYourRegisteredEmailIdAndPassword,
-                      style: TextStyles().medium.copyWith(
-                            fontSize: sizes.fontRatio * 12,
-                            color: AppColors().black,
-                          ),
+                      style: textStyles.medium.copyWith(
+                        fontSize: sizes.fontRatio * 12,
+                        color: colors.black,
+                      ),
                     ),
                     verticalSpacer(34),
                     CommonTextField(
@@ -65,7 +65,7 @@ class _BlocUIState extends State<BlocUI> {
                       icon: IconButton(
                         icon: SvgPicture.asset(
                           AppAssets().icEyeCrossed,
-                          color: PayNestTheme.primaryColor,
+                          color: colors.primaryColor,
                         ),
                         onPressed: () {
                           context.read<SignInBloc>().add(
@@ -88,10 +88,10 @@ class _BlocUIState extends State<BlocUI> {
                   alignment: Alignment.centerRight,
                   child: Text(
                     forgotPassword,
-                    style: TextStyles().bold.copyWith(
-                          fontSize: sizes.fontRatio * 14,
-                          color: AppColors().primaryColor,
-                        ),
+                    style: textStyles.bold.copyWith(
+                      fontSize: sizes.fontRatio * 14,
+                      color: colors.primaryColor,
+                    ),
                   ),
                 ),
               ),
@@ -119,10 +119,10 @@ class _BlocUIState extends State<BlocUI> {
                               SizedBox(
                                 child: Text(
                                   loginWithTouchID,
-                                  style: TextStyles().bold.copyWith(
-                                        fontSize: sizes.fontRatio * 18,
-                                        color: AppColors().black,
-                                      ),
+                                  style: textStyles.bold.copyWith(
+                                    fontSize: sizes.fontRatio * 18,
+                                    color: colors.black,
+                                  ),
                                 ),
                               ),
                             ],
@@ -136,11 +136,11 @@ class _BlocUIState extends State<BlocUI> {
                 width: double.infinity,
                 height: sizes.heightRatio * 46,
                 child: ElevatedButtons(
-                  color: AppColors().primaryColor,
+                  color: colors.primaryColor,
                   text: signIn,
                   isLoading:
                       state.status == SignInStatus.loading ? true : false,
-                  textColor: AppColors().white,
+                  textColor: colors.white,
                   onPressed: () {
                     if (loginFormKey.currentState!.validate()) {
                       FocusScope.of(context).requestFocus(FocusNode());
@@ -164,22 +164,22 @@ class _BlocUIState extends State<BlocUI> {
                   Expanded(
                     child: Container(
                       height: 1.5,
-                      color: AppColors().primaryColor,
+                      color: colors.primaryColor,
                     ),
                   ),
                   horizontalSpacer(10),
                   Text(
                     or,
-                    style: TextStyles().bold.copyWith(
-                          fontSize: sizes.fontRatio * 14,
-                          color: AppColors().black,
-                        ),
+                    style: textStyles.bold.copyWith(
+                      fontSize: sizes.fontRatio * 14,
+                      color: colors.black,
+                    ),
                   ),
                   horizontalSpacer(10),
                   Expanded(
                     child: Container(
                       height: 1.5,
-                      color: AppColors().primaryColor,
+                      color: colors.primaryColor,
                     ),
                   ),
                 ],
@@ -220,7 +220,7 @@ class _BlocUIState extends State<BlocUI> {
             showToast(
               message: state.message,
               context: context,
-              color: AppColors().redShade2,
+              color: colors.redShade2,
             );
             break;
           case SignInStatus.init:

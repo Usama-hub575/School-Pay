@@ -23,18 +23,18 @@ Widget optionalButton({
           Text(
             value,
             textAlign: TextAlign.center,
-            style: TextStyles().bold.copyWith(
-                  color: AppColors().white,
-                  fontSize: sizes.fontRatio * 14,
-                ),
+            style: textStyles.bold.copyWith(
+              color: colors.white,
+              fontSize: sizes.fontRatio * 14,
+            ),
           ),
           Text(
             'OPTIONAL',
             textAlign: TextAlign.center,
-            style: TextStyles().medium.copyWith(
-                  fontSize: sizes.fontRatio * 10,
-                  color: AppColors().white,
-                ),
+            style: textStyles.medium.copyWith(
+              fontSize: sizes.fontRatio * 10,
+              color: colors.white,
+            ),
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+export 'assistance/export.dart';
 export 'dashboard/export.dart';
 export 'host/export.dart';
 export 'initializer/export.dart';

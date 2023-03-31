@@ -14,8 +14,8 @@ import 'package:paynest_flutter_app/views/host/transactiondetails/transactiondet
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../data/model/datamodel/transactiondetail_model.dart';
-import '../../../data/model/response/dashboard/transactions_list/transaction_list_response_model.dart';
+import '../../../data/model/response/dashboard/transaction/transaction_detail/transaction_detail_model.dart';
+import '../../../data/model/response/dashboard/transaction/transaction_list_response/transaction_list_response_model.dart';
 import '../../../presentation/res/res.dart';
 import 'widgets/shimmer_card.dart';
 

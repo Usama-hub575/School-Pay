@@ -1,0 +1,4 @@
+enum GetAssistanceStatus {
+  init,
+  showToast,
+}

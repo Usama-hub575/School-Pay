@@ -184,10 +184,10 @@ class RegisterCountryCodePickerState extends State<RegisterCountryCodePicker> {
                 widget.showOnlyCountryWhenClosed
                     ? selectedItem.toString()
                     : selectedItem!.toCountryStringOnly(),
-                style: TextStyles().bold.copyWith(
-                      fontSize: sizes.fontRatio * 14,
-                      color: AppColors().black,
-                    ),
+                style: textStyles.bold.copyWith(
+                  fontSize: sizes.fontRatio * 14,
+                  color: colors.black,
+                ),
               ),
             const Spacer(),
             if (widget.showDropDownButton)
@@ -258,8 +258,8 @@ class RegisterCountryCodePickerState extends State<RegisterCountryCodePicker> {
 
   void showCountryCodePickerDialog() {
     showModalBottomSheet(
-      barrierColor: widget.barrierColor ?? AppColors().black.withOpacity(0.1),
-      backgroundColor: AppColors().black.withOpacity(0.1),
+      barrierColor: widget.barrierColor ?? colors.black.withOpacity(0.1),
+      backgroundColor: colors.black.withOpacity(0.1),
       context: context,
       builder: (context) => Center(
         child: SelectionDialog(

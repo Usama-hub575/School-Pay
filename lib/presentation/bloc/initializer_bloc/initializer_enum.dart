@@ -8,5 +8,4 @@ enum InitializerStatus {
   forcefulDialogue,
   dashboardPage,
   welcomePage,
-  home,
 }

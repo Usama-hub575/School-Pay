@@ -1,4 +1,4 @@
-import '../data/model/response/dashboard/students/students_response_model.dart';
+import '../data/model/response/dashboard/student/students_response_model.dart';
 
 MyStudentsResponseModel getMyStudentModel({required StudentData element}) {
   List<StudentData> studentList = [];

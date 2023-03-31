@@ -45,10 +45,10 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
             verticalSpacer(16),
             Text(
               confirmCode,
-              style: TextStyles().extraBold.copyWith(
-                    color: AppColors().black,
-                    fontSize: sizes.fontRatio * 18,
-                  ),
+              style: textStyles.extraBold.copyWith(
+                color: colors.black,
+                fontSize: sizes.fontRatio * 18,
+              ),
             ),
             BlocConsumer<RegisterOTPPageBloc, RegisterOTPPageState>(
               builder: (context, state) {
@@ -63,9 +63,9 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                           ),
                           child: Text(
                             'The Code Has Been sent to ${widget.phoneCode + widget.phoneNumber} & ${widget.email}. Please Enter The Code Below.',
-                            style: TextStyles().regular.copyWith(
-                                  fontSize: sizes.fontRatio * 12,
-                                ),
+                            style: textStyles.regular.copyWith(
+                              fontSize: sizes.fontRatio * 12,
+                            ),
                           ),
                         ),
                         verticalSpacer(80),
@@ -76,14 +76,14 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                           child: Pinput(
                             length: 4,
                             defaultPinTheme: PinTheme(
-                              textStyle: TextStyles().bold.copyWith(
-                                    fontSize: sizes.fontRatio * 16,
-                                    color: AppColors().black,
-                                  ),
+                              textStyle: textStyles.bold.copyWith(
+                                fontSize: sizes.fontRatio * 16,
+                                color: colors.black,
+                              ),
                               decoration: BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
-                                    color: AppColors().black.withOpacity(0.5),
+                                    color: colors.black.withOpacity(0.5),
                                   ),
                                 ),
                               ),
@@ -134,10 +134,10 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                                 },
                                 child: Text(
                                   resend,
-                                  style: TextStyles().bold.copyWith(
-                                        fontSize: sizes.fontRatio * 16,
-                                        color: AppColors().primaryColor,
-                                      ),
+                                  style: textStyles.bold.copyWith(
+                                    fontSize: sizes.fontRatio * 16,
+                                    color: colors.primaryColor,
+                                  ),
                                 ),
                               ),
                         verticalSpacer(40),
@@ -145,7 +145,7 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                           width: double.infinity,
                           height: sizes.heightRatio * 46,
                           child: ElevatedButtons(
-                            color: AppColors().primaryColor,
+                            color: colors.primaryColor,
                             text: next,
                             onPressed: () async {
                               if (otpController.length == 4) {
@@ -161,7 +161,7 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                                     );
                               }
                             },
-                            textColor: AppColors().white,
+                            textColor: colors.white,
                             isLoading:
                                 state.status == RegisterOTPPageStatus.loading
                                     ? true
@@ -191,7 +191,7 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                     showToast(
                       message: state.otpErrorMessage ?? enteredOTPIsWrong,
                       context: context,
-                      color: AppColors().redShade2,
+                      color: colors.redShade2,
                     );
                     break;
                 }

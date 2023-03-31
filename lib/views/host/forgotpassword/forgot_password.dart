@@ -22,7 +22,7 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   UserController userController = Get.put(UserController());
   TextEditingController emailController = TextEditingController();
-  GlobalKey<ScaffoldState> _scaffoldKey =
+  final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>(debugLabel: 'forgotPassword');
 
   RegisterController registerController = RegisterController();

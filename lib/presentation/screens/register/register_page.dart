@@ -41,11 +41,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: sizes.heightRatio * 46,
                         width: sizes.widthRatio * 46,
                         decoration: BoxDecoration(
-                          boxShadow: const [
+                          boxShadow: [
                             BoxShadow(
-                              color: Colors.black54,
+                              color: colors.black,
                               blurRadius: 1.0,
-                              offset: Offset(
+                              offset: const Offset(
                                 1.3, // Move to right 10  horizontally
                                 1.3, // Move to bottom 10 Vertically
                               ),
@@ -54,12 +54,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           borderRadius: BorderRadius.circular(
                             12,
                           ),
-                          color: AppColors().primaryColor,
+                          color: colors.primaryColor,
                         ),
                         child: Icon(
                           Icons.arrow_back,
                           size: 20,
-                          color: AppColors().white,
+                          color: colors.white,
                         ),
                       ),
                     ),
