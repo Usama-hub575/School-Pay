@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 
-import '../data/model/response/register/register_resp_model.dart';
+import '../data/model/response/register/register_response_model.dart';
 import '../data/model/updateprofile_model.dart';
 import '../data/model/updateprofile_resp_model.dart';
 
@@ -46,7 +46,8 @@ class UpdateProfileController extends GetxController {
         var updateRes = await APIService().refreshUserData(
           parentId: id,
         );
-        userController.userResData.value = registerRespModelFromJson(updateRes);
+        userController.userResData.value =
+            registerResponseModelFromJson(updateRes);
         userController.userResData.refresh();
         updateProfileData.refresh();
         isLoading(false);

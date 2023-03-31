@@ -6,14 +6,14 @@ import 'package:paynest_flutter_app/service/api_service.dart';
 import '../data/model/forgot_password_model.dart';
 import '../data/model/forgot_password_resp_model.dart';
 import '../data/model/register_model.dart';
-import '../data/model/response/register/register_resp_model.dart';
+import '../data/model/response/register/register_response_model.dart';
 
 class RegisterController extends GetxController {
   var isLoading = false.obs;
   final isFailed = "".obs;
-  final registerResData =
-      RegisterRespModel(status: false, message: null, token: null, parent: null)
-          .obs;
+  final registerResData = RegisterResponseModel(
+          status: false, message: null, token: null, parent: null)
+      .obs;
   var forgotPasswordResData =
       ForgotPasswordRespModel(status: false, message: null).obs;
 
@@ -49,7 +49,7 @@ class RegisterController extends GetxController {
           await APIService().apiResister(registerModelToJson(registerModel));
       var decoded = jsonDecode(res);
       if (decoded['status'] == true) {
-        RegisterRespModel lrm = registerRespModelFromJson(res);
+        RegisterResponseModel lrm = registerResponseModelFromJson(res);
         registerResData.value = lrm;
         registerResData.refresh();
       } else if (decoded['status'] == false) {

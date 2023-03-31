@@ -13,6 +13,8 @@ abstract class NetworkHelper {
     Map<String, String>? headers,
     body,
     encoding,
+    bool modifyHeader = true,
+    bool encodeBody = true,
   });
 
   Future<Either<String, Failure>> multipart(

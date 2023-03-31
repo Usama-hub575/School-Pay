@@ -1,9 +1,6 @@
 // To parse this JSON data, do
 //
 //     final transactionListModel = transactionListModelFromJson(jsonString);
-
-
-
 // TransactionListModel transactionListModelFromJson(String str) => TransactionListModel.fromJson(json.decode(str));
 //
 // String transactionListModelToJson(TransactionListModel data) => json.encode(data.toJson());

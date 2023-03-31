@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paynest_flutter_app/constants/constants.dart';
 import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/views/host/dashboard/dashboard.dart';
 import 'package:paynest_flutter_app/views/host/more/more_page.dart';
 import 'package:paynest_flutter_app/views/host/pay/paynow_page.dart';
 import 'package:paynest_flutter_app/views/host/student/student_page.dart';
@@ -30,7 +29,7 @@ class _HostPageState extends State<HostPage> {
   List<Widget> pages = [];
 
   final pay = [
-    PayNowPage(whichStack: 'host'),
+    const PayNowPage(whichStack: 'host'),
   ];
 
   final selectedIcons = <String>[
@@ -61,16 +60,16 @@ class _HostPageState extends State<HostPage> {
   }
 
   initializePages() {
-    pages.add(
-      DashboardPage(
-        onTap: () {
-          selectedNavItem(1);
-        },
-        onRecentTransactionTap: () {
-          selectedNavItem(2);
-        },
-      ),
-    );
+    // pages.add(
+    //   DashboardPage(
+    //     onTap: () {
+    //       selectedNavItem(1);
+    //     },
+    //     onRecentTransactionTap: () {
+    //       selectedNavItem(2);
+    //     },
+    //   ),
+    // );
     pages.add(
       StudentPage(whichStack: "host"),
     );
@@ -161,7 +160,7 @@ class _HostPageState extends State<HostPage> {
           payNow = 0;
           selectedNavItem(index);
         },
-        shadow: BoxShadow(
+        shadow: const BoxShadow(
           offset: Offset(0, 1),
           blurRadius: 12,
           spreadRadius: 0.5,

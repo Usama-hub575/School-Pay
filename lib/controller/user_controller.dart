@@ -5,17 +5,17 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
-import 'package:paynest_flutter_app/views/host/dashboard/dashboard.dart';
 
 import '../data/model/forgot_password_resp_model.dart';
-import '../data/model/mystudents_resp_model.dart';
 import '../data/model/parent_student_response_model.dart';
 import '../data/model/register_model.dart';
 import '../data/model/request/login/login_model.dart';
 import '../data/model/reset_password_by_otp.dart';
 import '../data/model/response/countries/get_countries/get_countries_response.dart';
+import '../data/model/response/dashboard/students/students_response_model.dart';
 import '../data/model/response/login/login_response_model.dart';
-import '../data/model/response/register/register_resp_model.dart';
+import '../data/model/response/register/register_response_model.dart';
+import '../presentation/screens/dashboard/dashboard.dart';
 import '../utils/sharedPrefKeys.dart';
 
 MySharedPreferences preferences = MySharedPreferences.instance;
@@ -28,15 +28,18 @@ class UserController extends GetxController {
   var attemptsRemain = ''.obs;
   final storage = GetStorage();
   var errorMessage = "Something went wrong on server side!";
-  final userResData =
-      RegisterRespModel(status: false, message: null, token: null, parent: null)
-          .obs;
+  final userResData = RegisterResponseModel(
+    status: false,
+    message: null,
+    token: null,
+    parent: null,
+  ).obs;
   final getCountriesResponse = CountriesResponse(
     status: false,
     country: [],
   ).obs;
   var singleStudentResponse =
-      MyStudentsRespModel(status: false, students: null).obs;
+      MyStudentsResponseModel(status: false, students: null).obs;
   var forgotPasswordResData =
       ForgotPasswordRespModel(status: false, message: null).obs;
   ParentStudentResponse parentStudentResponse = ParentStudentResponse();
@@ -77,7 +80,7 @@ class UserController extends GetxController {
           await APIService().apiResister(registerModelToJson(registerModel));
       var decoded = jsonDecode(res);
       if (decoded['status'] == true) {
-        RegisterRespModel lrm = registerRespModelFromJson(res);
+        RegisterResponseModel lrm = registerResponseModelFromJson(res);
         userResData.value = lrm;
         storage.write(
           SharedPrefKeys.accessToken,
@@ -120,7 +123,7 @@ class UserController extends GetxController {
       if (res != null) {
         if (res != "") {
           var decoded = jsonDecode(res);
-          RegisterRespModel lrm = registerRespModelFromJson(res);
+          RegisterResponseModel lrm = registerResponseModelFromJson(res);
           if (decoded['status'] == true) {
             userResData.value = lrm;
             userResData.refresh();
@@ -216,7 +219,7 @@ class UserController extends GetxController {
       );
       var decoded = jsonDecode(res);
       if (decoded['status'] == true) {
-        singleStudentResponse.value = MyStudentsRespModel.fromJson(
+        singleStudentResponse.value = MyStudentsResponseModel.fromJson(
           jsonDecode(
             res.toString(),
           ),

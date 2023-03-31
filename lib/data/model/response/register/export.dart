@@ -1,1 +1,1 @@
-export 'register_resp_model.dart';
+export 'register_response_model.dart';

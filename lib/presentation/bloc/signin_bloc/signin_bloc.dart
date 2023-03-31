@@ -51,10 +51,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         ),
       );
     } else {
-      state.message = response.message.toString();
       emit(
         state.copyWith(
           status: SignInStatus.showToast,
+          message: response.message.toString(),
         ),
       );
     }

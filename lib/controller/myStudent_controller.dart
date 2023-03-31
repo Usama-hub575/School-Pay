@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 
 import '../data/model/mystudents_model.dart';
-import '../data/model/mystudents_resp_model.dart';
+import '../data/model/response/dashboard/students/students_response_model.dart';
 
 class MyStudentController extends GetxController {
   var isLoading = false.obs;
-  var myStudentData = MyStudentsRespModel(status: false, students: null).obs;
-
+  var myStudentData =
+      MyStudentsResponseModel(status: false, students: null).obs;
 
   hitMyStudents(parentID) async {
     try {
@@ -22,7 +22,8 @@ class MyStudentController extends GetxController {
 
       var decoded = jsonDecode(res);
       if (decoded['status'] == true) {
-        MyStudentsRespModel respModel = myStudentsRespModelFromJson(res);
+        MyStudentsResponseModel respModel =
+            myStudentsResponseModelFromJson(res);
         myStudentData.value = respModel;
         myStudentData.refresh();
       } else if (decoded['status'] == false) {
@@ -48,7 +49,8 @@ class MyStudentController extends GetxController {
   }
 
   void resetStudentCard() {
-    if(myStudentData.value.students !=null && myStudentData.value.students!.length > 0){
+    if (myStudentData.value.students != null &&
+        myStudentData.value.students!.length > 0) {
       for (int i = 0; i < myStudentData.value.students!.length; i++) {
         myStudentData.value.students![i].isSelected = false;
       }

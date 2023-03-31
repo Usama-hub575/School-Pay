@@ -3,6 +3,8 @@ class StorageKeys {
   static const String onBoardingStatus = 'onBoardingStatus';
 
   static const String phone = "phone";
+  static const String firstName = "firstName";
+  static const String lastName = "lastName";
 
   ///Using///
   static const String isLogin = "isLogin";

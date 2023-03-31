@@ -2,35 +2,35 @@
 //
 //     final myStudentsRespModel = myStudentsRespModelFromJson(jsonString);
 
-import 'dart:convert';
+import 'package:paynest_flutter_app/export.dart';
 
-MyStudentsRespModel myStudentsRespModelFromJson(String str) =>
-    MyStudentsRespModel.fromJson(json.decode(str));
+MyStudentsResponseModel myStudentsResponseModelFromJson(String str) =>
+    MyStudentsResponseModel.fromJson(json.decode(str));
 
-String myStudentsRespModelToJson(MyStudentsRespModel data) =>
+String myStudentsResponseModelToJson(MyStudentsResponseModel data) =>
     json.encode(data.toJson());
 
-class MyStudentsRespModel {
-  MyStudentsRespModel({
+class MyStudentsResponseModel {
+  MyStudentsResponseModel({
     required this.status,
     required this.students,
   });
 
   bool status;
-  List<StudentElement>? students;
+  List<StudentData>? students;
 
-  static MyStudentsRespModel empty() {
-    return MyStudentsRespModel(
+  static MyStudentsResponseModel empty() {
+    return MyStudentsResponseModel(
       status: false,
       students: [],
     );
   }
 
-  factory MyStudentsRespModel.fromJson(Map<String, dynamic> json) =>
-      MyStudentsRespModel(
+  factory MyStudentsResponseModel.fromJson(Map<String, dynamic> json) =>
+      MyStudentsResponseModel(
         status: json["status"],
-        students: List<StudentElement>.from(
-            json["students"].map((x) => StudentElement.fromJson(x))),
+        students: List<StudentData>.from(
+            json["students"].map((x) => StudentData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -39,8 +39,8 @@ class MyStudentsRespModel {
       };
 }
 
-class StudentElement {
-  StudentElement({
+class StudentData {
+  StudentData({
     required this.id,
     required this.parentId,
     required this.studentId,
@@ -51,8 +51,8 @@ class StudentElement {
     required this.isSelected,
   });
 
-  static StudentElement empty() {
-    return StudentElement(
+  static StudentData empty() {
+    return StudentData(
       id: 0,
       parentId: 0,
       studentId: 0,
@@ -73,7 +73,7 @@ class StudentElement {
   StudentStudent? student;
   bool isSelected;
 
-  factory StudentElement.fromJson(Map<String, dynamic> json) => StudentElement(
+  factory StudentData.fromJson(Map<String, dynamic> json) => StudentData(
         id: json["id"] ?? -1,
         parentId: json["parentId"] ?? -1,
         studentId: json["studentId"] ?? -1,
@@ -307,92 +307,92 @@ class StudentStudent {
       };
 }
 
-class School {
-  School({
-    required this.id,
-    required this.name,
-    required this.deletedAt,
-    required this.addedBy,
-    required this.address,
-    required this.description,
-    required this.vat,
-    required this.paynestFee,
-    required this.apiKey,
-    required this.merchantId,
-    required this.file,
-    required this.privacy,
-    required this.createdAt,
-    required this.updatedAt,
-  });
-
-  int id;
-  String name;
-  dynamic deletedAt;
-  dynamic addedBy;
-  String address;
-  String description;
-  double vat;
-  int paynestFee;
-  String? apiKey;
-  String? merchantId;
-  String? file;
-  String? privacy;
-  DateTime createdAt;
-  DateTime updatedAt;
-
-  static School empty() {
-    return School(
-        id: -1,
-        name: "-",
-        deletedAt: "-",
-        addedBy: "-",
-        address: "-",
-        description: "-",
-        vat: -1.0,
-        paynestFee: -1,
-        apiKey: "-",
-        merchantId: "-",
-        file: "-",
-        privacy: "-",
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now());
-  }
-
-  factory School.fromJson(Map<String, dynamic> json) => School(
-        id: json["id"] ?? 0,
-        name: json["name"] ?? "-",
-        deletedAt: json["deletedAt"] ?? "-",
-        addedBy: json["addedBy"] ?? "-",
-        address: json["address"] ?? "-",
-        description: json["description"] ?? "-",
-        vat: double.parse(json["vat"]),
-        paynestFee: json["paynestFee"] ?? 0,
-        apiKey: json["APIKey"] ?? "",
-        merchantId: json["merchantId"] ?? "-",
-        file: json["file"] ?? "-",
-        privacy: json["privacy"] ?? "-",
-        createdAt: json["createdAt"] != null
-            ? DateTime.parse(json["createdAt"])
-            : DateTime.now(),
-        updatedAt: json["updatedAt"] != null
-            ? DateTime.parse(json["updatedAt"])
-            : DateTime.now(),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "deletedAt": deletedAt,
-        "addedBy": addedBy,
-        "address": address,
-        "description": description,
-        "vat": vat,
-        "paynestFee": paynestFee,
-        "APIKey": apiKey,
-        "merchantId": merchantId,
-        "file": file,
-        "privacy": privacy,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-      };
-}
+// class School {
+//   School({
+//     required this.id,
+//     required this.name,
+//     required this.deletedAt,
+//     required this.addedBy,
+//     required this.address,
+//     required this.description,
+//     required this.vat,
+//     required this.paynestFee,
+//     required this.apiKey,
+//     required this.merchantId,
+//     required this.file,
+//     required this.privacy,
+//     required this.createdAt,
+//     required this.updatedAt,
+//   });
+//
+//   int id;
+//   String name;
+//   dynamic deletedAt;
+//   dynamic addedBy;
+//   String address;
+//   String description;
+//   double vat;
+//   int paynestFee;
+//   String? apiKey;
+//   String? merchantId;
+//   String? file;
+//   String? privacy;
+//   DateTime createdAt;
+//   DateTime updatedAt;
+//
+//   static School empty() {
+//     return School(
+//         id: -1,
+//         name: "-",
+//         deletedAt: "-",
+//         addedBy: "-",
+//         address: "-",
+//         description: "-",
+//         vat: -1.0,
+//         paynestFee: -1,
+//         apiKey: "-",
+//         merchantId: "-",
+//         file: "-",
+//         privacy: "-",
+//         createdAt: DateTime.now(),
+//         updatedAt: DateTime.now());
+//   }
+//
+//   factory School.fromJson(Map<String, dynamic> json) => School(
+//         id: json["id"] ?? 0,
+//         name: json["name"] ?? "-",
+//         deletedAt: json["deletedAt"] ?? "-",
+//         addedBy: json["addedBy"] ?? "-",
+//         address: json["address"] ?? "-",
+//         description: json["description"] ?? "-",
+//         vat: double.parse(json["vat"]),
+//         paynestFee: json["paynestFee"] ?? 0,
+//         apiKey: json["APIKey"] ?? "",
+//         merchantId: json["merchantId"] ?? "-",
+//         file: json["file"] ?? "-",
+//         privacy: json["privacy"] ?? "-",
+//         createdAt: json["createdAt"] != null
+//             ? DateTime.parse(json["createdAt"])
+//             : DateTime.now(),
+//         updatedAt: json["updatedAt"] != null
+//             ? DateTime.parse(json["updatedAt"])
+//             : DateTime.now(),
+//       );
+//
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "name": name,
+//         "deletedAt": deletedAt,
+//         "addedBy": addedBy,
+//         "address": address,
+//         "description": description,
+//         "vat": vat,
+//         "paynestFee": paynestFee,
+//         "APIKey": apiKey,
+//         "merchantId": merchantId,
+//         "file": file,
+//         "privacy": privacy,
+//         "createdAt": createdAt.toIso8601String(),
+//         "updatedAt": updatedAt.toIso8601String(),
+//       };
+// }

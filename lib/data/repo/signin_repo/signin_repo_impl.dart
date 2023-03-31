@@ -37,9 +37,9 @@ class SignInRepoImpl implements SignInRepo {
     String? savedFcm = storage.getString(key: StorageKeys.fcmToken);
 
     final body = {
-      'email': savedEmail ?? email,
-      'password': savedPassword ?? password,
-      'fcm': savedFcm ?? fcm,
+      'email': email,
+      'password': password,
+      'fcm': fcm,
     };
 
     final response = await networkHelper.post(
@@ -54,6 +54,18 @@ class SignInRepoImpl implements SignInRepo {
           jsonDecode(success),
         );
         if (authenticationResponseModel.status == true) {
+          storage.saveString(
+            key: StorageKeys.firstName,
+            value: authenticationResponseModel.parent.firstName,
+          );
+          storage.saveString(
+            key: StorageKeys.lastName,
+            value: authenticationResponseModel.parent.lastName,
+          );
+          storage.saveString(
+            key: StorageKeys.accessToken,
+            value: authenticationResponseModel.token,
+          );
           storage.saveString(
             key: StorageKeys.email,
             value: savedEmail ?? email,

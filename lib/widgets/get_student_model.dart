@@ -1,10 +1,10 @@
-import 'package:paynest_flutter_app/data/model/mystudents_resp_model.dart';
+import '../data/model/response/dashboard/students/students_response_model.dart';
 
-MyStudentsRespModel getMyStudentModel({required StudentElement element}) {
-  List<StudentElement> studentList = [];
+MyStudentsResponseModel getMyStudentModel({required StudentData element}) {
+  List<StudentData> studentList = [];
   studentList.add(element);
 
-  return MyStudentsRespModel(
+  return MyStudentsResponseModel(
     status: true,
     students: studentList,
   );

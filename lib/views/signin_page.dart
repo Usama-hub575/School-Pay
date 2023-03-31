@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/utils/utils.dart';
@@ -12,14 +13,14 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   UserController userController = Get.put(UserController());
   final storage = GetStorage();
-  MySharedPreferences _preferences = MySharedPreferences.instance;
+  final MySharedPreferences _preferences = MySharedPreferences.instance;
 
   bool isBioMatric = false;
   bool isLoading = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isObscure = true;
-  GlobalKey<ScaffoldState> _scaffoldKey =
+  final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>(debugLabel: 'signIn');
 
   isBioMatricEnable() {

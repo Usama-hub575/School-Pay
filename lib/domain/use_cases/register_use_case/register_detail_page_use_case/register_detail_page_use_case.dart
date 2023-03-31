@@ -7,8 +7,9 @@ class RegisterDetailPageUseCase {
   });
 
   RegisterDetailPageRepo registerDetailPageRepo;
+  RegisterResponseModel _registerResponseModel = RegisterResponseModel.empty();
 
-  Future<Either<RegisterRespModel, Failure>> register({
+  Future<Either<RegisterResponseModel, Failure>> register({
     required firstName,
     required lastName,
     required password,
@@ -38,8 +39,22 @@ class RegisterDetailPageUseCase {
 
       return response.fold(
         (success) {
+          if (success.status) {
+            registerDetailPageRepo.setInt(
+              key: StorageKeys.userId,
+              value: success.parent!.id,
+            );
+            registerDetailPageRepo.setString(
+              key: StorageKeys.firstName,
+              value: success.parent!.firstName,
+            );
+            registerDetailPageRepo.setString(
+              key: StorageKeys.lastName,
+              value: success.parent!.lastName,
+            );
+          }
           return Left(
-            success,
+            _registerResponseModel = success,
           );
         },
         (r) {
@@ -60,4 +75,6 @@ class RegisterDetailPageUseCase {
       );
     }
   }
+
+  RegisterResponseModel getRegisterResponseModel() => _registerResponseModel;
 }

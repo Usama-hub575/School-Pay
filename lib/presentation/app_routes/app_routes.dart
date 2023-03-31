@@ -5,6 +5,7 @@ class AppRoutes {
   static const navigateToWelcome = '/welcome';
   static const navigateToSignIn = '/signIn';
   static const navigateToRegister = '/register';
+  static const navigateToDashboard = '/dashboard';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     _currentRoute = settings.name;
@@ -26,6 +27,10 @@ class AppRoutes {
       case navigateToRegister:
         return MaterialPageRoute(
           builder: (_) => const RegisterPage(),
+        );
+      case navigateToDashboard:
+        return MaterialPageRoute(
+          builder: (_) => const HostPage(),
         );
       default:
         return _errorRoute();

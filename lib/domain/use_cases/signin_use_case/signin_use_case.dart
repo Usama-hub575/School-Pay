@@ -7,7 +7,7 @@ class SignInUseCase {
 
   SignInRepo signInRepo;
   AuthenticationModel authenticationResponseData = AuthenticationModel.empty();
-  late InitializerUseCase initializeUseCase;
+  late InitializerUseCase initializerUseCase;
 
   bool? isBioMetricEnable() {
     return signInRepo.getBool(StorageKeys.isBioMetric);
@@ -23,8 +23,8 @@ class SignInUseCase {
       fcm: signInRepo.getString('fcmToken'),
     );
     response.fold(
-      (result) {
-        authenticationResponseData = result;
+      (success) {
+        authenticationResponseData = success;
       },
       (r) {
         authenticationResponseData.message = r.message;
@@ -42,7 +42,7 @@ class SignInUseCase {
       String? password = signInRepo.getString(
         StorageKeys.userPassword,
       );
-      await initializeUseCase.login(
+      await initializerUseCase.login(
         email: email,
         password: password,
         fcmToken: signInRepo.getString('fcmToken'),

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
 import 'package:paynest_flutter_app/export.dart';
@@ -7,11 +8,9 @@ import 'package:paynest_flutter_app/service/api_service.dart';
 
 import '../../../controller/createtransaction_resp_controller.dart';
 import '../../../controller/myStudent_controller.dart';
-import '../../../data/model/create_payment_intent_model.dart';
 import '../../../data/model/datamodel/paynowtransaction_detail_model.dart';
 import '../../../data/model/datamodel/singlestudent_model.dart';
 import '../../../data/model/lean_payment_model.dart';
-import '../../../data/model/lean_response.dart';
 import '../../webview/webview.dart';
 import '../transactiondetails/paynowltransactiondetails_page.dart';
 

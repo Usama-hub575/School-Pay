@@ -15,7 +15,7 @@ import 'package:paynest_flutter_app/widgets/spacer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../data/model/datamodel/transactiondetail_model.dart';
-import '../../../data/model/transactionlist_resp_model.dart';
+import '../../../data/model/response/dashboard/transactions_list/transaction_list_response_model.dart';
 import '../../../presentation/res/res.dart';
 import 'widgets/shimmer_card.dart';
 
@@ -108,8 +108,8 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                 height: 44.h,
                                 width: 44.w,
                                 decoration: BoxDecoration(
-                                    boxShadow: [
-                                      const BoxShadow(
+                                    boxShadow: const [
+                                      BoxShadow(
                                         color: Colors.black26,
                                         blurRadius: 2.0,
                                         offset: Offset(

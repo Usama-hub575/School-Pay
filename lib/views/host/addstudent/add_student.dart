@@ -1,13 +1,24 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/controller/addstudent_controller.dart';
 import 'package:paynest_flutter_app/controller/all_studentslist_controller.dart';
-import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/addstudent/widget/student_bottom_sheet.dart';
-import 'package:paynest_flutter_app/views/host/dashboard/widgets/succes_bottom_sheet.dart';
 
+import '../../../../constants/constants.dart';
+import '../../../../presentation/res/assets.dart';
+import '../../../../presentation/res/res.dart';
+import '../../../../theme/theme.dart';
+import '../../../../widgets/spacer.dart';
+import '../../../controller/user_controller.dart';
 import '../../../data/model/datamodel/selectedschool_to_addstudent.dart';
 import '../../../data/model/studentlist_res_model.dart';
+import '../../../presentation/screens/dashboard/widgets/succes_bottom_sheet.dart';
+import '../../../widgets/inkwell_widget.dart';
+import '../../../widgets/toast.dart';
 
 class AddStudent extends StatefulWidget {
   final SelectedSchoolData schoolData;

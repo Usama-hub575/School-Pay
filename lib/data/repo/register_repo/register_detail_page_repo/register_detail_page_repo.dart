@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:paynest_flutter_app/export.dart';
 
 mixin RegisterDetailPageRepo {
-  Future<Either<RegisterRespModel, Failure>> register({
+  Future<Either<RegisterResponseModel, Failure>> register({
     required String firstName,
     required String lastName,
     required String password,
@@ -15,4 +15,8 @@ mixin RegisterDetailPageRepo {
     required String birth,
     required String passport,
   });
+
+  Future? setInt({required String key, int? value});
+
+  Future? setString({required String key, String? value});
 }

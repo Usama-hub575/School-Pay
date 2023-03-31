@@ -142,6 +142,7 @@ const cfgPayment = "Configure payment methods";
 const makeFirstPayment = "Make First Payment";
 const setPIN = "Setup PIN";
 const student = "Payees";
+const students = "Payees";
 const dateOfBirth = "Date Of Birth";
 const studentName = "Payee Name";
 const fullName = "Full Name";
