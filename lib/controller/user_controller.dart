@@ -6,13 +6,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 import 'package:paynest_flutter_app/utils/sharedpref.dart';
 
-import '../data/model/forgot_password_resp_model.dart';
 import '../data/model/parent_student_response_model.dart';
 import '../data/model/register_model.dart';
 import '../data/model/request/login/login_model.dart';
 import '../data/model/reset_password_by_otp.dart';
 import '../data/model/response/countries/get_countries/get_countries_response.dart';
 import '../data/model/response/dashboard/student/students_response_model.dart';
+import '../data/model/response/forgot_password/forgot_password_response_model.dart';
 import '../data/model/response/login/login_response_model.dart';
 import '../data/model/response/register/register_response_model.dart';
 import '../presentation/screens/dashboard/dashboard.dart';
@@ -41,7 +41,7 @@ class UserController extends GetxController {
   var singleStudentResponse =
       MyStudentsResponseModel(status: false, students: null).obs;
   var forgotPasswordResData =
-      ForgotPasswordRespModel(status: false, message: null).obs;
+      ForgotPasswordResponseModel(status: false, message: null).obs;
   ParentStudentResponse parentStudentResponse = ParentStudentResponse();
 
   void init({required BuildContext context}) {
@@ -193,7 +193,8 @@ class UserController extends GetxController {
         ),
       );
       var decoded = jsonDecode(res);
-      ForgotPasswordRespModel lrm = forgotPasswordRespModelFromJson(res);
+      ForgotPasswordResponseModel lrm =
+          forgotPasswordResponseModelFromJson(res);
       if (decoded['status'] == true) {
         forgotPasswordResData.value = lrm;
         print(decoded['message']);

@@ -1,6 +1,6 @@
 import 'package:paynest_flutter_app/export.dart';
 
-part 'signin_events.dart';
+part 'signin_event.dart';
 part 'signin_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
@@ -14,12 +14,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<Initializer>(_initialize);
     on<SignInToggle>(_toggle);
     on<Loading>(_loading);
-    on<ForgotPassword>(_forgotPassword);
+    on<NavigateToForgotPassword>(_navigateToForgotPassword);
   }
 
   final SignInUseCase signInUseCase;
 
-  _forgotPassword(ForgotPassword event, emit) {
+  _navigateToForgotPassword(NavigateToForgotPassword event, emit) {
     emit(
       state.copyWith(
         status: SignInStatus.forgotPassword,

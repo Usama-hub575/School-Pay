@@ -80,9 +80,10 @@ class _BlocUIState extends State<BlocUI> {
               verticalSpacer(16),
               InkWellWidget(
                 onTap: () {
-                  context.read<SignInBloc>().add(
-                        ForgotPassword(),
-                      );
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.navigateToForgotPassword,
+                  );
                 },
                 child: Container(
                   alignment: Alignment.centerRight,

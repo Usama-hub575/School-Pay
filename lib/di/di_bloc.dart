@@ -55,4 +55,9 @@ Future initializeBlocs() async {
   it.registerLazySingleton(
     () => GetAssistanceBloc(),
   );
+  it.registerLazySingleton(
+    () => ForgotPasswordBloc(
+      forgotPasswordUseCase: it<ForgotPasswordUseCase>(),
+    ),
+  );
 }

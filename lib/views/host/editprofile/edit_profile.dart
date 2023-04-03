@@ -63,7 +63,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
+          SizedBox(
             height: 240.h,
             child: Stack(
               children: [
@@ -134,7 +134,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     ),
                                     spreadRadius: 0,
                                     blurRadius: 10,
-                                    offset: Offset(
+                                    offset: const Offset(
                                       0,
                                       5,
                                     ),
@@ -169,7 +169,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     color: Colors.black.withOpacity(0.3),
                                     spreadRadius: 0,
                                     blurRadius: 20,
-                                    offset: Offset(
+                                    offset: const Offset(
                                       1,
                                       1,
                                     ),
@@ -179,7 +179,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               child: Container(
                                 height: sizes.heightRatio * 60,
                                 width: sizes.widthRatio * 60,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),
                                 child: SvgPicture.asset(
@@ -198,7 +198,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
           Expanded(
               child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Form(
               key: Utils.editProfileFormKey,
               child: Padding(
@@ -561,7 +561,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                     verticalSpacer(70),
                     Obx(
-                      () => Container(
+                      () => SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(

@@ -86,7 +86,6 @@ flutter:
 
   assets:
     - assets/
-    - assets/icons/
     - assets/dashboard/
     - assets/svg/
     - assets/json/

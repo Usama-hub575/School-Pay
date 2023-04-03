@@ -25,4 +25,4 @@ class SignInToggle extends SignInEvent {}
 
 class Loading extends SignInEvent {}
 
-class ForgotPassword extends SignInEvent {}
+class NavigateToForgotPassword extends SignInEvent {}

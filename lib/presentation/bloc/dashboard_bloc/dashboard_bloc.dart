@@ -32,7 +32,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     final response = await dashboardUseCase.fetchStudents();
     response.fold(
       (success) {
-        ;
         emit(
           state.copyWith(
             students: success.students,

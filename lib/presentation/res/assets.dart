@@ -41,7 +41,7 @@ class AppAssets {
   final String icTransactionNonPng = "assets/dashboard/ic_transaction_non.png";
   final String icFacebook = 'assets/png/ic_facebook.png';
   final String icGoogle = 'assets/png/ic_google.png';
-  final String ic_bell = "assets/dashboard/ic_bell.png";
+  final String icBell = "assets/dashboard/ic_bell.png";
   final String icTick = "assets/png/ic_tick.png";
   final String icBackground = "assets/png/ic_background.png";
   final String noData = "assets/png/no-data.png";
