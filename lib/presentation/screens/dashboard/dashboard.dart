@@ -1,16 +1,14 @@
 import 'package:get/get.dart';
+import 'package:paynest_flutter_app/data/model/datamodel/single_student_model.dart';
+import 'package:paynest_flutter_app/data/model/datamodel/single_student_model.dart'
+    as student;
 import 'package:paynest_flutter_app/export.dart';
-import 'package:paynest_flutter_app/views/host/assistance/get_assistance.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
 import 'package:paynest_flutter_app/views/host/pendingtask/pending_task.dart';
 import 'package:paynest_flutter_app/views/host/singlestudent/singlestudent_page.dart';
 import 'package:paynest_flutter_app/views/host/student/student_page.dart';
 
-import '../../../controller/myStudent_controller.dart';
-import '../../../controller/transactionlist_controller.dart';
-import '../../../data/model/datamodel/singlestudent_model.dart';
-import '../../../data/model/datamodel/singlestudent_model.dart' as student;
-import '../../../data/model/datamodel/transactiondetail_model.dart';
+import '../../../data/model/datamodel/single_student_model.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({
@@ -43,11 +41,6 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  final MyStudentController myStudentController =
-      Get.put(MyStudentController());
-  final TransactionListController transactionListController =
-      Get.put(TransactionListController());
-
   @override
   void initState() {
     super.initState();
@@ -171,7 +164,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          const GetAssistance(),
+                                          const GetAssistancePage(),
                                     ),
                                   );
                                 },
@@ -615,6 +608,13 @@ class _DashboardPageState extends State<DashboardPage> {
             break;
           case DashboardStatus.loaded:
             // TODO: Handle this case.
+            break;
+          case DashboardStatus.error:
+            showToast(
+              message: state.errorMessage,
+              context: context,
+              color: colors.redShade2,
+            );
             break;
         }
       },

@@ -1,14 +1,13 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:paynest_flutter_app/export.dart';
 
-class GetAssistance extends StatefulWidget {
-  const GetAssistance({Key? key}) : super(key: key);
+class GetAssistancePage extends StatefulWidget {
+  const GetAssistancePage({Key? key}) : super(key: key);
 
   @override
-  State<GetAssistance> createState() => _GetAssistanceState();
+  State<GetAssistancePage> createState() => _GetAssistancePageState();
 }
 
-class _GetAssistanceState extends State<GetAssistance> {
+class _GetAssistancePageState extends State<GetAssistancePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,14 +16,20 @@ class _GetAssistanceState extends State<GetAssistance> {
           Container(
             height: sizes.heightRatio * 150,
             decoration: BoxDecoration(
-              color: PayNestTheme.primaryColor,
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(24.r),
+              color: colors.primaryColor,
+              borderRadius: const BorderRadius.vertical(
+                bottom: Radius.circular(
+                  24,
+                ),
               ),
             ),
             child: SafeArea(
               child: Padding(
-                padding: EdgeInsets.only(left: 25.h),
+                padding: EdgeInsets.only(
+                  left: horizontalValue(
+                    25,
+                  ),
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -32,10 +37,14 @@ class _GetAssistanceState extends State<GetAssistance> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(right: 25.h),
+                          padding: EdgeInsets.only(
+                            right: horizontalValue(
+                              25,
+                            ),
+                          ),
                           child: Container(
-                            height: 44.h,
-                            width: 44.w,
+                            height: verticalValue(44),
+                            width: horizontalValue(44),
                             decoration: BoxDecoration(
                               boxShadow: const [
                                 BoxShadow(
@@ -48,7 +57,7 @@ class _GetAssistanceState extends State<GetAssistance> {
                                 ),
                               ],
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(12.r),
+                              borderRadius: BorderRadius.circular(12),
                             ),
                             child: IconButton(
                               onPressed: () {
@@ -56,8 +65,8 @@ class _GetAssistanceState extends State<GetAssistance> {
                               },
                               icon: Icon(
                                 Icons.arrow_back,
-                                size: 20.sp,
-                                color: PayNestTheme.primaryColor,
+                                size: 20,
+                                color: colors.primaryColor,
                               ),
                               // child: Text(""),
                             ),
@@ -65,15 +74,14 @@ class _GetAssistanceState extends State<GetAssistance> {
                         ),
                         Text(
                           assistance,
-                          style: PayNestTheme.title20white.copyWith(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'montserratBold',
+                          style: textStyles.bold.copyWith(
+                            color: colors.white,
                             fontSize: sizes.fontRatio * 18,
                           ),
                         ),
                         SizedBox(
-                          height: 44.h,
-                          width: 44.w,
+                          height: verticalValue(44),
+                          width: horizontalValue(44),
                         )
                       ],
                     ),
@@ -102,7 +110,7 @@ class _GetAssistanceState extends State<GetAssistance> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: PayNestTheme.primaryColor,
+                  color: colors.primaryColor,
                 ),
               ),
               child: Row(
@@ -120,9 +128,9 @@ class _GetAssistanceState extends State<GetAssistance> {
                       children: [
                         Text(
                           contactCustomerCare,
-                          style: PayNestTheme.h2_12blueAccent.copyWith(
+                          style: textStyles.bold.copyWith(
                             fontSize: sizes.fontRatio * 16,
-                            color: PayNestTheme.primaryColor,
+                            color: colors.primaryColor,
                           ),
                         ),
                         verticalSpacer(8),
@@ -131,8 +139,9 @@ class _GetAssistanceState extends State<GetAssistance> {
                             Text(
                               shareYourQuery,
                               maxLines: 2,
-                              style: PayNestTheme.small_2_12black.copyWith(
+                              style: textStyles.regular.copyWith(
                                 fontSize: sizes.fontRatio * 10,
+                                color: colors.black,
                                 fontWeight: FontWeight.w300,
                               ),
                             )
@@ -165,7 +174,7 @@ class _GetAssistanceState extends State<GetAssistance> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: PayNestTheme.primaryColor,
+                  color: colors.primaryColor,
                 ),
               ),
               child: Row(
@@ -183,9 +192,9 @@ class _GetAssistanceState extends State<GetAssistance> {
                       children: [
                         Text(
                           fAQS,
-                          style: PayNestTheme.h2_12blueAccent.copyWith(
+                          style: textStyles.bold.copyWith(
                             fontSize: sizes.fontRatio * 16,
-                            color: PayNestTheme.primaryColor,
+                            color: colors.primaryColor,
                           ),
                         ),
                         verticalSpacer(8),
@@ -193,8 +202,9 @@ class _GetAssistanceState extends State<GetAssistance> {
                           width: sizes.widthRatio * 280,
                           child: Text(
                             goThrough,
-                            style: PayNestTheme.small_2_12black.copyWith(
+                            style: textStyles.regular.copyWith(
                               fontSize: sizes.fontRatio * 10,
+                              color: colors.black,
                               fontWeight: FontWeight.w300,
                             ),
                           ),
@@ -207,61 +217,81 @@ class _GetAssistanceState extends State<GetAssistance> {
             ),
           ),
           verticalSpacer(24),
-          InkWell(
-            onTap: () {
-              openWhatsapp();
-            },
-            child: Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: horizontalValue(20),
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: horizontalValue(16),
-                vertical: verticalValue(16),
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: PayNestTheme.primaryColor,
-                ),
-              ),
-              child: Row(
-                children: [
-                  SizedBox(
-                    height: sizes.heightRatio * 56,
-                    width: sizes.widthRatio * 56,
-                    child: Lottie.asset(
-                      AppAssets().commentAnimation,
+          BlocConsumer<GetAssistanceBloc, GetAssistanceState>(
+            builder: (context, state) {
+              return InkWell(
+                onTap: () {
+                  // context.read<>
+                  openWhatsapp();
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: horizontalValue(20),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: horizontalValue(16),
+                    vertical: verticalValue(16),
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: colors.primaryColor,
                     ),
                   ),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          liveChat,
-                          style: PayNestTheme.h2_12blueAccent.copyWith(
-                            fontSize: sizes.fontRatio * 16,
-                            color: PayNestTheme.primaryColor,
-                          ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        height: sizes.heightRatio * 56,
+                        width: sizes.widthRatio * 56,
+                        child: Lottie.asset(
+                          AppAssets().commentAnimation,
                         ),
-                        verticalSpacer(8),
-                        SizedBox(
-                          width: sizes.widthRatio * 280,
-                          child: Text(
-                            chatWith,
-                            style: PayNestTheme.small_2_12black.copyWith(
-                              fontSize: sizes.fontRatio * 10,
-                              fontWeight: FontWeight.w300,
+                      ),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              liveChat,
+                              style: textStyles.bold.copyWith(
+                                fontSize: sizes.fontRatio * 16,
+                                color: colors.primaryColor,
+                              ),
                             ),
-                          ),
+                            verticalSpacer(8),
+                            SizedBox(
+                              width: sizes.widthRatio * 280,
+                              child: Text(
+                                chatWith,
+                                style: textStyles.regular.copyWith(
+                                  fontSize: sizes.fontRatio * 10,
+                                  color: colors.black,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
+                ),
+              );
+            },
+            listener: (context, state) {
+              switch (state.status) {
+                case GetAssistanceStatus.init:
+                  // TODO: Handle this case.
+                  break;
+                case GetAssistanceStatus.showToast:
+                  showToast(
+                    context: context,
+                    message: whatsAppNotInstalled,
+                    color: colors.red,
+                  );
+                  break;
+              }
+            },
           ),
         ],
       ),

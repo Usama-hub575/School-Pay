@@ -1,2 +1,2 @@
-export 'students/export.dart';
-export 'transactions_list/export.dart';
+export 'student/export.dart';
+export 'transaction/export.dart';

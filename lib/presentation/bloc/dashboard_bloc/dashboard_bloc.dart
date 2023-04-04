@@ -42,7 +42,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       (r) {
         emit(
           state.copyWith(
-            status: DashboardStatus.init,
+            status: DashboardStatus.error,
+            errorMessage: r.message,
           ),
         );
       },
@@ -63,7 +64,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       (r) {
         emit(
           state.copyWith(
-            status: DashboardStatus.init,
+            status: DashboardStatus.error,
+            errorMessage: r.message,
           ),
         );
       },

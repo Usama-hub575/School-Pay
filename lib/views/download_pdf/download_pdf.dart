@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
-import '../../data/model/datamodel/singlestudent_model.dart';
+import '../../data/model/datamodel/single_student_model.dart';
 import '../../presentation/res/res.dart';
 import '../../widgets/spacer.dart';
 

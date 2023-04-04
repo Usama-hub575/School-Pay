@@ -1,8 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/export.dart';
 
-import '../../../../data/model/transactionlist_resp_model.dart';
-
 class RecentTransactions extends StatefulWidget {
   const RecentTransactions({
     Key? key,
@@ -37,13 +35,15 @@ class _RecentTransactionsState extends State<RecentTransactions> {
   Widget build(BuildContext context) {
     return isListEmpty
         ? Container(
-            padding: const EdgeInsets.only(bottom: 20),
+            padding: EdgeInsets.only(
+              bottom: verticalValue(20),
+            ),
             decoration: BoxDecoration(
-              color: PayNestTheme.colorDimPrimary,
+              color: colors.lightGrey1,
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
+                  color: colors.textGrey.withOpacity(0.5),
                   spreadRadius: 2,
                   blurRadius: 7,
                   offset: const Offset(0, 1),
@@ -85,7 +85,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
               height: sizes.heightRatio * 23,
               width: sizes.heightRatio * 23,
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: colors.green2,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Center(
@@ -106,19 +106,17 @@ class _RecentTransactionsState extends State<RecentTransactions> {
                   Text(
                     transactionsRow.school!.name,
                     textAlign: TextAlign.start,
-                    style: PayNestTheme.h2_12blueAccent.copyWith(
+                    style: textStyles.bold.copyWith(
                       fontSize: sizes.fontRatio * 13,
-                      color: PayNestTheme.black,
-                      fontFamily: 'montserratBold',
+                      color: colors.black,
                     ),
                   ),
                   Text(
                     dateFormat.format(DateTime.parse(
                         transactionsRow.payedOn.toString().substring(0, 10))),
-                    style: PayNestTheme.h2_12blueAccentLight.copyWith(
+                    style: textStyles.regular.copyWith(
                       fontSize: sizes.fontRatio * 10,
-                      color: PayNestTheme.textGrey,
-                      fontFamily: 'montserratRegular',
+                      color: colors.textGrey,
                     ),
                   ),
                 ],
@@ -129,9 +127,9 @@ class _RecentTransactionsState extends State<RecentTransactions> {
               'AED ${amountFormater(
                 double.parse('${transactionsRow.amount}'),
               )}',
-              style: PayNestTheme.h2_12blueAccent.copyWith(
+              style: textStyles.bold.copyWith(
                 fontSize: sizes.fontRatio * 13,
-                color: PayNestTheme.blueAccent,
+                color: colors.blueAccent,
               ),
             ),
             horizontalSpacer(12),

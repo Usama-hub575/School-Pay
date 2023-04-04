@@ -6,7 +6,6 @@ part 'initializer_state.dart';
 class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
   final FirebaseUseCase firebaseUseCase;
   final InitializerUseCase initializerUseCase;
-  late StorageRepo storage;
 
   InitializerBloc({
     required this.firebaseUseCase,
@@ -15,7 +14,7 @@ class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
     on<UpdateButtonAction>(_updateButtonAction);
     on<GetCountries>(_getCountries);
     on<Initialize>(_initialize);
-    // on<Login>(_login);
+    on<Login>(_login);
   }
 
   late PackageInfo packageInfo;
@@ -52,10 +51,8 @@ class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
           );
         }
       } else {
-        emit(
-          state.copyWith(
-            status: InitializerStatus.welcomePage,
-          ),
+        add(
+          Login(),
         );
       }
     }
@@ -89,29 +86,32 @@ class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
     await initializerUseCase.getCountries();
   }
 
-// _login(Login event, emit) async {
-//   if (storage.getString(key:StorageKeys.email) != null &&
-//       storage.getString(key:StorageKeys.password) != null) {
-//     bool value = await initializerUseCase.login();
-//     if (value) {
-//       emit(
-//         state.copyWith(
-//           status: InitializerStatus.home,
-//         ),
-//       );
-//     } else {
-//       emit(
-//         state.copyWith(
-//           status: InitializerStatus.welcomePage,
-//         ),
-//       );
-//     }
-//   } else {
-//     emit(
-//       state.copyWith(
-//         status: InitializerStatus.welcomePage,
-//       ),
-//     );
-//   }
-// }
+  _login(Login event, emit) async {
+    if (initializerUseCase.getString(key: StorageKeys.email) != null &&
+        initializerUseCase.getString(key: StorageKeys.password) != null) {
+      final response = await initializerUseCase.login();
+      response.fold(
+        (success) {
+          emit(
+            state.copyWith(
+              status: InitializerStatus.dashboardPage,
+            ),
+          );
+        },
+        (r) {
+          emit(
+            state.copyWith(
+              status: InitializerStatus.welcomePage,
+            ),
+          );
+        },
+      );
+    } else {
+      emit(
+        state.copyWith(
+          status: InitializerStatus.welcomePage,
+        ),
+      );
+    }
+  }
 }

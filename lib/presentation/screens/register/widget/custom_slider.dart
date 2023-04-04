@@ -19,10 +19,10 @@ class _CustomSliderState extends State<CustomSlider> {
       children: [
         Text(
           'STEP ${widget.currentIndex + 1}',
-          style: TextStyles().bold.copyWith(
-                color: AppColors().black,
-                fontSize: sizes.fontRatio * 16,
-              ),
+          style: textStyles.bold.copyWith(
+            color: colors.black,
+            fontSize: sizes.fontRatio * 16,
+          ),
         ),
         horizontalSpacer(8),
         widget.currentIndex == 0
@@ -36,16 +36,16 @@ class _CustomSliderState extends State<CustomSlider> {
                 width: sizes.widthRatio * 16,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors().white,
+                  color: colors.white,
                   border: Border.all(
-                    color: AppColors().black.withOpacity(0.5),
+                    color: colors.black.withOpacity(0.5),
                   ),
                 ),
               ),
         Expanded(
           child: Container(
             height: 1,
-            color: AppColors().textGrey,
+            color: colors.textGrey,
           ),
         ),
         widget.currentIndex == 1
@@ -59,16 +59,16 @@ class _CustomSliderState extends State<CustomSlider> {
                 width: sizes.widthRatio * 16,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors().white,
+                  color: colors.white,
                   border: Border.all(
-                    color: AppColors().black.withOpacity(0.5),
+                    color: colors.black.withOpacity(0.5),
                   ),
                 ),
               ),
         Expanded(
           child: Container(
             height: 1,
-            color: AppColors().textGrey,
+            color: colors.textGrey,
           ),
         ),
         widget.currentIndex == 2
@@ -82,9 +82,9 @@ class _CustomSliderState extends State<CustomSlider> {
                 width: sizes.widthRatio * 16,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors().white,
+                  color: colors.white,
                   border: Border.all(
-                    color: AppColors().black.withOpacity(0.5),
+                    color: colors.black.withOpacity(0.5),
                   ),
                 ),
               ),

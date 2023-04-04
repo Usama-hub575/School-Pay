@@ -8,7 +8,7 @@ import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
-import '../../../data/model/datamodel/transactiondetail_model.dart';
+import '../../../data/model/response/dashboard/transaction/transaction_detail/transaction_detail_model.dart';
 import '../../../presentation/res/res.dart';
 import '../../../widgets/back_button.dart';
 

@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
-import '../../../../data/model/response/dashboard/transactions_list/transaction_list_response_model.dart';
+import '../../../../data/model/response/dashboard/transaction/transaction_list_response/transaction_list_response_model.dart';
 import '../../../../presentation/res/res.dart';
 import '../../../../theme/theme.dart';
 import '../../../../widgets/inkwell_widget.dart';

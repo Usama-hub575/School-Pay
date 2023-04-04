@@ -17,29 +17,28 @@ class AppAssets {
   final String icMale = "assets/svg/male.svg";
   final String icFemale = "assets/svg/female.svg";
   final String icSchoolBuilding = "assets/svg/school_building.svg";
-  final String ic_dashboard = "assets/svg/ic_dashboard_selected.svg";
-  final String ic_dashboard_non = "assets/svg/ic_dashboard_unselected.svg";
-  final String ic_student = "assets/svg/ic_student_selected.svg";
-  final String ic_student_non = "assets/svg/ic_student_unselected.svg";
-  final String ic_transaction = "assets/svg/ic_transaction_selected.svg";
-  final String ic_transaction_non = "assets/svg/ic_transaction_unselected.svg";
-  final String ic_menu = "assets/svg/ic_setting_selected.svg";
-  final String ic_menu_non = "assets/svg/ic_setting_unselected.svg";
-  final String ic_location = "assets/icons/ic_locationAccess.svg";
-  final String ic_biometric = "assets/icons/ic_biometric.svg";
-  final String ic_changeSecurity = "assets/icons/ic_changeSecurity.svg";
-  final String ic_paymentHistory = "assets/icons/ic_paymentHistory.svg";
-  final String ic_paymentMethod = "assets/icons/ic_paymentMethod.svg";
-  final String ic_contactUs = "assets/icons/ic_contactUs.svg";
-  final String ic_privacyPolicy = "assets/icons/ic_privacyPolicy.svg";
-  final String ic_terms = "assets/icons/ic_terms.svg";
-  final String ic_studentAvatar = "assets/icons/ic_studentAvatar.svg";
-  final String paynestLogo = "assets/logo.svg";
+  final String icDashboardSelected = "assets/svg/ic_dashboard_selected.svg";
+  final String icDashboardNon = "assets/svg/ic_dashboard_unselected.svg";
+  final String icStudent = "assets/svg/ic_student_selected.svg";
+  final String icStudentNon = "assets/svg/ic_student_unselected.svg";
+  final String icTransaction = "assets/svg/ic_transaction_selected.svg";
+  final String icTransactionNon = "assets/svg/ic_transaction_unselected.svg";
+  final String icMenu = "assets/svg/ic_setting_selected.svg";
+  final String icMenuNon = "assets/svg/ic_setting_unselected.svg";
+  final String icStudentAvatar = "assets/svg/ic_studentAvatar.svg";
+  final String payNestLogo = "assets/logo.svg";
   final String arrowNext = "assets/icons/ic_arrow_next.svg";
   final String faq = "assets/icons/ic_faq.svg";
 
   ///png
-
+  final String icDashboard = "assets/dashboard/ic_dashboard.png";
+  final String icDashboardNonPng = "assets/dashboard/ic_dashboard_non.png";
+  final String icMenuPng = "assets/dashboard/ic_menu.png";
+  final String icMenuNonPng = "assets/dashboard/ic_menu_non.png";
+  final String icStudentPng = "assets/dashboard/ic_student.png";
+  final String icStudentNonPng = "assets/dashboard/ic_student_non.png";
+  final String icTransactionPng = "assets/dashboard/ic_transaction.png";
+  final String icTransactionNonPng = "assets/dashboard/ic_transaction_non.png";
   final String icFacebook = 'assets/png/ic_facebook.png';
   final String icGoogle = 'assets/png/ic_google.png';
   final String ic_bell = "assets/dashboard/ic_bell.png";
@@ -50,15 +49,12 @@ class AppAssets {
   final String icCommercialBank = "assets/png/credit_card.png";
   final String icLean = "assets/png/ic_leantech_logo.png";
   final String icPostPay = "assets/png/ic_postpay.png";
-  final String ic_schoolWhite = "assets/icons/ic_schoolIconWhite.png";
-  final String ic_schooldark = "assets/icons/ic_schoolIcondark.png";
+  final String icSchoolWhite = "assets/png/ic_schoolIconWhite.png";
+  final String icSchoolDark = "assets/icons/ic_schoolIcondark.png";
   final String splash = "assets/png/splash.png";
-  final String ic_edit = "assets/icons/ic_edit.png";
-  final String paynestLogoNew = "assets/png/logo_new.png";
+  final String payNestLogoNew = "assets/png/logo_new.png";
   final String welcomeRegisterLogo = "assets/png/welcome_register_logo.png";
-  final String touchid = "assets/png/ic_touchid.png";
-  final String googleicon = "assets/icons/ic_google.png";
-  final String facebookicon = "assets/icons/ic_facebook.png";
+  final String touchID = "assets/png/ic_touchid.png";
 
   /// jpg
 

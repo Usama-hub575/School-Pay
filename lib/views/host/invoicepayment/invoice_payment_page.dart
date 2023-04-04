@@ -7,7 +7,7 @@ import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/widget/amount_bottom_sheet.dart';
 import 'package:paynest_flutter_app/views/host/payment_method/payment_method.dart';
 
-import '../../../data/model/datamodel/singlestudent_model.dart';
+import '../../../data/model/datamodel/single_student_model.dart';
 import '../../download_pdf/download_pdf.dart';
 
 class InvoicePaymentPage extends StatefulWidget {

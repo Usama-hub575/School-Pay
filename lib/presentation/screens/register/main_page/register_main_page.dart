@@ -49,10 +49,10 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
               ),
               child: Text(
                 pleaseEnterYourPhoneNumberAndEmailId,
-                style: TextStyles().extraBold.copyWith(
-                      fontSize: sizes.fontRatio * 18,
-                      color: AppColors().black,
-                    ),
+                style: textStyles.extraBold.copyWith(
+                  fontSize: sizes.fontRatio * 18,
+                  color: colors.black,
+                ),
               ),
             ),
             BlocConsumer<RegisterMainPageBloc, RegisterMainPageState>(
@@ -102,7 +102,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           icon: IconButton(
                             icon: SvgPicture.asset(
                               AppAssets().icEyeCrossed,
-                              color: AppColors().primaryColor,
+                              color: colors.primaryColor,
                             ),
                             onPressed: () {
                               context.read<RegisterMainPageBloc>().add(
@@ -135,7 +135,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           icon: IconButton(
                             icon: SvgPicture.asset(
                               AppAssets().icEyeCrossed,
-                              color: AppColors().primaryColor,
+                              color: colors.primaryColor,
                             ),
                             onPressed: () {
                               context.read<RegisterMainPageBloc>().add(
@@ -153,8 +153,8 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           children: [
                             Checkbox(
                               value: state.terms,
-                              focusColor: AppColors().primaryColor,
-                              activeColor: AppColors().primaryColor,
+                              focusColor: colors.primaryColor,
+                              activeColor: colors.primaryColor,
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(5.0),
@@ -171,10 +171,10 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                                 children: [
                                   TextSpan(
                                     text: iAccept,
-                                    style: TextStyles().bold.copyWith(
-                                          color: AppColors().black,
-                                          fontSize: sizes.fontRatio * 14,
-                                        ),
+                                    style: textStyles.bold.copyWith(
+                                      color: colors.black,
+                                      fontSize: sizes.fontRatio * 14,
+                                    ),
                                   ),
                                   const TextSpan(
                                     text: '  ',
@@ -188,10 +188,10 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                                         );
                                         setState(() {});
                                       },
-                                    style: TextStyles().bold.copyWith(
-                                          decoration: TextDecoration.underline,
-                                          fontSize: sizes.fontRatio * 14,
-                                        ),
+                                    style: textStyles.bold.copyWith(
+                                      decoration: TextDecoration.underline,
+                                      fontSize: sizes.fontRatio * 14,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -203,12 +203,12 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           width: double.infinity,
                           height: sizes.heightRatio * 46,
                           child: ElevatedButtons(
-                            textColor: AppColors().white,
+                            textColor: colors.white,
                             isLoading:
                                 state.status == RegisterMainPageStatus.loading
                                     ? true
                                     : false,
-                            color: AppColors().primaryColor,
+                            color: colors.primaryColor,
                             text: next,
                             onPressed: state.status ==
                                     RegisterMainPageStatus.loading
@@ -235,7 +235,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                                       showToast(
                                         message: phoneFieldCannotBeEmpty,
                                         context: context,
-                                        color: AppColors().redShade2,
+                                        color: colors.redShade2,
                                       );
                                     } else if (formKey.currentState!
                                             .validate() &&
@@ -243,13 +243,13 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                                       showToast(
                                         message: acceptTermsAndCondition,
                                         context: context,
-                                        color: AppColors().redShade2,
+                                        color: colors.redShade2,
                                       );
                                     } else {
                                       showToast(
                                         message: fieldsCannotBeEmpty,
                                         context: context,
-                                        color: AppColors().redShade2,
+                                        color: colors.redShade2,
                                       );
                                     }
                                   },
@@ -266,7 +266,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                                 height: verticalValue(1),
                                 width: horizontalValue(129),
                                 decoration: BoxDecoration(
-                                  color: AppColors().primaryColor,
+                                  color: colors.primaryColor,
                                 ),
                               ),
                               Padding(
@@ -275,17 +275,17 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                                 ),
                                 child: Text(
                                   or,
-                                  style: TextStyles().bold.copyWith(
-                                        color: AppColors().black,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                  style: textStyles.bold.copyWith(
+                                    color: colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                               Container(
                                 height: verticalValue(1),
                                 width: horizontalValue(129),
                                 decoration: BoxDecoration(
-                                  color: AppColors().primaryColor,
+                                  color: colors.primaryColor,
                                 ),
                               ),
                             ],
@@ -301,17 +301,17 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                             ),
                             label: Text(
                               google,
-                              style: TextStyles().bold.copyWith(
-                                    color: AppColors().black,
-                                    fontSize: sizes.fontRatio * 16,
-                                  ),
+                              style: textStyles.bold.copyWith(
+                                color: colors.black,
+                                fontSize: sizes.fontRatio * 16,
+                              ),
                             ),
                             style: OutlinedButton.styleFrom(
                               // primary: MyTheme.sharpGreen,
                               elevation: 0,
                               // side: BorderSide(width:1, color:Colors.white),
                               side: BorderSide(
-                                color: AppColors().primaryColor,
+                                color: colors.primaryColor,
                                 width: 1,
                               ),
                               shape: RoundedRectangleBorder(
@@ -335,17 +335,17 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                             ),
                             label: Text(
                               facebook,
-                              style: TextStyles().bold.copyWith(
-                                    color: AppColors().black,
-                                    fontSize: sizes.fontRatio * 16,
-                                  ),
+                              style: textStyles.bold.copyWith(
+                                color: colors.black,
+                                fontSize: sizes.fontRatio * 16,
+                              ),
                             ),
                             style: OutlinedButton.styleFrom(
                               // primary: MyTheme.sharpGreen,
                               elevation: 0,
                               // side: BorderSide(width:1, color:Colors.white),
                               side: BorderSide(
-                                color: AppColors().primaryColor,
+                                color: colors.primaryColor,
                                 width: 1,
                               ),
                               shape: RoundedRectangleBorder(

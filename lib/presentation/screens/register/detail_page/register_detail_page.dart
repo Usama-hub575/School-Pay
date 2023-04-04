@@ -63,10 +63,10 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
               verticalSpacer(32),
               Text(
                 pleaseEnterDetailBelow,
-                style: TextStyles().extraBold.copyWith(
-                      fontSize: sizes.fontRatio * 18,
-                      color: AppColors().black,
-                    ),
+                style: textStyles.extraBold.copyWith(
+                  fontSize: sizes.fontRatio * 18,
+                  color: colors.black,
+                ),
               ),
               Expanded(
                 child: ListView(
@@ -106,9 +106,9 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             child: Text(
                               gender,
                               textAlign: TextAlign.start,
-                              style: TextStyles().bold.copyWith(
-                                    fontSize: sizes.fontRatio * 12,
-                                  ),
+                              style: textStyles.bold.copyWith(
+                                fontSize: sizes.fontRatio * 12,
+                              ),
                             ),
                           ),
                           Row(
@@ -125,11 +125,10 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                                           value: value,
                                           child: Text(
                                             value,
-                                            style: TextStyles().bold.copyWith(
-                                                  fontSize:
-                                                      sizes.fontRatio * 14,
-                                                  color: AppColors().black,
-                                                ),
+                                            style: textStyles.bold.copyWith(
+                                              fontSize: sizes.fontRatio * 14,
+                                              color: colors.black,
+                                            ),
                                           ),
                                         );
                                       }).toList(),
@@ -156,9 +155,9 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           Container(
                             width: horizontalValue(1),
                             height: verticalValue(1),
-                            color: AppColors().textGrey.withOpacity(
-                                  0.5,
-                                ),
+                            color: colors.textGrey.withOpacity(
+                              0.5,
+                            ),
                           ),
                           verticalSpacer(12),
                           Row(
@@ -167,10 +166,10 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                               optionalButton(
                                 value: 'Emirates ID',
                                 buttonColor: state.isEmiratesSelected
-                                    ? AppColors().primaryColor
-                                    : AppColors().primaryColor.withOpacity(
-                                          0.5,
-                                        ),
+                                    ? colors.primaryColor
+                                    : colors.primaryColor.withOpacity(
+                                        0.5,
+                                      ),
                                 onTap: () {
                                   state.isEmiratesSelected = true;
                                   state.isPassportSelected = false;
@@ -181,10 +180,10 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                               optionalButton(
                                 value: 'Passport   ',
                                 buttonColor: state.isPassportSelected
-                                    ? AppColors().primaryColor
-                                    : AppColors().primaryColor.withOpacity(
-                                          0.5,
-                                        ),
+                                    ? colors.primaryColor
+                                    : colors.primaryColor.withOpacity(
+                                        0.5,
+                                      ),
                                 onTap: () {
                                   state.isEmiratesSelected = false;
                                   state.isPassportSelected = true;
@@ -217,12 +216,10 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                               padding: EdgeInsets.only(top: verticalValue(24)),
                               child: Text(
                                 optional,
-                                style: TextStyles().bold.copyWith(
-                                      color: AppColors()
-                                          .primaryColor
-                                          .withOpacity(0.5),
-                                      fontSize: sizes.fontRatio * 8,
-                                    ),
+                                style: textStyles.bold.copyWith(
+                                  color: colors.primaryColor.withOpacity(0.5),
+                                  fontSize: sizes.fontRatio * 8,
+                                ),
                               ),
                             ),
                             obscureText: false,
@@ -247,21 +244,18 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             12),
-                                                    color:
-                                                        AppColors().blueAccent,
+                                                    color: colors.blueAccent,
                                                   ),
                                                   child: Center(
                                                     child: Text(
                                                       done,
-                                                      style: TextStyles()
-                                                          .semiBold
+                                                      style: textStyles.semiBold
                                                           .copyWith(
-                                                            fontSize: sizes
-                                                                    .fontRatio *
+                                                        fontSize:
+                                                            sizes.fontRatio *
                                                                 12,
-                                                            color: AppColors()
-                                                                .white,
-                                                          ),
+                                                        color: colors.white,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -305,12 +299,10 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                                 ),
                                 child: Text(
                                   optional,
-                                  style: TextStyles().bold.copyWith(
-                                        color: AppColors()
-                                            .primaryColor
-                                            .withOpacity(0.5),
-                                        fontSize: sizes.fontRatio * 8,
-                                      ),
+                                  style: textStyles.bold.copyWith(
+                                    color: colors.primaryColor.withOpacity(0.5),
+                                    fontSize: sizes.fontRatio * 8,
+                                  ),
                                 ),
                               ),
                             ),
@@ -321,9 +313,9 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             child: Text(
                               addressDetails,
                               textAlign: TextAlign.start,
-                              style: TextStyles().bold.copyWith(
-                                    fontSize: sizes.fontRatio * 16,
-                                  ),
+                              style: textStyles.bold.copyWith(
+                                fontSize: sizes.fontRatio * 16,
+                              ),
                             ),
                           ),
                           verticalSpacer(12),
@@ -340,12 +332,10 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                               padding: EdgeInsets.only(top: verticalValue(24)),
                               child: Text(
                                 optional,
-                                style: TextStyles().bold.copyWith(
-                                      color: AppColors()
-                                          .primaryColor
-                                          .withOpacity(0.5),
-                                      fontSize: sizes.fontRatio * 8,
-                                    ),
+                                style: textStyles.bold.copyWith(
+                                  color: colors.primaryColor.withOpacity(0.5),
+                                  fontSize: sizes.fontRatio * 8,
+                                ),
                               ),
                             ),
                           ),
@@ -363,12 +353,10 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                               padding: EdgeInsets.only(top: verticalValue(24)),
                               child: Text(
                                 optional,
-                                style: TextStyles().bold.copyWith(
-                                      color: AppColors()
-                                          .primaryColor
-                                          .withOpacity(0.5),
-                                      fontSize: sizes.fontRatio * 8,
-                                    ),
+                                style: textStyles.bold.copyWith(
+                                  color: colors.primaryColor.withOpacity(0.5),
+                                  fontSize: sizes.fontRatio * 8,
+                                ),
                               ),
                             ),
                           ),
@@ -378,9 +366,9 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             child: Text(
                               countryRegion,
                               textAlign: TextAlign.start,
-                              style: TextStyles().bold.copyWith(
-                                    fontSize: sizes.fontRatio * 12,
-                                  ),
+                              style: textStyles.bold.copyWith(
+                                fontSize: sizes.fontRatio * 12,
+                              ),
                             ),
                           ),
                           verticalSpacer(8),
@@ -406,16 +394,16 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                                 shape: BoxShape.circle,
                               ),
                               flagWidth: sizes.fontRatio * 50,
-                              textStyle: TextStyles().bold.copyWith(
-                                    fontSize: sizes.fontRatio * 14,
-                                  ),
+                              textStyle: textStyles.bold.copyWith(
+                                fontSize: sizes.fontRatio * 14,
+                              ),
                             ),
                           ),
                           verticalSpacer(12),
                           Container(
                             width: double.infinity,
                             height: 1,
-                            color: AppColors().textGrey.withOpacity(0.5),
+                            color: colors.textGrey.withOpacity(0.5),
                           ),
                           verticalSpacer(12),
                         ],
@@ -428,7 +416,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                 width: double.infinity,
                 height: sizes.heightRatio * 46,
                 child: ElevatedButtons(
-                  color: AppColors().primaryColor,
+                  color: colors.primaryColor,
                   text: next,
                   onPressed: () async {
                     if (registrationFormKey.currentState!.validate()) {
@@ -450,7 +438,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           );
                     }
                   },
-                  textColor: AppColors().white,
+                  textColor: colors.white,
                   isLoading: state.status == RegisterDetailPageStatus.loading
                       ? true
                       : false,
@@ -475,7 +463,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
             showToast(
               message: state.errorMessage,
               context: context,
-              color: AppColors().redShade2,
+              color: colors.redShade2,
             );
             break;
           case RegisterDetailPageStatus.navigateToDashboard:

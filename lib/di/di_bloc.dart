@@ -51,4 +51,8 @@ Future initializeBlocs() async {
   it.registerLazySingleton(
     () => HostPageBloc(),
   );
+
+  it.registerLazySingleton(
+    () => GetAssistanceBloc(),
+  );
 }

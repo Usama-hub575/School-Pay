@@ -32,7 +32,7 @@ class _NewPasswordState extends State<NewPassword> {
   TextEditingController otpController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   RegisterController registerController = RegisterController();
-  GlobalKey<ScaffoldState> _scaffoldKey =
+  final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>(debugLabel: 'newPassword');
   bool isObscure = true;
   bool cPassword = true;
@@ -64,7 +64,7 @@ class _NewPasswordState extends State<NewPassword> {
                   height: 54.h,
                   width: 44.w,
                   decoration: BoxDecoration(
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black26,
                         blurRadius: 2.0,
@@ -93,12 +93,12 @@ class _NewPasswordState extends State<NewPassword> {
                     // child: Text(""),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Image.asset(
                   AppAssets().welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
             Expanded(
@@ -120,150 +120,144 @@ class _NewPasswordState extends State<NewPassword> {
                           ),
                         ),
                         verticalSpacer(16),
-                        Container(
-                          child: TextFormField(
-                            style: PayNestTheme.title_2_16primaryColor.copyWith(
-                              fontSize: sizes.fontRatio * 14,
-                              color: PayNestTheme.textGrey,
-                            ),
-                            obscureText: isObscure,
-                            obscuringCharacter: '*',
-                            controller: newPasswordController,
-                            decoration: InputDecoration(
-                              border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(
-                                    0.5,
-                                  ),
-                                ),
-                              ),
-                              // suffixIcon: IconButton(
-                              //   icon: SvgPicture.asset(
-                              //     AppAssets.passwordEye,
-                              //     color: PayNestTheme.primaryColor,
-                              //   ),
-                              //   onPressed: () {
-                              //     setState(
-                              //       () {
-                              //         isObscure = !isObscure;
-                              //       },
-                              //     );
-                              //   },
-                              // ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(0.5),
-                                ),
-                              ),
-                              labelText: newPassword,
-                              labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                                fontSize: sizes.fontRatio * 12,
-                                color: PayNestTheme.primaryColor,
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(0.5),
-                                ),
-                              ),
-                              errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(0.5),
-                                ),
-                              ),
-                              disabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(0.5),
-                                ),
-                              ),
-                            ),
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              if (value!.trim().isEmpty) {
-                                return 'Required';
-                              }
-                              // Check if the entered email has the right format
-                              if (value.trim().length < 4) {
-                                return 'New Password must not be less than 4';
-                              }
-                              // Return null if the entered email is valid
-                              return null;
-                            },
+                        TextFormField(
+                          style: PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontSize: sizes.fontRatio * 14,
+                            color: PayNestTheme.textGrey,
                           ),
+                          obscureText: isObscure,
+                          obscuringCharacter: '*',
+                          controller: newPasswordController,
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(
+                                  0.5,
+                                ),
+                              ),
+                            ),
+                            // suffixIcon: IconButton(
+                            //   icon: SvgPicture.asset(
+                            //     AppAssets.passwordEye,
+                            //     color: PayNestTheme.primaryColor,
+                            //   ),
+                            //   onPressed: () {
+                            //     setState(
+                            //       () {
+                            //         isObscure = !isObscure;
+                            //       },
+                            //     );
+                            //   },
+                            // ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                            labelText: newPassword,
+                            labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                              fontSize: sizes.fontRatio * 12,
+                              color: PayNestTheme.primaryColor,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                            errorBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                            disabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'Required';
+                            }
+                            // Check if the entered email has the right format
+                            if (value.trim().length < 4) {
+                              return 'New Password must not be less than 4';
+                            }
+                            // Return null if the entered email is valid
+                            return null;
+                          },
                         ),
                         verticalSpacer(16),
-                        Container(
-                          child: TextFormField(
-                            controller: confirmPasswordController,
-                            obscureText: cPassword,
-                            style: PayNestTheme.title_2_16primaryColor.copyWith(
-                              fontSize: sizes.fontRatio * 14,
-                              color: PayNestTheme.textGrey,
-                            ),
-                            obscuringCharacter: '*',
-                            decoration: InputDecoration(
-                              border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(
-                                    0.5,
-                                  ),
-                                ),
-                              ),
-                              // suffixIcon: IconButton(
-                              //   icon: SvgPicture.asset(
-                              //     AppAssets.passwordEye,
-                              //     color: PayNestTheme.primaryColor,
-                              //   ),
-                              //   onPressed: () {
-                              //     setState(
-                              //       () {
-                              //         cPassword = !cPassword;
-                              //       },
-                              //     );
-                              //   },
-                              // ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(0.5),
-                                ),
-                              ),
-                              labelText: confirmPassword,
-                              labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                                fontSize: sizes.fontRatio * 12,
-                                color: PayNestTheme.primaryColor,
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(0.5),
-                                ),
-                              ),
-                              errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(0.5),
-                                ),
-                              ),
-                              disabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: PayNestTheme.textGrey.withOpacity(0.5),
-                                ),
-                              ),
-                            ),
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              if (value!.trim().isEmpty) {
-                                return 'Required';
-                              }
-                              if (value.trim().length < 4) {
-                                return 'Confirm Password must not be less than 4';
-                              }
-                              if (value.toString() !=
-                                  newPasswordController.text) {
-                                return 'password not matched';
-                              }
-                              return null;
-                            },
+                        TextFormField(
+                          controller: confirmPasswordController,
+                          obscureText: cPassword,
+                          style: PayNestTheme.title_2_16primaryColor.copyWith(
+                            fontSize: sizes.fontRatio * 14,
+                            color: PayNestTheme.textGrey,
                           ),
+                          obscuringCharacter: '*',
+                          decoration: InputDecoration(
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(
+                                  0.5,
+                                ),
+                              ),
+                            ),
+                            // suffixIcon: IconButton(
+                            //   icon: SvgPicture.asset(
+                            //     AppAssets.passwordEye,
+                            //     color: PayNestTheme.primaryColor,
+                            //   ),
+                            //   onPressed: () {
+                            //     setState(
+                            //       () {
+                            //         cPassword = !cPassword;
+                            //       },
+                            //     );
+                            //   },
+                            // ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                            labelText: confirmPassword,
+                            labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                              fontSize: sizes.fontRatio * 12,
+                              color: PayNestTheme.primaryColor,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                            errorBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                            disabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.trim().isEmpty) {
+                              return 'Required';
+                            }
+                            if (value.trim().length < 4) {
+                              return 'Confirm Password must not be less than 4';
+                            }
+                            if (value.toString() !=
+                                newPasswordController.text) {
+                              return 'password not matched';
+                            }
+                            return null;
+                          },
                         ),
                         verticalSpacer(16),
                         Text(
@@ -321,7 +315,7 @@ class _NewPasswordState extends State<NewPassword> {
                   ),
                   verticalSpacer(60),
                   Obx(
-                    () => Container(
+                    () => SizedBox(
                       width: double.infinity,
                       height: sizes.heightRatio * 46,
                       child: ElevatedButton(

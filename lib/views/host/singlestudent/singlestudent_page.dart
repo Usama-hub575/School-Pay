@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/invoicepayment/invoice_payment_page.dart';
 
-import '../../../data/model/datamodel/singlestudent_model.dart'
+import '../../../data/model/datamodel/single_student_model.dart'
     as SingleSchoolModel;
 
 class SingleStudentPage extends StatefulWidget {

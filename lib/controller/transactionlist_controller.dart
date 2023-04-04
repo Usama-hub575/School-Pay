@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 
-import '../data/model/response/dashboard/transactions_list/transaction_list_response_model.dart';
+import '../data/model/response/dashboard/transaction/transaction_list_response/transaction_list_response_model.dart';
 import '../data/model/transactionlist_model.dart';
 
 class TransactionListController extends GetxController {

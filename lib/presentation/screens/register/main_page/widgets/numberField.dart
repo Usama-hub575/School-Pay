@@ -26,7 +26,7 @@ class _NumberFieldState extends State<NumberField> {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: AppColors().textGrey.withOpacity(0.5),
+            color: colors.textGrey.withOpacity(0.5),
           ),
         ),
       ),
@@ -34,7 +34,7 @@ class _NumberFieldState extends State<NumberField> {
         children: [
           CountryCodePicker(
             enabled: !widget.enable,
-            borderColor: AppColors().lightGreyShade,
+            borderColor: colors.lightGreyShade,
             padding: EdgeInsets.zero,
             showDropDownButton: true,
             onChanged: (value) {
@@ -50,31 +50,31 @@ class _NumberFieldState extends State<NumberField> {
               shape: BoxShape.circle,
             ),
             flagWidth: sizes.fontRatio * 50,
-            textStyle: TextStyles().bold.copyWith(
-                  color: AppColors().black,
-                  fontSize: sizes.fontRatio * 16,
-                ),
+            textStyle: textStyles.bold.copyWith(
+              color: colors.black,
+              fontSize: sizes.fontRatio * 16,
+            ),
           ),
           Expanded(
             child: TextFormField(
               readOnly: widget.enable,
               keyboardType: TextInputType.phone,
-              style: TextStyles().bold.copyWith(
-                    fontSize: sizes.fontRatio * 14,
-                    color: PayNestTheme.textGrey,
-                  ),
+              style: textStyles.bold.copyWith(
+                fontSize: sizes.fontRatio * 14,
+                color: PayNestTheme.textGrey,
+              ),
               controller: widget.textController,
               decoration: InputDecoration(
                 hintText: '987 654 321',
-                hintStyle: TextStyles().bold.copyWith(
-                      fontSize: sizes.fontRatio * 14,
-                      color: AppColors().textGrey,
-                    ),
+                hintStyle: textStyles.bold.copyWith(
+                  fontSize: sizes.fontRatio * 14,
+                  color: colors.textGrey,
+                ),
                 border: InputBorder.none,
-                errorStyle: TextStyles().bold.copyWith(
-                      fontSize: sizes.fontRatio * 12,
-                      color: AppColors().redShade2,
-                    ),
+                errorStyle: textStyles.bold.copyWith(
+                  fontSize: sizes.fontRatio * 12,
+                  color: colors.redShade2,
+                ),
               ),
               // autovalidateMode: AutovalidateMode.onUserInteraction,
               // validator: (value) {

@@ -36,16 +36,13 @@ class _InitializerPageState extends State<InitializerPage> {
     context.read<InitializerBloc>().add(
           Initialize(),
         );
-    // context.read<InitializerBloc>().add(
-    //       Login(),
-    //     );
   }
 
   @override
   Widget build(BuildContext context) {
     initializeResources(context: context);
     return Scaffold(
-      backgroundColor: AppColors().primaryColor,
+      backgroundColor: colors.primaryColor,
       body: BlocConsumer<InitializerBloc, InitializerState>(
         builder: (context, state) {
           return Stack(
@@ -66,14 +63,14 @@ class _InitializerPageState extends State<InitializerPage> {
                 width: sizes.width,
                 height: sizes.height,
                 child: Container(
-                  color: AppColors().primaryColor.withOpacity(0.30),
+                  color: colors.primaryColor.withOpacity(0.30),
                   child: Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          AppAssets().paynestLogoNew,
+                          AppAssets().payNestLogoNew,
                           width: sizes.widthRatio * 180,
                           fit: BoxFit.fill,
                         ),
@@ -81,8 +78,8 @@ class _InitializerPageState extends State<InitializerPage> {
                         SizedBox(
                           width: sizes.width / 2,
                           child: LinearProgressIndicator(
-                            color: AppColors().white,
-                            backgroundColor: Colors.transparent,
+                            color: colors.white,
+                            backgroundColor: colors.transparent,
                           ),
                         )
                       ],
@@ -108,7 +105,10 @@ class _InitializerPageState extends State<InitializerPage> {
                       );
                 },
                 cancelButtonAction: () {
-                  // Navigator.of(context).push(navigateToWelcome);
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.navigateToWelcome,
+                  );
                 },
                 locale: state.languageIndex,
               );
@@ -129,11 +129,11 @@ class _InitializerPageState extends State<InitializerPage> {
                 locale: state.languageIndex,
               );
               break;
-            case InitializerStatus.home:
-              // Navigator.of(context).push(navigateToWelcome);
-              break;
             case InitializerStatus.welcomePage:
               Navigator.pushNamed(context, AppRoutes.navigateToWelcome);
+              break;
+            case InitializerStatus.dashboardPage:
+              Navigator.pushNamed(context, AppRoutes.navigateToDashboard);
               break;
             case InitializerStatus.init:
               // TODO: Handle this case.
@@ -148,9 +148,6 @@ class _InitializerPageState extends State<InitializerPage> {
               // TODO: Handle this case.
               break;
             case InitializerStatus.failure:
-              // TODO: Handle this case.
-              break;
-            case InitializerStatus.dashboardPage:
               // TODO: Handle this case.
               break;
           }

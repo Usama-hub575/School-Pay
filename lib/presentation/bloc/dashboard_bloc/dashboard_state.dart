@@ -3,6 +3,7 @@ part of 'dashboard_bloc.dart';
 // ignore: must_be_immutable
 class DashboardState extends Equatable {
   DashboardStatus status = DashboardStatus.init;
+  String errorMessage = '';
   bool isLoading = true;
   String firstName = '';
   String lastName = '';
@@ -13,6 +14,7 @@ class DashboardState extends Equatable {
 
   DashboardState({
     this.status = DashboardStatus.init,
+    this.errorMessage = '',
     required this.transactionListResponseModel,
     required this.registerResponseModel,
     this.isLoading = true,
@@ -24,6 +26,7 @@ class DashboardState extends Equatable {
   DashboardState copyWith({
     RegisterResponseModel? registerResponseModel,
     TransactionListResponseModel? transactionListResponseModel,
+    String? errorMessage,
     DashboardStatus? status,
     List<StudentData>? students,
     bool? isLoading,
@@ -36,6 +39,7 @@ class DashboardState extends Equatable {
       registerResponseModel:
           registerResponseModel ?? this.registerResponseModel,
       status: status ?? this.status,
+      errorMessage: errorMessage ?? this.errorMessage,
       students: students ?? this.students,
       isLoading: isLoading ?? this.isLoading,
       firstName: firstName ?? this.firstName,
@@ -45,7 +49,7 @@ class DashboardState extends Equatable {
 
   @override
   List<Object?> get props => [
-        transactions,
+        errorMessage,
         registerResponseModel,
         students,
         isLoading,

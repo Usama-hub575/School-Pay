@@ -3,7 +3,7 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/amount_formater.dart';
 
 import '../../../../constants/constants.dart';
-import '../../../../data/model/datamodel/singlestudent_model.dart';
+import '../../../../data/model/datamodel/single_student_model.dart';
 import '../../../../presentation/res/res.dart';
 import '../../../../widgets/spacer.dart';
 
