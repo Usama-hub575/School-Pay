@@ -14,7 +14,6 @@ class RegisterMainPageBloc
     on<CheckBox>(_checkBox);
     on<RegisterMainPageLoading>(_loading);
     on<RegisterToggle>(_toggle);
-    on<Loaded>(_loaded);
     on<SendOTP>(_sendOTP);
   }
 
@@ -28,13 +27,19 @@ class RegisterMainPageBloc
     );
     response.fold(
       (success) {
-        return Left(
-          emit(
-            state.copyWith(
-              status: RegisterMainPageStatus.navigateToOTPPage,
-            ),
-          ),
-        );
+        success.status == true
+            ? emit(
+                state.copyWith(
+                  status: RegisterMainPageStatus.navigateToOTPPage,
+                  successMessage: success.message,
+                ),
+              )
+            : emit(
+                state.copyWith(
+                  status: RegisterMainPageStatus.mainPageError,
+                  mainPageErrorMessage: success.message,
+                ),
+              );
       },
       (r) {
         return Right(
@@ -53,14 +58,6 @@ class RegisterMainPageBloc
     emit(
       state.copyWith(
         terms: !state.terms,
-      ),
-    );
-  }
-
-  _loaded(Loaded event, emit) {
-    emit(
-      state.copyWith(
-        status: RegisterMainPageStatus.loaded,
       ),
     );
   }

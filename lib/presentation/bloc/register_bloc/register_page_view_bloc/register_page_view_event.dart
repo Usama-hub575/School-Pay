@@ -7,6 +7,14 @@ abstract class RegisterPageViewEvent extends Equatable {
 
 class BackNavigation extends RegisterPageViewEvent {}
 
+class EnableButton extends RegisterPageViewEvent {
+  final bool enableButton;
+
+  EnableButton({
+    required this.enableButton,
+  });
+}
+
 class ChangeStep extends RegisterPageViewEvent {
   final int currentIndex;
 

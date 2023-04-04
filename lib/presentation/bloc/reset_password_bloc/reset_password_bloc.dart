@@ -13,26 +13,53 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
         ) {
     on<ResetPassword>(_resetPassword);
     on<ResetPasswordToggle>(_resetPasswordToggle);
+    on<IsCodeComplete>(_isCodeComplete);
+    on<ResetPasswordLoading>(_loading);
+  }
+
+  _loading(ResetPasswordLoading event, emit) {
+    emit(
+      state.copyWith(
+        status: ResetPasswordStatus.loading,
+      ),
+    );
+  }
+
+  _isCodeComplete(IsCodeComplete event, emit) {
+    emit(
+      state.copyWith(
+        isCodeComplete: event.isCodeComplete,
+        otp: event.pin,
+      ),
+    );
   }
 
   _resetPasswordToggle(ResetPasswordToggle event, emit) {
-    emit(state.copyWith(
-      isObscure: !state.isObscure,
-    ));
+    event.value == 'newPassword'
+        ? emit(
+            state.copyWith(
+              newPasswordObscure: !state.newPasswordObscure,
+            ),
+          )
+        : emit(
+            state.copyWith(
+              confirmPasswordObscure: !state.confirmPasswordObscure,
+            ),
+          );
   }
 
   _resetPassword(ResetPassword event, emit) async {
     final response = await resetPasswordUseCase.resetPassword(
-      email: email,
-      otp: otp,
-      password: password,
+      email: event.email,
+      otp: event.otp,
+      password: event.password,
     );
     return response.fold(
       (success) {
         success.status
             ? emit(
                 state.copyWith(
-                  status: ResetPasswordStatus.navigateToSignInPage,
+                  status: ResetPasswordStatus.success,
                 ),
               )
             : emit(

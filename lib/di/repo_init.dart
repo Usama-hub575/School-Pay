@@ -58,4 +58,11 @@ Future initializeRepoDependencies() async {
       networkHelper: it(),
     ),
   );
+
+  it.registerLazySingleton<ResetPasswordRepo>(
+    () => ResetPasswordRepoImpl(
+      storageRepo: storage,
+      networkHelper: it(),
+    ),
+  );
 }

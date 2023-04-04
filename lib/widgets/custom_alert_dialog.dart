@@ -81,8 +81,7 @@ class CustomAlertDialog {
                     ),
                   ),
                   onPressed: () async {
-                    Navigator.pop(_);
-                    buttonAction.call();
+                    buttonAction();
                   },
                   child: Text(
                     ok,

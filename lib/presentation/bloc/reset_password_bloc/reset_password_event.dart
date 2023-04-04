@@ -5,6 +5,34 @@ abstract class ResetPasswordEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class ResetPassword extends ResetPasswordEvent {}
+class ResetPassword extends ResetPasswordEvent {
+  final String email;
+  final String otp;
+  final String password;
 
-class ResetPasswordToggle extends ResetPasswordEvent {}
+  ResetPassword({
+    required this.email,
+    required this.otp,
+    required this.password,
+  });
+}
+
+class ResetPasswordLoading extends ResetPasswordEvent {}
+
+class ResetPasswordToggle extends ResetPasswordEvent {
+  final String value;
+
+  ResetPasswordToggle({
+    required this.value,
+  });
+}
+
+class IsCodeComplete extends ResetPasswordEvent {
+  final bool isCodeComplete;
+  final String pin;
+
+  IsCodeComplete({
+    required this.isCodeComplete,
+    required this.pin,
+  });
+}

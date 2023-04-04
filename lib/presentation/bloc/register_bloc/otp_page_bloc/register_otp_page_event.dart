@@ -6,10 +6,10 @@ abstract class RegisterOTPPageEvent extends Equatable {
 }
 
 class CheckCode extends RegisterOTPPageEvent {
-  final bool codeValue;
+  final bool isCodeComplete;
 
   CheckCode({
-    required this.codeValue,
+    required this.isCodeComplete,
   });
 }
 

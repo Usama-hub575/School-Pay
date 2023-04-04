@@ -81,26 +81,34 @@ class _RegisterPageState extends State<RegisterPage> {
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       RegisterMainPage(
-                        onButtonTap: (value) => setState(
-                          () => state.buttonEnable = value,
-                        ),
+                        onButtonTap: (value) =>
+                            context.read<RegisterPageViewBloc>().add(
+                                  EnableButton(
+                                    enableButton: value,
+                                  ),
+                                ),
                         onNextTap: (
                           email,
                           password,
                           phoneCode,
                           phoneNumber,
                         ) {
-                          controller.nextPage(
+                          controller
+                              .nextPage(
                             duration: const Duration(
                               milliseconds: 1,
                             ),
                             curve: Curves.bounceIn,
+                          )
+                              .whenComplete(
+                            () {
+                              context.read<RegisterPageViewBloc>().add(
+                                    ChangeStep(
+                                      currentIndex: 1,
+                                    ),
+                                  );
+                            },
                           );
-                          context.read<RegisterPageViewBloc>().add(
-                                ChangeStep(
-                                  currentIndex: 1,
-                                ),
-                              );
                           state.email = email;
                           state.password = password;
                           state.phoneCode = phoneCode;
@@ -147,12 +155,6 @@ class _RegisterPageState extends State<RegisterPage> {
             break;
           case RegisterPageViewStatus.jumpToMainPage:
             controller.jumpToPage(0);
-            break;
-          case RegisterPageViewStatus.jumpToPreviousPage:
-            controller.previousPage(
-              duration: const Duration(milliseconds: 1),
-              curve: Curves.bounceIn,
-            );
             break;
           case RegisterPageViewStatus.pop:
             Navigator.of(context).pop();

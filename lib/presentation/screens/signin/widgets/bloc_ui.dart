@@ -11,7 +11,7 @@ class _BlocUIState extends State<BlocUI> {
   final userResponseData = AuthenticationModel.empty();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  static GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {

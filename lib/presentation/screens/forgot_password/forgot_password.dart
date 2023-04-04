@@ -179,7 +179,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             // });
                           },
                           color: colors.primaryColor,
-                          text: sendEmail,
+                          text: sendOTP,
                           textColor: colors.white,
                           isLoading:
                               state.status == ForgotPasswordStatus.loading
@@ -201,7 +201,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       context,
                       AppRoutes.navigateToNewPassword,
                       arguments: {
-                        'Email': emailController.text,
+                        'email': emailController.text,
                       },
                     );
                     break;

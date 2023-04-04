@@ -42,6 +42,8 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: false,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           SizedBox.expand(

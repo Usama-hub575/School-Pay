@@ -7,12 +7,12 @@ class RegisterMainPageUseCase {
   });
 
   RegisterMainPageRepo registerMainPageRepo;
-  OtpResponseModel otpResponseModel = OtpResponseModel(
-    requestId: null,
-    type: null,
+  OTPResponseModel otpResponseModel = OTPResponseModel(
+    status: false,
+    message: '',
   );
 
-  Future<Either<OtpResponseModel, Failure>> hitSendOTP(
+  Future<Either<OTPResponseModel, Failure>> hitSendOTP(
     email,
     userPhone,
     dialCode,
@@ -50,5 +50,5 @@ class RegisterMainPageUseCase {
     }
   }
 
-  OtpResponseModel getOTPModel() => otpResponseModel;
+  OTPResponseModel getOTPModel() => otpResponseModel;
 }

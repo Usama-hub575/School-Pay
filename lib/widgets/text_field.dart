@@ -88,7 +88,9 @@ class _CommonTextFieldState extends State<CommonTextField> {
           }
         }
         if (widget.labelText == password ||
-            widget.labelText == createPassword) {
+            widget.labelText == createPassword ||
+            widget.labelText == newPassword ||
+            widget.labelText == confirmPassword) {
           if (value.trim().length < 5) {
             return passwordMustNotBeLessThan5;
           }

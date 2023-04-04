@@ -95,7 +95,7 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                               if (value!.length < 4) {
                                 context.read<RegisterOTPPageBloc>().add(
                                       CheckCode(
-                                        codeValue: false,
+                                        isCodeComplete: false,
                                       ),
                                     );
                               }
@@ -108,7 +108,7 @@ class _RegisterOTPPageState extends State<RegisterOTPPage> {
                             onCompleted: (pin) {
                               context.read<RegisterOTPPageBloc>().add(
                                     CheckCode(
-                                      codeValue: true,
+                                      isCodeComplete: true,
                                     ),
                                   );
                             },

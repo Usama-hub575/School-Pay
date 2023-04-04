@@ -10,7 +10,7 @@ class SendOTPController extends GetxController {
   var isLoading = false.obs;
   var status = false.obs;
   var errorMessage = "".obs;
-  final otpResp = OtpResponseModel(requestId: null, type: null).obs;
+  final otpResp = OTPResponseModel(status: null, message: null).obs;
 
   hitSendOTP(email, userPhone, dailCode) async {
     try {
@@ -23,7 +23,7 @@ class SendOTPController extends GetxController {
       if (decoded['status']) {
         status.value = decoded['status'] ?? false;
         errorMessage.value = decoded['message'] ?? "";
-        OtpResponseModel lrm = otpResponseModelFromJson(res);
+        OTPResponseModel lrm = OTPResponseModel.fromJson(res);
         otpResp.value = lrm;
         otpResp.refresh();
         // print(lrm.message);

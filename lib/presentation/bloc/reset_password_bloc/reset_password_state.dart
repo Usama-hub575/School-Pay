@@ -4,17 +4,17 @@ part of 'reset_password_bloc.dart';
 class ResetPasswordState extends Equatable {
   ResetPasswordStatus status = ResetPasswordStatus.init;
   String errorMessage = '';
-  bool isObscure = true;
-  bool confirmPassword = true;
-  bool codeComplete = false;
+  bool newPasswordObscure = true;
+  bool confirmPasswordObscure = true;
+  bool isCodeComplete = false;
   String email = "";
   String otp = '';
 
   ResetPasswordState({
     this.status = ResetPasswordStatus.init,
-    this.isObscure = true,
-    this.confirmPassword = true,
-    this.codeComplete = false,
+    this.newPasswordObscure = true,
+    this.confirmPasswordObscure = true,
+    this.isCodeComplete = false,
     this.email = '',
     this.otp = '',
     this.errorMessage = '',
@@ -22,10 +22,10 @@ class ResetPasswordState extends Equatable {
 
   ResetPasswordState copyWith({
     ResetPasswordStatus? status,
-    bool? isObscure,
+    bool? newPasswordObscure,
     String? errorMessage,
-    bool? confirmPassword,
-    bool? codeComplete,
+    bool? confirmPasswordObscure,
+    bool? isCodeComplete,
     String? email,
     String? otp,
   }) {
@@ -33,9 +33,10 @@ class ResetPasswordState extends Equatable {
       status: status ?? this.status,
       errorMessage: errorMessage ?? this.errorMessage,
       email: email ?? this.email,
-      confirmPassword: confirmPassword ?? this.confirmPassword,
-      isObscure: isObscure ?? this.isObscure,
-      codeComplete: codeComplete ?? this.codeComplete,
+      confirmPasswordObscure:
+          confirmPasswordObscure ?? this.confirmPasswordObscure,
+      newPasswordObscure: newPasswordObscure ?? this.newPasswordObscure,
+      isCodeComplete: isCodeComplete ?? this.isCodeComplete,
       otp: otp ?? this.otp,
     );
   }
@@ -45,9 +46,9 @@ class ResetPasswordState extends Equatable {
         status,
         errorMessage,
         email,
-        confirmPassword,
-        isObscure,
-        codeComplete,
+        confirmPasswordObscure,
+        newPasswordObscure,
+        isCodeComplete,
         otp,
       ];
 }

@@ -40,7 +40,9 @@ class AppRoutes {
         );
       case navigateToNewPassword:
         return MaterialPageRoute(
-          builder: (_) => const NewPassword(),
+          builder: (_) => NewPassword(
+            email: args?['email'],
+          ),
         );
       default:
         return _errorRoute();
