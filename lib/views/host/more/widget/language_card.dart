@@ -69,7 +69,7 @@ class _LanguageCardState extends State<LanguageCard> {
                 fontWeight: FontWeight.w700,
                 color: PayNestTheme.colorWhite,
               ),
-              labels: ['En', 'Ar'],
+              labels: const ['En', 'Ar'],
               selectedLabelIndex: (index) {
                 selectedIndex = index;
                 setState(() {});

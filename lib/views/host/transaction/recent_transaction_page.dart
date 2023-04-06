@@ -22,7 +22,8 @@ import 'widgets/shimmer_card.dart';
 class RecentTransactionPage extends StatefulWidget {
   final String whichStack;
 
-  RecentTransactionPage({required this.whichStack, Key? key}) : super(key: key);
+  const RecentTransactionPage({required this.whichStack, Key? key})
+      : super(key: key);
 
   @override
   State<RecentTransactionPage> createState() => _RecentTransactionPageState();
@@ -214,7 +215,8 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              '${dateFormat.format(DateTime.parse(key))}',
+                                              dateFormat
+                                                  .format(DateTime.parse(key)),
                                               style: PayNestTheme
                                                   .h2_12blueAccent
                                                   .copyWith(

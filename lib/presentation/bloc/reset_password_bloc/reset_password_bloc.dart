@@ -56,7 +56,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
     );
     return response.fold(
       (success) {
-        success.status
+        success.message == 'passswordReset sucessfully'
             ? emit(
                 state.copyWith(
                   status: ResetPasswordStatus.success,

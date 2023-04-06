@@ -23,7 +23,7 @@ import '../../../widgets/toast.dart';
 class AddStudent extends StatefulWidget {
   final SelectedSchoolData schoolData;
 
-  AddStudent({Key? key, required this.schoolData}) : super(key: key);
+  const AddStudent({Key? key, required this.schoolData}) : super(key: key);
 
   @override
   State<AddStudent> createState() => _AddStudentState();
@@ -63,8 +63,8 @@ class _AddStudentState extends State<AddStudent> {
     switch (_selectedFilter) {
       case 'Name':
         if (studentListController.studentList.value.getStudent != null &&
-            studentListController.studentList.value.getStudent!.rows!.length >
-                0) {
+            studentListController
+                .studentList.value.getStudent!.rows!.isNotEmpty) {
           studentListController.studentList.value.getStudent!.rows!.clear();
         }
         await studentListController.search(
@@ -83,8 +83,8 @@ class _AddStudentState extends State<AddStudent> {
         break;
       case 'Account Number':
         if (studentListController.studentList.value.getStudent != null &&
-            studentListController.studentList.value.getStudent!.rows!.length >
-                0) {
+            studentListController
+                .studentList.value.getStudent!.rows!.isNotEmpty) {
           studentListController.studentList.value.getStudent!.rows!.clear();
         }
         await studentListController.search(
@@ -103,8 +103,8 @@ class _AddStudentState extends State<AddStudent> {
         break;
       case 'Student ID':
         if (studentListController.studentList.value.getStudent != null &&
-            studentListController.studentList.value.getStudent!.rows!.length >
-                0) {
+            studentListController
+                .studentList.value.getStudent!.rows!.isNotEmpty) {
           studentListController.studentList.value.getStudent!.rows!.clear();
         }
         await studentListController.search(
@@ -124,7 +124,7 @@ class _AddStudentState extends State<AddStudent> {
     }
   }
 
-  List<StudentListRowData> _searchResult = [];
+  final List<StudentListRowData> _searchResult = [];
   List<StudentListRowData> sortedList = [];
 
   @override
@@ -164,8 +164,8 @@ class _AddStudentState extends State<AddStudent> {
                                   height: 44.h,
                                   width: 44.w,
                                   decoration: BoxDecoration(
-                                    boxShadow: [
-                                      const BoxShadow(
+                                    boxShadow: const [
+                                      BoxShadow(
                                         color: Colors.black54,
                                         blurRadius: 1.0,
                                         offset: Offset(
@@ -418,8 +418,7 @@ class _AddStudentState extends State<AddStudent> {
                         ? studentListController.studentList.value.getStudent !=
                                     null &&
                                 studentListController.studentList.value
-                                        .getStudent!.rows!.length !=
-                                    0
+                                    .getStudent!.rows!.isNotEmpty
                             ? Column(
                                 children: [
                                   verticalSpacer(16),
@@ -480,7 +479,7 @@ class _AddStudentState extends State<AddStudent> {
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Container(
+                                                      SizedBox(
                                                         width:
                                                             sizes.widthRatio *
                                                                 100,
@@ -570,12 +569,11 @@ class _AddStudentState extends State<AddStudent> {
                                                                     .getStudent !=
                                                                 null &&
                                                             studentListController
-                                                                    .studentList
-                                                                    .value
-                                                                    .getStudent!
-                                                                    .rows!
-                                                                    .length >
-                                                                0) {
+                                                                .studentList
+                                                                .value
+                                                                .getStudent!
+                                                                .rows!
+                                                                .isNotEmpty) {
                                                           studentListController
                                                               .studentList
                                                               .value
@@ -855,7 +853,7 @@ class _AddStudentState extends State<AddStudent> {
                                   ),
                                 )
                               : Center(
-                                  child: Container(
+                                  child: SizedBox(
                                     height: sizes.heightRatio * 16,
                                     width: sizes.widthRatio * 16,
                                     child: CircularProgressIndicator(

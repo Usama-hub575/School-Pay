@@ -36,7 +36,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
                 const Spacer(),
                 Image.asset(
-                  AppAssets().welcomeRegisterLogo,
+                  assets.welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,
                 ),
                 const Spacer(),

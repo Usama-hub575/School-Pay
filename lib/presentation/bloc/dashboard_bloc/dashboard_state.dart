@@ -4,9 +4,13 @@ part of 'dashboard_bloc.dart';
 class DashboardState extends Equatable {
   DashboardStatus status = DashboardStatus.init;
   String errorMessage = '';
+  bool isBioMetricEnable = false;
+  var list = {};
   bool isLoading = true;
   String firstName = '';
   String lastName = '';
+  bool showShimmer = false;
+  List<TransactionsRow> transactionsList = [];
   List<StudentData> students = [];
   TransactionListResponseModel transactionListResponseModel =
       TransactionListResponseModel.empty();
@@ -15,6 +19,9 @@ class DashboardState extends Equatable {
   DashboardState({
     this.status = DashboardStatus.init,
     this.errorMessage = '',
+    this.isBioMetricEnable = false,
+    this.list = const {},
+    this.showShimmer = false,
     required this.transactionListResponseModel,
     required this.registerResponseModel,
     this.isLoading = true,
@@ -27,7 +34,10 @@ class DashboardState extends Equatable {
     RegisterResponseModel? registerResponseModel,
     TransactionListResponseModel? transactionListResponseModel,
     String? errorMessage,
+    bool? isBioMetricEnable,
     DashboardStatus? status,
+    bool? showShimmer,
+    var list,
     List<StudentData>? students,
     bool? isLoading,
     String? firstName,
@@ -39,6 +49,9 @@ class DashboardState extends Equatable {
       registerResponseModel:
           registerResponseModel ?? this.registerResponseModel,
       status: status ?? this.status,
+      list: list ?? this.list,
+      isBioMetricEnable: isBioMetricEnable ?? this.isBioMetricEnable,
+      showShimmer: showShimmer ?? this.showShimmer,
       errorMessage: errorMessage ?? this.errorMessage,
       students: students ?? this.students,
       isLoading: isLoading ?? this.isLoading,
@@ -49,7 +62,10 @@ class DashboardState extends Equatable {
 
   @override
   List<Object?> get props => [
+        isBioMetricEnable,
         errorMessage,
+        showShimmer,
+        list,
         registerResponseModel,
         students,
         isLoading,

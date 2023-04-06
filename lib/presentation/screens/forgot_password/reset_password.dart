@@ -44,7 +44,7 @@ class _NewPasswordState extends State<NewPassword> {
                 ),
                 const Spacer(),
                 Image.asset(
-                  AppAssets().welcomeRegisterLogo,
+                  assets.welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,
                 ),
                 const Spacer(),
@@ -75,7 +75,7 @@ class _NewPasswordState extends State<NewPassword> {
                               validatorText: pleaseEnterPassword,
                               icon: IconButton(
                                 icon: SvgPicture.asset(
-                                  AppAssets().icEyeCrossed,
+                                  assets.icEyeCrossed,
                                   color: colors.primaryColor,
                                 ),
                                 onPressed: () {
@@ -102,7 +102,7 @@ class _NewPasswordState extends State<NewPassword> {
                               validatorText: pleaseEnterPassword,
                               icon: IconButton(
                                 icon: SvgPicture.asset(
-                                  AppAssets().icEyeCrossed,
+                                  assets.icEyeCrossed,
                                   color: colors.primaryColor,
                                 ),
                                 onPressed: () {
@@ -257,7 +257,7 @@ class _NewPasswordState extends State<NewPassword> {
                           context,
                           AppRoutes.navigateToSignIn,
                           ModalRoute.withName(
-                            AppRoutes.navigateToNewPassword,
+                            AppRoutes.navigateToWelcome,
                           ),
                         );
                       },

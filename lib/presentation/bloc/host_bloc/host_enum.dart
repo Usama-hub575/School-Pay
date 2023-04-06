@@ -1,6 +1,6 @@
-enum HostPageStatus {
+enum HostStatus {
   dashBoardPage,
   studentPage,
   recentTransactionPage,
-  morePage,
+  settingsPage,
 }

@@ -46,11 +46,11 @@ class _GetAssistancePageState extends State<GetAssistancePage> {
                             height: verticalValue(44),
                             width: horizontalValue(44),
                             decoration: BoxDecoration(
-                              boxShadow: const [
+                              boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black26,
+                                  color: colors.lightGreyShade4,
                                   blurRadius: 2.0,
-                                  offset: Offset(
+                                  offset: const Offset(
                                     3.0, // Move to right 10  horizontally
                                     3.0, // Move to bottom 10 Vertically
                                   ),
@@ -104,7 +104,7 @@ class _GetAssistancePageState extends State<GetAssistancePage> {
                 horizontal: horizontalValue(20),
               ),
               padding: EdgeInsets.symmetric(
-                horizontal: horizontalValue(8),
+                horizontal: horizontalValue(16),
                 vertical: verticalValue(16),
               ),
               decoration: BoxDecoration(
@@ -119,7 +119,7 @@ class _GetAssistancePageState extends State<GetAssistancePage> {
                     height: sizes.heightRatio * 80,
                     width: sizes.widthRatio * 80,
                     child: Lottie.asset(
-                      AppAssets().customerSupportAnimation,
+                      assets.customerSupportAnimation,
                     ),
                   ),
                   Flexible(
@@ -183,7 +183,7 @@ class _GetAssistancePageState extends State<GetAssistancePage> {
                     height: sizes.heightRatio * 80,
                     width: sizes.widthRatio * 80,
                     child: Lottie.asset(
-                      AppAssets().faqAnimation,
+                      assets.faqAnimation,
                     ),
                   ),
                   Flexible(
@@ -191,7 +191,7 @@ class _GetAssistancePageState extends State<GetAssistancePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          fAQS,
+                          fAQs,
                           style: textStyles.bold.copyWith(
                             fontSize: sizes.fontRatio * 16,
                             color: colors.primaryColor,
@@ -221,8 +221,10 @@ class _GetAssistancePageState extends State<GetAssistancePage> {
             builder: (context, state) {
               return InkWell(
                 onTap: () {
-                  // context.read<>
-                  openWhatsapp();
+                  context.read<GetAssistanceBloc>().add(
+                        OpenWhatsApp(),
+                      );
+                  // openWhatsapp();
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(
@@ -241,10 +243,10 @@ class _GetAssistancePageState extends State<GetAssistancePage> {
                   child: Row(
                     children: [
                       SizedBox(
-                        height: sizes.heightRatio * 56,
-                        width: sizes.widthRatio * 56,
+                        height: sizes.heightRatio * 80,
+                        width: sizes.widthRatio * 80,
                         child: Lottie.asset(
-                          AppAssets().commentAnimation,
+                          assets.commentAnimation,
                         ),
                       ),
                       Flexible(
@@ -298,27 +300,27 @@ class _GetAssistancePageState extends State<GetAssistancePage> {
     );
   }
 
-  openWhatsapp() async {
-    var whatsapp = "+971525919430";
-    var whatsappUrlAndroid = "whatsapp://send?phone=$whatsapp&text=hello";
-    var whatAppUrlIOS = "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
-    if (Platform.isIOS) {
-      // for iOS phone only
-      if (await canLaunchUrl(
-        Uri.parse(whatAppUrlIOS),
-      )) {
-        await launch(whatAppUrlIOS, forceSafariVC: false);
-      } else {
-        showToast(
-          context: context,
-          message: 'Whatsapp not installed',
-          color: PayNestTheme.red,
-        );
-      }
-    } else {
-      await launchUrl(
-        Uri.parse(whatsappUrlAndroid),
-      );
-    }
-  }
+  // openWhatsapp() async {
+  //   var whatsapp = "+971525919430";
+  //   var whatsappUrlAndroid = "whatsapp://send?phone=$whatsapp&text=hello";
+  //   var whatAppUrlIOS = "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
+  //   if (Platform.isIOS) {
+  //     // for iOS phone only
+  //     if (await canLaunchUrl(
+  //       Uri.parse(whatAppUrlIOS),
+  //     )) {
+  //       await launch(whatAppUrlIOS, forceSafariVC: false);
+  //     } else {
+  //       showToast(
+  //         context: context,
+  //         message: 'Whatsapp not installed',
+  //         color: PayNestTheme.red,
+  //       );
+  //     }
+  //   } else {
+  //     await launchUrl(
+  //       Uri.parse(whatsappUrlAndroid),
+  //     );
+  //   }
+  // }
 }

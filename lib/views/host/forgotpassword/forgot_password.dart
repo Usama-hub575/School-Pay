@@ -44,12 +44,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   iconColor: PayNestTheme.colorWhite,
                   buttonColor: PayNestTheme.primaryColor,
                 ),
-                Spacer(),
+                const Spacer(),
                 Image.asset(
                   AppAssets().welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
             Expanded(

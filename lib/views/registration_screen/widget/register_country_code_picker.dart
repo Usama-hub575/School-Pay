@@ -88,7 +88,7 @@ class RegisterCountryCodePicker extends StatefulWidget {
 
   final Color borderColor;
 
-  RegisterCountryCodePicker({
+  const RegisterCountryCodePicker({
     this.onChanged,
     this.onInit,
     required this.borderColor,
@@ -282,9 +282,7 @@ class CountryCodePickerState extends State<RegisterCountryCodePicker> {
           searchStyle: widget.searchStyle,
           textStyle: widget.dialogTextStyle,
           boxDecoration: widget.boxDecoration,
-          showFlag: widget.showFlagDialog != null
-              ? widget.showFlagDialog
-              : widget.showFlag,
+          showFlag: widget.showFlagDialog ?? widget.showFlag,
           flagWidth: widget.flagWidth,
           flagDecoration: widget.flagDecoration,
           size: widget.dialogSize,

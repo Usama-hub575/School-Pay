@@ -66,7 +66,7 @@ class _ChangePINState extends State<ChangePIN> {
                             width: 44.w,
                             decoration: BoxDecoration(
                                 boxShadow: [
-                                  BoxShadow(
+                                  const BoxShadow(
                                     color: Colors.black26,
                                     blurRadius: 2.0,
                                     offset: Offset(
@@ -105,7 +105,7 @@ class _ChangePINState extends State<ChangePIN> {
             ),
           ),
           SizedBox(height: 50.h),
-          Text(enterPin),
+          const Text(enterPin),
           SizedBox(height: 10.h),
           Center(
             child: Form(
@@ -132,7 +132,7 @@ class _ChangePINState extends State<ChangePIN> {
               ),
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Obx(() => SizedBox(
                 height: 60.h,
                 width: 326.w,

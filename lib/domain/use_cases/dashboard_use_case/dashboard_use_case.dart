@@ -12,6 +12,14 @@ class DashboardUseCase {
     return dashboardRepo.getInt(key: StorageKeys.userId)!;
   }
 
+  bool? getBool() {
+    return dashboardRepo.getBool(key: StorageKeys.isBioMetric);
+  }
+
+  Future? setBool({required key, bool? value}) {
+    return dashboardRepo.setBool(key: key, value: value);
+  }
+
   String? getFirstName() {
     return dashboardRepo.getString(
       key: StorageKeys.firstName,

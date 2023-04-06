@@ -4,7 +4,7 @@ import 'package:paynest_flutter_app/export.dart';
 class BlueBackButton extends StatefulWidget {
   final BuildContext context;
 
-  BlueBackButton({Key? key, required this.context}) : super(key: key);
+  const BlueBackButton({Key? key, required this.context}) : super(key: key);
 
   @override
   State<BlueBackButton> createState() => _BlueBackButtonState();

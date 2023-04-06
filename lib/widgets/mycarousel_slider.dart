@@ -5,7 +5,7 @@ class CarouselSliderPage extends StatefulWidget {
   const CarouselSliderPage({Key? key}) : super(key: key);
 
   @override
-  _CarouselSliderPageState createState() => _CarouselSliderPageState();
+  State<CarouselSliderPage> createState() => _CarouselSliderPageState();
 }
 
 class _CarouselSliderPageState extends State<CarouselSliderPage> {

@@ -125,7 +125,7 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
                   ),
                   verticalSpacer(4),
                   Text(
-                    '${student.student!.school!.name}',
+                    student.student!.school!.name,
                     softWrap: true,
                     style: PayNestTheme.h2_12blueAccentLight.copyWith(
                       fontSize: sizes.fontRatio * 12,

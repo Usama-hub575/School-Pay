@@ -4,5 +4,7 @@ export 'forgot_password/export.dart';
 export 'host/export.dart';
 export 'initializer/export.dart';
 export 'register/export.dart';
+export 'settings/export.dart';
 export 'signin/export.dart';
+export 'transactions/export.dart';
 export 'welcome/export.dart';

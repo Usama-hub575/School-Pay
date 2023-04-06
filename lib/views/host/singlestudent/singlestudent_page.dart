@@ -286,21 +286,13 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                         ? Text(
                             userController.singleStudentResponse.value
                                     .students![0].student?.firstName ??
-                                '' +
-                                    (userController
-                                                .singleStudentResponse
-                                                .value
-                                                .students![0]
-                                                .student
-                                                ?.lastName !=
-                                            null
-                                        ? userController
-                                                .parentStudentResponse
-                                                .parentStudent!
-                                                .student!
-                                                .lastName ??
-                                            ''
-                                        : ''),
+                                (userController.singleStudentResponse.value
+                                            .students![0].student?.lastName !=
+                                        null
+                                    ? userController.parentStudentResponse
+                                            .parentStudent!.student!.lastName ??
+                                        ''
+                                    : ''),
                             textAlign: TextAlign.center,
                             style: PayNestTheme.h2_12blueAccent.copyWith(
                               fontSize: sizes.fontRatio * 22,

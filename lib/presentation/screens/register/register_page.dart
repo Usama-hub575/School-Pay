@@ -65,7 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const Spacer(),
                     Image.asset(
-                      AppAssets().welcomeRegisterLogo,
+                      assets.welcomeRegisterLogo,
                       width: sizes.widthRatio * 120,
                     ),
                     const Spacer(),

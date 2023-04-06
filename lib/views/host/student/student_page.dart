@@ -19,7 +19,7 @@ import 'widget/single_student_card.dart';
 class StudentPage extends StatefulWidget {
   final String whichStack;
 
-  StudentPage({required this.whichStack, Key? key}) : super(key: key);
+  const StudentPage({required this.whichStack, Key? key}) : super(key: key);
 
   @override
   State<StudentPage> createState() => _StudentPageState();
@@ -57,8 +57,8 @@ class _StudentPageState extends State<StudentPage> {
                           height: 44.h,
                           width: 44.w,
                           decoration: BoxDecoration(
-                              boxShadow: [
-                                const BoxShadow(
+                              boxShadow: const [
+                                BoxShadow(
                                   color: Colors.black26,
                                   blurRadius: 2.0,
                                   offset: Offset(

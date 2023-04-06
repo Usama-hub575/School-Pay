@@ -17,6 +17,7 @@ export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:flutter_local_notifications/flutter_local_notifications.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:flutter_svg/flutter_svg.dart';
+export 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 export 'package:get/get_core/src/get_main.dart';
 export 'package:get_it/get_it.dart';
 export 'package:get_storage/get_storage.dart';

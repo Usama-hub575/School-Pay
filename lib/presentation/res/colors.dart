@@ -41,11 +41,14 @@ class AppColors {
   Color lightGreyShade2 = const Color.fromRGBO(0, 0, 0, .16);
   Color lightGreyShade3 = const Color.fromRGBO(221, 221, 221, .16);
   Color lightGrey3 = const Color.fromRGBO(168, 168, 168, 1);
+  Color lightGreyShade4 = const Color.fromRGBO(0, 0, 0, .26);
+  Color lightGreyShade5 = const Color.fromRGBO(0, 0, 0, .12);
   Color black = Colors.black;
   Color background = const Color.fromRGBO(249, 250, 251, 1);
   Color red = const Color.fromRGBO(160, 35, 1, 1);
   Color redShade = const Color.fromRGBO(145, 53, 0, 1);
   Color redShade2 = const Color.fromRGBO(252, 0, 0, 1);
+  Color redShade3 = const Color.fromRGBO(221, 86, 86, 1.0);
   Color errorRed = const Color.fromRGBO(239, 107, 49, 1);
   Color whiteShade = const Color.fromRGBO(249, 250, 251, 1);
   Color greyShade = const Color.fromRGBO(85, 85, 85, 1);

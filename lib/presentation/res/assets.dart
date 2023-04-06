@@ -14,6 +14,7 @@ class AppAssets {
   final String icAdd = "assets/svg/ic_add.svg";
   final String icArrowDown = "assets/svg/ic_arrow_down.svg";
   final String icArrowDropDown = "assets/svg/ic_arrow_drop_down.svg";
+  final String icArrowNext = "assets/svg/ic_arrow_next.svg";
   final String icMale = "assets/svg/male.svg";
   final String icFemale = "assets/svg/female.svg";
   final String icSchoolBuilding = "assets/svg/school_building.svg";
@@ -50,7 +51,7 @@ class AppAssets {
   final String icLean = "assets/png/ic_leantech_logo.png";
   final String icPostPay = "assets/png/ic_postpay.png";
   final String icSchoolWhite = "assets/png/ic_schoolIconWhite.png";
-  final String icSchoolDark = "assets/icons/ic_schoolIcondark.png";
+  final String icSchoolDark = "assets/png/ic_schoolIcondark.png";
   final String splash = "assets/png/splash.png";
   final String payNestLogoNew = "assets/png/logo_new.png";
   final String welcomeRegisterLogo = "assets/png/welcome_register_logo.png";

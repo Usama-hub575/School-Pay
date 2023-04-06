@@ -71,10 +71,10 @@ class _HostPageState extends State<HostPage> {
     //   ),
     // );
     pages.add(
-      StudentPage(whichStack: "host"),
+      const StudentPage(whichStack: "host"),
     );
     pages.add(
-      RecentTransactionPage(whichStack: "host"),
+      const RecentTransactionPage(whichStack: "host"),
     );
     pages.add(
       const MorePage(),
@@ -97,7 +97,7 @@ class _HostPageState extends State<HostPage> {
         onWillPop: () async => false,
         child: payNow == -1 ? pay[0] : pages[pageIndex],
       ),
-      floatingActionButton: Container(
+      floatingActionButton: SizedBox(
         height: 64.h,
         width: 64.h,
         child: Visibility(
@@ -137,7 +137,7 @@ class _HostPageState extends State<HostPage> {
               verticalSpacer(8),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text("${names[index]}",
+                child: Text(names[index],
                     maxLines: 1,
                     style: PayNestTheme.navbar12.copyWith(
                       fontSize: sizes.fontRatio * 8,

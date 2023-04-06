@@ -217,10 +217,10 @@ class _RegisterOtpPageState extends State<RegisterOtpPage> {
     height: 70.h,
     textStyle: TextStyle(
         fontSize: 20.sp,
-        color: Color.fromRGBO(30, 60, 87, 1),
+        color: const Color.fromRGBO(30, 60, 87, 1),
         fontWeight: FontWeight.w600),
     decoration: BoxDecoration(
-      border: Border.all(color: Color(0xff8C8C8C)),
+      border: Border.all(color: const Color(0xff8C8C8C)),
       borderRadius: BorderRadius.circular(12.r),
     ),
   );

@@ -11,7 +11,7 @@ class StudentCard extends StatefulWidget {
   final Function(StudentData studentElement) onTap;
 
   @override
-  _StudentCardState createState() => _StudentCardState();
+  State<StudentCard> createState() => _StudentCardState();
 }
 
 class _StudentCardState extends State<StudentCard> {
@@ -69,8 +69,8 @@ class _StudentCardState extends State<StudentCard> {
                 ),
                 child: SvgPicture.asset(
                   studentData.student?.gender == "male"
-                      ? AppAssets().icMale
-                      : AppAssets().icFemale,
+                      ? assets.icMale
+                      : assets.icFemale,
                 ),
               ),
               verticalSpacer(6),
@@ -109,7 +109,7 @@ class _StudentCardState extends State<StudentCard> {
           left: 0,
           right: 0,
           child: SvgPicture.asset(
-            AppAssets().icAdd,
+            assets.icAdd,
           ),
         ),
       ],

@@ -15,7 +15,7 @@ import '../../../widgets/spacer.dart';
 import '../../../widgets/toast.dart';
 
 class NewPassword extends StatefulWidget {
-  NewPassword({
+  const NewPassword({
     Key? key,
     required this.email,
   }) : super(key: key);
