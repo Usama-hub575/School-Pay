@@ -92,9 +92,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                               state.status == RegisterMainPageStatus.loading
                                   ? true
                                   : false,
-                          onValidate: (value) {
-                            return null;
-                          },
+                          onValidate: (value) {},
                           controller: createPasswordController,
                           labelText: createPassword,
                           validatorText: pleaseCreatePassword,
@@ -370,25 +368,9 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                         width: sizes.heightRatio * 20,
                         height: sizes.heightRatio * 20,
                         child: CircularProgressIndicator(
-                          backgroundColor: PayNestTheme.colorWhite,
-                          color: PayNestTheme.blueAccent,
+                          backgroundColor: colors.white,
+                          color: colors.blueAccent,
                         ),
-                      ),
-                    );
-                    break;
-                  case RegisterMainPageStatus.confirmPassword:
-                    // TODO: Handle this case.
-                    break;
-                  case RegisterMainPageStatus.password:
-                    // TODO: Handle this case.
-                    break;
-                  case RegisterMainPageStatus.loaded:
-                    Text(
-                      next,
-                      style: PayNestTheme.title_2_16primaryColor.copyWith(
-                        fontWeight: FontWeight.w500,
-                        fontSize: sizes.fontRatio * 14,
-                        color: PayNestTheme.colorWhite,
                       ),
                     );
                     break;
@@ -399,31 +381,12 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                       phoneCodeController.text,
                       phoneController.text,
                     );
-                    context.read<RegisterMainPageBloc>().add(
-                          Loaded(),
-                        );
                     break;
                   case RegisterMainPageStatus.mainPageError:
-                    context.read<RegisterMainPageBloc>().add(
-                          Loaded(),
-                        );
-                    ScaffoldMessenger.of(key.currentState!.context)
-                        .showSnackBar(
-                      SnackBar(
-                        duration: const Duration(seconds: 1),
-                        backgroundColor: Colors.red,
-                        padding: EdgeInsets.symmetric(
-                          vertical: verticalValue(16),
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        content: Text(
-                          state.mainPageErrorMessage,
-                          textAlign: TextAlign.center,
-                        ),
-                        behavior: SnackBarBehavior.floating,
-                      ),
+                    showToast(
+                      message: state.mainPageErrorMessage,
+                      context: context,
+                      color: colors.redShade2,
                     );
                     break;
                 }

@@ -6,10 +6,12 @@ class AppRoutes {
   static const navigateToSignIn = '/signIn';
   static const navigateToRegister = '/register';
   static const navigateToDashboard = '/dashboard';
+  static const navigateToForgotPassword = '/forgotPassword';
+  static const navigateToNewPassword = '/newPassword';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     _currentRoute = settings.name;
-    // Map<String, dynamic>? args = settings.arguments as Map<String, dynamic>?;
+    Map<String, dynamic>? args = settings.arguments as Map<String, dynamic>?;
 
     switch (settings.name) {
       case initializer:
@@ -31,6 +33,16 @@ class AppRoutes {
       case navigateToDashboard:
         return MaterialPageRoute(
           builder: (_) => const HostPage(),
+        );
+      case navigateToForgotPassword:
+        return MaterialPageRoute(
+          builder: (_) => const ForgotPassword(),
+        );
+      case navigateToNewPassword:
+        return MaterialPageRoute(
+          builder: (_) => NewPassword(
+            email: args?['email'],
+          ),
         );
       default:
         return _errorRoute();

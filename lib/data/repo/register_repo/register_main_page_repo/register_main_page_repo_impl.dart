@@ -12,7 +12,7 @@ class RegisterMainPageRepoImpl implements RegisterMainPageRepo {
   });
 
   @override
-  Future<Either<OtpResponseModel, Failure>> sendOTP({
+  Future<Either<OTPResponseModel, Failure>> sendOTP({
     required String email,
     required String phone,
     required String dialCode,
@@ -29,7 +29,7 @@ class RegisterMainPageRepoImpl implements RegisterMainPageRepo {
     return response.fold(
       (success) {
         return Left(
-          OtpResponseModel.fromJson(
+          OTPResponseModel.fromJson(
             jsonDecode(success),
           ),
         );

@@ -20,7 +20,7 @@ class RegisterOTPPageBloc
   _code(CheckCode event, emit) {
     emit(
       state.copyWith(
-        isCodeComplete: event.codeValue,
+        isCodeComplete: event.isCodeComplete,
       ),
     );
   }

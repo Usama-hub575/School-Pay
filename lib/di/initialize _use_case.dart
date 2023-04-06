@@ -9,6 +9,8 @@ Future initializeUseCaseDependencies() async {
   await initializeRegisterMainPageUseCase();
   await initializerRegisterOTPPageUseCase();
   await initializeDashboardUseCase();
+  await initializeForgotPasswordUseCase();
+  await initializeResetPasswordUseCase();
 }
 
 Future initializeLocaleUseCase() async {
@@ -70,6 +72,22 @@ Future initializeDashboardUseCase() async {
   it.registerLazySingleton(
     () => DashboardUseCase(
       dashboardRepo: it<DashboardRepo>(),
+    ),
+  );
+}
+
+Future initializeForgotPasswordUseCase() async {
+  it.registerLazySingleton(
+    () => ForgotPasswordUseCase(
+      forgotPasswordRepo: it<ForgotPasswordRepo>(),
+    ),
+  );
+}
+
+Future initializeResetPasswordUseCase() async {
+  it.registerLazySingleton(
+    () => ResetPasswordUseCase(
+      resetPasswordRepo: it<ResetPasswordRepo>(),
     ),
   );
 }

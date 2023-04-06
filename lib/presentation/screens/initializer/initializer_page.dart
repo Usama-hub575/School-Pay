@@ -130,10 +130,18 @@ class _InitializerPageState extends State<InitializerPage> {
               );
               break;
             case InitializerStatus.welcomePage:
-              Navigator.pushNamed(context, AppRoutes.navigateToWelcome);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.navigateToWelcome,
+                (route) => false,
+              );
               break;
             case InitializerStatus.dashboardPage:
-              Navigator.pushNamed(context, AppRoutes.navigateToDashboard);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.navigateToDashboard,
+                (route) => false,
+              );
               break;
             case InitializerStatus.init:
               // TODO: Handle this case.

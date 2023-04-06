@@ -113,6 +113,12 @@ void main() async {
             BlocProvider.value(
               value: it<GetAssistanceBloc>(),
             ),
+            BlocProvider.value(
+              value: it<ForgotPasswordBloc>(),
+            ),
+            BlocProvider.value(
+              value: it<ResetPasswordBloc>(),
+            ),
           ],
           child: const MyApp(),
         ),

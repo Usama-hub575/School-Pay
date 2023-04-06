@@ -32,7 +32,7 @@ class ElevatedButtons extends StatelessWidget {
       },
       child: Padding(
         padding: EdgeInsets.symmetric(
-          vertical: verticalValue(8),
+          vertical: verticalValue(6),
         ),
         child: isLoading
             ? Center(

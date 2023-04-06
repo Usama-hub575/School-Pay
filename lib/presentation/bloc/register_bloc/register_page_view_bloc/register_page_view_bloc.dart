@@ -11,6 +11,15 @@ class RegisterPageViewBloc
         ) {
     on<BackNavigation>(_backNavigation);
     on<ChangeStep>(_changeStep);
+    on<EnableButton>(_enableButton);
+  }
+
+  _enableButton(EnableButton event, emit) {
+    emit(
+      state.copyWith(
+        buttonEnable: event.enableButton,
+      ),
+    );
   }
 
   _backNavigation(BackNavigation event, emit) {
@@ -22,12 +31,6 @@ class RegisterPageViewBloc
         ),
       );
     } else if (state.currentIndex == 0) {
-      emit(
-        state.copyWith(
-          status: RegisterPageViewStatus.jumpToPreviousPage,
-        ),
-      );
-    } else {
       emit(
         state.copyWith(
           status: RegisterPageViewStatus.pop,
