@@ -7,7 +7,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc({
     required this.signInUseCase,
   }) : super(
-          SignInState(),
+          SignInState(
+            authenticationResponseModel: AuthenticationModel.empty(),
+          ),
         ) {
     on<OnPressed>(_onPressed);
     on<BioMetric>(_bioMetric);
@@ -48,6 +50,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(
         state.copyWith(
           status: SignInStatus.home,
+          authenticationResponseModel: response,
         ),
       );
     } else {

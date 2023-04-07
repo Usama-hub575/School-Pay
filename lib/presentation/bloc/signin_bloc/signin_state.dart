@@ -8,6 +8,7 @@ class SignInState extends Equatable {
   String password = '';
   String email = '';
   String message = '';
+  AuthenticationModel authenticationResponseModel = AuthenticationModel.empty();
 
   SignInState({
     this.status = SignInStatus.init,
@@ -16,12 +17,14 @@ class SignInState extends Equatable {
     this.email = '',
     this.password = '',
     this.message = '',
+    required this.authenticationResponseModel,
   });
 
   SignInState copyWith({
     SignInStatus? status,
     bool? isObscure,
     bool? isBioMetric,
+    AuthenticationModel? authenticationResponseModel,
     String? email,
     String? password,
     String? message,
@@ -29,6 +32,8 @@ class SignInState extends Equatable {
     return SignInState(
       status: status ?? this.status,
       isObscure: isObscure ?? this.isObscure,
+      authenticationResponseModel:
+          authenticationResponseModel ?? this.authenticationResponseModel,
       isBioMetric: isBioMetric ?? this.isBioMetric,
       email: email ?? this.email,
       password: password ?? this.password,
@@ -39,6 +44,7 @@ class SignInState extends Equatable {
   @override
   List<Object?> get props => [
         message,
+        authenticationResponseModel,
         status,
         isObscure,
         isBioMetric,

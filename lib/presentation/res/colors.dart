@@ -47,6 +47,7 @@ class AppColors {
   Color background = const Color.fromRGBO(249, 250, 251, 1);
   Color red = const Color.fromRGBO(160, 35, 1, 1);
   Color redShade = const Color.fromRGBO(145, 53, 0, 1);
+  Color redAccent = const Color.fromRGBO(255, 82, 82, 1.0);
   Color redShade2 = const Color.fromRGBO(252, 0, 0, 1);
   Color redShade3 = const Color.fromRGBO(221, 86, 86, 1.0);
   Color errorRed = const Color.fromRGBO(239, 107, 49, 1);

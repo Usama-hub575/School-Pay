@@ -20,7 +20,9 @@ class SignInUseCase {
     final response = await signInRepo.apiLogin(
       email: email,
       password: password,
-      fcm: signInRepo.getString('fcmToken'),
+      fcm: signInRepo.getString(
+        StorageKeys.fcmToken,
+      ),
     );
     response.fold(
       (success) {
@@ -45,7 +47,9 @@ class SignInUseCase {
       await initializerUseCase.login(
         email: email,
         password: password,
-        fcmToken: signInRepo.getString('fcmToken'),
+        fcmToken: signInRepo.getString(
+          StorageKeys.fcmToken,
+        ),
       );
 
       if (authenticationResponseData.status) {

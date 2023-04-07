@@ -71,6 +71,10 @@ class SignInRepoImpl implements SignInRepo {
             value: savedEmail ?? email,
           );
           storage.saveString(
+            key: StorageKeys.phone,
+            value: authenticationResponseModel.parent.phone,
+          );
+          storage.saveString(
             key: StorageKeys.password,
             value: savedPassword ?? password,
           );
