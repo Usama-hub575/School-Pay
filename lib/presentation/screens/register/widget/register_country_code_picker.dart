@@ -192,7 +192,7 @@ class RegisterCountryCodePickerState extends State<RegisterCountryCodePicker> {
             const Spacer(),
             if (widget.showDropDownButton)
               SvgPicture.asset(
-                AppAssets().icArrowDown,
+                assets.icArrowDown,
               ),
           ],
         ),

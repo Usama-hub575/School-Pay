@@ -7,7 +7,7 @@ class EmiratesIdFormatter extends TextInputFormatter {
   EmiratesIdFormatter({
     required this.mask,
     required this.separator,
-  }) {}
+  });
 
   @override
   TextEditingValue formatEditUpdate(

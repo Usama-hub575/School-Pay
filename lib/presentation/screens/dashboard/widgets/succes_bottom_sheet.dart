@@ -30,7 +30,7 @@ class SuccessWidget extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
-        color: PayNestTheme.black.withOpacity(0),
+        color: colors.black.withOpacity(0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
@@ -43,7 +43,7 @@ class SuccessWidget extends StatelessWidget {
                     topLeft: Radius.circular(16.0),
                     topRight: Radius.circular(16.0),
                   ),
-                  color: PayNestTheme.colorWhite,
+                  color: colors.white,
                 ),
                 child: Padding(
                   padding:
@@ -53,38 +53,38 @@ class SuccessWidget extends StatelessWidget {
                       verticalSpacer(24),
                       Text(
                         studentAdded,
-                        style: PayNestTheme.title_2_16primaryColor.copyWith(
+                        style: textStyles.bold.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: PayNestTheme.primaryColor,
+                          color: colors.primaryColor,
+                          fontSize: sizes.fontRatio * 16,
                         ),
                       ),
                       verticalSpacer(16),
                       Container(
                         width: double.infinity,
                         height: 1,
-                        color: PayNestTheme.textGrey.withOpacity(0.5),
+                        color: colors.textGrey.withOpacity(0.5),
                       ),
                       verticalSpacer(16),
                       Lottie.asset(
-                        AppAssets().checkAnimation,
+                        assets.checkAnimation,
                         repeat: true,
                         height: sizes.heightRatio * 100,
                         width: sizes.widthRatio * 100,
                       ),
                       Text(
                         successfully,
-                        style: PayNestTheme.title_2_16primaryColor.copyWith(
-                          fontWeight: FontWeight.bold,
+                        style: textStyles.bold.copyWith(
                           fontSize: sizes.fontRatio * 16,
-                          color: PayNestTheme.primaryColor,
+                          color: colors.primaryColor,
                         ),
                       ),
                       Text(
                         studentAddedSuccessfully,
-                        style: PayNestTheme.small_2_12black.copyWith(
+                        style: textStyles.regular.copyWith(
                           fontWeight: FontWeight.w200,
                           fontSize: sizes.fontRatio * 12,
-                          color: PayNestTheme.black.withOpacity(0.7),
+                          color: colors.black.withOpacity(0.7),
                         ),
                       ),
                       verticalSpacer(22.0),
@@ -93,7 +93,7 @@ class SuccessWidget extends StatelessWidget {
                         height: sizes.heightRatio * 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: PayNestTheme.primaryColor,
+                            backgroundColor: colors.primaryColor,
                             elevation: 0,
                             // side: BorderSide(width:1, color:Colors.white),
                             shape: RoundedRectangleBorder(
@@ -104,18 +104,17 @@ class SuccessWidget extends StatelessWidget {
                           ),
                           onPressed: () async {
                             Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/DashboardPage',
+                              AppRoutes.navigateToDashboard,
                               (Route<dynamic> route) => false,
                             );
                           },
                           child: Center(
                             child: Text(
                               takeToHome,
-                              style:
-                                  PayNestTheme.title_2_16primaryColor.copyWith(
+                              style: textStyles.bold.copyWith(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
-                                color: PayNestTheme.colorWhite,
+                                color: colors.white,
                               ),
                             ),
                           ),

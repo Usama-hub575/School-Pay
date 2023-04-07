@@ -41,7 +41,7 @@ class _StudentWidgetState extends State<StudentWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: PayNestTheme.black.withOpacity(0),
+      color: colors.black.withOpacity(0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -56,7 +56,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                   topLeft: Radius.circular(16.0),
                   topRight: Radius.circular(16.0),
                 ),
-                color: PayNestTheme.colorWhite,
+                color: colors.white,
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(
@@ -69,10 +69,8 @@ class _StudentWidgetState extends State<StudentWidget> {
                       verticalSpacer(48),
                       Text(
                         enterStudentDetail,
-                        style: PayNestTheme.title_2_16primaryColor.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: PayNestTheme.primaryColor,
-                          fontFamily: 'montserratBold',
+                        style: textStyles.bold.copyWith(
+                          color: colors.primaryColor,
                           fontSize: sizes.fontRatio * 16,
                         ),
                       ),
@@ -92,42 +90,41 @@ class _StudentWidgetState extends State<StudentWidget> {
                             ),
                           ],
                           // Only num,
-                          style: PayNestTheme.title_3_16blackbold.copyWith(
+                          style: textStyles.semiBold.copyWith(
                             fontSize: sizes.fontRatio * 12,
-                            color: PayNestTheme.lightBlack,
-                            fontFamily: 'montserratSemiBold',
+                            color: colors.lightGreyShade,
                           ),
                           decoration: InputDecoration(
                             border: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: PayNestTheme.textGrey.withOpacity(
+                                color: colors.textGrey.withOpacity(
                                   0.5,
                                 ),
                               ),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                                color: colors.textGrey.withOpacity(0.5),
                               ),
                             ),
                             labelText: enterPaynestStudentCode,
-                            labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
+                            labelStyle: textStyles.bold.copyWith(
                               fontSize: sizes.fontRatio * 12,
-                              color: PayNestTheme.primaryColor,
+                              color: colors.primaryColor,
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                                color: colors.textGrey.withOpacity(0.5),
                               ),
                             ),
                             errorBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                                color: colors.textGrey.withOpacity(0.5),
                               ),
                             ),
                             disabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: PayNestTheme.textGrey.withOpacity(0.5),
+                                color: colors.textGrey.withOpacity(0.5),
                               ),
                             ),
                           ),
@@ -141,7 +138,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                           height: sizes.heightRatio * 50,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: PayNestTheme.primaryColor,
+                              backgroundColor: colors.primaryColor,
                               elevation: 0,
                               // side: BorderSide(width:1, color:Colors.white),
                               shape: RoundedRectangleBorder(

@@ -200,7 +200,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
                 flex: widget.alignLeft ? 0 : 1,
                 fit: widget.alignLeft ? FlexFit.tight : FlexFit.loose,
                 child: SvgPicture.asset(
-                  AppAssets().icArrowDown,
+                  assets.icArrowDown,
                 ),
               ),
             horizontalSpacer(10),

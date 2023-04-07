@@ -243,7 +243,7 @@ const appGUIDE =
 const contactCC = "Contact Customer Care";
 const contactAssistance =
     "Still not getting what you are looking for. Contact our customer care for further assistance";
-const fAQS = "FAQs";
+const fAQs = "FAQs";
 const commonQuestion = "Get the query to your most common questions here.";
 const startLChat =
     "Immediately start live chat with one of our customer care representative.";

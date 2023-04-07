@@ -15,9 +15,8 @@ class RecentTransactions extends StatefulWidget {
 }
 
 class _RecentTransactionsState extends State<RecentTransactions> {
-  bool isListEmpty = true;
   late DateFormat dateFormat;
-
+  bool isListEmpty = true;
   @override
   void initState() {
     super.initState();
@@ -58,7 +57,8 @@ class _RecentTransactionsState extends State<RecentTransactions> {
               ),
               itemBuilder: (context, index) {
                 return _singleCard(
-                    transactionsRow: widget.transactions!.rows![index]);
+                  transactionsRow: widget.transactions!.rows![index],
+                );
               },
               separatorBuilder: (context, index) {
                 return verticalSpacer(16);
@@ -71,7 +71,9 @@ class _RecentTransactionsState extends State<RecentTransactions> {
         : const SizedBox.shrink();
   }
 
-  Widget _singleCard({required TransactionsRow transactionsRow}) {
+  Widget _singleCard({
+    required TransactionsRow transactionsRow,
+  }) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: horizontalValue(16),
@@ -91,7 +93,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
               child: Center(
                 child: Icon(
                   Icons.check,
-                  color: PayNestTheme.colorWhite,
+                  color: colors.white,
                   size: 14,
                 ),
               ),

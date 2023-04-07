@@ -8,17 +8,15 @@ import 'package:paynest_flutter_app/service/api_service.dart';
 
 import '../../../controller/createtransaction_resp_controller.dart';
 import '../../../controller/myStudent_controller.dart';
-import '../../../data/model/datamodel/paynowtransaction_detail_model.dart';
 import '../../../data/model/datamodel/single_student_model.dart';
 import '../../../data/model/lean_payment_model.dart';
 import '../../webview/webview.dart';
-import '../transactiondetails/paynowltransactiondetails_page.dart';
 
 class PaymentMethod extends StatefulWidget {
   final SingleStudentModel singleStudentModel;
   final int payment;
 
-  PaymentMethod({
+  const PaymentMethod({
     Key? key,
     required this.singleStudentModel,
     required this.payment,
@@ -584,7 +582,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => PayNowTransactionDetailsPage(
-                          pntdm: model,
+                          payNowTransactionDetailModel: model,
                         ),
                       ),
                     );

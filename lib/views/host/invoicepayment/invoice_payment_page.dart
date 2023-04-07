@@ -13,7 +13,7 @@ import '../../download_pdf/download_pdf.dart';
 class InvoicePaymentPage extends StatefulWidget {
   final SingleStudentModel singleStudentModel;
 
-  InvoicePaymentPage({Key? key, required this.singleStudentModel})
+  const InvoicePaymentPage({Key? key, required this.singleStudentModel})
       : super(key: key);
 
   @override
@@ -70,7 +70,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                           fontSize: sizes.fontRatio * 18,
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ],
@@ -194,7 +194,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                     ),
                     verticalSpacer(4),
                     Text(
-                      '${widget.singleStudentModel.student!.studentRegNo}',
+                      widget.singleStudentModel.student!.studentRegNo,
                       style: PayNestTheme.title_3_16blackbold.copyWith(
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.lightBlack,
@@ -218,7 +218,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                     ),
                     verticalSpacer(4),
                     Text(
-                      '${widget.singleStudentModel.student!.school!.name}',
+                      widget.singleStudentModel.student!.school!.name,
                       style: PayNestTheme.title_3_16blackbold.copyWith(
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.lightBlack,
@@ -242,7 +242,8 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                     ),
                     verticalSpacer(4),
                     Text(
-                      '${DateFormat("yyyy-MM-dd").format(widget.singleStudentModel.student!.dueDate)}',
+                      DateFormat("yyyy-MM-dd")
+                          .format(widget.singleStudentModel.student!.dueDate),
                       style: PayNestTheme.title_3_16blackbold.copyWith(
                         fontSize: sizes.fontRatio * 16,
                         color: PayNestTheme.lightBlack,
@@ -278,7 +279,7 @@ class _InvoicePaymentPageState extends State<InvoicePaymentPage> {
                       ),
                     ),
                     verticalSpacer(24),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(

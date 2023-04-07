@@ -17,6 +17,19 @@ class DashboardRepoImpl implements DashboardRepo {
   }
 
   @override
+  bool? getBool({required String key}) {
+    if (storage.contains(key) ?? false) {
+      return storage.getBool(key: key);
+    }
+    return false;
+  }
+
+  @override
+  Future? setBool({required String key, bool? value}) {
+    return storage.saveBool(key: key, value: value);
+  }
+
+  @override
   String? getString({required String key}) {
     return storage.getString(key: key);
   }

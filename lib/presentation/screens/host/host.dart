@@ -1,9 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:paynest_flutter_app/export.dart';
-import 'package:paynest_flutter_app/views/host/more/more_page.dart';
-import 'package:paynest_flutter_app/views/host/pay/paynow_page.dart';
 import 'package:paynest_flutter_app/views/host/student/student_page.dart';
-import 'package:paynest_flutter_app/views/host/transaction/recent_transaction_page.dart';
 
 class HostPage extends StatefulWidget {
   const HostPage({Key? key}) : super(key: key);
@@ -13,29 +10,20 @@ class HostPage extends StatefulWidget {
 }
 
 class _HostPageState extends State<HostPage> {
-  // int pageIndex = 0;
-  // int payNow = 0;
-  // bool bottomTabIsActive = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  List<Widget> pages = [];
-
-  final pay = [
-    const PayNowPage(whichStack: 'host'),
-  ];
-
   final selectedIcons = <String>[
-    AppAssets().icDashboardSelected,
-    AppAssets().icStudent,
-    AppAssets().icTransaction,
-    AppAssets().icMenu,
+    assets.icDashboardSelected,
+    assets.icStudent,
+    assets.icTransaction,
+    assets.icMenu,
   ];
 
   final unSelectedIcons = <String>[
-    AppAssets().icDashboardNon,
-    AppAssets().icStudentNon,
-    AppAssets().icTransactionNon,
-    AppAssets().icMenuNon,
+    assets.icDashboardNon,
+    assets.icStudentNon,
+    assets.icTransactionNon,
+    assets.icMenuNon,
   ];
 
   final names = <String>[
@@ -76,9 +64,9 @@ class _HostPageState extends State<HostPage> {
   @override
   void initState() {
     super.initState();
-    context.read<HostPageBloc>().add(
-          ChangePage(
-            status: HostPageStatus.dashBoardPage,
+    context.read<HostBloc>().add(
+          SelectNavigationBarItem(
+            status: HostStatus.dashBoardPage,
           ),
         );
     // pages = [];
@@ -88,13 +76,13 @@ class _HostPageState extends State<HostPage> {
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
-    return BlocBuilder<HostPageBloc, HostPageState>(
+    return BlocBuilder<HostBloc, HostState>(
       builder: (context, state) {
         return Scaffold(
           key: _scaffoldKey,
           body: WillPopScope(
             onWillPop: () async => false,
-            child: navPage(state.status),
+            child: navigatePage(state.status),
           ),
           floatingActionButton: SizedBox(
             height: sizes.heightRatio * 64,
@@ -104,7 +92,7 @@ class _HostPageState extends State<HostPage> {
               child: FloatingActionButton.extended(
                 backgroundColor: colors.primaryColor,
                 onPressed: () {
-                  context.read<HostPageBloc>().add(
+                  context.read<HostBloc>().add(
                         FloatingActionButtonOnPressed(),
                       );
                 },
@@ -161,6 +149,9 @@ class _HostPageState extends State<HostPage> {
             rightCornerRadius: 16,
             onTap: (index) {
               state.payNow = 0;
+              context.read<HostBloc>().add(
+                    ChangePageIndex(pageIndex: index),
+                  );
               // selectedNavItem(index);
             },
             shadow: const BoxShadow(
@@ -175,16 +166,16 @@ class _HostPageState extends State<HostPage> {
     );
   }
 
-  navPage(HostPageStatus status) {
+  navigatePage(HostStatus status) {
     switch (status) {
-      case HostPageStatus.dashBoardPage:
+      case HostStatus.dashBoardPage:
         return const DashboardPage();
-      case HostPageStatus.studentPage:
-        return StudentPage(whichStack: "host");
-      case HostPageStatus.recentTransactionPage:
-        return RecentTransactionPage(whichStack: "host");
-      case HostPageStatus.morePage:
-        return const MorePage();
+      case HostStatus.studentPage:
+        return const StudentPage(whichStack: "host");
+      case HostStatus.recentTransactionPage:
+        return const RecentTransactionPage(whichStack: "host");
+      case HostStatus.settingsPage:
+        return const SettingsPage();
       default:
         return const DashboardPage();
     }

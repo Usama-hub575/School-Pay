@@ -27,7 +27,7 @@ class _CustomSliderState extends State<CustomSlider> {
         horizontalSpacer(8),
         widget.currentIndex == 0
             ? Lottie.asset(
-                AppAssets().sliderCircleAnimation,
+                assets.sliderCircleAnimation,
                 height: sizes.heightRatio * 26,
                 width: sizes.widthRatio * 26,
               )
@@ -50,7 +50,7 @@ class _CustomSliderState extends State<CustomSlider> {
         ),
         widget.currentIndex == 1
             ? Lottie.asset(
-                AppAssets().sliderCircleAnimation,
+                assets.sliderCircleAnimation,
                 height: sizes.heightRatio * 26,
                 width: sizes.widthRatio * 26,
               )
@@ -73,7 +73,7 @@ class _CustomSliderState extends State<CustomSlider> {
         ),
         widget.currentIndex == 2
             ? Lottie.asset(
-                AppAssets().sliderCircleAnimation,
+                assets.sliderCircleAnimation,
                 height: sizes.heightRatio * 26,
                 width: sizes.widthRatio * 26,
               )

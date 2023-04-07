@@ -26,6 +26,7 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    initializeResources(context: context);
     return Scaffold(
       body: Container(
         margin: EdgeInsets.symmetric(
@@ -42,7 +43,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 const Spacer(),
                 Image.asset(
-                  AppAssets().welcomeRegisterLogo,
+                  assets.welcomeRegisterLogo,
                   width: sizes.widthRatio * 120,
                 ),
                 const Spacer(),

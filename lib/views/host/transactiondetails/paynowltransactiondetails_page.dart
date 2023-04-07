@@ -8,14 +8,14 @@ import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
-import '../../../data/model/datamodel/paynowtransaction_detail_model.dart';
+import '../../../data/model/response/transaction/pay_now_transaction_detail_model/pay_now_transaction_detail_model.dart';
 import '../../../presentation/res/res.dart';
 import '../../../widgets/amount_formater.dart';
 
 class PayNowTransactionDetailsPage extends StatefulWidget {
   final PayNowTransactionDetailModel pntdm;
 
-  PayNowTransactionDetailsPage({required this.pntdm});
+  const PayNowTransactionDetailsPage({super.key, required this.pntdm});
 
   @override
   State<PayNowTransactionDetailsPage> createState() =>
@@ -196,7 +196,7 @@ class _PayNowTransactionDetailsPageState
                         : const SizedBox.shrink(),
                     widget.pntdm.student!.grade != '-'
                         ? Text(
-                            "Grade " + widget.pntdm.student!.grade.toString(),
+                            "Grade ${widget.pntdm.student!.grade}",
                             style: PayNestTheme.title_3_16blackbold.copyWith(
                               fontSize: sizes.fontRatio * 16,
                               color: PayNestTheme.lightBlack,
@@ -297,10 +297,9 @@ class _PayNowTransactionDetailsPageState
                       height: 5.h,
                     ),
                     Text(
-                      'AED ' +
-                          amountFormater(double.parse(
-                            widget.pntdm.amountPaid.toString(),
-                          )),
+                      'AED ${amountFormater(double.parse(
+                        widget.pntdm.amountPaid.toString(),
+                      ))}',
                       style: PayNestTheme.title_3_16black.copyWith(
                         fontSize: sizes.fontRatio * 22,
                       ),

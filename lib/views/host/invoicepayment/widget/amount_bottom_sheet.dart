@@ -88,34 +88,32 @@ class _AmountWidgetState extends State<AmountWidget> {
                         ),
                       ),
                       verticalSpacer(24),
-                      Container(
-                        child: Row(
-                          children: [
-                            Text(
-                              'Current Payable Amount',
-                              style: PayNestTheme.h2_12blueAccentLight.copyWith(
-                                fontSize: sizes.fontRatio * 14,
-                                color: PayNestTheme.primaryColor,
-                                fontFamily: 'montserratSemiBold',
-                              ),
+                      Row(
+                        children: [
+                          Text(
+                            'Current Payable Amount',
+                            style: PayNestTheme.h2_12blueAccentLight.copyWith(
+                              fontSize: sizes.fontRatio * 14,
+                              color: PayNestTheme.primaryColor,
+                              fontFamily: 'montserratSemiBold',
                             ),
-                            const Spacer(),
-                            Text(
-                              'AED ${amountFormater(
-                                double.parse(
-                                  widget.singleStudentModel.student!
-                                      .totalBalanceAmount
-                                      .toString(),
-                                ),
-                              )}',
-                              style: PayNestTheme.h2_12blueAccent.copyWith(
-                                fontSize: sizes.fontRatio * 16,
-                                color: PayNestTheme.primaryColor,
-                                fontFamily: 'montserratExtraBold',
+                          ),
+                          const Spacer(),
+                          Text(
+                            'AED ${amountFormater(
+                              double.parse(
+                                widget.singleStudentModel.student!
+                                    .totalBalanceAmount
+                                    .toString(),
                               ),
+                            )}',
+                            style: PayNestTheme.h2_12blueAccent.copyWith(
+                              fontSize: sizes.fontRatio * 16,
+                              color: PayNestTheme.primaryColor,
+                              fontFamily: 'montserratExtraBold',
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       verticalSpacer(6),
                       Container(
@@ -195,7 +193,7 @@ class _AmountWidgetState extends State<AmountWidget> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       verticalSpacer(16),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(

@@ -44,7 +44,7 @@ class _MorePageState extends State<MorePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             height: 240.h,
             child: Stack(
               children: [
@@ -212,7 +212,7 @@ class _MorePageState extends State<MorePage> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => RecentTransactionPage(
+                            builder: (context) => const RecentTransactionPage(
                               whichStack: "other",
                             ),
                           ),
@@ -303,7 +303,7 @@ class _MorePageState extends State<MorePage> {
                     verticalSpacer(12),
                     SingleCard(
                       icon: AppAssets().icFaq,
-                      value: fAQS,
+                      value: fAQs,
                       onTap: () {
                         launchUrl(
                           Uri.parse(
@@ -363,7 +363,7 @@ class _MorePageState extends State<MorePage> {
                     //   color: PayNestTheme.lineColor,
                     // ),
                     verticalSpacer(5),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(

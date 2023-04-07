@@ -13,12 +13,7 @@ import '../../../data/model/datamodel/single_student_model.dart';
 class DashboardPage extends StatefulWidget {
   const DashboardPage({
     Key? key,
-    // required this.onTap,
-    // required this.onRecentTransactionTap,
   }) : super(key: key);
-
-  // final Function onTap;
-  // final Function onRecentTransactionTap;
 
   static void onNotificationClick(
     context,
@@ -56,26 +51,7 @@ class _DashboardPageState extends State<DashboardPage> {
     context.read<DashboardBloc>().add(
           FetchTransactions(),
         );
-    // userController.init(
-    //   context: context,
-    // );
   }
-
-  // fetchStudents() async {
-  //   await myStudentController.hitMyStudents(
-  //     userController.userResData.value.parent!.id,
-  //   );
-  // }
-  //
-  // fetchTransactions() async {
-  //   await transactionListController.hitTransaction(
-  //     userController.userResData.value.parent!.id.toString(),
-  //   );
-  //   isLoading = false;
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +83,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           children: [
                             verticalSpacer(24),
                             Image.asset(
-                              AppAssets().welcomeRegisterLogo,
+                              assets.welcomeRegisterLogo,
                               width: sizes.widthRatio * 70,
                               color: colors.white,
                             ),
@@ -169,7 +145,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   );
                                 },
                                 icon: Lottie.asset(
-                                  AppAssets().supportAnimation,
+                                  assets.supportAnimation,
                                   repeat: true,
                                 ),
                               ),
@@ -223,15 +199,15 @@ class _DashboardPageState extends State<DashboardPage> {
                             students,
                             style: textStyles.bold.copyWith(
                               fontSize: sizes.fontRatio * 16,
-                              color: PayNestTheme.black,
+                              color: colors.black,
                             ),
                           ),
                           const Spacer(),
                           InkWell(
                             onTap: () {
-                              context.read<HostPageBloc>().add(
-                                    ChangePage(
-                                      status: HostPageStatus.studentPage,
+                              context.read<HostBloc>().add(
+                                    SelectNavigationBarItem(
+                                      status: HostStatus.studentPage,
                                     ),
                                   );
                             },
@@ -433,7 +409,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                         ),
                                       ),
                                       SvgPicture.asset(
-                                        AppAssets().arrowNext,
+                                        assets.arrowNext,
                                         height: sizes.heightRatio * 20,
                                       )
                                     ],
@@ -479,7 +455,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                         ),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Colors.grey.withOpacity(0.3),
+                                            color: colors.greyShade
+                                                .withOpacity(0.3),
                                             spreadRadius: 1,
                                             blurRadius: 2,
                                             offset: const Offset(
@@ -506,7 +483,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                                 ),
                                           ),
                                           Lottie.asset(
-                                            AppAssets().arrowForwardAnimation,
+                                            assets.arrowForwardAnimation,
                                             repeat: true,
                                             width: sizes.widthRatio * 22,
                                             height: sizes.heightRatio * 22,
@@ -552,9 +529,9 @@ class _DashboardPageState extends State<DashboardPage> {
                                     )
                                   : InkWellWidget(
                                       onTap: () {
-                                        context.read<HostPageBloc>().add(
-                                              ChangePage(
-                                                status: HostPageStatus
+                                        context.read<HostBloc>().add(
+                                              SelectNavigationBarItem(
+                                                status: HostStatus
                                                     .recentTransactionPage,
                                               ),
                                             );
@@ -586,7 +563,9 @@ class _DashboardPageState extends State<DashboardPage> {
                                         .transactionListResponseModel
                                         .transactions!,
                                     onTap: (transactionRow) {
-                                      onTap(row: transactionRow);
+                                      onTap(
+                                        row: transactionRow,
+                                      );
                                     },
                                   )
                                 : const SizedBox.shrink(),
@@ -687,7 +666,7 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   void onTap({required TransactionsRow row}) {
-    TransactionDetailModel tdm = TransactionDetailModel(
+    TransactionDetailModel transactionDetailModel = TransactionDetailModel(
       id: row.id,
       schoolId: row.schoolId,
       parentId: row.parentId,
@@ -762,7 +741,7 @@ class _DashboardPageState extends State<DashboardPage> {
     // Navigator.of(context).push(
     //   MaterialPageRoute(
     //     builder: (context) => TransactionDetailsPage(
-    //       tdm: tdm,
+    //       transactionDetailModel: transactionDetailModel,
     //     ),
     //   ),
     // );

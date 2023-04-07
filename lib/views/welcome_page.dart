@@ -66,14 +66,14 @@ class _WelcomePageState extends State<WelcomePage> {
           SizedBox.expand(
             child: FittedBox(
               fit: BoxFit.cover,
-              child: Container(
+              child: SizedBox(
                 width: videoPlayerController.value.size.width,
                 height: videoPlayerController.value.size.height,
                 child: VideoPlayer(videoPlayerController),
               ),
             ),
           ),
-          Container(
+          SizedBox(
             height: sizes.height,
             width: sizes.width,
             child: Column(

@@ -4,9 +4,11 @@ class AppBarBackButton extends StatefulWidget {
   final Color buttonColor;
   final Color iconColor;
 
-  AppBarBackButton(
-      {Key? key, required this.buttonColor, required this.iconColor})
-      : super(key: key);
+  const AppBarBackButton({
+    Key? key,
+    required this.buttonColor,
+    required this.iconColor,
+  }) : super(key: key);
 
   @override
   State<AppBarBackButton> createState() => _AppBarBackButtonState();

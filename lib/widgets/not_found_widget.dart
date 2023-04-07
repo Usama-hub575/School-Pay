@@ -98,7 +98,7 @@ class NoDataFound extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(

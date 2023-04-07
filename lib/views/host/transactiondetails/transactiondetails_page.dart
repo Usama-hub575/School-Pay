@@ -15,7 +15,7 @@ import '../../../widgets/back_button.dart';
 class TransactionDetailsPage extends StatefulWidget {
   final TransactionDetailModel tdm;
 
-  TransactionDetailsPage({Key? key, required this.tdm}) : super(key: key);
+  const TransactionDetailsPage({Key? key, required this.tdm}) : super(key: key);
 
   @override
   State<TransactionDetailsPage> createState() => _TransactionDetailsPageState();
@@ -195,11 +195,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       height: 5.h,
                     ),
                     Text(
-                        widget.tdm.student!.firstName.toString() +
-                            " " +
-                            (widget.tdm.student!.lastName != '-'
-                                ? widget.tdm.student!.lastName
-                                : ''),
+                        "${widget.tdm.student!.firstName} ${widget.tdm.student!.lastName != '-' ? widget.tdm.student!.lastName : ''}",
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                             color: PayNestTheme.textGrey,
                             fontSize: sizes.fontRatio * 16)),
@@ -226,7 +222,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                         : const SizedBox.shrink(),
                     widget.tdm.student!.grade != '-'
                         ? Text(
-                            "Grade " + widget.tdm.student!.grade.toString(),
+                            "Grade ${widget.tdm.student!.grade}",
                             style: PayNestTheme.title_2_16primaryColor.copyWith(
                               color: PayNestTheme.textGrey,
                               fontSize: sizes.fontRatio * 16,
@@ -295,10 +291,9 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       height: 5.h,
                     ),
                     Text(
-                        'AED ' +
-                            amountFormater(double.parse(
-                              widget.tdm.amount.toString(),
-                            )),
+                        'AED ${amountFormater(double.parse(
+                          widget.tdm.amount.toString(),
+                        ))}',
                         style: PayNestTheme.title_2_16primaryColor.copyWith(
                             color: PayNestTheme.black,
                             fontSize: sizes.fontRatio * 22,

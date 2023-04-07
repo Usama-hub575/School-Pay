@@ -49,7 +49,7 @@ Future initializeBlocs() async {
   );
 
   it.registerLazySingleton(
-    () => HostPageBloc(),
+    () => HostBloc(),
   );
 
   it.registerLazySingleton(

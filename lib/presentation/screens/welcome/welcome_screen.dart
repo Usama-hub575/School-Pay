@@ -10,7 +10,7 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   VideoPlayerController videoPlayerController = VideoPlayerController.asset(
-    AppAssets().welcomeVideo,
+    assets.welcomeVideo,
   );
   late DateFormat dateFormat;
 
@@ -65,7 +65,7 @@ class _WelcomePageState extends State<WelcomePage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Image.asset(
-                  AppAssets().payNestLogoNew,
+                  assets.payNestLogoNew,
                   width: sizes.widthRatio * 180,
                   fit: BoxFit.fill,
                 ),

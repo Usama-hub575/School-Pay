@@ -64,7 +64,7 @@ class _BlocUIState extends State<BlocUI> {
                       validatorText: pleaseEnterPassword,
                       icon: IconButton(
                         icon: SvgPicture.asset(
-                          AppAssets().icEyeCrossed,
+                          assets.icEyeCrossed,
                           color: colors.primaryColor,
                         ),
                         onPressed: () {
@@ -112,7 +112,7 @@ class _BlocUIState extends State<BlocUI> {
                           child: Column(
                             children: [
                               Lottie.asset(
-                                AppAssets().faceId,
+                                assets.faceId,
                                 height: 109,
                                 width: 81,
                                 repeat: true,
@@ -189,14 +189,14 @@ class _BlocUIState extends State<BlocUI> {
               ContinueButton(
                 text: google,
                 icon: Image.asset(
-                  AppAssets().icGoogle,
+                  assets.icGoogle,
                 ),
               ),
               verticalSpacer(16),
               ContinueButton(
                 text: facebook,
                 icon: Image.asset(
-                  AppAssets().icFacebook,
+                  assets.icFacebook,
                 ),
               ),
             ],

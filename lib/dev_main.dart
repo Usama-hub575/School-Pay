@@ -108,7 +108,7 @@ void main() async {
               value: it<DashboardBloc>(),
             ),
             BlocProvider.value(
-              value: it<HostPageBloc>(),
+              value: it<HostBloc>(),
             ),
             BlocProvider.value(
               value: it<GetAssistanceBloc>(),

@@ -4,7 +4,7 @@ class InkWellWidget extends StatefulWidget {
   final Function onTap;
   final Widget child;
 
-  InkWellWidget({Key? key, required this.onTap, required this.child})
+  const InkWellWidget({Key? key, required this.onTap, required this.child})
       : super(key: key);
 
   @override
@@ -22,8 +22,8 @@ class _InkWellWidgetState extends State<InkWellWidget> {
       ),
       child: InkWell(
         onTap: () => widget.onTap(),
-        child: widget.child,
         splashColor: Colors.transparent,
+        child: widget.child,
       ),
     );
   }

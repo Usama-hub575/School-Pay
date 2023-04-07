@@ -9,16 +9,14 @@ import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/paynow_controller.dart';
 import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
-import 'package:paynest_flutter_app/views/host/transactiondetails/paynowltransactiondetails_page.dart';
 import 'package:paynest_flutter_app/views/webview/webview.dart';
 
-import '../../../data/model/datamodel/paynowtransaction_detail_model.dart';
 import '../../../data/model/lean_payment_model.dart';
 
 class PayNowPage extends StatefulWidget {
   final String whichStack;
 
-  const PayNowPage({required this.whichStack});
+  const PayNowPage({super.key, required this.whichStack});
 
   @override
   State<PayNowPage> createState() => _PayNowPageState();
@@ -1548,7 +1546,7 @@ class _PayNowPageState extends State<PayNowPage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => PayNowTransactionDetailsPage(
-                          pntdm: model,
+                          payNowTransactionDetailModel: model,
                         ),
                       ),
                     );

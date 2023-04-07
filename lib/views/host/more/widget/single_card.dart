@@ -33,7 +33,7 @@ class SingleCard extends StatelessWidget {
             SvgPicture.asset(icon),
             horizontalSpacer(12),
             Text(
-              '$value',
+              value,
               style: PayNestTheme.h2_12blueAccent.copyWith(
                 fontSize: sizes.fontRatio * 16,
                 color: PayNestTheme.lightBlack,

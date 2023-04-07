@@ -99,7 +99,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           obscureText: state.obscurePassword,
                           icon: IconButton(
                             icon: SvgPicture.asset(
-                              AppAssets().icEyeCrossed,
+                              assets.icEyeCrossed,
                               color: colors.primaryColor,
                             ),
                             onPressed: () {
@@ -132,7 +132,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           obscureText: state.obscureConfirmPassword,
                           icon: IconButton(
                             icon: SvgPicture.asset(
-                              AppAssets().icEyeCrossed,
+                              assets.icEyeCrossed,
                               color: colors.primaryColor,
                             ),
                             onPressed: () {
@@ -295,7 +295,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           child: OutlinedButton.icon(
                             onPressed: () {},
                             icon: Image.asset(
-                              AppAssets().icGoogle,
+                              assets.icGoogle,
                             ),
                             label: Text(
                               google,
@@ -329,7 +329,7 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                           child: OutlinedButton.icon(
                             onPressed: () {},
                             icon: Image.asset(
-                              AppAssets().icFacebook,
+                              assets.icFacebook,
                             ),
                             label: Text(
                               facebook,
