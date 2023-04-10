@@ -1,5 +1,4 @@
 import 'package:paynest_flutter_app/export.dart';
-import 'package:paynest_flutter_app/views/host/viewprofile/view_profile.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -88,17 +87,17 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        BlocBuilder<DashboardBloc, DashboardState>(
+                        BlocBuilder<SignInBloc, SignInState>(
                           builder: (context, state) {
-                            return state.registerResponseModel.parent!
+                            return state.authenticationResponseModel.parent
                                             .profileImage ==
                                         null &&
-                                    state.registerResponseModel.parent!
+                                    state.authenticationResponseModel.parent
                                             .profileImage !=
                                         ""
                                 ? CircleAvatar(
                                     backgroundImage: NetworkImage(
-                                      state.registerResponseModel.parent!
+                                      state.authenticationResponseModel.parent
                                               .profileImage ??
                                           '',
                                     ),
@@ -279,7 +278,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         launch(
                           'https://paynest.ae/#faq',
                         );
-                        setState(() {});
                       },
                     ),
                     verticalSpacer(16),
@@ -290,7 +288,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         launch(
                           'https://paynest.ae/#faq',
                         );
-                        setState(() {});
                       },
                     ),
                     verticalSpacer(16),
@@ -301,7 +298,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         launch(
                           'https://paynest.ae/privacy-policy.html',
                         );
-                        setState(() {});
                       },
                     ),
                     verticalSpacer(16),
@@ -312,7 +308,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         launch(
                           'https://paynest.ae/terms.html',
                         );
-                        setState(() {});
                       },
                     ),
                     verticalSpacer(16),

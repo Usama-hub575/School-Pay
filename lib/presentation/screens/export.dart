@@ -7,4 +7,5 @@ export 'register/export.dart';
 export 'settings/export.dart';
 export 'signin/export.dart';
 export 'transactions/export.dart';
+export 'view_profile/export.dart';
 export 'welcome/export.dart';

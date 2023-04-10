@@ -8,22 +8,24 @@ class DashboardState extends Equatable {
   var list = {};
   bool isLoading = true;
   String firstName = '';
+  String email = '';
+  String phoneNumber = '';
   String lastName = '';
   bool showShimmer = false;
   List<TransactionsRow> transactionsList = [];
   List<StudentData> students = [];
   TransactionListResponseModel transactionListResponseModel =
       TransactionListResponseModel.empty();
-  RegisterResponseModel registerResponseModel = RegisterResponseModel.empty();
 
   DashboardState({
     this.status = DashboardStatus.init,
     this.errorMessage = '',
     this.isBioMetricEnable = false,
     this.list = const {},
+    this.email = '',
+    this.phoneNumber = '',
     this.showShimmer = false,
     required this.transactionListResponseModel,
-    required this.registerResponseModel,
     this.isLoading = true,
     this.firstName = '',
     this.lastName = '',
@@ -34,6 +36,8 @@ class DashboardState extends Equatable {
     RegisterResponseModel? registerResponseModel,
     TransactionListResponseModel? transactionListResponseModel,
     String? errorMessage,
+    String? email,
+    String? phoneNumber,
     bool? isBioMetricEnable,
     DashboardStatus? status,
     bool? showShimmer,
@@ -46,9 +50,9 @@ class DashboardState extends Equatable {
     return DashboardState(
       transactionListResponseModel:
           transactionListResponseModel ?? this.transactionListResponseModel,
-      registerResponseModel:
-          registerResponseModel ?? this.registerResponseModel,
       status: status ?? this.status,
+      email: email ?? this.email,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
       list: list ?? this.list,
       isBioMetricEnable: isBioMetricEnable ?? this.isBioMetricEnable,
       showShimmer: showShimmer ?? this.showShimmer,
@@ -64,9 +68,10 @@ class DashboardState extends Equatable {
   List<Object?> get props => [
         isBioMetricEnable,
         errorMessage,
+        phoneNumber,
+        email,
         showShimmer,
         list,
-        registerResponseModel,
         students,
         isLoading,
         status,

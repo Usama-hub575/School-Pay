@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:paynest_flutter_app/data/model/datamodel/single_student_model.dart';
 import 'package:paynest_flutter_app/data/model/datamodel/single_student_model.dart'
     as student;
@@ -39,9 +38,6 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     super.initState();
-    userController = Get.put(
-      UserController(),
-    );
     context.read<DashboardBloc>().add(
           GetName(),
         );
@@ -384,39 +380,45 @@ class _DashboardPageState extends State<DashboardPage> {
                           ],
                         ),
                         verticalSpacer(10),
-
-                        state.registerResponseModel.parent?.pin == null
-                            ? SizedBox(
-                                height: sizes.heightRatio * 48,
-                                width: sizes.widthRatio * 326,
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => const ChangePIN(),
+                        BlocBuilder<SignInBloc, SignInState>(
+                          builder: (context, state) {
+                            return state.authenticationResponseModel.parent
+                                        ?.pin ==
+                                    null
+                                ? SizedBox(
+                                    height: sizes.heightRatio * 48,
+                                    width: sizes.widthRatio * 326,
+                                    child: OutlinedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ChangePIN(),
+                                          ),
+                                        );
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            setPIN,
+                                            style: textStyles.bold.copyWith(
+                                              color: colors.black,
+                                              fontSize: sizes.fontRatio * 10,
+                                            ),
+                                          ),
+                                          SvgPicture.asset(
+                                            assets.arrowNext,
+                                            height: sizes.heightRatio * 20,
+                                          )
+                                        ],
                                       ),
-                                    );
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        setPIN,
-                                        style: textStyles.bold.copyWith(
-                                          color: colors.black,
-                                          fontSize: sizes.fontRatio * 10,
-                                        ),
-                                      ),
-                                      SvgPicture.asset(
-                                        assets.arrowNext,
-                                        height: sizes.heightRatio * 20,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              )
-                            : const SizedBox.shrink(),
+                                    ),
+                                  )
+                                : const SizedBox.shrink();
+                          },
+                        ),
                         verticalSpacer(10),
                         state.isLoading
                             ? FadeShimmer(
@@ -426,73 +428,83 @@ class _DashboardPageState extends State<DashboardPage> {
                                 highlightColor: const Color(0xFFF4F4F4),
                                 radius: 18,
                               )
-                            : state.registerResponseModel.parent
-                                            ?.paymentConfigured ==
-                                        null ||
-                                    state.registerResponseModel.parent!
-                                        .paymentConfigured
-                                        .toString()
-                                        .isEmpty
-                                ? InkWellWidget(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) => StudentPage(
-                                            whichStack: "other",
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      width: double.infinity,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: horizontalValue(12),
-                                        vertical: verticalValue(12),
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                          18,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: colors.greyShade
-                                                .withOpacity(0.3),
-                                            spreadRadius: 1,
-                                            blurRadius: 2,
-                                            offset: const Offset(
-                                              0,
-                                              1,
+                            : BlocBuilder<SignInBloc, SignInState>(
+                                builder: (context, state) {
+                                  return state.authenticationResponseModel
+                                                  .parent?.paymentConfigured ==
+                                              null ||
+                                          state.authenticationResponseModel
+                                              .parent!.paymentConfigured
+                                              .toString()
+                                              .isEmpty
+                                      ? InkWellWidget(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const StudentPage(
+                                                  whichStack: "other",
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: Container(
+                                            width: double.infinity,
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: horizontalValue(12),
+                                              vertical: verticalValue(12),
+                                            ),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                18,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: colors.greyShade
+                                                      .withOpacity(0.3),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 2,
+                                                  offset: const Offset(
+                                                    0,
+                                                    1,
+                                                  ),
+                                                ),
+                                              ],
+                                              color: colors.whiteShade,
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  makeFirstPayment,
+                                                  style: TextStyles()
+                                                      .regular
+                                                      .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize:
+                                                            sizes.fontRatio *
+                                                                14,
+                                                        color: colors.black,
+                                                      ),
+                                                ),
+                                                Lottie.asset(
+                                                  assets.arrowForwardAnimation,
+                                                  repeat: true,
+                                                  width: sizes.widthRatio * 22,
+                                                  height:
+                                                      sizes.heightRatio * 22,
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                        color: colors.whiteShade,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            makeFirstPayment,
-                                            style: TextStyles()
-                                                .regular
-                                                .copyWith(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize:
-                                                      sizes.fontRatio * 14,
-                                                  color: colors.black,
-                                                ),
-                                          ),
-                                          Lottie.asset(
-                                            assets.arrowForwardAnimation,
-                                            repeat: true,
-                                            width: sizes.widthRatio * 22,
-                                            height: sizes.heightRatio * 22,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                : const SizedBox.shrink(),
+                                        )
+                                      : const SizedBox.shrink();
+                                },
+                              ),
                         verticalSpacer(10),
                         // SizedBox(height: 10.5.h),
                         Padding(

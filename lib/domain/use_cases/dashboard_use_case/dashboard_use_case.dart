@@ -20,15 +20,9 @@ class DashboardUseCase {
     return dashboardRepo.setBool(key: key, value: value);
   }
 
-  String? getFirstName() {
+  String? getString({required String key}) {
     return dashboardRepo.getString(
-      key: StorageKeys.firstName,
-    );
-  }
-
-  String? getLastName() {
-    return dashboardRepo.getString(
-      key: StorageKeys.lastName,
+      key: key,
     );
   }
 

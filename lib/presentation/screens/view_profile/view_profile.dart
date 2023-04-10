@@ -1,0 +1,616 @@
+import 'package:intl/intl.dart';
+import 'package:paynest_flutter_app/export.dart';
+import 'package:paynest_flutter_app/views/host/changepassword/change_password.dart';
+import 'package:paynest_flutter_app/views/host/editprofile/edit_profile.dart';
+
+class ViewProfile extends StatefulWidget {
+  const ViewProfile({Key? key}) : super(key: key);
+
+  @override
+  State<ViewProfile> createState() => _ViewProfileState();
+}
+
+class _ViewProfileState extends State<ViewProfile> {
+  TextEditingController passwordController = TextEditingController();
+  late DateFormat dateFormat;
+
+  @override
+  void initState() {
+    initializeDateFormatting();
+    dateFormat = DateFormat.yMMMMd('en_GB');
+    passwordController.text = '********';
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: verticalValue(240),
+            child: Stack(
+              children: [
+                Container(
+                  height: verticalValue(172),
+                  decoration: BoxDecoration(
+                    color: colors.primaryColor,
+                    borderRadius: const BorderRadius.vertical(
+                      bottom: Radius.circular(24),
+                    ),
+                  ),
+                  child: SafeArea(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: horizontalValue(25),
+                        top: verticalValue(25),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              AppBarBackButton(
+                                iconColor: colors.primaryColor,
+                                buttonColor: colors.white,
+                              ),
+                              horizontalSpacer(50),
+                              Text(
+                                myProfile,
+                                style: textStyles.bold.copyWith(
+                                  color: colors.white,
+                                  fontSize: sizes.fontRatio * 18,
+                                ),
+                              ),
+                              const Spacer(),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  right: horizontalValue(25),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: colors.lightGreyShade4,
+                                        blurRadius: 2.0,
+                                        offset: const Offset(
+                                          3.0, // Move to right 10  horizontally
+                                          3.0, // Move to bottom 10 Vertically
+                                        ),
+                                      ),
+                                    ],
+                                    color: colors.white,
+                                    borderRadius: BorderRadius.circular(
+                                      12,
+                                    ),
+                                  ),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const EditProfilePage(),
+                                        ),
+                                      );
+                                    },
+                                    padding: EdgeInsets.zero,
+                                    icon: Lottie.asset(
+                                      assets.editAnimation,
+                                      repeat: true,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned.fill(
+                  top: verticalValue(100),
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: horizontalValue(24),
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: horizontalValue(25),
+                            right: horizontalValue(25),
+                            top: verticalValue(30),
+                          ),
+                          child: Container(
+                            width: horizontalValue(250),
+                            height: verticalValue(100),
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: colors.dropShadow.withOpacity(
+                                    .3,
+                                  ),
+                                  spreadRadius: 0,
+                                  blurRadius: 10,
+                                  offset: const Offset(
+                                    0,
+                                    5,
+                                  ),
+                                ),
+                              ],
+                              color: colors.white,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                // verticalSpacer(10),
+                                BlocBuilder<DashboardBloc, DashboardState>(
+                                  builder: (context, state) {
+                                    return Text(
+                                      "${state.firstName} ${state.lastName}",
+                                      style: textStyles.bold.copyWith(
+                                        fontSize: sizes.fontRatio * 18,
+                                        color: colors.black,
+                                      ),
+                                    );
+                                  },
+                                ),
+                                verticalSpacer(20),
+                              ],
+                            ),
+                          ),
+                        ),
+                        BlocBuilder<SignInBloc, SignInState>(
+                          builder: (context, state) {
+                            return Positioned(
+                              top: 0,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(46),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.3),
+                                      spreadRadius: 0,
+                                      blurRadius: 18,
+                                      offset: const Offset(
+                                        1,
+                                        1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                child: state.authenticationResponseModel.parent!
+                                                .profileImage ==
+                                            null &&
+                                        state.authenticationResponseModel
+                                                .parent!.profileImage !=
+                                            ""
+                                    ? CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                          state.authenticationResponseModel
+                                                  .parent!.profileImage ??
+                                              '',
+                                        ),
+                                      )
+                                    : Container(
+                                        height: sizes.heightRatio * 80,
+                                        width: sizes.widthRatio * 80,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: SvgPicture.asset(
+                                          assets.icMale,
+                                        ),
+                                      ),
+                              ),
+                            );
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: horizontalValue(16),
+                  vertical: verticalValue(16),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    verticalSpacer(20),
+                    Text(
+                      accountDetails,
+                      style: textStyles.bold.copyWith(
+                        color: colors.primaryColor,
+                        fontSize: sizes.fontRatio * 16,
+                      ),
+                    ),
+                    verticalSpacer(16),
+                    Text(
+                      fullName,
+                      style: textStyles.bold.copyWith(
+                        color: colors.primaryColor,
+                        fontSize: sizes.fontRatio * 12,
+                      ),
+                    ),
+                    verticalSpacer(4),
+                    BlocBuilder<DashboardBloc, DashboardState>(
+                      builder: (context, state) {
+                        return Text(
+                          "${state.firstName} ${state.lastName}",
+                          style: textStyles.semiBold.copyWith(
+                            fontSize: sizes.fontRatio * 16,
+                            color: colors.lightGreyShade,
+                          ),
+                        );
+                      },
+                    ),
+                    verticalSpacer(8),
+                    Container(
+                      height: verticalValue(1),
+                      color: colors.greyLite5,
+                    ),
+                    verticalSpacer(12),
+                    Text(
+                      email,
+                      style: textStyles.bold.copyWith(
+                        color: colors.primaryColor,
+                        fontSize: sizes.fontRatio * 12,
+                      ),
+                    ),
+                    verticalSpacer(8),
+                    BlocBuilder<SignInBloc, SignInState>(
+                      builder: (context, state) {
+                        return Text(
+                          state.authenticationResponseModel.parent?.email ?? '',
+                          style: textStyles.semiBold.copyWith(
+                            fontSize: sizes.fontRatio * 16,
+                            color: colors.lightGreyShade,
+                          ),
+                        );
+                      },
+                    ),
+                    verticalSpacer(8),
+                    Container(
+                      height: verticalValue(1),
+                      color: colors.greyLite5,
+                    ),
+                    verticalSpacer(12),
+                    Text(
+                      phoneNumber,
+                      style: textStyles.bold.copyWith(
+                        color: colors.primaryColor,
+                        fontSize: sizes.fontRatio * 12,
+                      ),
+                    ),
+                    verticalSpacer(8),
+                    BlocBuilder<SignInBloc, SignInState>(
+                        builder: (context, state) {
+                      return Text(
+                        '${state.authenticationResponseModel.parent!.dialCode} ${state.authenticationResponseModel.parent!.phone}',
+                        style: textStyles.semiBold.copyWith(
+                          fontSize: sizes.fontRatio * 16,
+                          color: colors.lightGreyShade,
+                        ),
+                      );
+                    }),
+                    verticalSpacer(8),
+                    Container(
+                      height: verticalValue(1),
+                      color: colors.greyLite5,
+                    ),
+                    verticalSpacer(12),
+                    Text(
+                      emiratesIDD,
+                      style: textStyles.bold.copyWith(
+                        color: colors.primaryColor,
+                        fontSize: sizes.fontRatio * 12,
+                      ),
+                    ),
+                    verticalSpacer(8),
+                    Row(
+                      children: [
+                        BlocBuilder<SignInBloc, SignInState>(
+                          builder: (context, state) {
+                            return Text(
+                              (state.authenticationResponseModel.parent
+                                              ?.emiratesId?.length ??
+                                          0) >=
+                                      14
+                                  ? getDashedEmiratesId(
+                                      state.authenticationResponseModel.parent!
+                                              .emiratesId ??
+                                          '',
+                                    )
+                                  : state.authenticationResponseModel.parent!
+                                          .emiratesId ??
+                                      '',
+                              style: textStyles.semiBold.copyWith(
+                                fontSize: sizes.fontRatio * 16,
+                                color: colors.lightGreyShade,
+                              ),
+                            );
+                          },
+                        ),
+                        const Spacer(),
+                        Text(
+                          optional,
+                          style: textStyles.bold.copyWith(
+                            color: colors.primaryColor.withOpacity(0.5),
+                            fontSize: sizes.fontRatio * 8,
+                          ),
+                        ),
+                        horizontalSpacer(8),
+                      ],
+                    ),
+                    verticalSpacer(8),
+                    Container(
+                      height: verticalValue(1),
+                      color: colors.greyLite5,
+                    ),
+                    verticalSpacer(12),
+                    Text(
+                      expiry,
+                      style: textStyles.bold.copyWith(
+                        color: colors.primaryColor,
+                        fontSize: sizes.fontRatio * 12,
+                      ),
+                    ),
+                    verticalSpacer(8),
+                    Row(
+                      children: [
+                        BlocBuilder<SignInBloc, SignInState>(
+                          builder: (context, state) {
+                            return Text(
+                              state.authenticationResponseModel.parent!
+                                              .expiryDate ==
+                                          null ||
+                                      state.authenticationResponseModel.parent!
+                                          .expiryDate!.isEmpty
+                                  ? '-'
+                                  : dateFormat.format(
+                                      DateTime.parse(
+                                        state.authenticationResponseModel
+                                            .parent!.expiryDate
+                                            .toString()
+                                            .substring(0, 10),
+                                      ),
+                                    ),
+                              style: textStyles.semiBold.copyWith(
+                                fontSize: sizes.fontRatio * 16,
+                                color: colors.lightGreyShade,
+                              ),
+                            );
+                          },
+                        ),
+                        const Spacer(),
+                        Text(
+                          optional,
+                          style: textStyles.bold.copyWith(
+                            color: colors.primaryColor.withOpacity(0.5),
+                            fontSize: sizes.fontRatio * 8,
+                          ),
+                        ),
+                        horizontalSpacer(8),
+                      ],
+                    ),
+                    verticalSpacer(8),
+                    Container(
+                      height: verticalValue(1),
+                      color: colors.greyLite5,
+                    ),
+                    verticalSpacer(12),
+                    Text(
+                      passportNumber,
+                      style: textStyles.bold.copyWith(
+                        color: colors.primaryColor,
+                        fontSize: sizes.fontRatio * 12,
+                      ),
+                    ),
+                    verticalSpacer(8),
+                    Row(
+                      children: [
+                        BlocBuilder<SignInBloc, SignInState>(
+                          builder: (context, state) {
+                            return Text(
+                              state.authenticationResponseModel.parent
+                                      ?.passport ??
+                                  '',
+                              style: textStyles.semiBold.copyWith(
+                                fontSize: sizes.fontRatio * 16,
+                                color: colors.lightGreyShade,
+                              ),
+                            );
+                          },
+                        ),
+                        const Spacer(),
+                        Text(
+                          optional,
+                          style: textStyles.bold.copyWith(
+                            color: colors.primaryColor.withOpacity(0.5),
+                            fontSize: sizes.fontRatio * 8,
+                          ),
+                        ),
+                        horizontalSpacer(8),
+                      ],
+                    ),
+                    verticalSpacer(8),
+                    Container(
+                      height: verticalValue(1),
+                      color: colors.greyLite5,
+                    ),
+                    verticalSpacer(12),
+                    Text(
+                      expiry,
+                      style: textStyles.bold.copyWith(
+                        color: colors.primaryColor,
+                        fontSize: sizes.fontRatio * 12,
+                      ),
+                    ),
+                    verticalSpacer(8),
+                    Row(
+                      children: [
+                        BlocBuilder<SignInBloc, SignInState>(
+                          builder: (context, state) {
+                            return Text(
+                              state.authenticationResponseModel.parent
+                                              .expiryDate ==
+                                          null ||
+                                      state.authenticationResponseModel.parent
+                                          .expiryDate!.isEmpty
+                                  ? '-'
+                                  : dateFormat.format(
+                                      DateTime.parse(
+                                        state.authenticationResponseModel.parent
+                                            .expiryDate
+                                            .toString()
+                                            .substring(0, 10),
+                                      ),
+                                    ),
+                              style: textStyles.semiBold.copyWith(
+                                fontSize: sizes.fontRatio * 16,
+                                color: colors.lightGreyShade,
+                              ),
+                            );
+                          },
+                        ),
+                        const Spacer(),
+                        Text(
+                          optional,
+                          style: textStyles.bold.copyWith(
+                            color: colors.primaryColor.withOpacity(0.5),
+                            fontSize: sizes.fontRatio * 8,
+                          ),
+                        ),
+                        horizontalSpacer(8),
+                      ],
+                    ),
+                    verticalSpacer(8),
+                    Container(
+                      height: verticalValue(1),
+                      color: colors.greyLite5,
+                    ),
+                    verticalSpacer(16),
+                    Text(
+                      passwordDetail,
+                      style: textStyles.bold.copyWith(
+                        color: colors.primaryColor,
+                        fontSize: sizes.fontRatio * 16,
+                      ),
+                    ),
+                    verticalSpacer(8),
+                    Text(
+                      password,
+                      style: textStyles.bold.copyWith(
+                        color: colors.primaryColor,
+                        fontSize: sizes.fontRatio * 16,
+                      ),
+                    ),
+                    verticalSpacer(8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '*******',
+                          style: textStyles.semiBold.copyWith(
+                            fontSize: sizes.fontRatio * 16,
+                            color: colors.lightGreyShade,
+                          ),
+                        ),
+                        SvgPicture.asset(
+                          assets.icEyeCrossed,
+                          color: colors.primaryColor,
+                        ),
+                      ],
+                    ),
+                    verticalSpacer(8),
+                    Container(
+                      height: verticalValue(1),
+                      color: colors.greyLite5,
+                    ),
+                    verticalSpacer(16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: colors.primaryColor,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              14,
+                            ),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: verticalValue(16),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const ChangePassword(),
+                            ),
+                          );
+                        },
+                        child: Center(
+                          child: Text(
+                            changePassword,
+                            style: textStyles.bold.copyWith(
+                              fontWeight: FontWeight.w500,
+                              fontSize: sizes.fontRatio * 14,
+                              color: colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    verticalSpacer(16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: colors.redAccent,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              14,
+                            ),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: verticalValue(16),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Center(
+                          child: Text(
+                            deleteAccount,
+                            style: textStyles.bold.copyWith(
+                              fontWeight: FontWeight.w500,
+                              fontSize: sizes.fontRatio * 14,
+                              color: colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

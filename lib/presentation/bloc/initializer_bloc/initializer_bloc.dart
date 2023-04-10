@@ -95,6 +95,12 @@ class InitializerBloc extends Bloc<InitializerEvent, InitializerState> {
           emit(
             state.copyWith(
               status: InitializerStatus.dashboardPage,
+              email: initializerUseCase.getString(
+                key: StorageKeys.email,
+              ),
+              password: initializerUseCase.getString(
+                key: StorageKeys.password,
+              ),
             ),
           );
         },

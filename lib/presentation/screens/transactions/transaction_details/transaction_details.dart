@@ -142,7 +142,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                                     textAlign: TextAlign.center,
                                     style: textStyles.semiBold.copyWith(
                                       fontSize: sizes.fontRatio * 14,
-                                      color: colors.textGrey,
+                                      color: colors.lightGreyShade,
                                     ),
                                   ),
                                 ],
@@ -230,7 +230,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     Text(
                       "${widget.transactionDetailModel.student!.firstName} ${widget.transactionDetailModel.student!.lastName != '-' ? widget.transactionDetailModel.student!.lastName : ''}",
                       style: textStyles.bold.copyWith(
-                        color: colors.textGrey,
+                        color: colors.lightGreyShade,
                         fontSize: sizes.fontRatio * 16,
                       ),
                     ),
@@ -241,15 +241,16 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       child: Container(
                         // width: horizontalValue(1),
                         height: verticalValue(1),
-                        color: colors.textGrey,
+                        color: colors.greyLite5,
                       ),
                     ),
                     widget.transactionDetailModel.student!.grade != '-'
                         ? Text(
                             studentClass,
                             style: textStyles.bold.copyWith(
-                                fontSize: sizes.fontRatio * 12,
-                                color: colors.primaryColor),
+                              fontSize: sizes.fontRatio * 12,
+                              color: colors.primaryColor,
+                            ),
                           )
                         : const SizedBox.shrink(),
                     widget.transactionDetailModel.student!.grade != '-'
@@ -261,7 +262,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                         ? Text(
                             "Grade ${widget.transactionDetailModel.student!.grade}",
                             style: textStyles.bold.copyWith(
-                              color: colors.textGrey,
+                              color: colors.lightGreyShade,
                               fontSize: sizes.fontRatio * 16,
                             ),
                           )
@@ -273,7 +274,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                             ),
                             child: Container(
                               height: verticalValue(1),
-                              color: colors.textGrey,
+                              color: colors.greyLite5,
                             ),
                           )
                         : const SizedBox.shrink(),
@@ -291,7 +292,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     Text(
                       widget.transactionDetailModel.studentId.toString(),
                       style: textStyles.bold.copyWith(
-                        color: colors.textGrey,
+                        color: colors.lightGreyShade,
                         fontSize: sizes.fontRatio * 16,
                       ),
                     ),
@@ -301,7 +302,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       ),
                       child: Container(
                         height: verticalValue(1),
-                        color: colors.textGrey,
+                        color: colors.greyLite5,
                       ),
                     ),
 
@@ -318,7 +319,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                     Text(
                       widget.transactionDetailModel.refNo.toString(),
                       style: textStyles.bold.copyWith(
-                        color: colors.textGrey,
+                        color: colors.lightGreyShade,
                         fontSize: sizes.fontRatio * 16,
                       ),
                     ),
@@ -328,7 +329,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                       ),
                       child: Container(
                         height: verticalValue(1),
-                        color: colors.textGrey,
+                        color: colors.greyLite5,
                       ),
                     ),
 
@@ -358,9 +359,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                         vertical: verticalValue(16),
                       ),
                       child: Container(
-                        width: horizontalValue(1),
                         height: verticalValue(1),
-                        color: colors.white,
                       ),
                     ),
 
@@ -381,11 +380,7 @@ class _TransactionDetailsPageState extends State<TransactionDetailsPage> {
                           ),
                         ),
                         onPressed: () {
-                          setState(
-                            () {
-                              Navigator.of(context).pop();
-                            },
-                          );
+                          Navigator.of(context).pop();
                         },
                         child: Text(
                           done,

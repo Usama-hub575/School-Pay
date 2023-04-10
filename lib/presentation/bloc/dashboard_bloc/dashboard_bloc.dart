@@ -10,7 +10,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   }) : super(
           DashboardState(
             transactionListResponseModel: TransactionListResponseModel.empty(),
-            registerResponseModel: RegisterResponseModel.empty(),
           ),
         ) {
     on<FetchStudents>(_fetchStudents);
@@ -50,8 +49,18 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   _getName(GetName event, emit) {
     emit(
       state.copyWith(
-        firstName: dashboardUseCase.getFirstName(),
-        lastName: dashboardUseCase.getLastName(),
+        firstName: dashboardUseCase.getString(
+          key: StorageKeys.firstName,
+        ),
+        lastName: dashboardUseCase.getString(
+          key: StorageKeys.lastName,
+        ),
+        // email: dashboardUseCase.getString(
+        //   key: StorageKeys.email,
+        // ),
+        // phoneNumber: dashboardUseCase.getString(
+        //   key: StorageKeys.phone,
+        // ),
       ),
     );
   }

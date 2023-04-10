@@ -137,6 +137,12 @@ class _InitializerPageState extends State<InitializerPage> {
               );
               break;
             case InitializerStatus.dashboardPage:
+              context.read<SignInBloc>().add(
+                    OnPressed(
+                      email: state.email,
+                      password: state.password,
+                    ),
+                  );
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 AppRoutes.navigateToDashboard,
