@@ -363,7 +363,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             ),
                           ),
                           labelText:
-                              isEmiratesSelected ? emiratesIDD : passportNumber,
+                              isEmiratesSelected ? emiratesID : passportNumber,
                           labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
                             fontSize: sizes.fontRatio * 12,
                             color: PayNestTheme.primaryColor,

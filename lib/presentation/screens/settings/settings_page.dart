@@ -142,8 +142,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   onTap: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ViewProfile(),
+                                        builder: (context) => const MyProfile(),
                                       ),
                                     );
                                   },

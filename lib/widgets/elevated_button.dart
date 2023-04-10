@@ -32,21 +32,22 @@ class ElevatedButtons extends StatelessWidget {
       },
       child: Padding(
         padding: EdgeInsets.symmetric(
-          vertical: verticalValue(6),
+          vertical: verticalValue(16),
         ),
         child: isLoading
             ? Center(
                 child: CircularProgressIndicator(
-                  backgroundColor: AppColors().white,
-                  color: AppColors().blueAccent,
+                  backgroundColor: colors.white,
+                  color: colors.blueAccent,
                 ),
               )
             : Text(
                 text,
-                style: TextStyles().semiBold.copyWith(
-                      color: textColor,
-                      fontSize: sizes.fontRatio * 14,
-                    ),
+                style: textStyles.bold.copyWith(
+                  color: textColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: sizes.fontRatio * 14,
+                ),
               ),
       ),
     );

@@ -65,4 +65,15 @@ Future initializeBlocs() async {
       resetPasswordUseCase: it<ResetPasswordUseCase>(),
     ),
   );
+
+  it.registerLazySingleton(
+    () => ChangePasswordBloc(
+      changePasswordUseCase: it<ChangePasswordUseCase>(),
+    ),
+  );
+  it.registerLazySingleton(
+    () => EditProfileBloc(
+      editProfileUseCase: it<EditProfileUseCase>(),
+    ),
+  );
 }

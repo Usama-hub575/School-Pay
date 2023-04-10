@@ -8,8 +8,6 @@ import 'package:lottie/lottie.dart';
 import 'package:paynest_flutter_app/controller/user_controller.dart';
 import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
-import 'package:paynest_flutter_app/views/host/changepassword/change_password.dart';
-import 'package:paynest_flutter_app/views/host/editprofile/edit_profile.dart';
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../constants/constants.dart';
@@ -102,12 +100,12 @@ class _ViewProfileState extends State<ViewProfile> {
                                   ),
                                   child: IconButton(
                                     onPressed: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const EditProfilePage(),
-                                        ),
-                                      );
+                                      // Navigator.of(context).push(
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) =>
+                                      //         const EditProfilePage(),
+                                      //   ),
+                                      // );
                                     },
                                     padding: EdgeInsets.zero,
                                     icon: Lottie.asset(
@@ -324,7 +322,7 @@ class _ViewProfileState extends State<ViewProfile> {
                     ),
                     verticalSpacer(12),
                     Text(
-                      emiratesIDD,
+                      emiratesID,
                       style: PayNestTheme.h2_14textGrey.copyWith(
                         color: PayNestTheme.primaryColor,
                         fontFamily: 'montserratBold',
@@ -567,11 +565,11 @@ class _ViewProfileState extends State<ViewProfile> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const ChangePassword(),
-                            ),
-                          );
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const ChangePassword(),
+                          //   ),
+                          // );
                         },
                         child: Center(
                           child: Text(

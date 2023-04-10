@@ -1,4 +1,6 @@
+export 'change_password_repo/export.dart';
 export 'dashboard_repo/export.dart';
+export 'edit_profile_repo/export.dart';
 export 'firebase_repo/export.dart';
 export 'forgot_password_repo/export.dart';
 export 'initializer_repo/export.dart';

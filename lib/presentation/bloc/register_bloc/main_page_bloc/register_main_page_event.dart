@@ -11,11 +11,9 @@ class RegisterMainPageLoading extends RegisterMainPageEvent {}
 
 class RegisterToggle extends RegisterMainPageEvent {
   final String toggleStatus;
-  final bool obscure;
 
   RegisterToggle({
     required this.toggleStatus,
-    required this.obscure,
   });
 }
 

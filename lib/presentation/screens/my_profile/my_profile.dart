@@ -1,16 +1,14 @@
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/export.dart';
-import 'package:paynest_flutter_app/views/host/changepassword/change_password.dart';
-import 'package:paynest_flutter_app/views/host/editprofile/edit_profile.dart';
 
-class ViewProfile extends StatefulWidget {
-  const ViewProfile({Key? key}) : super(key: key);
+class MyProfile extends StatefulWidget {
+  const MyProfile({Key? key}) : super(key: key);
 
   @override
-  State<ViewProfile> createState() => _ViewProfileState();
+  State<MyProfile> createState() => _MyProfileState();
 }
 
-class _ViewProfileState extends State<ViewProfile> {
+class _MyProfileState extends State<MyProfile> {
   TextEditingController passwordController = TextEditingController();
   late DateFormat dateFormat;
 
@@ -184,22 +182,22 @@ class _ViewProfileState extends State<ViewProfile> {
                                     ),
                                   ],
                                 ),
-                                child: state.authenticationResponseModel.parent!
+                                child: state.authenticationResponseModel.parent
                                                 .profileImage ==
                                             null &&
-                                        state.authenticationResponseModel
-                                                .parent!.profileImage !=
+                                        state.authenticationResponseModel.parent
+                                                .profileImage !=
                                             ""
                                     ? CircleAvatar(
                                         backgroundImage: NetworkImage(
                                           state.authenticationResponseModel
-                                                  .parent!.profileImage ??
+                                                  .parent.profileImage ??
                                               '',
                                         ),
                                       )
                                     : Container(
-                                        height: sizes.heightRatio * 80,
-                                        width: sizes.widthRatio * 80,
+                                        height: verticalValue(80),
+                                        width: verticalValue(80),
                                         decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
                                         ),
@@ -274,7 +272,7 @@ class _ViewProfileState extends State<ViewProfile> {
                     BlocBuilder<SignInBloc, SignInState>(
                       builder: (context, state) {
                         return Text(
-                          state.authenticationResponseModel.parent?.email ?? '',
+                          state.authenticationResponseModel.parent.email ?? '',
                           style: textStyles.semiBold.copyWith(
                             fontSize: sizes.fontRatio * 16,
                             color: colors.lightGreyShade,
@@ -299,7 +297,7 @@ class _ViewProfileState extends State<ViewProfile> {
                     BlocBuilder<SignInBloc, SignInState>(
                         builder: (context, state) {
                       return Text(
-                        '${state.authenticationResponseModel.parent!.dialCode} ${state.authenticationResponseModel.parent!.phone}',
+                        '${state.authenticationResponseModel.parent.dialCode} ${state.authenticationResponseModel.parent.phone}',
                         style: textStyles.semiBold.copyWith(
                           fontSize: sizes.fontRatio * 16,
                           color: colors.lightGreyShade,
@@ -313,7 +311,7 @@ class _ViewProfileState extends State<ViewProfile> {
                     ),
                     verticalSpacer(12),
                     Text(
-                      emiratesIDD,
+                      emiratesID,
                       style: textStyles.bold.copyWith(
                         color: colors.primaryColor,
                         fontSize: sizes.fontRatio * 12,
@@ -326,15 +324,15 @@ class _ViewProfileState extends State<ViewProfile> {
                           builder: (context, state) {
                             return Text(
                               (state.authenticationResponseModel.parent
-                                              ?.emiratesId?.length ??
+                                              .emiratesId?.length ??
                                           0) >=
                                       14
                                   ? getDashedEmiratesId(
-                                      state.authenticationResponseModel.parent!
+                                      state.authenticationResponseModel.parent
                                               .emiratesId ??
                                           '',
                                     )
-                                  : state.authenticationResponseModel.parent!
+                                  : state.authenticationResponseModel.parent
                                           .emiratesId ??
                                       '',
                               style: textStyles.semiBold.copyWith(
@@ -374,16 +372,16 @@ class _ViewProfileState extends State<ViewProfile> {
                         BlocBuilder<SignInBloc, SignInState>(
                           builder: (context, state) {
                             return Text(
-                              state.authenticationResponseModel.parent!
+                              state.authenticationResponseModel.parent
                                               .expiryDate ==
                                           null ||
-                                      state.authenticationResponseModel.parent!
+                                      state.authenticationResponseModel.parent
                                           .expiryDate!.isEmpty
                                   ? '-'
                                   : dateFormat.format(
                                       DateTime.parse(
-                                        state.authenticationResponseModel
-                                            .parent!.expiryDate
+                                        state.authenticationResponseModel.parent
+                                            .expiryDate
                                             .toString()
                                             .substring(0, 10),
                                       ),
@@ -426,7 +424,7 @@ class _ViewProfileState extends State<ViewProfile> {
                           builder: (context, state) {
                             return Text(
                               state.authenticationResponseModel.parent
-                                      ?.passport ??
+                                      .passport ??
                                   '',
                               style: textStyles.semiBold.copyWith(
                                 fontSize: sizes.fontRatio * 16,
@@ -543,19 +541,11 @@ class _ViewProfileState extends State<ViewProfile> {
                     verticalSpacer(16),
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: colors.primaryColor,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              14,
-                            ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            vertical: verticalValue(16),
-                          ),
-                        ),
+                      child: ElevatedButtons(
+                        textColor: colors.white,
+                        text: changePassword,
+                        isLoading: false,
+                        color: colors.primaryColor,
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -563,45 +553,17 @@ class _ViewProfileState extends State<ViewProfile> {
                             ),
                           );
                         },
-                        child: Center(
-                          child: Text(
-                            changePassword,
-                            style: textStyles.bold.copyWith(
-                              fontWeight: FontWeight.w500,
-                              fontSize: sizes.fontRatio * 14,
-                              color: colors.white,
-                            ),
-                          ),
-                        ),
                       ),
                     ),
                     verticalSpacer(16),
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: colors.redAccent,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              14,
-                            ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            vertical: verticalValue(16),
-                          ),
-                        ),
+                      child: ElevatedButtons(
+                        color: colors.redShade2,
+                        isLoading: false,
+                        text: deleteAccount,
+                        textColor: colors.white,
                         onPressed: () {},
-                        child: Center(
-                          child: Text(
-                            deleteAccount,
-                            style: textStyles.bold.copyWith(
-                              fontWeight: FontWeight.w500,
-                              fontSize: sizes.fontRatio * 14,
-                              color: colors.white,
-                            ),
-                          ),
-                        ),
                       ),
                     ),
                   ],

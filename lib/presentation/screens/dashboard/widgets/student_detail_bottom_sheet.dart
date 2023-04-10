@@ -107,7 +107,7 @@ class _StudentWidgetState extends State<StudentWidget> {
                                 color: colors.textGrey.withOpacity(0.5),
                               ),
                             ),
-                            labelText: enterPaynestStudentCode,
+                            labelText: enterPayNestStudentCode,
                             labelStyle: textStyles.bold.copyWith(
                               fontSize: sizes.fontRatio * 12,
                               color: colors.primaryColor,

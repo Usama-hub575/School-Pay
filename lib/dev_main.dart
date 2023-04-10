@@ -119,6 +119,12 @@ void main() async {
             BlocProvider.value(
               value: it<ResetPasswordBloc>(),
             ),
+            BlocProvider.value(
+              value: it<ChangePasswordBloc>(),
+            ),
+            BlocProvider.value(
+              value: it<EditProfileBloc>(),
+            ),
           ],
           child: const MyApp(),
         ),

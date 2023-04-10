@@ -65,4 +65,16 @@ Future initializeRepoDependencies() async {
       networkHelper: it(),
     ),
   );
+  it.registerLazySingleton<ChangePasswordRepo>(
+    () => ChangePasswordRepoImpl(
+      storage: storage,
+      networkHelper: it(),
+    ),
+  );
+  it.registerLazySingleton<EditProfileRepo>(
+    () => EditProfileRepoImpl(
+      storage: storage,
+      networkHelper: it(),
+    ),
+  );
 }

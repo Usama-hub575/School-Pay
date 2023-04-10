@@ -1,3 +1,5 @@
+export 'edit_profile_use_case/export.dart';
+export 'change_password_use_case/export.dart';
 export 'dashboard_use_case/export.dart';
 export 'firebase_use_case/export.dart';
 export 'forgot_password_use_case/export.dart';

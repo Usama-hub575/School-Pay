@@ -100,8 +100,10 @@ class _HostPageState extends State<HostPage> {
                   paynow,
                   textAlign: TextAlign.center,
                   style: textStyles.bold.copyWith(
-                    color: colors.white,
                     fontSize: sizes.fontRatio * 12,
+                    color: state.payNowButton == true
+                        ? colors.paidGreen
+                        : colors.white,
                   ),
                 ), //icon inside button
               ),
@@ -118,7 +120,7 @@ class _HostPageState extends State<HostPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset(
-                    state.bottomTabIsActive
+                    state.bottomTabIsActive && state.payNowButton == false
                         ? selectedIcons[index]
                         : unSelectedIcons[index],
                   ),
@@ -149,10 +151,10 @@ class _HostPageState extends State<HostPage> {
             rightCornerRadius: 16,
             onTap: (index) {
               state.payNow = 0;
+              state.payNowButton = false;
               context.read<HostBloc>().add(
                     ChangePageIndex(pageIndex: index),
                   );
-              // selectedNavItem(index);
             },
             shadow: const BoxShadow(
               offset: Offset(0, 1),

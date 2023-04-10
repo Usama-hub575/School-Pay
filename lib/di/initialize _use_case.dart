@@ -11,6 +11,8 @@ Future initializeUseCaseDependencies() async {
   await initializeDashboardUseCase();
   await initializeForgotPasswordUseCase();
   await initializeResetPasswordUseCase();
+  await initializeChangePasswordUseCase();
+  await initializeEditProfileUseCase();
 }
 
 Future initializeLocaleUseCase() async {
@@ -88,6 +90,22 @@ Future initializeResetPasswordUseCase() async {
   it.registerLazySingleton(
     () => ResetPasswordUseCase(
       resetPasswordRepo: it<ResetPasswordRepo>(),
+    ),
+  );
+}
+
+Future initializeChangePasswordUseCase() async {
+  it.registerLazySingleton(
+    () => ChangePasswordUseCase(
+      changePasswordRepo: it<ChangePasswordRepo>(),
+    ),
+  );
+}
+
+Future initializeEditProfileUseCase() async {
+  it.registerLazySingleton(
+    () => EditProfileUseCase(
+      editProfileRepo: it<EditProfileRepo>(),
     ),
   );
 }

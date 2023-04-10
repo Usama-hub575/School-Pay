@@ -78,6 +78,10 @@ class SignInRepoImpl implements SignInRepo {
             key: StorageKeys.password,
             value: savedPassword ?? password,
           );
+          storage.saveInt(
+            key: StorageKeys.userId,
+            value: authenticationResponseModel.parent.id,
+          );
           storage.saveString(
             key: StorageKeys.fcmToken,
             value: savedFcm ?? fcm,
