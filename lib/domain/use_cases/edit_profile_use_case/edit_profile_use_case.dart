@@ -24,6 +24,14 @@ class EditProfileUseCase {
     );
     return response.fold(
       (success) {
+        editProfileRepo.saveString(
+          key: StorageKeys.firstName,
+          value: firstName,
+        );
+        editProfileRepo.saveString(
+          key: StorageKeys.lastName,
+          value: lastName,
+        );
         return Left(
           success,
         );

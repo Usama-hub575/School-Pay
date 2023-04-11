@@ -12,6 +12,11 @@ class EditProfileRepoImpl implements EditProfileRepo {
   });
 
   @override
+  Future? saveString({required String key, String? value}) {
+    return storage.saveString(key: key, value: value);
+  }
+
+  @override
   Future<Either<UpdateProfileResponseModel, Failure>> updateProfile({
     required String firstName,
     required String lastName,
