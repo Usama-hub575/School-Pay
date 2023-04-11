@@ -144,7 +144,9 @@ class _BlocUIState extends State<BlocUI> {
                   textColor: colors.white,
                   onPressed: () {
                     if (loginFormKey.currentState!.validate()) {
-                      FocusScope.of(context).requestFocus(FocusNode());
+                      FocusScope.of(context).requestFocus(
+                        FocusNode(),
+                      );
                       context.read<SignInBloc>().add(
                             Loading(),
                           );

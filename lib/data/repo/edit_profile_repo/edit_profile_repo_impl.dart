@@ -22,19 +22,21 @@ class EditProfileRepoImpl implements EditProfileRepo {
     int? parentID = storage.getInt(
       key: StorageKeys.userId,
     );
-    final response =
-        await networkHelper.put(endPoints.getUpdateProfileEndPoint(), headers: {
-      "Content-Type": "application/json",
-      "Authorization":
-          "Bearer ${storage.getString(key: StorageKeys.accessToken) ?? ''}",
-    }, body: {
-      "id": parentID,
-      "firstName": firstName,
-      "lastName": lastName,
-      "email": email,
-      "expiryDate": expiryDate,
-      "emiratesId": emiratesId
-    });
+    final response = await networkHelper.put(
+        endPoints.getUpdateProfileEndPoint(),
+        //         headers: {
+        //   "Content-Type": "application/json",
+        //   "Authorization":
+        //       "Bearer ${storage.getString(key: StorageKeys.accessToken) ?? ''}",
+        // },
+        body: {
+          "id": parentID,
+          "firstName": firstName,
+          "lastName": lastName,
+          "email": email,
+          "expiryDate": expiryDate,
+          "emiratesId": emiratesId
+        });
     return response.fold(
       (success) {
         return Left(

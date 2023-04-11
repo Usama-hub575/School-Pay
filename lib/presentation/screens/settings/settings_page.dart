@@ -323,15 +323,16 @@ class _SettingsPageState extends State<SettingsPage> {
                       width: double.infinity,
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                            backgroundColor: colors.redShade3,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                12,
-                              ),
+                          backgroundColor: colors.redShade2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              12,
                             ),
-                            padding: EdgeInsets.symmetric(
-                              vertical: verticalValue(16),
-                            )),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: verticalValue(16),
+                          ),
+                        ),
                         onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(

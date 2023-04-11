@@ -17,8 +17,6 @@ class ElevatedButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return BlocBuilder<SignInBloc, SignInState>(
-    //   builder: (context, state) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
@@ -32,7 +30,8 @@ class ElevatedButtons extends StatelessWidget {
       },
       child: Padding(
         padding: EdgeInsets.symmetric(
-          vertical: verticalValue(16),
+          vertical: verticalValue(7),
+          horizontal: horizontalValue(10),
         ),
         child: isLoading
             ? Center(

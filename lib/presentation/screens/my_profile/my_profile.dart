@@ -541,6 +541,7 @@ class _MyProfileState extends State<MyProfile> {
                     verticalSpacer(16),
                     SizedBox(
                       width: double.infinity,
+                      height: sizes.heightRatio * 46,
                       child: ElevatedButtons(
                         textColor: colors.white,
                         text: changePassword,
@@ -558,6 +559,7 @@ class _MyProfileState extends State<MyProfile> {
                     verticalSpacer(16),
                     SizedBox(
                       width: double.infinity,
+                      height: sizes.heightRatio * 46,
                       child: ElevatedButtons(
                         color: colors.redShade2,
                         isLoading: false,

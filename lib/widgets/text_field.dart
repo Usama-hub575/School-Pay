@@ -7,6 +7,7 @@ class CommonTextField extends StatefulWidget {
     required this.onValidate,
     required this.controller,
     required this.labelText,
+    this.enabled,
     this.validatorText,
     required this.obscureText,
     this.inputFormatters,
@@ -19,6 +20,7 @@ class CommonTextField extends StatefulWidget {
   final String labelText;
   final String? validatorText;
   final bool obscureText;
+  final bool? enabled;
   final Widget? icon;
   final List<TextInputFormatter>? inputFormatters;
 
@@ -30,11 +32,13 @@ class _CommonTextFieldState extends State<CommonTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: widget.enabled,
       readOnly: widget.readOnly,
       textInputAction: TextInputAction.done,
       inputFormatters: widget.inputFormatters,
-      style: TextStyle(
+      style: textStyles.semiBold.copyWith(
         fontSize: sizes.fontRatio * 16,
+        color: colors.lightGreyShade,
       ),
       controller: widget.controller,
       obscureText: widget.obscureText,
@@ -54,7 +58,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
         ),
         labelText: widget.labelText,
         labelStyle: textStyles.bold.copyWith(
-          fontSize: sizes.fontRatio * 12,
+          fontSize: sizes.fontRatio * 16,
           color: colors.primaryColor,
         ),
         enabledBorder: UnderlineInputBorder(

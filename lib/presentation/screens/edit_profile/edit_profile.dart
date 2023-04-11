@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-// import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:paynest_flutter_app/export.dart';
 
@@ -11,16 +10,12 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  // final UserController userController = Get.find<UserController>();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController expiryDateController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController emiratesIdController = TextEditingController();
   static GlobalKey<FormState> editProfileFormKey = GlobalKey<FormState>();
-
-  // UpdateProfileController updateProfileController =
-  //     Get.put(UpdateProfileController());
 
   DateTime tempPickedDate = DateTime.now();
   late DateFormat dateFormat;
@@ -39,12 +34,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
           .email,
     );
     firstNameController = TextEditingController(
-        text: context
-            .read<SignInBloc>()
-            .state
-            .authenticationResponseModel
-            .parent
-            .firstName);
+      text: context
+          .read<SignInBloc>()
+          .state
+          .authenticationResponseModel
+          .parent
+          .firstName,
+    );
     lastNameController = TextEditingController(
       text: context
           .read<SignInBloc>()
@@ -198,15 +194,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 BlocBuilder<SignInBloc, SignInState>(
-                                    builder: (context, state) {
-                                  return Text(
-                                    "${state.authenticationResponseModel.parent.firstName} ${state.authenticationResponseModel.parent.lastName}",
-                                    style: textStyles.bold.copyWith(
-                                      fontSize: sizes.fontRatio * 18,
-                                      color: colors.black,
-                                    ),
-                                  );
-                                }),
+                                  builder: (context, state) {
+                                    return Text(
+                                      "${state.authenticationResponseModel.parent.firstName} ${state.authenticationResponseModel.parent.lastName}",
+                                      style: textStyles.bold.copyWith(
+                                        fontSize: sizes.fontRatio * 18,
+                                        color: colors.black,
+                                      ),
+                                    );
+                                  },
+                                ),
                                 verticalSpacer(16),
                               ],
                             ),
@@ -344,18 +341,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       // ),
                       verticalSpacer(8),
                       BlocBuilder<EditProfileBloc, EditProfileState>(
-                          builder: (context, state) {
-                        return CommonTextField(
-                          readOnly: state.status == EditProfileStatus.loading
-                              ? true
-                              : false,
-                          onValidate: (value) {},
-                          validatorText: requiredText,
-                          controller: lastNameController,
-                          labelText: lastName,
-                          obscureText: false,
-                        );
-                      }),
+                        builder: (context, state) {
+                          return CommonTextField(
+                            readOnly: state.status == EditProfileStatus.loading
+                                ? true
+                                : false,
+                            onValidate: (value) {},
+                            validatorText: requiredText,
+                            controller: lastNameController,
+                            labelText: lastName,
+                            obscureText: false,
+                          );
+                        },
+                      ),
                       // TextFormField(
                       //   controller: lastNameController,
                       //   style: PayNestTheme.title_3_16blackbold.copyWith(
@@ -499,6 +497,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       children: [
                                         InkWellWidget(
                                           onTap: () {
+                                            expiryDateController.text =
+                                                dateFormat
+                                                    .format(tempPickedDate)
+                                                    .toString();
                                             Navigator.pop(context);
                                           },
                                           child: Container(
@@ -525,15 +527,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       ],
                                     ),
                                     content: SizedBox(
-                                      width: .9,
-                                      height: .5,
+                                      width: horizontalValue(300),
+                                      height: verticalValue(200),
                                       child: CupertinoDatePicker(
                                         mode: CupertinoDatePickerMode.date,
                                         onDateTimeChanged: (DateTime dateTime) {
                                           tempPickedDate = dateTime;
-                                          expiryDateController.text = dateFormat
-                                              .format(dateTime)
-                                              .toString();
                                         },
                                         initialDateTime: DateTime.parse(
                                           state.authenticationResponseModel
@@ -552,7 +551,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               );
                             },
                             child: CommonTextField(
-                              readOnly: false,
+                              readOnly: true,
+                              enabled: false,
                               onValidate: (value) {},
                               controller: expiryDateController,
                               labelText: expiry,

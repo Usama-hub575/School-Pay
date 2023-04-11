@@ -53,7 +53,7 @@ class SignInRepoImpl implements SignInRepo {
             AuthenticationModel.fromJson(
           jsonDecode(success),
         );
-        if (authenticationResponseModel.status == true) {
+        if (authenticationResponseModel.status) {
           storage.saveString(
             key: StorageKeys.firstName,
             value: authenticationResponseModel.parent.firstName,
