@@ -139,162 +139,159 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
               ),
             ),
           ),
-          BlocConsumer<DashboardBloc, DashboardState>(
-              builder: (context, state) {
-            return state.showShimmer
-                ? Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 3,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                horizontal: horizontalValue(32),
-                              ),
-                              child: Row(
-                                children: [
-                                  FadeShimmer(
-                                    width: sizes.widthRatio * 120,
-                                    height: sizes.heightRatio * 20,
-                                    baseColor: const Color(0xFFEBEBF4),
-                                    highlightColor: const Color(0xFFF4F4F4),
-                                    radius: 10,
-                                  ),
-                                  horizontalSpacer(8),
-                                  const Expanded(
-                                    child: FadeShimmer(
-                                      height: 1,
-                                      width: double.infinity,
-                                      baseColor: Color(0xFFEBEBF4),
-                                      highlightColor: Color(0xFFF4F4F4),
-                                      // radius: 10,
+          BlocBuilder<DashboardBloc, DashboardState>(
+            builder: (context, state) {
+              return state.showShimmer
+                  ? Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: horizontalValue(32),
+                                ),
+                                child: Row(
+                                  children: [
+                                    FadeShimmer(
+                                      width: sizes.widthRatio * 120,
+                                      height: sizes.heightRatio * 20,
+                                      baseColor: const Color(0xFFEBEBF4),
+                                      highlightColor: const Color(0xFFF4F4F4),
+                                      radius: 10,
                                     ),
-                                  ),
-                                ],
+                                    horizontalSpacer(8),
+                                    const Expanded(
+                                      child: FadeShimmer(
+                                        height: 1,
+                                        width: double.infinity,
+                                        baseColor: Color(0xFFEBEBF4),
+                                        highlightColor: Color(0xFFF4F4F4),
+                                        // radius: 10,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            verticalSpacer(12),
-                            const TransactionShimmerCard(),
-                            verticalSpacer(12),
-                          ],
-                        );
-                      },
-                    ),
-                  )
-                : state.transactionListResponseModel.transactions!.rows!
-                        .isNotEmpty
-                    ? Expanded(
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: state.list.length,
-                          itemBuilder: (context, index) {
-                            String key = state.list.keys.elementAt(index);
-                            return Column(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.symmetric(
-                                    horizontal: horizontalValue(20),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        dateFormat.format(
-                                          DateTime.parse(
-                                            key,
+                              verticalSpacer(12),
+                              const TransactionShimmerCard(),
+                              verticalSpacer(12),
+                            ],
+                          );
+                        },
+                      ),
+                    )
+                  : state.transactionListResponseModel.transactions!.rows!
+                          .isNotEmpty
+                      ? Expanded(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: state.list.length,
+                            itemBuilder: (context, index) {
+                              String key = state.list.keys.elementAt(index);
+                              return Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.symmetric(
+                                      horizontal: horizontalValue(20),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          dateFormat.format(
+                                            DateTime.parse(
+                                              key,
+                                            ),
+                                          ),
+                                          style: textStyles.bold.copyWith(
+                                            fontSize: sizes.fontRatio * 16,
+                                            color: colors.black,
                                           ),
                                         ),
-                                        style: textStyles.bold.copyWith(
-                                          fontSize: sizes.fontRatio * 16,
-                                          color: colors.black,
+                                        horizontalSpacer(8),
+                                        Expanded(
+                                          child: Container(
+                                            height: 1,
+                                            color: colors.textGrey
+                                                .withOpacity(0.5),
+                                          ),
                                         ),
-                                      ),
-                                      horizontalSpacer(8),
-                                      Expanded(
-                                        child: Container(
-                                          height: 1,
-                                          color:
-                                              colors.textGrey.withOpacity(0.5),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                verticalSpacer(12),
-                                SingleTransaction(
-                                  transactionList: state.list[key],
-                                  onTap: (transactionRow) {
-                                    onTap(
-                                      row: transactionRow,
-                                    );
-                                  },
-                                ),
-                                verticalSpacer(12),
-                              ],
-                            );
-                          },
-                        ),
-                      )
-                    : Expanded(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: horizontalValue(16),
-                          ),
-                          child: Column(
-                            children: [
-                              verticalSpacer(100),
-                              Container(
-                                width: sizes.widthRatio * 150,
-                                height: sizes.heightRatio * 150,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      assets.noData,
+                                      ],
                                     ),
-                                    fit: BoxFit.cover,
                                   ),
-                                ),
-                              ),
-                              verticalSpacer(20),
-                              Container(
-                                width: double.infinity,
-                                alignment: Alignment.center,
-                                child: Text(
-                                  noDataText,
-                                  style: textStyles.bold.copyWith(
-                                    fontSize: sizes.fontRatio * 22,
-                                    color: colors.primaryColor,
+                                  verticalSpacer(12),
+                                  SingleTransaction(
+                                    transactionList: state.list[key],
+                                    onTap: (transactionRow) {
+                                      onTap(
+                                        row: transactionRow,
+                                      );
+                                    },
                                   ),
-                                ),
-                              ),
-                              verticalSpacer(10),
-                              Container(
-                                width: double.infinity,
-                                alignment: Alignment.center,
-                                child: Text(
-                                  sorryWeCant,
-                                  textAlign: TextAlign.center,
-                                  style: textStyles.bold.copyWith(
-                                    fontSize: sizes.fontRatio * 16,
-                                    color: colors.lightGreyShade,
-                                  ),
-                                ),
-                              ),
-                              const Spacer(),
-                              verticalSpacer(16),
-                            ],
+                                  verticalSpacer(12),
+                                ],
+                              );
+                            },
                           ),
-                        ),
-                      );
-          }, listener: (context, state) {
-            switch (state.status) {
-
-            }
-          })
+                        )
+                      : Expanded(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: horizontalValue(16),
+                            ),
+                            child: Column(
+                              children: [
+                                verticalSpacer(100),
+                                Container(
+                                  width: sizes.widthRatio * 150,
+                                  height: sizes.heightRatio * 150,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        assets.noData,
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                verticalSpacer(20),
+                                Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    noDataText,
+                                    style: textStyles.bold.copyWith(
+                                      fontSize: sizes.fontRatio * 22,
+                                      color: colors.primaryColor,
+                                    ),
+                                  ),
+                                ),
+                                verticalSpacer(10),
+                                Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    sorryWeCant,
+                                    textAlign: TextAlign.center,
+                                    style: textStyles.bold.copyWith(
+                                      fontSize: sizes.fontRatio * 16,
+                                      color: colors.lightGreyShade,
+                                    ),
+                                  ),
+                                ),
+                                const Spacer(),
+                                verticalSpacer(16),
+                              ],
+                            ),
+                          ),
+                        );
+            },
+          ),
         ],
       ),
     );

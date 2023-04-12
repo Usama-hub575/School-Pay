@@ -33,6 +33,7 @@ class AppColors {
   Color green3 = const Color.fromRGBO(44, 195, 135, 1);
   Color green4 = const Color.fromRGBO(0, 195, 135, 1);
   Color green2 = const Color.fromRGBO(76, 175, 80, 1.0);
+  Color paidGreen = const Color.fromRGBO(187, 216, 76, 1.0);
   Color transparent = Colors.transparent.withOpacity(0.0);
   Color darkBlue = const Color.fromRGBO(34, 43, 69, 1);
   Color darkBlue1 = const Color.fromRGBO(23, 115, 150, 1);

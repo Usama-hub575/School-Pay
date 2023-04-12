@@ -63,19 +63,17 @@ class RegisterMainPageBloc
   }
 
   _toggle(RegisterToggle event, emit) {
-    if (event.toggleStatus == "password") {
-      emit(
-        state.copyWith(
-          obscurePassword: event.obscure,
-        ),
-      );
-    } else {
-      emit(
-        state.copyWith(
-          obscureConfirmPassword: event.obscure,
-        ),
-      );
-    }
+    event.toggleStatus == "password"
+        ? emit(
+            state.copyWith(
+              obscurePassword: !state.obscurePassword,
+            ),
+          )
+        : emit(
+            state.copyWith(
+              obscureConfirmPassword: !state.obscureConfirmPassword,
+            ),
+          );
   }
 
   _loading(RegisterMainPageLoading event, emit) {

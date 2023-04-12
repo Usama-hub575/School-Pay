@@ -169,7 +169,8 @@ class NetworkHelperImpl extends NetworkHelper {
   }) {
     try {
       headers ??= <String, String>{};
-      headers["Authorization"] = 'Bearer${storage.getString(key: 'fcmToken')}';
+      headers["Authorization"] =
+          'Bearer ${storage.getString(key: StorageKeys.accessToken)}';
       headers["Content-Type"] = "application/json";
     } catch (e) {
       debugPrint(e.toString());

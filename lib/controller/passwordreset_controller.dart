@@ -4,36 +4,35 @@ import 'package:get/get.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 
 import '../data/model/passwordreset_model.dart';
-import '../data/model/passwordreset_resp_model.dart';
+import '../data/model/response/change_password/change_password_response_model.dart';
 
-class PasswordResetController extends GetxController{
+class PasswordResetController extends GetxController {
   var isLoading = false.obs;
-  final resetPassData = PasswordResetRespModel(status: false, message: null).obs;
+  final resetPassData =
+      ChangePasswordResponseModel(status: false, message: null).obs;
 
-
-  hitResetPassword(parentId,oldPassword,newPassword) async {
+  hitResetPassword(parentId, oldPassword, newPassword) async {
     PasswordResetModel model = PasswordResetModel(
-        parentId: parentId,
-        oldPassword: oldPassword,
-        newPassword: newPassword
-    );
+        parentId: parentId, oldPassword: oldPassword, newPassword: newPassword);
 
-    try{
+    try {
       isLoading(true);
-      var res = await APIService().apiResetPassword(passwordResetModelToJson(model));
+      var res =
+          await APIService().apiResetPassword(passwordResetModelToJson(model));
       var decoded = jsonDecode(res);
-      if(decoded['status'] == true){
-        PasswordResetRespModel reset = passwordResetRespModelFromJson(res);
+      if (decoded['status'] == true) {
+        ChangePasswordResponseModel reset =
+            changePasswordResponseModelFromJson(res);
         resetPassData.value = reset;
         resetPassData.refresh();
-      }else if(decoded['status'] == false){
-        PasswordResetRespModel reset = passwordResetRespModelFromJson(res);
+      } else if (decoded['status'] == false) {
+        ChangePasswordResponseModel reset =
+            changePasswordResponseModelFromJson(res);
         resetPassData.value = reset;
         resetPassData.refresh();
         isLoading(false);
       }
-    }
-    finally{
+    } finally {
       isLoading(false);
     }
   }

@@ -55,12 +55,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         lastName: dashboardUseCase.getString(
           key: StorageKeys.lastName,
         ),
-        // email: dashboardUseCase.getString(
-        //   key: StorageKeys.email,
-        // ),
-        // phoneNumber: dashboardUseCase.getString(
-        //   key: StorageKeys.phone,
-        // ),
       ),
     );
   }

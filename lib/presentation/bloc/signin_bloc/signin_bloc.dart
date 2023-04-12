@@ -45,7 +45,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   _onPressed(OnPressed event, emit) async {
     final response = await signInUseCase.onPressed(
-        email: event.email, password: event.password);
+      email: event.email,
+      password: event.password,
+    );
     if (response.status) {
       emit(
         state.copyWith(

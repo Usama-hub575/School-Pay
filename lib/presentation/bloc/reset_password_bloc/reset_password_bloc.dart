@@ -70,10 +70,12 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
               );
       },
       (r) {
-        emit(state.copyWith(
-          status: ResetPasswordStatus.error,
-          errorMessage: r.message,
-        ));
+        emit(
+          state.copyWith(
+            status: ResetPasswordStatus.error,
+            errorMessage: r.message,
+          ),
+        );
       },
     );
   }

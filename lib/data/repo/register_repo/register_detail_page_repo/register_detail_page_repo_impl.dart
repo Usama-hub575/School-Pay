@@ -36,7 +36,7 @@ class RegisterDetailPageRepoImpl implements RegisterDetailPageRepo {
         'countryCode': countryCode,
         'dialCode': dialCode,
         'phone': phone,
-        'emiratesID': emiratesID,
+        'emiratesID': emiratesIDNumber,
         'gender': gender,
         'birth': birth,
         'passport': passport,

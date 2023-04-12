@@ -1,4 +1,6 @@
+export 'change_password_bloc/export.dart';
 export 'dashboard_bloc/export.dart';
+export 'edit_profile_bloc/export.dart';
 export 'firebase_bloc/export.dart';
 export 'forgot_password_bloc/export.dart';
 export 'get_assistance_bloc/export.dart';

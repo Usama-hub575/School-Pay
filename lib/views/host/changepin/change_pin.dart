@@ -94,7 +94,7 @@ class _ChangePINState extends State<ChangePIN> {
                           height: 10.h,
                         ),
                         Text(
-                          chgPIN,
+                          changePin,
                           style: PayNestTheme.title20white,
                         ),
                       ],

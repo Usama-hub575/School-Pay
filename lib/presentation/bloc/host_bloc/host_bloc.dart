@@ -59,6 +59,7 @@ class HostBloc extends Bloc<HostEvent, HostState> {
       state.copyWith(
         payNow: -1,
         bottomTabIsActive: false,
+        payNowButton: true,
       ),
     );
   }

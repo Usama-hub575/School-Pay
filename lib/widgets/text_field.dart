@@ -7,6 +7,7 @@ class CommonTextField extends StatefulWidget {
     required this.onValidate,
     required this.controller,
     required this.labelText,
+    this.enabled,
     this.validatorText,
     required this.obscureText,
     this.inputFormatters,
@@ -19,6 +20,7 @@ class CommonTextField extends StatefulWidget {
   final String labelText;
   final String? validatorText;
   final bool obscureText;
+  final bool? enabled;
   final Widget? icon;
   final List<TextInputFormatter>? inputFormatters;
 
@@ -30,49 +32,52 @@ class _CommonTextFieldState extends State<CommonTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: widget.enabled,
       readOnly: widget.readOnly,
       textInputAction: TextInputAction.done,
       inputFormatters: widget.inputFormatters,
-      style: TextStyle(
+      style: textStyles.semiBold.copyWith(
         fontSize: sizes.fontRatio * 16,
+        color: colors.lightGreyShade,
       ),
       controller: widget.controller,
       obscureText: widget.obscureText,
       decoration: InputDecoration(
         border: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: AppColors().textGrey.withOpacity(
-                  0.5,
-                ),
+            color: colors.textGrey.withOpacity(
+              0.5,
+            ),
           ),
         ),
         suffixIcon: widget.icon,
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: AppColors().textGrey.withOpacity(0.5),
+            color: colors.textGrey.withOpacity(0.5),
           ),
         ),
         labelText: widget.labelText,
-        labelStyle: TextStyles().bold.copyWith(
-              fontSize: sizes.fontRatio * 12,
-            ),
+        labelStyle: textStyles.bold.copyWith(
+          fontSize: sizes.fontRatio * 16,
+          color: colors.primaryColor,
+        ),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: AppColors().textGrey.withOpacity(0.5),
+            color: colors.textGrey.withOpacity(0.5),
           ),
         ),
         errorBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: AppColors().textGrey.withOpacity(0.5),
+            color: colors.textGrey.withOpacity(0.5),
           ),
         ),
-        errorStyle: TextStyles().bold.copyWith(
-              fontSize: sizes.fontRatio * 12,
-              color: AppColors().redShade2,
-            ),
+        errorStyle: textStyles.bold.copyWith(
+          fontSize: sizes.fontRatio * 12,
+          color: colors.redShade2,
+        ),
         disabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: AppColors().textGrey.withOpacity(0.5),
+            color: colors.textGrey.withOpacity(0.5),
           ),
         ),
       ),
@@ -90,7 +95,8 @@ class _CommonTextFieldState extends State<CommonTextField> {
         if (widget.labelText == password ||
             widget.labelText == createPassword ||
             widget.labelText == newPassword ||
-            widget.labelText == confirmPassword) {
+            widget.labelText == confirmPassword ||
+            widget.labelText == oldPassword) {
           if (value.trim().length < 5) {
             return passwordMustNotBeLessThan5;
           }

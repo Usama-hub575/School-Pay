@@ -517,7 +517,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             ),
                           ),
                         ),
-                        labelText: emiratesIDD,
+                        labelText: emiratesID,
                         labelStyle: PayNestTheme.h2_14textGrey.copyWith(
                           color: PayNestTheme.primaryColor,
                           fontFamily: 'montserratBold',

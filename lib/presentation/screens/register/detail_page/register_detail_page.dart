@@ -202,7 +202,7 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                             onValidate: (value) {},
                             controller: emirateIDController,
                             labelText: state.isEmiratesSelected
-                                ? emiratesIDD
+                                ? emiratesID
                                 : passportNumber,
                             inputFormatters: state.isEmiratesSelected
                                 ? <TextInputFormatter>[

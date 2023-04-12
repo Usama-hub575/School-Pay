@@ -25,7 +25,9 @@ class _WelcomePageState extends State<WelcomePage> {
           (value) {
             videoPlayerController.play();
             videoPlayerController.setVolume(0);
-            videoPlayerController.setLooping(true);
+            videoPlayerController.setLooping(
+              true,
+            );
             setState(() {});
           },
         );
@@ -146,10 +148,8 @@ class _WelcomePageState extends State<WelcomePage> {
                 verticalSpacer(16),
                 GestureDetector(
                   onTap: () {
-                    launchUrl(
-                      Uri.parse(
-                        EndPoints().getPrivacyPolicyEndPoint(),
-                      ),
+                    launch(
+                      'https://paynest.ae/privacy-policy.html',
                     );
                   },
                   child: Text(
