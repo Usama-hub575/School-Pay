@@ -175,7 +175,7 @@ class StudentStudent {
   DateTime? createdAt;
   DateTime? updatedAt;
   String? payeeType;
-  School? school;
+  TransactionListResponseSchool? school;
 
   static StudentStudent empty() {
     return StudentStudent(
@@ -213,7 +213,7 @@ class StudentStudent {
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
         payeeType: '',
-        school: School.empty());
+        school: TransactionListResponseSchool.empty());
   }
 
   factory StudentStudent.fromJson(Map<String, dynamic> json) => StudentStudent(
@@ -260,8 +260,8 @@ class StudentStudent {
             : DateTime.now(),
         payeeType: json['payeeType'] ?? '',
         school: json["school"] != null
-            ? School.fromJson(json["school"])
-            : School.empty(),
+            ? TransactionListResponseSchool.fromJson(json["school"])
+            : TransactionListResponseSchool.empty(),
       );
 
   Map<String, dynamic> toJson() => {

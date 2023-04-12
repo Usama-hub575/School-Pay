@@ -1,4 +1,4 @@
-import '../data/model/response/dashboard/student/students_response_model.dart';
+import 'package:paynest_flutter_app/export.dart';
 
 MyStudentsResponseModel getMyStudentModel({required StudentData element}) {
   List<StudentData> studentList = [];

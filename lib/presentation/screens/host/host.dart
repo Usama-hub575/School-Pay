@@ -1,6 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:paynest_flutter_app/export.dart';
-import 'package:paynest_flutter_app/views/host/student/student_page.dart';
 
 class HostPage extends StatefulWidget {
   const HostPage({Key? key}) : super(key: key);

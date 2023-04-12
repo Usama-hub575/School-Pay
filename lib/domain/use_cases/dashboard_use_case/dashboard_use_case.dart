@@ -26,6 +26,28 @@ class DashboardUseCase {
     );
   }
 
+  Future<Either<MyStudentsResponseModel, Failure>> getStudentsByID(
+      {required String userID}) async {
+    final response = await dashboardRepo.getStudentsByID(
+      userID: userID,
+    );
+    return response.fold(
+      (success) {
+        return Left(
+          success,
+        );
+      },
+      (r) {
+        return Right(
+          Failure(
+            status: r.status,
+            message: r.message,
+          ),
+        );
+      },
+    );
+  }
+
   Future<Either<MyStudentsResponseModel, Failure>> fetchStudents() async {
     final response = await dashboardRepo.getStudents(
       userID: getUserID(),

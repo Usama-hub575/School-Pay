@@ -9,5 +9,7 @@ export 'my_profile/export.dart';
 export 'register/export.dart';
 export 'settings/export.dart';
 export 'signin/export.dart';
+export 'single_student/export.dart';
+export 'student/export.dart';
 export 'transactions/export.dart';
 export 'welcome/export.dart';

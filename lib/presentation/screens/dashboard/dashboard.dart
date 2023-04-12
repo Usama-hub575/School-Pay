@@ -4,8 +4,6 @@ import 'package:paynest_flutter_app/data/model/datamodel/single_student_model.da
 import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
 import 'package:paynest_flutter_app/views/host/pendingtask/pending_task.dart';
-import 'package:paynest_flutter_app/views/host/singlestudent/singlestudent_page.dart';
-import 'package:paynest_flutter_app/views/host/student/student_page.dart';
 
 import '../../../data/model/datamodel/single_student_model.dart';
 
@@ -23,7 +21,7 @@ class DashboardPage extends StatefulWidget {
         MaterialPageRoute(
           builder: (context) => SingleStudentPage(
             studentId: id,
-            myStudentsRespModel: MyStudentsResponseModel.empty(),
+            myStudentsResponseModel: MyStudentsResponseModel.empty(),
           ),
         ),
       );
@@ -254,7 +252,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                               SingleStudentPage(
                                             studentId:
                                                 student.studentId.toString(),
-                                            myStudentsRespModel:
+                                            myStudentsResponseModel:
                                                 getMyStudentModel(
                                               element: student,
                                             ),
@@ -383,7 +381,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         BlocBuilder<SignInBloc, SignInState>(
                           builder: (context, state) {
                             return state.authenticationResponseModel.parent
-                                        ?.pin ==
+                                        .pin ==
                                     null
                                 ? SizedBox(
                                     height: sizes.heightRatio * 48,
@@ -431,10 +429,10 @@ class _DashboardPageState extends State<DashboardPage> {
                             : BlocBuilder<SignInBloc, SignInState>(
                                 builder: (context, state) {
                                   return state.authenticationResponseModel
-                                                  .parent?.paymentConfigured ==
+                                                  .parent.paymentConfigured ==
                                               null ||
                                           state.authenticationResponseModel
-                                              .parent!.paymentConfigured
+                                              .parent.paymentConfigured
                                               .toString()
                                               .isEmpty
                                       ? InkWellWidget(
@@ -506,7 +504,6 @@ class _DashboardPageState extends State<DashboardPage> {
                                 },
                               ),
                         verticalSpacer(10),
-                        // SizedBox(height: 10.5.h),
                         Padding(
                           padding: EdgeInsets.symmetric(
                             vertical: verticalValue(
@@ -750,13 +747,13 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
     );
 
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => TransactionDetailsPage(
-    //       transactionDetailModel: transactionDetailModel,
-    //     ),
-    //   ),
-    // );
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TransactionDetailsPage(
+          transactionDetailModel: transactionDetailModel,
+        ),
+      ),
+    );
   }
 
   void navigateToSingleStudentScreen({required String id}) {
@@ -764,7 +761,7 @@ class _DashboardPageState extends State<DashboardPage> {
       MaterialPageRoute(
         builder: (context) => SingleStudentPage(
           studentId: id,
-          myStudentsRespModel: MyStudentsResponseModel.empty(),
+          myStudentsResponseModel: MyStudentsResponseModel.empty(),
         ),
       ),
     );

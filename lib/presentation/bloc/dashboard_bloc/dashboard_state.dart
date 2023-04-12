@@ -12,6 +12,9 @@ class DashboardState extends Equatable {
   String phoneNumber = '';
   String lastName = '';
   bool showShimmer = false;
+  MyStudentsResponseModel myStudentsResponseModel =
+      MyStudentsResponseModel.empty();
+  ParentStudentResponse parentStudentResponse = ParentStudentResponse();
   List<TransactionsRow> transactionsList = [];
   List<StudentData> students = [];
   TransactionListResponseModel transactionListResponseModel =
@@ -25,6 +28,8 @@ class DashboardState extends Equatable {
     this.email = '',
     this.phoneNumber = '',
     this.showShimmer = false,
+    required this.parentStudentResponse,
+    required this.myStudentsResponseModel,
     required this.transactionListResponseModel,
     this.isLoading = true,
     this.firstName = '',
@@ -35,6 +40,8 @@ class DashboardState extends Equatable {
   DashboardState copyWith({
     RegisterResponseModel? registerResponseModel,
     TransactionListResponseModel? transactionListResponseModel,
+    ParentStudentResponse? parentStudentResponse,
+    MyStudentsResponseModel? myStudentsResponseModel,
     String? errorMessage,
     String? email,
     String? phoneNumber,
@@ -48,10 +55,14 @@ class DashboardState extends Equatable {
     String? lastName,
   }) {
     return DashboardState(
+      myStudentsResponseModel:
+          myStudentsResponseModel ?? this.myStudentsResponseModel,
       transactionListResponseModel:
           transactionListResponseModel ?? this.transactionListResponseModel,
       status: status ?? this.status,
       email: email ?? this.email,
+      parentStudentResponse:
+          parentStudentResponse ?? this.parentStudentResponse,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       list: list ?? this.list,
       isBioMetricEnable: isBioMetricEnable ?? this.isBioMetricEnable,
@@ -67,6 +78,8 @@ class DashboardState extends Equatable {
   @override
   List<Object?> get props => [
         isBioMetricEnable,
+        parentStudentResponse,
+        myStudentsResponseModel,
         errorMessage,
         phoneNumber,
         email,

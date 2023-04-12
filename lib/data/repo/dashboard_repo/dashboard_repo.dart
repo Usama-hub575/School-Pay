@@ -14,6 +14,10 @@ mixin DashboardRepo {
     int? userID = 0,
   });
 
+  Future<Either<MyStudentsResponseModel, Failure>> getStudentsByID({
+    String? userID,
+  });
+
   Future<Either<TransactionListResponseModel, Failure>> getTransactions({
     int? userID = 0,
   });

@@ -257,22 +257,23 @@ class School {
   String? createdAt;
   String? updatedAt;
 
-  School(
-      {this.id,
-      this.name,
-      this.deletedAt,
-      this.addedBy,
-      this.address,
-      this.description,
-      this.vat,
-      this.paynestFee,
-      this.aPIKey,
-      this.merchantId,
-      this.file,
-      this.privacy,
-      this.payeeType,
-      this.createdAt,
-      this.updatedAt});
+  School({
+    this.id,
+    this.name,
+    this.deletedAt,
+    this.addedBy,
+    this.address,
+    this.description,
+    this.vat,
+    this.paynestFee,
+    this.aPIKey,
+    this.merchantId,
+    this.file,
+    this.privacy,
+    this.payeeType,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   School.fromJson(Map<String, dynamic> json) {
     id = json['id'];

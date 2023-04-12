@@ -26,7 +26,7 @@ class SelectSchool extends StatefulWidget {
 class _SelectSchoolState extends State<SelectSchool> {
   SchoolController schoolController = Get.put(SchoolController());
   TextEditingController ssController = TextEditingController();
-  final GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
 
   @override
   initState() {
@@ -51,7 +51,7 @@ class _SelectSchoolState extends State<SelectSchool> {
     setState(() {});
   }
 
-  List<Log> _searchResult = [];
+  final List<Log> _searchResult = [];
 
   @override
   Widget build(BuildContext context) {

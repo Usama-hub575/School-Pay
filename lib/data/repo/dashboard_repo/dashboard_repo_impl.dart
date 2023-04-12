@@ -35,6 +35,33 @@ class DashboardRepoImpl implements DashboardRepo {
   }
 
   @override
+  Future<Either<MyStudentsResponseModel, Failure>> getStudentsByID({
+    String? userID,
+  }) async {
+    final response = await networkHelper.get(
+      endPoints.getStudentByIDEndPoint().replaceAll(
+            '{student_id}',
+            userID.toString(),
+          ),
+    );
+    return response.fold(
+      (success) {
+        return Left(
+          myStudentsResponseModelFromJson(success),
+        );
+      },
+      (r) {
+        return Right(
+          Failure(
+            status: r.status,
+            message: r.message,
+          ),
+        );
+      },
+    );
+  }
+
+  @override
   Future<Either<MyStudentsResponseModel, Failure>> getStudents({
     int? userID = 0,
   }) async {

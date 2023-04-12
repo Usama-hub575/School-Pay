@@ -10,6 +10,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   }) : super(
           DashboardState(
             transactionListResponseModel: TransactionListResponseModel.empty(),
+            parentStudentResponse: ParentStudentResponse(),
+            myStudentsResponseModel: MyStudentsResponseModel.empty(),
           ),
         ) {
     on<FetchStudents>(_fetchStudents);
@@ -18,6 +20,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     on<ShowShimmer>(_showShimmer);
     on<IsBioMetricEnable>(_isBioMetricEnable);
     on<RadioButtonOnTap>(_radioButtonOnTap);
+    on<GetStudentByID>(_getStudentByID);
   }
 
   DashboardUseCase dashboardUseCase;
@@ -27,6 +30,29 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       state.copyWith(
         isBioMetricEnable: dashboardUseCase.getBool(),
       ),
+    );
+  }
+
+  _getStudentByID(GetStudentByID event, emit) async {
+    final response = await dashboardUseCase.getStudentsByID(
+      userID: event.userID,
+    );
+    response.fold(
+      (success) {
+        emit(
+          state.copyWith(
+            myStudentsResponseModel: success,
+          ),
+        );
+      },
+      (r) {
+        emit(
+          state.copyWith(
+            status: DashboardStatus.error,
+            errorMessage: r.message,
+          ),
+        );
+      },
     );
   }
 
@@ -66,6 +92,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         emit(
           state.copyWith(
             students: success.students,
+            myStudentsResponseModel: success,
           ),
         );
       },
