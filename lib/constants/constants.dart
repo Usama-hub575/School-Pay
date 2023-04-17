@@ -118,6 +118,8 @@ const apartment = "Apartment";
 const city = "City";
 const ok = "Ok";
 const english = "English";
+const payBySafeX = "Pay By SafeX";
+const serviceUnavailable = "Service Unavailable !!";
 const arabic = "Arabic";
 const countryRegion = "Country / Region*";
 const updateProfile = "Update Profile";
@@ -135,6 +137,7 @@ const congratulations = "Congratulations!";
 const youHaveSuccessfully = "You Have Successfully Transferred The Amount.";
 const language = "Language";
 const invalidEmail = 'Invalid Email';
+const amountShouldBeGreaterThan0 = "Amount Should Be Grater Then 0!";
 const passwordNotMatched = 'Password Not Matched';
 const passwordMustNotBeLessThan5 = 'Password Must Not Be Less Than 5';
 const pendingTask = "Pending Tasks";
@@ -167,7 +170,7 @@ const deleteAccount = "Delete Account";
 const changePassword = "Change Password";
 const continueTo = "Continue";
 const enterYourPin = "Enter your 4 digit Pin to continue";
-const currentPayableAmount = "Current Payable amount";
+const currentPayableAmount = "Current Payable Amount";
 const downloadInvoice = 'Download Invoice';
 const verifyStudent = "Verify Payees";
 const enterAmount = "Enter Amount";
@@ -187,6 +190,8 @@ const myProfile = "My Profile";
 const editProfile = "Edit Profile";
 const save = "Save";
 
+const somethingWentWrongWithTheTransaction =
+    "Something went wrong with the transaction";
 const pleaseConfirmDetailsBelow =
     "Please confirm below details before we proceed.";
 const pleaseEnterDetailBelow = "Please Enter Your Personal Details";
@@ -200,10 +205,11 @@ const confirmCode = "Confirmation Code Has Been Sent!";
 const thePINWill =
     "This PIN will be used to authorize transactions and adding payees and properties.";
 const noStudent = "No payee available";
-
+const amountIsNotCorrect = "Amount is not correct";
 const createPIN = "Create PIN to secure your account";
 
 const welcome = "Welcome";
+const comingSoon = "Coming Soon!";
 const welcomeBack = "Welcome Back";
 const recentTransactions = "Recent Transactions";
 const recentTransaction = "Recent Transaction";
@@ -216,6 +222,7 @@ const addressDetails = "Address Details";
 const google = "Continue with Google";
 const facebook = "Continue with Facebook";
 
+const feesAlreadyPaid = "Fees already paid";
 const payment = "Payment";
 const paymentFor = "Payment For";
 const feePayment = "Fee Payment";

@@ -3,7 +3,6 @@ import 'package:paynest_flutter_app/data/model/datamodel/single_student_model.da
     as student;
 import 'package:paynest_flutter_app/export.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
-import 'package:paynest_flutter_app/views/host/pendingtask/pending_task.dart';
 
 import '../../../data/model/datamodel/single_student_model.dart';
 
@@ -165,16 +164,16 @@ class _DashboardPageState extends State<DashboardPage> {
                               FadeShimmer(
                                 width: sizes.widthRatio * 55,
                                 height: sizes.heightRatio * 20,
-                                baseColor: const Color(0xFFEBEBF4),
-                                highlightColor: const Color(0xFFF4F4F4),
+                                baseColor: colors.baseWhite,
+                                highlightColor: colors.highlightWhite,
                                 radius: 10,
                               ),
                               const Spacer(),
                               FadeShimmer(
                                 width: sizes.widthRatio * 55,
                                 height: sizes.heightRatio * 20,
-                                baseColor: const Color(0xFFEBEBF4),
-                                highlightColor: const Color(0xFFF4F4F4),
+                                baseColor: colors.baseWhite,
+                                highlightColor: colors.highlightWhite,
                                 radius: 10,
                               ),
                             ],
@@ -200,8 +199,9 @@ class _DashboardPageState extends State<DashboardPage> {
                           InkWell(
                             onTap: () {
                               context.read<HostBloc>().add(
-                                    SelectNavigationBarItem(
-                                      status: HostStatus.studentPage,
+                                    ChangePageIndex(
+                                      stack: "other",
+                                      pageIndex: 1,
                                     ),
                                   );
                             },
@@ -267,68 +267,30 @@ class _DashboardPageState extends State<DashboardPage> {
                             ? FadeShimmer(
                                 width: double.infinity,
                                 height: sizes.heightRatio * 50,
-                                baseColor: const Color(0xFFEBEBF4),
-                                highlightColor: const Color(0xFFF4F4F4),
+                                baseColor: colors.baseWhite,
+                                highlightColor: colors.highlightWhite,
                                 radius: 18,
                               )
                             : SizedBox(
                                 width: double.infinity,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: colors.primaryColor,
-                                    elevation: 0,
-                                    // side: BorderSide(width:1, color:Colors.white),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                        20,
-                                      ),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: verticalValue(12),
-                                    ),
-                                  ),
+                                height: sizes.heightRatio * 46,
+                                child: ElevatedButtons(
+                                  textColor: colors.white,
+                                  text: addStudent,
+                                  isLoading: false,
+                                  color: colors.primaryColor,
                                   onPressed: () {
-                                    // Navigator.of(context).push(
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) => const SelectSchool(),
-                                    //   ),
-                                    // );
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SelectSchool(),
+                                      ),
+                                    );
                                     // AddStudentBottomSheet.show(
                                     //   context: context,
                                     // );
                                   },
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: colors.white,
-                                              width: 2,
-                                            ),
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Center(
-                                            child: Icon(
-                                              Icons.add,
-                                              color: colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                        horizontalSpacer(10),
-                                        Text(
-                                          addStudent,
-                                          style: textStyles.bold.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: colors.white,
-                                            fontSize: sizes.fontRatio * 14,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  showIcon: true,
                                 ),
                               ),
                         verticalSpacer(10),
@@ -339,8 +301,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ? FadeShimmer(
                                     width: sizes.widthRatio * 55,
                                     height: sizes.heightRatio * 20,
-                                    baseColor: const Color(0xFFEBEBF4),
-                                    highlightColor: const Color(0xFFF4F4F4),
+                                    baseColor: colors.baseWhite,
+                                    highlightColor: colors.highlightWhite,
                                     radius: 10,
                                   )
                                 : Text(
@@ -354,8 +316,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ? FadeShimmer(
                                     width: sizes.widthRatio * 55,
                                     height: sizes.heightRatio * 20,
-                                    baseColor: const Color(0xFFEBEBF4),
-                                    highlightColor: const Color(0xFFF4F4F4),
+                                    baseColor: colors.baseWhite,
+                                    highlightColor: colors.highlightWhite,
                                     radius: 10,
                                   )
                                 : InkWell(
@@ -422,8 +384,8 @@ class _DashboardPageState extends State<DashboardPage> {
                             ? FadeShimmer(
                                 width: double.infinity,
                                 height: sizes.heightRatio * 50,
-                                baseColor: const Color(0xFFEBEBF4),
-                                highlightColor: const Color(0xFFF4F4F4),
+                                baseColor: colors.baseWhite,
+                                highlightColor: colors.highlightWhite,
                                 radius: 18,
                               )
                             : BlocBuilder<SignInBloc, SignInState>(
@@ -437,14 +399,12 @@ class _DashboardPageState extends State<DashboardPage> {
                                               .isEmpty
                                       ? InkWellWidget(
                                           onTap: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const StudentPage(
-                                                  whichStack: "other",
-                                                ),
-                                              ),
-                                            );
+                                            context.read<HostBloc>().add(
+                                                  ChangePageIndex(
+                                                    stack: "other",
+                                                    pageIndex: 1,
+                                                  ),
+                                                );
                                           },
                                           child: Container(
                                             width: double.infinity,
@@ -517,8 +477,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                   ? FadeShimmer(
                                       width: sizes.widthRatio * 150,
                                       height: sizes.heightRatio * 20,
-                                      baseColor: const Color(0xFFEBEBF4),
-                                      highlightColor: const Color(0xFFF4F4F4),
+                                      baseColor: colors.baseWhite,
+                                      highlightColor: colors.highlightWhite,
                                       radius: 10,
                                     )
                                   : Text(
@@ -532,16 +492,16 @@ class _DashboardPageState extends State<DashboardPage> {
                                   ? FadeShimmer(
                                       width: sizes.widthRatio * 55,
                                       height: sizes.heightRatio * 20,
-                                      baseColor: const Color(0xFFEBEBF4),
-                                      highlightColor: const Color(0xFFF4F4F4),
+                                      baseColor: colors.baseWhite,
+                                      highlightColor: colors.highlightWhite,
                                       radius: 10,
                                     )
                                   : InkWellWidget(
                                       onTap: () {
                                         context.read<HostBloc>().add(
-                                              SelectNavigationBarItem(
-                                                status: HostStatus
-                                                    .recentTransactionPage,
+                                              ChangePageIndex(
+                                                stack: "other",
+                                                pageIndex: 2,
                                               ),
                                             );
                                       },
@@ -561,8 +521,8 @@ class _DashboardPageState extends State<DashboardPage> {
                             ? FadeShimmer(
                                 width: double.infinity,
                                 height: sizes.heightRatio * 150,
-                                baseColor: const Color(0xFFEBEBF4),
-                                highlightColor: const Color(0xFFF4F4F4),
+                                baseColor: colors.baseWhite,
+                                highlightColor: colors.highlightWhite,
                                 radius: 18,
                               )
                             : state.transactionListResponseModel.transactions !=

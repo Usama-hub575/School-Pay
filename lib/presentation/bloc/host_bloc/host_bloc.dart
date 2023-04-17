@@ -29,12 +29,14 @@ class HostBloc extends Bloc<HostEvent, HostState> {
       emit(
         state.copyWith(
           status: HostStatus.studentPage,
+          stack: event.stack,
         ),
       );
     } else if (event.pageIndex == 2) {
       emit(
         state.copyWith(
           status: HostStatus.recentTransactionPage,
+          stack: event.stack,
         ),
       );
     } else if (event.pageIndex == 3) {
@@ -60,6 +62,7 @@ class HostBloc extends Bloc<HostEvent, HostState> {
         payNow: -1,
         bottomTabIsActive: false,
         payNowButton: true,
+        status: HostStatus.payNowPage,
       ),
     );
   }

@@ -84,55 +84,59 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                   verticalSpacer(24),
                   Row(
                     mainAxisAlignment: widget.whichStack == "other"
-                        ? MainAxisAlignment.start
+                        ? MainAxisAlignment.spaceBetween
                         : MainAxisAlignment.center,
                     children: [
                       widget.whichStack == "other"
-                          ? Padding(
-                              padding: EdgeInsets.only(
-                                right: horizontalValue(25),
-                              ),
-                              child: Container(
-                                height: verticalValue(44),
-                                width: horizontalValue(44),
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: colors.black,
-                                      blurRadius: 2.0,
-                                      offset: const Offset(
-                                        3.0, // Move to right 10  horizontally
-                                        3.0, // Move to bottom 10 Vertically
-                                      ),
+                          ? Container(
+                              height: verticalValue(44),
+                              width: horizontalValue(44),
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: colors.black,
+                                    blurRadius: 2.0,
+                                    offset: const Offset(
+                                      3.0, // Move to right 10  horizontally
+                                      3.0, // Move to bottom 10 Vertically
                                     ),
-                                  ],
-                                  color: colors.white,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  icon: Icon(
-                                    Icons.clear,
-                                    size: 20,
-                                    color: colors.blueAccent,
                                   ),
-                                  // child: Text(""),
+                                ],
+                                color: colors.white,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: IconButton(
+                                onPressed: () {
+                                  context.read<HostBloc>().add(
+                                        ChangePageIndex(
+                                          stack: "host",
+                                          pageIndex: 0,
+                                        ),
+                                      );
+                                },
+                                icon: Icon(
+                                  Icons.clear,
+                                  size: 20,
+                                  color: colors.blueAccent,
                                 ),
+                                // child: Text(""),
                               ),
                             )
                           : const SizedBox(),
-                      Expanded(
-                        child: Text(
-                          transactions,
-                          textAlign: TextAlign.center,
-                          style: textStyles.bold.copyWith(
-                            color: colors.white,
-                            fontSize: sizes.fontRatio * 18,
-                          ),
+                      Text(
+                        transactions,
+                        textAlign: TextAlign.center,
+                        style: textStyles.bold.copyWith(
+                          color: colors.white,
+                          fontSize: sizes.fontRatio * 18,
                         ),
                       ),
+                      widget.whichStack == "other"
+                          ? SizedBox(
+                              height: verticalValue(44),
+                              width: horizontalValue(44),
+                            )
+                          : const SizedBox(),
                     ],
                   ),
                 ],
@@ -141,7 +145,8 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
           ),
           BlocBuilder<DashboardBloc, DashboardState>(
             builder: (context, state) {
-              return state.showShimmer
+              return state.showShimmer &&
+                      state.transactionListResponseModel.transactions!.count < 1
                   ? Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,

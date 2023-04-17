@@ -59,7 +59,11 @@ class _StudentWidgetState extends State<StudentWidget> {
   TextEditingController _dob = TextEditingController();
   DateTime tempPickedDate = DateTime.now();
 
-  List<String> filters = ['Student ID', 'Account Number', 'Date Of Birth'];
+  List<String> filters = [
+    'Student ID',
+    'Account Number',
+    'Date Of Birth',
+  ];
   String? _selectedFilter;
   bool isSearchFieldEnable = false;
 

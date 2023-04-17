@@ -81,7 +81,7 @@ class _HostPageState extends State<HostPage> {
           key: _scaffoldKey,
           body: WillPopScope(
             onWillPop: () async => false,
-            child: navigatePage(state.status),
+            child: navigatePage(state.status, state.stack),
           ),
           floatingActionButton: SizedBox(
             height: sizes.heightRatio * 64,
@@ -152,14 +152,14 @@ class _HostPageState extends State<HostPage> {
               state.payNow = 0;
               state.payNowButton = false;
               context.read<HostBloc>().add(
-                    ChangePageIndex(pageIndex: index),
+                    ChangePageIndex(pageIndex: index, stack: "host"),
                   );
             },
-            shadow: const BoxShadow(
-              offset: Offset(0, 1),
+            shadow: BoxShadow(
+              offset: const Offset(0, 1),
               blurRadius: 12,
               spreadRadius: 0.5,
-              color: Colors.grey,
+              color: colors.greyShade,
             ),
           ),
         );
@@ -167,16 +167,18 @@ class _HostPageState extends State<HostPage> {
     );
   }
 
-  navigatePage(HostStatus status) {
+  navigatePage(HostStatus status, String stack) {
     switch (status) {
       case HostStatus.dashBoardPage:
         return const DashboardPage();
       case HostStatus.studentPage:
-        return const StudentPage(whichStack: "host");
+        return StudentPage(whichStack: stack);
       case HostStatus.recentTransactionPage:
-        return const RecentTransactionPage(whichStack: "host");
+        return RecentTransactionPage(whichStack: stack);
       case HostStatus.settingsPage:
         return const SettingsPage();
+      case HostStatus.payNowPage:
+        return PayNowPage(whichStack: stack);
       default:
         return const DashboardPage();
     }

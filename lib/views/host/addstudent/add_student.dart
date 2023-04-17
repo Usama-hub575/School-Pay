@@ -14,7 +14,7 @@ import '../../../../presentation/res/res.dart';
 import '../../../../theme/theme.dart';
 import '../../../../widgets/spacer.dart';
 import '../../../controller/user_controller.dart';
-import '../../../data/model/datamodel/selectedschool_to_addstudent.dart';
+import '../../../data/model/response/school_list/selected_school_to_addstudent.dart';
 import '../../../data/model/studentlist_res_model.dart';
 import '../../../presentation/screens/dashboard/widgets/succes_bottom_sheet.dart';
 import '../../../widgets/inkwell_widget.dart';

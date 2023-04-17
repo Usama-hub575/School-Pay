@@ -54,6 +54,7 @@ class AppAssets {
   final String icSchoolDark = "assets/png/ic_schoolIcondark.png";
   final String splash = "assets/png/splash.png";
   final String payNestLogoNew = "assets/png/logo_new.png";
+  final String safeXPay = "assets/png/safexPay.png";
   final String welcomeRegisterLogo = "assets/png/welcome_register_logo.png";
   final String touchID = "assets/png/ic_touchid.png";
 

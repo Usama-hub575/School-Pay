@@ -15,9 +15,11 @@ class SelectNavigationBarItem extends HostEvent {
 
 class ChangePageIndex extends HostEvent {
   final int pageIndex;
+  final String stack;
 
   ChangePageIndex({
     required this.pageIndex,
+    required this.stack,
   });
 }
 

@@ -1,3 +1,4 @@
+export 'add_student_bloc/export.dart';
 export 'change_password_bloc/export.dart';
 export 'dashboard_bloc/export.dart';
 export 'edit_profile_bloc/export.dart';
@@ -6,7 +7,8 @@ export 'forgot_password_bloc/export.dart';
 export 'get_assistance_bloc/export.dart';
 export 'host_bloc/export.dart';
 export 'initializer_bloc/export.dart';
+export 'pay_now_bloc/export.dart';
 export 'register_bloc/export.dart';
 export 'reset_password_bloc/export.dart';
+export 'school_list_bloc/export.dart';
 export 'signin_bloc/export.dart';
-export 'transactions_bloc/export.dart';

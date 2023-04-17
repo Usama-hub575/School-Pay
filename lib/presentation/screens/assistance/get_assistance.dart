@@ -56,7 +56,7 @@ class _GetAssistancePageState extends State<GetAssistancePage> {
                                   ),
                                 ),
                               ],
-                              color: Colors.white,
+                              color: colors.white,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: IconButton(

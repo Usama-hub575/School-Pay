@@ -35,7 +35,7 @@ class DashboardRepoImpl implements DashboardRepo {
   }
 
   @override
-  Future<Either<MyStudentsResponseModel, Failure>> getStudentsByID({
+  Future<Either<SingleStudentResponseModel, Failure>> getStudentsByID({
     String? userID,
   }) async {
     final response = await networkHelper.get(
@@ -47,7 +47,10 @@ class DashboardRepoImpl implements DashboardRepo {
     return response.fold(
       (success) {
         return Left(
-          myStudentsResponseModelFromJson(success),
+          SingleStudentResponseModel.fromJson(
+            json.decode(success),
+          ),
+          // myStudentsResponseModelFromJson(success),
         );
       },
       (r) {

@@ -26,7 +26,7 @@ class DashboardUseCase {
     );
   }
 
-  Future<Either<MyStudentsResponseModel, Failure>> getStudentsByID(
+  Future<Either<SingleStudentResponseModel, Failure>> getStudentsByID(
       {required String userID}) async {
     final response = await dashboardRepo.getStudentsByID(
       userID: userID,

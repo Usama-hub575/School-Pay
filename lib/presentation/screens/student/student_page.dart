@@ -1,5 +1,4 @@
 import 'package:paynest_flutter_app/export.dart';
-import 'package:paynest_flutter_app/views/host/school/select_school.dart';
 
 class StudentPage extends StatefulWidget {
   final String whichStack;
@@ -14,8 +13,6 @@ class StudentPage extends StatefulWidget {
 }
 
 class _StudentPageState extends State<StudentPage> {
-  // final MyStudentController controller = Get.find<MyStudentController>();
-
   @override
   void initState() {
     super.initState();
@@ -60,7 +57,12 @@ class _StudentPageState extends State<StudentPage> {
                           ),
                           child: IconButton(
                             onPressed: () {
-                              Navigator.pop(context);
+                              context.read<HostBloc>().add(
+                                    ChangePageIndex(
+                                      stack: "host",
+                                      pageIndex: 0,
+                                    ),
+                                  );
                             },
                             icon: Icon(
                               Icons.arrow_back,

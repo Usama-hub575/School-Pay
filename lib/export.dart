@@ -22,6 +22,7 @@ export 'package:get/get_core/src/get_main.dart';
 export 'package:get_it/get_it.dart';
 export 'package:get_storage/get_storage.dart';
 export 'package:intl/date_symbol_data_local.dart';
+export 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
 export 'package:local_auth/local_auth.dart';
 export 'package:lottie/lottie.dart';
 export 'package:package_info_plus/package_info_plus.dart';

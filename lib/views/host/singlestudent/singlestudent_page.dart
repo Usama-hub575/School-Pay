@@ -289,7 +289,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                 (userController.singleStudentResponse.value
                                             .students![0].student?.lastName !=
                                         null
-                                    ? userController.parentStudentResponse
+                                    ? userController.singleStudentResponseModel
                                             .parentStudent!.student!.lastName ??
                                         ''
                                     : ''),

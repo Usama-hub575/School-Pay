@@ -50,7 +50,7 @@ class MyStudentController extends GetxController {
 
   void resetStudentCard() {
     if (myStudentData.value.students != null &&
-        myStudentData.value.students!.length > 0) {
+        myStudentData.value.students!.isNotEmpty) {
       for (int i = 0; i < myStudentData.value.students!.length; i++) {
         myStudentData.value.students![i].isSelected = false;
       }

@@ -77,4 +77,16 @@ Future initializeRepoDependencies() async {
       networkHelper: it(),
     ),
   );
+  it.registerLazySingleton<SchoolListRepo>(
+    () => SchoolListRepoImpl(
+      storage: storage,
+      networkHelper: it(),
+    ),
+  );
+  it.registerLazySingleton<PayNowPageRepo>(
+    () => PayNowPageRepoImpl(
+      storage: storage,
+      networkHelper: it(),
+    ),
+  );
 }

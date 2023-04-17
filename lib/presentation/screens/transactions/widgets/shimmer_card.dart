@@ -21,8 +21,8 @@ class TransactionShimmerCard extends StatelessWidget {
             width: sizes.widthRatio * 150,
             height: sizes.heightRatio * 50,
             // fadeTheme: FadeTheme.dark,
-            baseColor: const Color(0xFFEBEBF4),
-            highlightColor: const Color(0xFFF4F4F4),
+            baseColor: colors.baseWhite,
+            highlightColor: colors.highlightWhite,
             radius: 16,
           ),
         );

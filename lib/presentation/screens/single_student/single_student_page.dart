@@ -296,7 +296,7 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                                       ?.lastName !=
                                                   null
                                               ? state
-                                                      .parentStudentResponse
+                                                      .singleStudentResponseModel
                                                       .parentStudent!
                                                       .student!
                                                       .lastName ??

@@ -10,7 +10,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   }) : super(
           DashboardState(
             transactionListResponseModel: TransactionListResponseModel.empty(),
-            parentStudentResponse: ParentStudentResponse(),
+            singleStudentResponseModel: SingleStudentResponseModel(),
             myStudentsResponseModel: MyStudentsResponseModel.empty(),
           ),
         ) {
@@ -21,6 +21,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     on<IsBioMetricEnable>(_isBioMetricEnable);
     on<RadioButtonOnTap>(_radioButtonOnTap);
     on<GetStudentByID>(_getStudentByID);
+    on<UpdatedSelectedCard>(_updatedSelectedCard);
+    on<ResetSelectedCard>(_resetSelectedCard);
+    on<PayNowOnSearchChange>(_onSearchChange);
   }
 
   DashboardUseCase dashboardUseCase;
@@ -33,6 +36,33 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     );
   }
 
+  _onSearchChange(PayNowOnSearchChange event, emit) {
+    List<StudentData> list = [];
+    if (event.value == '') {
+      list = state.students;
+      emit(
+        state.copyWith(
+          searchResult: list,
+        ),
+      );
+    } else {
+      for (var studentData in state.students) {
+        var name =
+            '${studentData.student!.firstName.trim().toUpperCase()} ${studentData.student!.lastName.trim().toUpperCase()}';
+        if (name.contains(
+          event.value.toUpperCase(),
+        )) {
+          list.add(studentData);
+        }
+      }
+      emit(
+        state.copyWith(
+          searchResult: list,
+        ),
+      );
+    }
+  }
+
   _getStudentByID(GetStudentByID event, emit) async {
     final response = await dashboardUseCase.getStudentsByID(
       userID: event.userID,
@@ -41,7 +71,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       (success) {
         emit(
           state.copyWith(
-            myStudentsResponseModel: success,
+            singleStudentResponseModel: success,
           ),
         );
       },
@@ -93,6 +123,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           state.copyWith(
             students: success.students,
             myStudentsResponseModel: success,
+            searchResult: success.students,
           ),
         );
       },
@@ -168,6 +199,40 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           ),
         );
       },
+    );
+  }
+
+  _resetSelectedCard(ResetSelectedCard event, emit) {
+    var myStudentsResponseModel = MyStudentsResponseModel.empty();
+    myStudentsResponseModel = state.myStudentsResponseModel;
+    if (myStudentsResponseModel.students != null &&
+        myStudentsResponseModel.students!.isNotEmpty) {
+      for (int i = 0; i < myStudentsResponseModel.students!.length; i++) {
+        myStudentsResponseModel.students![i].isSelected = false;
+      }
+      emit(
+        state.copyWith(
+          myStudentsResponseModel: myStudentsResponseModel,
+        ),
+      );
+    }
+  }
+
+  _updatedSelectedCard(UpdatedSelectedCard event, emit) {
+    var myStudentsResponseModel = MyStudentsResponseModel.empty();
+    myStudentsResponseModel = state.myStudentsResponseModel;
+    for (int i = 0; i < myStudentsResponseModel.students!.length; i++) {
+      if (myStudentsResponseModel.students![i].id == event.id) {
+        myStudentsResponseModel.students![i].isSelected = true;
+      } else {
+        myStudentsResponseModel.students![i].isSelected = false;
+      }
+    }
+
+    emit(
+      state.copyWith(
+        myStudentsResponseModel: myStudentsResponseModel,
+      ),
     );
   }
 }
