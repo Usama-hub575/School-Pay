@@ -1,6 +1,4 @@
 import 'package:paynest_flutter_app/export.dart';
-import 'package:paynest_flutter_app/views/host/addstudent/add_student.dart'
-    as add_student;
 
 class SelectSchool extends StatefulWidget {
   const SelectSchool({Key? key}) : super(key: key);
@@ -269,7 +267,7 @@ class _SelectSchoolState extends State<SelectSchool> {
         );
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => add_student.AddStudent(
+            builder: (context) => AddStudent(
               schoolData: schoolData,
             ),
           ),

@@ -51,6 +51,8 @@ const error = "Error";
 const iAccept = "I Accept";
 const termsAndConditions = "Terms & Conditions";
 const termsAndConditionsURL = "https://pay nest.ae/terms.html";
+const forAlternateUseCaseWithAllTextFieldsPleaseClickHereThisWillNotBeShownOnActualApp =
+    "For Alternate Use Case With All Text Fields Please Click Here. (This Will Not Be Shown On Actual App)";
 const sorryWeCant =
     "Sorry, we can’t process your request At the moment, please try again later";
 const show = "Show";
@@ -103,6 +105,8 @@ const addStudentManually = "Add Payee Manually";
 const passwordDetails = "Password details";
 const done = "Done";
 const search = "Search";
+const searchCannotBeEmpty = "Search Cannot Be Empty !";
+const searchResult = "Search Result";
 
 const personalDetails = "Personal details";
 const firstName = "First Name";
@@ -182,6 +186,7 @@ const studentAdded = "Payee Added";
 const studentAddedSuccessfully = "Payee Added Successfully";
 const addDetails = "Please Add Below Details Before We Proceed";
 const pleaseSelect = "Please Select";
+const pleaseSelectSearchByFieldFirst = "Please Select Search By Field First";
 const successfully = "Successfully!";
 const paynow = "Pay\nNow";
 const pay = "Pay Now";

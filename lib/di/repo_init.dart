@@ -89,4 +89,10 @@ Future initializeRepoDependencies() async {
       networkHelper: it(),
     ),
   );
+  it.registerLazySingleton<AddStudentRepo>(
+    () => AddStudentRepoImpl(
+      storage: storage,
+      networkHelper: it(),
+    ),
+  );
 }

@@ -86,4 +86,9 @@ Future initializeBlocs() async {
       payNowPageUseCase: it<PayNowPageUseCase>(),
     ),
   );
+  it.registerLazySingleton(
+    () => AddStudentBloc(
+      addStudentUseCase: it<AddStudentUseCase>(),
+    ),
+  );
 }

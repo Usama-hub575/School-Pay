@@ -25,6 +25,13 @@ class AddStudentResponseModel {
         message: json["message"],
       );
 
+  static AddStudentResponseModel empty() {
+    return AddStudentResponseModel(
+      status: false,
+      message: null,
+    );
+  }
+
   Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,

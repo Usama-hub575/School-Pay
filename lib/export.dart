@@ -4,6 +4,7 @@ export 'dart:io';
 
 export 'package:carousel_slider/carousel_controller.dart';
 export 'package:carousel_slider/carousel_slider.dart';
+export 'package:dropdown_button2/dropdown_button2.dart';
 export 'package:equatable/equatable.dart';
 export 'package:fade_shimmer/fade_shimmer.dart';
 export 'package:firebase_core/firebase_core.dart';

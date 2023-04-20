@@ -147,4 +147,56 @@ class AddStudentRepoImpl implements AddStudentRepo {
       },
     );
   }
+
+  @override
+  Future<Either<StudentListResponseModel, Failure>> search({
+    required String searchBy,
+    required String queryParam,
+    required int schoolID,
+  }) async {
+    var endPoint = '';
+    if (searchBy == 'Name') {
+      endPoint = endPoints
+          .getSearchByNameEndPoint()
+          .replaceAll('{name}', queryParam)
+          .replaceAll(
+            '{school_id}',
+            schoolID.toString(),
+          );
+    } else if (searchBy == 'Account') {
+      endPoint = endPoints
+          .getSearchByPIDEndPoint()
+          .replaceAll('{pid}', queryParam)
+          .replaceAll(
+            '{school_id}',
+            schoolID.toString(),
+          );
+    } else if (searchBy == 'StudentID') {
+      endPoint = endPoints
+          .getSearchBySIDEndPoint()
+          .replaceAll('{sid}', queryParam)
+          .replaceAll(
+            '{school_id}',
+            schoolID.toString(),
+          );
+    }
+    final response = await networkHelper.get(
+      endPoint,
+    );
+    return response.fold(
+      (success) {
+        return Left(
+          studentListResponseModelFromJson(success),
+        );
+      },
+      (r) {
+        return Right(
+          Failure(
+            status: r.status,
+            message: r.message,
+          ),
+        );
+      },
+    );
+  }
 }

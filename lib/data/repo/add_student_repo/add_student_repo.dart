@@ -22,4 +22,10 @@ mixin AddStudentRepo {
   Future<Either<AddStudentResponseModel, Failure>> addStudentByPayNestNumber({
     required String payNestNumber,
   });
+
+  Future<Either<StudentListResponseModel, Failure>> search({
+    required String searchBy,
+    required String queryParam,
+    required int schoolID,
+  });
 }

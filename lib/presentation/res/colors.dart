@@ -14,11 +14,11 @@ Map<int, Color> color = {
 };
 
 class AppColors {
-  Color textGrey = const Color(0xFF8C8C8C);
-  Color blueAccent = const Color(0xFF04ACDD);
-  Color textGreyWhiteShade = const Color(0xFFB8C1C5);
-  Color dropShadow = const Color(0xFF7A7A7A);
   Color appColor = const Color.fromRGBO(0, 206, 139, 1);
+  Color dropShadow = const Color.fromRGBO(122, 122, 122, 1.0);
+  Color textGreyWhiteShade = const Color.fromRGBO(184, 193, 197, 1.0);
+  Color blueAccent = const Color.fromRGBO(4, 172, 221, 1.0);
+  Color textGrey = const Color.fromRGBO(140, 140, 140, 1.0);
   Color lightAppColor = const Color.fromRGBO(0, 195, 135, 0.1);
   Color appColorShade = const Color.fromRGBO(0, 206, 139, .16);
   Color white = const Color.fromRGBO(255, 255, 255, 1);

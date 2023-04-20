@@ -109,4 +109,31 @@ class AddStudentUseCase {
       },
     );
   }
+
+  Future<Either<StudentListResponseModel, Failure>> search({
+    required String searchBy,
+    required String queryParam,
+    required int schoolID,
+  }) async {
+    final response = await addStudentRepo.search(
+      searchBy: searchBy,
+      queryParam: queryParam,
+      schoolID: schoolID,
+    );
+    return response.fold(
+      (success) {
+        return Left(
+          success,
+        );
+      },
+      (r) {
+        return Right(
+          Failure(
+            status: r.status,
+            message: r.message,
+          ),
+        );
+      },
+    );
+  }
 }

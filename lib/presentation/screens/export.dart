@@ -1,3 +1,4 @@
+export 'add_student/export.dart';
 export 'assistance/export.dart';
 export 'change_password/export.dart';
 export 'dashboard/export.dart';

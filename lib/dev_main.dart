@@ -131,6 +131,9 @@ void main() async {
             BlocProvider.value(
               value: it<PayNowBloc>(),
             ),
+            BlocProvider.value(
+              value: it<AddStudentBloc>(),
+            ),
           ],
           child: const MyApp(),
         ),

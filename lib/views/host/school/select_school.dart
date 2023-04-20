@@ -12,7 +12,7 @@ import 'package:paynest_flutter_app/views/host/addstudent/add_student.dart'
 import 'package:paynest_flutter_app/widgets/spacer.dart';
 
 import '../../../data/model/response/school_list/school_list_response_model.dart';
-import '../../../data/model/response/school_list/selected_school_to_addstudent.dart';
+import '../../../data/model/response/school_list/selected_school_to_add_student.dart';
 import '../../../presentation/res/res.dart';
 import '../../../widgets/back_button.dart';
 
