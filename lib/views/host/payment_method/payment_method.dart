@@ -197,7 +197,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         child: Row(
                           children: [
                             horizontalSpacer(16),
-                            _commercial_image(
+                            commercialImage(
                               imagePath: AppAssets().icCommercialBank,
                             ),
                             Expanded(
@@ -703,7 +703,7 @@ PayNowTransactionDetailModel _getModel(
   );
 }
 
-Widget _commercial_image({required String imagePath}) {
+Widget commercialImage({required String imagePath}) {
   return Container(
     height: sizes.heightRatio * 41,
     width: sizes.widthRatio * 41,

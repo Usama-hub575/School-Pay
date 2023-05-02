@@ -163,33 +163,37 @@ class _RegisterDetailPageState extends State<RegisterDetailPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              optionalButton(
-                                value: 'Emirates ID',
-                                buttonColor: state.isEmiratesSelected
-                                    ? colors.primaryColor
-                                    : colors.primaryColor.withOpacity(
-                                        0.5,
-                                      ),
-                                onTap: () {
-                                  state.isEmiratesSelected = true;
-                                  state.isPassportSelected = false;
-                                  emirateIDController.clear();
-                                  setState(() {});
-                                },
+                              Expanded(
+                                child: optionalButton(
+                                  value: 'Emirates ID',
+                                  buttonColor: state.isEmiratesSelected
+                                      ? colors.primaryColor
+                                      : colors.primaryColor.withOpacity(
+                                          0.5,
+                                        ),
+                                  onTap: () {
+                                    state.isEmiratesSelected = true;
+                                    state.isPassportSelected = false;
+                                    emirateIDController.clear();
+                                    setState(() {});
+                                  },
+                                ),
                               ),
-                              optionalButton(
-                                value: 'Passport   ',
-                                buttonColor: state.isPassportSelected
-                                    ? colors.primaryColor
-                                    : colors.primaryColor.withOpacity(
-                                        0.5,
-                                      ),
-                                onTap: () {
-                                  state.isEmiratesSelected = false;
-                                  state.isPassportSelected = true;
-                                  emirateIDController.clear();
-                                  setState(() {});
-                                },
+                              Expanded(
+                                child: optionalButton(
+                                  value: 'Passport   ',
+                                  buttonColor: state.isPassportSelected
+                                      ? colors.primaryColor
+                                      : colors.primaryColor.withOpacity(
+                                          0.5,
+                                        ),
+                                  onTap: () {
+                                    state.isEmiratesSelected = false;
+                                    state.isPassportSelected = true;
+                                    emirateIDController.clear();
+                                    setState(() {});
+                                  },
+                                ),
                               ),
                             ],
                           ),

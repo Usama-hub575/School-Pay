@@ -1,9 +1,12 @@
+export 'add_student_repo/export.dart';
 export 'change_password_repo/export.dart';
 export 'dashboard_repo/export.dart';
 export 'edit_profile_repo/export.dart';
 export 'firebase_repo/export.dart';
 export 'forgot_password_repo/export.dart';
 export 'initializer_repo/export.dart';
+export 'pay_now_page_repo/export.dart';
 export 'register_repo/export.dart';
 export 'reset_password_repo/export.dart';
+export 'school_list_repo/export.dart';
 export 'signin_repo/export.dart';

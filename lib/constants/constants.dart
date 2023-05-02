@@ -51,6 +51,8 @@ const error = "Error";
 const iAccept = "I Accept";
 const termsAndConditions = "Terms & Conditions";
 const termsAndConditionsURL = "https://pay nest.ae/terms.html";
+const forAlternateUseCaseWithAllTextFieldsPleaseClickHereThisWillNotBeShownOnActualApp =
+    "For Alternate Use Case With All Text Fields Please Click Here. (This Will Not Be Shown On Actual App)";
 const sorryWeCant =
     "Sorry, we can’t process your request At the moment, please try again later";
 const show = "Show";
@@ -103,6 +105,8 @@ const addStudentManually = "Add Payee Manually";
 const passwordDetails = "Password details";
 const done = "Done";
 const search = "Search";
+const searchCannotBeEmpty = "Search Cannot Be Empty !";
+const searchResult = "Search Result";
 
 const personalDetails = "Personal details";
 const firstName = "First Name";
@@ -118,6 +122,8 @@ const apartment = "Apartment";
 const city = "City";
 const ok = "Ok";
 const english = "English";
+const payBySafeX = "Pay By SafeX";
+const serviceUnavailable = "Service Unavailable !!";
 const arabic = "Arabic";
 const countryRegion = "Country / Region*";
 const updateProfile = "Update Profile";
@@ -135,6 +141,7 @@ const congratulations = "Congratulations!";
 const youHaveSuccessfully = "You Have Successfully Transferred The Amount.";
 const language = "Language";
 const invalidEmail = 'Invalid Email';
+const amountShouldBeGreaterThan0 = "Amount Should Be Grater Then 0!";
 const passwordNotMatched = 'Password Not Matched';
 const passwordMustNotBeLessThan5 = 'Password Must Not Be Less Than 5';
 const pendingTask = "Pending Tasks";
@@ -167,17 +174,19 @@ const deleteAccount = "Delete Account";
 const changePassword = "Change Password";
 const continueTo = "Continue";
 const enterYourPin = "Enter your 4 digit Pin to continue";
-const currentPayableMmount = "Current Payable amount";
+const currentPayableAmount = "Current Payable Amount";
 const downloadInvoice = 'Download Invoice';
 const verifyStudent = "Verify Payees";
 const enterAmount = "Enter Amount";
 const addStudent = "Add Payee";
 const enterStudent = "Please Enter Payee ID Or Date Of Birth";
 const enterStudentDetail = "Enter Payee Details";
+const studentDetails = "Payee Details";
 const studentAdded = "Payee Added";
 const studentAddedSuccessfully = "Payee Added Successfully";
 const addDetails = "Please Add Below Details Before We Proceed";
 const pleaseSelect = "Please Select";
+const pleaseSelectSearchByFieldFirst = "Please Select Search By Field First";
 const successfully = "Successfully!";
 const paynow = "Pay\nNow";
 const pay = "Pay Now";
@@ -186,6 +195,8 @@ const myProfile = "My Profile";
 const editProfile = "Edit Profile";
 const save = "Save";
 
+const somethingWentWrongWithTheTransaction =
+    "Something went wrong with the transaction";
 const pleaseConfirmDetailsBelow =
     "Please confirm below details before we proceed.";
 const pleaseEnterDetailBelow = "Please Enter Your Personal Details";
@@ -199,10 +210,11 @@ const confirmCode = "Confirmation Code Has Been Sent!";
 const thePINWill =
     "This PIN will be used to authorize transactions and adding payees and properties.";
 const noStudent = "No payee available";
-
+const amountIsNotCorrect = "Amount is not correct";
 const createPIN = "Create PIN to secure your account";
 
 const welcome = "Welcome";
+const comingSoon = "Coming Soon!";
 const welcomeBack = "Welcome Back";
 const recentTransactions = "Recent Transactions";
 const recentTransaction = "Recent Transaction";
@@ -215,10 +227,10 @@ const addressDetails = "Address Details";
 const google = "Continue with Google";
 const facebook = "Continue with Facebook";
 
+const feesAlreadyPaid = "Fees already paid";
 const payment = "Payment";
-const paymentfor = "Payment For";
-const currentPayableamount = "Current Payable amount";
-const feepayment = "Fee Payment";
+const paymentFor = "Payment For";
+const feePayment = "Fee Payment";
 const paymentHistory = "Payment History";
 const invoiceDetails = "Invoice Details";
 const paymentCategory = "Payment Category";

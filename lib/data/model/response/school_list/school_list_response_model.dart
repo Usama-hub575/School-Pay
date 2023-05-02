@@ -4,14 +4,14 @@
 
 import 'dart:convert';
 
-SchoolListRespModel schoolListRespModelFromJson(String str) =>
-    SchoolListRespModel.fromJson(json.decode(str));
+SchoolListResponseModel schoolListResponseModelFromJson(String str) =>
+    SchoolListResponseModel.fromJson(json.decode(str));
 
-String schoolListRespModelToJson(SchoolListRespModel data) =>
+String schoolListResponseModelToJson(SchoolListResponseModel data) =>
     json.encode(data.toJson());
 
-class SchoolListRespModel {
-  SchoolListRespModel({
+class SchoolListResponseModel {
+  SchoolListResponseModel({
     required this.status,
     required this.log,
   });
@@ -19,8 +19,8 @@ class SchoolListRespModel {
   bool status;
   List<Log>? log;
 
-  factory SchoolListRespModel.fromJson(Map<String, dynamic> json) =>
-      SchoolListRespModel(
+  factory SchoolListResponseModel.fromJson(Map<String, dynamic> json) =>
+      SchoolListResponseModel(
         status: json["status"],
         log: List<Log>.from(json["log"].map((x) => Log.fromJson(x))),
       );

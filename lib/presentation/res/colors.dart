@@ -14,11 +14,11 @@ Map<int, Color> color = {
 };
 
 class AppColors {
-  Color textGrey = const Color(0xFF8C8C8C);
-  Color blueAccent = const Color(0xFF04ACDD);
-  Color textGreyWhiteShade = const Color(0xFFB8C1C5);
-  Color dropShadow = const Color(0xFF7A7A7A);
   Color appColor = const Color.fromRGBO(0, 206, 139, 1);
+  Color dropShadow = const Color.fromRGBO(122, 122, 122, 1.0);
+  Color textGreyWhiteShade = const Color.fromRGBO(184, 193, 197, 1.0);
+  Color blueAccent = const Color.fromRGBO(4, 172, 221, 1.0);
+  Color textGrey = const Color.fromRGBO(140, 140, 140, 1.0);
   Color lightAppColor = const Color.fromRGBO(0, 195, 135, 0.1);
   Color appColorShade = const Color.fromRGBO(0, 206, 139, .16);
   Color white = const Color.fromRGBO(255, 255, 255, 1);
@@ -38,12 +38,13 @@ class AppColors {
   Color darkBlue = const Color.fromRGBO(34, 43, 69, 1);
   Color darkBlue1 = const Color.fromRGBO(23, 115, 150, 1);
   Color colorBlue = const Color.fromRGBO(28, 84, 178, 1);
+  Color lightGrey3 = const Color.fromRGBO(168, 168, 168, 1);
   Color lightGreyShade = const Color.fromRGBO(112, 112, 112, 1);
   Color lightGreyShade2 = const Color.fromRGBO(0, 0, 0, .16);
   Color lightGreyShade3 = const Color.fromRGBO(221, 221, 221, .16);
-  Color lightGrey3 = const Color.fromRGBO(168, 168, 168, 1);
   Color lightGreyShade4 = const Color.fromRGBO(0, 0, 0, .26);
   Color lightGreyShade5 = const Color.fromRGBO(0, 0, 0, .12);
+  Color lightGreyShade6 = const Color.fromRGBO(0, 0, 0, 0.5411764705882353);
   Color black = Colors.black;
   Color background = const Color.fromRGBO(249, 250, 251, 1);
   Color red = const Color.fromRGBO(160, 35, 1, 1);
@@ -57,6 +58,8 @@ class AppColors {
   Color greyLite = const Color.fromRGBO(193, 198, 208, 1);
   Color greyLite2 = const Color.fromRGBO(183, 183, 183, 1);
   Color greyLite3 = const Color.fromRGBO(236, 235, 235, 1);
+  Color baseWhite = const Color.fromRGBO(235, 235, 244, 1.0);
+  Color highlightWhite = const Color.fromRGBO(244, 244, 244, 1.0);
   Color greyLite4 = const Color.fromRGBO(209, 209, 209, 1);
   Color greyLite5 = const Color.fromRGBO(204, 204, 204, 1);
   Color orangeDark = const Color.fromRGBO(239, 107, 49, 1);

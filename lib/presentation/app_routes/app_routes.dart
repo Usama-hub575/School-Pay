@@ -3,7 +3,6 @@ import 'package:paynest_flutter_app/export.dart';
 class AppRoutes {
   static const initializer = '/';
   static const navigateToWelcome = '/welcome';
-  static const navigateToSignIn = '/signIn';
   static const navigateToRegister = '/register';
   static const navigateToDashboard = '/dashboard';
   static const navigateToForgotPassword = '/forgotPassword';
@@ -21,10 +20,6 @@ class AppRoutes {
       case navigateToWelcome:
         return MaterialPageRoute(
           builder: (_) => const WelcomePage(),
-        );
-      case navigateToSignIn:
-        return MaterialPageRoute(
-          builder: (_) => const SignInPage(),
         );
       case navigateToRegister:
         return MaterialPageRoute(
@@ -60,15 +55,17 @@ class AppRoutes {
   }
 
   static Route<dynamic> _errorRoute() {
-    return MaterialPageRoute(builder: (_) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Error'),
-        ),
-        body: const Center(
-          child: Text('Error'),
-        ),
-      );
-    });
+    return MaterialPageRoute(
+      builder: (_) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Error'),
+          ),
+          body: const Center(
+            child: Text('Error'),
+          ),
+        );
+      },
+    );
   }
 }

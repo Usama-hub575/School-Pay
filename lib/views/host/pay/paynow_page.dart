@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:encrypt/encrypt.dart' as encryption;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:lean_sdk_flutter/lean_sdk_flutter.dart';
 import 'package:paynest_flutter_app/controller/createtransaction_resp_controller.dart';
 import 'package:paynest_flutter_app/controller/myStudent_controller.dart';
 import 'package:paynest_flutter_app/controller/paynow_controller.dart';
@@ -384,7 +383,6 @@ class _PayNowPageState extends State<PayNowPage> {
                                                                 student.student!
                                                                     .totalBalanceAmount
                                                                     .toString();
-                                                            setState(() {});
                                                           },
                                                           index,
                                                         );

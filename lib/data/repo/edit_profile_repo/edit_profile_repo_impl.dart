@@ -12,8 +12,8 @@ class EditProfileRepoImpl implements EditProfileRepo {
   });
 
   @override
-  Future? saveString({required String key, String? value}) {
-    return storage.saveString(key: key, value: value);
+  String? getString({required String key}) {
+    return storage.getString(key: key);
   }
 
   @override
@@ -27,23 +27,25 @@ class EditProfileRepoImpl implements EditProfileRepo {
     int? parentID = storage.getInt(
       key: StorageKeys.userId,
     );
-    final response = await networkHelper.put(
-        endPoints.getUpdateProfileEndPoint(),
-        //         headers: {
-        //   "Content-Type": "application/json",
-        //   "Authorization":
-        //       "Bearer ${storage.getString(key: StorageKeys.accessToken) ?? ''}",
-        // },
-        body: {
-          "id": parentID,
-          "firstName": firstName,
-          "lastName": lastName,
-          "email": email,
-          "expiryDate": expiryDate,
-          "emiratesId": emiratesId
-        });
+    final response =
+        await networkHelper.put(endPoints.getUpdateProfileEndPoint(), body: {
+      "id": parentID,
+      "firstName": firstName,
+      "lastName": lastName,
+      "email": email,
+      "expiryDate": expiryDate,
+      "emiratesId": emiratesId
+    });
     return response.fold(
       (success) {
+        storage.saveString(
+          key: StorageKeys.firstName,
+          value: firstName,
+        );
+        storage.saveString(
+          key: StorageKeys.lastName,
+          value: lastName,
+        );
         return Left(
           updateProfileResponseModelFromJson(success),
         );

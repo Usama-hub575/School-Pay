@@ -115,9 +115,12 @@ class _WelcomePageState extends State<WelcomePage> {
                     text: signIn,
                     onPressed: () async {
                       videoPlayerController.pause();
-                      await Navigator.pushNamed(
-                        context,
-                        AppRoutes.navigateToSignIn,
+                      await Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const SignInPage(
+                            whichStack: "",
+                          ),
+                        ),
                       );
                       videoPlayerController.play();
                     },

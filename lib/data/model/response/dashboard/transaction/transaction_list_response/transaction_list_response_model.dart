@@ -116,8 +116,8 @@ class TransactionsRow {
   dynamic stringFromBank;
   DateTime? createdAt;
   DateTime? updatedAt;
-  Student? student;
-  School? school;
+  TransactionListStudents? student;
+  TransactionListResponseSchool? school;
 
   factory TransactionsRow.fromJson(Map<String, dynamic> json) =>
       TransactionsRow(
@@ -147,11 +147,11 @@ class TransactionsRow {
             ? DateTime.now()
             : DateTime.parse(json["updatedAt"]),
         student: json["student"] == null
-            ? Student.empty()
-            : Student.fromJson(json["student"]),
+            ? TransactionListStudents.empty()
+            : TransactionListStudents.fromJson(json["student"]),
         school: json["school"] == null
-            ? School.empty()
-            : School.fromJson(json["school"]),
+            ? TransactionListResponseSchool.empty()
+            : TransactionListResponseSchool.fromJson(json["school"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -179,8 +179,8 @@ class TransactionsRow {
       };
 }
 
-class School {
-  School({
+class TransactionListResponseSchool {
+  TransactionListResponseSchool({
     required this.id,
     required this.name,
     required this.deletedAt,
@@ -212,8 +212,8 @@ class School {
   DateTime createdAt;
   DateTime updatedAt;
 
-  static School empty() {
-    return School(
+  static TransactionListResponseSchool empty() {
+    return TransactionListResponseSchool(
         id: -1,
         name: "-",
         deletedAt: DateTime.now(),
@@ -230,7 +230,8 @@ class School {
         updatedAt: DateTime.now());
   }
 
-  factory School.fromJson(Map<String, dynamic> json) => School(
+  factory TransactionListResponseSchool.fromJson(Map<String, dynamic> json) =>
+      TransactionListResponseSchool(
         id: json["id"] ?? -1,
         name: json["name"] ?? "-",
         deletedAt:
@@ -270,8 +271,8 @@ class School {
       };
 }
 
-class Student {
-  Student({
+class TransactionListStudents {
+  TransactionListStudents({
     required this.dob,
     required this.admissionDate,
     required this.id,
@@ -341,8 +342,8 @@ class Student {
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  static Student empty() {
-    return Student(
+  static TransactionListStudents empty() {
+    return TransactionListStudents(
         dob: DateTime.now(),
         admissionDate: DateTime.now(),
         id: -1,
@@ -378,7 +379,8 @@ class Student {
         updatedAt: DateTime.now());
   }
 
-  factory Student.fromJson(Map<String, dynamic> json) => Student(
+  factory TransactionListStudents.fromJson(Map<String, dynamic> json) =>
+      TransactionListStudents(
         dob: json["dob"] == null ? DateTime.now() : DateTime.parse(json["dob"]),
         admissionDate: json["admissionDate"] == null
             ? DateTime.now()

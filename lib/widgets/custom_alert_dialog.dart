@@ -36,7 +36,7 @@ class CustomAlertDialog {
               SizedBox(
                 width: horizontalValue(68),
                 child: Lottie.asset(
-                  AppAssets().checkAnimation,
+                  assets.checkAnimation,
                 ),
               ),
             ],
@@ -51,45 +51,35 @@ class CustomAlertDialog {
               verticalSpacer(16),
               Text(
                 title,
-                style: TextStyles().semiBold.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: sizes.fontRatio * 22,
-                    ),
+                style: textStyles.semiBold.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: sizes.fontRatio * 22,
+                ),
               ),
               verticalSpacer(8),
               Text(
                 message,
-                style: TextStyles().semiBold.copyWith(
-                      color: AppColors().black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: sizes.fontRatio * 14,
-                    ),
+                style: textStyles.semiBold.copyWith(
+                  color: colors.black,
+                  fontWeight: FontWeight.w400,
+                  fontSize: sizes.fontRatio * 14,
+                ),
                 textAlign: TextAlign.center,
               ),
-              verticalSpacer(16),
-              SizedBox(
-                width: horizontalValue(60),
-                height: verticalValue(26),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors().primaryColor,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        15,
-                      ),
-                    ),
-                  ),
+              verticalSpacer(10),
+              Container(
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(
+                  horizontal: horizontalValue(32),
+                ),
+                child: ElevatedButtons(
+                  color: colors.primaryColor,
+                  textColor: colors.white,
+                  text: ok,
+                  isLoading: false,
                   onPressed: () async {
                     buttonAction();
                   },
-                  child: Text(
-                    ok,
-                    style: TextStyles().bold.copyWith(
-                          fontSize: sizes.fontRatio * 14,
-                          color: AppColors().white,
-                        ),
-                  ),
                 ),
               ),
             ],
@@ -130,7 +120,7 @@ class CustomAlertDialog {
             ),
             title: Container(
               decoration: BoxDecoration(
-                color: AppColors().white,
+                color: colors.white,
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(
                     27,
@@ -141,11 +131,11 @@ class CustomAlertDialog {
                 children: [
                   verticalSpacer(16),
                   SizedBox(
-                    width: 68,
+                    width: horizontalValue(68),
                     child: Image.asset(
-                      AppAssets().icTick,
+                      assets.icTick,
                       fit: BoxFit.fill,
-                      color: AppColors().primaryColor,
+                      color: colors.primaryColor,
                     ),
                     // child: Assets.png.icTick.image(
                     //   fit: BoxFit.fill,
@@ -164,10 +154,10 @@ class CustomAlertDialog {
                     verticalSpacer(16),
                     Text(
                       title,
-                      style: TextStyles().bold.copyWith(
-                            fontWeight: FontWeight.bold,
-                            fontSize: sizes.fontRatio * 22,
-                          ),
+                      style: textStyles.bold.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: sizes.fontRatio * 22,
+                      ),
                     ),
                     verticalSpacer(8),
                     Container(
@@ -176,11 +166,11 @@ class CustomAlertDialog {
                       ),
                       child: Text(
                         message,
-                        style: TextStyles().regular.copyWith(
-                              color: AppColors().black,
-                              fontWeight: FontWeight.w400,
-                              fontSize: sizes.fontRatio * 14,
-                            ),
+                        style: textStyles.regular.copyWith(
+                          color: colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: sizes.fontRatio * 14,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -190,35 +180,15 @@ class CustomAlertDialog {
                       margin: EdgeInsets.symmetric(
                         horizontal: horizontalValue(32),
                       ),
-                      child: OutlinedButton(
+                      child: ElevatedButtons(
+                        isLoading: false,
+                        text: update,
+                        textColor: colors.white,
+                        color: colors.primaryColor,
                         onPressed: () {
                           updateButtonAction();
                         },
-                        style: OutlinedButton.styleFrom(
-                          minimumSize: const Size(
-                            0.5,
-                            40,
-                          ),
-                          side: BorderSide(
-                            width: 1.0,
-                            color: AppColors().primaryColor,
-                          ),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(
-                                15,
-                              ),
-                            ),
-                          ),
-                          backgroundColor: AppColors().primaryColor,
-                        ),
-                        child: Text(
-                          update,
-                          style: TextStyles().bold.copyWith(
-                                fontSize: sizes.fontRatio * 14,
-                                color: AppColors().white,
-                              ),
-                        ),
+                        showIcon: false,
                       ),
                     ),
                     Container(
@@ -227,36 +197,15 @@ class CustomAlertDialog {
                         horizontal: horizontalValue(32),
                       ),
                       child: showCancelButton
-                          ? OutlinedButton(
+                          ? ElevatedButtons(
                               onPressed: () {
                                 Navigator.pop(_);
                                 cancelButtonAction!();
                               },
-                              style: OutlinedButton.styleFrom(
-                                minimumSize: const Size(
-                                  0.5,
-                                  40,
-                                ),
-                                side: BorderSide(
-                                  width: 1.0,
-                                  color: AppColors().primaryColor,
-                                ),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(
-                                      15,
-                                    ),
-                                  ),
-                                ),
-                                backgroundColor: AppColors().primaryColor,
-                              ),
-                              child: Text(
-                                cancel,
-                                style: TextStyles().bold.copyWith(
-                                      fontSize: sizes.fontRatio * 14,
-                                      color: AppColors().white,
-                                    ),
-                              ),
+                              color: colors.primaryColor,
+                              textColor: colors.white,
+                              text: cancel,
+                              isLoading: false,
                             )
                           : const SizedBox(),
                     ),

@@ -5,6 +5,8 @@ mixin StorageRepo {
 
   Future? saveDouble({required String key, double? value});
 
+  Future? reload();
+
   Future? saveBool({required String key, bool? value});
 
   Future? saveStringList({required String key, List<String>? value});

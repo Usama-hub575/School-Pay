@@ -10,6 +10,9 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
+    context.read<EditProfileBloc>().add(
+          GetName(),
+        );
     context.read<DashboardBloc>().add(
           IsBioMetricEnable(),
         );
@@ -124,7 +127,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           },
                         ),
                         horizontalSpacer(16),
-                        BlocBuilder<DashboardBloc, DashboardState>(
+                        BlocBuilder<EditProfileBloc, EditProfileState>(
                           builder: (context, state) {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -196,7 +199,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const RecentTransactionPage(
-                              whichStack: "other",
+                              whichStack: "settings",
                             ),
                           ),
                         );
@@ -310,29 +313,12 @@ class _SettingsPageState extends State<SettingsPage> {
                       },
                     ),
                     verticalSpacer(16),
-                    // Container(
-                    //   margin: EdgeInsets.symmetric(
-                    //     horizontal: horizontalValue(16),
-                    //   ),
-                    //   width: horizontalValue(1),
-                    //   height: verticalValue(1),
-                    //   color: colors.white,
-                    // ),
-                    verticalSpacer(5),
                     SizedBox(
                       width: double.infinity,
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: colors.redShade2,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              12,
-                            ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            vertical: verticalValue(16),
-                          ),
-                        ),
+                      height: sizes.heightRatio * 46,
+                      child: ElevatedButtons(
+                        color: colors.redShade3,
+                        text: signOut,
                         onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
@@ -342,13 +328,8 @@ class _SettingsPageState extends State<SettingsPage> {
                             (Route route) => false,
                           );
                         },
-                        child: Text(
-                          signOut,
-                          style: textStyles.bold.copyWith(
-                            fontSize: sizes.fontRatio * 14,
-                            color: colors.white,
-                          ),
-                        ),
+                        textColor: colors.white,
+                        isLoading: false,
                       ),
                     ),
                     verticalSpacer(16),

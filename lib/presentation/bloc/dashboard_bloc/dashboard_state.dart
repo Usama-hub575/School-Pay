@@ -7,12 +7,16 @@ class DashboardState extends Equatable {
   bool isBioMetricEnable = false;
   var list = {};
   bool isLoading = true;
-  String firstName = '';
+  // String firstName = '';
   String email = '';
   String phoneNumber = '';
-  String lastName = '';
+  // String lastName = '';
   bool showShimmer = false;
-  List<TransactionsRow> transactionsList = [];
+  List<StudentData> searchResult = [];
+  MyStudentsResponseModel myStudentsResponseModel =
+      MyStudentsResponseModel.empty();
+  SingleStudentResponseModel singleStudentResponseModel =
+      SingleStudentResponseModel();
   List<StudentData> students = [];
   TransactionListResponseModel transactionListResponseModel =
       TransactionListResponseModel.empty();
@@ -22,20 +26,26 @@ class DashboardState extends Equatable {
     this.errorMessage = '',
     this.isBioMetricEnable = false,
     this.list = const {},
+    this.searchResult = const [],
     this.email = '',
     this.phoneNumber = '',
     this.showShimmer = false,
+    required this.singleStudentResponseModel,
+    required this.myStudentsResponseModel,
     required this.transactionListResponseModel,
     this.isLoading = true,
-    this.firstName = '',
-    this.lastName = '',
+    // this.firstName = '',
+    // this.lastName = '',
     this.students = const [],
   });
 
   DashboardState copyWith({
     RegisterResponseModel? registerResponseModel,
     TransactionListResponseModel? transactionListResponseModel,
+    SingleStudentResponseModel? singleStudentResponseModel,
+    MyStudentsResponseModel? myStudentsResponseModel,
     String? errorMessage,
+    List<StudentData>? searchResult,
     String? email,
     String? phoneNumber,
     bool? isBioMetricEnable,
@@ -48,6 +58,11 @@ class DashboardState extends Equatable {
     String? lastName,
   }) {
     return DashboardState(
+      myStudentsResponseModel:
+          myStudentsResponseModel ?? this.myStudentsResponseModel,
+      singleStudentResponseModel:
+          singleStudentResponseModel ?? this.singleStudentResponseModel,
+      searchResult: searchResult ?? this.searchResult,
       transactionListResponseModel:
           transactionListResponseModel ?? this.transactionListResponseModel,
       status: status ?? this.status,
@@ -59,14 +74,19 @@ class DashboardState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
       students: students ?? this.students,
       isLoading: isLoading ?? this.isLoading,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
+      // firstName: firstName ?? this.firstName,
+      // lastName: lastName ?? this.lastName,
     );
   }
 
   @override
   List<Object?> get props => [
+        // firstName,
+        // lastName,
         isBioMetricEnable,
+        singleStudentResponseModel,
+        searchResult,
+        myStudentsResponseModel,
         errorMessage,
         phoneNumber,
         email,

@@ -65,8 +65,8 @@ class _ChangePINState extends State<ChangePIN> {
                             height: 44.h,
                             width: 44.w,
                             decoration: BoxDecoration(
-                                boxShadow: [
-                                  const BoxShadow(
+                                boxShadow: const [
+                                  BoxShadow(
                                     color: Colors.black26,
                                     blurRadius: 2.0,
                                     offset: Offset(

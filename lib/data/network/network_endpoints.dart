@@ -47,6 +47,8 @@ class EndPoints {
       "/api/student/getByLName?LName={last_name}&schoolId={school_id}";
   final String _searchByFirstName =
       "/api/student/getByFName?FName={first_name}&schoolId={school_id}";
+  final String _searchByName =
+      "/api/student/getByName?Name={name}&schoolId={school_id}";
   final String _searchByPID =
       "/api/student/getByPID?PID={pid}&schoolId={school_id}";
   final String _searchBySID =
@@ -136,6 +138,8 @@ class EndPoints {
   String getSearchByPIDEndPoint() => baseUrl.toString() + _searchByPID;
 
   String getSearchBySIDEndPoint() => baseUrl.toString() + _searchBySID;
+
+  String getSearchByNameEndPoint() => baseUrl.toString() + _searchByName;
 
   Map<String, String> headers = {"Content-Type": "application/json"};
 }

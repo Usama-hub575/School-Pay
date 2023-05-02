@@ -64,4 +64,10 @@ class StorageRepoImpl implements StorageRepo {
         key,
         value ?? [],
       );
+
+  @override
+  Future? reload() {
+    sharedPreferences.reload();
+    return null;
+  }
 }

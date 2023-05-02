@@ -8,6 +8,12 @@ class EditProfileUseCase {
     required this.editProfileRepo,
   });
 
+  String? getString({required String key}) {
+    return editProfileRepo.getString(
+      key: key,
+    );
+  }
+
   Future<Either<UpdateProfileResponseModel, Failure>> updateProfile({
     required String firstName,
     required String lastName,
@@ -24,14 +30,6 @@ class EditProfileUseCase {
     );
     return response.fold(
       (success) {
-        editProfileRepo.saveString(
-          key: StorageKeys.firstName,
-          value: firstName,
-        );
-        editProfileRepo.saveString(
-          key: StorageKeys.lastName,
-          value: lastName,
-        );
         return Left(
           success,
         );

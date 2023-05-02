@@ -1,10 +1,10 @@
-class ParentStudentResponse {
+class SingleStudentResponseModel {
   bool? status;
   ParentStudent? parentStudent;
 
-  ParentStudentResponse({this.status, this.parentStudent});
+  SingleStudentResponseModel({this.status, this.parentStudent});
 
-  ParentStudentResponse.fromJson(Map<String, dynamic> json) {
+  SingleStudentResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     parentStudent = json['parentStudent'] != null
         ? ParentStudent.fromJson(json['parentStudent'])
@@ -103,6 +103,7 @@ class Student {
   String? parentEmail;
   String? section;
   String? payeeType;
+  String? lastTransactionDateTimeGst;
   String? createdAt;
   String? updatedAt;
   School? school;
@@ -145,6 +146,7 @@ class Student {
       this.parentEmail,
       this.section,
       this.payeeType,
+      this.lastTransactionDateTimeGst,
       this.createdAt,
       this.updatedAt,
       this.school});
@@ -187,6 +189,7 @@ class Student {
     parentEmail = json['parentEmail'];
     section = json['section'];
     payeeType = json['payeeType'];
+    lastTransactionDateTimeGst = json['lastTransactionDateTimeGst'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     school = json['school'] != null ? School.fromJson(json['school']) : null;
@@ -231,6 +234,7 @@ class Student {
     data['parentEmail'] = parentEmail;
     data['section'] = section;
     data['payeeType'] = payeeType;
+    data['lastTransactionDateTimeGst'] = lastTransactionDateTimeGst;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
     if (school != null) {
@@ -243,17 +247,18 @@ class Student {
 class School {
   int? id;
   String? name;
-  String? deletedAt;
-  String? addedBy;
+  Null? deletedAt;
+  Null? addedBy;
   String? address;
   String? description;
   String? vat;
   int? paynestFee;
   String? aPIKey;
   String? merchantId;
-  String? file;
+  Null? file;
   String? privacy;
   String? payeeType;
+  int? defaultLeanBankAccount;
   String? createdAt;
   String? updatedAt;
 
@@ -271,6 +276,7 @@ class School {
       this.file,
       this.privacy,
       this.payeeType,
+      this.defaultLeanBankAccount,
       this.createdAt,
       this.updatedAt});
 
@@ -288,6 +294,7 @@ class School {
     file = json['file'];
     privacy = json['privacy'];
     payeeType = json['payeeType'];
+    defaultLeanBankAccount = json['defaultLeanBankAccount'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
@@ -307,6 +314,7 @@ class School {
     data['file'] = file;
     data['privacy'] = privacy;
     data['payeeType'] = payeeType;
+    data['defaultLeanBankAccount'] = defaultLeanBankAccount;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
     return data;

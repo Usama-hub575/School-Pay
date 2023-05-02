@@ -100,7 +100,7 @@ class _RecentTransactionsState extends State<RecentTransactions> {
             ),
             horizontalSpacer(16),
             Flexible(
-              fit: FlexFit.loose,
+              fit: FlexFit.tight,
               flex: 12,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

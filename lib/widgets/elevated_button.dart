@@ -1,19 +1,22 @@
 import 'package:paynest_flutter_app/export.dart';
 
+// ignore: must_be_immutable
 class ElevatedButtons extends StatelessWidget {
-  const ElevatedButtons({
+  ElevatedButtons({
     Key? key,
     required this.color,
     required this.text,
     required this.onPressed,
     required this.textColor,
     required this.isLoading,
+    this.showIcon,
   }) : super(key: key);
   final Color color;
   final Color textColor;
   final String text;
   final Function onPressed;
   final bool isLoading;
+  bool? showIcon = false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +43,44 @@ class ElevatedButtons extends StatelessWidget {
                   color: colors.blueAccent,
                 ),
               )
-            : Text(
-                text,
-                style: textStyles.bold.copyWith(
-                  color: textColor,
-                  fontWeight: FontWeight.w500,
-                  fontSize: sizes.fontRatio * 14,
-                ),
-              ),
+            : showIcon == true
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: colors.white,
+                            width: horizontalValue(2),
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.add,
+                            color: colors.white,
+                          ),
+                        ),
+                      ),
+                      horizontalSpacer(10),
+                      Text(
+                        text,
+                        style: textStyles.bold.copyWith(
+                          color: textColor,
+                          fontWeight: FontWeight.w500,
+                          fontSize: sizes.fontRatio * 14,
+                        ),
+                      ),
+                    ],
+                  )
+                : Text(
+                    text,
+                    style: textStyles.bold.copyWith(
+                      color: textColor,
+                      fontWeight: FontWeight.w500,
+                      fontSize: sizes.fontRatio * 14,
+                    ),
+                  ),
       ),
     );
   }

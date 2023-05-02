@@ -76,63 +76,75 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
             ),
             child: Padding(
               padding: EdgeInsets.only(
-                left: widget.whichStack == "other" ? horizontalValue(25) : 0,
+                left: widget.whichStack == "other" ||
+                        widget.whichStack == "settings"
+                    ? horizontalValue(25)
+                    : 0,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   verticalSpacer(24),
                   Row(
-                    mainAxisAlignment: widget.whichStack == "other"
-                        ? MainAxisAlignment.start
+                    mainAxisAlignment: widget.whichStack == "other" ||
+                            widget.whichStack == "settings"
+                        ? MainAxisAlignment.spaceBetween
                         : MainAxisAlignment.center,
                     children: [
-                      widget.whichStack == "other"
-                          ? Padding(
-                              padding: EdgeInsets.only(
-                                right: horizontalValue(25),
-                              ),
-                              child: Container(
-                                height: verticalValue(44),
-                                width: horizontalValue(44),
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: colors.black,
-                                      blurRadius: 2.0,
-                                      offset: const Offset(
-                                        3.0, // Move to right 10  horizontally
-                                        3.0, // Move to bottom 10 Vertically
-                                      ),
+                      widget.whichStack == "other" ||
+                              widget.whichStack == "settings"
+                          ? Container(
+                              height: verticalValue(44),
+                              width: horizontalValue(44),
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: colors.black,
+                                    blurRadius: 2.0,
+                                    offset: const Offset(
+                                      3.0, // Move to right 10  horizontally
+                                      3.0, // Move to bottom 10 Vertically
                                     ),
-                                  ],
-                                  color: colors.white,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  icon: Icon(
-                                    Icons.clear,
-                                    size: 20,
-                                    color: colors.blueAccent,
                                   ),
-                                  // child: Text(""),
+                                ],
+                                color: colors.white,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: IconButton(
+                                onPressed: () {
+                                  widget.whichStack == "other"
+                                      ? context.read<HostBloc>().add(
+                                            ChangePageIndex(
+                                              stack: "host",
+                                              pageIndex: 0,
+                                            ),
+                                          )
+                                      : Navigator.pop(context);
+                                },
+                                icon: Icon(
+                                  Icons.clear,
+                                  size: 20,
+                                  color: colors.blueAccent,
                                 ),
+                                // child: Text(""),
                               ),
                             )
                           : const SizedBox(),
-                      Expanded(
-                        child: Text(
-                          transactions,
-                          textAlign: TextAlign.center,
-                          style: textStyles.bold.copyWith(
-                            color: colors.white,
-                            fontSize: sizes.fontRatio * 18,
-                          ),
+                      Text(
+                        transactions,
+                        textAlign: TextAlign.center,
+                        style: textStyles.bold.copyWith(
+                          color: colors.white,
+                          fontSize: sizes.fontRatio * 18,
                         ),
                       ),
+                      widget.whichStack == "other" ||
+                              widget.whichStack == "settings"
+                          ? SizedBox(
+                              height: verticalValue(44),
+                              width: horizontalValue(44),
+                            )
+                          : const SizedBox(),
                     ],
                   ),
                 ],
@@ -141,7 +153,8 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
           ),
           BlocBuilder<DashboardBloc, DashboardState>(
             builder: (context, state) {
-              return state.showShimmer
+              return state.showShimmer &&
+                      state.transactionListResponseModel.transactions!.count < 1
                   ? Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,
@@ -215,7 +228,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                         horizontalSpacer(8),
                                         Expanded(
                                           child: Container(
-                                            height: 1,
+                                            height: verticalValue(1),
                                             color: colors.textGrey
                                                 .withOpacity(0.5),
                                           ),

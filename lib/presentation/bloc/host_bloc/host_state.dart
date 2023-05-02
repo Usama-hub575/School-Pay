@@ -5,12 +5,14 @@ class HostState extends Equatable {
   HostStatus status;
   int pageIndex = 0;
   int payNow = 0;
+  String stack = '';
   bool bottomTabIsActive = false;
   bool payNowButton = false;
 
   HostState({
     this.status = HostStatus.dashBoardPage,
     this.pageIndex = 0,
+    this.stack = '',
     this.payNowButton = false,
     this.bottomTabIsActive = false,
     this.payNow = 0,
@@ -19,12 +21,14 @@ class HostState extends Equatable {
   HostState copyWith({
     HostStatus? status,
     int? pageIndex,
+    String? stack,
     bool? payNowButton,
     int? payNow,
     bool? bottomTabIsActive,
   }) {
     return HostState(
       status: status ?? this.status,
+      stack: stack ?? this.stack,
       payNowButton: payNowButton ?? this.payNowButton,
       bottomTabIsActive: bottomTabIsActive ?? this.bottomTabIsActive,
       pageIndex: pageIndex ?? this.pageIndex,
@@ -37,6 +41,7 @@ class HostState extends Equatable {
         status,
         payNowButton,
         pageIndex,
+        stack,
         payNow,
         bottomTabIsActive,
       ];

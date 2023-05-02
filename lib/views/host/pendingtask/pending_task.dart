@@ -8,7 +8,7 @@ import 'package:paynest_flutter_app/presentation/res/assets.dart';
 import 'package:paynest_flutter_app/theme/theme.dart';
 import 'package:paynest_flutter_app/views/host/changepin/change_pin.dart';
 
-import '../../../widgets/not_found_widget.dart';
+import '../../../widgets/no_data_found_widget.dart';
 
 class PendingTask extends StatefulWidget {
   const PendingTask({Key? key}) : super(key: key);

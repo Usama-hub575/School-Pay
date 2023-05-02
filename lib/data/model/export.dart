@@ -21,7 +21,6 @@ export 'request/otp/verify_otp/otp_verify_model.dart';
 export 'reset_password_by_otp.dart';
 export 'response/export.dart';
 export 'response/otp/verify_otp_response/otp_verify_response_model.dart';
-export 'schoollist_model.dart';
 export 'transactionlist_model.dart';
 export 'updatebank_model.dart';
 export 'updateprofile_model.dart';

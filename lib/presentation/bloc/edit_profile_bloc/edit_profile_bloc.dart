@@ -10,10 +10,25 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           EditProfileState(),
         ) {
     on<EditProfileLoading>(_loading);
+    on<EditProfileLoaded>(_loaded);
     on<EditProfileOnPressed>(_onPressed);
+    on<GetName>(_getName);
   }
 
   EditProfileUseCase editProfileUseCase;
+
+  _getName(GetName event, emit) async {
+    emit(
+      state.copyWith(
+        firstName: editProfileUseCase.getString(
+          key: StorageKeys.firstName,
+        ),
+        lastName: editProfileUseCase.getString(
+          key: StorageKeys.lastName,
+        ),
+      ),
+    );
+  }
 
   _onPressed(EditProfileOnPressed event, emit) async {
     final response = await editProfileUseCase.updateProfile(
@@ -54,6 +69,14 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     emit(
       state.copyWith(
         status: EditProfileStatus.loading,
+      ),
+    );
+  }
+
+  _loaded(EditProfileLoaded event, emit) {
+    emit(
+      state.copyWith(
+        status: EditProfileStatus.loaded,
       ),
     );
   }

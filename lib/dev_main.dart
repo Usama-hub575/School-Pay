@@ -125,6 +125,15 @@ void main() async {
             BlocProvider.value(
               value: it<EditProfileBloc>(),
             ),
+            BlocProvider.value(
+              value: it<SchoolListBloc>(),
+            ),
+            BlocProvider.value(
+              value: it<PayNowBloc>(),
+            ),
+            BlocProvider.value(
+              value: it<AddStudentBloc>(),
+            ),
           ],
           child: const MyApp(),
         ),

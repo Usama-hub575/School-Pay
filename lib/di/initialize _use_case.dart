@@ -13,6 +13,9 @@ Future initializeUseCaseDependencies() async {
   await initializeResetPasswordUseCase();
   await initializeChangePasswordUseCase();
   await initializeEditProfileUseCase();
+  await initializeSchoolListUseCase();
+  await initializePayNowUseCase();
+  await initializeAddStudentUseCase();
 }
 
 Future initializeLocaleUseCase() async {
@@ -106,6 +109,30 @@ Future initializeEditProfileUseCase() async {
   it.registerLazySingleton(
     () => EditProfileUseCase(
       editProfileRepo: it<EditProfileRepo>(),
+    ),
+  );
+}
+
+Future initializeSchoolListUseCase() async {
+  it.registerLazySingleton(
+    () => SchoolListUseCase(
+      schoolListRepo: it<SchoolListRepo>(),
+    ),
+  );
+}
+
+Future initializePayNowUseCase() async {
+  it.registerLazySingleton(
+    () => PayNowPageUseCase(
+      payNowPageRepo: it<PayNowPageRepo>(),
+    ),
+  );
+}
+
+Future initializeAddStudentUseCase() async {
+  it.registerLazySingleton(
+    () => AddStudentUseCase(
+      addStudentRepo: it<AddStudentRepo>(),
     ),
   );
 }

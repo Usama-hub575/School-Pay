@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:paynest_flutter_app/service/api_service.dart';
 
-import '../data/model/schoollist_model.dart';
+import '../data/model/response/school_list/school_list_response_model.dart';
 
-class SchoolController extends GetxController{
+class SchoolController extends GetxController {
   var isLoading = false.obs;
-  final schoolResList = SchoolListRespModel(status: false, log: null).obs;
+  final schoolResList = SchoolListResponseModel(status: false, log: null).obs;
 
   @override
   void onInit() {
@@ -16,28 +16,28 @@ class SchoolController extends GetxController{
   }
 
   hitSchoolList() async {
-    try{
+    try {
       isLoading(true);
       var res = await APIService().apiSchoolList();
       var decoded = jsonDecode(res);
-      if(decoded['status'] == true){
-        SchoolListRespModel lrm = schoolListRespModelFromJson(res);
+      if (decoded['status'] == true) {
+        SchoolListResponseModel lrm = schoolListResponseModelFromJson(res);
         schoolResList.value = lrm;
         schoolResList.refresh();
-      }else if(decoded['status'] == false){
+      } else if (decoded['status'] == false) {
         isLoading(false);
       }
-    }
-    finally{
+    } finally {
       isLoading(false);
     }
   }
 
-  void updateList({required int id}){
-    for(int i=0;i<schoolResList.value.log!.length;i++){
-      if(schoolResList.value.log![i].id == id){
-        schoolResList.value.log![i].isSelected = !schoolResList.value.log![i].isSelected;
-      }else{
+  void updateList({required int id}) {
+    for (int i = 0; i < schoolResList.value.log!.length; i++) {
+      if (schoolResList.value.log![i].id == id) {
+        schoolResList.value.log![i].isSelected =
+            !schoolResList.value.log![i].isSelected;
+      } else {
         schoolResList.value.log![i].isSelected = false;
       }
     }

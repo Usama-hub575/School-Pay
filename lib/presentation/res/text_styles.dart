@@ -16,6 +16,7 @@ class TextStyles {
   final semiBold = TextStyle(
     fontWeight: FontWeight.w600,
     color: colors.darkText,
+    fontFamily: "montserratBold",
   );
 
   final bold = TextStyle(

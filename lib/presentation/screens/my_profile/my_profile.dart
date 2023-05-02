@@ -15,6 +15,9 @@ class _MyProfileState extends State<MyProfile> {
   @override
   void initState() {
     initializeDateFormatting();
+    context.read<EditProfileBloc>().add(
+          GetName(),
+        );
     dateFormat = DateFormat.yMMMMd('en_GB');
     passwordController.text = '********';
     super.initState();
@@ -83,21 +86,37 @@ class _MyProfileState extends State<MyProfile> {
                                       12,
                                     ),
                                   ),
-                                  child: IconButton(
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const EditProfilePage(),
-                                        ),
-                                      );
-                                    },
-                                    padding: EdgeInsets.zero,
-                                    icon: Lottie.asset(
-                                      assets.editAnimation,
-                                      repeat: true,
-                                    ),
-                                  ),
+                                  child: BlocBuilder<EditProfileBloc,
+                                          EditProfileState>(
+                                      builder: (context, state) {
+                                    return IconButton(
+                                      onPressed: () async {
+                                        final value =
+                                            await Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const EditProfilePage(),
+                                          ),
+                                        );
+                                        if (value as bool) {
+                                          context.read<EditProfileBloc>().add(
+                                                EditProfileLoading(),
+                                              );
+                                          context.read<EditProfileBloc>().add(
+                                                GetName(),
+                                              );
+                                          context.read<EditProfileBloc>().add(
+                                                EditProfileLoaded(),
+                                              );
+                                        }
+                                      },
+                                      padding: EdgeInsets.zero,
+                                      icon: Lottie.asset(
+                                        assets.editAnimation,
+                                        repeat: true,
+                                      ),
+                                    );
+                                  }),
                                 ),
                               ),
                             ],
@@ -147,7 +166,7 @@ class _MyProfileState extends State<MyProfile> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 // verticalSpacer(10),
-                                BlocBuilder<DashboardBloc, DashboardState>(
+                                BlocBuilder<EditProfileBloc, EditProfileState>(
                                   builder: (context, state) {
                                     return Text(
                                       "${state.firstName} ${state.lastName}",
@@ -244,7 +263,7 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                     ),
                     verticalSpacer(4),
-                    BlocBuilder<DashboardBloc, DashboardState>(
+                    BlocBuilder<EditProfileBloc, EditProfileState>(
                       builder: (context, state) {
                         return Text(
                           "${state.firstName} ${state.lastName}",
@@ -561,7 +580,7 @@ class _MyProfileState extends State<MyProfile> {
                       width: double.infinity,
                       height: sizes.heightRatio * 46,
                       child: ElevatedButtons(
-                        color: colors.redShade2,
+                        color: colors.redShade3,
                         isLoading: false,
                         text: deleteAccount,
                         textColor: colors.white,
