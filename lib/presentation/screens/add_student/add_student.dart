@@ -275,7 +275,9 @@ class _AddStudentState extends State<AddStudent> {
                                             ),
                                           )
                                           .toList(),
-                                      value: state.selectedFilter,
+                                      value: state.selectedFilter.isNotEmpty
+                                          ? state.selectedFilter
+                                          : null,
                                       onChanged: (value) {
                                         context.read<AddStudentBloc>().add(
                                               DropDownButtonOnChange(
@@ -283,9 +285,6 @@ class _AddStudentState extends State<AddStudent> {
                                                 isSearchFieldEnable: true,
                                               ),
                                             );
-                                        // _selectedFilter = value as String;
-                                        // isSearchFieldEnable = true;
-                                        // setState(() {});
                                       },
                                     ),
                                   );
@@ -853,14 +852,15 @@ class _AddStudentState extends State<AddStudent> {
                     : verticalSpacer(220);
               },
             ),
-            Container(
-              width: double.infinity,
-              margin: EdgeInsets.symmetric(
-                horizontal: horizontalValue(32),
-              ),
-              child: BlocBuilder<AddStudentBloc, AddStudentState>(
-                builder: (context, state) {
-                  return ElevatedButtons(
+            BlocBuilder<AddStudentBloc, AddStudentState>(
+              builder: (context, state) {
+                return Container(
+                  width: double.infinity,
+                  height: sizes.heightRatio * 46,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: horizontalValue(16),
+                  ),
+                  child: ElevatedButtons(
                     isLoading:
                         state.status == AddStudentStatus.loading ? true : false,
                     text: search,
@@ -872,7 +872,7 @@ class _AddStudentState extends State<AddStudent> {
                         showToast(
                           context: context,
                           message: searchCannotBeEmpty,
-                          color: colors.red,
+                          color: colors.redShade3,
                         );
                       }
                       if (searchController.text.isNotEmpty) {
@@ -890,9 +890,9 @@ class _AddStudentState extends State<AddStudent> {
                         state.searchResult.clear();
                       }
                     },
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
             verticalSpacer(16),
           ],

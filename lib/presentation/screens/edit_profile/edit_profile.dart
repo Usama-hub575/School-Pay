@@ -33,21 +33,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
           .parent
           .email,
     );
+    context.read<EditProfileBloc>().add(
+          GetName(),
+        );
     firstNameController = TextEditingController(
-      text: context
-          .read<SignInBloc>()
-          .state
-          .authenticationResponseModel
-          .parent
-          .firstName,
+      text: context.read<EditProfileBloc>().state.firstName,
     );
     lastNameController = TextEditingController(
-      text: context
-          .read<SignInBloc>()
-          .state
-          .authenticationResponseModel
-          .parent
-          .lastName,
+      text: context.read<EditProfileBloc>().state.lastName,
     );
     expiryDateController = TextEditingController(
       text: context
@@ -193,10 +186,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                BlocBuilder<SignInBloc, SignInState>(
+                                BlocBuilder<EditProfileBloc, EditProfileState>(
                                   builder: (context, state) {
                                     return Text(
-                                      "${state.authenticationResponseModel.parent.firstName} ${state.authenticationResponseModel.parent.lastName}",
+                                      "${state.firstName} ${state.lastName}",
                                       style: textStyles.bold.copyWith(
                                         fontSize: sizes.fontRatio * 18,
                                         color: colors.black,
@@ -284,61 +277,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           );
                         },
                       ),
-                      // TextFormField(
-                      //   controller: firstNameController,
-                      //   style: textStyles.semiBold.copyWith(
-                      //     fontSize: sizes.fontRatio * 16,
-                      //     color: colors.lightGreyShade,
-                      //   ),
-                      //   decoration: InputDecoration(
-                      //     border: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: colors.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     labelText: firstName,
-                      //     labelStyle: textStyles.bold.copyWith(
-                      //       color: colors.primaryColor,
-                      //       fontSize: sizes.fontRatio * 12,
-                      //     ),
-                      //     enabledBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: colors.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     errorBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: colors.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     disabledBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     focusedBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(0.3),
-                      //       ),
-                      //     ),
-                      //   ),
-                      //   autovalidateMode: AutovalidateMode.onUserInteraction,
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return "Required";
-                      //     } else {
-                      //       return null;
-                      //     }
-                      //   },
-                      // ),
                       verticalSpacer(8),
                       BlocBuilder<EditProfileBloc, EditProfileState>(
                         builder: (context, state) {
@@ -354,63 +292,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           );
                         },
                       ),
-                      // TextFormField(
-                      //   controller: lastNameController,
-                      //   style: PayNestTheme.title_3_16blackbold.copyWith(
-                      //     fontSize: sizes.fontRatio * 16,
-                      //     color: PayNestTheme.lightBlack,
-                      //     fontFamily: 'montserratSemiBold',
-                      //   ),
-                      //   decoration: InputDecoration(
-                      //     border: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     labelText: lastName,
-                      //     labelStyle: PayNestTheme.h2_14textGrey.copyWith(
-                      //       color: PayNestTheme.primaryColor,
-                      //       fontFamily: 'montserratBold',
-                      //       fontSize: sizes.fontRatio * 12,
-                      //     ),
-                      //     enabledBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     errorBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     disabledBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     focusedBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(0.3),
-                      //       ),
-                      //     ),
-                      //   ),
-                      //   autovalidateMode: AutovalidateMode.onUserInteraction,
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return "Required";
-                      //     } else {
-                      //       return null;
-                      //     }
-                      //   },
-                      // ),
                       verticalSpacer(8),
                       BlocBuilder<EditProfileBloc, EditProfileState>(
                         builder: (context, state) {
@@ -426,65 +307,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           );
                         },
                       ),
-                      // TextFormField(
-                      //   controller: emailController,
-                      //   style: PayNestTheme.title_3_16blackbold.copyWith(
-                      //     fontSize: sizes.fontRatio * 16,
-                      //     color: PayNestTheme.lightBlack,
-                      //     fontFamily: 'montserratSemiBold',
-                      //   ),
-                      //   decoration: InputDecoration(
-                      //     border: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     labelText: emailAddress,
-                      //     labelStyle: PayNestTheme.h2_14textGrey.copyWith(
-                      //       color: PayNestTheme.primaryColor,
-                      //       fontFamily: 'montserratBold',
-                      //       fontSize: sizes.fontRatio * 12,
-                      //     ),
-                      //     enabledBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     errorBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     disabledBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     focusedBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(0.3),
-                      //       ),
-                      //     ),
-                      //   ),
-                      //   autovalidateMode: AutovalidateMode.onUserInteraction,
-                      //   validator: (value) {
-                      //     if (value!.trim().isEmpty) {
-                      //       return 'Please enter email';
-                      //     }
-                      //     if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                      //       return 'Invalid email';
-                      //     }
-                      //     return null;
-                      //   },
-                      // ),
                       verticalSpacer(8),
                       BlocBuilder<SignInBloc, SignInState>(
                         builder: (context, state) {
@@ -559,60 +381,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               obscureText: false,
                               validatorText: requiredText,
                             ),
-                            // child: TextFormField(
-                            //   controller: expiryDateController,
-                            //   enabled: false,
-                            //   style: PayNestTheme.title_2_16primaryColor.copyWith(
-                            //     fontSize: sizes.fontRatio * 14,
-                            //     color: PayNestTheme.textGrey,
-                            //   ),
-                            //   decoration: InputDecoration(
-                            //     border: UnderlineInputBorder(
-                            //       borderSide: BorderSide(
-                            //         color: PayNestTheme.textGrey.withOpacity(
-                            //           0.5,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //     labelText: expiry,
-                            //     labelStyle: PayNestTheme.h2_12blueAccent.copyWith(
-                            //       fontSize: sizes.fontRatio * 12,
-                            //       color: PayNestTheme.primaryColor,
-                            //     ),
-                            //     enabledBorder: UnderlineInputBorder(
-                            //       borderSide: BorderSide(
-                            //         color: PayNestTheme.textGrey.withOpacity(
-                            //           0.5,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //     errorBorder: UnderlineInputBorder(
-                            //       borderSide: BorderSide(
-                            //         color: PayNestTheme.textGrey.withOpacity(
-                            //           0.5,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //     disabledBorder: UnderlineInputBorder(
-                            //       borderSide: BorderSide(
-                            //         color: PayNestTheme.textGrey.withOpacity(
-                            //           0.5,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //     errorStyle:
-                            //         PayNestTheme.title_2_16primaryColor.copyWith(
-                            //       fontSize: sizes.fontRatio * 12,
-                            //       color: PayNestTheme.red,
-                            //     ),
-                            //     focusedBorder: UnderlineInputBorder(
-                            //       borderSide: BorderSide(
-                            //         color: PayNestTheme.textGrey.withOpacity(0.5),
-                            //       ),
-                            //     ),
-                            //   ),
-                            //   autovalidateMode: AutovalidateMode.onUserInteraction,
-                            // ),
                           );
                         },
                       ),
@@ -636,69 +404,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           );
                         },
                       ),
-                      // TextFormField(
-                      //   controller: emiratesIdController,
-                      //   style: PayNestTheme.title_3_16blackbold.copyWith(
-                      //     fontSize: sizes.fontRatio * 16,
-                      //     color: PayNestTheme.lightBlack,
-                      //     fontFamily: 'montserratSemiBold',
-                      //   ),
-                      //   inputFormatters: <TextInputFormatter>[
-                      //     EmiratesIdFormatter(
-                      //       mask: 'xxx-xxxx-xxxxxxx-x',
-                      //       separator: '-',
-                      //     )
-                      //   ],
-                      //   decoration: InputDecoration(
-                      //     border: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     labelText: emiratesID,
-                      //     labelStyle: PayNestTheme.h2_14textGrey.copyWith(
-                      //       color: PayNestTheme.primaryColor,
-                      //       fontFamily: 'montserratBold',
-                      //       fontSize: sizes.fontRatio * 12,
-                      //     ),
-                      //     enabledBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     errorBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     disabledBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(
-                      //           0.3,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     focusedBorder: UnderlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: PayNestTheme.textGrey.withOpacity(0.3),
-                      //       ),
-                      //     ),
-                      //   ),
-                      //   autovalidateMode: AutovalidateMode.onUserInteraction,
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return "Required";
-                      //     } else {
-                      //       return null;
-                      //     }
-                      //   },
-                      // ),
                       verticalSpacer(70),
                       SizedBox(
                         width: double.infinity,
@@ -733,43 +438,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                               ),
                                         ),
                                       );
-                                  //   await updateProfileController
-                                  //       .hitUpdateProfile(
-                                  //     userController
-                                  //         .userResData.value.parent?.id,
-                                  //     firstNameController.text.toString(),
-                                  //     lastNameController.text.toString(),
-                                  //     emailController.text.toString(),
-                                  //     tempPickedDate.toString(),
-                                  //     emiratesIdController.text
-                                  //         .toString()
-                                  //         .replaceAll('-', ''),
-                                  //     userController,
-                                  //   );
-                                  //   if (updateProfileController
-                                  //           .updateProfileData.value.status ==
-                                  //       true) {
-                                  //     Navigator.pop(context);
-                                  //     showToast(
-                                  //         context: context,
-                                  //         message: updateProfileController
-                                  //             .message.value
-                                  //             .toString(),
-                                  //         color: PayNestTheme.primaryColor);
-                                  //   } else {
-                                  //     showToast(
-                                  //         context: context,
-                                  //         message: updateProfileController
-                                  //             .isFailed.value
-                                  //             .toString(),
-                                  //         color: PayNestTheme.primaryColor);
-                                  //   }
-                                  // } else {
-                                  //   showToast(
-                                  //       context: context,
-                                  //       message: 'Email field is empty!',
-                                  //       color: PayNestTheme.red);
-                                  // }
                                 }
                               },
                             );
@@ -781,7 +449,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               case EditProfileStatus.loading:
                                 break;
                               case EditProfileStatus.success:
-                                Navigator.pop(context);
+                                Navigator.pop(context, true);
                                 showToast(
                                   message: state.successMessage,
                                   context: context,
@@ -792,8 +460,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 showToast(
                                   message: state.errorMessage,
                                   context: context,
-                                  color: colors.primaryColor,
+                                  color: colors.redShade3,
                                 );
+                                break;
+                              case EditProfileStatus.loaded:
+                                // TODO: Handle this case.
                                 break;
                             }
                           },

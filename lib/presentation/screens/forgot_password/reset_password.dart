@@ -253,12 +253,17 @@ class _NewPasswordState extends State<NewPassword> {
                       showCrossIcon: false,
                       buttonAction: () {
                         Navigator.pop(context);
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          AppRoutes.navigateToSignIn,
-                          ModalRoute.withName(
-                            AppRoutes.navigateToWelcome,
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (context) => const SignInPage(
+                              whichStack: "other",
+                            ),
                           ),
+                          (route) => false,
+                          // Navigator.pushNamedAndRemoveUntil(
+                          //   context,
+                          //   AppRoutes.navigateToSignIn,
+                          //   (route) => false,
                         );
                       },
                     );

@@ -7,12 +7,17 @@ abstract class EditProfileEvent extends Equatable {
 
 class EditProfileLoading extends EditProfileEvent {}
 
+class EditProfileLoaded extends EditProfileEvent {}
+
+class GetName extends EditProfileEvent {}
+
 class EditProfileOnPressed extends EditProfileEvent {
   final String firstName;
   final String lastName;
   final String email;
   final String expiryDate;
   final String emiratesID;
+
   EditProfileOnPressed({
     required this.firstName,
     required this.lastName,

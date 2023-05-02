@@ -132,26 +132,28 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                     ),
                                     const Spacer(),
                                     BlocBuilder<DashboardBloc, DashboardState>(
-                                        builder: (context, state) {
-                                      return state.myStudentsResponseModel
-                                                  .students !=
-                                              null
-                                          ? Text(
-                                              'AED ${amountFormater(
-                                                double.parse(
-                                                  state.students[0].student!
-                                                      .totalBalanceAmount
-                                                      .toString(),
+                                      builder: (context, state) {
+                                        return state.myStudentsResponseModel
+                                                    .students !=
+                                                null
+                                            ? Text(
+                                                'AED ${amountFormater(
+                                                  double.parse(
+                                                    state.students[0].student!
+                                                        .totalBalanceAmount
+                                                        .toString(),
+                                                  ),
+                                                )}',
+                                                style: textStyles.extraBold
+                                                    .copyWith(
+                                                  fontSize:
+                                                      sizes.fontRatio * 16,
+                                                  color: colors.primaryColor,
                                                 ),
-                                              )}',
-                                              style:
-                                                  textStyles.extraBold.copyWith(
-                                                fontSize: sizes.fontRatio * 16,
-                                                color: colors.primaryColor,
-                                              ),
-                                            )
-                                          : const SizedBox.shrink();
-                                    }),
+                                              )
+                                            : const SizedBox.shrink();
+                                      },
+                                    ),
                                   ],
                                 ),
                               ),
@@ -161,7 +163,6 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                                   horizontal: horizontalValue(16),
                                 ),
                                 width: double.infinity,
-                                height: 1,
                                 color: colors.textGrey.withOpacity(0.5),
                               ),
                               const Spacer(),
@@ -248,12 +249,12 @@ class _SingleStudentPageState extends State<SingleStudentPage> {
                         color: colors.white,
                         boxShadow: [
                           BoxShadow(
-                            color: colors.lightGrey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 2,
+                            color: colors.greyLite2.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
                             offset: const Offset(
                               0,
-                              1,
+                              3,
                             ), // changes position of shadow
                           ),
                         ],

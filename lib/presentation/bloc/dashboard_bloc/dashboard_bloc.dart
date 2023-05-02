@@ -16,7 +16,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         ) {
     on<FetchStudents>(_fetchStudents);
     on<FetchTransactions>(_fetchTransactions);
-    on<GetName>(_getName);
+    // on<GetName>(_getName);
     on<ShowShimmer>(_showShimmer);
     on<IsBioMetricEnable>(_isBioMetricEnable);
     on<RadioButtonOnTap>(_radioButtonOnTap);
@@ -102,18 +102,18 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     }
   }
 
-  _getName(GetName event, emit) {
-    emit(
-      state.copyWith(
-        firstName: dashboardUseCase.getString(
-          key: StorageKeys.firstName,
-        ),
-        lastName: dashboardUseCase.getString(
-          key: StorageKeys.lastName,
-        ),
-      ),
-    );
-  }
+  // _getName(GetName event, emit) async {
+  //   emit(
+  //     state.copyWith(
+  //       firstName: dashboardUseCase.getString(
+  //         key: StorageKeys.firstName,
+  //       ),
+  //       lastName: dashboardUseCase.getString(
+  //         key: StorageKeys.lastName,
+  //       ),
+  //     ),
+  //   );
+  // }
 
   _fetchStudents(FetchStudents event, emit) async {
     final response = await dashboardUseCase.fetchStudents();

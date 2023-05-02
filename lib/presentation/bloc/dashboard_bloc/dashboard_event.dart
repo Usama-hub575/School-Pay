@@ -17,7 +17,7 @@ class GetStudentByID extends DashboardEvent {
   });
 }
 
-class GetName extends DashboardEvent {}
+// class GetName extends DashboardEvent {}
 
 class ShowShimmer extends DashboardEvent {}
 

@@ -251,105 +251,105 @@ class _RegisterMainPageState extends State<RegisterMainPage> {
                                   },
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: verticalValue(29),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: verticalValue(1),
-                                width: horizontalValue(129),
-                                decoration: BoxDecoration(
-                                  color: colors.primaryColor,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: horizontalValue(16),
-                                ),
-                                child: Text(
-                                  or,
-                                  style: textStyles.bold.copyWith(
-                                    color: colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                height: verticalValue(1),
-                                width: horizontalValue(129),
-                                decoration: BoxDecoration(
-                                  color: colors.primaryColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: sizes.heightRatio * 50,
-                          width: sizes.widthRatio * 326,
-                          child: OutlinedButton.icon(
-                            onPressed: () {},
-                            icon: Image.asset(
-                              assets.icGoogle,
-                            ),
-                            label: Text(
-                              google,
-                              style: textStyles.bold.copyWith(
-                                color: colors.black,
-                                fontSize: sizes.fontRatio * 16,
-                              ),
-                            ),
-                            style: OutlinedButton.styleFrom(
-                              // primary: MyTheme.sharpGreen,
-                              elevation: 0,
-                              // side: BorderSide(width:1, color:Colors.white),
-                              side: BorderSide(
-                                color: colors.primaryColor,
-                                width: 1,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  15,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: verticalValue(16),
-                        ),
-                        SizedBox(
-                          height: sizes.heightRatio * 50,
-                          width: sizes.widthRatio * 326,
-                          child: OutlinedButton.icon(
-                            onPressed: () {},
-                            icon: Image.asset(
-                              assets.icFacebook,
-                            ),
-                            label: Text(
-                              facebook,
-                              style: textStyles.bold.copyWith(
-                                color: colors.black,
-                                fontSize: sizes.fontRatio * 16,
-                              ),
-                            ),
-                            style: OutlinedButton.styleFrom(
-                              // primary: MyTheme.sharpGreen,
-                              elevation: 0,
-                              // side: BorderSide(width:1, color:Colors.white),
-                              side: BorderSide(
-                                color: colors.primaryColor,
-                                width: 1,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            ),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(
+                        //     vertical: verticalValue(29),
+                        //   ),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       Container(
+                        //         height: verticalValue(1),
+                        //         width: horizontalValue(129),
+                        //         decoration: BoxDecoration(
+                        //           color: colors.primaryColor,
+                        //         ),
+                        //       ),
+                        //       Padding(
+                        //         padding: EdgeInsets.symmetric(
+                        //           horizontal: horizontalValue(16),
+                        //         ),
+                        //         child: Text(
+                        //           or,
+                        //           style: textStyles.bold.copyWith(
+                        //             color: colors.black,
+                        //             fontWeight: FontWeight.bold,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       Container(
+                        //         height: verticalValue(1),
+                        //         width: horizontalValue(129),
+                        //         decoration: BoxDecoration(
+                        //           color: colors.primaryColor,
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   height: sizes.heightRatio * 50,
+                        //   width: sizes.widthRatio * 326,
+                        //   child: OutlinedButton.icon(
+                        //     onPressed: () {},
+                        //     icon: Image.asset(
+                        //       assets.icGoogle,
+                        //     ),
+                        //     label: Text(
+                        //       google,
+                        //       style: textStyles.bold.copyWith(
+                        //         color: colors.black,
+                        //         fontSize: sizes.fontRatio * 16,
+                        //       ),
+                        //     ),
+                        //     style: OutlinedButton.styleFrom(
+                        //       // primary: MyTheme.sharpGreen,
+                        //       elevation: 0,
+                        //       // side: BorderSide(width:1, color:Colors.white),
+                        //       side: BorderSide(
+                        //         color: colors.primaryColor,
+                        //         width: 1,
+                        //       ),
+                        //       shape: RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.circular(
+                        //           15,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   height: verticalValue(16),
+                        // ),
+                        // SizedBox(
+                        //   height: sizes.heightRatio * 50,
+                        //   width: sizes.widthRatio * 326,
+                        //   child: OutlinedButton.icon(
+                        //     onPressed: () {},
+                        //     icon: Image.asset(
+                        //       assets.icFacebook,
+                        //     ),
+                        //     label: Text(
+                        //       facebook,
+                        //       style: textStyles.bold.copyWith(
+                        //         color: colors.black,
+                        //         fontSize: sizes.fontRatio * 16,
+                        //       ),
+                        //     ),
+                        //     style: OutlinedButton.styleFrom(
+                        //       // primary: MyTheme.sharpGreen,
+                        //       elevation: 0,
+                        //       // side: BorderSide(width:1, color:Colors.white),
+                        //       side: BorderSide(
+                        //         color: colors.primaryColor,
+                        //         width: 1,
+                        //       ),
+                        //       shape: RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.circular(15),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

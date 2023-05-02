@@ -5,22 +5,30 @@ class EditProfileState extends Equatable {
   EditProfileStatus status = EditProfileStatus.init;
   String errorMessage = '';
   String successMessage = '';
+  String lastName = '';
+  String firstName = '';
 
   EditProfileState({
     this.status = EditProfileStatus.init,
     this.errorMessage = '',
     this.successMessage = '',
+    this.firstName = '',
+    this.lastName = '',
   });
 
   EditProfileState copyWith({
     EditProfileStatus? status,
     String? errorMessage,
     String? successMessage,
+    String? firstName,
+    String? lastName,
   }) {
     return EditProfileState(
       status: status ?? this.status,
       errorMessage: errorMessage ?? this.errorMessage,
       successMessage: successMessage ?? this.successMessage,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
     );
   }
 
@@ -29,5 +37,7 @@ class EditProfileState extends Equatable {
         status,
         errorMessage,
         successMessage,
+        firstName,
+        lastName,
       ];
 }

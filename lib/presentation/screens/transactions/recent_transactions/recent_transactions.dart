@@ -76,18 +76,23 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
             ),
             child: Padding(
               padding: EdgeInsets.only(
-                left: widget.whichStack == "other" ? horizontalValue(25) : 0,
+                left: widget.whichStack == "other" ||
+                        widget.whichStack == "settings"
+                    ? horizontalValue(25)
+                    : 0,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   verticalSpacer(24),
                   Row(
-                    mainAxisAlignment: widget.whichStack == "other"
+                    mainAxisAlignment: widget.whichStack == "other" ||
+                            widget.whichStack == "settings"
                         ? MainAxisAlignment.spaceBetween
                         : MainAxisAlignment.center,
                     children: [
-                      widget.whichStack == "other"
+                      widget.whichStack == "other" ||
+                              widget.whichStack == "settings"
                           ? Container(
                               height: verticalValue(44),
                               width: horizontalValue(44),
@@ -107,12 +112,14 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                               ),
                               child: IconButton(
                                 onPressed: () {
-                                  context.read<HostBloc>().add(
-                                        ChangePageIndex(
-                                          stack: "host",
-                                          pageIndex: 0,
-                                        ),
-                                      );
+                                  widget.whichStack == "other"
+                                      ? context.read<HostBloc>().add(
+                                            ChangePageIndex(
+                                              stack: "host",
+                                              pageIndex: 0,
+                                            ),
+                                          )
+                                      : Navigator.pop(context);
                                 },
                                 icon: Icon(
                                   Icons.clear,
@@ -131,7 +138,8 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                           fontSize: sizes.fontRatio * 18,
                         ),
                       ),
-                      widget.whichStack == "other"
+                      widget.whichStack == "other" ||
+                              widget.whichStack == "settings"
                           ? SizedBox(
                               height: verticalValue(44),
                               width: horizontalValue(44),
@@ -220,7 +228,7 @@ class _RecentTransactionPageState extends State<RecentTransactionPage> {
                                         horizontalSpacer(8),
                                         Expanded(
                                           child: Container(
-                                            height: 1,
+                                            height: verticalValue(1),
                                             color: colors.textGrey
                                                 .withOpacity(0.5),
                                           ),

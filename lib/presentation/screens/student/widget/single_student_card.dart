@@ -97,7 +97,7 @@ class _SingleStudentCardState extends State<SingleStudentCard> {
             ),
             horizontalSpacer(12),
             Flexible(
-              fit: FlexFit.loose,
+              fit: FlexFit.tight,
               flex: 16,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

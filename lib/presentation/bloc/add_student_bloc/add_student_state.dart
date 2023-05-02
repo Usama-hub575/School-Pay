@@ -5,7 +5,8 @@ class AddStudentState extends Equatable {
   AddStudentStatus status = AddStudentStatus.init;
   String errorMessage = 'Verification Failed';
   List<String> filters = ['Name', 'Account Number', 'Student ID'];
-  String selectedFilter = 'Name';
+
+  String selectedFilter = '';
   List<StudentListRowData> searchResult = [];
   List<StudentListRowData> rowData = [];
   bool isExpanded = false;
@@ -23,7 +24,7 @@ class AddStudentState extends Equatable {
     required this.studentListResponseModel,
     required this.addStudentResponseModel,
     this.filters = const ['Name', 'Account Number', 'Student ID'],
-    this.selectedFilter = 'Name',
+    this.selectedFilter = '',
     this.searchResult = const [],
     this.isExpanded = false,
     this.isSearchFieldEnable = false,

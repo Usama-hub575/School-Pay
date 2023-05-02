@@ -1,7 +1,8 @@
 import 'package:paynest_flutter_app/export.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  final String whichStack;
+  const SignInPage({Key? key, required this.whichStack}) : super(key: key);
 
   @override
   State<SignInPage> createState() => _SignInPageState();
@@ -37,10 +38,12 @@ class _SignInPageState extends State<SignInPage> {
             verticalSpacer(40),
             Row(
               children: [
-                AppBarBackButton(
-                  iconColor: colors.white,
-                  buttonColor: colors.primaryColor,
-                ),
+                widget.whichStack == "other"
+                    ? const SizedBox.shrink()
+                    : AppBarBackButton(
+                        iconColor: colors.white,
+                        buttonColor: colors.primaryColor,
+                      ),
                 const Spacer(),
                 Image.asset(
                   assets.welcomeRegisterLogo,

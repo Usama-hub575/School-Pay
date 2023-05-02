@@ -35,7 +35,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     super.initState();
-    context.read<DashboardBloc>().add(
+    context.read<EditProfileBloc>().add(
           GetName(),
         );
     context.read<DashboardBloc>().add(
@@ -92,13 +92,16 @@ class _DashboardPageState extends State<DashboardPage> {
                                     color: colors.white,
                                   ),
                                 ),
-                                Text(
-                                  '${state.firstName} ${state.lastName}',
-                                  style: textStyles.semiBold.copyWith(
-                                    fontSize: sizes.fontRatio * 18,
-                                    color: colors.white,
-                                  ),
-                                ),
+                                BlocBuilder<EditProfileBloc, EditProfileState>(
+                                    builder: (context, state) {
+                                  return Text(
+                                    '${state.firstName} ${state.lastName}',
+                                    style: textStyles.semiBold.copyWith(
+                                      fontSize: sizes.fontRatio * 18,
+                                      color: colors.white,
+                                    ),
+                                  );
+                                }),
                               ],
                             ),
                           ],

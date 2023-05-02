@@ -7,10 +7,10 @@ class DashboardState extends Equatable {
   bool isBioMetricEnable = false;
   var list = {};
   bool isLoading = true;
-  String firstName = '';
+  // String firstName = '';
   String email = '';
   String phoneNumber = '';
-  String lastName = '';
+  // String lastName = '';
   bool showShimmer = false;
   List<StudentData> searchResult = [];
   MyStudentsResponseModel myStudentsResponseModel =
@@ -34,15 +34,14 @@ class DashboardState extends Equatable {
     required this.myStudentsResponseModel,
     required this.transactionListResponseModel,
     this.isLoading = true,
-    this.firstName = '',
-    this.lastName = '',
+    // this.firstName = '',
+    // this.lastName = '',
     this.students = const [],
   });
 
   DashboardState copyWith({
     RegisterResponseModel? registerResponseModel,
     TransactionListResponseModel? transactionListResponseModel,
-    // ParentStudentResponse? parentStudentResponse,
     SingleStudentResponseModel? singleStudentResponseModel,
     MyStudentsResponseModel? myStudentsResponseModel,
     String? errorMessage,
@@ -68,8 +67,6 @@ class DashboardState extends Equatable {
           transactionListResponseModel ?? this.transactionListResponseModel,
       status: status ?? this.status,
       email: email ?? this.email,
-      // parentStudentResponse:
-      //     parentStudentResponse ?? this.parentStudentResponse,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       list: list ?? this.list,
       isBioMetricEnable: isBioMetricEnable ?? this.isBioMetricEnable,
@@ -77,13 +74,15 @@ class DashboardState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
       students: students ?? this.students,
       isLoading: isLoading ?? this.isLoading,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
+      // firstName: firstName ?? this.firstName,
+      // lastName: lastName ?? this.lastName,
     );
   }
 
   @override
   List<Object?> get props => [
+        // firstName,
+        // lastName,
         isBioMetricEnable,
         singleStudentResponseModel,
         searchResult,
